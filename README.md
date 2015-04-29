@@ -1,6 +1,6 @@
-#Compass
+#Thesis
 
-rhino & grasshopper set of tools for dynamic relaxation analysis
+mon mémoire de thèse
 
 ##Authors
 
