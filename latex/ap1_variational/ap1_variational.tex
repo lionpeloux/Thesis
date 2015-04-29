@@ -1,0 +1,219 @@
+%\appendix
+\chapter{Calculus of variations}
+
+% --------------------------------------------------------------------------------------------
+\section{Introduction}
+% --------------------------------------------------------------------------------------------
+In this appendix we drawback essential mathematical concepts for the calculus of variations.
+Recall how the notion of energy, gradients are extended to function spaces.
+
+\cite{Abraham2002}
+
+% --------------------------------------------------------------------------------------------
+\section{Spaces}
+% --------------------------------------------------------------------------------------------
+
+\subsection{Normed space}
+% --------------------------------------------------------------------------------------------
+A \emph{normed space} $V(\mathbb{K})$ is a vector space $V$ over the scalar field $\mathbb{K}$ with a norm $\|.\|$.
+
+A \emph{norm} is a map $\| . \| : V \times V \longmapsto \mathbb{K}$ which satisfies :
+\begin{align}
+	&\forall x \in V, 							&& \|x\| = 0_\mathbb{K} \Rightarrow x = 0_V&&&\\
+	&\forall x \in V, \forall \lambda \in \mathbb{K}, 	&& \|\lambda x\| = |\lambda| \,\|x\|&&&\\
+	&\forall (x,y) \in V^2, 						&& \|x + y\| \leqslant \|x\| + \|y\|&&&
+\end{align}
+
+\subsection{Inner product space}
+% --------------------------------------------------------------------------------------------
+A \emph{inner product space} or \emph{pre-hilbert space} $E(\mathbb{K})$ is a vector space $E$ over the scalar field $\mathbb{K}$ with an inner product.
+
+An \emph{inner product} is a map $\langle \,; \rangle : E \times E \longmapsto \mathbb{K}$ which is bilinear, symmetric, positive-definite :
+\begin{align}
+	&\forall (x,y,z) \in E^3, \forall (\lambda,\mu) \in \mathbb{K}^2, 	&& \langle \lambda x\ + \mu y \,; z\rangle  = \lambda \langle  x \,; z\rangle + \mu \langle  y\,; z\rangle&&&\\
+	&												&& \langle x \,; \lambda y + \mu z \rangle  = \lambda \langle  x\,; y\rangle + \mu \langle  x \,; z\rangle&&&\notag\\
+	&\forall (x,y) \in E^2, 									&& \langle x\,; y\rangle = \langle y\,; x\rangle &&&\\
+	&\forall x \in E, 										&& \langle x\,; x\rangle \geqslant 0_\mathbb{K} &&&\\
+	&\forall x \in E, 										&& \langle x\,; x\rangle = 0_\mathbb{K} \Rightarrow x = 0_E &&&
+\end{align}
+Moreover, an inner product naturally induces a norm on $E$ defined by :
+\begin{align}
+	\forall x \in E, \quad \|x\| = \sqrt{\langle x\,; x\rangle}
+\end{align}
+Thus, an inner product vector space is also naturally a normed vector space.
+
+\subsection{Euclidean space}
+% --------------------------------------------------------------------------------------------
+An \emph{Euclidean space} $\mathcal{E}(\mathbb{R})$ is a finite-dimensional real vector space with an inner product.
+Thus, distances and angles between vectors could be defined and measured regarding to the norm associated with the chosen inner product.
+
+An Euclidean space is nothing but a finite-dimensional real pre-hilbert space.
+
+\subsection{Banach space}
+% --------------------------------------------------------------------------------------------
+
+A \emph{Banach space} $\mathcal{B}(\mathbb{K})$ is a complete normed vector space, which means that it is a normed vector space in which every Cauchy sequence of $\mathcal{B}$ converges in $\mathcal{B}$ for the given norm.
+
+Thus, a Banach space is a vector space with a metric that allows the computation of vector length and distance between vectors and is complete in the sense that a Cauchy sequence of vectors always converges to a well defined limit in that space.
+
+\subsection{Hilbert space}
+% --------------------------------------------------------------------------------------------
+
+A \emph{Hilbert space} is an inner product vector space $\mathcal{H}(\mathbb{K})$ such that the natural norm induced by the inner product turns $\mathcal{H}$ into a complete metric space (i.e.\ every Cauchy sequence of $\mathcal{H}$ converges in $\mathcal{H}$).
+
+The Hilbert space concept is a generalization of the Euclidean space concept.
+In physics it's common to encounter Hilbert spaces as infinite-dimensional function spaces.
+
+Hilbert spaces are Banach spaces, but the converse does not hold generally.
+
+For example, $\mathcal{L}^2([a,b])$ is an infinite-dimensional Hilbert space with the canonical inner product $\langle f\,; g\rangle=\int_a^b fg$.
+
+Note that $\mathcal{L}^2$ is the only Hilbert space among the $\mathcal{L}^p$ spaces.
+% --------------------------------------------------------------------------------------------
+\section{Derivative}
+% --------------------------------------------------------------------------------------------
+
+The well known notion of function derivative in $\mathbb{R}^\mathbb{R}$ can be extended to maps between Banach spaces.
+This is useful in physics when formulating problems as variational problems, usually in terms of energy minimization. Indeed, energy is generally defined over a functional vector space and not simply over the real line.
+
+In this case, the research of minimal values of a potential energy rests on the calculus of variations of the energy function compared to variations to other functions defining the problem (geometry, materials, boundary conditions, ...).
+
+Mathematical concepts extended well-known notions of derivative, jacobian and hessian in Euclidean spaces (typically $\mathbb{R}^2$ or $\mathbb{R}^3$) for Banach functional spaces.
+
+\subsection{Fréchet derivative - strong}
+% --------------------------------------------------------------------------------------------
+\subsubsection{Differentiability}
+Let $\mathcal{B}_V$ and $\mathcal{B}_W$ be two Banach spaces and $U \subset \mathcal{B}_V$ an open subset of $\mathcal{B}_V$.
+Let $f : u \longmapsto f(u)$ be a function of  $U^{\mathcal{B}_W}$.
+$f$ is said to be \emph{Fréchet differentiable} at $u\in U$ if there exists a continious linear operator $Df_{u} \in 
+\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ such that :
+\begin{align}
+\lim_{\|h\| \to 0} \frac{\|f(u+h) - f(u)- Df_{u}(h)\|_{\mathcal{B}_W}}{\|h\|_{\mathcal{B}_V}} = 0
+\end{align}
+Or, equivalently :
+\begin{align}
+	f(u+h) = f(u) + Df_{u}(h) + o(\|h\|) \quad , \quad 
+	\lim_{\|h\| \to 0} \frac{\|o(\|h\|)\|_{\mathcal{B}_W}}{\|h\|} = 0
+\end{align}
+
+Note that $df = Df_{u}(h)$ is called the differential of $f$ at point $u$ and represents the change in the function $f$ for a perturbation $h$ from $u$.
+
+In the literature, it is common to found the following notation : $df = Df_u(h) = Df(u)h$, for the differential of $f$, which means nothing but $Df(u)$ is linear regarding $h$. This notation can be ambiguous as far as the linearity of $Df(u)$ in $h$ is denoted as a product which is not explicitly defined.
+
+\subsubsection{Derivability}
+
+If $f$ is Fréchet differentiable at $u \in U$, the continous linear operator $Df_{u} \in 
+\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ is called the Fréchet derivative of $f$ at $u$ and is also denoted :
+\begin{align}
+	f'(u) = Df(u) = Df_{u}
+\end{align}
+$f$ is said to be $\mathcal{C}^1$ in the sens of Fréchet if $f$ is Fréchet differentiable for all $u \in U$ and the function $Df : u \longmapsto f'(u)$ of $U^{\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})}$ is continuous.
+ 
+\subsubsection{Higer derivatives}
+ 
+Because the differential of $f$ is a linear map from $\mathcal{B}_V$ to $\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ it is possible to look for the differentiability of $Df$. If it exists, it is denoted $D^2f$ and maps $\mathcal{B}_V$ to $\mathcal{L}(\mathcal{B}_V,\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W}))$.
+ 
+\subsection{Gâteaux derivative - weak}
+% --------------------------------------------------------------------------------------------
+\subsubsection{Differentiability}
+Let $\mathcal{B}_V$ and $\mathcal{B}_W$ be two Banach spaces and $U \subset \mathcal{B}_V$ an open subset of $\mathcal{B}_V$.
+Let $f : u \longmapsto f(u)$ be a function of  $U^{\mathcal{B}_W}$.
+$f$ is said to be \emph{Gâteaux differentiable} at $u\in U$ if there exists a continious linear operator $Df_{u} \in 
+\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ such that :
+\begin{align}
+\forall h \in \mathcal{U}, \quad\lim_{\lambda \to 0} \frac{f(u+\lambda h) - f(u)}{\lambda} = \frac{d}{d\lambda}f(u+\lambda h)\Bigr|_{\lambda = 0} = Df_u(h)
+\end{align}
+Or, equivalently :
+\begin{align}
+	\forall h \in \mathcal{U}, \quad f(u+\lambda h) = f(u) + \lambda D_{f,u}(h) + o(|\lambda|)
+	\quad , \quad \lim_{\lambda \to 0} \frac{\|o(|\lambda|)\|_{\mathcal{B}_W}}{\lambda} = 0
+\end{align}
+
+Note that $df = Df_{u}(h)$ is called the differential of $f$ at point $u$.
+
+\subsubsection{Derivability}
+If $f$ is Gâteaux differentiable at $u \in U$, the continous linear operator $Df_{u} \in 
+\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ is called the Gâteaux derivative of $f$ at $u$ and is also denoted :
+\begin{align}
+	f'(u) = Df(u) = Df_{u}
+\end{align}
+$f$ is said to be $\mathcal{C}^1$ in the sens of Gâteaux if $f$ is Gâteaux differentiable for all $u \in U$ and the function $Df : u \longmapsto f'(u)$ of $U^{\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})}$ is continuous.
+ 
+The Gâteaux derivative is a weaker form of derivative than the Fréchet derivative : if $f$ is Fréchet differentiable, then it is also Gâteaux differentiable, and its Fréchet and Gâteaux derivatives agree, but the converse does not hold generally.
+
+\subsection{Useful properties}
+
+Let $\mathcal{B}_V$, $\mathcal{B}_W$ and $\mathcal{B}_Z$ be three Banach spaces. 
+Let $f,g : \mathcal{B}_V \longmapsto \mathcal{B}_W$ and $h : \mathcal{B}_W \longmapsto \mathcal{B}_Z$ be three Gâteaux differentiable functions. Then, the following useful properties holds :
+\begin{align}
+	&D(f+g)(u) = Df(u) + Dg(u)\\
+	&D(h\circ f)(u) = Dh(f(u)) \circ Df(u)
+\end{align}
+
+\subsection{Partial derivative}
+
+\section{Gradient}
+
+The \emph{gradient vector} denotes the differential or total derivative of a differentiable function $F$ in the special case it is a map from $\mathbb{R}^n$ to $\mathbb{R}$. Thus, it satisfies the following relationships :
+\begin{align}
+	&\nabla F(x) = F'(x) = DF_x\\
+	&DF_x(h) = \langle \nabla F(x)\,; h\rangle\\
+	&F(x + h) = F(x) + \langle \nabla F(x)\,; h\rangle + o(\|h\|)
+\end{align}
+If the matrix notation is adopted, the previous relations leads to :
+\begin{align}
+	{F}({X}+{H}) = F(X) +  \nabla F(u)^T H + o(\|H\|)
+	\quad , \quad \nabla F(x) = \left[\begin{array}{c}\frac{\partial F}{\partial x_1} \\ \vdots \\ \frac{\partial F}{\partial x_n}\end{array}\right] \in \mathbb(R)^n
+\end{align}
+
+\section{Jacobian}
+Let $f$ be a differentiable function from $\mathbb{R}^n$ to $\mathbb{R}^p$. The differential of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^p$ which could be represented with the following matrix called the \emph{jacobian matrix} :
+\begin{align}
+	&Df_{x} = \boldsymbol{J}_f(x) = \frac{df}{dx}(x) = 
+	\left[\begin{array}{ccc}
+		\frac{\partial f}{\partial x_1} \,,& \cdots \;, & \frac{\partial f}{\partial x_n}
+	\end{array}\right] =
+	\left[\begin{array}{ccc}
+		\frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} \\
+		\vdots & \ddots & \vdots \\
+		\frac{\partial f_p}{\partial x_1} & \cdots & \frac{\partial f_p}{\partial x_n}
+	\end{array}\right]\in\mathcal{M}_{p,n}(\mathbb{R})
+\end{align}
+Thus, with the matrix notation, the Taylor expansion takes the following form :
+\begin{align}
+	&F(X+H) = F(X) +  \boldsymbol{J}_f^XH + o(\|H\|)
+\end{align}
+In the cas $p=1$, the jacobian matrix of the functional $F$ is nothing but the gradient transpose itself :
+\begin{align}
+	DF_{x} = \boldsymbol{J}_F(x) = \frac{dF}{dx} = 
+	\left[\begin{array}{ccc}
+		\frac{\partial F}{\partial x_1} \,,& \cdots \;, &\frac{\partial F}{\partial x_n}
+	\end{array}\right] = \nabla F^T
+\end{align}
+
+\section{Hessian}
+Let $F$ be a differentiable function from $\mathbb{R}^n$ to $\mathbb{R}$. The second order differential of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^n$ which could be represented with the following matrix called the \emph{hessian matrix} :
+\begin{align}
+	&D^2F_{x} = \boldsymbol{H}_F(x) = \frac{d^2F}{dx}(x) = 
+	\left[\begin{array}{cccc}
+		\frac{\partial F^2_1}{\partial x_1^2} & \frac{\partial F^2_1}{\partial x_1\partial x_2} &\cdots & \frac{\partial F^2_1}{\partial x_1\partial x_n} \\
+		\frac{\partial F^2_1}{\partial x_2\partial x_1} & \frac{\partial F^2_1}{\partial x_2^2} &\cdots & \frac{\partial F^2_1}{\partial x_2\partial x_n} \\
+		\vdots & &\ddots & \vdots \\
+		\frac{\partial F^2_p}{\partial x_n\partial x_1} & \frac{\partial F^2_p}{\partial x_n\partial x_2}&\cdots & \frac{\partial F^2_p}{\partial x_n^2}
+	\end{array}\right]\in\mathcal{M}_{n,n}(\mathbb{R})
+\end{align}
+Thus, with the matrix notation, the Taylor expansion takes the following form :
+\begin{align}
+	F(X+H) = F(X) +  \boldsymbol{J}_F^XH + \tfrac{1}{2}H^T\boldsymbol{H}_F^XH + o(\|H\|)
+\end{align}
+
+
+\section{Functional}
+% --------------------------------------------------------------------------------------------
+A \emph{functional} is a map from a vector space $E(\mathbb{K})$ into its underlying scalar field $\mathbb{K}$. Here $\mathcal{E}_p[\boldsymbol{x},\theta]$ is a functional depending over $\boldsymbol{x}$ and $\theta$.
+
+
+
+
+\bibliographystyle{alpha}
+\bibliography{../bibliography}

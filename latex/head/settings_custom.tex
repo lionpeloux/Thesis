@@ -1,0 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%		Thesis Settings
+%		Custom settings
+%
+%		2011
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+%   Use this file for your own custom packages, command-definitions, etc...
+%
+
+% LDP Packages
+%--------------------------------------
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{lipsum}
+\usepackage{MnSymbol}
+
+
+\usepackage{natbib}
+% use [sectionbib] option so bibliography appears like a not numbered section at the end of each chapter
+\usepackage[sectionbib]{chapterbib}
+
+
+% LDP Theorem
+%--------------------------------------
+\newtheoremstyle{mystyleA} % style name
+    {}              % space above, empty = `usual value'
+    {20pt}          % space below
+    {}              % body font
+    {}              % indent
+    {\bfseries}     % head font
+    {.}             % punctuation after head
+    {5pt}           % space after head (\newline)
+    {}              % Thm head spec
+
+\theoremstyle{mystyleA}
+\newtheorem*{mydef}{Definition}
+\newtheorem*{myrk}{Remark}
+
+\newtheoremstyle{mystyleB} % style name
+    {}              % space above, empty = `usual value'
+    {20pt}          % space below
+    {\itshape}      % body font
+    {}              % indent
+    {\itshape}      % head font
+    {.}             % punctuation after head
+    {5pt}           % space after head (\newline)
+    {}              % Thm head spec
+\theoremstyle{mystyleB}
+\newtheorem*{myproof}{Preuve}
+
+% LDP Custom functions
+% ---------------
+\newcommand{\fonction}[5]{\begin{array}{lrcl}
+#1: & #2 & \longrightarrow & #3 \\
+    & #4 & \longmapsto & #5 \end{array}}
+% \fonction{f}{E}{F}{x}{f(x)}
+
+% the following lines are for creating a simplified TO-DO box. However since boites is not per default installed with all latex-distributions, we have removed this example again
+% if you want to use it and do not have "boites" installed, you can get it from here: http://www.ctan.org/tex-archive/macros/latex/contrib/boites
+%
+%\usepackage{boites,boites_exemples}
+%\newcommand{\todolist}[1]{\begin{boiteepaisseavecuntitre}{TO DO in this chapter} #1 \end{boiteepaisseavecuntitre}}  % creates a little box
+% %\newcommand{\todolist}[1]{}  % to be used when to do is not to be printed

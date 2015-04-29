@@ -1,0 +1,407 @@
+\chapter{Geometry of smooth and discret curves}
+\section{Introduction}
+Dans ce chapitre, après un bref rappel sur le cadre mathématique d'étude des courbes paramétrique de l'espace, on présente les notions de courbures et de torsion géométrique associées au repère de fraient. On montre ensuite le cas plus général d'un repère mobile quelconque attaché à une courbe gamma. On définit enfin la particularité d'un repère mobile adapté à un courbe, et on présente, en sus du repère de Frenet, une approche différente pour accrocher des repères le long d'une courbe (Bishop / RMF / Zéro-twisting frame)
+
+% --------------------------------------------------------------------------------------------------------------------------------------------
+% SMOOTH SPACE CURVE
+% --------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Paramectric Curves}
+
+% parametric curve
+\subsection{Definition}
+Let $I$ be an interval \cite{Bishop1975} of $\mathbb{R}$ and $F\colon t \mapsto F(t)$ be a map of ${\mathcal{C}}^{}(I,{\mathbb{R}}^3)$. Then $\gamma=(I,F)$ is called a \emph{parametric curve} and :
+\begin{itemize}
+\item The 2-uplet $(I,F)$ is called a \emph{parametrization} of $\gamma$
+\item $\gamma = F(I) = \{F(t), t \in I\}$ is called the \emph{graph} or \emph{trace} of $\gamma$
+\item $\gamma$ is said to be ${\mathcal{C}}^{k}$ if $F \in {\mathcal{C}^{k}}^{}(I,{\mathbb{R}}^3)$
+\end{itemize}
+\smallskip
+\begin{myrk}
+Note that for a given graph in ${\mathbb{R}}^3$ they may be different possible parameterizations. From now, $\gamma$ will simply refer to $F(I)$, its graph.
+\end{myrk}
+
+% regularity
+\subsection{Regularity}
+Let $\gamma=(I,F)$ be a parametric \cite{Bloomenthal} curve, and $t_0 \in I$ a parameter.
+\begin{itemize}
+\item A point of parameter $t_0$ is called \emph{regular} if $F'(t_0) \neq 0$.
+\\The curve $\gamma$ is called \emph{regular} if $\gamma$ is $\mathcal{C}^{1}$ and $F'(t) \neq 0, \forall t \in I$
+\item A point of parameter $t_0$ is called \emph{biregular} if $F'(t_0)$ and $F''(t_0)$ are not collinear
+\\The curve $\gamma$ is called \emph{biregular} if $\gamma$ is $\mathcal{C}^{2}$ and  $F'(t)\cdot    F''(t) \neq 0, \forall t \in I$
+\end{itemize}
+
+% reparametrization
+\subsection{Reparametrization}
+Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\mathbb{R}}^{3}$ an interval, and $\varphi\colon I\mapsto J$ a ${\mathcal{C}}^{k}$ diffeomorphisme. Lets define $G=F\circ\varphi$. Then :
+\begin{itemize}
+\item $G\in{\mathcal{C}}^{k}(J,{\mathbb{R}}^3)$
+\item $G(J)=F(I)$
+\item $\varphi$ is said to be an admissible \emph{change of parameter} for $\gamma$
+\item  $(J,G)$ is said to be another \emph{admissible parametrization} for $\gamma$
+\end{itemize}
+
+% natural parametrization
+\subsection{Natural parametrization}
+Let $\gamma$ be a space curve of class ${\mathcal{C}}^{1}$. A parametrization $(I,F)$ of $\gamma$ is called \emph{natural} if $\|F'(t)\| = 1, \forall t \in I$. Thus : 
+\begin{itemize}
+\item The curve is necessarily regular
+\item F is strictly monotonic
+\end{itemize}
+
+% curve length
+\subsection{Curve length}
+Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{1}$. The length of $\gamma$ is define as : 
+\begin{equation}
+L=\int_{I}\|F'(t)\|dt
+\end{equation}
+Note that the length of $\gamma$ is invariant under reparametrization.
+
+% arc-length
+\subsection{Arc-length parametrization}
+Let $\gamma=(I,F)$ be a regular parametric curve of class ${\mathcal{C}}^{1}$. Let $t_0 \in I$ be a given parameter. The following map is said to be the \emph{arc-length of origin $t_0$} of $\gamma$ :
+\begin{equation}
+s \colon t \mapsto \int_{t_{0}}^{t}\|F'(u)\|du
+\quad,\quad
+s \in I \times \mathbb{R}
+\end{equation}
+
+The arc-length $s\colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
+
+Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\|G'(s)\| = 1, \forall s \in J$.
+
+This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed ($\|G'\| = 1$).
+
+
+% --------------------------------------------------------------------------------------------------------------------------------------------
+% FRENET THRIEDRON
+% --------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Frenet's Trihedron}
+\label{sec:frenet}
+En cinématique ou en géométrie différentielle, le repère de Frenet ou repère de Serret-Frenet est un outil d'étude du comportement local des courbes. Il s'agit d'un repère local associé à un point P, décrivant une courbe (C). Son mode de construction est différent selon que l'espace ambiant est de dimension 2 (courbe plane) ou 3 (courbe gauche) ; il est possible également de définir un repère de Frenet en toute dimension, pourvu que la courbe vérifie des conditions différentielles simples.
+
+Le repère de Frenet, et les formules de Frenet donnant les dérivées des vecteurs de ce repère, permettent de mener de façon systématique des calculs de courbure, de torsion pour les courbes gauches et d'introduire des concepts géométriques associés aux courbes : cercle osculateur, plan osculateur (en), parallélisme des courbes
+
+In this section we consider $\gamma=(J,G)$ to be a regular ($\|\gamma\|=1$) parametric curve of class ${\mathcal{C}}^{2}$, parametrized by its arc-length (denoted $s$). For the sake of simplicity we will refer to $G(s)$ as $\gamma(s)$.
+
+% tangent vector
+\subsection{Tangent vector}
+The first vector of Frenet's trihedron is called the \emph{unit tangent vector} ($\mathbf{t}$). At any given parameter $s_0 \in J$,  it is defined as :
+\begin{equation}
+\mathbf{t}(s_0) = \frac{\gamma'(s_0)}{\|\gamma'(s_0)\|} = \gamma'(s_0)
+\quad,\quad
+\|\mathbf{t}(s_0)\|=1
+\end{equation}
+
+%Normal vector
+\subsection{Normal vector}
+The second vector of Frenet's trihedron is called the \emph{unit normal vector} ($\mathbf{n}$). It is constructed from $\mathbf{t'}$ which is orthogonal to $\mathbf{t}$ : $\|\mathbf{t}\|=1 \Rightarrow \mathbf{t^{'}} \cdot  \mathbf{t} = 0 \Leftrightarrow  \mathbf{t^{'}} \perp \mathbf{t}$. Thus, at any given parameter $s_0 \in J$, it is define as :
+\begin{equation}
+\mathbf{n}(s_0) = \frac{\mathbf{t}'(s_0)}{\|\mathbf{t}'(s_0)\|} = \frac{\gamma''(s_0)}{\|\gamma''(s_0)\|}
+\quad,\quad
+\|\mathbf{n}(s_0)\|=1
+\end{equation}
+
+%Binormal vector and torsion
+\subsection{Binormal vector}
+The third vector of Frenet's trihedron is called the \emph{unit binormal vector} ($\mathbf{b}$). It is constructed from $\mathbf{t}$ and $\mathbf{n}$ to form an orthonormal direct basis of $\mathbb{R}^{3}$. Thus, at any given parameter $s_0 \in J$, it is define as :
+\begin{equation}
+\mathbf{b}(s_0) = \mathbf{t}(s_0) \times \mathbf{n}(s_0) 
+\quad,\quad
+\|\mathbf{b}(s_0)\|=1
+\end{equation}
+
+
+% --------------------------------------------------------------------------------------------------------------------------------------------
+% CURVATURE
+% --------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Curvature}
+
+
+Note that from a geometric point of view, $\frac{1}{\kappa(s_0)}$ represents the radius of the osculating circle of $\gamma$ at the point of parameter $s_0$.
+
+$\kappa(s_0) = \|\mathbf{t}'(s_0)\| = \|\gamma''(s_0)\|$
+
+%Curvature binormal
+\subsection{Osculating circle}
+Défini de façon directe, le cercle de courbure est le cercle le plus proche de la courbe en P, c'est l'unique cercle osculateur à la courbe en ce point. Ceci signifie qu'il constitue une très bonne approximation de la courbe, meilleure qu'un cercle tangent quelconque. En effet, il donne non seulement une idée de la direction dans laquelle la courbe avance (direction de la tangente), mais aussi de sa tendance à tourner de part ou d'autre de la tangente.
+
+%Curvature binormal
+\subsection{Curvature binormal vector}
+Finally, we define the \emph{curvature binormal vector} at any given parameter $s_0 \in J$ as :
+\begin{equation}
+\mathbf{\kappa b}(s_0) = \mathbf{t}(s_0) \times \mathbf{t}'(s_0) = \kappa(s_0)\cdot\mathbf{b}(s_0)
+\quad,\quad
+\|\mathbf{\kappa b}(s_0)\|= \kappa(s_0)
+\end{equation}
+
+
+% --------------------------------------------------------------------------------------------------------------------------------------------
+% TORSION
+% --------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Torsion}
+En géométrie différentielle, la torsion d'une courbe tracée dans l'espace mesure la manière dont la courbe se tord pour sortir de son plan osculateur (plan contenant le cercle osculateur). Ainsi, par exemple, une courbe plane a une torsion nulle et une hélice circulaire est de torsion constante. Prises ensemble, la courbure et la torsion d'une courbe de l'espace en définissent la forme comme le fait la courbure pour une courbe plane. La torsion apparait comme coefficient dans les équations différentielles du repère de Frenet.
+
+The \emph{torsion} measures the deviance of $\gamma$ from being a planar curve and is defined at any given parameter $s_0 \in J$ as :
+\begin{equation}
+\tau_f(s_0) = \mathbf{n}'(s_0) \cdot \mathbf{b}(s_0) 
+\end{equation}
+
+%\begin{myprop}
+%Si $F$ est ${\mathcal{C}}^{1}$ et régulière alors nécessairement elle est monotone car $F'$ est de signe constant.
+%\end{myprop}
+
+% figure
+%\begin{figure}[t] 
+%\centering 
+%\includegraphics[width=\linewidth]{img_ch1_1_frenet.pdf} 
+%\caption{Repères de Frenet attachés à $\gamma$.}
+%\label{fig:1_1}
+%\end{figure}
+
+
+% --------------------------------------------------------------------------------------------------------------------------------------------
+% CURVE FRAMING
+% --------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\section{Curve Framing}
+
+% moving frame
+\subsection{Moving frame}
+
+Soit $\gamma : s \rightarrow \gamma(s)$ une courbe bi-régulière de l'espace, paramétrée par son abscisse curviligne. On appelle \emph{repère mobile} attaché à $\gamma$ le trièdre orthonormé direct 
+$\{\mathbf{d_{3}}(s),\mathbf{d_{1}}(s),\mathbf{d_{2}}(s) \}$. 
+
+Par construction, le repère mobile attaché à $\gamma$ vérifie :
+\begin{equation}
+\begin{cases}
+&\| \mathbf{d_{i}}(s) \| = 1 \\
+&\mathbf{d_{i}}(s) \cdot \mathbf{d_{j}}(s) = 0
+\end{cases}
+\end{equation}
+
+% governing equations
+\subsubsection{Governing equations}
+Par dérivation des relations précédentes on obtient les équations différentielles suivantes :
+\begin{equation}
+\begin{cases}
+&\mathbf{d_{i}^{'}}(s) \cdot \mathbf{d_{i}}(s) = 0 \\
+&\mathbf{d_{i}^{'}}(s) \cdot \mathbf{d_{j}}(s) = -\mathbf{d_{i}}(s) \cdot \mathbf{d_{j}^{'}}(s)
+\end{cases}
+\end{equation}
+Il existe donc 3 fonctions scalaires $\tau(s)$, $\kappa_{1}(s)$, $\kappa_{2}(s)$ telles que :
+\begin{equation}
+\begin{cases}
+&\mathbf{d_{3}^{'}}(s) = \kappa_{2}(s)\mathbf{d_{1}}(s) - \kappa_{1}(s)\mathbf{d_{2}}(s) \\
+&\mathbf{d_{1}^{'}}(s) = -\kappa_{2}(s)\mathbf{d_{3}}(s) + \tau(s)\mathbf{d_{2}}(s) \\
+&\mathbf{d_{2}^{'}}(s) = \kappa_{1}(s)\mathbf{d_{3}}(s) - \tau(s)\mathbf{d_{1}}(s)
+\end{cases}
+\end{equation}
+Ce système se réécrit sous forme matricielle de la façon suivante :
+\begin{gather}
+\left[\begin{array}{c}
+\mathbf{d_{3}^{'}}(s) \\
+\mathbf{d_{1}^{'}}(s) \\
+\mathbf{d_{2}^{'}}(s)
+\end{array}\right]
+=
+\left[\begin{array}{ccc}
+0 & \kappa_{2}(s) & -\kappa_{1}(s) \\
+-\kappa_{2}(s) & 0 & \tau(s) \\
+\kappa_{1}(s) & -\tau(s) & 0
+\end{array}\right]
+\left[\begin{array}{c}
+\mathbf{d_{3}}(s) \\
+\mathbf{d_{1}}(s) \\
+\mathbf{d_{2}}(s)
+\end{array}\right]
+\end{gather}
+
+On remarquera qu'ainsi définie, l'évolution des repères mobiles le long de la courbe $\gamma$ est gouvernée par une équation différentielle d'ordre 1. Dès lors, un unique triplet $\{\tau$, $\kappa_{1}$, $\kappa_{2}\}$  engendre une famille de repères mobiles définis à une constante d'intégration prêt. Généralement, un repère mobile sera donc entièrement définit par la donnée de $\tau$, $\kappa_{1}$, $\kappa_{2}$ et de $\{\mathbf{d_{3}}(s=0),\mathbf{d_{1}}(s=0),\mathbf{d_{2}}(s=0) \}$.
+
+% figure
+%\begin{figure}[t] 
+%\centering 
+%\includegraphics[height=5cm]{img_ch1_2_torsion.pdf} 
+%\caption{Interprétation géométrique des fonctions scalaires $\tau(s)$, $\kappa_{1}(s)$, $\kappa_{2}(s)$ gouvernant l'évolution du repère mobile attaché à $\gamma$.}
+%\label{fig:1_2}
+%\end{figure}
+
+% vecteur de Darboux
+\subsubsection{Darboux vector}
+Il est pertinent de considérer l'évolution d'un repère mobile le long de $\gamma$ en introduisant son vecteur de Darboux ($\mathbf{\Omega}$), qui correspond au taux de rotation du trièdre $\{\mathbf{d_{3}}(s),\mathbf{d_{1}}(s),\mathbf{d_{2}}(s) \}$ selon l'abscisse curviligne. Les équations d'évolution du repère mobile s'écrivent alors :
+\begin{gather}
+\mathbf{d_{i}^{'}}(s) = \mathbf{\Omega}(s) \times \mathbf{d_{i}}(s)
+\quad avec \quad
+\mathbf{\Omega}(s) 
+= 
+\left[\begin{array}{c}
+\tau(s) \\
+\kappa_{1}(s) \\
+\kappa_{2}(s)
+\end{array}\right]
+\end{gather}
+Géométriquement, les fonctions scalaires $\tau(s)$, $\kappa_{1}(s)$, $\kappa_{2}(s)$  correspondent respectivement aux taux de rotations du trièdre autour des axes dirigés par $\mathbf{d_{3}}(s),\mathbf{d_{1}}(s),\mathbf{d_{2}}(s)$ :
+\begin{gather}
+\frac{d\theta_3}{dt}(s) = \tau(s)
+\quad,\quad
+\frac{d\theta_1}{dt}(s) = \kappa_{1}(s)
+\quad,\quad
+\frac{d\theta_2}{dt}(s) = \kappa_{2}(s)
+\end{gather}
+
+% adapted frame
+\subsection{Adapted frame}
+De plus, on dira qu'il est \emph{adapté} à $\gamma$ si en tout point $\gamma(s)$, $\mathbf{d_{3}}(s)$ est tangent à $\gamma$ :
+\begin{gather}
+\mathbf{d_{3}}(s) = \mathbf{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
+\end{gather}
+
+Dans ce cas, la courbure $\kappa$ de la courbe $\gamma$ vaut : $\kappa \equiv \|\gamma''\| = \|\mathbf{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$
+
+La courbure est une quantité géométrique intrinsèque, indépendante du choix du repère mobile attaché à la courbe. C'est donc un invariant. Et donc quelque soit le choix du repère mobile adapté $|\mathbf{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$ est un invariant (la courbure).
+
+% FRENET FRAME
+\subsection{Frenet frame}
+
+% definition
+\subsubsection{Definition}
+The Frenet frame is a well-known particular adapted moving frame (§\ref{sec:frenet}). At any given regular point $\gamma(s_0)$ it is define as $\{\mathbf{t}(s_0),\mathbf{n}(s_0),\mathbf{b}(s_0)\}$ where : 
+\begin{gather}
+\mathbf{t}(s_0) = \frac{\gamma^{'}(s_0)}{\|\gamma'(s_0)\|}
+\quad,\quad
+\mathbf{n}(s_0) = \frac{\mathbf{t'}(s_0)}{\mathbf{\kappa}(s_0)}
+\quad,\quad
+\mathbf{b}(s_0)= \mathbf{t}(s_0)\times\mathbf{n}(s_0)
+\end{gather}
+
+\subsubsection{Governing equations}
+The Frenet frame satisfies the \emph{Frenet-Serret} formulas, which govern the evolution of the frame along the curve $\gamma$ :
+\begin{gather}
+\left[\begin{array}{c}
+\mathbf{t^{'}}(s) \\
+\mathbf{n^{'}}(s) \\
+\mathbf{b^{'}}(s)
+\end{array}\right]
+=
+\left[\begin{array}{ccc}
+0 & \kappa_{}(s) & 0 \\
+-\kappa_{}(s) & 0 & \tau_f(s) \\
+0 & -\tau_f(s) & 0
+\end{array}\right]
+\left[\begin{array}{c}
+\mathbf{t}(s) \\
+\mathbf{n}(s) \\
+\mathbf{b}(s)
+\end{array}\right]
+\end{gather}
+
+One can remember the generic differential equations of an adapted moving frame attached to a curve, where : 
+\begin{gather}
+\mathbf{d_{3}}(s) = \mathbf{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
+\quad,\quad
+\kappa_{1}(s) = 0
+\quad,\quad
+\kappa_{2}(s) = \kappa(s)
+\quad,\quad
+\tau(s) = \tau_{f}(s)
+\end{gather}
+
+\subsubsection{Darboux vector}
+Consequently, the Darboux vector ($\mathbf{\Omega_{f}}$) of the Frenet frame is given by :
+\begin{gather}
+\mathbf{\Omega_f}(s) 
+= 
+\left[\begin{array}{c}
+\tau_{f}(s) \\
+0 \\
+\kappa(s)
+\end{array}\right]
+\end{gather}
+
+\subsubsection{Specific points}
+undefined when curvature vanishes
+
+not related to mechanical torsion
+
+
+% REPERE DE BISHOP
+\subsection{Bishop frame}
+
+% definition
+\subsubsection{Definition}
+Different ways to frame a curve. The usual one is Frenet. But, it could not be as relevant as we want in our field of interest.
+
+The Bishop frame is defined as a a well-known particular adapted moving frame (§\ref{sec:frenet}). At any given regular point $\gamma(s_0)$ it is define as $\{\mathbf{t}(s_0),\mathbf{n}(s_0),\mathbf{b}(s_0)\}$ where : 
+\begin{gather}
+\mathbf{t}(s_0) = \frac{\gamma^{'}(s_0)}{\|\gamma'(s_0)\|}
+\quad,\quad
+\mathbf{n}(s_0) = \frac{\mathbf{t'}(s_0)}{\mathbf{\kappa}(s_0)}
+\quad,\quad
+\mathbf{b}(s_0)= \mathbf{t}(s_0)\times\mathbf{n}(s_0)
+\end{gather}
+
+\subsubsection{Governing equations}
+The Bishop frame evolution is governed by the following differential equations :
+\begin{gather}
+\left[\begin{array}{c}
+\mathbf{t^{'}}(s) \\
+\mathbf{u^{'}}(s) \\
+\mathbf{v^{'}}(s)
+\end{array}\right]
+=
+\left[\begin{array}{ccc}
+0 & \kappa_{2}(s) & -\kappa_{1}(s) \\
+-\kappa_{2}(s) & 0 & 0 \\
+\kappa_{1}(s) & 0 & 0
+\end{array}\right]
+\left[\begin{array}{c}
+\mathbf{t}(s) \\
+\mathbf{u}(s) \\
+\mathbf{v}(s)
+\end{array}\right]
+\end{gather}
+
+One can remember the generic differential equations of an adapted moving frame attached to a curve, where : 
+\begin{gather}
+\mathbf{d_{3}}(s) = \mathbf{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
+\quad,\quad
+\kappa_{1}(s) = 0
+\quad,\quad
+\kappa_{2}(s) = \kappa(s)
+\quad,\quad
+\tau(s) = \tau_{f}(s)
+\end{gather}
+
+\subsubsection{Darboux vector}
+Consequently, the Darboux vector ($\mathbf{\Omega_{b}}$) of the Bishop frame is given by :
+\begin{gather}
+\mathbf{\Omega_b}(s) 
+= 
+\left[\begin{array}{c}
+0\\
+\kappa_1(s)\\
+\kappa_2(s)
+\end{array}\right]
+\end{gather}
+
+\subsubsection{Specific points}
+well defined when curvature vanishes
+
+related to mechanical torsion
+
+\bibliographystyle{alpha}
+\bibliography{../bibliography}
+
+%sdsd
+
+
+

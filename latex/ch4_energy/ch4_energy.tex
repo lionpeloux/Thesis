@@ -1,0 +1,373 @@
+\chapter{Elastic rod : variational approch}
+
+% #######################################################
+\section{Introduction}
+% #######################################################
+
+\lipsum[1]
+
+Basile \cite{Bergou2010}
+
+Basile \cite{Bergou2008}
+Je
+Basile \cite{Audoly2000}
+
+Sina \cite{Nabei2014}
+
+% #######################################################
+\section{Kinematic}
+% #######################################################
+
+Bishop
+
+ $\boldsymbol{x}$ only depends on arc-length along the curve : $\boldsymbol{x}(t)$
+
+Implicit dependence of $\theta$ in $\boldsymbol{x}$ : $\theta(t) \equiv \theta[x](t)$
+
+Implicit dependence of $\boldsymbol{\omega}$ in $\boldsymbol{x}$ and $\theta$ : $\boldsymbol{\omega}(t) \equiv \boldsymbol{\omega}[\boldsymbol{x},\theta](t)$
+
+We denote $\tau$ the twist along the curve : $\tau(t) = \frac{\partial \theta}{\partial t} = \theta'(t)$
+
+We will make the following mathematical assumptions :
+\begin{align}
+	&\fonction{\boldsymbol{x}}{[0,L]}{\mathbb{R}^3}{t}{\boldsymbol{x}(t)}
+	&&\boldsymbol{x} \in \mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3})
+	\\ \notag\\
+	&\fonction{\theta[\boldsymbol{x}]}{[0,L]}{\mathbb{R}}{t}{\theta[\boldsymbol{x}](t)}
+	&&\theta[\boldsymbol{x}] \in \mathcal{C}^{\infty}([0,L]^{\mathbb{R}})
+	\\ \notag\\
+	&\fonction{\boldsymbol{\omega}[\boldsymbol{x},\theta]}{[0,L]}{\mathbb{R}^2}{t}{\boldsymbol{\omega}[\boldsymbol{x},\theta](t)}
+	&&\boldsymbol{\omega}[\boldsymbol{x},\theta] \in \mathcal{C}^{\infty}([0,L]^{\mathbb{R}^2})
+\end{align}
+
+The dependence in the arc-length is denoted by the parameter $t \in [0,L]$ by the use of parenthesis $(.)$.
+The dependencies in functions are denoted by the use of brackets $[.]$.
+
+When computings energy gradients, it comes to differentiate energies regarding there dependencies in functions $\boldsymbol{x}$ and $\theta$. Thus, we may recall that :
+\begin{align}
+	&\fonction{\theta}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3})}{\mathcal{C}^{\infty}([0,L]^\mathbb{R})}{\boldsymbol{x}}{\theta[\boldsymbol{x}]}
+	&&\theta \in \mathcal{C}^{\infty}
+	\\ \notag\\
+	&\fonction{\boldsymbol{\omega}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3}) \times \mathcal{C}^{\infty}([0,L]^{\mathbb{R}})}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^2})}{(\boldsymbol{x},\theta)}{\boldsymbol{\omega}[\boldsymbol{x},\theta]}
+	&&\boldsymbol{\omega} \in \mathcal{C}^{\infty}
+\end{align}
+
+
+
+
+
+% #######################################################
+\section{Energy}
+% #######################################################
+
+\begin{align}
+\mathcal{E}_p[\boldsymbol{x},\theta] & = \mathcal{E}_{stretch}[\boldsymbol{x}] + \mathcal{E}_{bend}[\boldsymbol{x},\theta] + \mathcal{E}_{twist}[\theta]
+\end{align}
+\begin{align}
+\mathcal{E}_{stretch}[\boldsymbol{x}] & = \tfrac{1}{2} \int_{0}^{L} K_s(\tfrac{\|\boldsymbol{x}'\|}{\|\bar{\boldsymbol{x}}'\|}-1)^2dt \\
+\mathcal{E}_{bend}[\boldsymbol{x},\theta] & = \tfrac{1}{2} \int_{0}^{L} (\boldsymbol\omega -\boldsymbol{\bar{\omega}})^T B \, (\boldsymbol\omega -\boldsymbol{\bar{\omega}})dt \\
+\mathcal{E}_{twist}[\theta] & = \tfrac{1}{2} \int_{0}^{L} \beta(\theta' -{\bar{\theta'}})^2dt
+\end{align}
+
+Energies could be seen as functional, i.e.\ functions that map vectors from a functional vector space to there underlying scalar field $\mathbb{R}$.
+
+\begin{align}
+	&\fonction{\mathcal{E}_{stretch}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3})}{\mathbb{R}}{\boldsymbol{x}}{\mathcal{E}_{stretch}[\boldsymbol{x}]}
+	\\ \notag\\
+	&\fonction{\mathcal{E}_{bend}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3}) \times \mathcal{C}^\infty([0,L]^{\mathbb{R}^3},[0,L]^{\mathbb{R}})}{\mathbb{R}}{(\boldsymbol{x},\theta)}{\mathcal{E}_{bend}[\boldsymbol{x},\theta]}
+	\\ \notag\\
+	&\fonction{\mathcal{E}_{twist}}{\mathcal{C}^\infty([0,L]^{\mathbb{R}^3},[0,L]^{\mathbb{R}})}{\mathbb{R}}{\theta}{\mathcal{E}_{twist}[\theta]}
+\end{align}
+
+% #######################################################
+\section{Inextensibility}
+% #######################################################
+
+
+
+
+
+% #######################################################
+\section{Gradients}
+% #######################################################
+
+
+% --------------------------------------------------------------------------------------------
+\subsection{Momentum}
+% --------------------------------------------------------------------------------------------
+
+Calcul du moment :
+\begin{align}
+	\mathcal{M} & = -\frac{d\mathcal{E}_p}{d\theta} =  - \frac{\partial \mathcal{E}_p}{\partial \theta} = - \frac{\partial \mathcal{E}_{bend}}{\partial \theta} - \frac{\partial \mathcal{E}_{twist}}{\partial \theta} \\[0.5em]
+\end{align}
+
+
+\subsubsection{Calcul de $\frac{\partial \mathcal{E}_{twist}}{\partial \theta}$}
+% --------------------------------------------------------------------------------------------
+
+\begin{align}
+	\mathcal{E}_{twist}[\theta + \lambda h_{\theta}] & = \tfrac{1}{2} \int_{0}^{L} \beta\big((\theta + \lambda h_{\theta})' -{\bar{\theta'}}\big)^2 \,dt \\ 
+%   	& = \tfrac{1}{2} \int_{0}^{L} \beta( (\theta'-{\bar{\theta'}})^2 + 2 \lambda (\theta'-{\bar{\theta'}}) h_{\theta}' + \lambda^2 h_{\theta}'^2) \,dt \notag\\
+   	& = \mathcal{E}_{twist}[\theta] + \lambda\int_{0}^{L} \beta(\theta'-{\bar{\theta'}}) h_{\theta}' dt +   \lambda^2 \int_{0}^{L} \frac{\beta h_{\theta}'^2}{2} \,dt \notag\\
+	& = \mathcal{E}_{twist}[\theta] + \lambda\left[\beta(\theta'-{\bar{\theta'}}) h_{\theta}\right]_0^L - \lambda\int_{0}^{L} \big(\beta(\theta'-{\bar{\theta'}})\big)' h_{\theta}  \,dt + o(\lambda) \notag\\
+	& = \mathcal{E}_{twist}[\theta] + \lambda\int_{0}^{L} \big[\beta(\theta'-{\bar{\theta'}})(\delta_L-\delta_0) - \big(\beta(\theta'-{\bar{\theta'}})\big)'\big] h_{\theta}  \,dt + o(\lambda) \notag\\
+	& = \mathcal{E}_{twist}[\theta] + \lambda(D_{\mathcal{E}_{twist}} \cdot h_{\theta}) + o(\lambda) \notag
+\end{align}
+
+With :
+\begin{align}
+\frac{\partial \mathcal{E}_{twist}}{\partial \theta} \equiv D_{\mathcal{E}_t} = - \big(\beta(\theta'-{\bar{\theta'}})\big)' + \beta(\theta'-{\bar{\theta'}})(\delta_L-\delta_0) \quad , \quad \frac{\partial \mathcal{E}_{twist}}{\partial \theta} : [0;L] \longrightarrow 	\mathbb{R}
+\end{align}
+
+
+
+\subsubsection{Calcul de $\frac{\partial \boldsymbol{\omega}}{\partial \theta}$}
+% --------------------------------------------------------------------------------------------
+
+On montre par des considérations géométriques que :
+\begin{align}
+	\boldsymbol{d_1}[\boldsymbol{x}, \theta + \lambda h_{\theta}] & = \boldsymbol{d_1}[\boldsymbol{x}, \theta] + \sin(\lambda h_{\theta})\boldsymbol{d_2}[\boldsymbol{x}, \theta] - (1-\cos(\lambda h_{\theta})\boldsymbol{d_1}[\boldsymbol{x}, \theta] \\
+   	& = \boldsymbol{d_1}[\boldsymbol{x}, \theta] + \lambda h_{\theta}\boldsymbol{d_2}[\boldsymbol{x}, \theta] + o(\lambda) \notag
+\end{align}
+\begin{align}
+	\boldsymbol{d_2}[\boldsymbol{x}, \theta + \lambda h_{\theta}] & = \boldsymbol{d_2}[\boldsymbol{x}, \theta] - \sin(\lambda h_{\theta})\boldsymbol{d_1}[\boldsymbol{x}, \theta] - (1-\cos(\lambda h_{\theta})\boldsymbol{d_2}[\boldsymbol{x}, \theta] \\
+   	& = \boldsymbol{d_2}[\boldsymbol{x}, \theta] - \lambda h_{\theta}\boldsymbol{d_1}[\boldsymbol{x}, \theta] + o(\lambda) \notag
+\end{align}
+
+On en déduit pour le vecteur courbure matérielle :
+\begin{align}
+	\boldsymbol{\omega}[\boldsymbol{x}, \theta + \lambda h_{\theta}] & = 
+	\left[\begin{array}{c}
+	\boldsymbol{x}'' \cdot  \boldsymbol{d_1}[\boldsymbol{x}, \theta + \lambda h_{\theta}]\\
+	\boldsymbol{x}'' \cdot \boldsymbol{d_2}[\boldsymbol{x}, \theta + \lambda h_{\theta}]\\
+	\end{array}\right] \\
+	& = \boldsymbol{\omega}[\boldsymbol{x}, \theta] + \lambda 
+	\left[\begin{array}{c}
+	\boldsymbol{x}'' \cdot  \boldsymbol{d_2}[\boldsymbol{x}, \theta]\\
+	- \boldsymbol{x}'' \cdot \boldsymbol{d_1}[\boldsymbol{x}, \theta]\\
+	\end{array}\right] \cdot h_{\theta}
+	 + o(\lambda)\notag\\
+	 & = \boldsymbol{\omega}[\boldsymbol{x}, \theta] + \lambda(D_{\boldsymbol{\omega}} \cdot h_{\theta}) + o(\lambda)\notag
+\end{align}
+
+With :
+\begin{align}
+	&\frac{\partial \boldsymbol{\omega}}{\partial \theta} \equiv D_{\boldsymbol{\omega}} = - R_{\pi/2}\:\boldsymbol{\omega}[\boldsymbol{x}, \theta]
+	\quad , \quad R_{\pi/2} = \left[\begin{array}{cc}0 & -1 \\1 & 0\end{array}\right]
+	\quad , \quad \frac{\partial \boldsymbol{\omega}}{\partial \theta}  : [0;L] \longrightarrow \mathbb{R}^2
+\end{align}
+
+
+\subsubsection{Calcul de $\frac{\partial \mathcal{E}_{bend}}{\partial \theta}$}
+% --------------------------------------------------------------------------------------------
+
+\begin{align}
+	\mathcal{E}_{bend}[\boldsymbol{x},\theta + \lambda h_{\theta}]
+		& = \tfrac{1}{2} \int_{0}^{L} \big(\boldsymbol{\omega}[\boldsymbol{x}, \theta + \lambda h_{\theta}] - \bar{\boldsymbol{\omega}}[\boldsymbol{x}, \theta]\big)^T B \,  \big(\boldsymbol{\omega}[\boldsymbol{x}, \theta + \lambda h_{\theta}] - \bar{\boldsymbol{\omega}}[\boldsymbol{x}, \theta]\big)dt \notag\\
+%	& = \tfrac{1}{2} \int_{0}^{L} \big((\boldsymbol{\omega} - \bar{\boldsymbol{\omega}}) - \lambda R_{\pi/2}\:\boldsymbol{\omega} \cdot h_{\theta} + o(\lambda)\big)^T B \,  \big((\boldsymbol{\omega} - \bar{\boldsymbol{\omega}}) - \lambda R_{\pi/2}\:\boldsymbol{\omega} \cdot h_{\theta} + o(\lambda)\big)dt \notag\\
+		& = \mathcal{E}_{bend}[\boldsymbol{x},\theta] - \lambda \int_{0}^{L} \big((\boldsymbol{\omega} - \bar{\boldsymbol{\omega}})^T B R_{\pi/2}\:\boldsymbol{\omega}\big)\cdot h_{\theta} dt + o(\lambda) \notag\\
+		& =  \mathcal{E}_{bend}[\boldsymbol{x},\theta] + \lambda(D_{\mathcal{E}_{bend}} \cdot h_{\theta}) + o(\lambda)
+\end{align}
+
+With :
+\begin{align}
+	\frac{\partial \mathcal{E}_{bend}}{\partial \theta} \equiv D_{\mathcal{E}_{bend}} = -(\boldsymbol{\omega} - \bar{\boldsymbol{\omega}})^T B R_{\pi/2}\:\boldsymbol{\omega}
+	\quad , \quad \frac{\partial \mathcal{E}_{bend}}{\partial \theta} : [0;L] \longrightarrow \mathbb{R}
+\end{align}
+
+
+\subsubsection{Calcul de $\mathcal{M}$}
+% --------------------------------------------------------------------------------------------
+
+Finally:
+\begin{align}
+\mathcal{M} 	& = -\frac{d\mathcal{E}_p}{d\theta} = -(\boldsymbol{\omega} - \bar{\boldsymbol{\omega}})^T B R_{\pi/2}\:\boldsymbol{\omega} - \big(\beta(\theta'-{\bar{\theta'}})\big)' + \beta(\theta'-{\bar{\theta'}})(\delta_L-\delta_0)
+\end{align}
+
+ATTENTION : écrire ici que M est porté par $d_3$
+
+% --------------------------------------------------------------------------------------------
+\subsection{Forces}
+% --------------------------------------------------------------------------------------------
+
+Calcul des efforts:
+\begin{align}
+\boldsymbol{\mathcal{F}} & = -\frac{d\mathcal{E}_p}{d\boldsymbol{x}} =  - \frac{\partial \mathcal{E}_p}{\partial \boldsymbol{x}} - \int_{0}^{L} \tfrac{\partial \mathcal{E}_p}{\partial \theta} \tfrac{\partial \theta}{\partial \boldsymbol{x}}
+\end{align}
+
+
+\subsubsection{Calcul de $\frac{\partial \theta}{\partial \boldsymbol{x}}$ par le writh}
+% --------------------------------------------------------------------------------------------
+
+\cite{Fuller1978}, \cite{deVries2005},  \cite{Vauquelin2000}, \cite{Berger2009}
+
+On montre ici qu'en un point d'abscisse s, une variation de la centerline de $\lambda \boldsymbol{h_x}$ entraine une variation de $\theta$ intégrée sur la courbe $\Gamma$ de $(\frac{\partial \theta[\boldsymbol{x}](s)}{\partial\boldsymbol{x}} \cdot \lambda \boldsymbol{h_x})$.
+
+$H : t \mapsto \left\{\begin{array}{c}0  , \quad t<0 \\1  , \quad t\geqslant0\end{array}\right.$ est la fonction de Heaviside.
+
+$\delta_{t_0} : t \mapsto \delta(t-t_0)$ est la distribution de dirac centrée en $t_0$.
+
+ATTENTION : ici il y a qqch à expliquer entre $\theta$ et $\psi$ (il y a une question de signe à détailler).
+
+\begin{align}
+	\Delta\psi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}](s) = \psi[\boldsymbol{x} + \lambda\boldsymbol{h_x}](s) - \psi[\boldsymbol{x}](s)
+\end{align}
+
+\begin{align}
+	\Delta\psi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}](s) & = \int_{0}^{s} \frac{\boldsymbol{x'} \times (\boldsymbol{x} + \lambda\boldsymbol{h_x})'}{1+ \boldsymbol{x'} \cdot  (\boldsymbol{x} + \lambda\boldsymbol{h_x})'} \cdot \big(\boldsymbol{x''} + (\boldsymbol{x} + \lambda\boldsymbol{h_x})''\big) dt \\
+	& = \int_{0}^{s} \frac{\lambda \boldsymbol{x'} \times \boldsymbol{h_x}'}{2(1+ \frac{\lambda \boldsymbol{x'} \cdot \boldsymbol{h_x}'}{2})} \cdot (2\boldsymbol{x''} + \lambda\boldsymbol{h_x}'') dt \notag\\
+	& = \int_{0}^{s} \frac{\lambda}{2}(\boldsymbol{x'} \times \boldsymbol{h_x}')\big(1- \frac{\lambda \boldsymbol{x'} \cdot \boldsymbol{h_x}'}{2} + o(\lambda)\big)(2\boldsymbol{x''} + \lambda\boldsymbol{h_x}'') dt \notag\\
+	& = \int_{0}^{s} \big(-\boldsymbol{k_b} \cdot \lambda \boldsymbol{h_x'} + \frac{\lambda^2}{2}(\boldsymbol{x'} \times \boldsymbol{h_x}')\cdot\boldsymbol{h_x''}\big)\big(1- \frac{\lambda \boldsymbol{x'} \cdot \boldsymbol{h_x}'}{2} + o(\lambda)\big) dt \notag\\
+	& = - \int_{0}^{s} -\boldsymbol{k_b} \cdot \lambda \boldsymbol{h_x'}dt +o(\lambda) \notag\\
+	& = \big[-\boldsymbol{k_b} \cdot \lambda \boldsymbol{h_x}\big]_{0}^{s} + \int_{0}^{s} \boldsymbol{k_b'} \cdot \lambda \boldsymbol{h_x}dt +o(\lambda) \notag\\
+	& = \int_{0}^{L} \big((1-H)\boldsymbol{k_b'} - (\delta_s - \delta_0)\boldsymbol{k_b}\big)\cdot\lambda \boldsymbol{h_x}dt +o(\lambda) \notag\\
+	& = \lambda(\boldsymbol{D_{\psi}}(s)\cdot\boldsymbol{h_x}) + o(\lambda)\notag
+\end{align}
+
+With :
+\begin{align}
+	\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \equiv -\boldsymbol{D_{\psi}}(s) = (\delta_s - \delta_0)\boldsymbol{k_b} - (1-H)\boldsymbol{k_b'}
+	\quad , \quad \frac{\partial \theta}{\partial \boldsymbol{x}}(s) : [0;L] \longrightarrow \mathbb{R}^3
+\end{align}
+
+
+
+\subsubsection{Calcul de $\frac{\partial \boldsymbol{\omega}}{\partial \boldsymbol{x}}$}
+% --------------------------------------------------------------------------------------------
+
+Quand $\boldsymbol{x}$ varie de $\lambda\boldsymbol{h_x}$, le repère materiel est tourné de sorte que, en décomposant sur le repère de base :
+\begin{align}
+	\boldsymbol{d_1}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] & = \boldsymbol{d_1}[\boldsymbol{x}, \theta] + \Delta\psi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}]\boldsymbol{d_2}[\boldsymbol{x}, \theta] + \Delta\phi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}]\boldsymbol{d_3}[\boldsymbol{x}, \theta] + o(\lambda)\\
+	\boldsymbol{d_2}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] & = \boldsymbol{d_2}[\boldsymbol{x}, \theta] - \Delta\psi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}]\boldsymbol{d_1}[\boldsymbol{x}, \theta] - \Delta\phi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}]\boldsymbol{d_3}[\boldsymbol{x}, \theta] + o(\lambda)
+\end{align}
+On montre aisément que la contribution en $\Delta\psi$ autour de $\boldsymbol{d_1}$ et $\boldsymbol{d_2}$ est d'un ordre supérieur à celle autour de $\boldsymbol{d_3} = \boldsymbol{x}'$ (ce qui se comprend bien dans le cas d'une variation en hélice).
+
+Par propriété d'orthogonalité des vecteurs du repère mobile (cf § sur le curve framing) on montre que :
+\begin{align}
+	\boldsymbol{d_1}\cdot\boldsymbol{d_3} = 0 &\Rightarrow \boldsymbol{d_1}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] \cdot (\boldsymbol{x}+\lambda\boldsymbol{h_x})' = 0\\
+	&\Rightarrow \Delta\phi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}] = \boldsymbol{d_1}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] \cdot \boldsymbol{x}' = \lambda(-\boldsymbol{d_1}[\boldsymbol{x}, \theta] \cdot \boldsymbol{h_x}') + o(\lambda) \notag
+\end{align}
+\begin{align}
+	\boldsymbol{d_2}\cdot\boldsymbol{d_3} = 0 &\Rightarrow \boldsymbol{d_1}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] \cdot (\boldsymbol{x}+\lambda\boldsymbol{h_x})' = 0\\
+	&\Rightarrow \Delta\phi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}] = \boldsymbol{d_2}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] \cdot \boldsymbol{x}' = \lambda(-\boldsymbol{d_2}[\boldsymbol{x}, \theta] \cdot \boldsymbol{h_x}') + o(\lambda) \notag
+\end{align}
+
+On en déduit le calcul de la variation de $\boldsymbol{\omega}$ pour une vairation de la centerline de $\lambda \boldsymbol{h_x}$ qui vaut :
+\begin{align}
+	\boldsymbol{\omega}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]
+	& =
+	\left[\begin{array}{c}
+	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot  \boldsymbol{d_1}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]\\
+	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot \boldsymbol{d_2}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]\\
+	\end{array}\right] \notag\\
+	& = 
+	\left[\begin{array}{c}
+	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot ( 	\boldsymbol{d_1}[\boldsymbol{x}] 
+												+ (-\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x} + o(\lambda))\boldsymbol{d_2}[\boldsymbol{x}]
+												- (\lambda \boldsymbol{d_1[\boldsymbol{x}]}\cdot\boldsymbol{h_x} + o(\lambda)) \cdot \boldsymbol{x}''
+											)\\
+	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot ( 	\boldsymbol{d_2}[\boldsymbol{x}] 
+												- (-\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x} + o(\lambda))\boldsymbol{d_1}[\boldsymbol{x}]
+												- (\lambda \boldsymbol{d_2[\boldsymbol{x}]}\cdot\boldsymbol{h_x} + o(\lambda)) \cdot \boldsymbol{x}''
+											)\\
+	\end{array}\right] \notag\\
+	  \begin{split}
+      		& = \boldsymbol{\omega}[\boldsymbol{x},\theta] +
+        			\lambda
+        			\left[\begin{array}{c}
+        			\boldsymbol{d_1}[\boldsymbol{x},\theta]^T \\
+        			\boldsymbol{d_2}[\boldsymbol{x},\theta]^T
+        			\end{array}\right] \cdot \boldsymbol{h_x}'' 
+        			 -
+        			\big(\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x}\big)
+        			\left[\begin{array}{c}
+        			\boldsymbol{d_2}[\boldsymbol{x},\theta]\cdot \boldsymbol{x}''\\
+        			-\boldsymbol{d_1}[\boldsymbol{x},\theta]\cdot \boldsymbol{x}''\\
+        			\end{array}\right] \\
+        		& \hspace{5cm}+ \lambda(\boldsymbol{x}'' \cdot \boldsymbol{x}')
+        		\left[\begin{array}{c}
+        		\boldsymbol{d_1}[\boldsymbol{x},\theta]\cdot \boldsymbol{h_x}'\\
+        		\boldsymbol{d_2}[\boldsymbol{x},\theta]\cdot \boldsymbol{h_x}''\\
+        		\end{array}\right]
+        		 + o(\lambda)
+ 	 \end{split} \notag
+\end{align}
+
+
+\begin{align}
+	\boldsymbol{\omega}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta] & = 
+	\left[\begin{array}{c}
+		(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot  \boldsymbol{d_1}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]\\
+		(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot \boldsymbol{d_2}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]\\
+	\end{array}\right] && POUET &&& POUET\notag\\
+& = 
+\left[\begin{array}{c}
+	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot ( 	\boldsymbol{d_1}[\boldsymbol{x}] 
+												+ (-\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x} + o(\lambda))\boldsymbol{d_2}[\boldsymbol{x}]
+											)\\
+	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot ( 	\boldsymbol{d_2}[\boldsymbol{x}] 
+												- (-\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x} + o(\lambda))\boldsymbol{d_1}[\boldsymbol{x}]
+											)\\
+	\end{array}\right] && POUET &&& POUET\notag\\
+& \quad- 
+\left[\begin{array}{c}
+												- (\lambda \boldsymbol{d_1[\boldsymbol{x}]}\cdot\boldsymbol{h_x} + o(\lambda)) \cdot \boldsymbol{x}''
+											)\\
+												- (\lambda \boldsymbol{d_2[\boldsymbol{x}]}\cdot\boldsymbol{h_x} + o(\lambda)) \cdot \boldsymbol{x}''
+											)\\
+	\end{array}\right] && POUET &&& POUET\notag\\
+\end{align}
+
+
+
+\begin{align}
+  g + h & = i \\
+  \begin{split}
+      a & = b + c - d \\
+        & \quad + e - f
+  \end{split} \\
+\end{align}
+
+\begin{equation}\label{e:barwq}\begin{split}
+H_c&=\frac{1}{2n} \sum^n_{l=0}(-1)^{l}(n-{l})^{p-2}
+\sum_{l _1+\dots+ l _p=l}\prod^p_{i=1} \binom{n_i}{l _i}\\ 
+&\quad\cdot[(n-l )-(n_i-l _i)]^{n_i-l _i}\cdot
+\Bigl[(n-l )^2-\sum^p_{j=1}(n_i-l _i)^2\Bigr].
+\end{split}\end{equation}
+
+	\begin{align}
+        		\boldsymbol{\omega}[\boldsymbol{x},\theta] +
+        		\lambda
+        		\left[\begin{array}{c}
+        		\boldsymbol{d_1}[\boldsymbol{x}]^T \\
+        		\boldsymbol{d_2}[\boldsymbol{x}]^T
+        		\end{array}\right] \cdot \boldsymbol{h_x}'' 
+        		& -
+        		\big(\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x}\big)
+        		\left[\begin{array}{c}
+        		\boldsymbol{d_2}[\boldsymbol{x},\theta]\cdot \boldsymbol{x}''\\
+        		-\boldsymbol{d_1}[\boldsymbol{x},\theta]\cdot \boldsymbol{x}''\\
+        		\end{array}\right] \\
+        		& - 
+        		\lambda(\boldsymbol{x}'' \cdot \boldsymbol{x}')
+        		\left[\begin{array}{c}
+        		\boldsymbol{d_1}[\boldsymbol{x},\theta]\cdot \boldsymbol{h_x}'\\
+        		\boldsymbol{d_2}[\boldsymbol{x},\theta]\cdot \boldsymbol{h_x}''\\
+        		\end{array}\right] \\
+        		& + o(\lambda)
+	\end{align}
+
+% #######################################################
+\section{Discretization}
+% #######################################################
+
+
+
+
+% #######################################################
+\section{Connection}
+% #######################################################
+
+
+\bibliographystyle{alpha}
+\bibliography{../bibliography}
