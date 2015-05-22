@@ -4,7 +4,7 @@
 \section{Introduction}
 % #######################################################
 
-\lipsum[1]
+In this section a novel element with 4 degrees of freedom accounting for torsion and bending behaviours is presented. The beam is considered in Kirchhoff’s theory framework, so that it is supposed to be inextensible and its sections are supposed to remain orthogonal to the centreline during deformation. The reduction from the classic 6-DoF model to this 4-DoF model is achieved by an appropriate curve-angle representation based on a relevant curve framing. Energies are then formulated and leads to internal forces and moments acting on the beam. The static equilibrium is deduced from a damped fictitious dynamic with an adapted dynamic relaxation algorithm.
 
 Basile \cite{Bergou2010}
 
@@ -13,6 +13,203 @@ Je
 Basile \cite{Audoly2000}
 
 Sina \cite{Nabei2014}
+
+
+% #######################################################
+\section{Kirchhoff rod}
+The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross sections. The centerline is parameterized by its arc-length. Cross sections orientations are followed along the centerline by their material frame $\{\vect{d}_1 (s),\vect{d}_2 (s),\vect{d}_3 (s)\}$ which is an adapted orthonormal moving frame aligned to section’s principal axes of inertia. Here, \guil{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned to the centerline’s tangent. In the literature, this description is also known as a \emph{Cosserat Curve} [ref].
+
+\subsection{Inextensibility}
+Note the previous description is only valid for inextensible rods in order to follow material points by their arc-length indifferently in their rest or deformed configuration. As explained in \cite{Audoly2010}, this hypothesis is usually relevant for slender beams. Indeed, in practice, if a slender member faces substantial axial strain the bending behaviour would become negligible due to the important difference between axial and bending stiffness. The length of the rod will be denoted $L$ and the arc-length $s$ will vary (with no loss of generality) in $[0,L]$.
+
+\subsection{Euler-Bernouilli}
+Strains are supposed to remain small so that material frame remains orthogonal to the centerline in the deformed configuration. Thus, differentiating the conditions of orthonormality leads to the following differential equations governing the evolution of $\{\vect{d}_1 (s),\vect{d}_2 (s),\vect{d}_3 (s)\}$ along the centerline :
+\begin{gather}
+\left[\begin{array}{c}
+\mathbf{d'_{3}}(s) \\
+\mathbf{d'_{1}}(s) \\
+\mathbf{d'_{2}}(s)
+\end{array}\right]
+=
+\left[\begin{array}{ccc}
+0 & \kappa_{2}(s) & -\kappa_{1}(s) \\
+-\kappa_{2}(s) & 0 & \tau(s) \\
+\kappa_{1}(s) & -\tau(s) & 0
+\end{array}\right]
+\left[\begin{array}{c}
+\mathbf{d_{3}}(s) \\
+\mathbf{d_{1}}(s) \\
+\mathbf{d_{2}}(s)
+\end{array}\right]
+\end{gather}
+
+\subsection{Darboux vector}Those equations can be formulated with the \emph{Darboux vector} of the chosen material frame, which represents the rotational velocity of the frame along $\vect{x}(s)$ :
+\begin{gather}
+\vect{d}_{i}^{'}(s) = \vect{\Omega}_m(s) \times \vect{d}_i(s)
+\quad,\quad
+\vect{\Omega}_m(s) 
+= 
+\left[\begin{array}{c}
+\tau(s) \\
+\kappa_{1}(s) \\
+\kappa_{2}(s)
+\end{array}\right]
+\end{gather}
+Where $\kappa_1(s)$, $\kappa_2(s)$ and $\tau(s)$ represent respectively the rate of rotation of the material frame around the axis  $\vect{d}_1 (s)$, $\vect{d}_2 (s)$ and $\vect{d}_3 (s)$.
+
+\subsection{Curvatures and twist}
+The material curvatures are denoted $\kappa_1(s)$ and $\kappa_2(s)$ and represent the rod’s flexion in the principal planes respectively normal to $\vect{d}_1(s)$ and $\vect{d}_2(s)$ .The material twist is denoted $\tau(s)$ and represents the section’s rate of rotation around $\vect{d}_3(s)$. Those scalar functions measure directly the strain as defined in Kirchhoff’s theory (Figure 4). Recall that the Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ defines the osculating plane and the total curvature ($\kappa$) of a spatial curve :
+\begin{equation}
+	\vect{t}'(s) = \kappa(s) \vect{n}(s)
+	\quad,\quad
+	\kappa(s) = \norm{\vect{t}'(s)}
+	\quad,\quad
+	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) = \frac{\vect{t}(s) \times \vect{t}(s)'}{\kappa(s)} 
+\end{equation}
+To describe the osculating plane in which lies the bending part of the deformation, let’s introduce the \emph{curvature binormal} $\kappa\vect{b}(s) = \vect{t}(s)\times\vect{t}'(s)$, the vector of direction $\vect{b}(s)$ and norm $\kappa(s)$. At each point of arc-length $s$ the osculating plane is normal to $\kappa\vect{b}(s)$.
+
+\subsection{Elastic energy}
+Kirrchhoff’s theory assigns an elastic energy to beams according to their strain \cite{Audoly2010}. In this theory, a beam is supposed to be inextensible. Thus the elastic energy ($\mathcal{E}_p$) only accounts for torsion and bending behaviors and is given by :
+\begin{equation}
+	\mathcal{E}_{p} = 
+	\tfrac{1}{2} \int_{0}^{L}EI_1(\kappa_1-\overbar{\kappa_1})^2 + EI_2(\kappa_2-\overbar{\kappa_2})^2 ds
+	+ \tfrac{1}{2} \int_{0}^{L} \beta(\tau -{\overbar{\tau}})^2 ds
+\end{equation}
+
+Herer, $\overbar{\kappa_1}$, $\overbar{\kappa_2}$ and $\overbar{\tau}$  denote the natural curvature and twist of the rod in the rest position (no stress).
+
+\section{Curve-angle representation}
+The previous paragraph has shown how the elastic potential energy of a rod can be computed following both its centerline and its cross sections orientations, which represents a model with 6-DoF : 3 for centerline positions and 3 for cross section orientations. Following \cite{Bergou2008}, let’s introduce a reduced coordinate formulation of the rod that account for only 4-DoF. This reduction of DoF relies on the concept of zero-twisting frame which gives a reference frame with zero twist along a given centerline. Thus, cross section orientations $\{\vect{d}_1 (s),\vect{d}_2 (s),\vect{d}_3 (s)\}$ can be tracked only by the measure of an angle $\theta$ from this reference frame denoted $\{\vect{u}(s),\vect{v}(s),\vect{d}_3 (s)\}$ (Figure 5). An alternative could be to parameterize the global rotations of local material frame and to compute the rotation needed to align two successive frames along the curve’s tangent.
+
+\subsection{Zero-twisting frame}
+Zero-twisting frame, also known as Bishop frame, was introduced by Bishop in 1964. Bishop remarked that there was more than one way to frame a curve \cite{Bishop1975}. Indeed, for a given curve, any orthonormal moving frame would satisfy the following differential equations, where $k_1(s)$, $k_2 (s)$ and $\tau(s)$ are scalar functions that define completely the moving frame :
+\begin{gather}
+\left[\begin{array}{c}
+\mathbf{e'_{3}}(s) \\
+\mathbf{e'_{1}}(s) \\
+\mathbf{e'_{2}}(s)
+\end{array}\right]
+=
+\left[\begin{array}{ccc}
+0 & k_{2}(s) & -\kappa_{1}(s) \\
+-k_{2}(s) & 0 & \tau(s) \\
+k_{1}(s) & -\tau(s) & 0
+\end{array}\right]
+\left[\begin{array}{c}
+\mathbf{e_{3}}(s) \\
+\mathbf{e_{1}}(s) \\
+\mathbf{e_{2}}(s)
+\end{array}\right]
+\end{gather}
+For instance, a Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ is a frame which satisfies $k_1(s)=0$. Note that this frame suffers from major disadvantages : it is undefined where the curvature vanishes and it flips at inflexion points.A Bishop frame $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$ is a frame which satisfies $\tau(s)=0$. By construction, this frame has no angular velocity (i.e. no twist) around the curve’s tangent ($\vect{u}\cdot\vect{v}' = \vect{u'}\cdot\vect{v}=0$). Its evolution along the curve is described by the corresponding Darboux vector : $\vect{\Omega}_b(s)=\kappa\vect{b}=\vect{t}\times\vect{t'}$. Remark that $\vect{\Omega}_b(s)$ only depends on the centerline and is well defined even when the curvature vanishes.
+
+Thus, by the help of $\vect{\Omega}_b(s)$, it’s possible to transport a given vector $\vect{e}$ along the centerline with no twist : $\vect{e'}=\kappa\vect{b}\times\vect{e}$. This is called \emph{parallel transport}.
+
+\subsection{Bending strains}
+
+Let’s compute the bending strains $\kappa_1(s)$ and $\kappa_2(s)$ regarding the geometric configuration of the rod. Remark that :
+\begin{equation}
+	\begin{aligned}
+	&\kappa\vect{b}\cdot\vect{d}_1 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_1 = (\vect{d}_1\times\vect{d}_3)\cdot\vect{d}'_3 = -\vect{d}_2\cdot\vect{d}'_3 = \kappa_1 \\
+	&\kappa\vect{b}\cdot\vect{d}_2 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_2 = (\vect{d}_2\times\vect{d}_3)\cdot\vect{d}'_3 = \vect{d}_1\cdot\vect{d}'_3 = \kappa_2	
+	\end{aligned}
+\end{equation}
+Thus, the vector of material curvatures ($\vect{\omega}$) expressed on material frame axes $\{\vect{d}_1(s),\vect{d}_2(s)\}$ is defined as :
+\begin{equation}
+	\vect{\omega} =
+	\begin{bmatrix}
+		\kappa_1\\
+		\kappa_2\\
+	\end{bmatrix} =
+	\begin{bmatrix}
+		\kappa\vect{b}\cdot\vect{d}_1\\
+		\kappa\vect{b}\cdot\vect{d}_2\\
+	\end{bmatrix} =
+		\begin{bmatrix}
+		-\vect{x}''\cdot\vect{d}_2\\
+		\vect{x}''\cdot\vect{d}_1\\
+	\end{bmatrix}
+\end{equation}
+
+\subsection{Torsion strain}
+Let’s compute the twist or torsion strain $\tau$ regarding the geometric configuration of the rod. Decomposing the material frame on the bishop frame gives :
+\begin{equation}
+	\begin{bmatrix}
+		\vect{d}_1\\
+		\vect{d}_2\\
+	\end{bmatrix} =
+		\begin{bmatrix}
+		\cos{\theta}\;\vect{u} + \sin{\theta}\;\vect{v}\\
+		-\sin{\theta}\;\vect{u} + \cos{\theta}\;\vect{v}\\
+	\end{bmatrix}
+\end{equation}
+Thus, the twist can be identified directly as the variation of $\theta$ along the curve :
+\begin{equation}
+	\tau = \vect{d}'_1 \cdot \vect{d}_2 = (\theta'\vect{d}_2 + \kappa\vect{b}\times\vect{d}_1)\cdot \vect{d}_2 = \theta' + \vect{d}_3\cdot\kappa\vect{b} = \theta'
+\end{equation}
+Note that the Frenet frame does not lead to a correct evaluation of the twist.
+
+\section{Elastic energy}
+Introducing $\vect{\omega}$ and $\theta$, the elastic energy can be rewritten as follow :
+\begin{equation}
+		\mathcal{E}_{p} = \mathcal{E}_{b} + \mathcal{E}_{t} = 
+		\tfrac{1}{2} \int_{0}^{L} (\vect{\omega}-\overbar{\vect{\omega}})^T B (\vect{\omega}-\overbar{\vect{\omega}}) ds
+		+ \tfrac{1}{2} \int_{0}^{L} \beta(\theta' -{\overbar{\theta'}})^2 ds
+\end{equation}
+Where $B$ is the bending stiffness matrix along the principal axes of inertia and $\beta$ is the torsional stiffness :
+\begin{equation}
+	B = \begin{bmatrix}
+			EI_1	&	0\\
+			0	&	EI_2\\
+		\end{bmatrix}
+	\quad,\quad
+	\beta = GJ
+\end{equation}
+
+\section{Inextensibility}
+Recall that the rod is supposed to be inextensible in Kirchhoff’s theory. Thus, there is no stretching energy associated with an axial strain. However, this constraint will be enforced via a penalty energy, which in practice is somehow very similar as considering an axial stiffness in the beam…
+
+\section{Time-scale assumption}
+Following \cite{Bergou2008}, it is relevant to assume that the propagation of twist waves is instantaneous compared to the one of bending waves. Thus, internal forces $\vect{f}^{int}$ and moment $\vect{m}^{int}$ acts on two different timescales in the rod dynamic. Thus on the timescale of action of the force $\vect{f}^{int}$ on the center line, driving the bending waves, the twist waves propagate instantaneously, so that $\forall s \in [0,L],\; \delta\mathcal{E}_{p}/\delta\theta=0$ for the computation of $\vect{f}^{int}$. This assumption may not be enforced, as in \cite{Nabei2014}, but leads to simpler and faster computations.
+
+\section{Gradient}
+Internal torsional moments and forces acting on the rod are classically obtained by differentiating the potential energy of the system with respect to $\theta$ and $\vect{x}$. Here, the calculus is a bit tricky as far as the differentiation takes place in function spaces. After a brief reminder on functional derivative, the main results of the calculations of the energy derivatives are given.
+
+\subsection{Derivative of $\theta$ with respect to $\vect{x}$}
+It’s important to notice that the centreline $\vect{x}$ is independent of $\theta$. However, the convers does not hold. Indeed, a variation of the centerline would cause the cross section orientations to be perturbed and thus the potential energy to be modified.
+
+When moving the centerline while conserving section orientation $\{\vect{d}_1,\vect{d}_2\}$,  the angle $\theta$ is modified because the bishop frame is modified. The variation of $\theta$ is thus equal to the opposite of the rotation angle of the bishop frame around $\vect{d}_3$ while the centerline undergoes a variation.
+
+Parallel transport being a propagation of frame from $s = 0$, the variation of $\theta$ at arc-length $s$ is the cumulated angle of rotation of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ around $\vect{d}_3[\vect{x}]$. Recalling the rotation rate of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ is $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ by definition of zero-twisting frame, one can write :
+\begin{equation}
+	\pdiffof{x}{\theta}{s}{\vect{h}_x} =
+	\frac{d}{d\lambda} \int_0^s -\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt \Bigr|_{\lambda = 0}
+\end{equation}
+The calculation of $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ is straight forward from the curvature binormal definition :
+\begin{equation}
+	\begin{aligned}
+	\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]
+	&= (\vect{x} + \lambda\vect{h}_x)' \times (\vect{x} + \lambda\vect{h}_x)'' \\
+	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + \lambda^2(\vect{h}'_x \times \vect{h}''_x)
+	\end{aligned}
+\end{equation}
+Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and denoting by $\delta_s$ and $H_s$ the Dirac function and Heaviside step function centered at $s$ :
+\begin{equation}
+	\begin{aligned}
+		\pdiffof{x}{\theta}{s}{\vect{h}_x} &= - \int_0^s (\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') \cdot \vect{x}' \,dt = \int_0^s \kappa\vect{b}[\vect{x}] \cdot  \vect{h}'_x \,dt\\
+		&= \big[\kappa\vect{b}[\vect{x}] \cdot  \vect{h}_x \big]_0^s - \int_0^s \kappa\vect{b}'[\vect{x}] \cdot  \vect{h}_x \,dt \\
+		&= \int_0^s \left(\kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}]\right)\cdot  \vect{h}_x \,dt \\
+		&= \int_0^L \left(\kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}](1-H_s)\right)\cdot  \vect{h}_x \,dt \\
+		&= \scalar{\frac{\partial\theta}{\partial\vect{x}}(s)}{\vect{h}_x}
+	\end{aligned}
+\end{equation}
+In other words, this means that a variation $\vect{h}_x$ of $\vect{x}$ causes a variation $\int_0^L \frac{\partial\theta}{\partial\vect{x}}(s) \cdot  \vect{h}_x \,dt $ of $\theta$ at $s$. Note that this is an integrated quantity, all along the centerline. Finally, the derivative of $\theta$ with respect to $\vect{x}$ is given by :
+\begin{equation}
+	\frac{\partial\theta}{\partial\vect{x}}(s) = \kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}](1-H_s) \in [0,L]^{\mathbb{R}^3}
+\end{equation}
+
+Note that the derivative of $\theta$ with respect to $\vect{x}$ can be evaluated by the change of writhe in the curve as suggested in \cite{deVries2005}. This approach is completly equivalent.
+
 
 % #######################################################
 \section{Kinematic}
@@ -72,11 +269,11 @@ When computings energy gradients, it comes to differentiate energies regarding t
 Energies could be seen as functional, i.e.\ functions that map vectors from a functional vector space to there underlying scalar field $\mathbb{R}$.
 
 \begin{align}
-	&\fonction{\mathcal{E}_{stretch}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3})}{\mathbb{R}}{\boldsymbol{x}}{\mathcal{E}_{stretch}[\boldsymbol{x}]}
+	&\fonctionL{\mathcal{E}_{stretch}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3})}{\mathbb{R}}{\boldsymbol{x}}{\mathcal{E}_{stretch}[\boldsymbol{x}]}
 	\\ \notag\\
-	&\fonction{\mathcal{E}_{bend}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3}) \times \mathcal{C}^\infty([0,L]^{\mathbb{R}^3},[0,L]^{\mathbb{R}})}{\mathbb{R}}{(\boldsymbol{x},\theta)}{\mathcal{E}_{bend}[\boldsymbol{x},\theta]}
+	&\fonctionL{\mathcal{E}_{bend}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3}) \times \mathcal{C}^\infty([0,L]^{\mathbb{R}^3},[0,L]^{\mathbb{R}})}{\mathbb{R}}{(\boldsymbol{x},\theta)}{\mathcal{E}_{bend}[\boldsymbol{x},\theta]}
 	\\ \notag\\
-	&\fonction{\mathcal{E}_{twist}}{\mathcal{C}^\infty([0,L]^{\mathbb{R}^3},[0,L]^{\mathbb{R}})}{\mathbb{R}}{\theta}{\mathcal{E}_{twist}[\theta]}
+	&\fonctionL{\mathcal{E}_{twist}}{\mathcal{C}^\infty([0,L]^{\mathbb{R}^3},[0,L]^{\mathbb{R}})}{\mathbb{R}}{\theta}{\mathcal{E}_{twist}[\theta]}
 \end{align}
 
 % #######################################################
