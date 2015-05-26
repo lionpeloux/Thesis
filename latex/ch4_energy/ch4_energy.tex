@@ -17,43 +17,43 @@ Sina \cite{Nabei2014}
 
 % #######################################################
 \section{Kirchhoff rod}
-The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross sections. The centerline is parameterized by its arc-length. Cross sections orientations are followed along the centerline by their material frame $\{\vect{d}_1 (s),\vect{d}_2 (s),\vect{d}_3 (s)\}$ which is an adapted orthonormal moving frame aligned to section’s principal axes of inertia. Here, \guil{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned to the centerline’s tangent. In the literature, this description is also known as a \emph{Cosserat Curve} [ref].
+The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross sections. The centerline is parameterized by its arc-length. Cross sections orientations are followed along the centerline by their material frame $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ which is an adapted orthonormal moving frame aligned to section’s principal axes of inertia. Here, \guil{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned to the centerline’s tangent. In the literature, this description is also known as a \emph{Cosserat Curve} [ref].
 
 \subsection{Inextensibility}
 Note the previous description is only valid for inextensible rods in order to follow material points by their arc-length indifferently in their rest or deformed configuration. As explained in \cite{Audoly2010}, this hypothesis is usually relevant for slender beams. Indeed, in practice, if a slender member faces substantial axial strain the bending behaviour would become negligible due to the important difference between axial and bending stiffness. The length of the rod will be denoted $L$ and the arc-length $s$ will vary (with no loss of generality) in $[0,L]$.
 
 \subsection{Euler-Bernouilli}
-Strains are supposed to remain small so that material frame remains orthogonal to the centerline in the deformed configuration. Thus, differentiating the conditions of orthonormality leads to the following differential equations governing the evolution of $\{\vect{d}_1 (s),\vect{d}_2 (s),\vect{d}_3 (s)\}$ along the centerline :
+Strains are supposed to remain small so that material frame remains orthogonal to the centerline in the deformed configuration. Thus, differentiating the conditions of orthonormality leads to the following differential equations governing the evolution of $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ along the centerline :
 \begin{gather}
-\left[\begin{array}{c}
-\mathbf{d'_{3}}(s) \\
-\mathbf{d'_{1}}(s) \\
-\mathbf{d'_{2}}(s)
-\end{array}\right]
-=
-\left[\begin{array}{ccc}
-0 & \kappa_{2}(s) & -\kappa_{1}(s) \\
--\kappa_{2}(s) & 0 & \tau(s) \\
-\kappa_{1}(s) & -\tau(s) & 0
-\end{array}\right]
-\left[\begin{array}{c}
-\mathbf{d_{3}}(s) \\
-\mathbf{d_{1}}(s) \\
-\mathbf{d_{2}}(s)
-\end{array}\right]
+	\begin{bmatrix}
+		\mathbf{d'_{3}}(s) \\
+		\mathbf{d'_{1}}(s) \\
+		\mathbf{d'_{2}}(s)
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		0 & \kappa_{2}(s) & -\kappa_{1}(s) \\
+		-\kappa_{2}(s) & 0 & \tau(s) \\
+		\kappa_{1}(s) & -\tau(s) & 0
+	\end{bmatrix}
+	\begin{bmatrix}
+		\mathbf{d_{3}}(s) \\
+		\mathbf{d_{1}}(s) \\
+		\mathbf{d_{2}}(s)
+	\end{bmatrix}
 \end{gather}
 
 \subsection{Darboux vector}Those equations can be formulated with the \emph{Darboux vector} of the chosen material frame, which represents the rotational velocity of the frame along $\vect{x}(s)$ :
 \begin{gather}
-\vect{d}_{i}^{'}(s) = \vect{\Omega}_m(s) \times \vect{d}_i(s)
-\quad,\quad
-\vect{\Omega}_m(s) 
-= 
-\left[\begin{array}{c}
-\tau(s) \\
-\kappa_{1}(s) \\
-\kappa_{2}(s)
-\end{array}\right]
+	\vect{d}'_{i}(s) = \vect{\Omega}_m(s) \times \vect{d}_i(s)
+	\quad,\quad
+	\vect{\Omega}_m(s) 
+	= 
+	\begin{bmatrix}
+		\tau(s) \\
+		\kappa_{1}(s) \\
+		\kappa_{2}(s)
+	\end{bmatrix}
 \end{gather}
 Where $\kappa_1(s)$, $\kappa_2(s)$ and $\tau(s)$ represent respectively the rate of rotation of the material frame around the axis  $\vect{d}_1 (s)$, $\vect{d}_2 (s)$ and $\vect{d}_3 (s)$.
 
@@ -64,7 +64,7 @@ The material curvatures are denoted $\kappa_1(s)$ and $\kappa_2(s)$ and represen
 	\quad,\quad
 	\kappa(s) = \norm{\vect{t}'(s)}
 	\quad,\quad
-	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) = \frac{\vect{t}(s) \times \vect{t}(s)'}{\kappa(s)} 
+	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) = \frac{\vect{t}(s) \times \vect{t}'(s)}{\kappa(s)} 
 \end{equation}
 To describe the osculating plane in which lies the bending part of the deformation, let’s introduce the \emph{curvature binormal} $\kappa\vect{b}(s) = \vect{t}(s)\times\vect{t}'(s)$, the vector of direction $\vect{b}(s)$ and norm $\kappa(s)$. At each point of arc-length $s$ the osculating plane is normal to $\kappa\vect{b}(s)$.
 
@@ -79,27 +79,27 @@ Kirrchhoff’s theory assigns an elastic energy to beams according to their stra
 Herer, $\overbar{\kappa_1}$, $\overbar{\kappa_2}$ and $\overbar{\tau}$  denote the natural curvature and twist of the rod in the rest position (no stress).
 
 \section{Curve-angle representation}
-The previous paragraph has shown how the elastic potential energy of a rod can be computed following both its centerline and its cross sections orientations, which represents a model with 6-DoF : 3 for centerline positions and 3 for cross section orientations. Following \cite{Bergou2008}, let’s introduce a reduced coordinate formulation of the rod that account for only 4-DoF. This reduction of DoF relies on the concept of zero-twisting frame which gives a reference frame with zero twist along a given centerline. Thus, cross section orientations $\{\vect{d}_1 (s),\vect{d}_2 (s),\vect{d}_3 (s)\}$ can be tracked only by the measure of an angle $\theta$ from this reference frame denoted $\{\vect{u}(s),\vect{v}(s),\vect{d}_3 (s)\}$ (Figure 5). An alternative could be to parameterize the global rotations of local material frame and to compute the rotation needed to align two successive frames along the curve’s tangent.
+The previous paragraph has shown how the elastic potential energy of a rod can be computed following both its centerline and its cross sections orientations, which represents a model with 6-DoF : 3 for centerline positions and 3 for cross section orientations. Following \cite{Bergou2008}, let’s introduce a reduced coordinate formulation of the rod that account for only 4-DoF. This reduction of DoF relies on the concept of zero-twisting frame which gives a reference frame with zero twist along a given centerline. Thus, cross section orientations $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ can be tracked only by the measure of an angle $\theta$ from this reference frame denoted $\{\vect{d}_3(s),\vect{u}(s),\vect{v}(s)\}$ (Figure 5). An alternative could be to parameterize the global rotations of local material frame and to compute the rotation needed to align two successive frames along the curve’s tangent.
 
 \subsection{Zero-twisting frame}
 Zero-twisting frame, also known as Bishop frame, was introduced by Bishop in 1964. Bishop remarked that there was more than one way to frame a curve \cite{Bishop1975}. Indeed, for a given curve, any orthonormal moving frame would satisfy the following differential equations, where $k_1(s)$, $k_2 (s)$ and $\tau(s)$ are scalar functions that define completely the moving frame :
 \begin{gather}
-\left[\begin{array}{c}
-\mathbf{e'_{3}}(s) \\
-\mathbf{e'_{1}}(s) \\
-\mathbf{e'_{2}}(s)
-\end{array}\right]
+	\begin{bmatrix}
+		\mathbf{e'_{3}}(s) \\
+		\mathbf{e'_{1}}(s) \\
+		\mathbf{e'_{2}}(s)
+	\end{bmatrix}
 =
-\left[\begin{array}{ccc}
-0 & k_{2}(s) & -\kappa_{1}(s) \\
--k_{2}(s) & 0 & \tau(s) \\
-k_{1}(s) & -\tau(s) & 0
-\end{array}\right]
-\left[\begin{array}{c}
-\mathbf{e_{3}}(s) \\
-\mathbf{e_{1}}(s) \\
-\mathbf{e_{2}}(s)
-\end{array}\right]
+	\begin{bmatrix}
+		0 & k_{2}(s) & -\kappa_{1}(s) \\
+		-k_{2}(s) & 0 & \tau(s) \\
+		k_{1}(s) & -\tau(s) & 0
+	\end{bmatrix}
+	\begin{bmatrix}
+		\mathbf{e_{3}}(s) \\
+		\mathbf{e_{1}}(s) \\
+		\mathbf{e_{2}}(s)
+	\end{bmatrix}
 \end{gather}
 For instance, a Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ is a frame which satisfies $k_1(s)=0$. Note that this frame suffers from major disadvantages : it is undefined where the curvature vanishes and it flips at inflexion points.A Bishop frame $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$ is a frame which satisfies $\tau(s)=0$. By construction, this frame has no angular velocity (i.e. no twist) around the curve’s tangent ($\vect{u}\cdot\vect{v}' = \vect{u'}\cdot\vect{v}=0$). Its evolution along the curve is described by the corresponding Darboux vector : $\vect{\Omega}_b(s)=\kappa\vect{b}=\vect{t}\times\vect{t'}$. Remark that $\vect{\Omega}_b(s)$ only depends on the centerline and is well defined even when the curvature vanishes.
 
@@ -113,6 +113,10 @@ Let’s compute the bending strains $\kappa_1(s)$ and $\kappa_2(s)$ regarding th
 	&\kappa\vect{b}\cdot\vect{d}_1 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_1 = (\vect{d}_1\times\vect{d}_3)\cdot\vect{d}'_3 = -\vect{d}_2\cdot\vect{d}'_3 = \kappa_1 \\
 	&\kappa\vect{b}\cdot\vect{d}_2 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_2 = (\vect{d}_2\times\vect{d}_3)\cdot\vect{d}'_3 = \vect{d}_1\cdot\vect{d}'_3 = \kappa_2	
 	\end{aligned}
+\end{equation}
+That is to say $\kappa\vect{b}$ is orthogonal to $\vect{d}_3$ :
+\begin{equation}
+	\kappa\vect{b} = \kappa_1\vect{d}_1 +   \kappa_2\vect{d}_2
 \end{equation}
 Thus, the vector of material curvatures ($\vect{\omega}$) expressed on material frame axes $\{\vect{d}_1(s),\vect{d}_2(s)\}$ is defined as :
 \begin{equation}
@@ -166,6 +170,11 @@ Where $B$ is the bending stiffness matrix along the principal axes of inertia an
 	\beta = GJ
 \end{equation}
 
+Ici on peut remarquer que l'énergie de torsion est indépendante de $\vect{x}$ et ne dépend donc que de $\theta$.
+
+L'énergie de flexion quant à elle dépend à la fois de $\vect{x}$ et de $\theta$ par l'intermédiaire des vecteurs matériels ($\kappa_1$ et $\kappa_2$ sont les projections de $\kappa\vect{b}$ sur $\vect{d}_1$ et $\vect{d}_2$). Lorsque $EI_1 = EI_2 = EI$, l'énergie de flexion est proportionnelle à la courbure au carré ($EI_1\kappa_1^2 + EI_2\kappa_2^2 = EI\kappa^2$) et par conséquent de dépend plus de $\theta$. En effet, la courbure ($\kappa = ||\kappa\vect{b}|| = ||\vect{x}'\times\vect{x}''||$) ne dépend que de la géométrie de la centerline et pas de l'orientation des sections.
+Il n'y a plus de couplage entre la flexion et la torsion et l'énergie totale peut-être minimisée indépendamment en trouvant le minimum de l'énergie de flexion par rapport à la centerline (c'est à dire par rapport à $\vect{x}$ et le minimum de l'énergie de torsion par rapport à l'orientation des sections (c'est à dire par rapport à $\theta$).
+
 \section{Inextensibility}
 Recall that the rod is supposed to be inextensible in Kirchhoff’s theory. Thus, there is no stretching energy associated with an axial strain. However, this constraint will be enforced via a penalty energy, which in practice is somehow very similar as considering an axial stiffness in the beam…
 
@@ -190,10 +199,11 @@ The calculation of $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ is straight fo
 	\begin{aligned}
 	\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]
 	&= (\vect{x} + \lambda\vect{h}_x)' \times (\vect{x} + \lambda\vect{h}_x)'' \\
-	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + \lambda^2(\vect{h}'_x \times \vect{h}''_x)
+	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + \lambda^2(\vect{h}'_x \times \vect{h}''_x) \\
+	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + o(\lambda)
 	\end{aligned}
 \end{equation}
-Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and denoting by $\delta_s$ and $H_s$ the Dirac function and Heaviside step function centered at $s$ :
+Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and denoting by $\delta_s$ and $H_s$ the Dirac function and the Heaviside step function centered at $s$ :
 \begin{equation}
 	\begin{aligned}
 		\pdiffof{x}{\theta}{s}{\vect{h}_x} &= - \int_0^s (\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') \cdot \vect{x}' \,dt = \int_0^s \kappa\vect{b}[\vect{x}] \cdot  \vect{h}'_x \,dt\\
@@ -203,12 +213,37 @@ Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and denoting by $\delta_
 		&= \scalar{\frac{\partial\theta}{\partial\vect{x}}(s)}{\vect{h}_x}
 	\end{aligned}
 \end{equation}
-In other words, this means that a variation $\vect{h}_x$ of $\vect{x}$ causes a variation $\int_0^L \frac{\partial\theta}{\partial\vect{x}}(s) \cdot  \vect{h}_x \,dt $ of $\theta$ at $s$. Note that this is an integrated quantity, all along the centerline. Finally, the derivative of $\theta$ with respect to $\vect{x}$ is given by :
+In other words, this means that a variation $\vect{h}_x$ of $\vect{x}$ causes a variation $\int_0^L \frac{\partial\theta}{\partial\vect{x}}(s) \cdot  \vect{h}_x$ of $\theta$ at $s$. Note that this is an integrated quantity, all along the centerline. Finally, the derivative of $\theta$ with respect to $\vect{x}$ is given by :
 \begin{equation}
 	\frac{\partial\theta}{\partial\vect{x}}(s) = \kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}](1-H_s) \in [0,L]^{\mathbb{R}^3}
 \end{equation}
 
 Note that the derivative of $\theta$ with respect to $\vect{x}$ can be evaluated by the change of writhe in the curve as suggested in \cite{deVries2005}. This approach is completly equivalent.
+
+\subsection{Derivative of $\vect{\omega}$ with respect to $\vect{x}$}
+
+Let’s express the variation of the material frame after a variation $\lambda \vect{h}_x$ of $\vect{x}$ while $\theta$ remains unchanged. First, remind that material frame remains orthonormal during deformation. Thus, one can write :
+\begin{equation}
+	\left\{
+		\begin{aligned}
+			&\vect{d}_1[\vect{x}+\lambda \vect{h}_x] = \vect{d}_1[\vect{x}] + \Delta \Psi \vect{d}_2[\vect{x}] - \Delta \Phi \vect{d}_3[\vect{x}] + o(\lambda)\\
+			&\vect{d}_2[\vect{x}+\lambda \vect{h}_x] = \vect{d}_2[\vect{x}] - \Delta \Psi \vect{d}_1[\vect{x}] + \Delta\Gamma \vect{d}_3[\vect{x}] + o(\lambda)
+		\end{aligned}
+	\right.
+\end{equation}
+Where $\Delta\Psi$, $\Delta\Gamma$ and $\Delta\Phi$ represent the rotation of $\{\vect{d}_3[\vect{x}+\lambda \vect{h}_x],\vect{d}_1[\vect{x}+\lambda \vect{h}_x],\vect{d}_2[\vect{x}+\lambda \vect{h}_x]\}$, respectively around $\vect{d}_3[\vect{x}]$, $\vect{d}_1[\vect{x}]$, $\vect{d}_2[\vect{x}]$.
+
+Thus, recalling that $\vect{x}''\cdot\vect{d}_3 = 0$ :
+\begin{equation}
+	\left\{
+		\begin{aligned}
+			(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] = 
+			\vect{x}''\cdot\vect{d}_1[\vect{x}] + \lambda(\vect{d}_1[\vect{x}]\cdot\vect{h}''_x + \Delta\Psi \vect{d}_2[\vect{x}]\cdot\vect{x}'') + o(\lambda) \\
+			(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] =
+			\vect{x}''\cdot\vect{d}_2[\vect{x}] + \lambda(\vect{d}_2[\vect{x}]\cdot\vect{h}''_x - \Delta\Psi \vect{d}_1[\vect{x}]\cdot\vect{x}'') + o(\lambda)
+		\end{aligned}
+		\right.
+\end{equation}
 
 
 % #######################################################
