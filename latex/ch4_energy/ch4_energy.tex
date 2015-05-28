@@ -17,7 +17,7 @@ Sina \cite{Nabei2014}
 
 % #######################################################
 \section{Kirchhoff rod}
-The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross sections. The centerline is parameterized by its arc-length. Cross sections orientations are followed along the centerline by their material frame $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ which is an adapted orthonormal moving frame aligned to section’s principal axes of inertia. Here, \guil{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned to the centerline’s tangent. In the literature, this description is also known as a \emph{Cosserat Curve} [ref].
+The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross sections. The centerline is parameterized by its arc-length. Cross sections orientations are followed along the centerline by their material frame $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ which is an adapted orthonormal moving frame aligned to section’s principal axes of inertia. Here, \guil{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned to the centerline’s tangent. In the literature, this description is also known as a \emph{Cosserat Curve} \note{[ref]}.
 
 \subsection{Inextensibility}
 Note the previous description is only valid for inextensible rods in order to follow material points by their arc-length indifferently in their rest or deformed configuration. As explained in \cite{Audoly2010}, this hypothesis is usually relevant for slender beams. Indeed, in practice, if a slender member faces substantial axial strain the bending behaviour would become negligible due to the important difference between axial and bending stiffness. The length of the rod will be denoted $L$ and the arc-length $s$ will vary (with no loss of generality) in $[0,L]$.
@@ -42,6 +42,14 @@ Strains are supposed to remain small so that material frame remains orthogonal t
 		\mathbf{d_{2}}(s)
 	\end{bmatrix}
 \end{gather}
+
+\note{La théorie des poutres est une application de la théorie de l'élasticité isotrope. Pour mener les calculs de résistance des matériaux, on considère les hypothèses suivantes : 
+
+(1) hypothèse de Bernoulli : au cours de la déformation, les sections droites restent perpendiculaires à la courbe moyenne ; 
+
+(2) les sections droites restent planes selon Navier-Bernoulli (pas de gauchissement).
+
+L'hypothèse de Bernoulli permet de négliger le cisaillement dans le cas de la flexion : le risque de rupture est alors dû à l'extension des fibres situées à l'extérieur de la flexion, et la flèche est due au moment fléchissant. Cette hypothèse n'est pas valable pour les poutres courtes car ces dernières sont hors des limites de validité du modèle de poutre, à savoir que la dimension des sections doit être petite devant la longueur de la courbe moyenne. Le cisaillement est pris en compte dans le modèle de Timoshenko et Mindlin.}
 
 \subsection{Darboux vector}Those equations can be formulated with the \emph{Darboux vector} of the chosen material frame, which represents the rotational velocity of the frame along $\vect{x}(s)$ :
 \begin{gather}
@@ -170,10 +178,11 @@ Where $B$ is the bending stiffness matrix along the principal axes of inertia an
 	\beta = GJ
 \end{equation}
 
+\note{
 Ici on peut remarquer que l'énergie de torsion est indépendante de $\vect{x}$ et ne dépend donc que de $\theta$.
 
 L'énergie de flexion quant à elle dépend à la fois de $\vect{x}$ et de $\theta$ par l'intermédiaire des vecteurs matériels ($\kappa_1$ et $\kappa_2$ sont les projections de $\kappa\vect{b}$ sur $\vect{d}_1$ et $\vect{d}_2$). Lorsque $EI_1 = EI_2 = EI$, l'énergie de flexion est proportionnelle à la courbure au carré ($EI_1\kappa_1^2 + EI_2\kappa_2^2 = EI\kappa^2$) et par conséquent de dépend plus de $\theta$. En effet, la courbure ($\kappa = ||\kappa\vect{b}|| = ||\vect{x}'\times\vect{x}''||$) ne dépend que de la géométrie de la centerline et pas de l'orientation des sections.
-Il n'y a plus de couplage entre la flexion et la torsion et l'énergie totale peut-être minimisée indépendamment en trouvant le minimum de l'énergie de flexion par rapport à la centerline (c'est à dire par rapport à $\vect{x}$ et le minimum de l'énergie de torsion par rapport à l'orientation des sections (c'est à dire par rapport à $\theta$).
+Il n'y a plus de couplage entre la flexion et la torsion et l'énergie totale peut-être minimisée indépendamment en trouvant le minimum de l'énergie de flexion par rapport à la centerline (c'est à dire par rapport à $\vect{x}$ et le minimum de l'énergie de torsion par rapport à l'orientation des sections (c'est à dire par rapport à $\theta$).}
 
 \section{Inextensibility}
 Recall that the rod is supposed to be inextensible in Kirchhoff’s theory. Thus, there is no stretching energy associated with an axial strain. However, this constraint will be enforced via a penalty energy, which in practice is somehow very similar as considering an axial stiffness in the beam…
@@ -185,6 +194,19 @@ Following \cite{Bergou2008}, it is relevant to assume that the propagation of tw
 Internal torsional moments and forces acting on the rod are classically obtained by differentiating the potential energy of the system with respect to $\theta$ and $\vect{x}$. Here, the calculus is a bit tricky as far as the differentiation takes place in function spaces. After a brief reminder on functional derivative, the main results of the calculations of the energy derivatives are given.
 
 \subsection{Derivative of $\theta$ with respect to $\vect{x}$}
+
+\note{paragraphe entièrment à revoir. Expliquer le cheminement. x fixe bishop et theta fixe d1,d2 par rapport à bishop. x est indépendant de theta. Seul des CL peuvent créer des couplages entre x et theta
+
+Donc les vrais degrés de liberté du problème sont en fait les vecteurs matériels et les positions x. Se reporter à une modélisation du pb dans SO3 comme Spillmann par exemple.
+
+Le calcul des gradients se résume donc à calculer les gradients des vecteurs matériels par rapport à des perturbations infinitésimales en x et theta. Pour theta, c'est facile. Pour kb, c'est facile. Reste la variation par rapport à x, qui est en fait la variation de bishop qu'on explique avec le writhe (défaut de fermeture de bishop sur une boucle fermée) et le transport parallèle.
+Le calcul se fait aisément en écrivant la double rotation et en effectuant le DL au premier ordre.
+
+Le reste est quasiment immédiat. Reste la question des CL et des termes aux bords.
+
+Il faut aussi se positionner par rapport à l'article de Basile. Regarder la question applied displacement vs settlement pour imposer une CL.
+}
+
 It’s important to notice that the centreline $\vect{x}$ is independent of $\theta$. However, the convers does not hold. Indeed, a variation of the centerline would cause the cross section orientations to be perturbed and thus the potential energy to be modified.
 
 When moving the centerline while conserving section orientation $\{\vect{d}_1,\vect{d}_2\}$,  the angle $\theta$ is modified because the bishop frame is modified. The variation of $\theta$ is thus equal to the opposite of the rotation angle of the bishop frame around $\vect{d}_3$ while the centerline undergoes a variation.
