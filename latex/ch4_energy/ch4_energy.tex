@@ -51,7 +51,8 @@ Strains are supposed to remain small so that material frame remains orthogonal t
 
 L'hypothèse de Bernoulli permet de négliger le cisaillement dans le cas de la flexion : le risque de rupture est alors dû à l'extension des fibres situées à l'extérieur de la flexion, et la flèche est due au moment fléchissant. Cette hypothèse n'est pas valable pour les poutres courtes car ces dernières sont hors des limites de validité du modèle de poutre, à savoir que la dimension des sections doit être petite devant la longueur de la courbe moyenne. Le cisaillement est pris en compte dans le modèle de Timoshenko et Mindlin.}
 
-\subsection{Darboux vector}Those equations can be formulated with the \emph{Darboux vector} of the chosen material frame, which represents the rotational velocity of the frame along $\vect{x}(s)$ :
+\subsection{Darboux vector}
+Those equations can be formulated with the \emph{Darboux vector} of the chosen material frame, which represents the rotational velocity of the frame along $\vect{x}(s)$ :
 \begin{gather}
 	\vect{d}'_{i}(s) = \vect{\Omega}_m(s) \times \vect{d}_i(s)
 	\quad,\quad
@@ -87,7 +88,11 @@ Kirrchhoff’s theory assigns an elastic energy to beams according to their stra
 Herer, $\overbar{\kappa_1}$, $\overbar{\kappa_2}$ and $\overbar{\tau}$  denote the natural curvature and twist of the rod in the rest position (no stress).
 
 \section{Curve-angle representation}
-The previous paragraph has shown how the elastic potential energy of a rod can be computed following both its centerline and its cross sections orientations, which represents a model with 6-DoF : 3 for centerline positions and 3 for cross section orientations. Following \cite{Bergou2008}, let’s introduce a reduced coordinate formulation of the rod that account for only 4-DoF. This reduction of DoF relies on the concept of zero-twisting frame which gives a reference frame with zero twist along a given centerline. Thus, cross section orientations $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ can be tracked only by the measure of an angle $\theta$ from this reference frame denoted $\{\vect{d}_3(s),\vect{u}(s),\vect{v}(s)\}$ (Figure 5). An alternative could be to parameterize the global rotations of local material frame and to compute the rotation needed to align two successive frames along the curve’s tangent.
+The previous paragraph has shown how the elastic potential energy of a rod can be computed following both its centerline and its cross sections orientations, which represents a model with 6-DoF : 3 for centerline positions and 3 for cross section orientations.
+
+Following \cite{Bergou2008}, let’s introduce a reduced coordinate formulation of the rod that account for only 4-DoF. This reduction of DoF relies on the concept of zero-twisting frame which gives a reference frame with zero twist along a given centerline. Thus, cross section orientations $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ can be tracked only by the measure of an angle $\theta$ from this reference frame denoted $\{\vect{d}_3(s),\vect{u}(s),\vect{v}(s)\}$ (Figure 5).
+
+Note that an alternative solution could be to parameterize the global rotations of local material frame and to compute the rotation needed to align two successive frames along the curve’s tangent.
 
 \subsection{Zero-twisting frame}
 Zero-twisting frame, also known as Bishop frame, was introduced by Bishop in 1964. Bishop remarked that there was more than one way to frame a curve \cite{Bishop1975}. Indeed, for a given curve, any orthonormal moving frame would satisfy the following differential equations, where $k_1(s)$, $k_2 (s)$ and $\tau(s)$ are scalar functions that define completely the moving frame :
@@ -109,13 +114,14 @@ Zero-twisting frame, also known as Bishop frame, was introduced by Bishop in 196
 		\mathbf{e_{2}}(s)
 	\end{bmatrix}
 \end{gather}
-For instance, a Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ is a frame which satisfies $k_1(s)=0$. Note that this frame suffers from major disadvantages : it is undefined where the curvature vanishes and it flips at inflexion points.A Bishop frame $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$ is a frame which satisfies $\tau(s)=0$. By construction, this frame has no angular velocity (i.e. no twist) around the curve’s tangent ($\vect{u}\cdot\vect{v}' = \vect{u'}\cdot\vect{v}=0$). Its evolution along the curve is described by the corresponding Darboux vector : $\vect{\Omega}_b(s)=\kappa\vect{b}=\vect{t}\times\vect{t'}$. Remark that $\vect{\Omega}_b(s)$ only depends on the centerline and is well defined even when the curvature vanishes.
+For instance, a Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ is a frame which satisfies $k_1(s)=0$. Note that this frame suffers from major disadvantages : it is undefined where the curvature vanishes and it flips at inflexion points.
+A Bishop frame $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$ is a frame which satisfies $\tau(s)=0$. By construction, this frame has no angular velocity (i.e. no twist) around the curve’s tangent ($\vect{u}\cdot\vect{v}' = \vect{u'}\cdot\vect{v}=0$). Its evolution along the curve is described by the corresponding Darboux vector : $\vect{\Omega}_b(s)=\kappa\vect{b}=\vect{t}\times\vect{t'}$. Remark that $\vect{\Omega}_b(s)$ only depends on the centerline and is well defined even when the curvature vanishes.
 
 Thus, by the help of $\vect{\Omega}_b(s)$, it’s possible to transport a given vector $\vect{e}$ along the centerline with no twist : $\vect{e'}=\kappa\vect{b}\times\vect{e}$. This is called \emph{parallel transport}.
 
 \subsection{Bending strains}
 
-Let’s compute the bending strains $\kappa_1(s)$ and $\kappa_2(s)$ regarding the geometric configuration of the rod. Remark that :
+Let’s compute the bending strains $\kappa_1$ and $\kappa_2$ regarding the geometric configuration of the rod. Remark that :
 \begin{equation}
 	\begin{aligned}
 	&\kappa\vect{b}\cdot\vect{d}_1 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_1 = (\vect{d}_1\times\vect{d}_3)\cdot\vect{d}'_3 = -\vect{d}_2\cdot\vect{d}'_3 = \kappa_1 \\
@@ -193,7 +199,194 @@ Following \cite{Bergou2008}, it is relevant to assume that the propagation of tw
 \section{Gradient}
 Internal torsional moments and forces acting on the rod are classically obtained by differentiating the potential energy of the system with respect to $\theta$ and $\vect{x}$. Here, the calculus is a bit tricky as far as the differentiation takes place in function spaces. After a brief reminder on functional derivative, the main results of the calculations of the energy derivatives are given.
 
+\subsection{Derivative of material directors with respect to $\theta$}
+
+Recalling that $\theta$ and $\vect{x}$ are independant variables and that Bishop frame $\{\vect{u},\vect{v}\}$ only depends on $\vect{x}$, the decomposition of material frame directors $\{\vect{d}_1,\vect{d}_2\}$ on Bishop frame leads directly to the following expression for the derivative of the first material director  :
+\begin{equation}
+			\pdiffof{\theta}{\vect{d}_1}{s}{h_\theta}
+	= \frac{d}{d\lambda} \vect{d}_1[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}
+	= \left(-\sin{\theta}\;\vect{u} + \cos{\theta}\;\vect{v}\right) \cdot h_\theta
+	= \vect{d}_2\cdot h_\theta \\
+\end{equation}
+And to the following expression for the derivative of the second material director : 
+\begin{equation}
+			\pdiffof{\theta}{\vect{d}_2}{s}{h_\theta}
+	= \frac{d}{d\lambda} \vect{d}_2[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}
+	= \left(-\cos{\theta}\;\vect{u} - \sin{\theta}\;\vect{v}\right) \cdot h_\theta
+	= -\vect{d}_1\cdot h_\theta \\
+\end{equation}
+
+\subsection{Derivative of the material curvatures vector with respect to $\theta$}
+Regarding the definition of the material curvatures vector and the derivative of material directors with respect to $\theta$, it follows immediately that :
+\begin{equation}
+			\pdiffof{\theta}{\vect{\omega}}{s}{h_\theta}
+	= \frac{d}{d\lambda} \vect{\omega}[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}
+	= \begin{bmatrix}
+		\kappa\vect{b}\cdot\vect{d}_2\\
+		-\kappa\vect{b}\cdot\vect{d}_1\\
+	\end{bmatrix}\cdot h_\theta
+	= - \mat{J}\vect{\omega}\cdot h_\theta\\
+\end{equation}
+Where $\mat{J}$ is the matrix that acts on
+two dimensional vectors by counter-clockwise rotation of angle $\frac{\pi}{2}$ : 
+\begin{equation}
+	\mat{J} = \begin{bmatrix}
+			0	&	-1\\
+			1	&	0\\
+		\end{bmatrix}
+\end{equation}
+
+\subsection{Derivative of material directors with respect to $\vect{x}$}
+
+\begin{figure}[t] 
+\centering 
+\includegraphics[width=\linewidth]{writhe.pdf} 
+\caption{Repères de Frenet attachés à $\gamma$.}
+\label{fig:1_1}
+\end{figure}
+
+A variation of the centerline would cause a variation in the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame.
+
+A variation of the centerline would cause a variation in the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame.
+
+This variation is closely related to the writhe of closed curves. As explained in \cite{Fuller1978} when parallel transporting an adapted frame around a closed curve it might not realigned with itself after one complete loop. This \guil{lack of alignement} is directly measured by the change of writhe which can be computed with Fuller's Formula \cite{Fuller1978}.
+
+One can also see this lack of alignement in terms of rotation. Parallel transport being a propagation of frame from $s = 0$, the cumulated rotation of Bishop frame from the deformed configuration around the initial configuration at arc-length $s$ is the cumulated angle of rotation of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ around $\vect{d}_3[\vect{x}]$. Recalling the rotation rate of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ is $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ by definition of zero-twisting frame, one can write :
+\begin{equation}
+	\Psi_\epsilon(s) =
+	-\int_0^s \kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt
+\end{equation}
+The calculation of $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ is straight forward from the curvature binormal definition :
+\begin{equation}
+	\begin{aligned}
+	\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]
+	&= (\vect{x} + \lambda\vect{h}_x)' \times (\vect{x} + \lambda\vect{h}_x)'' \\
+	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + \lambda^2(\vect{h}'_x \times \vect{h}''_x) \\
+	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + o(\lambda)
+	\end{aligned}
+\end{equation}
+Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and $\kappa\vect{b}[\vect{x}]\cdot\vect{d}_3[\vect{x}] = 0$, and denoting by $\delta_s$ and $H_s$ the Dirac function and the Heaviside step function centered at $s$ :
+\begin{equation}
+	\begin{aligned}
+		\Psi_\epsilon(s) 
+		&= -\int_0^s \kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt\\
+		&= - \lambda \int_0^s (\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') \cdot \vect{x}' \,dt + o(\lambda)\\
+		&=  - \lambda \left(\big[\kappa\vect{b}[\vect{x}] \cdot  \vect{h}_x \big]_0^s - \int_0^s \kappa\vect{b}'[\vect{x}] \cdot  \vect{h}_x \,dt\right) + o(\lambda)\\
+		&= - \lambda \left(\int_0^s \left(\kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}]\right)\cdot  \vect{h}_x \,dt\right) + o(\lambda)\\
+		&= - \lambda \left(\int_0^L \left(\kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}](1-H_s)\right)\cdot  \vect{h}_x \,dt\right) + o(\lambda)
+	\end{aligned}
+\end{equation}
+
+\begin{figure}[t] 
+\centering 
+\includegraphics[width=\linewidth]{rotation_A.pdf} 
+\caption{Repères de Frenet attachés à $\gamma$.}
+\label{fig:1_1}
+\end{figure}
+
+This scalar numbers denotes the lack of closure 
+
+To evaluate this change of Bishop frame
+
+\subsubsection{Writhe}
+\begin{equation}
+	\vect{\tilde{u}}_\epsilon = \cos{\Psi}\;\vect{u} + \sin{\Psi}\;\vect{v}
+\end{equation}
+\begin{equation}
+	\vect{\tilde{v}}_\epsilon = -\sin{\Psi}\;\vect{u} + \cos{\Psi}\;\vect{v}
+\end{equation}
+
+\begin{figure}[t] 
+\centering 
+\includegraphics[width=\linewidth]{rotation_B.pdf} 
+\caption{$\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha$.}
+\label{fig:1_1}
+\end{figure}
+
+This section is a bit tricky.
+
+$F_\epsilon = \{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$
+$\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$
+$F = \{\vect{t}, \vect{u},\vect{v}\}$
+
+What we want to achive is to write at arc-length $s$ the Bishop frame in the deformed configuration $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the Bishop frame in the reference configuration $\{\vect{t}, \vect{u},\vect{v}\}$.
+
+We first write $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the the basis $\{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$. Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. Denoting :
+\begin{equation}
+	\vect{b} = \vect{t}_\epsilon \times \vect{t} 
+	 = \cos{\gamma}\;\vect{\tilde{u}}_\epsilon + \sin{\gamma}\;\vect{\tilde{v}}_\epsilon
+	 = \cos{\gamma}\;\vect{u}_\epsilon + \sin{\gamma}\;\vect{v}_\epsilon
+\end{equation}
+We have :
+\begin{equation}
+	\begin{aligned}
+	\vect{u}_\epsilon &= \sin{\gamma}\;\vect{b} + \cos{\gamma}\;\big(\sin{\alpha}\;\vect{\tilde{t}}
+	+ \cos{\alpha}\;(\cos{\gamma}\;\vect{\tilde{u}_\epsilon} 
+	- \sin{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
+	&=\cos{\gamma}\sin{\alpha}\;\vect{t}
+	+ (\cos{\alpha}\cos{\gamma}^2+ \cos{\gamma}^2)\vect{\tilde{u}_\epsilon} 
+	+ \sin{\gamma}\cos{\gamma}\;(1-\cos{\alpha})\vect{\tilde{v}_\epsilon} 
+	\end{aligned}
+\end{equation}
+\begin{equation}
+	\begin{aligned}
+	\vect{v}_\epsilon &= \cos{\gamma}\;\vect{b} + \sin{\gamma}\;\big(-\sin{\alpha}\;\vect{\tilde{t}}
+	+ \cos{\alpha}\;(\sin{\gamma}\;\vect{\tilde{u}_\epsilon} 
+	- \cos{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
+	&=-\sin{\gamma}\sin{\alpha}\;\vect{t}
+	+ \cos{\gamma}\sin{\gamma}\;(1-\cos{\alpha})\vect{\tilde{u}_\epsilon} 
+	+ (\cos{\gamma}^2 + \cos{\alpha}\sin{\gamma}^2)\vect{\tilde{v}_\epsilon} 
+	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\vect{u}_\epsilon =
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & \cos{\Psi} & -\sin{\Psi} \\
+		0 & \sin{\Psi} & \cos{\Psi} 
+	\end{bmatrix}
+	\begin{bmatrix}
+		\cos{\gamma}\sin{\alpha} \\
+		1-2\cos{\gamma}^2\sin{\alpha/2}^2 \\
+		2\sin{\gamma}\cos{\gamma}\sin{\alpha/2}^2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\alpha\cos{\gamma}\\
+		1 \\
+		\Psi
+	\end{bmatrix}
+	+ o(\lambda)
+\end{equation}
+
+
+\begin{equation}
+	\vect{v}_\epsilon =
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & \cos{\Psi} & -\sin{\Psi} \\
+		0 & \sin{\Psi} & \cos{\Psi} 
+	\end{bmatrix}
+	\begin{bmatrix}
+		-\sin{\gamma}\sin{\alpha} \\
+		2\sin{\gamma}\cos{\gamma}\sin{\alpha/2}^2 \\
+		1-2\sin{\gamma}^2\sin{\alpha/2}^2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		-\alpha\sin{\gamma}\\
+		-\Psi \\
+		1
+	\end{bmatrix}
+	+ o(\lambda)
+\end{equation}
+
+$\tilde{F}_\epsilon(0)$
+$\epsilon$
+
 \subsection{Derivative of $\theta$ with respect to $\vect{x}$}
+
 
 \note{paragraphe entièrment à revoir. Expliquer le cheminement. x fixe bishop et theta fixe d1,d2 par rapport à bishop. x est indépendant de theta. Seul des CL peuvent créer des couplages entre x et theta
 
