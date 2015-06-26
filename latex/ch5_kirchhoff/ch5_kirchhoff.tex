@@ -1,12 +1,114 @@
-\chapter{Elastic rod : a novel element from kirchhoff equations}
+\chapter{Elastic rod : a novel element from Kirchhoff equations}
 \lipsum[1]
 
 \section{Introduction}
 Dans ce chapitre, après un bref rappel sur le cadre mathématique d'étude des courbes paramétrique de l'espace, on présente les notions de courbures et de torsion géométrique associées au repère de fraient. On montre ensuite le cas plus général d'un repère mobile quelconque attaché à une courbe gamma. On définit enfin la particularité d'un repère mobile adapté à un courbe, et on présente, en sus du repère de Frenet, une approche différente pour accrocher des repères le long d'une courbe (Bishop / RMF / Zéro-twisting frame)
 
-% --------------------------------------------------------------------------------------------------------------------------------------------
-% SMOOTH SPACE CURVE
-% --------------------------------------------------------------------------------------------------------------------------------------------
+\section{Kirchhoff's law}
+
+\subsection{Kirchhoff's first law}
+On fait un bilan sur une tranche d'épaisseur $ds$, de centre de gravité $G$ positionné en $\vect{x}_G$ :
+\begin{equation}
+	(\rho Sds)\ddot{\vect{x}}_G = \vect{F}(s+ds)-\vect{F}(s) + \vect{f}(s)ds = \left(\frac{\partial \vect{F}}{\partial s}(s)+\vect{f}(s)\right)ds
+\end{equation}
+
+Which leads to the first equation of Kirchhoff law :
+\begin{equation}
+	\rho S \ddot{\vect{x}}_G = \frac{\partial \vect{F}}{\partial s}+\vect{f}
+\end{equation}
+
+\subsection{Kirchhoff's second law}
+On fait un bilan sur une tranche d'épaisseur $ds$, de centre de gravité $G$ positionné en $\vect{x}_G$. On applique le théorème du moment cinétique dans un référentiel inertiel :
+\begin{equation}
+	\begin{aligned}
+		\frac{d}{dt}(dI_G) &= 
+		\vect{M}(s+ds)-\vect{M}(s) + \vect{m}(s)ds
+		+ (\tfrac{1}{2}ds\vect{x}')\times \vect{F}(s+ds) + (-\tfrac{1}{2}ds\vect{x}')\times -\vect{F}(s)\\
+		&= \left(\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{x}'\times \vect{F}(s)\right)ds
+	\end{aligned}
+\end{equation}
+L'évolution temporelle des vecteurs matériels est cette fois décrite par un vecteur de Darboux temporel noté $\vect{\Lambda}$ tel que :
+\begin{equation}
+	\dot{\vect{d}_{i}}(s) =\vect{\Lambda}(t) \times \vect{d}_i(s)	\quad,\quad
+	\vect{\Lambda}(t)
+	= 
+	\begin{bmatrix}
+		\Lambda_3(t) \\
+		\Lambda_1(t) \\
+		\Lambda_2(t)
+	\end{bmatrix}
+\end{equation}
+Les lois de composition / dérivation de la mécanique nous permettent décrire :
+\begin{equation}
+	\begin{aligned}
+		\frac{d}{dt}(dI_G) &= dI_G\dot{\vect{\Lambda}} + \vect{\Lambda}\times dI_G
+	\end{aligned}
+\end{equation}
+Qu'est ce qu'on met dans $dI_G$ ? Et bien tout simplement l'opérateur d'inertie de la section, qui s'exprime à l'aide des moments quadratiques des directions principales de la façon suivante, dans la base des directions principales d'inertie au premier ordre en $ds$ :
+\begin{equation}
+	\begin{aligned}
+		dI_G = \rho
+			\begin{bmatrix}
+				I_1 & 0 & 0 \\
+				0 & I_2 & 0 \\
+				0 & 0 & I_1+I_2
+			\end{bmatrix} ds
+	\end{aligned}
+\end{equation}
+Et l'on peut alors écrire la seconde loi de Kirchhoff sous la forme suivante :
+\begin{equation}
+	\begin{aligned}
+		\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{x}'\times \vect{F}(s)
+		= \rho
+			\begin{bmatrix}
+				I_1 (\dot{\Lambda}_1 + \Lambda_2 \Lambda_3) &\\
+				I_2 (\dot{\Lambda}_2 - \Lambda_3 \Lambda_1) &\\
+				(I_1 + I_2)\dot{\Lambda}_3 + (I_2 - I_1)\Lambda_1\Lambda_2&
+			\end{bmatrix}
+	\end{aligned}
+\end{equation}
+On montre ensuite :
+\begin{equation}
+\begin{cases}
+&\dot{\vect{d}_3} 	= \vect{\Lambda}\times \vect{d}_3\  
+				= \Lambda_2\vect{d_1} - \Lambda_1\vect{d_2}\\
+&\dot{\vect{d}_1} 	= \vect{\Lambda}\times \vect{d}_1\  
+				= -\Lambda_2\vect{d_3} + \Lambda_3\vect{d_2}\\
+&\dot{\vect{d}_2} 	= \vect{\Lambda}\times \vect{d}_2\  
+				= \Lambda_1\vect{d_3} - \Lambda_3\vect{d_1}\\
+\end{cases}
+\quad\Rightarrow\quad
+\begin{cases}
+&\ddot{\vect{d}_3} 	= \dot{\Lambda}_2\vect{d_1} - \dot{\Lambda}_1\vect{d_2} 
+				+ \vect{\Lambda} \times \dot{\vect{d}_3}\\
+&\ddot{\vect{d}_1} 	= -\dot{\Lambda}_2\vect{d_3} + \dot{\Lambda}_3\vect{d_2}
+				+ \vect{\Lambda} \times \dot{\vect{d}_1}\\
+&\ddot{\vect{d}_2} 	= \dot{\Lambda}_1\vect{d_3} - \dot{\Lambda}_3\vect{d_1}
+				+ \vect{\Lambda} \times \dot{\vect{d}_2}		
+\end{cases}
+\end{equation}
+On en déduit en remarquant que $(\vect{\Lambda}\times\dot{\vect{d}_i})\times\vect{d}_i = \Lambda_i(\vect{\Lambda}\times\dot{\vect{d}_i})$ que :
+\begin{equation}
+\begin{cases}
+&\ddot{\vect{d}_3}\times\vect{d}_3 	
+			= (\dot{\Lambda}_2\vect{d_1} - \dot{\Lambda}_1\vect{d_2} 
+				+ \vect{\Lambda} \times \dot{\vect{d}_3}) \times \vect{d}_3
+			= (- \dot{\Lambda}_1 + \Lambda_2\Lambda_3)\vect{d}_1
+			-(\dot{\Lambda}_2 + \Lambda_1\Lambda_3)\vect{d}_2\\
+&\ddot{\vect{d}_1}\times\vect{d}_1	
+			= -\dot{\Lambda}_2\vect{d_3} + \dot{\Lambda}_3\vect{d_2}
+				+ \vect{\Lambda} \times \dot{\vect{d}_1} \times \vect{d}_1
+			= -(\dot{\Lambda}_3 + \Lambda_1\Lambda_2)\vect{d}_3
+			+(-\dot{\Lambda}_2 + \Lambda_1\Lambda_3)\vect{d}_2\\
+&\ddot{\vect{d}_2} \times\vect{d}_2	
+			= \dot{\Lambda}_1\vect{d_3} - \dot{\Lambda}_3\vect{d_1}
+				+ \vect{\Lambda} \times \dot{\vect{d}_2}  \times \vect{d}_2
+			= (- \dot{\Lambda}_3 + \Lambda_1\Lambda_2)\vect{d}_3
+			-(\dot{\Lambda}_1 + \Lambda_2\Lambda_3)\vect{d}_1\\		
+\end{cases}
+\end{equation}
+On peut alors conclure sur l'expression du moment :
+
 
 
 \bibliographystyle{alpha}
