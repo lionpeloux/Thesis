@@ -14,6 +14,8 @@ Basile \cite{Audoly2000}
 
 Sina \cite{Nabei2014}
 
+\cite{Fuller1978}, \cite{deVries2005},  \cite{Vauquelin2000}, \cite{Berger2009}
+
 
 % #######################################################
 \section{Kirchhoff rod}
@@ -94,6 +96,14 @@ Following \cite{Bergou2008}, let’s introduce a reduced coordinate formulation 
 
 Note that an alternative solution could be to parameterize the global rotations of local material frame and to compute the rotation needed to align two successive frames along the curve’s tangent.
 
+\note{
+Ici, expliquer la succession des dépendances : les vecteurs matériaux dépendent du repère de bishop par la seule variable theta. Le repère de bishop quand à lui est entièrement déterminé (au choix d'une constante de départ près) par la donnée de la centerline x.
+
+Faire un schéma explicatif.
+
+quid du transport parallèle en temps et non en espace ?
+}
+
 \subsection{Zero-twisting frame}
 Zero-twisting frame, also known as Bishop frame, was introduced by Bishop in 1964. Bishop remarked that there was more than one way to frame a curve \cite{Bishop1975}. Indeed, for a given curve, any orthonormal moving frame would satisfy the following differential equations, where $k_1(s)$, $k_2 (s)$ and $\tau(s)$ are scalar functions that define completely the moving frame :
 \begin{gather}
@@ -123,10 +133,12 @@ Thus, by the help of $\vect{\Omega}_b(s)$, it’s possible to transport a given 
 
 Let’s compute the bending strains $\kappa_1$ and $\kappa_2$ regarding the geometric configuration of the rod. Remark that :
 \begin{equation}
+	\left\{
 	\begin{aligned}
 	&\kappa\vect{b}\cdot\vect{d}_1 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_1 = (\vect{d}_1\times\vect{d}_3)\cdot\vect{d}'_3 = -\vect{d}_2\cdot\vect{d}'_3 = \kappa_1 \\
 	&\kappa\vect{b}\cdot\vect{d}_2 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_2 = (\vect{d}_2\times\vect{d}_3)\cdot\vect{d}'_3 = \vect{d}_1\cdot\vect{d}'_3 = \kappa_2	
 	\end{aligned}
+	\right.
 \end{equation}
 That is to say $\kappa\vect{b}$ is orthogonal to $\vect{d}_3$ :
 \begin{equation}
@@ -157,8 +169,12 @@ Let’s compute the twist or torsion strain $\tau$ regarding the geometric confi
 		\vect{d}_2\\
 	\end{bmatrix} =
 		\begin{bmatrix}
-		\cos{\theta}\;\vect{u} + \sin{\theta}\;\vect{v}\\
-		-\sin{\theta}\;\vect{u} + \cos{\theta}\;\vect{v}\\
+		\cos{\theta} & \sin{\theta}\\
+		-\sin{\theta} & \cos{\theta}\\
+	\end{bmatrix}
+	\begin{bmatrix}
+		\vect{u}\\
+		\vect{v}\\
 	\end{bmatrix}
 \end{equation}
 Thus, the twist can be identified directly as the variation of $\theta$ along the curve :
@@ -196,24 +212,25 @@ Recall that the rod is supposed to be inextensible in Kirchhoff’s theory. Thus
 \section{Time-scale assumption}
 Following \cite{Bergou2008}, it is relevant to assume that the propagation of twist waves is instantaneous compared to the one of bending waves. Thus, internal forces $\vect{f}^{int}$ and moment $\vect{m}^{int}$ acts on two different timescales in the rod dynamic. Thus on the timescale of action of the force $\vect{f}^{int}$ on the center line, driving the bending waves, the twist waves propagate instantaneously, so that $\forall s \in [0,L],\; \delta\mathcal{E}_{p}/\delta\theta=0$ for the computation of $\vect{f}^{int}$. This assumption may not be enforced, as in \cite{Nabei2014}, but leads to simpler and faster computations.
 
-\section{Gradient}
+\section{Energy gradient with respect to $\theta$ : torsional moment}
 Internal torsional moments and forces acting on the rod are classically obtained by differentiating the potential energy of the system with respect to $\theta$ and $\vect{x}$. Here, the calculus is a bit tricky as far as the differentiation takes place in function spaces. After a brief reminder on functional derivative, the main results of the calculations of the energy derivatives are given.
 
 \subsection{Derivative of material directors with respect to $\theta$}
 
-Recalling that $\theta$ and $\vect{x}$ are independant variables and that Bishop frame $\{\vect{u},\vect{v}\}$ only depends on $\vect{x}$, the decomposition of material frame directors $\{\vect{d}_1,\vect{d}_2\}$ on Bishop frame leads directly to the following expression for the derivative of the first material director  :
+Recalling that $\theta$ and $\vect{x}$ are independant variables and that Bishop frame $\{\vect{u},\vect{v}\}$ only depends on $\vect{x}$, the decomposition of material frame directors $\{\vect{d}_1,\vect{d}_2\}$ on Bishop frame leads directly to the following expression for the derivative of the material directors  :
 \begin{equation}
-			\pdiffof{\theta}{\vect{d}_1}{s}{h_\theta}
+	\left\{
+	\begin{aligned}
+	&\pdiffof{\theta}{\vect{d}_1}{s}{h_\theta}
 	= \frac{d}{d\lambda} \vect{d}_1[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}
 	= \left(-\sin{\theta}\;\vect{u} + \cos{\theta}\;\vect{v}\right) \cdot h_\theta
 	= \vect{d}_2\cdot h_\theta \\
-\end{equation}
-And to the following expression for the derivative of the second material director : 
-\begin{equation}
-			\pdiffof{\theta}{\vect{d}_2}{s}{h_\theta}
+	&\pdiffof{\theta}{\vect{d}_2}{s}{h_\theta}
 	= \frac{d}{d\lambda} \vect{d}_2[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}
 	= \left(-\cos{\theta}\;\vect{u} - \sin{\theta}\;\vect{v}\right) \cdot h_\theta
-	= -\vect{d}_1\cdot h_\theta \\
+	= -\vect{d}_1\cdot h_\theta	
+	\end{aligned}
+	\right.
 \end{equation}
 
 \subsection{Derivative of the material curvatures vector with respect to $\theta$}
@@ -236,157 +253,74 @@ two dimensional vectors by counter-clockwise rotation of angle $\frac{\pi}{2}$ :
 		\end{bmatrix}
 \end{equation}
 
-\subsection{Derivative of material directors with respect to $\vect{x}$}
+\subsection{Computation of the moment of torsion}
 
-\begin{figure}[t] 
-\centering 
-\includegraphics[width=\linewidth]{writhe.pdf} 
-\caption{Repères de Frenet attachés à $\gamma$.}
-\label{fig:1_1}
-\end{figure}
-
-A variation of the centerline would cause a variation in the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame.
-
-A variation of the centerline would cause a variation in the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame.
-
-This variation is closely related to the writhe of closed curves. As explained in \cite{Fuller1978} when parallel transporting an adapted frame around a closed curve it might not realigned with itself after one complete loop. This \guil{lack of alignement} is directly measured by the change of writhe which can be computed with Fuller's Formula \cite{Fuller1978}.
-
-One can also see this lack of alignement in terms of rotation. Parallel transport being a propagation of frame from $s = 0$, the cumulated rotation of Bishop frame from the deformed configuration around the initial configuration at arc-length $s$ is the cumulated angle of rotation of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ around $\vect{d}_3[\vect{x}]$. Recalling the rotation rate of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ is $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ by definition of zero-twisting frame, one can write :
-\begin{equation}
-	\Psi_\epsilon(s) =
-	-\int_0^s \kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt
-\end{equation}
-The calculation of $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ is straight forward from the curvature binormal definition :
+The moment of torsion is given by the functional derivative of the potential elastic energy with respect to $\theta$ which can be decomposed according to the chaine rule :
 \begin{equation}
 	\begin{aligned}
-	\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]
-	&= (\vect{x} + \lambda\vect{h}_x)' \times (\vect{x} + \lambda\vect{h}_x)'' \\
-	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + \lambda^2(\vect{h}'_x \times \vect{h}''_x) \\
-	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + o(\lambda)
-	\end{aligned}
+	\scalar{-m(s)}{h_\theta} = \pdiffof{\theta}{\mathcal{E}_p}{s}{h_\theta} 
+	&= \pdiffof{\theta}{\mathcal{E}_b}{s}{h_\theta} + \pdiffof{\theta}{\mathcal{E}_t}{s}{h_\theta} \\
+	&= \pdiffof{\theta}{\mathcal{E}_b[\vect{\omega}[\theta]]}{s}{h_\theta} + \pdiffof{\theta}{\mathcal{E}_t[\theta]}{s}{h_\theta} \\
+	\end{aligned} 
 \end{equation}
-Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and $\kappa\vect{b}[\vect{x}]\cdot\vect{d}_3[\vect{x}] = 0$, and denoting by $\delta_s$ and $H_s$ the Dirac function and the Heaviside step function centered at $s$ :
+
+\subsubsection{Derivative of the torsion energy with respect to $\theta$}
+
+Decomposing the previous calculus gives:
 \begin{equation}
 	\begin{aligned}
-		\Psi_\epsilon(s) 
-		&= -\int_0^s \kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt\\
-		&= - \lambda \int_0^s (\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') \cdot \vect{x}' \,dt + o(\lambda)\\
-		&=  - \lambda \left(\big[\kappa\vect{b}[\vect{x}] \cdot  \vect{h}_x \big]_0^s - \int_0^s \kappa\vect{b}'[\vect{x}] \cdot  \vect{h}_x \,dt\right) + o(\lambda)\\
-		&= - \lambda \left(\int_0^s \left(\kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}]\right)\cdot  \vect{h}_x \,dt\right) + o(\lambda)\\
-		&= - \lambda \left(\int_0^L \left(\kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}](1-H_s)\right)\cdot  \vect{h}_x \,dt\right) + o(\lambda)
+	\pdiffof{\theta}{\mathcal{E}_t[\theta]}{s}{h_\theta}
+		&= \frac{d}{d\lambda} \mathcal{E}_t[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0} \\
+		&= \frac{d}{d\lambda}\left( \tfrac{1}{2} \int_{0}^{L} \beta\left((\theta + \lambda h_\theta)' -{\overbar{\theta'}}\right)^2 \;dt \right)\Bigr|_{\lambda = 0} \\
+		&= \int_{0}^{L} \beta(\theta' -{\overbar{\theta'}}) \cdot h_\theta' \;dt \\
+		&= \left[\beta(\theta' -{\overbar{\theta'}}) \cdot h_\theta\right]_0^L - \int_{0}^{L} \left(\beta(\theta' -{\overbar{\theta'}})\right)' \cdot h_\theta \;dt \\
+		&= \int_{0}^{L} \left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) \cdot h_\theta \;dt \\
 	\end{aligned}
 \end{equation}
 
-\begin{figure}[t] 
-\centering 
-\includegraphics[width=\linewidth]{rotation_A.pdf} 
-\caption{Repères de Frenet attachés à $\gamma$.}
-\label{fig:1_1}
-\end{figure}
+\subsubsection{Derivative of the bending energy with respect to $\theta$}
 
-This scalar numbers denotes the lack of closure 
-
-To evaluate this change of Bishop frame
-
-\subsubsection{Writhe}
-\begin{equation}
-	\vect{\tilde{u}}_\epsilon = \cos{\Psi}\;\vect{u} + \sin{\Psi}\;\vect{v}
-\end{equation}
-\begin{equation}
-	\vect{\tilde{v}}_\epsilon = -\sin{\Psi}\;\vect{u} + \cos{\Psi}\;\vect{v}
-\end{equation}
-
-\begin{figure}[t] 
-\centering 
-\includegraphics[width=\linewidth]{rotation_B.pdf} 
-\caption{$\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha$.}
-\label{fig:1_1}
-\end{figure}
-
-This section is a bit tricky.
-
-$F_\epsilon = \{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$
-$\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$
-$F = \{\vect{t}, \vect{u},\vect{v}\}$
-
-What we want to achive is to write at arc-length $s$ the Bishop frame in the deformed configuration $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the Bishop frame in the reference configuration $\{\vect{t}, \vect{u},\vect{v}\}$.
-
-We first write $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the the basis $\{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$. Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. Denoting :
-\begin{equation}
-	\vect{b} = \vect{t}_\epsilon \times \vect{t} 
-	 = \cos{\gamma}\;\vect{\tilde{u}}_\epsilon + \sin{\gamma}\;\vect{\tilde{v}}_\epsilon
-	 = \cos{\gamma}\;\vect{u}_\epsilon + \sin{\gamma}\;\vect{v}_\epsilon
-\end{equation}
-We have :
+The derivative of $\mathcal{E}_b$ is obtained with the chaine rule :
 \begin{equation}
 	\begin{aligned}
-	\vect{u}_\epsilon &= \sin{\gamma}\;\vect{b} + \cos{\gamma}\;\big(\sin{\alpha}\;\vect{\tilde{t}}
-	+ \cos{\alpha}\;(\cos{\gamma}\;\vect{\tilde{u}_\epsilon} 
-	- \sin{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
-	&=\cos{\gamma}\sin{\alpha}\;\vect{t}
-	+ (\cos{\alpha}\cos{\gamma}^2+ \cos{\gamma}^2)\vect{\tilde{u}_\epsilon} 
-	+ \sin{\gamma}\cos{\gamma}\;(1-\cos{\alpha})\vect{\tilde{v}_\epsilon} 
+	\pdiffof{\omega}{\mathcal{E}_b[\vect{\omega}]}{s}{\vect{h}_\omega}
+		&= \frac{d}{d\lambda} \mathcal{E}_b[\vect{\omega} + \lambda \vect{h}_\omega]\Bigr|_{\lambda = 0} \\
+		&= \frac{d}{d\lambda}\left( \tfrac{1}{2} \int_{0}^{L} \left((\vect{\omega} + \lambda \vect{h}_\omega)-\overbar{\vect{\omega}}\right)^T \mat{B} \left((\vect{\omega} + \lambda \vect{h}_\omega)-\overbar{\vect{\omega}}\right) \;dt \right)\Bigr|_{\lambda = 0} \\
+		&= \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \cdot \vect{h}_\omega \;dt \\
 	\end{aligned}
 \end{equation}
+Finally, reminding eq 4.14 :
 \begin{equation}
 	\begin{aligned}
-	\vect{v}_\epsilon &= \cos{\gamma}\;\vect{b} + \sin{\gamma}\;\big(-\sin{\alpha}\;\vect{\tilde{t}}
-	+ \cos{\alpha}\;(\sin{\gamma}\;\vect{\tilde{u}_\epsilon} 
-	- \cos{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
-	&=-\sin{\gamma}\sin{\alpha}\;\vect{t}
-	+ \cos{\gamma}\sin{\gamma}\;(1-\cos{\alpha})\vect{\tilde{u}_\epsilon} 
-	+ (\cos{\gamma}^2 + \cos{\alpha}\sin{\gamma}^2)\vect{\tilde{v}_\epsilon} 
+	\pdiffof{\theta}{\mathcal{E}_b[\vect{\omega}[\theta]]}{s}{h_\theta} &=
+	\pdiffof{\omega}{\mathcal{E}_b[\vect{\omega}]}{s}{(\pdiffof{\theta}{\vect{\omega}[\theta]}{s}{h_\theta})} \\
+	&= - \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\cdot h_\theta \;dt
 	\end{aligned}
 \end{equation}
 
+\subsubsection{Moment of torsion}
+Thus, the 
 \begin{equation}
-	\vect{u}_\epsilon =
-	\begin{bmatrix}
-		1 & 0 & 0 \\
-		0 & \cos{\Psi} & -\sin{\Psi} \\
-		0 & \sin{\Psi} & \cos{\Psi} 
-	\end{bmatrix}
-	\begin{bmatrix}
-		\cos{\gamma}\sin{\alpha} \\
-		1-2\cos{\gamma}^2\sin{\alpha/2}^2 \\
-		2\sin{\gamma}\cos{\gamma}\sin{\alpha/2}^2
-	\end{bmatrix}
-	=
-	\begin{bmatrix}
-		\alpha\cos{\gamma}\\
-		1 \\
-		\Psi
-	\end{bmatrix}
-	+ o(\lambda)
+	\begin{aligned}
+	\scalar{-m(s)}{h_\theta} &= \pdiffof{\theta}{\mathcal{E}_b[\vect{\omega}[\theta]]}{s}{h_\theta} + \pdiffof{\theta}{\mathcal{E}_t[\theta]}{s}{h_\theta} \\
+	&= \int_{0}^{L} \left(\left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) - (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\right) \cdot h_\theta \;dt
+	\end{aligned} 
+\end{equation}
+Finally, we can conclude on the expression of the internal moment of torsion :
+\begin{equation}
+	m(s) = - \left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) + (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}
+\end{equation}
+
+\subsubsection{Quasistatic hypothesis}
+\begin{equation}
+	\left(\beta(\theta' -{\overbar{\theta'}})\right)' + (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} = 0
 \end{equation}
 
 
-\begin{equation}
-	\vect{v}_\epsilon =
-	\begin{bmatrix}
-		1 & 0 & 0 \\
-		0 & \cos{\Psi} & -\sin{\Psi} \\
-		0 & \sin{\Psi} & \cos{\Psi} 
-	\end{bmatrix}
-	\begin{bmatrix}
-		-\sin{\gamma}\sin{\alpha} \\
-		2\sin{\gamma}\cos{\gamma}\sin{\alpha/2}^2 \\
-		1-2\sin{\gamma}^2\sin{\alpha/2}^2
-	\end{bmatrix}
-	=
-	\begin{bmatrix}
-		-\alpha\sin{\gamma}\\
-		-\Psi \\
-		1
-	\end{bmatrix}
-	+ o(\lambda)
-\end{equation}
 
-$\tilde{F}_\epsilon(0)$
-$\epsilon$
+\section{Energy gradient with respect to $x$ : forces}
 
-\subsection{Derivative of $\theta$ with respect to $\vect{x}$}
-
+Internal torsional moments and forces acting on the rod are classically obtained by differentiating the potential energy of the system with respect to $\theta$ and $\vect{x}$. Here, the calculus is a bit tricky as far as the differentiation takes place in function spaces. After a brief reminder on functional derivative, the main results of the calculations of the energy derivatives are given.
 
 \note{paragraphe entièrment à revoir. Expliquer le cheminement. x fixe bishop et theta fixe d1,d2 par rapport à bishop. x est indépendant de theta. Seul des CL peuvent créer des couplages entre x et theta
 
@@ -400,14 +334,44 @@ Le reste est quasiment immédiat. Reste la question des CL et des termes aux bor
 Il faut aussi se positionner par rapport à l'article de Basile. Regarder la question applied displacement vs settlement pour imposer une CL.
 }
 
-It’s important to notice that the centreline $\vect{x}$ is independent of $\theta$. However, the convers does not hold. Indeed, a variation of the centerline would cause the cross section orientations to be perturbed and thus the potential energy to be modified.
+\subsection{Derivative of material directors with respect to $\vect{x}$}
 
-When moving the centerline while conserving section orientation $\{\vect{d}_1,\vect{d}_2\}$,  the angle $\theta$ is modified because the bishop frame is modified. The variation of $\theta$ is thus equal to the opposite of the rotation angle of the bishop frame around $\vect{d}_3$ while the centerline undergoes a variation.
+A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation in the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame.
 
-Parallel transport being a propagation of frame from $s = 0$, the variation of $\theta$ at arc-length $s$ is the cumulated angle of rotation of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ around $\vect{d}_3[\vect{x}]$. Recalling the rotation rate of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ is $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ by definition of zero-twisting frame, one can write :
+$F_\epsilon = \{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$
+$\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$
+$F = \{\vect{t}, \vect{u},\vect{v}\}$
+
+What we want to achive is to write at arc-length $s$ the Bishop frame in the deformed configuration $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the Bishop frame in the reference configuration $\{\vect{t}, \vect{u},\vect{v}\}$.
+
+We first write $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the the basis $\{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$. Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. Denoting :
+
+\begin{figure}[t] 
+\centering 
+\includegraphics[width=\linewidth]{writhe.pdf} 
+\caption{Repères de Frenet attachés à $\gamma$.}
+\label{fig:1_1}
+\end{figure}
+
+\subsubsection{Calculation of $\Psi_\epsilon$}
+
+\begin{figure}[p] 
+\centering 
+\includegraphics[width=\textwidth]{rotation_A.pdf} 
+\caption{$\tilde{F}$ is obtained by rotating $\tilde{F}_\epsilon$ around $\vect{t}$ of an angle $\Psi_\epsilon$.}
+\includegraphics[width=\textwidth]{rotation_B.pdf} 
+\caption{$\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha_\epsilon$.}
+\label{A}
+\end{figure}
+
+This variation is closely related to the writhe of closed curves. As explained in \cite{Fuller1978} when parallel transporting an adapted frame around a closed curve it might not realigned with itself after one complete loop. This \guil{lack of alignement} is directly measured by the change of writhe which can be computed with Fuller's Formula \cite{Fuller1978}.
+
+Note that the derivative of $\theta$ with respect to $\vect{x}$ can be evaluated by the change of writhe in the curve as suggested in \cite{deVries2005}. This approach is completly equivalent.
+
+One can also see this lack of alignement in terms of rotation. Parallel transport being a propagation of frame from $s = 0$, the cumulated rotation of Bishop frame from the deformed configuration around the initial configuration at arc-length $s$ is the cumulated angle of rotation of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ around $\vect{d}_3[\vect{x}]$. Recalling the rotation rate of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ is $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ by definition of zero-twisting frame, one can write :
 \begin{equation}
-	\pdiffof{x}{\theta}{s}{\vect{h}_x} =
-	\frac{d}{d\lambda} \int_0^s -\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt \Bigr|_{\lambda = 0}
+	\Psi_\epsilon[\vect{x}](s) =
+	-\int_0^s \kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt
 \end{equation}
 The calculation of $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ is straight forward from the curvature binormal definition :
 \begin{equation}
@@ -418,391 +382,484 @@ The calculation of $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ is straight fo
 	&= \kappa\vect{b}[\vect{x}] + \lambda(\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') + o(\lambda)
 	\end{aligned}
 \end{equation}
-Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and denoting by $\delta_s$ and $H_s$ the Dirac function and the Heaviside step function centered at $s$ :
+Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and $\kappa\vect{b}[\vect{x}]\cdot\vect{d}_3[\vect{x}] = 0$, and using the invariance of circular product by cyclic permutation, one can express :
 \begin{equation}
 	\begin{aligned}
-		\pdiffof{x}{\theta}{s}{\vect{h}_x} &= - \int_0^s (\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') \cdot \vect{x}' \,dt = \int_0^s \kappa\vect{b}[\vect{x}] \cdot  \vect{h}'_x \,dt\\
-		&= \big[\kappa\vect{b}[\vect{x}] \cdot  \vect{h}_x \big]_0^s - \int_0^s \kappa\vect{b}'[\vect{x}] \cdot  \vect{h}_x \,dt \\
-		&= \int_0^s \left(\kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}]\right)\cdot  \vect{h}_x \,dt \\
-		&= \int_0^L \left(\kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}](1-H_s)\right)\cdot  \vect{h}_x \,dt \\
-		&= \scalar{\frac{\partial\theta}{\partial\vect{x}}(s)}{\vect{h}_x}
+		\Psi_\epsilon[\vect{x}](s) 
+		&= -\int_0^s \kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt\\
+		&= - \lambda \int_0^s (\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') \cdot \vect{x}' \,dt + o(\lambda)\\
+		&= - \lambda \int_0^s \kappa\vect{b}[\vect{x}]\cdot\vect{h}'_x \,dt + o(\lambda)\\
 	\end{aligned}
 \end{equation}
-In other words, this means that a variation $\vect{h}_x$ of $\vect{x}$ causes a variation $\int_0^L \frac{\partial\theta}{\partial\vect{x}}(s) \cdot  \vect{h}_x$ of $\theta$ at $s$. Note that this is an integrated quantity, all along the centerline. Finally, the derivative of $\theta$ with respect to $\vect{x}$ is given by :
+By integration by parts, dropping the implicit reference to $\vect{x}$ in the notation, and denoting by $\delta_s$ and $H_s$ the Dirac function and the Heaviside step function centered at $s$, $\Psi_\epsilon(s)$ could be rewritten as :
 \begin{equation}
-	\frac{\partial\theta}{\partial\vect{x}}(s) = \kappa\vect{b}[\vect{x}]\left(\delta_s-\delta_0\right) - \kappa\vect{b}'[\vect{x}](1-H_s) \in [0,L]^{\mathbb{R}^3}
+	\begin{aligned}
+		\Psi_\epsilon(s) 
+		&= - \lambda \int_0^s \kappa\vect{b}\cdot\vect{h}'_x \,dt + o(\lambda)\\
+		&=  - \lambda \left(\big[\kappa\vect{b} \cdot  \vect{h}_x \big]_0^s - \int_0^s \kappa\vect{b}' \cdot  \vect{h}_x \,dt\right) + o(\lambda)\\
+		&= - \lambda \left(\int_0^s \left(\left(\delta_s-\delta_0\right)\kappa\vect{b} - \kappa\vect{b}'\right)\cdot  \vect{h}_x \,dt\right) + o(\lambda)\\
+		&= - \lambda \left(\int_0^L \left(\left(\delta_s-\delta_0\right)\kappa\vect{b} - (1-H_s)\kappa\vect{b}'\right)\cdot  \vect{h}_x \,dt\right) + o(\lambda)
+	\end{aligned}
+\end{equation}
+Note that, as expected, $\Psi_\epsilon(s)$ is in first order of $\lambda$ and thus gets negligible when $\lambda$ tends to zero, that is to say when the perturbation of $\vect{x}$ is infinitesimal :
+\begin{equation}
+	\lim_{\lambda \to 0} \Psi_\epsilon(s) = 0
 \end{equation}
 
-Note that the derivative of $\theta$ with respect to $\vect{x}$ can be evaluated by the change of writhe in the curve as suggested in \cite{deVries2005}. This approach is completly equivalent.
+$H_s : t \mapsto \left\{\begin{array}{c}0  , \quad t<s \\1  , \quad t\geqslant s \end{array}\right.$ est la fonction de Heaviside.
 
-\subsection{Derivative of $\vect{\omega}$ with respect to $\vect{x}$}
+$\delta_s : t \mapsto \delta(t-s)$ est la distribution de dirac centrée en $s$.
 
-Let’s express the variation of the material frame after a variation $\lambda \vect{h}_x$ of $\vect{x}$ while $\theta$ remains unchanged. First, remind that material frame remains orthonormal during deformation. Thus, one can write :
+\subsubsection{Calculation of $\alpha_\epsilon$}
+
+Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$.
+$\tilde{F}_\epsilon$ results from the rotation of $F_\epsilon$ around $\vect{b} = \vect{t}_\epsilon \times \vect{t}$ by an angle $\alpha_\epsilon$.
+
+Because the rod is supposed to be inextensible, the following properties hold :
+\begin{equation}
+	\|\vect{t}\| = \|\vect{x}'\| = 1 \quad,\quad \|\vect{t}_\epsilon\| = \|(\vect{x}+\vect{\epsilon})'\| = 1
+\end{equation}
+Thus, when the perturbation $\vect{\epsilon}$ of the centerline gets infinitesimal $\vect{t}_\epsilon$ stays collinear to $\vect{t}$. Indeed :
+\begin{equation}
+		\|\vect{t}_\epsilon\| = 1 
+		\Rightarrow  (\vect{x}+\vect{\epsilon})' \cdot (\vect{x}+\vect{\epsilon})' = 1
+		\Leftrightarrow  \vect{x}'\cdot\vect{\epsilon}' = - \tfrac{\lambda^2}{2}\|\vect{h}_x\|^2
+\end{equation}
+Which leeds to :
+\begin{equation}
+		\cos \alpha_\epsilon(s) = \vect{t} \cdot \vect{t}_\epsilon = \vect{x}' \cdot (\vect{x}+\vect{\epsilon})'
+		= 1 + \vect{x}' \cdot \vect{\epsilon}'
+		= 1 - \tfrac{\lambda^2}{2}\|\vect{h}_x\|^2
+\end{equation}
+Finally, it's possible to conclude that $\alpha_\epsilon(s)$ is in first order of $\lambda$ and thus gets negligible when $\lambda$ tends to zero :
+\begin{equation}
+	\lim_{\lambda \to 0} \alpha_\epsilon(s) = 0
+\end{equation}
+
+%\begin{figure}[t] 
+%\centering 
+%\includegraphics[width=\linewidth]{rotation_B.pdf} 
+%\caption{$\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha$.}
+%\label{fig:1_1}
+%\end{figure}
+
+\subsubsection{Aligning $\tilde{F}_\epsilon$ towards $F_\epsilon$}
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		&\vect{\tilde{u}}_\epsilon = \cos{\Psi_\epsilon}\;\vect{u} + \sin{\Psi_\epsilon}\;\vect{v}\\
+		&\vect{\tilde{v}}_\epsilon = -\sin{\Psi_\epsilon}\;\vect{u} + \cos{\Psi_\epsilon}\;\vect{v}
+	\end{aligned}
+	\right.
+\end{equation}
+
+\subsubsection{Aligning $F_\epsilon$ towards $\vect{t}$}
+
+Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha_\epsilon$. Where :
+\begin{equation}
+	\vect{b} = \vect{t}_\epsilon \times \vect{t} 
+	 = \cos{\gamma}\;\vect{\tilde{u}}_\epsilon + \sin{\gamma}\;\vect{\tilde{v}}_\epsilon
+	 = \cos{\gamma}\;\vect{u}_\epsilon + \sin{\gamma}\;\vect{v}_\epsilon
+\end{equation}
+Expressing $F_\epsilon$ on the basis $\tilde{F}_\epsilon$ gives :
+\begin{equation}
+	\begin{aligned}
+	\vect{u}_\epsilon &= \sin{\gamma}\;\vect{b} + \cos{\gamma}\;\big(\sin{\alpha_\epsilon}\;\vect{\tilde{t}}
+	+ \cos{\alpha_\epsilon}\;(\cos{\gamma}\;\vect{\tilde{u}_\epsilon} 
+	- \sin{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
+	&=\cos{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
+	+ (\cos{\alpha_\epsilon}\cos{\gamma}^2+ \cos{\gamma}^2)\vect{\tilde{u}_\epsilon} 
+	+ \sin{\gamma}\cos{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{v}_\epsilon} 
+	\end{aligned}
+\end{equation}
+And :
+\begin{equation}
+	\begin{aligned}
+	\vect{v}_\epsilon &= \cos{\gamma}\;\vect{b} + \sin{\gamma}\;\big(-\sin{\alpha_\epsilon}\;\vect{\tilde{t}}
+	+ \cos{\alpha_\epsilon}\;(\sin{\gamma}\;\vect{\tilde{u}_\epsilon} 
+	- \cos{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
+	&=-\sin{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
+	+ \cos{\gamma}\sin{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{u}_\epsilon} 
+	+ (\cos{\gamma}^2 + \cos{\alpha_\epsilon}\sin{\gamma}^2)\vect{\tilde{v}_\epsilon} 
+	\end{aligned}
+\end{equation}
+Thus, one can finally express $F_\epsilon$ on the basis $F$ as the composition of two rotations :
+\begin{equation}
+	\vect{u}_\epsilon =
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & \cos{\Psi_\epsilon} & -\sin{\Psi_\epsilon} \\
+		0 & \sin{\Psi_\epsilon} & \cos{\Psi_\epsilon} 
+	\end{bmatrix}
+	\begin{bmatrix}
+		\cos{\gamma}\sin{\alpha_\epsilon} \\
+		1-2\cos{\gamma}^2\sin{\alpha_\epsilon/2}^2 \\
+		2\sin{\gamma}\cos{\gamma}\sin{\alpha_\epsilon/2}^2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\alpha_\epsilon\cos{\gamma}\\
+		1 \\
+		\Psi_\epsilon
+	\end{bmatrix}
+	+ o(\lambda)
+\end{equation}
+And :
+\begin{equation}
+	\vect{v}_\epsilon =
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & \cos{\Psi_\epsilon} & -\sin{\Psi_\epsilon} \\
+		0 & \sin{\Psi_\epsilon} & \cos{\Psi_\epsilon} 
+	\end{bmatrix}
+	\begin{bmatrix}
+		-\sin{\gamma}\sin{\alpha_\epsilon} \\
+		2\sin{\gamma}\cos{\gamma}\sin{\alpha_\epsilon/2}^2 \\
+		1-2\sin{\gamma}^2\sin{\alpha_\epsilon/2}^2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		-\alpha_\epsilon\sin{\gamma}\\
+		-\Psi_\epsilon \\
+		1
+	\end{bmatrix}
+	+ o(\lambda)
+\end{equation}
+Here, the expressions avec been developed in first order of $\lambda$ as far as $\alpha_\epsilon$ and $\Psi_\epsilon$ it's been proofed in eq [] that those quantities tends two zero when the perturbation of the centerline is infinitesimal.
+
+\subsubsection{Variation of Bishop frame with respect to $\vect{x}$}
+Finally, one can express the variation of material directors with respect to an infinitesimal variation of rod's centerline :
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		&\vect{u}_\epsilon = \alpha_\epsilon\cos{\gamma}\;\vect{t} + \vect{u} + \Psi_\epsilon\vect{v} + o(\lambda) \\
+		&\vect{v}_\epsilon = -\alpha_\epsilon\sin{\gamma}\;\vect{t} + \vect{v} - \Psi_\epsilon\vect{u} + o(\lambda) \\
+	\end{aligned}
+	\right.
+\end{equation}
+
+\subsubsection{Variation of material frame with respect to $\vect{x}$}
+Recalling the expression of the material frame expressed in the reference Bishop frame, it's now easy to deduce the variation of material frame with respect to a variation of the rod's centerline :
 \begin{equation}
 	\left\{
 		\begin{aligned}
-			&\vect{d}_1[\vect{x}+\lambda \vect{h}_x] = \vect{d}_1[\vect{x}] + \Delta \Psi \vect{d}_2[\vect{x}] - \Delta \Phi \vect{d}_3[\vect{x}] + o(\lambda)\\
-			&\vect{d}_2[\vect{x}+\lambda \vect{h}_x] = \vect{d}_2[\vect{x}] - \Delta \Psi \vect{d}_1[\vect{x}] + \Delta\Gamma \vect{d}_3[\vect{x}] + o(\lambda)
+			&\vect{d}_1[\vect{x}+\lambda \vect{h}_x] = 
+			\cos{\theta} \; \vect{u}_\epsilon + \sin{\theta} \; \vect{v}_\epsilon\\
+			&\vect{d}_2[\vect{x}+\lambda \vect{h}_x] = 
+			-\sin{\theta} \; \vect{u}_\epsilon + \cos{\theta} \; \vect{v}_\epsilon\\
 		\end{aligned}
 	\right.
 \end{equation}
-Where $\Delta\Psi$, $\Delta\Gamma$ and $\Delta\Phi$ represent the rotation of $\{\vect{d}_3[\vect{x}+\lambda \vect{h}_x],\vect{d}_1[\vect{x}+\lambda \vect{h}_x],\vect{d}_2[\vect{x}+\lambda \vect{h}_x]\}$, respectively around $\vect{d}_3[\vect{x}]$, $\vect{d}_1[\vect{x}]$, $\vect{d}_2[\vect{x}]$.
-
-Thus, recalling that $\vect{x}''\cdot\vect{d}_3 = 0$ :
+Which leads according to the previous équation to :
 \begin{equation}
 	\left\{
 		\begin{aligned}
-			(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] = 
-			\vect{x}''\cdot\vect{d}_1[\vect{x}] + \lambda(\vect{d}_1[\vect{x}]\cdot\vect{h}''_x + \Delta\Psi \vect{d}_2[\vect{x}]\cdot\vect{x}'') + o(\lambda) \\
-			(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] =
-			\vect{x}''\cdot\vect{d}_2[\vect{x}] + \lambda(\vect{d}_2[\vect{x}]\cdot\vect{h}''_x - \Delta\Psi \vect{d}_1[\vect{x}]\cdot\vect{x}'') + o(\lambda)
+			&\vect{d}_1[\vect{x}+\lambda \vect{h}_x] = \vect{d}_1[\vect{x}] + \Psi_\epsilon\vect{d}_2[\vect{x}]
+			+ \alpha_\epsilon\cos{(\theta-\gamma)}\;\vect{t}[\vect{x}] + o(\lambda) \\
+			&\vect{d}_2[\vect{x}+\lambda \vect{h}_x] = \vect{d}_2[\vect{x}] - \Psi_\epsilon\vect{d}_1[\vect{x}]
+			- \alpha_\epsilon\sin{(\theta+\gamma)}\;\vect{t}[\vect{x}] + o(\lambda) \\
+		\end{aligned}
+	\right.
+\end{equation}
+
+\subsection{Derivative of the material curvatures vector with respect to $\vect{x}$}
+
+It's know straightforward from the previous section to express the variation of the material curvatures with respect to a variation $\vect{\epsilon} =\lambda \vect{h}_x$ of $\vect{x}$ while $\theta$ remains unchanged.
+\begin{equation}
+	\left\{
+		\begin{aligned}
+			&(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] = 
+				(\vect{x}''+\lambda \vect{h}_x'')\cdot\big(\vect{d}_1 + \Psi_\epsilon\vect{d}_2
+				+ \alpha_\epsilon\cos{(\theta-\gamma)}\;\vect{t} + o(\lambda)\big) \\
+			&(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] = 
+				(\vect{x}''+\lambda \vect{h}_x'')\cdot\big(\vect{d}_2 - \Psi_\epsilon\vect{d}_1
+			- \alpha_\epsilon\sin{(\theta+\gamma)}\;\vect{t} + o(\lambda)\big) \\
 		\end{aligned}
 		\right.
 \end{equation}
+Thus, recalling that $\vect{x}''\cdot\vect{d}_3 = 0$ and that $\alpha_\epsilon$ and $\Psi_\epsilon$ are first order quantities in $\lambda$ :
+\begin{equation}
+	\left\{
+		\begin{aligned}
+			&(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] = 
+				\vect{x}''\cdot\vect{d}_1 + \Psi_\epsilon\vect{x}''\cdot\vect{d}_2 + \lambda \vect{h}_x''\cdot\vect{d}_1
+				+ o(\lambda)\\
+			&(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] = 
+				\vect{x}''\cdot\vect{d}_2 - \Psi_\epsilon\vect{x}''\cdot\vect{d}_1 +  \lambda \vect{h}_x''\cdot\vect{d}_2
+				+ o(\lambda)\\
+		\end{aligned}
+		\right.
+\end{equation}
+Which finally leads to :
+\begin{equation}
+		\vect{\omega}[\vect{x}+\lambda \vect{h}_x]  = 
+		\vect{\omega}[\vect{x}] - \Psi_\epsilon\mat{J}\vect{\omega}[\vect{x}]+\lambda
+		\begin{bmatrix}
+			-\vect{h}_x''\cdot\vect{d}_2\\
+			\vect{h}_x''\cdot\vect{d}_1\\
+		\end{bmatrix} + o(\lambda)
+\end{equation}
+Reminding the expression of $\Psi_\epsilon$ computed in paragraphe[], one can express the derivative of the material curvatures vector with respect to $\vect{x}$ :
+\begin{equation}
+			\pdiffof{x}{\vect{\omega}}{s}{\vect{h}_x}
+	= 	\left(\int_0^L \left(\left(\delta_s-\delta_0\right)\kappa\vect{b} - (1-H_s)\kappa\vect{b}'\right)\cdot  \vect{h}_x \,dt\right)\mat{J}\vect{\omega}+
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix}\cdot \vect{h}_x''
+\end{equation}
 
+
+\subsection{Computation of the forces acting on the centerline}
+
+The forces acting on the centerline are given by the functional derivative of the potential elastic energy with respect to $x$ which can be decomposed according to the chaine rule :
+\begin{equation}
+	\begin{aligned}
+	\scalar{-f(s)}{\vect{h}_x} = \pdiffof{x}{\mathcal{E}_p}{s}{\vect{h}_x} 
+	&= \pdiffof{x}{\mathcal{E}_b}{s}{\vect{h}_x} + \pdiffof{x}{\mathcal{E}_t}{s}{\vect{h}_x} \\
+	&= \pdiffof{x}{\mathcal{E}_b[\vect{\omega}[\vect{x}]]}{s}{\vect{h}_x} + \pdiffof{x}{\mathcal{E}_t[\vect{x}]}{s}{\vect{h}_x} \\
+	\end{aligned} 
+\end{equation}
+
+\subsubsection{Derivative of the torsion energy with respect to $x$}
+
+Recall that the torsion energy only depends on $\theta$ which is independent of $x$. Thus, $\mathcal{E}_t$ is independent of $x$ :
+\begin{equation}
+	\pdiffof{x}{\mathcal{E}_t[\vect{x}]}{s}{\vect{h}_x}
+		= \frac{d}{d\lambda} \mathcal{E}_t[\vect{x} + \lambda \vect{h}_x]\Bigr|_{\lambda = 0} = 0
+\end{equation}
+
+\subsubsection{Derivative of the bending energy with respect to $x$}
+
+The derivative of $\mathcal{E}_b$ is obtained with the chaine rule :
+\begin{equation}
+	\pdiffof{\omega}{\mathcal{E}_b[\vect{\omega}]}{s}{\vect{h}_\omega}
+		= \frac{d}{d\lambda} \mathcal{E}_b[\vect{\omega} + \lambda \vect{h}_\omega]\Bigr|_{\lambda = 0}
+		= \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \cdot \vect{h}_\omega \;dt
+\end{equation}
+Finally, reminding eq 4.14 :
+\begin{equation}
+	\pdiffof{x}{\mathcal{E}_b[\vect{\omega}[\vect{x}]]}{s}{\vect{h}_x}
+	= \pdiffof{\omega}{\mathcal{E}_b[\vect{\omega}]}{s}{(\pdiffof{x}{\vect{\omega}[\vect{x}]}{s}{\vect{h}_x})}
+	= \mathcal{A} +\mathcal{B}+\mathcal{C}
+\end{equation}
+Where :
+\begin{equation}
+	\begin{aligned}
+	\mathcal{A} &= \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} 
+	\begin{bmatrix}
+		-{\vect{d}_2}^T\\
+		{\vect{d}_1}^T\\
+	\end{bmatrix}\cdot \vect{h}_x'' \;dt \\
+	\mathcal{B} &=
+	\int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\left(\int_{u=0}^L \left(\delta_t-\delta_0\right)\kappa\vect{b}\cdot  \vect{h}_x \;du\right)
+	\;dt\\
+	\mathcal{C} &=
+	\int_{t=0}^{L} -(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\left(\int_{u=0}^L \left(1-H_t\right)\kappa\vect{b}'\cdot  \vect{h}_x \;du\right)
+	\;dt
+	\end{aligned}
+\end{equation}
+
+Calculus of $\mathcal{A}$ :
+\begin{equation}
+	\begin{split}
+	\mathcal{A} 
+	& = \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix}\cdot \vect{h}_x'' \;dt \\
+	& = \left[(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix} \cdot \vect{h}_x'\right]_0^L
+		- \int_{0}^{L} \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix}\right)'\cdot \vect{h}_x' \;dt \\
+	& = \left[(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix} \cdot \vect{h}_x'
+		- \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix}\right)'\cdot \vect{h}_x
+		\right]_0^L\\
+		&+ \int_{0}^{L} \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix}\right)''\cdot \vect{h}_x \;dt \\
+	\end{split}
+\end{equation}
+
+Calculus of $\mathcal{B}$ :
+\begin{equation}
+	\begin{aligned}
+	\mathcal{B} &=
+	\int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\left(\int_{u=0}^L \left(\delta_t-\delta_0\right)\kappa\vect{b}\cdot  \vect{h}_x \,du\right)
+	\;dt
+	\\
+	&=
+	-\left(\kappa\vect{b}\cdot\vect{h}_x\right)(0) \int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;dt
+	+
+	\int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\kappa\vect{b}\cdot\vect{h}_x 
+	\;dt
+	\end{aligned} 
+\end{equation}
+
+Calculus of $\mathcal{C}$ :
+\begin{equation}
+	\begin{aligned}
+	\mathcal{C} &=
+	\int_{t=0}^{L} -(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\left(\int_{u=0}^L \left(1-H_t\right)\kappa\vect{b}'\cdot  \vect{h}_x \;du\right)
+	\;dt
+	\\
+	&=
+	\int_{u=0}^{L}\int_{t=u}^{L}-\left((\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\right)(t)
+	\left(\kappa\vect{b}'\cdot \vect{h}_x\right)(u) \;dt\;du
+	\\
+	&=
+	\int_{u=0}^{L}-\left(\int_{t=u}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;dt\right)
+	\left(\kappa\vect{b}'\cdot \vect{h}_x\right)\;du
+	\\
+	\end{aligned} 
+\end{equation}
+By several integration by parts, using Fubini’s theorem once and supposing that the terms vanishes at $s=0$ and $s=L$ :
+\begin{equation}
+	\begin{aligned} 
+	\mathcal{B}+\mathcal{C} &=
+	\int_{t=0}^{L} \left(
+	(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\kappa\vect{b}
+	-
+	\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
+	\kappa\vect{b}'
+	\right)\cdot \vect{h}_x \;dt\\
+	&=
+	\int_{t=0}^{L} \left(
+	-\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)'
+	\kappa\vect{b}
+	-
+	\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
+	\kappa\vect{b}'
+	\right)\cdot \vect{h}_x \;dt\\
+	&=
+	\int_{t=0}^{L} \left(
+	-\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
+	\kappa\vect{b}
+	\right)'\cdot \vect{h}_x \;dt\\
+	\end{aligned} 
+\end{equation}
+
+Which can be rewritted using the quasi-static hypothesis :
+\begin{equation}
+	\begin{aligned} 
+	\mathcal{B}+\mathcal{C} 
+	&=
+	\int_{t=0}^{L} \left(
+	-\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
+	\kappa\vect{b}
+	\right)'\cdot \vect{h}_x \;dt\\
+	&=
+	\int_{t=0}^{L} \left(
+	-\left(
+	\int_{u=t}^{L}\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\;du
+	\right)
+	\kappa\vect{b}
+	\right)'\cdot \vect{h}_x \;dt\\
+	&=
+	\int_{t=0}^{L} \left(
+	-\left(
+	\beta(\theta' -{\overbar{\theta'}})(L) - \left[\beta(\theta' -{\overbar{\theta'}})\right]_t^L
+	\right)
+	\kappa\vect{b}
+	\right)'\cdot \vect{h}_x \;dt\\
+		&=
+	\int_{t=0}^{L} -\left(
+	\beta(\theta' -{\overbar{\theta'}})
+	\kappa\vect{b}
+	\right)'\cdot \vect{h}_x \;dt\\
+	\end{aligned} 
+\end{equation}
+
+Finally :
+\begin{equation}
+		\pdiffof{x}{\mathcal{E}_b[\vect{\omega}[\vect{x}]]}{s}{\vect{h}_x}
+		=
+		\int_{0}^{L} \left(
+		\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix}\right)''
+		-
+		\left(\beta(\theta' -{\overbar{\theta'}})
+		\kappa\vect{b}\right)'
+		\right)\cdot \vect{h}_x \;dt\\
+\end{equation}
+
+\subsubsection{Internal forces}
+
+
+
+
+Thus, the 
+\begin{equation}
+	\begin{aligned}
+	\scalar{-f(s)}{\vect{h}_x} &= \pdiffof{x}{\mathcal{E}_p}{s}{\vect{h}_x}\\
+		&=
+		\int_{0}^{L} \left(
+		\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix}\right)''
+		-
+		\left(\beta(\theta' -{\overbar{\theta'}})
+		\kappa\vect{b}\right)'
+		\right)\cdot \vect{h}_x \;dt\\
+	\end{aligned} 
+\end{equation}
+Finally, we can conclude on the expression of the internal moment of torsion :
+\begin{equation}
+	f(s) = 
+	-\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		\begin{bmatrix}
+			-{\vect{d}_2}^T\\
+			{\vect{d}_1}^T\\
+		\end{bmatrix}\right)''
+		+
+		\left(\beta(\theta' -{\overbar{\theta'}})
+		\kappa\vect{b}\right)'
+\end{equation}
+
+\note{
+Remarquer ici que l'espression est purement locale.
+Elle ne dépend pas du sens de parcours de la poutre, contrairement au raisonnement suivi.
+Cette différence est notable avec la démarche de B. Audoly.
+Faire le bilan des bénéfices de l'hypothèse quasi-statique :
+- expressions rigoureusement vraies à l'équilibre statique
+- simplification ds le calcul des efforts
+- rapidité dans le calcul avec des expressions plus simples
+- il n'est pas forcément intéressant en terme d'algorithmie d'imposer l'hypothèse quasistatique au cours du calcul. Il faudrait faire un bench pour savoir.
+}
 
 % #######################################################
-\section{Kinematic}
+\section{Numerical Model}
 % #######################################################
 
-Bishop
-
- $\boldsymbol{x}$ only depends on arc-length along the curve : $\boldsymbol{x}(t)$
-
-Implicit dependence of $\theta$ in $\boldsymbol{x}$ : $\theta(t) \equiv \theta[x](t)$
-
-Implicit dependence of $\boldsymbol{\omega}$ in $\boldsymbol{x}$ and $\theta$ : $\boldsymbol{\omega}(t) \equiv \boldsymbol{\omega}[\boldsymbol{x},\theta](t)$
-
-We denote $\tau$ the twist along the curve : $\tau(t) = \frac{\partial \theta}{\partial t} = \theta'(t)$
-
-We will make the following mathematical assumptions :
-\begin{align}
-	&\fonction{\boldsymbol{x}}{[0,L]}{\mathbb{R}^3}{t}{\boldsymbol{x}(t)}
-	&&\boldsymbol{x} \in \mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3})
-	\\ \notag\\
-	&\fonction{\theta[\boldsymbol{x}]}{[0,L]}{\mathbb{R}}{t}{\theta[\boldsymbol{x}](t)}
-	&&\theta[\boldsymbol{x}] \in \mathcal{C}^{\infty}([0,L]^{\mathbb{R}})
-	\\ \notag\\
-	&\fonction{\boldsymbol{\omega}[\boldsymbol{x},\theta]}{[0,L]}{\mathbb{R}^2}{t}{\boldsymbol{\omega}[\boldsymbol{x},\theta](t)}
-	&&\boldsymbol{\omega}[\boldsymbol{x},\theta] \in \mathcal{C}^{\infty}([0,L]^{\mathbb{R}^2})
-\end{align}
-
-The dependence in the arc-length is denoted by the parameter $t \in [0,L]$ by the use of parenthesis $(.)$.
-The dependencies in functions are denoted by the use of brackets $[.]$.
-
-When computings energy gradients, it comes to differentiate energies regarding there dependencies in functions $\boldsymbol{x}$ and $\theta$. Thus, we may recall that :
-\begin{align}
-	&\fonction{\theta}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3})}{\mathcal{C}^{\infty}([0,L]^\mathbb{R})}{\boldsymbol{x}}{\theta[\boldsymbol{x}]}
-	&&\theta \in \mathcal{C}^{\infty}
-	\\ \notag\\
-	&\fonction{\boldsymbol{\omega}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3}) \times \mathcal{C}^{\infty}([0,L]^{\mathbb{R}})}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^2})}{(\boldsymbol{x},\theta)}{\boldsymbol{\omega}[\boldsymbol{x},\theta]}
-	&&\boldsymbol{\omega} \in \mathcal{C}^{\infty}
-\end{align}
-
-
-
-
-
-% #######################################################
-\section{Energy}
-% #######################################################
-
-\begin{align}
-\mathcal{E}_p[\boldsymbol{x},\theta] & = \mathcal{E}_{stretch}[\boldsymbol{x}] + \mathcal{E}_{bend}[\boldsymbol{x},\theta] + \mathcal{E}_{twist}[\theta]
-\end{align}
-\begin{align}
-\mathcal{E}_{stretch}[\boldsymbol{x}] & = \tfrac{1}{2} \int_{0}^{L} K_s(\tfrac{\|\boldsymbol{x}'\|}{\|\bar{\boldsymbol{x}}'\|}-1)^2dt \\
-\mathcal{E}_{bend}[\boldsymbol{x},\theta] & = \tfrac{1}{2} \int_{0}^{L} (\boldsymbol\omega -\boldsymbol{\bar{\omega}})^T B \, (\boldsymbol\omega -\boldsymbol{\bar{\omega}})dt \\
-\mathcal{E}_{twist}[\theta] & = \tfrac{1}{2} \int_{0}^{L} \beta(\theta' -{\bar{\theta'}})^2dt
-\end{align}
-
-Energies could be seen as functional, i.e.\ functions that map vectors from a functional vector space to there underlying scalar field $\mathbb{R}$.
-
-\begin{align}
-	&\fonctionL{\mathcal{E}_{stretch}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3})}{\mathbb{R}}{\boldsymbol{x}}{\mathcal{E}_{stretch}[\boldsymbol{x}]}
-	\\ \notag\\
-	&\fonctionL{\mathcal{E}_{bend}}{\mathcal{C}^{\infty}([0,L]^{\mathbb{R}^3}) \times \mathcal{C}^\infty([0,L]^{\mathbb{R}^3},[0,L]^{\mathbb{R}})}{\mathbb{R}}{(\boldsymbol{x},\theta)}{\mathcal{E}_{bend}[\boldsymbol{x},\theta]}
-	\\ \notag\\
-	&\fonctionL{\mathcal{E}_{twist}}{\mathcal{C}^\infty([0,L]^{\mathbb{R}^3},[0,L]^{\mathbb{R}})}{\mathbb{R}}{\theta}{\mathcal{E}_{twist}[\theta]}
-\end{align}
-
-% #######################################################
-\section{Inextensibility}
-% #######################################################
-
-
-
-
-
-% #######################################################
-\section{Gradients}
-% #######################################################
-
-
-% --------------------------------------------------------------------------------------------
-\subsection{Momentum}
-% --------------------------------------------------------------------------------------------
-
-Calcul du moment :
-\begin{align}
-	\mathcal{M} & = -\frac{d\mathcal{E}_p}{d\theta} =  - \frac{\partial \mathcal{E}_p}{\partial \theta} = - \frac{\partial \mathcal{E}_{bend}}{\partial \theta} - \frac{\partial \mathcal{E}_{twist}}{\partial \theta} \\[0.5em]
-\end{align}
-
-
-\subsubsection{Calcul de $\frac{\partial \mathcal{E}_{twist}}{\partial \theta}$}
-% --------------------------------------------------------------------------------------------
-
-\begin{align}
-	\mathcal{E}_{twist}[\theta + \lambda h_{\theta}] & = \tfrac{1}{2} \int_{0}^{L} \beta\big((\theta + \lambda h_{\theta})' -{\bar{\theta'}}\big)^2 \,dt \\ 
-%   	& = \tfrac{1}{2} \int_{0}^{L} \beta( (\theta'-{\bar{\theta'}})^2 + 2 \lambda (\theta'-{\bar{\theta'}}) h_{\theta}' + \lambda^2 h_{\theta}'^2) \,dt \notag\\
-   	& = \mathcal{E}_{twist}[\theta] + \lambda\int_{0}^{L} \beta(\theta'-{\bar{\theta'}}) h_{\theta}' dt +   \lambda^2 \int_{0}^{L} \frac{\beta h_{\theta}'^2}{2} \,dt \notag\\
-	& = \mathcal{E}_{twist}[\theta] + \lambda\left[\beta(\theta'-{\bar{\theta'}}) h_{\theta}\right]_0^L - \lambda\int_{0}^{L} \big(\beta(\theta'-{\bar{\theta'}})\big)' h_{\theta}  \,dt + o(\lambda) \notag\\
-	& = \mathcal{E}_{twist}[\theta] + \lambda\int_{0}^{L} \big[\beta(\theta'-{\bar{\theta'}})(\delta_L-\delta_0) - \big(\beta(\theta'-{\bar{\theta'}})\big)'\big] h_{\theta}  \,dt + o(\lambda) \notag\\
-	& = \mathcal{E}_{twist}[\theta] + \lambda(D_{\mathcal{E}_{twist}} \cdot h_{\theta}) + o(\lambda) \notag
-\end{align}
-
-With :
-\begin{align}
-\frac{\partial \mathcal{E}_{twist}}{\partial \theta} \equiv D_{\mathcal{E}_t} = - \big(\beta(\theta'-{\bar{\theta'}})\big)' + \beta(\theta'-{\bar{\theta'}})(\delta_L-\delta_0) \quad , \quad \frac{\partial \mathcal{E}_{twist}}{\partial \theta} : [0;L] \longrightarrow 	\mathbb{R}
-\end{align}
-
-
-
-\subsubsection{Calcul de $\frac{\partial \boldsymbol{\omega}}{\partial \theta}$}
-% --------------------------------------------------------------------------------------------
-
-On montre par des considérations géométriques que :
-\begin{align}
-	\boldsymbol{d_1}[\boldsymbol{x}, \theta + \lambda h_{\theta}] & = \boldsymbol{d_1}[\boldsymbol{x}, \theta] + \sin(\lambda h_{\theta})\boldsymbol{d_2}[\boldsymbol{x}, \theta] - (1-\cos(\lambda h_{\theta})\boldsymbol{d_1}[\boldsymbol{x}, \theta] \\
-   	& = \boldsymbol{d_1}[\boldsymbol{x}, \theta] + \lambda h_{\theta}\boldsymbol{d_2}[\boldsymbol{x}, \theta] + o(\lambda) \notag
-\end{align}
-\begin{align}
-	\boldsymbol{d_2}[\boldsymbol{x}, \theta + \lambda h_{\theta}] & = \boldsymbol{d_2}[\boldsymbol{x}, \theta] - \sin(\lambda h_{\theta})\boldsymbol{d_1}[\boldsymbol{x}, \theta] - (1-\cos(\lambda h_{\theta})\boldsymbol{d_2}[\boldsymbol{x}, \theta] \\
-   	& = \boldsymbol{d_2}[\boldsymbol{x}, \theta] - \lambda h_{\theta}\boldsymbol{d_1}[\boldsymbol{x}, \theta] + o(\lambda) \notag
-\end{align}
-
-On en déduit pour le vecteur courbure matérielle :
-\begin{align}
-	\boldsymbol{\omega}[\boldsymbol{x}, \theta + \lambda h_{\theta}] & = 
-	\left[\begin{array}{c}
-	\boldsymbol{x}'' \cdot  \boldsymbol{d_1}[\boldsymbol{x}, \theta + \lambda h_{\theta}]\\
-	\boldsymbol{x}'' \cdot \boldsymbol{d_2}[\boldsymbol{x}, \theta + \lambda h_{\theta}]\\
-	\end{array}\right] \\
-	& = \boldsymbol{\omega}[\boldsymbol{x}, \theta] + \lambda 
-	\left[\begin{array}{c}
-	\boldsymbol{x}'' \cdot  \boldsymbol{d_2}[\boldsymbol{x}, \theta]\\
-	- \boldsymbol{x}'' \cdot \boldsymbol{d_1}[\boldsymbol{x}, \theta]\\
-	\end{array}\right] \cdot h_{\theta}
-	 + o(\lambda)\notag\\
-	 & = \boldsymbol{\omega}[\boldsymbol{x}, \theta] + \lambda(D_{\boldsymbol{\omega}} \cdot h_{\theta}) + o(\lambda)\notag
-\end{align}
-
-With :
-\begin{align}
-	&\frac{\partial \boldsymbol{\omega}}{\partial \theta} \equiv D_{\boldsymbol{\omega}} = - R_{\pi/2}\:\boldsymbol{\omega}[\boldsymbol{x}, \theta]
-	\quad , \quad R_{\pi/2} = \left[\begin{array}{cc}0 & -1 \\1 & 0\end{array}\right]
-	\quad , \quad \frac{\partial \boldsymbol{\omega}}{\partial \theta}  : [0;L] \longrightarrow \mathbb{R}^2
-\end{align}
-
-
-\subsubsection{Calcul de $\frac{\partial \mathcal{E}_{bend}}{\partial \theta}$}
-% --------------------------------------------------------------------------------------------
-
-\begin{align}
-	\mathcal{E}_{bend}[\boldsymbol{x},\theta + \lambda h_{\theta}]
-		& = \tfrac{1}{2} \int_{0}^{L} \big(\boldsymbol{\omega}[\boldsymbol{x}, \theta + \lambda h_{\theta}] - \bar{\boldsymbol{\omega}}[\boldsymbol{x}, \theta]\big)^T B \,  \big(\boldsymbol{\omega}[\boldsymbol{x}, \theta + \lambda h_{\theta}] - \bar{\boldsymbol{\omega}}[\boldsymbol{x}, \theta]\big)dt \notag\\
-%	& = \tfrac{1}{2} \int_{0}^{L} \big((\boldsymbol{\omega} - \bar{\boldsymbol{\omega}}) - \lambda R_{\pi/2}\:\boldsymbol{\omega} \cdot h_{\theta} + o(\lambda)\big)^T B \,  \big((\boldsymbol{\omega} - \bar{\boldsymbol{\omega}}) - \lambda R_{\pi/2}\:\boldsymbol{\omega} \cdot h_{\theta} + o(\lambda)\big)dt \notag\\
-		& = \mathcal{E}_{bend}[\boldsymbol{x},\theta] - \lambda \int_{0}^{L} \big((\boldsymbol{\omega} - \bar{\boldsymbol{\omega}})^T B R_{\pi/2}\:\boldsymbol{\omega}\big)\cdot h_{\theta} dt + o(\lambda) \notag\\
-		& =  \mathcal{E}_{bend}[\boldsymbol{x},\theta] + \lambda(D_{\mathcal{E}_{bend}} \cdot h_{\theta}) + o(\lambda)
-\end{align}
-
-With :
-\begin{align}
-	\frac{\partial \mathcal{E}_{bend}}{\partial \theta} \equiv D_{\mathcal{E}_{bend}} = -(\boldsymbol{\omega} - \bar{\boldsymbol{\omega}})^T B R_{\pi/2}\:\boldsymbol{\omega}
-	\quad , \quad \frac{\partial \mathcal{E}_{bend}}{\partial \theta} : [0;L] \longrightarrow \mathbb{R}
-\end{align}
-
-
-\subsubsection{Calcul de $\mathcal{M}$}
-% --------------------------------------------------------------------------------------------
-
-Finally:
-\begin{align}
-\mathcal{M} 	& = -\frac{d\mathcal{E}_p}{d\theta} = -(\boldsymbol{\omega} - \bar{\boldsymbol{\omega}})^T B R_{\pi/2}\:\boldsymbol{\omega} - \big(\beta(\theta'-{\bar{\theta'}})\big)' + \beta(\theta'-{\bar{\theta'}})(\delta_L-\delta_0)
-\end{align}
-
-ATTENTION : écrire ici que M est porté par $d_3$
-
-% --------------------------------------------------------------------------------------------
-\subsection{Forces}
-% --------------------------------------------------------------------------------------------
-
-Calcul des efforts:
-\begin{align}
-\boldsymbol{\mathcal{F}} & = -\frac{d\mathcal{E}_p}{d\boldsymbol{x}} =  - \frac{\partial \mathcal{E}_p}{\partial \boldsymbol{x}} - \int_{0}^{L} \tfrac{\partial \mathcal{E}_p}{\partial \theta} \tfrac{\partial \theta}{\partial \boldsymbol{x}}
-\end{align}
-
-
-\subsubsection{Calcul de $\frac{\partial \theta}{\partial \boldsymbol{x}}$ par le writh}
-% --------------------------------------------------------------------------------------------
-
-\cite{Fuller1978}, \cite{deVries2005},  \cite{Vauquelin2000}, \cite{Berger2009}
-
-On montre ici qu'en un point d'abscisse s, une variation de la centerline de $\lambda \boldsymbol{h_x}$ entraine une variation de $\theta$ intégrée sur la courbe $\Gamma$ de $(\frac{\partial \theta[\boldsymbol{x}](s)}{\partial\boldsymbol{x}} \cdot \lambda \boldsymbol{h_x})$.
-
-$H : t \mapsto \left\{\begin{array}{c}0  , \quad t<0 \\1  , \quad t\geqslant0\end{array}\right.$ est la fonction de Heaviside.
-
-$\delta_{t_0} : t \mapsto \delta(t-t_0)$ est la distribution de dirac centrée en $t_0$.
-
-ATTENTION : ici il y a qqch à expliquer entre $\theta$ et $\psi$ (il y a une question de signe à détailler).
-
-\begin{align}
-	\Delta\psi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}](s) = \psi[\boldsymbol{x} + \lambda\boldsymbol{h_x}](s) - \psi[\boldsymbol{x}](s)
-\end{align}
-
-\begin{align}
-	\Delta\psi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}](s) & = \int_{0}^{s} \frac{\boldsymbol{x'} \times (\boldsymbol{x} + \lambda\boldsymbol{h_x})'}{1+ \boldsymbol{x'} \cdot  (\boldsymbol{x} + \lambda\boldsymbol{h_x})'} \cdot \big(\boldsymbol{x''} + (\boldsymbol{x} + \lambda\boldsymbol{h_x})''\big) dt \\
-	& = \int_{0}^{s} \frac{\lambda \boldsymbol{x'} \times \boldsymbol{h_x}'}{2(1+ \frac{\lambda \boldsymbol{x'} \cdot \boldsymbol{h_x}'}{2})} \cdot (2\boldsymbol{x''} + \lambda\boldsymbol{h_x}'') dt \notag\\
-	& = \int_{0}^{s} \frac{\lambda}{2}(\boldsymbol{x'} \times \boldsymbol{h_x}')\big(1- \frac{\lambda \boldsymbol{x'} \cdot \boldsymbol{h_x}'}{2} + o(\lambda)\big)(2\boldsymbol{x''} + \lambda\boldsymbol{h_x}'') dt \notag\\
-	& = \int_{0}^{s} \big(-\boldsymbol{k_b} \cdot \lambda \boldsymbol{h_x'} + \frac{\lambda^2}{2}(\boldsymbol{x'} \times \boldsymbol{h_x}')\cdot\boldsymbol{h_x''}\big)\big(1- \frac{\lambda \boldsymbol{x'} \cdot \boldsymbol{h_x}'}{2} + o(\lambda)\big) dt \notag\\
-	& = - \int_{0}^{s} -\boldsymbol{k_b} \cdot \lambda \boldsymbol{h_x'}dt +o(\lambda) \notag\\
-	& = \big[-\boldsymbol{k_b} \cdot \lambda \boldsymbol{h_x}\big]_{0}^{s} + \int_{0}^{s} \boldsymbol{k_b'} \cdot \lambda \boldsymbol{h_x}dt +o(\lambda) \notag\\
-	& = \int_{0}^{L} \big((1-H)\boldsymbol{k_b'} - (\delta_s - \delta_0)\boldsymbol{k_b}\big)\cdot\lambda \boldsymbol{h_x}dt +o(\lambda) \notag\\
-	& = \lambda(\boldsymbol{D_{\psi}}(s)\cdot\boldsymbol{h_x}) + o(\lambda)\notag
-\end{align}
-
-With :
-\begin{align}
-	\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \equiv -\boldsymbol{D_{\psi}}(s) = (\delta_s - \delta_0)\boldsymbol{k_b} - (1-H)\boldsymbol{k_b'}
-	\quad , \quad \frac{\partial \theta}{\partial \boldsymbol{x}}(s) : [0;L] \longrightarrow \mathbb{R}^3
-\end{align}
-
-
-
-\subsubsection{Calcul de $\frac{\partial \boldsymbol{\omega}}{\partial \boldsymbol{x}}$}
-% --------------------------------------------------------------------------------------------
-
-Quand $\boldsymbol{x}$ varie de $\lambda\boldsymbol{h_x}$, le repère materiel est tourné de sorte que, en décomposant sur le repère de base :
-\begin{align}
-	\boldsymbol{d_1}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] & = \boldsymbol{d_1}[\boldsymbol{x}, \theta] + \Delta\psi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}]\boldsymbol{d_2}[\boldsymbol{x}, \theta] + \Delta\phi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}]\boldsymbol{d_3}[\boldsymbol{x}, \theta] + o(\lambda)\\
-	\boldsymbol{d_2}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] & = \boldsymbol{d_2}[\boldsymbol{x}, \theta] - \Delta\psi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}]\boldsymbol{d_1}[\boldsymbol{x}, \theta] - \Delta\phi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}]\boldsymbol{d_3}[\boldsymbol{x}, \theta] + o(\lambda)
-\end{align}
-On montre aisément que la contribution en $\Delta\psi$ autour de $\boldsymbol{d_1}$ et $\boldsymbol{d_2}$ est d'un ordre supérieur à celle autour de $\boldsymbol{d_3} = \boldsymbol{x}'$ (ce qui se comprend bien dans le cas d'une variation en hélice).
-
-Par propriété d'orthogonalité des vecteurs du repère mobile (cf § sur le curve framing) on montre que :
-\begin{align}
-	\boldsymbol{d_1}\cdot\boldsymbol{d_3} = 0 &\Rightarrow \boldsymbol{d_1}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] \cdot (\boldsymbol{x}+\lambda\boldsymbol{h_x})' = 0\\
-	&\Rightarrow \Delta\phi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}] = \boldsymbol{d_1}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] \cdot \boldsymbol{x}' = \lambda(-\boldsymbol{d_1}[\boldsymbol{x}, \theta] \cdot \boldsymbol{h_x}') + o(\lambda) \notag
-\end{align}
-\begin{align}
-	\boldsymbol{d_2}\cdot\boldsymbol{d_3} = 0 &\Rightarrow \boldsymbol{d_1}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] \cdot (\boldsymbol{x}+\lambda\boldsymbol{h_x})' = 0\\
-	&\Rightarrow \Delta\phi_{\lambda\boldsymbol{h_x}}[\boldsymbol{x}] = \boldsymbol{d_2}[\boldsymbol{x}+\lambda\boldsymbol{h_x}, \theta] \cdot \boldsymbol{x}' = \lambda(-\boldsymbol{d_2}[\boldsymbol{x}, \theta] \cdot \boldsymbol{h_x}') + o(\lambda) \notag
-\end{align}
-
-On en déduit le calcul de la variation de $\boldsymbol{\omega}$ pour une vairation de la centerline de $\lambda \boldsymbol{h_x}$ qui vaut :
-\begin{align}
-	\boldsymbol{\omega}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]
-	& =
-	\left[\begin{array}{c}
-	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot  \boldsymbol{d_1}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]\\
-	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot \boldsymbol{d_2}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]\\
-	\end{array}\right] \notag\\
-	& = 
-	\left[\begin{array}{c}
-	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot ( 	\boldsymbol{d_1}[\boldsymbol{x}] 
-												+ (-\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x} + o(\lambda))\boldsymbol{d_2}[\boldsymbol{x}]
-												- (\lambda \boldsymbol{d_1[\boldsymbol{x}]}\cdot\boldsymbol{h_x} + o(\lambda)) \cdot \boldsymbol{x}''
-											)\\
-	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot ( 	\boldsymbol{d_2}[\boldsymbol{x}] 
-												- (-\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x} + o(\lambda))\boldsymbol{d_1}[\boldsymbol{x}]
-												- (\lambda \boldsymbol{d_2[\boldsymbol{x}]}\cdot\boldsymbol{h_x} + o(\lambda)) \cdot \boldsymbol{x}''
-											)\\
-	\end{array}\right] \notag\\
-	  \begin{split}
-      		& = \boldsymbol{\omega}[\boldsymbol{x},\theta] +
-        			\lambda
-        			\left[\begin{array}{c}
-        			\boldsymbol{d_1}[\boldsymbol{x},\theta]^T \\
-        			\boldsymbol{d_2}[\boldsymbol{x},\theta]^T
-        			\end{array}\right] \cdot \boldsymbol{h_x}'' 
-        			 -
-        			\big(\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x}\big)
-        			\left[\begin{array}{c}
-        			\boldsymbol{d_2}[\boldsymbol{x},\theta]\cdot \boldsymbol{x}''\\
-        			-\boldsymbol{d_1}[\boldsymbol{x},\theta]\cdot \boldsymbol{x}''\\
-        			\end{array}\right] \\
-        		& \hspace{5cm}+ \lambda(\boldsymbol{x}'' \cdot \boldsymbol{x}')
-        		\left[\begin{array}{c}
-        		\boldsymbol{d_1}[\boldsymbol{x},\theta]\cdot \boldsymbol{h_x}'\\
-        		\boldsymbol{d_2}[\boldsymbol{x},\theta]\cdot \boldsymbol{h_x}''\\
-        		\end{array}\right]
-        		 + o(\lambda)
- 	 \end{split} \notag
-\end{align}
-
-
-\begin{align}
-	\boldsymbol{\omega}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta] & = 
-	\left[\begin{array}{c}
-		(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot  \boldsymbol{d_1}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]\\
-		(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot \boldsymbol{d_2}[\boldsymbol{x}+\lambda \boldsymbol{h_x},\theta]\\
-	\end{array}\right] && POUET &&& POUET\notag\\
-& = 
-\left[\begin{array}{c}
-	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot ( 	\boldsymbol{d_1}[\boldsymbol{x}] 
-												+ (-\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x} + o(\lambda))\boldsymbol{d_2}[\boldsymbol{x}]
-											)\\
-	(\boldsymbol{x}+\lambda \boldsymbol{h_x})'' \cdot ( 	\boldsymbol{d_2}[\boldsymbol{x}] 
-												- (-\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x} + o(\lambda))\boldsymbol{d_1}[\boldsymbol{x}]
-											)\\
-	\end{array}\right] && POUET &&& POUET\notag\\
-& \quad- 
-\left[\begin{array}{c}
-												- (\lambda \boldsymbol{d_1[\boldsymbol{x}]}\cdot\boldsymbol{h_x} + o(\lambda)) \cdot \boldsymbol{x}''
-											)\\
-												- (\lambda \boldsymbol{d_2[\boldsymbol{x}]}\cdot\boldsymbol{h_x} + o(\lambda)) \cdot \boldsymbol{x}''
-											)\\
-	\end{array}\right] && POUET &&& POUET\notag\\
-\end{align}
-
-
-
-\begin{align}
-  g + h & = i \\
-  \begin{split}
-      a & = b + c - d \\
-        & \quad + e - f
-  \end{split} \\
-\end{align}
-
-\begin{equation}\label{e:barwq}\begin{split}
-H_c&=\frac{1}{2n} \sum^n_{l=0}(-1)^{l}(n-{l})^{p-2}
-\sum_{l _1+\dots+ l _p=l}\prod^p_{i=1} \binom{n_i}{l _i}\\ 
-&\quad\cdot[(n-l )-(n_i-l _i)]^{n_i-l _i}\cdot
-\Bigl[(n-l )^2-\sum^p_{j=1}(n_i-l _i)^2\Bigr].
-\end{split}\end{equation}
-
-	\begin{align}
-        		\boldsymbol{\omega}[\boldsymbol{x},\theta] +
-        		\lambda
-        		\left[\begin{array}{c}
-        		\boldsymbol{d_1}[\boldsymbol{x}]^T \\
-        		\boldsymbol{d_2}[\boldsymbol{x}]^T
-        		\end{array}\right] \cdot \boldsymbol{h_x}'' 
-        		& -
-        		\big(\lambda\frac{\partial \theta}{\partial \boldsymbol{x}}(s) \cdot \boldsymbol{h_x}\big)
-        		\left[\begin{array}{c}
-        		\boldsymbol{d_2}[\boldsymbol{x},\theta]\cdot \boldsymbol{x}''\\
-        		-\boldsymbol{d_1}[\boldsymbol{x},\theta]\cdot \boldsymbol{x}''\\
-        		\end{array}\right] \\
-        		& - 
-        		\lambda(\boldsymbol{x}'' \cdot \boldsymbol{x}')
-        		\left[\begin{array}{c}
-        		\boldsymbol{d_1}[\boldsymbol{x},\theta]\cdot \boldsymbol{h_x}'\\
-        		\boldsymbol{d_2}[\boldsymbol{x},\theta]\cdot \boldsymbol{h_x}''\\
-        		\end{array}\right] \\
-        		& + o(\lambda)
-	\end{align}
 
 % #######################################################
 \section{Discretization}
@@ -814,6 +871,20 @@ H_c&=\frac{1}{2n} \sum^n_{l=0}(-1)^{l}(n-{l})^{p-2}
 % #######################################################
 \section{Connection}
 % #######################################################
+
+
+\subsubsection{Internal forces}
+
+Note that :
+\begin{equation}
+	\mat{M} = \left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+	= (\kappa_1 - \overbar{\kappa_1})EI_1\vect{d}_1 + (\kappa_2 - \overbar{\kappa_2})EI_2\vect{d}_2
+\end{equation}
+
+And
+\begin{equation}
+	\mat{Q} = \left(\beta\left(\theta - \overbar{\theta}\right)\right)' \vect{d}_3
+\end{equation}
 
 
 \bibliographystyle{alpha}
