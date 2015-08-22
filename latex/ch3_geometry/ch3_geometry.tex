@@ -413,6 +413,105 @@ Laurent Hauswirth : la complexité d'un problème est en général proportionnel
 Expliquer le défaut de fermeture sur une boucle fermée. Calcul du writhe. Quelle différence avec Frenet ?
 }
 
+\subsubsection{Discrete Curvature}
+
+
+courbure discrete dans le cas général
+
+\begin{equation}
+	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\|\vect{e}_{i-1} + \vect{e}_{i} \|},
+	\quad
+	\kappa_2 = \frac{4 \,tan(\varphi_i/2)}{\|\vect{e}_{i-1}\| + \|\vect{e}_{i} \|}
+\end{equation}
+
+Qu'on réécrit en posant $\|\vect{e}_{i-1}\| = \alpha \|\vect{e}_{i} \|$, $\alpha \geq 0$ :
+
+\begin{equation}
+	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\|\vect{e}_{i}\|(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}},
+	\quad
+	\kappa_2 = \frac{4 \,tan(\varphi_i/2)}{\|\vect{e}_{i}\|(1+\alpha)}
+\end{equation}
+
+\begin{equation}
+	\kappa_1 / \kappa_2(\alpha) = \kappa_1 / \kappa_2(1/\alpha)= \frac{1+\alpha}{(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}} \, cos^2(\varphi_i/2)
+\end{equation}
+
+\begin{figure}[t] 
+\begin{center}
+\includegraphics[]{courbure_3PT.pdf} 
+\caption{Discrete curvature from 3-points circle.}
+\label{fig:1_1}
+\end{center}
+\end{figure}
+
+\begin{figure}[t] 
+\begin{center}
+\includegraphics[]{courbure_TAN.pdf} 
+\caption{Discrete curvature from inner tangent circle.}
+\label{fig:1_1}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[ 
+	legend style={at={(axis cs:0,6)},anchor=north west},
+	scale only axis, 
+	xmin=-3.1416/4/4, xmax= 3.1416+3.1416/4/4, restrict x to domain = 0 : 3.1416,
+	ymin=-2/4, ymax= 10+2/4, restrict y to domain = 0 : 10,
+	grid=major,
+	axis y line*= left,% the '*' avoids arrow heads 
+	xlabel={$\varphi_i$},
+	xtick={0, 0.7854, 1.5708, 2.3562, 3.14159},
+    	xticklabels={$0$, $\frac{\pi}{4}$,  $\frac{\pi}{2}$,  $\frac{3\pi}{4}$,$\pi$},
+	ylabel={$\kappa_1, \kappa_2$},
+	ytick={0, 2, 4, 6, 8,10} ]
+		
+		% kappa 1
+		\addplot[black, samples = 100, domain = 0: 3.1416, solid,  thick]
+		{2*sin(deg(x)/2)};  \node at (axis cs:3.0,2.4) {$\kappa_1$};			
+		\addplot[Tgray, samples = 100, domain = 0:3.1416, solid, very thin]								{\curvatureA(deg(x),2)}; 
+		\addplot[color=Tgray, samples = 100, domain = 0:3.1416, solid, very thin]
+		{\curvatureA(deg(x),0.5)}; 
+		
+		% kappa 2
+		\addplot[black, samples = 400, domain = 0:3.1416, solid,  thick]
+		{\curvatureB(deg(x),1)};  \node at (axis cs:3.0,9.5) {$\kappa_2$};
+		\addplot[color=Tgray, samples = 400, domain = 0:3.1416, solid, very thin]
+		{\curvatureB(deg(x),2)}; 
+		\addplot[color=Tgray, samples = 400, domain = 0:3.1416, solid, very thin]
+		{\curvatureB(deg(x),0.5)}; 
+	
+		
+	\end{axis} 
+	\begin{axis}[ 
+	scale only axis, 
+	xmin=-3.1416/4/4, xmax= 3.1416+3.1416/4/4, restrict x to domain = 0 : 3.1416,
+	ymin=-0.2/4, ymax= 1+0.2/4, restrict y to domain = 0 : 1,
+	axis y line*=right, 
+	axis x line=none, 
+	ylabel style = {rotate=-90},
+	ylabel = {${\kappa_1}/{\kappa_2}$},
+	ytick={0, 0.2, 0.4, 0.6, 0.8, 1}
+	] 
+	
+		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid, thick]
+		{\curvatureRap(deg(x),1)};  \node at (axis cs:1.1,0.95) {$\kappa_1/\kappa_2$};
+		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid, very thin]
+		{\curvatureRap(deg(x),2)}; 
+%		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid]
+%		{\curvatureRap(deg(x),0.5)}; 
+		
+	\end{axis} 
+\end{tikzpicture}
+\end{center}
+\caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
+\end{figure}
+
+
 \bibliographystyle{alpha}
 \bibliography{../bibliography}
 

@@ -1,5 +1,5 @@
 cd "/Users/Lionel/Public/Git/GitHub/Thesis/latex/"
-pdflatex ldp_thesis.tex
+pdflatex -shell-escape ldp_thesis.tex
 cd "ap1_variational"
 bibtex ap1_variational.aux
 cd ..
@@ -15,7 +15,10 @@ cd ..
 cd "ch4_energy"
 bibtex ch4_energy.aux
 cd ..
-pdflatex ldp_thesis.tex
-pdflatex ldp_thesis.tex
+cd "ch5_kirchhoff"
+bibtex ch5_kirchhoff.aux
+cd ..
+pdflatex -shell-escape ldp_thesis.tex
+pdflatex -shell-escape ldp_thesis.tex
 osascript -e 'tell application "Terminal" to quit' &
 exit

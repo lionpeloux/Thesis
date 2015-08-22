@@ -19,7 +19,10 @@
 \usepackage{stmaryrd}
 \usepackage{lipsum}
 \usepackage{MnSymbol}
-
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage{pgf,pgfplots}
+\usepackage{xcolor}
 
 \usepackage{natbib}
 % use [sectionbib] option so bibliography appears like a not numbered section at the end of each chapter
@@ -46,13 +49,39 @@
     {}              % space above, empty = `usual value'
     {20pt}          % space below
     {\itshape}      % body font
-    {}              % indent
+    {}              % indent"
     {\itshape}      % head font
     {.}             % punctuation after head
     {5pt}           % space after head (\newline)
     {}              % Thm head spec
 \theoremstyle{mystyleB}
 \newtheorem*{myproof}{Preuve}
+
+% LDP PfgPlots definition
+%--------------------------------------
+\pgfplotsset{width=10cm, compat=1.10}
+%\pgfplotsset{every axis plot post/.append  style={line width = 2pt}}
+\pgfplotsset{grid style = {
+%    dash pattern = on 0.05mm off 1mm,
+    line cap = round,
+    Tgray,
+    line width = 0.25pt}
+}
+\usepgfplotslibrary{fillbetween}
+
+% 3pt-circle-curvature where curvatureA(phi, alpha)
+\def\curvatureA(#1,#2){2*sin(#1)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5}
+%  Bi-tangent-circle-curvature where curvatureA(phi, alpha)
+\def\curvatureB(#1,#2){4*tan(#1/2)/(1+(#2))}
+% curvature A / curvature B
+\def\curvatureRap(#1,#2){(1+#2)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5*cos(#1/2)^2}
+
+
+\definecolor{Tblue}{RGB}{104, 135, 255}
+\definecolor{Tred}{RGB}{255, 110, 103}
+\definecolor{Tgreen}{RGB}{147, 250, 103}
+\definecolor{Tgray}{RGB}{184, 184, 184}
+\definecolor{Tdarkgray}{RGB}{56, 56, 56}
 
 % LDP Custom functions
 %--------------------------------------
