@@ -21,8 +21,16 @@
 \usepackage{MnSymbol}
 \usepackage{minted}
 \usepackage{tikz}
-\usepackage{pgf,pgfplots}
-\usepackage{xcolor}
+\usepackage{pgfplots,pgfplotstable}
+\usepackage{cleveref} % attention a loader apres hypperef
+
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+ % cross referencing \autoref
+\renewcommand{\sectionautorefname}{\S}
+\renewcommand{\subsectionautorefname}{\S}
+\renewcommand{\subsubsectionautorefname}{\S}
 
 \usepackage{natbib}
 % use [sectionbib] option so bibliography appears like a not numbered section at the end of each chapter
@@ -59,7 +67,7 @@
 
 % LDP PfgPlots definition
 %--------------------------------------
-\pgfplotsset{width=10cm, compat=1.10}
+\pgfplotsset{width=10cm, compat=newest}
 %\pgfplotsset{every axis plot post/.append  style={line width = 2pt}}
 \pgfplotsset{grid style = {
 %    dash pattern = on 0.05mm off 1mm,
@@ -67,7 +75,7 @@
     Tgray,
     line width = 0.25pt}
 }
-\usepgfplotslibrary{fillbetween}
+
 
 % 3pt-circle-curvature where curvatureA(phi, alpha)
 \def\curvatureA(#1,#2){2*sin(#1)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5}
@@ -85,7 +93,7 @@
 
 % LDP Custom functions
 %--------------------------------------
-    
+  
 % typo
 \newcommand{\guil}[1]{\og#1\fg{}}
 \newcommand{\note}[1]{\color{blue}#1\color{black}}

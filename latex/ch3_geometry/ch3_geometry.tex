@@ -17,7 +17,7 @@ Let $I$ be an interval \cite{Bishop1975} of $\mathbb{R}$ and $F\colon t \mapsto 
 \item $\gamma = F(I) = \{F(t), t \in I\}$ is called the \emph{graph} or \emph{trace} of $\gamma$
 \item $\gamma$ is said to be ${\mathcal{C}}^{k}$ if $F \in {\mathcal{C}^{k}}^{}(I,{\mathbb{R}}^3)$
 \end{itemize}
-\smallskip
+
 \begin{myrk}
 Note that for a given graph in ${\mathbb{R}}^3$ they may be different possible parameterizations. From now, $\gamma$ will simply refer to $F(I)$, its graph.
 \end{myrk}
@@ -176,104 +176,120 @@ The \emph{torsion} measures the deviance of $\gamma$ from being a planar curve a
 % moving frame
 \subsection{Moving frame}
 
-Soit $\gamma : s \rightarrow \gamma(s)$ une courbe bi-régulière de l'espace, paramétrée par son abscisse curviligne. On appelle \emph{repère mobile} attaché à $\gamma$ le trièdre orthonormé direct 
-$\{\mathbf{d_{3}}(s),\mathbf{d_{1}}(s),\mathbf{d_{2}}(s) \}$. 
-
-Par construction, le repère mobile attaché à $\gamma$ vérifie :
+Let $\gamma : s \rightarrow \gamma(s)$ be an arc-length parametrized curve. A map $F$ which associates to each point of arc-length $s$ a direct orthonormal trihedron is called a \emph{moving frame} :
+\begin{equation}
+	\fonctionL{F}{[0,L]}{\mathcal{SO}_{3}(\mathbb{R})}{s}{F(s) = \{\vect{e}_{3}(s),\vect{e}_{1}(s),\vect{e}_{2}(s)\}}
+\end{equation}
+Thus, inherently, a moving frame $F$ attached to $\gamma$ satisfies for all $s \in [0,L]$ :
 \begin{equation}
 \begin{cases}
-&\| \mathbf{d_{i}}(s) \| = 1 \\
-&\mathbf{d_{i}}(s) \cdot \mathbf{d_{j}}(s) = 0
+&\| \vect{e}_i(s) \| = 1 \\
+&\vect{e}_i(s) \cdot \vect{e}_j(s) = 0\quad , \quad i \neq j
 \end{cases}
 \end{equation}
+The terme \guil{moving frame} will refer indifferently to the map itself ($F$), or to a specific evaluation of the map ($F(s)$).
 
 % governing equations
 \subsubsection{Governing equations}
-Par dérivation des relations précédentes on obtient les équations différentielles suivantes :
+Computing the derivatives of the previous relationships leads to the following differential equations :
 \begin{equation}
 \begin{cases}
-&\mathbf{d_{i}^{'}}(s) \cdot \mathbf{d_{i}}(s) = 0 \\
-&\mathbf{d_{i}^{'}}(s) \cdot \mathbf{d_{j}}(s) = -\mathbf{d_{i}}(s) \cdot \mathbf{d_{j}^{'}}(s)
+&\vect{e}'_i(s) \cdot \vect{e}_i(s) = 0 \\
+&\vect{e}'_{i}(s) \cdot \vect{e}_{j}(s) = -\vect{e}_{i}(s) \cdot \vect{e}'_{j}(s)\quad , \quad i \neq j
 \end{cases}
 \end{equation}
-Il existe donc 3 fonctions scalaires $\tau(s)$, $\kappa_{1}(s)$, $\kappa_{2}(s)$ telles que :
+Thus, there exists 3 scalar functions $\tau(s)$, $k_{1}(s)$, $k_{2}(s)$ such that :
 \begin{equation}
 \begin{cases}
-&\mathbf{d_{3}^{'}}(s) = \kappa_{2}(s)\mathbf{d_{1}}(s) - \kappa_{1}(s)\mathbf{d_{2}}(s) \\
-&\mathbf{d_{1}^{'}}(s) = -\kappa_{2}(s)\mathbf{d_{3}}(s) + \tau(s)\mathbf{d_{2}}(s) \\
-&\mathbf{d_{2}^{'}}(s) = \kappa_{1}(s)\mathbf{d_{3}}(s) - \tau(s)\mathbf{d_{1}}(s)
+&\vect{e}'_{3}(s) = k_{2}(s)\vect{e}_{1}(s) - k_{1}(s)\vect{e}_{2}(s) \\
+&\vect{e}'_{1}(s) = -k_{2}(s)\vect{e}_{3}(s) + \tau(s)\vect{e}_{2}(s) \\
+&\vect{e}'_{2}(s) = k_{1}(s)\vect{e}_{3}(s) - \tau(s)\vect{e}_{1}(s)
 \end{cases}
 \end{equation}
-Ce système se réécrit sous forme matricielle de la façon suivante :
-\begin{gather}
-\left[\begin{array}{c}
-\mathbf{d_{3}^{'}}(s) \\
-\mathbf{d_{1}^{'}}(s) \\
-\mathbf{d_{2}^{'}}(s)
-\end{array}\right]
-=
-\left[\begin{array}{ccc}
-0 & \kappa_{2}(s) & -\kappa_{1}(s) \\
--\kappa_{2}(s) & 0 & \tau(s) \\
-\kappa_{1}(s) & -\tau(s) & 0
-\end{array}\right]
-\left[\begin{array}{c}
-\mathbf{d_{3}}(s) \\
-\mathbf{d_{1}}(s) \\
-\mathbf{d_{2}}(s)
-\end{array}\right]
-\end{gather}
-
-On remarquera qu'ainsi définie, l'évolution des repères mobiles le long de la courbe $\gamma$ est gouvernée par une équation différentielle d'ordre 1. Dès lors, un unique triplet $\{\tau$, $\kappa_{1}$, $\kappa_{2}\}$  engendre une famille de repères mobiles définis à une constante d'intégration prêt. Généralement, un repère mobile sera donc entièrement définit par la donnée de $\tau$, $\kappa_{1}$, $\kappa_{2}$ et de $\{\mathbf{d_{3}}(s=0),\mathbf{d_{1}}(s=0),\mathbf{d_{2}}(s=0) \}$.
-
-% figure
-%\begin{figure}[t] 
-%\centering 
-%\includegraphics[height=5cm]{img_ch1_2_torsion.pdf} 
-%\caption{Interprétation géométrique des fonctions scalaires $\tau(s)$, $\kappa_{1}(s)$, $\kappa_{2}(s)$ gouvernant l'évolution du repère mobile attaché à $\gamma$.}
-%\label{fig:1_2}
-%\end{figure}
+It is common to rewrite this first-order linear differential equations system as a single matrix equation :
+\begin{equation}
+	\begin{bmatrix}
+		\vect{e}'_{3}(s) \\
+		\vect{e}'_{1}(s) \\
+		\vect{e}'_{2}(s)
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		0 & k_{2}(s) & -k_{1}(s) \\
+		-k_{2}(s) & 0 & \tau(s) \\
+		k_{1}(s) & -\tau(s) & 0
+	\end{bmatrix}
+	\begin{bmatrix}
+		\vect{e}_{3}(s) \\
+		\vect{e}_{1}(s) \\
+		\vect{e}_{2}(s)
+	\end{bmatrix}
+\label{eq:3_12}
+\end{equation}
+Since the progression of any moving frame along $\gamma$ is ruled by a first-order differential equation, a unique triplet $\{\tau, k_{1}, k_{2}\}$ leads to a set of moving frames equal to each other within a constant of integration. Basically, with a given triplet $\{\tau, k_{1}, k_{2}\}$, one would \guil{propagate} a given initial direct orthonormal trihedron (at $s=0$ for instance) through the whole curve by integrating the differential system. In general, a moving frame will be fully determined by $\tau$, $\kappa_{1}$, $\kappa_{2}$ plus $\{\vect{e}_{3}(s=0),\vect{e}_{1}(s=0),\vect{e}_{2}(s=0)\}$.
 
 % vecteur de Darboux
 \subsubsection{Darboux vector}
-Il est pertinent de considérer l'évolution d'un repère mobile le long de $\gamma$ en introduisant son vecteur de Darboux ($\mathbf{\Omega}$), qui correspond au taux de rotation du trièdre $\{\mathbf{d_{3}}(s),\mathbf{d_{1}}(s),\mathbf{d_{2}}(s) \}$ selon l'abscisse curviligne. Les équations d'évolution du repère mobile s'écrivent alors :
-\begin{gather}
-\mathbf{d_{i}^{'}}(s) = \mathbf{\Omega}(s) \times \mathbf{d_{i}}(s)
+It is relevant to consider the mobile frame's evolution along $\gamma$ introducing the so-called \emph{Darboux vector} ($\vect{\Omega}$), which corresponds to the instantaneous angular velocity of $F$ at each point of arc-length $s$. Thus, the previous differential system governing the evolution of $F(s)$ along $\gamma$ becomes :
+\begin{equation}
+\vect{e}'_{i}(s) = \vect{\Omega}(s) \times \vect{e}_{i}(s)
 \quad avec \quad
-\mathbf{\Omega}(s) 
+\vect{\Omega}(s) 
 = 
-\left[\begin{array}{c}
-\tau(s) \\
-\kappa_{1}(s) \\
-\kappa_{2}(s)
-\end{array}\right]
-\end{gather}
-Géométriquement, les fonctions scalaires $\tau(s)$, $\kappa_{1}(s)$, $\kappa_{2}(s)$  correspondent respectivement aux taux de rotations du trièdre autour des axes dirigés par $\mathbf{d_{3}}(s),\mathbf{d_{1}}(s),\mathbf{d_{2}}(s)$ :
-\begin{gather}
-\frac{d\theta_3}{dt}(s) = \tau(s)
-\quad,\quad
-\frac{d\theta_1}{dt}(s) = \kappa_{1}(s)
-\quad,\quad
-\frac{d\theta_2}{dt}(s) = \kappa_{2}(s)
-\end{gather}
+\begin{bmatrix}
+	\tau(s) \\
+	k_1(s) \\
+	k_2(s)
+\end{bmatrix}
+\end{equation}
+This result is straightforward deduced from \eqref{eq:3_12}. Note that the cross product \guil{reveals} that the system is skew-symmetric, which could already be seen in \eqref{eq:3_12}.
+Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc-length $s$ and $s+ds$ (\autoref{fig:3_2}) shows that the scalar functions $\tau(s)$, $k_{1}(s)$, $k_{2}(s)$ effectively correspond to the angular speed of the frame, respectively around $\vect{e}_{3}(s)$, $\vect{e}_{1}(s)$, $\vect{e}_{2}(s)$ : 
+\begin{equation}
+	\frac{d\theta_3}{dt}(s) = \tau(s)
+	\quad,\quad
+	\frac{d\theta_1}{dt}(s) = k_{1}(s)
+	\quad,\quad
+	\frac{d\theta_2}{dt}(s) = k_{2}(s)
+\end{equation}
+
+\begin{figure}[t] 
+\begin{center}
+\includegraphics[]{adapted_moving_frame.pdf} 
+\caption{Adapted moving frame $F(s) =\{\vect{e}_{3}(s),\vect{e}_{1}(s),\vect{e}_{2}(s)\}$ where $\vect{e}_3(s) = \vect{t}(s)$.}
+\label{fig:3_1}
+\end{center}
+\end{figure}
+
+\begin{figure}[t] 
+\begin{center}
+\includegraphics[]{darboux.pdf} 
+\caption{Geometric interpretation of the Darboux vector of a moving frame.}
+\label{fig:3_2}
+\end{center}
+\end{figure}
 
 % adapted frame
 \subsection{Adapted frame}
-De plus, on dira qu'il est \emph{adapté} à $\gamma$ si en tout point $\gamma(s)$, $\mathbf{d_{3}}(s)$ est tangent à $\gamma$ :
-\begin{gather}
-\mathbf{d_{3}}(s) = \mathbf{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
-\end{gather}
+Let $F$ be a moving frame as defined in the previous section. $F$ is said to be \emph{adapted} to $\gamma$ if at each point $\gamma(s)$, $\vect{e}_{3}(s)$ is tangent to $\gamma$ :
+\begin{equation}
+	\vect{d_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}, \quad \forall s \in [0,L]
+\end{equation}
 
-Dans ce cas, la courbure $\kappa$ de la courbe $\gamma$ vaut : $\kappa \equiv \|\gamma''\| = \|\mathbf{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$
+For an adapted frame, the components $k_1$ and $k_2$ of the Darboux vector are related to the curve's curvature. Indeed, recall from \ref{} that $\kappa \equiv \|\gamma''\| = \|\vect{t}'\|$. Or $\vect{t} = \vect{d}_3$ for an adapted frame. Thus, the following relation holds :
+\begin{equation}
+	\kappa = \|\vect{d}'_3\| = \sqrt{{k_{1}}^2 + {k_{2}}^2}
+\end{equation}
+\note{
+La courbure est une quantité géométrique intrinsèque, indépendante du choix du repère mobile attaché à la courbe. C'est donc un invariant. Et donc quelque soit le choix du repère mobile adapté $\|\mathbf{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$ est un invariant (la courbure).
 
-La courbure est une quantité géométrique intrinsèque, indépendante du choix du repère mobile attaché à la courbe. C'est donc un invariant. Et donc quelque soit le choix du repère mobile adapté $|\mathbf{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$ est un invariant (la courbure).
+Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géométrie de la courbe dans le cas d'une isotropic rod $\mathcal{E}_b = EI\kappa^2$.}
 
 % FRENET FRAME
 \subsection{Frenet frame}
 
 % definition
 \subsubsection{Definition}
-The Frenet frame is a well-known particular adapted moving frame (§\ref{sec:frenet}). At any given regular point $\gamma(s_0)$ it is define as $\{\mathbf{t}(s_0),\mathbf{n}(s_0),\mathbf{b}(s_0)\}$ where : 
+The Frenet frame is a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s_0)$ it is define as $\{\mathbf{t}(s_0),\mathbf{n}(s_0),\mathbf{b}(s_0)\}$ where : 
 \begin{gather}
 \mathbf{t}(s_0) = \frac{\gamma^{'}(s_0)}{\|\gamma'(s_0)\|}
 \quad,\quad
@@ -314,6 +330,8 @@ One can remember the generic differential equations of an adapted moving frame a
 \tau(s) = \tau_{f}(s)
 \end{gather}
 
+
+
 \subsubsection{Darboux vector}
 Consequently, the Darboux vector ($\mathbf{\Omega_{f}}$) of the Frenet frame is given by :
 \begin{gather}
@@ -325,6 +343,7 @@ Consequently, the Darboux vector ($\mathbf{\Omega_{f}}$) of the Frenet frame is 
 \kappa(s)
 \end{array}\right]
 \end{gather}
+
 
 \subsubsection{Specific points}
 
@@ -346,7 +365,7 @@ Examiner la question de la fermeture sur une boucle fermée. Schéma.
 \subsubsection{Definition}
 Different ways to frame a curve. The usual one is Frenet. But, it could not be as relevant as we want in our field of interest.
 
-The Bishop frame is defined as a a well-known particular adapted moving frame (§\ref{sec:frenet}). At any given regular point $\gamma(s_0)$ it is define as $\{\mathbf{t}(s_0),\mathbf{n}(s_0),\mathbf{b}(s_0)\}$ where : 
+The Bishop frame is defined as a a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s_0)$ it is define as $\{\mathbf{t}(s_0),\mathbf{n}(s_0),\mathbf{b}(s_0)\}$ where : 
 \begin{gather}
 \mathbf{t}(s_0) = \frac{\gamma^{'}(s_0)}{\|\gamma'(s_0)\|}
 \quad,\quad
@@ -413,16 +432,152 @@ Laurent Hauswirth : la complexité d'un problème est en général proportionnel
 Expliquer le défaut de fermeture sur une boucle fermée. Calcul du writhe. Quelle différence avec Frenet ?
 }
 
-\subsubsection{Discrete Curvature}
+\subsection{Comparison between Frenet and Bishop frames}
 
+\subsubsection{Example A : circular helix}
+\begin{equation}
+	\left\{
+	\begin{array}{c}
+		\rho = a\\
+		z = b\theta
+	\end{array}\right.
+\end{equation}
+
+\subsubsection{Example B : conical helix (spiral)}
+\begin{equation}
+	\left\{
+	\begin{array}{c}
+		\rho = a e^{k\theta}\\
+		z = \rho \cot{\alpha}\\
+	\end{array}\right.
+\end{equation}
+
+
+soit pour une spirale dont on connait 
+
+\begin{figure}[H] 
+\centering
+\subfloat[][Frenet frame]{%
+  \begin{tikzpicture}
+\begin{axis}[
+	width = 7.5cm,
+	xmin=-0.1, xmax= 1.1, restrict x to domain = 0 : 1,
+	ymin=-4e-2, ymax= 7e-2, restrict y to domain = -4e-2:6e-2,
+	ytick={-3e-2, 0, 3e-2, 6e-2},
+	grid=major,
+	]
+
+       	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
+	\addplot [Tblue, smooth, thick]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\frenet};
+	
+	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
+	\addplot [black, smooth, thick, dashed]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\frenet};
+	
+	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
+	\addplot [black, smooth, thick]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\frenet};
+
+\end{axis}
+  \end{tikzpicture}}\quad
+\subfloat[][Bishop frame]{%
+  \begin{tikzpicture}
+\begin{axis}[
+	width = 7.5cm,
+	xmin=-0.1, xmax= 1.1, restrict x to domain = 0 : 1,
+	ymin=-4e-2, ymax= 7e-2, restrict y to domain = -4e-2:6e-2,
+	ytick={-3e-2, 0, 3e-2, 6e-2},
+	grid=major,
+	]
+
+       	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
+	\addplot [Tblue, smooth, thick]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\bishop};
+         
+         \pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
+	\addplot [black, smooth, thick, dashed]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\bishop};
+         
+         \pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
+	\addplot [black, smooth, thick]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\bishop};
+                 
+
+\end{axis}
+  \end{tikzpicture}}
+\caption[]{Comparison between Frenet and Bishop frame velocity for a spirale curve.}
+\label{g:nognot}
+\end{figure}
+
+
+
+
+\section{Discrete Curvature}
+
+\subsection{Definition}
+
+\cite{Hoffmann2008}
+
+The edge osculating circle.
+The vertex osculating circle.
+La localité est meilleur dans le cas du vertex-based discret osculating circle.
+Pour des anlges élevés, le edge-based discret osculating circle est plus pertinent.
+La courbure tend vers l'infini quand les 2 edges deviennent colineaires.
+
+La définition du plan osculateur est univoque dans le cas discret : c'est localement le plan défini par 2 edges consécutifs.
+
+Ce n'est pas le cas de la courbure qui perd son côté intrinsèque.
 
 courbure discrete dans le cas général
 
+\subsubsection{Vertex-based osculating circle}
+
 \begin{equation}
 	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\|\vect{e}_{i-1} + \vect{e}_{i} \|},
-	\quad
+\end{equation}
+
+\begin{figure}[] 
+\begin{center}
+\includegraphics[]{curvature_vertex.pdf} 
+\caption{Variation of the vertex-based discrete curvature.}
+\label{fig:1_1}
+\end{center}
+\end{figure}
+
+\subsubsection{Edge-based osculating circle}
+
+\begin{equation}
 	\kappa_2 = \frac{4 \,tan(\varphi_i/2)}{\|\vect{e}_{i-1}\| + \|\vect{e}_{i} \|}
 \end{equation}
+
+\begin{figure}[] 
+\begin{center}
+\includegraphics[]{curvature_edge.pdf} 
+\caption{Variation of the edge-based discrete curvature.}
+\label{fig:1_1}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}[h]
+     \centering
+     \subfloat[][vertex-based osculating circle]{\includegraphics{osculating_circle_vertex.pdf}\label{<figure1>}}
+     \subfloat[][edge-based osculating circle]{\includegraphics{osculating_circle_edge.pdf}\label{<figure2>}}
+     \caption{Definition of the osculating circle for discrete curves.}
+     \label{steady_state}
+\end{figure}
+
+\begin{figure}[H] 
+\begin{center}
+\includegraphics[]{osculating_circle_edge_cst.pdf} 
+\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+\label{fig:1_1}
+\end{center}
+\end{figure}
+
+\subsection{Variability of discrete curvature regarding $\alpha$}
 
 Qu'on réécrit en posant $\|\vect{e}_{i-1}\| = \alpha \|\vect{e}_{i} \|$, $\alpha \geq 0$ :
 
@@ -433,38 +588,20 @@ Qu'on réécrit en posant $\|\vect{e}_{i-1}\| = \alpha \|\vect{e}_{i} \|$, $\alp
 \end{equation}
 
 \begin{equation}
-	\kappa_1 / \kappa_2(\alpha) = \kappa_1 / \kappa_2(1/\alpha)= \frac{1+\alpha}{(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}} \, cos^2(\varphi_i/2)
+	\frac{\kappa_1}{\kappa_2}(\alpha) = \frac{\kappa_1}{\kappa_2}(1/\alpha)= \frac{1+\alpha}{(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}} \, cos^2(\varphi_i/2)
 \end{equation}
 
-\begin{figure}[t] 
-\begin{center}
-\includegraphics[]{courbure_3PT.pdf} 
-\caption{Discrete curvature from 3-points circle.}
-\label{fig:1_1}
-\end{center}
-\end{figure}
-
-\begin{figure}[t] 
-\begin{center}
-\includegraphics[]{courbure_TAN.pdf} 
-\caption{Discrete curvature from inner tangent circle.}
-\label{fig:1_1}
-\end{center}
-\end{figure}
-
-
-
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \begin{tikzpicture}
-	\begin{axis}[ 
-	legend style={at={(axis cs:0,6)},anchor=north west},
+	\begin{axis}[
 	scale only axis, 
+	legend style={at={(axis cs:0,6)},anchor=north west},
 	xmin=-3.1416/4/4, xmax= 3.1416+3.1416/4/4, restrict x to domain = 0 : 3.1416,
 	ymin=-2/4, ymax= 10+2/4, restrict y to domain = 0 : 10,
 	grid=major,
 	axis y line*= left,% the '*' avoids arrow heads 
-	xlabel={$\varphi_i$},
+	xlabel={$\varphi$},
 	xtick={0, 0.7854, 1.5708, 2.3562, 3.14159},
     	xticklabels={$0$, $\frac{\pi}{4}$,  $\frac{\pi}{2}$,  $\frac{3\pi}{4}$,$\pi$},
 	ylabel={$\kappa_1, \kappa_2$},
@@ -472,14 +609,16 @@ Qu'on réécrit en posant $\|\vect{e}_{i-1}\| = \alpha \|\vect{e}_{i} \|$, $\alp
 		
 		% kappa 1
 		\addplot[black, samples = 100, domain = 0: 3.1416, solid,  thick]
-		{2*sin(deg(x)/2)};  \node at (axis cs:3.0,2.4) {$\kappa_1$};			
-		\addplot[Tgray, samples = 100, domain = 0:3.1416, solid, very thin]								{\curvatureA(deg(x),2)}; 
+		{2*sin(deg(x)/2)};
+		\node[style={font=\scriptsize}] at (axis cs:3.0,2.4) {$\kappa_1$};			
+		\addplot[Tgray, samples = 100, domain = 0:3.1416, solid, very thin]					{\curvatureA(deg(x),2)}; 
 		\addplot[color=Tgray, samples = 100, domain = 0:3.1416, solid, very thin]
 		{\curvatureA(deg(x),0.5)}; 
 		
 		% kappa 2
 		\addplot[black, samples = 400, domain = 0:3.1416, solid,  thick]
-		{\curvatureB(deg(x),1)};  \node at (axis cs:3.0,9.5) {$\kappa_2$};
+		{\curvatureB(deg(x),1)};
+		\node[style={font=\scriptsize}] at (axis cs:3.0,9.5) {$\kappa_2$};
 		\addplot[color=Tgray, samples = 400, domain = 0:3.1416, solid, very thin]
 		{\curvatureB(deg(x),2)}; 
 		\addplot[color=Tgray, samples = 400, domain = 0:3.1416, solid, very thin]
@@ -493,23 +632,207 @@ Qu'on réécrit en posant $\|\vect{e}_{i-1}\| = \alpha \|\vect{e}_{i} \|$, $\alp
 	ymin=-0.2/4, ymax= 1+0.2/4, restrict y to domain = 0 : 1,
 	axis y line*=right, 
 	axis x line=none, 
-	ylabel style = {rotate=-90},
+%	ylabel style = {rotate=-90},
 	ylabel = {${\kappa_1}/{\kappa_2}$},
 	ytick={0, 0.2, 0.4, 0.6, 0.8, 1}
 	] 
-	
 		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid, thick]
-		{\curvatureRap(deg(x),1)};  \node at (axis cs:1.1,0.95) {$\kappa_1/\kappa_2$};
+		{\curvatureRap(deg(x),1)};
+		\node[style={font=\scriptsize}] at (axis cs:1.1,0.95) {$\kappa_1/\kappa_2$};
 		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid, very thin]
-		{\curvatureRap(deg(x),2)}; 
-%		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid]
-%		{\curvatureRap(deg(x),0.5)}; 
-		
+		{\curvatureRap(deg(x),2)}; 		
 	\end{axis} 
 \end{tikzpicture}
 \end{center}
 \caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
 \end{figure}
+
+
+\subsection{Convergence benchmark $\kappa_1$ vs. $\kappa_2$}
+
+\subsubsection{Straight line}
+
+\subsubsection{Circle}
+
+Smooth curve settings:
+\begin{equation}
+	\mathcal{E} = \int_0^l \kappa^2 ds = \kappa \pi,
+	\quad
+	l = \pi r,
+	\quad
+	\kappa = \frac{1}{r}
+\end{equation}
+
+Discrete curve :
+\begin{equation}
+	\varphi_N = \tfrac{\pi}{N},
+	\quad
+	|\vect{e}| = 2r\sin \tfrac{\varphi}{2},
+	\quad
+	l_N = N|\vect{e}| =2Nr\sin \tfrac{\varphi}{2} = l \frac{\sin \tfrac{\varphi}{2}}{\tfrac{\varphi}{2}}
+\end{equation}
+
+Discrete bending energies :
+\begin{equation}
+	\mathcal{E}_1 = \mathcal{E} \frac{\sin \tfrac{\varphi}{2}}{\tfrac{\varphi}{2}},
+	\quad
+	\mathcal{E}_2 = \mathcal{E} \frac{\sin \tfrac{\varphi}{2}}{\tfrac{\varphi}{2} \cos^2 \tfrac{\varphi}{2}},
+\end{equation}
+
+Remarque that ratios are independent of scale change (independent of R)
+
+\begin{figure}[H] 
+\begin{center}
+\includegraphics[]{circle.pdf} 
+\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+\label{fig:1_1}
+\end{center}
+\end{figure}
+
+qsmldkqsmldk s qsd qsd
+ sqd
+  qs dqs=dlk qs=ldk sq
+\newpage
+\begin{figure}[]
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[
+	scale only axis, 
+	xmin=0, xmax= 21, restrict x to domain = 1 : 20,
+	ymin=0.5, ymax= 1.7, restrict y to domain = 0 :1.6,
+	grid=major,
+	xlabel={$\mathcal{E}_i/\mathcal{E} = f_i(N=l/|e|)$},
+	xtick={1,5,10,15,20},
+	ylabel={},
+	]		
+		\addplot[black, samples = 1000, domain = 1: 21, solid,  thin]
+		{sin(deg(pi/(2*x)))/(pi/(2*x))};
+		\node[style={font=\scriptsize}] at (axis cs:3.5,1.565) {$\mathcal{E}_1/\mathcal{E}$};
+		
+		\addplot[black, samples = 1000, domain = 1: 21, solid,  thin, dashed]
+		{sin(deg(pi/(2*x)))/((pi/(2*x))*cos(deg(pi/(2*x)))^2)};
+		\node[style={font=\scriptsize}] at (axis cs:2.5,0.65) {$\mathcal{E}_2/\mathcal{E}$};
+		
+		\addplot[Tblue, samples = 1000, domain = 0: 21, solid,  thick]
+		{1}; 	
+	\end{axis} 
+\end{tikzpicture}
+\end{center}
+\caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
+\end{figure}
+
+\subsubsection{Elastica}
+
+\begin{figure}[H] 
+\begin{center}
+\includegraphics[]{elastica_withnum.pdf} 
+\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+\label{fig:1_1}
+\end{center}
+\end{figure}
+
+\begin{figure}[H] 
+\begin{center}
+\includegraphics[]{elastica_detail.pdf} 
+\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+\label{fig:1_1}
+\end{center}
+\end{figure}
+
+\begin{figure}[H] 
+\centering
+\subfloat[][$\mathcal{E}_1/\mathcal{E} = f(N = l/|e|)$]{%
+  \begin{tikzpicture}
+\begin{axis}[
+	width = 7.5cm,
+	xmin=8, xmax= 52, restrict x to domain = 10 : 50,
+	ymin=0.915, ymax= 1.005, restrict y to domain = 0 :1.6,
+	grid=major,
+	xtick={0,3,5,10,15,20,25,30,35,40,45,50},
+	]
+
+       	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica5.txt}\crvB;
+	\addplot [black, smooth, very thin]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvB};
+%  	\node[Tgray, style={font=\scriptsize}] at (axis cs:9,1) {$5$};
+
+       	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica10.txt}\crvC;
+	\addplot [black, smooth, very thin]
+        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvC};
+    	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.985) {$10$};
+         
+        \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica15.txt}\crvD;
+	\addplot [black, smooth, very thin]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvD};
+         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.978) {$15$};
+         
+     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica20.txt}	\crvE;
+	\addplot [black, smooth, very thin]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvE};
+       	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.965) {$20$};
+         
+     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica25.txt}	\crvF;
+	\addplot [black, smooth, very thin]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvF};
+       	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.94) {$25$};
+
+     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica30.txt}	\crvG;
+	\addplot [black, smooth, very thin]
+        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvG};
+       	\node[Tgray, style={font=\scriptsize}] at (axis cs:15,0.92) {$30$};
+         
+         \addplot[Tblue, samples = 100, domain = 0: 50, solid,  thick]
+	{1}; 	
+\end{axis}
+  \end{tikzpicture}}\quad
+\subfloat[][$\mathcal{E}_2/\mathcal{E} = f(N = l/|e|)$]{%
+  \begin{tikzpicture}
+\begin{axis}[
+	width = 7.5cm,
+	xmin=8, xmax= 52, restrict x to domain = 10 : 50,
+	ymin=0.995, ymax= 1.085, restrict y to domain = 1 :1.6,
+	grid=major,
+	xtick={0,3,5,10,15,20,25,30,35,40,45,50},
+	]
+
+         \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica5.txt}\crvB;
+	\addplot [black, smooth, very thin]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvB};
+         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,1.024) {$5$};
+
+        \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica10.txt}\crvC;
+	\addplot [black, smooth, very thin]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvC};
+         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,1.044) {$10$};
+         
+         \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica15.txt}\crvD;
+	\addplot [black, smooth, very thin]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvD};
+         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,1.07) {$15$};
+         
+     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica20.txt}	\crvE;
+	\addplot [black, smooth, very thin]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvE};
+         \node[Tgray, style={font=\scriptsize}] at (axis cs:13.5,1.08) {$20$};
+         
+     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica25.txt}	\crvF;
+	\addplot [black, smooth, very thin]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvF};
+         \node[Tgray, style={font=\scriptsize}] at (axis cs:18,1.08) {$25$};
+
+     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica30.txt}	\crvG;
+	\addplot [black, smooth, very thin]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvG};
+         \node[Tgray, style={font=\scriptsize}] at (axis cs:27,1.08) {$30$};
+         
+         \addplot[Tblue, samples = 100, domain = 0: 50, solid,  thick]
+	{1}; 	
+\end{axis}
+  \end{tikzpicture}}
+\caption[]{Bending energy representativity}
+\label{g:nognot}
+\end{figure}
+
 
 
 \bibliographystyle{alpha}
