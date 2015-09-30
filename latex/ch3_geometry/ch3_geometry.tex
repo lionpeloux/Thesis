@@ -1,6 +1,6 @@
 \chapter{Geometry of smooth and discret curves}
 \section{Introduction}
-Dans ce chapitre, après un bref rappel sur le cadre mathématique d'étude des courbes paramétrique de l'espace, on présente les notions de courbures et de torsion géométrique associées au repère de fraient. On montre ensuite le cas plus général d'un repère mobile quelconque attaché à une courbe gamma. On définit enfin la particularité d'un repère mobile adapté à un courbe, et on présente, en sus du repère de Frenet, une approche différente pour accrocher des repères le long d'une courbe (Bishop / RMF / Zéro-twisting frame)
+Dans ce chapitre, après un bref rappel sur le cadre mathématique d'étude des courbes paramétrique de l'espace, on présente les notions de courbures et de torsion géométrique associées au repère de Frenet. On montre ensuite le cas plus général d'un repère mobile quelconque attaché à une courbe gamma. On définit enfin la particularité d'un repère mobile adapté à un courbe, et on présente, en sus du repère de Frenet, une approche différente pour accrocher des repères le long d'une courbe (Bishop / RMF / Zéro-twisting frame)
 
 % --------------------------------------------------------------------------------------------------------------------------------------------
 % SMOOTH SPACE CURVE
@@ -67,7 +67,7 @@ s \colon t \mapsto \int_{t_{0}}^{t}\|F'(u)\|du
 s \in I \times \mathbb{R}
 \end{equation}
 
-The arc-length $s\colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
+The arc-length $s \colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
 
 Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\|G'(s)\| = 1, \forall s \in J$.
 
@@ -81,78 +81,127 @@ This parametrization is preferred because the natural parameter s traverses the 
 
 \section{Frenet's Trihedron}
 \label{sec:frenet}
-En cinématique ou en géométrie différentielle, le repère de Frenet ou repère de Serret-Frenet est un outil d'étude du comportement local des courbes. Il s'agit d'un repère local associé à un point P, décrivant une courbe (C). Son mode de construction est différent selon que l'espace ambiant est de dimension 2 (courbe plane) ou 3 (courbe gauche) ; il est possible également de définir un repère de Frenet en toute dimension, pourvu que la courbe vérifie des conditions différentielles simples.
+The trihedron of Frenet is a fundamental mathematical tool from the field of differential geometry to study local characterization of planar and non-planar space curves. It is a direct orthonormal basis attached to a point $P$ sliding along a parametric curve ($\gamma$). Introduced by Jean-Frédéric Frenet in his thesis upon \emph{curves of double curvature} in 1847, it brings out intrinsic local properties of space curves : the curvature ($\kappa$) which evaluates the deviance of $\gamma$ from being a straight line, and the torsion ($\tau$), which evaluates the deviance of $\gamma$ from being a plane curve. These quantities are also known as \guil{generalized curvatures}.
+The \emph{fundamental theorem of space curves} states that a curve is fully determined by its curvature and torsion up to a solid (or euclidean) movement in space. This assertion is equivalent to the well-known \emph{Serret-Frenet formulas}, which give the first-order linear differential equations system that govern the evolution of Frenet's trihedron along a space curve. For a given curvature and torsion, and a given initial trihedron, the geometry of the space curve can be constructed by integration these differential equations.
 
-Le repère de Frenet, et les formules de Frenet donnant les dérivées des vecteurs de ce repère, permettent de mener de façon systématique des calculs de courbure, de torsion pour les courbes gauches et d'introduire des concepts géométriques associés aux courbes : cercle osculateur, plan osculateur (en), parallélisme des courbes
-
-In this section we consider $\gamma=(J,G)$ to be a regular ($\|\gamma\|=1$) parametric curve of class ${\mathcal{C}}^{2}$, parametrized by its arc-length (denoted $s$). For the sake of simplicity we will refer to $G(s)$ as $\gamma(s)$.
+In this section we consider $\gamma=(J,G)$ to be a regular ($\|\gamma'\|=1$) parametric curve of class ${\mathcal{C}}^{2}$, parametrized by its arc-length (denoted $s$). For the sake of simplicity we will refer to $G(s)$ as $\gamma(s)$.
 
 % tangent vector
 \subsection{Tangent vector}
-The first vector of Frenet's trihedron is called the \emph{unit tangent vector} ($\mathbf{t}$). At any given parameter $s_0 \in J$,  it is defined as :
+The first vector of Frenet's trihedron is called the \emph{unit tangent vector} ($\vect{t}$). At any given parameter $s \in J$,  it is defined as :
 \begin{equation}
-\mathbf{t}(s_0) = \frac{\gamma'(s_0)}{\|\gamma'(s_0)\|} = \gamma'(s_0)
+\vect{t}(s) = \frac{\gamma'(s)}{\|\gamma'(s)\|} = \gamma'(s)
 \quad,\quad
-\|\mathbf{t}(s_0)\|=1
+\|\vect{t}(s)\|=1
 \end{equation}
+
+In differential geometry, the tangente to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P}$ , as $P$ approches $P_0$ on the path $\gamma$. For a regular curve, the left-sided and right-sided limits coïncide as $P^-$ and $P^+$ approche $P_0$ respectively from the left and the right sides :
+\begin{equation}
+	\vect{t}(P_0) 
+	= \lim_{P \to P_0}\frac{\overrightarrow{P_0 P}}{\norm{\overrightarrow{P_0 P}}}
+	= \lim_{P^- \to P_0}\frac{\overrightarrow{P_0 P^-}}{\norm{\overrightarrow{P_0 P^-}}}
+	= \lim_{P^+ \to P_0}\frac{\overrightarrow{P_0 P^+}}{\|\overrightarrow{P_0 P^+}\|}
+\label{eq:3_4}
+\end{equation}
+
+
 
 %Normal vector
 \subsection{Normal vector}
-The second vector of Frenet's trihedron is called the \emph{unit normal vector} ($\mathbf{n}$). It is constructed from $\mathbf{t'}$ which is orthogonal to $\mathbf{t}$ : $\|\mathbf{t}\|=1 \Rightarrow \mathbf{t^{'}} \cdot  \mathbf{t} = 0 \Leftrightarrow  \mathbf{t^{'}} \perp \mathbf{t}$. Thus, at any given parameter $s_0 \in J$, it is define as :
+The second vector of Frenet's trihedron is called the \emph{unit normal vector} ($\vect{n}$). It is constructed from $\vect{t'}$ which is orthogonal to $\vect{t}$. Indeed, $\|\vect{t}\|=1 \Rightarrow \vect{t^{'}} \cdot  \vect{t} = 0 \Leftrightarrow  \vect{t^{'}} \perp \vect{t}$. Thus, at any given parameter $s \in J$, it is defined as :
 \begin{equation}
-\mathbf{n}(s_0) = \frac{\mathbf{t}'(s_0)}{\|\mathbf{t}'(s_0)\|} = \frac{\gamma''(s_0)}{\|\gamma''(s_0)\|}
+\vect{n}(s) = \frac{\vect{t}'(s)}{\|\vect{t}'(s)\|} = \frac{\gamma''(s)}{\|\gamma''(s)\|}
 \quad,\quad
-\|\mathbf{n}(s_0)\|=1
+\|\vect{n}(s)\|=1
 \end{equation}
+Remark that the notion of \guil{normal vector} would be ambiguous for non-planar curves as far as there is an infinite number of possible vectors laying in the plane orthogonal to the curve's tangent. In practice, the tangent derivative is a convenient choice as it allows to extend the notion of curvature from planar to non-planar space curves. The tangent unit vector and the normal unit vector $\{\vect{t},\vect{n}\}$ define the so-called \guil{osculating plane}.
+
+Likewise the differential definition of the tangent exposed in \eqref{eq:3_4}, the osculating plane could be seen as the limit of the plane defined by 3 points $P_0$, $P^-$, $P^+$, as $P^-$ and $P^+$ approches $P_0$ respectively from its left and right side.
+
 
 %Binormal vector and torsion
 \subsection{Binormal vector}
-The third vector of Frenet's trihedron is called the \emph{unit binormal vector} ($\mathbf{b}$). It is constructed from $\mathbf{t}$ and $\mathbf{n}$ to form an orthonormal direct basis of $\mathbb{R}^{3}$. Thus, at any given parameter $s_0 \in J$, it is define as :
+The third vector of Frenet's trihedron is called the \emph{unit binormal vector} ($\vect{b}$). It is constructed from $\vect{t}$ and $\vect{n}$ to form an orthonormal direct basis of $\mathbb{R}^{3}$. Thus, at any given parameter $s \in J$, it is defined as :
 \begin{equation}
-\mathbf{b}(s_0) = \mathbf{t}(s_0) \times \mathbf{n}(s_0) 
+\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) 
 \quad,\quad
-\|\mathbf{b}(s_0)\|=1
+\|\vect{b}(s)\|=1
 \end{equation}
-
+The normal unit vector and the binormal unit vector $\{\vect{n},\vect{b}\}$ define the so-called \guil{normal plane}.
+The normal tangent vector and the binormal unit vector $\{\vect{t},\vect{b}\}$ define the so-called \guil{rectifying plane}.
 
 % --------------------------------------------------------------------------------------------------------------------------------------------
 % CURVATURE
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
+\begin{figure}[t] 
+\begin{center}
+\includegraphics[]{osculating_circle.pdf} 
+\caption{Different osculating circles for a spiral.}
+\label{fig:3_1}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+     \centering
+     \subfloat[][Tangent.]{\includegraphics{frenet_tangent.pdf}\label{<figure1>}}
+     \subfloat[][Normal and osculating circle]{\includegraphics{frenet_normal.pdf}\label{<figure2>}}
+     \caption{Differential definition of Frenet's trihedron at given point $P_0$.}
+     \label{}
+\end{figure}
 
 \section{Curvature}
 
+Note that from a geometric point of view, $\frac{1}{\kappa(s)}$ represents the radius of the osculating circle of $\gamma$ at the point of parameter $s$.
 
-Note that from a geometric point of view, $\frac{1}{\kappa(s_0)}$ represents the radius of the osculating circle of $\gamma$ at the point of parameter $s_0$.
+$\kappa(s) = \|\vect{t}'(s)\| = \|\gamma''(s)\|$
 
-$\kappa(s_0) = \|\mathbf{t}'(s_0)\| = \|\gamma''(s_0)\|$
+
+How do you know a curve is curving?  
+And how much? 
+The answer should depend just on the 
+shape of the curve, not on the speed at 
+which it is drawn.  
+So it connects with 
+arclength s, not with a time-
+parameter t
 
 %Curvature binormal
 \subsection{Osculating circle}
 Défini de façon directe, le cercle de courbure est le cercle le plus proche de la courbe en P, c'est l'unique cercle osculateur à la courbe en ce point. Ceci signifie qu'il constitue une très bonne approximation de la courbe, meilleure qu'un cercle tangent quelconque. En effet, il donne non seulement une idée de la direction dans laquelle la courbe avance (direction de la tangente), mais aussi de sa tendance à tourner de part ou d'autre de la tangente.
 
+Le centre de courbure est la position limite de l'intersection des deux normales en M(s) et M(s+Ds) et on parle alors de cercle de courbure ou cercle osculateur (du latin osculor, osculatus = caresser). 
+
 %Curvature binormal
 \subsection{Curvature binormal vector}
-Finally, we define the \emph{curvature binormal vector} at any given parameter $s_0 \in J$ as :
+Finally, we define the \emph{curvature binormal vector} at any given parameter $s \in J$ as :
 \begin{equation}
-\mathbf{\kappa b}(s_0) = \mathbf{t}(s_0) \times \mathbf{t}'(s_0) = \kappa(s_0)\cdot\mathbf{b}(s_0)
+\vect{\kappa b}(s) = \vect{t}(s) \times \vect{t}'(s) = \kappa(s)\cdot\vect{b}(s)
 \quad,\quad
-\|\mathbf{\kappa b}(s_0)\|= \kappa(s_0)
+\|\vect{\kappa b}(s)\|= \kappa(s)
 \end{equation}
-
 
 % --------------------------------------------------------------------------------------------------------------------------------------------
 % TORSION
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
+\begin{figure}[t] 
+\begin{center}
+\includegraphics[]{frenet_torsion.pdf} 
+\caption{Geometric torsion and rotation of the osculating plane}
+\label{fig:3_1}
+\end{center}
+\end{figure}
 
 \section{Torsion}
 En géométrie différentielle, la torsion d'une courbe tracée dans l'espace mesure la manière dont la courbe se tord pour sortir de son plan osculateur (plan contenant le cercle osculateur). Ainsi, par exemple, une courbe plane a une torsion nulle et une hélice circulaire est de torsion constante. Prises ensemble, la courbure et la torsion d'une courbe de l'espace en définissent la forme comme le fait la courbure pour une courbe plane. La torsion apparait comme coefficient dans les équations différentielles du repère de Frenet.
 
-The \emph{torsion} measures the deviance of $\gamma$ from being a planar curve and is defined at any given parameter $s_0 \in J$ as :
+The \emph{torsion} measures the deviance of $\gamma$ from being a planar curve and is defined at any given parameter $s \in J$ as :
 \begin{equation}
-\tau_f(s_0) = \mathbf{n}'(s_0) \cdot \mathbf{b}(s_0) 
+\tau_f(s) = \vect{n}'(s) \cdot \vect{b}(s) 
 \end{equation}
+
+Cette notion est propre aux courbes gauches et mesure comment la courbe se "tord" en changeant de plan. Dans le trièdre de Frenet, elle correspond à l'angle des plans osculateurs P(s) et P(s + Ds) en deux points infiniment proches M(s) et M(s + Ds), donc à l'angle Dû entre les binormales mesurant comment la courbe se tord en passant de P(s) à P(s + Ds). Ainsi, de façon analogue à la courbure, la torsion T en un point sera, par unité d'arc, la limite lorsque Ds tend vers 0 du rapport Dû/Ds :
 
 %\begin{myprop}
 %Si $F$ est ${\mathcal{C}}^{1}$ et régulière alors nécessairement elle est monotone car $F'$ est de signe constant.
@@ -280,7 +329,7 @@ For an adapted frame, the components $k_1$ and $k_2$ of the Darboux vector are r
 	\kappa = \|\vect{d}'_3\| = \sqrt{{k_{1}}^2 + {k_{2}}^2}
 \end{equation}
 \note{
-La courbure est une quantité géométrique intrinsèque, indépendante du choix du repère mobile attaché à la courbe. C'est donc un invariant. Et donc quelque soit le choix du repère mobile adapté $\|\mathbf{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$ est un invariant (la courbure).
+La courbure est une quantité géométrique intrinsèque, indépendante du choix du repère mobile attaché à la courbe. C'est donc un invariant. Et donc quelque soit le choix du repère mobile adapté $\|\vect{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$ est un invariant (la courbure).
 
 Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géométrie de la courbe dans le cas d'une isotropic rod $\mathcal{E}_b = EI\kappa^2$.}
 
@@ -289,22 +338,22 @@ Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géomét
 
 % definition
 \subsubsection{Definition}
-The Frenet frame is a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s_0)$ it is define as $\{\mathbf{t}(s_0),\mathbf{n}(s_0),\mathbf{b}(s_0)\}$ where : 
+The Frenet frame is a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s)$ it is define as $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ where : 
 \begin{gather}
-\mathbf{t}(s_0) = \frac{\gamma^{'}(s_0)}{\|\gamma'(s_0)\|}
+\vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma'(s)\|}
 \quad,\quad
-\mathbf{n}(s_0) = \frac{\mathbf{t'}(s_0)}{\mathbf{\kappa}(s_0)}
+\vect{n}(s) = \frac{\vect{t'}(s)}{\vect{\kappa}(s)}
 \quad,\quad
-\mathbf{b}(s_0)= \mathbf{t}(s_0)\times\mathbf{n}(s_0)
+\vect{b}(s)= \vect{t}(s)\times\vect{n}(s)
 \end{gather}
 
 \subsubsection{Governing equations}
 The Frenet frame satisfies the \emph{Frenet-Serret} formulas, which govern the evolution of the frame along the curve $\gamma$ :
 \begin{gather}
 \left[\begin{array}{c}
-\mathbf{t^{'}}(s) \\
-\mathbf{n^{'}}(s) \\
-\mathbf{b^{'}}(s)
+\vect{t^{'}}(s) \\
+\vect{n^{'}}(s) \\
+\vect{b^{'}}(s)
 \end{array}\right]
 =
 \left[\begin{array}{ccc}
@@ -313,15 +362,15 @@ The Frenet frame satisfies the \emph{Frenet-Serret} formulas, which govern the e
 0 & -\tau_f(s) & 0
 \end{array}\right]
 \left[\begin{array}{c}
-\mathbf{t}(s) \\
-\mathbf{n}(s) \\
-\mathbf{b}(s)
+\vect{t}(s) \\
+\vect{n}(s) \\
+\vect{b}(s)
 \end{array}\right]
 \end{gather}
 
 One can remember the generic differential equations of an adapted moving frame attached to a curve, where : 
 \begin{gather}
-\mathbf{d_{3}}(s) = \mathbf{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
+\vect{d_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
 \quad,\quad
 \kappa_{1}(s) = 0
 \quad,\quad
@@ -333,9 +382,9 @@ One can remember the generic differential equations of an adapted moving frame a
 
 
 \subsubsection{Darboux vector}
-Consequently, the Darboux vector ($\mathbf{\Omega_{f}}$) of the Frenet frame is given by :
+Consequently, the Darboux vector ($\vect{\Omega_{f}}$) of the Frenet frame is given by :
 \begin{gather}
-\mathbf{\Omega_f}(s) 
+\vect{\Omega_f}(s) 
 = 
 \left[\begin{array}{c}
 \tau_{f}(s) \\
@@ -365,22 +414,22 @@ Examiner la question de la fermeture sur une boucle fermée. Schéma.
 \subsubsection{Definition}
 Different ways to frame a curve. The usual one is Frenet. But, it could not be as relevant as we want in our field of interest.
 
-The Bishop frame is defined as a a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s_0)$ it is define as $\{\mathbf{t}(s_0),\mathbf{n}(s_0),\mathbf{b}(s_0)\}$ where : 
+The Bishop frame is defined as a a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s)$ it is define as $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ where : 
 \begin{gather}
-\mathbf{t}(s_0) = \frac{\gamma^{'}(s_0)}{\|\gamma'(s_0)\|}
+\vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma'(s)\|}
 \quad,\quad
-\mathbf{n}(s_0) = \frac{\mathbf{t'}(s_0)}{\mathbf{\kappa}(s_0)}
+\vect{n}(s) = \frac{\vect{t'}(s)}{\vect{\kappa}(s)}
 \quad,\quad
-\mathbf{b}(s_0)= \mathbf{t}(s_0)\times\mathbf{n}(s_0)
+\vect{b}(s)= \vect{t}(s)\times\vect{n}(s)
 \end{gather}
 
 \subsubsection{Governing equations}
 The Bishop frame evolution is governed by the following differential equations :
 \begin{gather}
 \left[\begin{array}{c}
-\mathbf{t^{'}}(s) \\
-\mathbf{u^{'}}(s) \\
-\mathbf{v^{'}}(s)
+\vect{t^{'}}(s) \\
+\vect{u^{'}}(s) \\
+\vect{v^{'}}(s)
 \end{array}\right]
 =
 \left[\begin{array}{ccc}
@@ -389,15 +438,15 @@ The Bishop frame evolution is governed by the following differential equations :
 \kappa_{1}(s) & 0 & 0
 \end{array}\right]
 \left[\begin{array}{c}
-\mathbf{t}(s) \\
-\mathbf{u}(s) \\
-\mathbf{v}(s)
+\vect{t}(s) \\
+\vect{u}(s) \\
+\vect{v}(s)
 \end{array}\right]
 \end{gather}
 
 One can remember the generic differential equations of an adapted moving frame attached to a curve, where : 
 \begin{gather}
-\mathbf{d_{3}}(s) = \mathbf{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
+\vect{d_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
 \quad,\quad
 \kappa_{1}(s) = 0
 \quad,\quad
@@ -407,9 +456,9 @@ One can remember the generic differential equations of an adapted moving frame a
 \end{gather}
 
 \subsubsection{Darboux vector}
-Consequently, the Darboux vector ($\mathbf{\Omega_{b}}$) of the Bishop frame is given by :
+Consequently, the Darboux vector ($\vect{\Omega_{b}}$) of the Bishop frame is given by :
 \begin{gather}
-\mathbf{\Omega_b}(s) 
+\vect{\Omega_b}(s) 
 = 
 \left[\begin{array}{c}
 0\\
