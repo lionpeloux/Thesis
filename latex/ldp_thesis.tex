@@ -16,6 +16,10 @@
 %%%%% HEAD: Book-Begin
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \graphicspath{ {./ch4_energy/img/}{./ch3_geometry/img/}}
+
+%\includeonly{ch3_geometry/ch3_geometry}
+\includeonly{ap2_bench/ap2_bench}
+
 \begin{document}
 \frontmatter
 \input{head/titlepage.tex}
@@ -53,7 +57,7 @@
 %%%%% MAIN: The chapters of the thesis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
-%\include{ch1_introduction/ch1_introduction}
+\include{ch1_introduction/ch1_introduction}
 %\include{ch2_gridshell/ch2_gridshell}
 \part{Torsion}
 \include{ch3_geometry/ch3_geometry}
@@ -70,6 +74,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\include{tail/appendix}
 \include{ap1_variational/ap1_variational}
+\include{ap2_bench/ap2_bench}
 \backmatter
 
 %\include{tail/biblio}

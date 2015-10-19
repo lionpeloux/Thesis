@@ -3,6 +3,9 @@ pdflatex -shell-escape ldp_thesis.tex
 cd "ap1_variational"
 bibtex ap1_variational.aux
 cd ..
+cd "ap2_bench"
+bibtex ap2_bench.aux
+cd ..
 cd "ch1_introduction"
 bibtex ch1_introduction.aux
 cd ..

@@ -1,0 +1,76 @@
+%\appendix
+\chapter{Bench for HPC}
+
+\section{Introduction}
+% ====================
+
+In this section aims at providing basic but reliable guidlines to produce fast and mannagable code
+for our algorithms
+
+\cite{Abraham2002}
+
+\section{Languages}
+% =================
+- Csharp
+- Julia
+- C++
+- Intel MKL
+- OpenBLAS
+
+\section{From syntax to processor}
+% ================================
+
+A short story about how a code is translated to get machin instructions
+
+\section{Benchmark}
+% ==================
+
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \pgfplotstableread[col sep=comma]{ap2_bench/plot/inputdata.txt}\mydata;
+    \begin{axis}[
+      xbar, xmin=0, enlarge x limits=0.05,
+      xmajorgrids,
+      width=15cm,
+      height=20cm,
+      enlarge y limits=0.06,
+      % xlabel={compilation time / seconds},
+      area style,
+      ytick=data,
+      yticklabels from table={\mydata}{cat} % Get tables from second column of data table
+      ,bar width=0.1
+      ,legend cell align=left,
+      ,legend style={area legend, draw=white, legend columns=1}
+      % ,xtick=\empty, ytick=\empty,
+      ,separate axis lines
+      ,x axis line style=white
+      ,y axis line style=white
+      ,every x tick/.style={color=white, very thin}
+      ,every y tick/.style={color=white, very thin}
+    ]
+    \addplot [style={white,fill=Tblue,mark=none}]
+              table [x expr=\thisrowno{5}, y expr=-\coordindex] {\mydata};
+
+    \addplot [style={white,fill=Tred,mark=none}]
+              table [x expr=\thisrowno{4}, y expr=-\coordindex] {\mydata};
+
+    \addplot [style={white,fill=Tgray,mark=none}]
+              table [x expr=\thisrowno{3}, y expr=-\coordindex] {\mydata};
+
+    \addplot [style={white,fill=Tgray,mark=none}]
+              table [x expr=\thisrowno{2}, y expr=-\coordindex] {\mydata};
+
+    \addplot [style={white,fill=Tgray,mark=none}]
+              table [x expr=\thisrowno{1}, y expr=-\coordindex] {\mydata};
+
+    \legend{Intel MKL, OpenBLAS, loop NBC, naive loop, native}
+    \end{axis}
+  \end{tikzpicture}
+\caption{Each operator is evaluated on a vector of Float64 of size $n=10^6$ for about 10s.
+Results are given relatively to MKL performance (MKL = 1). }
+\end{figure}
+
+\bibliographystyle{alpha}
+\bibliography{../bibliography}

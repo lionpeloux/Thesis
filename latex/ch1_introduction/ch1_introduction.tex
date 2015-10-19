@@ -1,12 +1,91 @@
 \chapter{Introduction}
 \lipsum[1]
 
-\begin{minted}{c}
-int main(){
-printf("hello, world");
-return 0;
+\begin{minted}{csharp}
+using System;
+using System.Diagnostics;
+using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra;
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    // Using managed code only
+    Control.UseManaged();
+    Console.WriteLine(Control.LinearAlgebraProvider);
+
+    var m = Matrix<double>.Build.Random(500, 500);
+    var v = Vector<double>.Build.Random(500);
+
+    var w = Stopwatch.StartNew();
+    var y1 = m.Solve(v);
+    Console.WriteLine(w.Elapsed);
+    Console.WriteLine(y1);
+
+    // Using the Intel MKL native provider
+    Control.UseNativeMKL();
+    Console.WriteLine(Control.LinearAlgebraProvider);
+
+    w.Restart();
+    var y2 = m.Solve(v);
+    Console.WriteLine(w.Elapsed);
+    Console.WriteLine(y2);
+  }
 }
 \end{minted}
+
+\begin{minted}{csharp}
+using System;
+using System.Diagnostics;
+using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra;
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    // Using managed code only
+    Control.UseManaged();
+    Console.WriteLine(Control.LinearAlgebraProvider);
+
+    var m = Matrix<double>.Build.Random(500, 500);
+    var v = Vector<double>.Build.Random(500);
+
+    var w = Stopwatch.StartNew();
+    var y1 = m.Solve(v);
+    Console.WriteLine(w.Elapsed);
+    Console.WriteLine(y1);
+
+    // Using the Intel MKL native provider
+    Control.UseNativeMKL();
+    Console.WriteLine(Control.LinearAlgebraProvider);
+
+    w.Restart();
+    var y2 = m.Solve(v);
+    Console.WriteLine(w.Elapsed);
+    Console.WriteLine(y2);
+  }
+}
+\end{minted}
+
+
+\begin{minted}{julia}
+f(x,y) = x + y
+
+function g(x,y)
+  return x * y
+  x + y
+end
+
+julia> f(2,3)
+5
+
+julia> g(2,3)
+6
+\end{minted}
+
+
 
 \bibliographystyle{alpha}
 \bibliography{../bibliography}

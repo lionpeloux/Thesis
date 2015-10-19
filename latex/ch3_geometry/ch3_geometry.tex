@@ -44,7 +44,7 @@ Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\
 
 % natural parametrization
 \subsection{Natural parametrization}
-Let $\gamma$ be a space curve of class ${\mathcal{C}}^{1}$. A parametrization $(I,F)$ of $\gamma$ is called \emph{natural} if $\|F'(t)\| = 1, \forall t \in I$. Thus : 
+Let $\gamma$ be a space curve of class ${\mathcal{C}}^{1}$. A parametrization $(I,F)$ of $\gamma$ is called \emph{natural} if $\|F'(t)\| = 1, \forall t \in I$. Thus :
 \begin{itemize}
 \item The curve is necessarily regular
 \item F is strictly monotonic
@@ -52,7 +52,7 @@ Let $\gamma$ be a space curve of class ${\mathcal{C}}^{1}$. A parametrization $(
 
 % curve length
 \subsection{Curve length}
-Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{1}$. The length of $\gamma$ is define as : 
+Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{1}$. The length of $\gamma$ is define as :
 \begin{equation}
 L=\int_{I}\|F'(t)\|dt
 \end{equation}
@@ -97,7 +97,7 @@ The first vector of Frenet's trihedron is called the \emph{unit tangent vector} 
 
 In differential geometry, the tangente to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P}$ , as $P$ approches $P_0$ on the path $\gamma$. For a regular curve, the left-sided and right-sided limits coïncide as $P^-$ and $P^+$ approche $P_0$ respectively from the left and the right sides :
 \begin{equation}
-	\vect{t}(P_0) 
+	\vect{t}(P_0)
 	= \lim_{P \to P_0}\frac{\overrightarrow{P_0 P}}{\norm{\overrightarrow{P_0 P}}}
 	= \lim_{P^- \to P_0}\frac{\overrightarrow{P_0 P^-}}{\norm{\overrightarrow{P_0 P^-}}}
 	= \lim_{P^+ \to P_0}\frac{\overrightarrow{P_0 P^+}}{\|\overrightarrow{P_0 P^+}\|}
@@ -123,7 +123,7 @@ Likewise the differential definition of the tangent exposed in \eqref{eq:3_4}, t
 \subsection{Binormal vector}
 The third vector of Frenet's trihedron is called the \emph{unit binormal vector} ($\vect{b}$). It is constructed from $\vect{t}$ and $\vect{n}$ to form an orthonormal direct basis of $\mathbb{R}^{3}$. Thus, at any given parameter $s \in J$, it is defined as :
 \begin{equation}
-\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) 
+\vect{b}(s) = \vect{t}(s) \times \vect{n}(s)
 \quad,\quad
 \|\vect{b}(s)\|=1
 \end{equation}
@@ -134,9 +134,9 @@ The normal tangent vector and the binormal unit vector $\{\vect{t},\vect{b}\}$ d
 % CURVATURE
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
-\begin{figure}[t] 
+\begin{figure}[t]
 \begin{center}
-\includegraphics[]{osculating_circle.pdf} 
+\includegraphics[]{osculating_circle.pdf}
 \caption{Different osculating circles for a spiral.}
 \label{fig:3_1}
 \end{center}
@@ -157,12 +157,12 @@ Note that from a geometric point of view, $\frac{1}{\kappa(s)}$ represents the r
 $\kappa(s) = \|\vect{t}'(s)\| = \|\gamma''(s)\|$
 
 
-How do you know a curve is curving?  
-And how much? 
-The answer should depend just on the 
-shape of the curve, not on the speed at 
-which it is drawn.  
-So it connects with 
+How do you know a curve is curving?
+And how much?
+The answer should depend just on the
+shape of the curve, not on the speed at
+which it is drawn.
+So it connects with
 arclength s, not with a time-
 parameter t
 
@@ -170,7 +170,7 @@ parameter t
 \subsection{Osculating circle}
 Défini de façon directe, le cercle de courbure est le cercle le plus proche de la courbe en P, c'est l'unique cercle osculateur à la courbe en ce point. Ceci signifie qu'il constitue une très bonne approximation de la courbe, meilleure qu'un cercle tangent quelconque. En effet, il donne non seulement une idée de la direction dans laquelle la courbe avance (direction de la tangente), mais aussi de sa tendance à tourner de part ou d'autre de la tangente.
 
-Le centre de courbure est la position limite de l'intersection des deux normales en M(s) et M(s+Ds) et on parle alors de cercle de courbure ou cercle osculateur (du latin osculor, osculatus = caresser). 
+Le centre de courbure est la position limite de l'intersection des deux normales en M(s) et M(s+Ds) et on parle alors de cercle de courbure ou cercle osculateur (du latin osculor, osculatus = caresser).
 
 %Curvature binormal
 \subsection{Curvature binormal vector}
@@ -185,9 +185,9 @@ Finally, we define the \emph{curvature binormal vector} at any given parameter $
 % TORSION
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
-\begin{figure}[t] 
+\begin{figure}[t]
 \begin{center}
-\includegraphics[]{frenet_torsion.pdf} 
+\includegraphics[]{frenet_torsion.pdf}
 \caption{Geometric torsion and rotation of the osculating plane}
 \label{fig:3_1}
 \end{center}
@@ -198,7 +198,7 @@ En géométrie différentielle, la torsion d'une courbe tracée dans l'espace me
 
 The \emph{torsion} measures the deviance of $\gamma$ from being a planar curve and is defined at any given parameter $s \in J$ as :
 \begin{equation}
-\tau_f(s) = \vect{n}'(s) \cdot \vect{b}(s) 
+\tau_f(s) = \vect{n}'(s) \cdot \vect{b}(s)
 \end{equation}
 
 Cette notion est propre aux courbes gauches et mesure comment la courbe se "tord" en changeant de plan. Dans le trièdre de Frenet, elle correspond à l'angle des plans osculateurs P(s) et P(s + Ds) en deux points infiniment proches M(s) et M(s + Ds), donc à l'angle Dû entre les binormales mesurant comment la courbe se tord en passant de P(s) à P(s + Ds). Ainsi, de façon analogue à la courbure, la torsion T en un point sera, par unité d'arc, la limite lorsque Ds tend vers 0 du rapport Dû/Ds :
@@ -207,9 +207,9 @@ Cette notion est propre aux courbes gauches et mesure comment la courbe se "tord
 %Si $F$ est ${\mathcal{C}}^{1}$ et régulière alors nécessairement elle est monotone car $F'$ est de signe constant.
 %\end{myprop}
 
-%\begin{figure}[t] 
-%\centering 
-%\includegraphics[width=\linewidth]{img_ch1_1_frenet.pdf} 
+%\begin{figure}[t]
+%\centering
+%\includegraphics[width=\linewidth]{img_ch1_1_frenet.pdf}
 %\caption{Repères de Frenet attachés à $\gamma$.}
 %\label{fig:1_1}
 %\end{figure}
@@ -283,8 +283,8 @@ It is relevant to consider the mobile frame's evolution along $\gamma$ introduci
 \begin{equation}
 \vect{e}'_{i}(s) = \vect{\Omega}(s) \times \vect{e}_{i}(s)
 \quad avec \quad
-\vect{\Omega}(s) 
-= 
+\vect{\Omega}(s)
+=
 \begin{bmatrix}
 	\tau(s) \\
 	k_1(s) \\
@@ -292,7 +292,7 @@ It is relevant to consider the mobile frame's evolution along $\gamma$ introduci
 \end{bmatrix}
 \end{equation}
 This result is straightforward deduced from \eqref{eq:3_12}. Note that the cross product \guil{reveals} that the system is skew-symmetric, which could already be seen in \eqref{eq:3_12}.
-Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc-length $s$ and $s+ds$ (\autoref{fig:3_2}) shows that the scalar functions $\tau(s)$, $k_{1}(s)$, $k_{2}(s)$ effectively correspond to the angular speed of the frame, respectively around $\vect{e}_{3}(s)$, $\vect{e}_{1}(s)$, $\vect{e}_{2}(s)$ : 
+Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc-length $s$ and $s+ds$ (\autoref{fig:3_2}) shows that the scalar functions $\tau(s)$, $k_{1}(s)$, $k_{2}(s)$ effectively correspond to the angular speed of the frame, respectively around $\vect{e}_{3}(s)$, $\vect{e}_{1}(s)$, $\vect{e}_{2}(s)$ :
 \begin{equation}
 	\frac{d\theta_3}{dt}(s) = \tau(s)
 	\quad,\quad
@@ -301,17 +301,17 @@ Geometrically, decomposing the infinitesimal rotation of the moving frame around
 	\frac{d\theta_2}{dt}(s) = k_{2}(s)
 \end{equation}
 
-\begin{figure}[t] 
+\begin{figure}[t]
 \begin{center}
-\includegraphics[]{adapted_moving_frame.pdf} 
+\includegraphics[]{adapted_moving_frame.pdf}
 \caption{Adapted moving frame $F(s) =\{\vect{e}_{3}(s),\vect{e}_{1}(s),\vect{e}_{2}(s)\}$ where $\vect{e}_3(s) = \vect{t}(s)$.}
 \label{fig:3_1}
 \end{center}
 \end{figure}
 
-\begin{figure}[t] 
+\begin{figure}[t]
 \begin{center}
-\includegraphics[]{darboux.pdf} 
+\includegraphics[]{darboux.pdf}
 \caption{Geometric interpretation of the Darboux vector of a moving frame.}
 \label{fig:3_2}
 \end{center}
@@ -338,7 +338,7 @@ Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géomét
 
 % definition
 \subsubsection{Definition}
-The Frenet frame is a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s)$ it is define as $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ where : 
+The Frenet frame is a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s)$ it is define as $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ where :
 \begin{gather}
 \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma'(s)\|}
 \quad,\quad
@@ -368,7 +368,7 @@ The Frenet frame satisfies the \emph{Frenet-Serret} formulas, which govern the e
 \end{array}\right]
 \end{gather}
 
-One can remember the generic differential equations of an adapted moving frame attached to a curve, where : 
+One can remember the generic differential equations of an adapted moving frame attached to a curve, where :
 \begin{gather}
 \vect{d_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
 \quad,\quad
@@ -384,8 +384,8 @@ One can remember the generic differential equations of an adapted moving frame a
 \subsubsection{Darboux vector}
 Consequently, the Darboux vector ($\vect{\Omega_{f}}$) of the Frenet frame is given by :
 \begin{gather}
-\vect{\Omega_f}(s) 
-= 
+\vect{\Omega_f}(s)
+=
 \left[\begin{array}{c}
 \tau_{f}(s) \\
 0 \\
@@ -414,7 +414,7 @@ Examiner la question de la fermeture sur une boucle fermée. Schéma.
 \subsubsection{Definition}
 Different ways to frame a curve. The usual one is Frenet. But, it could not be as relevant as we want in our field of interest.
 
-The Bishop frame is defined as a a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s)$ it is define as $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ where : 
+The Bishop frame is defined as a a well-known particular adapted moving frame (\autoref{sec:frenet}). At any given regular point $\gamma(s)$ it is define as $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ where :
 \begin{gather}
 \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma'(s)\|}
 \quad,\quad
@@ -444,7 +444,7 @@ The Bishop frame evolution is governed by the following differential equations :
 \end{array}\right]
 \end{gather}
 
-One can remember the generic differential equations of an adapted moving frame attached to a curve, where : 
+One can remember the generic differential equations of an adapted moving frame attached to a curve, where :
 \begin{gather}
 \vect{d_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
 \quad,\quad
@@ -458,8 +458,8 @@ One can remember the generic differential equations of an adapted moving frame a
 \subsubsection{Darboux vector}
 Consequently, the Darboux vector ($\vect{\Omega_{b}}$) of the Bishop frame is given by :
 \begin{gather}
-\vect{\Omega_b}(s) 
-= 
+\vect{\Omega_b}(s)
+=
 \left[\begin{array}{c}
 0\\
 \kappa_1(s)\\
@@ -502,9 +502,9 @@ Expliquer le défaut de fermeture sur une boucle fermée. Calcul du writhe. Quel
 \end{equation}
 
 
-soit pour une spirale dont on connait 
+soit pour une spirale dont on connait
 
-\begin{figure}[H] 
+\begin{figure}[H]
 \centering
 \subfloat[][Frenet frame]{%
   \begin{tikzpicture}
@@ -519,11 +519,11 @@ soit pour une spirale dont on connait
        	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
 	\addplot [Tblue, smooth, thick]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\frenet};
-	
+
 	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
 	\addplot [black, smooth, thick, dashed]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\frenet};
-	
+
 	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
 	\addplot [black, smooth, thick]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\frenet};
@@ -543,15 +543,15 @@ soit pour une spirale dont on connait
        	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
 	\addplot [Tblue, smooth, thick]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\bishop};
-         
+
          \pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
 	\addplot [black, smooth, thick, dashed]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\bishop};
-         
+
          \pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
 	\addplot [black, smooth, thick]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\bishop};
-                 
+
 
 \end{axis}
   \end{tikzpicture}}
@@ -586,9 +586,9 @@ courbure discrete dans le cas général
 	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\|\vect{e}_{i-1} + \vect{e}_{i} \|},
 \end{equation}
 
-\begin{figure}[] 
+\begin{figure}[]
 \begin{center}
-\includegraphics[]{curvature_vertex.pdf} 
+\includegraphics[]{curvature_vertex.pdf}
 \caption{Variation of the vertex-based discrete curvature.}
 \label{fig:1_1}
 \end{center}
@@ -600,9 +600,9 @@ courbure discrete dans le cas général
 	\kappa_2 = \frac{4 \,tan(\varphi_i/2)}{\|\vect{e}_{i-1}\| + \|\vect{e}_{i} \|}
 \end{equation}
 
-\begin{figure}[] 
+\begin{figure}[]
 \begin{center}
-\includegraphics[]{curvature_edge.pdf} 
+\includegraphics[]{curvature_edge.pdf}
 \caption{Variation of the edge-based discrete curvature.}
 \label{fig:1_1}
 \end{center}
@@ -618,9 +618,9 @@ courbure discrete dans le cas général
      \label{steady_state}
 \end{figure}
 
-\begin{figure}[H] 
+\begin{figure}[H]
 \begin{center}
-\includegraphics[]{osculating_circle_edge_cst.pdf} 
+\includegraphics[]{osculating_circle_edge_cst.pdf}
 \caption{Another definition of the osculating circle for arc-length parametrized curves.}
 \label{fig:1_1}
 \end{center}
@@ -644,53 +644,53 @@ Qu'on réécrit en posant $\|\vect{e}_{i-1}\| = \alpha \|\vect{e}_{i} \|$, $\alp
 \begin{center}
 \begin{tikzpicture}
 	\begin{axis}[
-	scale only axis, 
+	scale only axis,
 	legend style={at={(axis cs:0,6)},anchor=north west},
 	xmin=-3.1416/4/4, xmax= 3.1416+3.1416/4/4, restrict x to domain = 0 : 3.1416,
 	ymin=-2/4, ymax= 10+2/4, restrict y to domain = 0 : 10,
 	grid=major,
-	axis y line*= left,% the '*' avoids arrow heads 
+	axis y line*= left,% the '*' avoids arrow heads
 	xlabel={$\varphi$},
 	xtick={0, 0.7854, 1.5708, 2.3562, 3.14159},
     	xticklabels={$0$, $\frac{\pi}{4}$,  $\frac{\pi}{2}$,  $\frac{3\pi}{4}$,$\pi$},
 	ylabel={$\kappa_1, \kappa_2$},
 	ytick={0, 2, 4, 6, 8,10} ]
-		
+
 		% kappa 1
 		\addplot[black, samples = 100, domain = 0: 3.1416, solid,  thick]
 		{2*sin(deg(x)/2)};
-		\node[style={font=\scriptsize}] at (axis cs:3.0,2.4) {$\kappa_1$};			
-		\addplot[Tgray, samples = 100, domain = 0:3.1416, solid, very thin]					{\curvatureA(deg(x),2)}; 
+		\node[style={font=\scriptsize}] at (axis cs:3.0,2.4) {$\kappa_1$};
+		\addplot[Tgray, samples = 100, domain = 0:3.1416, solid, very thin]					{\curvatureA(deg(x),2)};
 		\addplot[color=Tgray, samples = 100, domain = 0:3.1416, solid, very thin]
-		{\curvatureA(deg(x),0.5)}; 
-		
+		{\curvatureA(deg(x),0.5)};
+
 		% kappa 2
 		\addplot[black, samples = 400, domain = 0:3.1416, solid,  thick]
 		{\curvatureB(deg(x),1)};
 		\node[style={font=\scriptsize}] at (axis cs:3.0,9.5) {$\kappa_2$};
 		\addplot[color=Tgray, samples = 400, domain = 0:3.1416, solid, very thin]
-		{\curvatureB(deg(x),2)}; 
+		{\curvatureB(deg(x),2)};
 		\addplot[color=Tgray, samples = 400, domain = 0:3.1416, solid, very thin]
-		{\curvatureB(deg(x),0.5)}; 
-	
-		
-	\end{axis} 
-	\begin{axis}[ 
-	scale only axis, 
+		{\curvatureB(deg(x),0.5)};
+
+
+	\end{axis}
+	\begin{axis}[
+	scale only axis,
 	xmin=-3.1416/4/4, xmax= 3.1416+3.1416/4/4, restrict x to domain = 0 : 3.1416,
 	ymin=-0.2/4, ymax= 1+0.2/4, restrict y to domain = 0 : 1,
-	axis y line*=right, 
-	axis x line=none, 
+	axis y line*=right,
+	axis x line=none,
 %	ylabel style = {rotate=-90},
 	ylabel = {${\kappa_1}/{\kappa_2}$},
 	ytick={0, 0.2, 0.4, 0.6, 0.8, 1}
-	] 
+	]
 		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid, thick]
 		{\curvatureRap(deg(x),1)};
 		\node[style={font=\scriptsize}] at (axis cs:1.1,0.95) {$\kappa_1/\kappa_2$};
 		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid, very thin]
-		{\curvatureRap(deg(x),2)}; 		
-	\end{axis} 
+		{\curvatureRap(deg(x),2)};
+	\end{axis}
 \end{tikzpicture}
 \end{center}
 \caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
@@ -730,9 +730,9 @@ Discrete bending energies :
 
 Remarque that ratios are independent of scale change (independent of R)
 
-\begin{figure}[H] 
+\begin{figure}[H]
 \begin{center}
-\includegraphics[]{circle.pdf} 
+\includegraphics[]{circle.pdf}
 \caption{Another definition of the osculating circle for arc-length parametrized curves.}
 \label{fig:1_1}
 \end{center}
@@ -746,25 +746,25 @@ qsmldkqsmldk s qsd qsd
 \begin{center}
 \begin{tikzpicture}
 	\begin{axis}[
-	scale only axis, 
+	scale only axis,
 	xmin=0, xmax= 21, restrict x to domain = 1 : 20,
 	ymin=0.5, ymax= 1.7, restrict y to domain = 0 :1.6,
 	grid=major,
 	xlabel={$\mathcal{E}_i/\mathcal{E} = f_i(N=l/|e|)$},
 	xtick={1,5,10,15,20},
 	ylabel={},
-	]		
+	]
 		\addplot[black, samples = 1000, domain = 1: 21, solid,  thin]
 		{sin(deg(pi/(2*x)))/(pi/(2*x))};
 		\node[style={font=\scriptsize}] at (axis cs:3.5,1.565) {$\mathcal{E}_1/\mathcal{E}$};
-		
+
 		\addplot[black, samples = 1000, domain = 1: 21, solid,  thin, dashed]
 		{sin(deg(pi/(2*x)))/((pi/(2*x))*cos(deg(pi/(2*x)))^2)};
 		\node[style={font=\scriptsize}] at (axis cs:2.5,0.65) {$\mathcal{E}_2/\mathcal{E}$};
-		
+
 		\addplot[Tblue, samples = 1000, domain = 0: 21, solid,  thick]
-		{1}; 	
-	\end{axis} 
+		{1};
+	\end{axis}
 \end{tikzpicture}
 \end{center}
 \caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
@@ -772,23 +772,23 @@ qsmldkqsmldk s qsd qsd
 
 \subsubsection{Elastica}
 
-\begin{figure}[H] 
+\begin{figure}[H]
 \begin{center}
-\includegraphics[]{elastica_withnum.pdf} 
+\includegraphics[]{elastica_withnum.pdf}
 \caption{Another definition of the osculating circle for arc-length parametrized curves.}
 \label{fig:1_1}
 \end{center}
 \end{figure}
 
-\begin{figure}[H] 
+\begin{figure}[H]
 \begin{center}
-\includegraphics[]{elastica_detail.pdf} 
+\includegraphics[]{elastica_detail.pdf}
 \caption{Another definition of the osculating circle for arc-length parametrized curves.}
 \label{fig:1_1}
 \end{center}
 \end{figure}
 
-\begin{figure}[H] 
+\begin{figure}[H]
 \centering
 \subfloat[][$\mathcal{E}_1/\mathcal{E} = f(N = l/|e|)$]{%
   \begin{tikzpicture}
@@ -809,17 +809,17 @@ qsmldkqsmldk s qsd qsd
 	\addplot [black, smooth, very thin]
         	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvC};
     	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.985) {$10$};
-         
+
         \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica15.txt}\crvD;
 	\addplot [black, smooth, very thin]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvD};
          \node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.978) {$15$};
-         
+
      	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica20.txt}	\crvE;
 	\addplot [black, smooth, very thin]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvE};
        	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.965) {$20$};
-         
+
      	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica25.txt}	\crvF;
 	\addplot [black, smooth, very thin]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvF};
@@ -829,9 +829,9 @@ qsmldkqsmldk s qsd qsd
 	\addplot [black, smooth, very thin]
         	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvG};
        	\node[Tgray, style={font=\scriptsize}] at (axis cs:15,0.92) {$30$};
-         
+
          \addplot[Tblue, samples = 100, domain = 0: 50, solid,  thick]
-	{1}; 	
+	{1};
 \end{axis}
   \end{tikzpicture}}\quad
 \subfloat[][$\mathcal{E}_2/\mathcal{E} = f(N = l/|e|)$]{%
@@ -853,17 +853,17 @@ qsmldkqsmldk s qsd qsd
 	\addplot [black, smooth, very thin]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvC};
          \node[Tgray, style={font=\scriptsize}] at (axis cs:10,1.044) {$10$};
-         
+
          \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica15.txt}\crvD;
 	\addplot [black, smooth, very thin]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvD};
          \node[Tgray, style={font=\scriptsize}] at (axis cs:10,1.07) {$15$};
-         
+
      	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica20.txt}	\crvE;
 	\addplot [black, smooth, very thin]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvE};
          \node[Tgray, style={font=\scriptsize}] at (axis cs:13.5,1.08) {$20$};
-         
+
      	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica25.txt}	\crvF;
 	\addplot [black, smooth, very thin]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvF};
@@ -873,9 +873,9 @@ qsmldkqsmldk s qsd qsd
 	\addplot [black, smooth, very thin]
          table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvG};
          \node[Tgray, style={font=\scriptsize}] at (axis cs:27,1.08) {$30$};
-         
+
          \addplot[Tblue, samples = 100, domain = 0: 50, solid,  thick]
-	{1}; 	
+	{1};
 \end{axis}
   \end{tikzpicture}}
 \caption[]{Bending energy representativity}
@@ -888,6 +888,3 @@ qsmldkqsmldk s qsd qsd
 \bibliography{../bibliography}
 
 %sdsd
-
-
-
