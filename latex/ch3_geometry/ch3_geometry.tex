@@ -516,7 +516,7 @@ soit pour une spirale dont on connait
 	grid=major,
 	]
 
-       	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
+ 	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
 	\addplot [Tblue, smooth, thick]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\frenet};
 

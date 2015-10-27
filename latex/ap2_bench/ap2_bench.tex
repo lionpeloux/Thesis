@@ -31,22 +31,23 @@ A short story about how a code is translated to get machin instructions
   \begin{tikzpicture}
     \pgfplotstableread[col sep=comma]{ap2_bench/plot/inputdata.txt}\mydata;
     \begin{axis}[
-      xbar, xmin=0, enlarge x limits=0.05,
+      xbar, xmin=0, enlarge x limits=0.1,
+      % grid,
       xmajorgrids,
-      width=15cm,
-      height=20cm,
-      enlarge y limits=0.06,
+      width=13cm,
+      height=22cm,
+      enlarge y limits=0.1,
       % xlabel={compilation time / seconds},
       area style,
       ytick=data,
       yticklabels from table={\mydata}{cat} % Get tables from second column of data table
       ,bar width=0.1
-      ,legend cell align=left,
+      ,legend cell align=left
       ,legend style={area legend, draw=white, legend columns=1}
       % ,xtick=\empty, ytick=\empty,
       ,separate axis lines
-      ,x axis line style=white
-      ,y axis line style=white
+      % ,x axis line style=white
+      % ,y axis line style=white
       ,every x tick/.style={color=white, very thin}
       ,every y tick/.style={color=white, very thin}
     ]
@@ -56,13 +57,13 @@ A short story about how a code is translated to get machin instructions
     \addplot [style={white,fill=Tred,mark=none}]
               table [x expr=\thisrowno{4}, y expr=-\coordindex] {\mydata};
 
-    \addplot [style={white,fill=Tgray,mark=none}]
+    \addplot [style={white,fill=Tdarkgray,mark=none}]
               table [x expr=\thisrowno{3}, y expr=-\coordindex] {\mydata};
 
-    \addplot [style={white,fill=Tgray,mark=none}]
+    \addplot [style={white,fill=Tdarkgray,mark=none}]
               table [x expr=\thisrowno{2}, y expr=-\coordindex] {\mydata};
 
-    \addplot [style={white,fill=Tgray,mark=none}]
+    \addplot [style={white,fill=Tdarkgray,mark=none}]
               table [x expr=\thisrowno{1}, y expr=-\coordindex] {\mydata};
 
     \legend{Intel MKL, OpenBLAS, loop NBC, naive loop, native}
