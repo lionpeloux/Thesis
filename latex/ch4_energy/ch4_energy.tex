@@ -16,6 +16,10 @@ Sina \cite{Nabei2014}
 
 \cite{Fuller1978}, \cite{deVries2005},  \cite{Vauquelin2000}, \cite{Berger2009}
 
+Dynamic relaxation :
+\cite{Lewis2003}
+En particulier,voir pour un comparatif avec une méthode implicite.
+
 \note{
 \begin{enumerate}
 \item quaternion pour piloter les input / ouput ?
@@ -58,9 +62,9 @@ Strains are supposed to remain small so that material frame remains orthogonal t
 	\end{bmatrix}
 \end{gather}
 
-\note{La théorie des poutres est une application de la théorie de l'élasticité isotrope. Pour mener les calculs de résistance des matériaux, on considère les hypothèses suivantes : 
+\note{La théorie des poutres est une application de la théorie de l'élasticité isotrope. Pour mener les calculs de résistance des matériaux, on considère les hypothèses suivantes :
 
-(1) hypothèse de Bernoulli : au cours de la déformation, les sections droites restent perpendiculaires à la courbe moyenne ; 
+(1) hypothèse de Bernoulli : au cours de la déformation, les sections droites restent perpendiculaires à la courbe moyenne ;
 
 (2) les sections droites restent planes selon Navier-Bernoulli (pas de gauchissement).
 
@@ -71,8 +75,8 @@ Those equations can be formulated with the \emph{Darboux vector} of the chosen m
 \begin{gather}
 	\vect{d}'_{i}(s) = \vect{\Omega}_m(s) \times \vect{d}_i(s)
 	\quad,\quad
-	\vect{\Omega}_m(s) 
-	= 
+	\vect{\Omega}_m(s)
+	=
 	\begin{bmatrix}
 		\tau(s) \\
 		\kappa_{1}(s) \\
@@ -88,14 +92,14 @@ The material curvatures are denoted $\kappa_1(s)$ and $\kappa_2(s)$ and represen
 	\quad,\quad
 	\kappa(s) = \norm{\vect{t}'(s)}
 	\quad,\quad
-	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) = \frac{\vect{t}(s) \times \vect{t}'(s)}{\kappa(s)} 
+	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) = \frac{\vect{t}(s) \times \vect{t}'(s)}{\kappa(s)}
 \end{equation}
 To describe the osculating plane in which lies the bending part of the deformation, let’s introduce the \emph{curvature binormal} $\kappa\vect{b}(s) = \vect{t}(s)\times\vect{t}'(s)$, the vector of direction $\vect{b}(s)$ and norm $\kappa(s)$. At each point of arc-length $s$ the osculating plane is normal to $\kappa\vect{b}(s)$.
 
 \subsection{Elastic energy}
 Kirrchhoff’s theory assigns an elastic energy to beams according to their strain \cite{Audoly2010}. In this theory, a beam is supposed to be inextensible. Thus the elastic energy ($\mathcal{E}_p$) only accounts for torsion and bending behaviors and is given by :
 \begin{equation}
-	\mathcal{E}_{p} = 
+	\mathcal{E}_{p} =
 	\tfrac{1}{2} \int_{0}^{L}EI_1(\kappa_1-\overbar{\kappa_1})^2 + EI_2(\kappa_2-\overbar{\kappa_2})^2 ds
 	+ \tfrac{1}{2} \int_{0}^{L} \beta(\tau -{\overbar{\tau}})^2 ds
 \end{equation}
@@ -145,7 +149,7 @@ Thus, by the help of $\vect{\Omega}_b(s)$, it’s possible to transport a given 
 \section{Strains}
 
 \subsection{Axial strain}
-There is no axial strain to be considered as far as the rod is supposed to be unstretchable. 
+There is no axial strain to be considered as far as the rod is supposed to be unstretchable.
 
 \subsection{Bending strain}
 
@@ -153,7 +157,7 @@ Let’s compute the bending strains $\kappa_1$ and $\kappa_2$ regarding the geom
 \begin{subequations}
 	\begin{gather}
 	\kappa\vect{b}\cdot\vect{d}_1 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_1 = (\vect{d}_1\times\vect{d}_3)\cdot\vect{d}'_3 = -\vect{d}_2\cdot\vect{d}'_3 = \kappa_1 \\
-	\kappa\vect{b}\cdot\vect{d}_2 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_2 = (\vect{d}_2\times\vect{d}_3)\cdot\vect{d}'_3 = \vect{d}_1\cdot\vect{d}'_3 = \kappa_2	
+	\kappa\vect{b}\cdot\vect{d}_2 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_2 = (\vect{d}_2\times\vect{d}_3)\cdot\vect{d}'_3 = \vect{d}_1\cdot\vect{d}'_3 = \kappa_2
 	\end{gather}
 \end{subequations}
 That is to say $\kappa\vect{b}$ is orthogonal to $\vect{d}_3$ :
@@ -202,7 +206,7 @@ Note that the Frenet frame does not lead to a correct evaluation of the twist.
 \section{Elastic energy}
 Introducing $\vect{\omega}$ and $\theta$, the elastic energy can be rewritten as follow :
 \begin{equation}
-		\mathcal{E}_{p} = \mathcal{E}_{b} + \mathcal{E}_{t} = 
+		\mathcal{E}_{p} = \mathcal{E}_{b} + \mathcal{E}_{t} =
 		\tfrac{1}{2} \int_{0}^{L} (\vect{\omega}-\overbar{\vect{\omega}})^T B (\vect{\omega}-\overbar{\vect{\omega}}) ds
 		+ \tfrac{1}{2} \int_{0}^{L} \beta(\theta' -{\overbar{\theta'}})^2 ds
 \end{equation}
@@ -244,7 +248,7 @@ Recalling that $\theta$ and $\vect{x}$ are independant variables and that Bishop
 	\pdiffof{\theta}{\vect{d}_2}{s}{h_\theta}
 	= \frac{d}{d\lambda} \vect{d}_2[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}
 	= \left(-\cos{\theta}\;\vect{u} - \sin{\theta}\;\vect{v}\right) \cdot h_\theta
-	= -\vect{d}_1\cdot h_\theta	
+	= -\vect{d}_1\cdot h_\theta
 	\end{gather}
 %	\right.
 \end{subequations}
@@ -261,7 +265,7 @@ Regarding the definition of the material curvatures vector and the derivative of
 	= - \mat{J}\vect{\omega}\cdot h_\theta\\
 \end{equation}
 Where $\mat{J}$ is the matrix that acts on
-two dimensional vectors by counter-clockwise rotation of angle $\frac{\pi}{2}$ : 
+two dimensional vectors by counter-clockwise rotation of angle $\frac{\pi}{2}$ :
 \begin{equation}
 	\mat{J} = \begin{bmatrix}
 			0	&	-1\\
@@ -274,10 +278,10 @@ two dimensional vectors by counter-clockwise rotation of angle $\frac{\pi}{2}$ :
 The moment of torsion is given by the functional derivative of the potential elastic energy with respect to $\theta$ which can be decomposed according to the chaine rule :
 \begin{equation}
 	\begin{aligned}
-	\scalar{-m(s)}{h_\theta} = \pdiffof{\theta}{\mathcal{E}_p}{s}{h_\theta} 
+	\scalar{-m(s)}{h_\theta} = \pdiffof{\theta}{\mathcal{E}_p}{s}{h_\theta}
 	&= \pdiffof{\theta}{\mathcal{E}_b}{s}{h_\theta} + \pdiffof{\theta}{\mathcal{E}_t}{s}{h_\theta} \\
 	&= \pdiffof{\theta}{\mathcal{E}_b[\vect{\omega}[\theta]]}{s}{h_\theta} + \pdiffof{\theta}{\mathcal{E}_t[\theta]}{s}{h_\theta} \\
-	\end{aligned} 
+	\end{aligned}
 \end{equation}
 
 \subsubsection{Derivative of the torsion energy with respect to $\theta$}
@@ -315,12 +319,12 @@ Finally, reminding eq 4.14 :
 \end{equation}
 
 \subsubsection{Moment of torsion}
-Thus, the 
+Thus, the
 \begin{equation}
 	\begin{aligned}
 	\scalar{-m(s)}{h_\theta} &= \pdiffof{\theta}{\mathcal{E}_b[\vect{\omega}[\theta]]}{s}{h_\theta} + \pdiffof{\theta}{\mathcal{E}_t[\theta]}{s}{h_\theta} \\
 	&= \int_{0}^{L} \left(\left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) - (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\right) \cdot h_\theta \;dt
-	\end{aligned} 
+	\end{aligned}
 \end{equation}
 Finally, we can conclude on the expression of the internal moment of torsion :
 \begin{equation}
@@ -329,7 +333,7 @@ Finally, we can conclude on the expression of the internal moment of torsion :
 
 \subsubsection{Quasistatic hypothesis}
 \begin{equation}
-	\left(\beta(\theta' -{\overbar{\theta'}})\right)' + (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} = 0 
+	\left(\beta(\theta' -{\overbar{\theta'}})\right)' + (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} = 0
 \end{equation}
 
 
@@ -366,20 +370,20 @@ What we want to achive is to write at arc-length $s$ the Bishop frame in the def
 
 We first write $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the the basis $\{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$. Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. Denoting :
 
-\begin{figure}[t] 
-\centering 
-\includegraphics[width=\linewidth]{writhe.pdf} 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{writhe.pdf}
 \caption{Repères de Frenet attachés à $\gamma$.}
 \label{fig:1_1}
 \end{figure}
 
 \subsubsection{Calculation of $\Psi_\epsilon$}
 
-\begin{figure}[p] 
-\centering 
-\includegraphics[width=\textwidth]{rotation_A.pdf} 
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{rotation_A.pdf}
 \caption{$\tilde{F}$ is obtained by rotating $\tilde{F}_\epsilon$ around $\vect{t}$ of an angle $\Psi_\epsilon$.}
-\includegraphics[width=\textwidth]{rotation_B.pdf} 
+\includegraphics[width=\textwidth]{rotation_B.pdf}
 \caption{$\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha_\epsilon$.}
 \label{A}
 \end{figure}
@@ -405,7 +409,7 @@ The calculation of $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ is straight fo
 Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and $\kappa\vect{b}[\vect{x}]\cdot\vect{d}_3[\vect{x}] = 0$, and using the invariance of circular product by cyclic permutation, one can express :
 \begin{equation}
 	\begin{aligned}
-		\Psi_\epsilon[\vect{x}](s) 
+		\Psi_\epsilon[\vect{x}](s)
 		&= -\int_0^s \kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt\\
 		&= - \lambda \int_0^s (\vect{x}'\times\vect{h}''_x + \vect{h}'_x\times\vect{x}'') \cdot \vect{x}' \,dt + o(\lambda)\\
 		&= - \lambda \int_0^s \kappa\vect{b}[\vect{x}]\cdot\vect{h}'_x \,dt + o(\lambda)\\
@@ -414,7 +418,7 @@ Thus, reminding that $\vect{d}_3[\vect{x}] = \vect{x}'$ and $\kappa\vect{b}[\vec
 By integration by parts, dropping the implicit reference to $\vect{x}$ in the notation, and denoting by $\delta_s$ and $H_s$ the Dirac function and the Heaviside step function centered at $s$, $\Psi_\epsilon(s)$ could be rewritten as :
 \begin{equation}
 	\begin{aligned}
-		\Psi_\epsilon(s) 
+		\Psi_\epsilon(s)
 		&= - \lambda \int_0^s \kappa\vect{b}\cdot\vect{h}'_x \,dt + o(\lambda)\\
 		&=  - \lambda \left(\big[\kappa\vect{b} \cdot  \vect{h}_x \big]_0^s - \int_0^s \kappa\vect{b}' \cdot  \vect{h}_x \,dt\right) + o(\lambda)\\
 		&= - \lambda \left(\int_0^s \left(\left(\delta_s-\delta_0\right)\kappa\vect{b} - \kappa\vect{b}'\right)\cdot  \vect{h}_x \,dt\right) + o(\lambda)\\
@@ -441,7 +445,7 @@ Because the rod is supposed to be inextensible, the following properties hold :
 \end{equation}
 Thus, when the perturbation $\vect{\epsilon}$ of the centerline gets infinitesimal $\vect{t}_\epsilon$ stays collinear to $\vect{t}$. Indeed :
 \begin{equation}
-		\|\vect{t}_\epsilon\| = 1 
+		\|\vect{t}_\epsilon\| = 1
 		\Rightarrow  (\vect{x}+\vect{\epsilon})' \cdot (\vect{x}+\vect{\epsilon})' = 1
 		\Leftrightarrow  \vect{x}'\cdot\vect{\epsilon}' = - \tfrac{\lambda^2}{2}\|\vect{h}_x'\|^2
 \end{equation}
@@ -468,9 +472,9 @@ Finally, it's possible to conclude that $\alpha_\epsilon(s)$ is in first order o
 	\lim_{\lambda \to 0} \alpha_\epsilon(s) = 0
 \end{equation}
 
-%\begin{figure}[t] 
-%\centering 
-%\includegraphics[width=\linewidth]{rotation_B.pdf} 
+%\begin{figure}[t]
+%\centering
+%\includegraphics[width=\linewidth]{rotation_B.pdf}
 %\caption{$\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha$.}
 %\label{fig:1_1}
 %\end{figure}
@@ -490,7 +494,7 @@ Finally, it's possible to conclude that $\alpha_\epsilon(s)$ is in first order o
 
 Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha_\epsilon$. Where :
 \begin{equation}
-	\vect{b} = \vect{t}_\epsilon \times \vect{t} 
+	\vect{b} = \vect{t}_\epsilon \times \vect{t}
 	 = \cos{\gamma}\;\vect{\tilde{u}}_\epsilon + \sin{\gamma}\;\vect{\tilde{v}}_\epsilon
 	 = \cos{\gamma}\;\vect{u}_\epsilon + \sin{\gamma}\;\vect{v}_\epsilon
 \end{equation}
@@ -498,22 +502,22 @@ Expressing $F_\epsilon$ on the basis $\tilde{F}_\epsilon$ gives for $\vect{u}_\e
 \begin{equation}
 	\begin{aligned}
 	\vect{u}_\epsilon &= \sin{\gamma}\;\vect{b} + \cos{\gamma}\;\big(\sin{\alpha_\epsilon}\;\vect{\tilde{t}}
-	+ \cos{\alpha_\epsilon}\;(\cos{\gamma}\;\vect{\tilde{u}_\epsilon} 
+	+ \cos{\alpha_\epsilon}\;(\cos{\gamma}\;\vect{\tilde{u}_\epsilon}
 	- \sin{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
 	&=\cos{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
-	+ (\cos{\alpha_\epsilon}\cos^2{\gamma}+ \cos^2{\gamma})\vect{\tilde{u}_\epsilon} 
-	+ \sin{\gamma}\cos{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{v}_\epsilon} 
+	+ (\cos{\alpha_\epsilon}\cos^2{\gamma}+ \cos^2{\gamma})\vect{\tilde{u}_\epsilon}
+	+ \sin{\gamma}\cos{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{v}_\epsilon}
 	\end{aligned}
 \end{equation}
 And for $\vect{v}_\epsilon$:
 \begin{equation}
 	\begin{aligned}
 	\vect{v}_\epsilon &= \cos{\gamma}\;\vect{b} + \sin{\gamma}\;\big(-\sin{\alpha_\epsilon}\;\vect{\tilde{t}}
-	+ \cos{\alpha_\epsilon}\;(\sin{\gamma}\;\vect{\tilde{u}_\epsilon} 
+	+ \cos{\alpha_\epsilon}\;(\sin{\gamma}\;\vect{\tilde{u}_\epsilon}
 	- \cos{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
 	&=-\sin{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
-	+ \cos{\gamma}\sin{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{u}_\epsilon} 
-	+ (\cos^2{\gamma} + \cos{\alpha_\epsilon}\sin^2{\gamma})\vect{\tilde{v}_\epsilon} 
+	+ \cos{\gamma}\sin{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{u}_\epsilon}
+	+ (\cos^2{\gamma} + \cos{\alpha_\epsilon}\sin^2{\gamma})\vect{\tilde{v}_\epsilon}
 	\end{aligned}
 \end{equation}
 
@@ -525,7 +529,7 @@ Thus, one can finally express $F_\epsilon$ on the basis $F$ as the composition o
 	\begin{bmatrix}
 		1 & 0 & 0 \\
 		0 & \cos{\Psi_\epsilon} & -\sin{\Psi_\epsilon} \\
-		0 & \sin{\Psi_\epsilon} & \cos{\Psi_\epsilon} 
+		0 & \sin{\Psi_\epsilon} & \cos{\Psi_\epsilon}
 	\end{bmatrix}
 	\begin{bmatrix}
 		\cos{\gamma}\sin{\alpha_\epsilon} \\
@@ -544,7 +548,7 @@ Thus, one can finally express $F_\epsilon$ on the basis $F$ as the composition o
 	\begin{bmatrix}
 		1 & 0 & 0 \\
 		0 & \cos{\Psi_\epsilon} & -\sin{\Psi_\epsilon} \\
-		0 & \sin{\Psi_\epsilon} & \cos{\Psi_\epsilon} 
+		0 & \sin{\Psi_\epsilon} & \cos{\Psi_\epsilon}
 	\end{bmatrix}
 	\begin{bmatrix}
 		-\sin{\gamma}\sin{\alpha_\epsilon} \\
@@ -562,7 +566,7 @@ Thus, one can finally express $F_\epsilon$ on the basis $F$ as the composition o
 \end{subequations}
 
 %\begin{equation}
-%	
+%
 %\end{equation}
 Here, the expressions avec been developed in first order of $\lambda$ as far as $\alpha_\epsilon$ and $\Psi_\epsilon$ it's been proofed in eq [] that those quantities tends two zero when the perturbation of the centerline is infinitesimal.
 
@@ -579,9 +583,9 @@ Finally, one can express the variation of material directors with respect to an 
 Recalling the expression of the material frame expressed in the reference Bishop frame, it's now easy to deduce the variation of material frame with respect to a variation of the rod's centerline :
 \begin{subequations}
 		\begin{gather}
-			\vect{d}_1[\vect{x}+\lambda \vect{h}_x] = 
+			\vect{d}_1[\vect{x}+\lambda \vect{h}_x] =
 			\cos{\theta} \; \vect{u}_\epsilon + \sin{\theta} \; \vect{v}_\epsilon\\
-			\vect{d}_2[\vect{x}+\lambda \vect{h}_x] = 
+			\vect{d}_2[\vect{x}+\lambda \vect{h}_x] =
 			-\sin{\theta} \; \vect{u}_\epsilon + \cos{\theta} \; \vect{v}_\epsilon
 		\end{gather}
 \end{subequations}
@@ -598,10 +602,10 @@ Which leads according to the previous équation to :
 It's know straightforward from the previous section to express the variation of the material curvatures with respect to a variation $\vect{\epsilon} =\lambda \vect{h}_x$ of $\vect{x}$ while $\theta$ remains unchanged.
 \begin{subequations}
 	\begin{gather}
-		(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] = 
+		(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] =
 			(\vect{x}''+\lambda \vect{h}_x'')\cdot\big(\vect{d}_1 + \Psi_\epsilon\vect{d}_2
 			+ \alpha_\epsilon\cos{(\theta-\gamma)}\;\vect{t} + o(\lambda)\big) \\
-		(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] = 
+		(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] =
 			(\vect{x}''+\lambda \vect{h}_x'')\cdot\big(\vect{d}_2 - \Psi_\epsilon\vect{d}_1
 			- \alpha_\epsilon\sin{(\theta+\gamma)}\;\vect{t} + o(\lambda)\big)
 		\end{gather}
@@ -610,13 +614,13 @@ Thus, recalling that $\vect{x}''\cdot\vect{d}_3 = 0$ and that $\alpha_\epsilon$ 
 \begin{subequations}
 	\begin{gather}
 		(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] = 					\vect{x}''\cdot\vect{d}_1 + \Psi_\epsilon\vect{x}''\cdot\vect{d}_2 + \lambda \vect{h}_x''\cdot\vect{d}_1 + o(\lambda)\\
-		(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] = 
+		(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] =
 				\vect{x}''\cdot\vect{d}_2 - \Psi_\epsilon\vect{x}''\cdot\vect{d}_1 +  \lambda \vect{h}_x''\cdot\vect{d}_2 + o(\lambda)
 	\end{gather}
 \end{subequations}
 Which finally leads to :
 \begin{equation}
-		\vect{\omega}[\vect{x}+\lambda \vect{h}_x]  = 
+		\vect{\omega}[\vect{x}+\lambda \vect{h}_x]  =
 		\vect{\omega}[\vect{x}] - \Psi_\epsilon\mat{J}\vect{\omega}[\vect{x}]+\lambda
 		\begin{bmatrix}
 			-\vect{h}_x''\cdot\vect{d}_2\\
@@ -639,10 +643,10 @@ Reminding the expression of $\Psi_\epsilon$ computed in paragraphe[], one can ex
 The forces acting on the centerline are given by the functional derivative of the potential elastic energy with respect to $x$ which can be decomposed according to the chaine rule :
 \begin{equation}
 	\begin{aligned}
-	\scalar{-f(s)}{\vect{h}_x} = \pdiffof{x}{\mathcal{E}_p}{s}{\vect{h}_x} 
+	\scalar{-f(s)}{\vect{h}_x} = \pdiffof{x}{\mathcal{E}_p}{s}{\vect{h}_x}
 	&= \pdiffof{x}{\mathcal{E}_b}{s}{\vect{h}_x} + \pdiffof{x}{\mathcal{E}_t}{s}{\vect{h}_x} \\
 	&= \pdiffof{x}{\mathcal{E}_b[\vect{\omega}[\vect{x}]]}{s}{\vect{h}_x} + \pdiffof{x}{\mathcal{E}_t[\vect{x}]}{s}{\vect{h}_x} \\
-	\end{aligned} 
+	\end{aligned}
 \end{equation}
 
 \subsubsection{Derivative of the torsion energy with respect to $x$}
@@ -670,7 +674,7 @@ Finally, reminding eq 4.14 :
 Where :
 \begin{subequations}
 	\begin{gather}
-	\mathcal{A} = \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} 
+	\mathcal{A} = \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
 	\begin{bmatrix}
 		-{\vect{d}_2}^T\\
 		{\vect{d}_1}^T\\
@@ -689,34 +693,34 @@ Where :
 Calculus of $\mathcal{A}$ :
 \begin{equation}
 	\begin{split}
-	\mathcal{A} 
-	& = \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} 
+	\mathcal{A}
+	& = \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
 		\end{bmatrix}\cdot \vect{h}_x'' \;dt \\
-	& = \left[(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} 
+	& = \left[(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
 		\end{bmatrix} \cdot \vect{h}_x'\right]_0^L
-		- \int_{0}^{L} \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		- \int_{0}^{L} \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
 		\end{bmatrix}\right)'\cdot \vect{h}_x' \;dt \\
-	& = \left[(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} 
+	& = \left[(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
 		\end{bmatrix} \cdot \vect{h}_x'
-		- \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		- \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
 		\end{bmatrix}\right)'\cdot \vect{h}_x
 		\right]_0^L\\
-		&+ \int_{0}^{L} \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		&+ \int_{0}^{L} \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
@@ -736,9 +740,9 @@ Calculus of $\mathcal{B}$ :
 	-\left(\kappa\vect{b}\cdot\vect{h}_x\right)(0) \int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;dt
 	+
 	\int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
-	\kappa\vect{b}\cdot\vect{h}_x 
+	\kappa\vect{b}\cdot\vect{h}_x
 	\;dt
-	\end{aligned} 
+	\end{aligned}
 \end{equation}
 
 Calculus of $\mathcal{C}$ :
@@ -757,11 +761,11 @@ Calculus of $\mathcal{C}$ :
 	\int_{u=0}^{L}-\left(\int_{t=u}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;dt\right)
 	\left(\kappa\vect{b}'\cdot \vect{h}_x\right)\;du
 	\\
-	\end{aligned} 
+	\end{aligned}
 \end{equation}
 By several integration by parts, using Fubini’s theorem once and supposing that the terms vanishes at $s=0$ and $s=L$ :
 \begin{equation}
-	\begin{aligned} 
+	\begin{aligned}
 	\mathcal{B}+\mathcal{C} &=
 	\int_{t=0}^{L} \left(
 	(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
@@ -783,13 +787,13 @@ By several integration by parts, using Fubini’s theorem once and supposing tha
 	-\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
 	\kappa\vect{b}
 	\right)'\cdot \vect{h}_x \;dt\\
-	\end{aligned} 
+	\end{aligned}
 \end{equation}
 
 Which can be rewritted using the quasi-static hypothesis :
 \begin{equation}
-	\begin{aligned} 
-	\mathcal{B}+\mathcal{C} 
+	\begin{aligned}
+	\mathcal{B}+\mathcal{C}
 	&=
 	\int_{t=0}^{L} \left(
 	-\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
@@ -814,7 +818,7 @@ Which can be rewritted using the quasi-static hypothesis :
 	\beta(\theta' -{\overbar{\theta'}})
 	\kappa\vect{b}
 	\right)'\cdot \vect{h}_x \;dt\\
-	\end{aligned} 
+	\end{aligned}
 \end{equation}
 
 Finally :
@@ -822,7 +826,7 @@ Finally :
 		\pdiffof{x}{\mathcal{E}_b[\vect{\omega}[\vect{x}]]}{s}{\vect{h}_x}
 		=
 		\int_{0}^{L} \left(
-		\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
@@ -838,13 +842,13 @@ Finally :
 
 
 
-Thus, the 
+Thus, the
 \begin{equation}
 	\begin{aligned}
 	\scalar{-f(s)}{\vect{h}_x} &= \pdiffof{x}{\mathcal{E}_p}{s}{\vect{h}_x}\\
 		&=
 		\int_{0}^{L} \left(
-		\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+		\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
@@ -853,12 +857,12 @@ Thus, the
 		\left(\beta(\theta' -{\overbar{\theta'}})
 		\kappa\vect{b}\right)'
 		\right)\cdot \vect{h}_x \;dt\\
-	\end{aligned} 
+	\end{aligned}
 \end{equation}
 Finally, we can conclude on the expression of the internal moment of torsion :
 \begin{equation}
-	f(s) = 
-	-\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+	f(s) =
+	-\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
@@ -903,7 +907,7 @@ Faire le bilan des bénéfices de l'hypothèse quasi-statique :
 
 Note that :
 \begin{equation}
-	\mat{M} = \left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
+	\mat{M} = \left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
 	= (\kappa_1 - \overbar{\kappa_1})EI_1\vect{d}_1 + (\kappa_2 - \overbar{\kappa_2})EI_2\vect{d}_2
 \end{equation}
 
