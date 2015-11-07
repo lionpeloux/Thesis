@@ -23,6 +23,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots,pgfplotstable}
 \usepackage{cleveref} % attention a loader apres hypperef
+\usepackage{csvsimple, booktabs, longtable} % pour les tables CSV
 
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{patterns}
@@ -76,14 +77,12 @@
     line width = 0.25pt}
 }
 
-
 % 3pt-circle-curvature where curvatureA(phi, alpha)
 \def\curvatureA(#1,#2){2*sin(#1)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5}
 %  Bi-tangent-circle-curvature where curvatureA(phi, alpha)
 \def\curvatureB(#1,#2){4*tan(#1/2)/(1+(#2))}
 % curvature A / curvature B
 \def\curvatureRap(#1,#2){(1+#2)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5*cos(#1/2)^2}
-
 
 \definecolor{Tblue}{RGB}{104, 135, 255}
 \definecolor{Tred}{RGB}{255, 110, 103}
@@ -128,6 +127,34 @@
 \newcommand{\norm}[1]{\left\|#1\right\|    }
 
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+
+% LDP Julia
+%--------------------------------------
+
+\usepackage{framed}
+
+\definecolor{shadecolor}{gray}{.92}
+\definecolor{incolor}{rgb}{0,0,.7}
+\definecolor{outcolor}{rgb}{.65,0,0}
+\definecolor{syntaxcolor}{rgb}{.65,0,0}
+\usepackage{verbatim}
+\newcommand{\sh}[1]{\textcolor{syntaxcolor}{#1}}
+
+\newcounter{jcounter}
+\newenvironment{jinput}[1][]{\ifx#1\relax\else\setcounter{jcounter}{#1}\addtocounter{jcounter}{-1}\fi\refstepcounter{jcounter}\ttfamily\hspace*{-.7in}\noindent\begin{minipage}[t]{.19\textwidth}\vskip2ex\hspace*{\fill}\textcolor{incolor}{In[\arabic{jcounter}]: }\end{minipage}\begin{minipage}[t]{.8\textwidth}\vskip-0ex\begin{shaded}}{\end{shaded}\end{minipage}\par}
+
+\newenvironment{joutput}[1][]{\vskip1ex plus .2ex minus .1ex\ifx#1\relax\else\setcounter{jcounter}{#1}\fi\addtocounter{jcounter}{-1}\refstepcounter{jcounter}\ttfamily\noindent\hspace*{-.2in}\begin{minipage}[t]{.19\textwidth}\vskip0ex\hspace*{\fill}\textcolor{outcolor}{Out[\arabic{jcounter}]: }\end{minipage}\begin{minipage}[t]{.8\textwidth}\vskip-0ex}{\end{minipage}\par\vskip1.5ex}
+
+     \newcommand{\ja}{\begin{jinput}}
+     \newcommand{\jb}{\end{jinput}\begin{joutput}}
+     \newcommand{\jc}{\end{joutput}}
+
+    \newcommand{\jav}{\begin{jinput}\begin{verbatim}}
+     \newcommand{\jbv}{\end{verbatim}\end{jinput}\begin{joutput}\begin{verbatim}}
+     \newcommand{\jcv}{\end{verbatim} \end{joutput}}
+
+\usepackage{fancyvrb}
 
 % \fonction{f}{E}{F}{x}{f(x)}
 

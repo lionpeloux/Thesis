@@ -1,0 +1,45 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGgithub{k}{using} \PYGgithub{n}{VML}
+
+\PYGgithub{c}{\PYGgithubZsh{} wrap functions to avoid global scoping while testing}
+\PYGgithub{k}{function}\PYGgithub{n+nf}{ sqrt\PYGgithubZus{}jvectorized}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{o}{\PYGgithubZlt{}:}\PYGgithub{n}{Number}\PYGgithub{p}{\PYGgithubZcb{}(}\PYGgithub{n}{a}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{})}
+    \PYGgithub{n}{sqrt}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{)}
+\PYGgithub{k}{end}
+\PYGgithub{k}{function}\PYGgithub{n+nf}{ sqrt\PYGgithubZus{}jbroadcast}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{o}{\PYGgithubZlt{}:}\PYGgithub{n}{Number}\PYGgithub{p}{\PYGgithubZcb{}(}\PYGgithub{n}{a}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{})}
+    \PYGgithub{n}{broadcast}\PYGgithub{p}{(}\PYGgithub{n}{sqrt}\PYGgithub{p}{,}\PYGgithub{n}{a}\PYGgithub{p}{)}
+\PYGgithub{k}{end}
+\PYGgithub{k}{function}\PYGgithub{n+nf}{ sqrt\PYGgithubZus{}jbroadcast}\PYGgithub{o}{!}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{o}{\PYGgithubZlt{}:}\PYGgithub{n}{Number}\PYGgithub{p}{\PYGgithubZcb{}(}\PYGgithub{n}{dest}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{},} \PYGgithub{n}{a}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{})}
+    \PYGgithub{n}{broadcast}\PYGgithub{o}{!}\PYGgithub{p}{(}\PYGgithub{n}{sqrt}\PYGgithub{p}{,}\PYGgithub{n}{dest}\PYGgithub{p}{,}\PYGgithub{n}{a}\PYGgithub{p}{)}
+\PYGgithub{k}{end}
+\PYGgithub{k}{function}\PYGgithub{n+nf}{ sqrt\PYGgithubZus{}jmap}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{o}{\PYGgithubZlt{}:}\PYGgithub{n}{Number}\PYGgithub{p}{\PYGgithubZcb{}(}\PYGgithub{n}{a}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{})}
+    \PYGgithub{n}{map}\PYGgithub{o}{!}\PYGgithub{p}{(}\PYGgithub{n}{sqrt}\PYGgithub{p}{,}\PYGgithub{n}{a}\PYGgithub{p}{)}
+\PYGgithub{k}{end}
+\PYGgithub{k}{function}\PYGgithub{n+nf}{ sqrt\PYGgithubZus{}jmap}\PYGgithub{o}{!}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{o}{\PYGgithubZlt{}:}\PYGgithub{n}{Number}\PYGgithub{p}{\PYGgithubZcb{}(}\PYGgithub{n}{dest}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{},} \PYGgithub{n}{a}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{})}
+    \PYGgithub{n}{map}\PYGgithub{o}{!}\PYGgithub{p}{(}\PYGgithub{n}{sqrt}\PYGgithub{p}{,}\PYGgithub{n}{dest}\PYGgithub{p}{,}\PYGgithub{n}{a}\PYGgithub{p}{)}
+\PYGgithub{k}{end}
+\PYGgithub{k}{function}\PYGgithub{n+nf}{ sqrt\PYGgithubZus{}jloop}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{o}{\PYGgithubZlt{}:}\PYGgithub{n}{Number}\PYGgithub{p}{\PYGgithubZcb{}(}\PYGgithub{n}{dest}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{},}\PYGgithub{n}{a}\PYGgithub{p}{::}\PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{})}
+    \PYGgithub{p}{@}\PYGgithub{n}{inbounds} \PYGgithub{k}{for} \PYGgithub{n}{i} \PYGgithub{k}{in} \PYGgithub{n}{eachindex}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{)} \PYGgithub{n}{dest}\PYGgithub{p}{[}\PYGgithub{n}{i}\PYGgithub{p}{]}\PYGgithub{o}{=}\PYGgithub{n}{sqrt}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{[}\PYGgithub{n}{i}\PYGgithub{p}{])} \PYGgithub{k}{end}
+\PYGgithub{k}{end}
+
+\PYGgithub{k}{function}\PYGgithub{n+nf}{ sqrt\PYGgithubZus{}bench}\PYGgithub{p}{()}
+    \PYGgithub{c}{\PYGgithubZsh{} define vector size and floating precision}
+    \PYGgithub{n}{n} \PYGgithub{o}{=} \PYGgithub{l+m+mi}{1\PYGgithubZus{}000}
+    \PYGgithub{n}{T} \PYGgithub{o}{=} \PYGgithub{k+kt}{Float64}
+    \PYGgithub{c}{\PYGgithubZsh{} allocate vectors}
+    \PYGgithub{n}{dest}  \PYGgithub{o}{=} \PYGgithub{n}{ones}\PYGgithub{p}{(}\PYGgithub{n}{T}\PYGgithub{p}{,}\PYGgithub{n}{n}\PYGgithub{p}{)}
+    \PYGgithub{p}{@}\PYGgithub{n}{time} \PYGgithub{n}{a} \PYGgithub{o}{=} \PYGgithub{n}{rand}\PYGgithub{p}{(}\PYGgithub{n}{T}\PYGgithub{p}{,}\PYGgithub{n}{n}\PYGgithub{p}{)}
+    \PYGgithub{c}{\PYGgithubZsh{} bench}
+    \PYGgithub{n}{gc}\PYGgithub{p}{()}
+    \PYGgithub{n}{gc\PYGgithubZus{}enable}\PYGgithub{p}{(}\PYGgithub{n}{false}\PYGgithub{p}{)}
+    \PYGgithub{p}{@}\PYGgithub{n}{time} \PYGgithub{n}{sqrt\PYGgithubZus{}jvectorized}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{)}
+    \PYGgithub{p}{@}\PYGgithub{n}{time} \PYGgithub{n}{sqrt\PYGgithubZus{}jbroadcast}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{)}
+    \PYGgithub{p}{@}\PYGgithub{n}{time} \PYGgithub{n}{sqrt\PYGgithubZus{}jbroadcast}\PYGgithub{o}{!}\PYGgithub{p}{(}\PYGgithub{n}{dest}\PYGgithub{p}{,}\PYGgithub{n}{a}\PYGgithub{p}{)}
+    \PYGgithub{p}{@}\PYGgithub{n}{time} \PYGgithub{n}{sqrt\PYGgithubZus{}jmap}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{)}
+    \PYGgithub{p}{@}\PYGgithub{n}{time} \PYGgithub{n}{sqrt\PYGgithubZus{}jmap}\PYGgithub{o}{!}\PYGgithub{p}{(}\PYGgithub{n}{dest}\PYGgithub{p}{,}\PYGgithub{n}{a}\PYGgithub{p}{)}
+    \PYGgithub{p}{@}\PYGgithub{n}{time} \PYGgithub{n}{VML}\PYGgithub{o}{.}\PYGgithub{n}{sqrt}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{)}
+    \PYGgithub{p}{@}\PYGgithub{n}{time} \PYGgithub{n}{VML}\PYGgithub{o}{.}\PYGgithub{n}{sqrt}\PYGgithub{o}{!}\PYGgithub{p}{(}\PYGgithub{n}{dest}\PYGgithub{p}{,}\PYGgithub{n}{a}\PYGgithub{p}{)}
+    \PYGgithub{n}{gc\PYGgithubZus{}enable}\PYGgithub{p}{(}\PYGgithub{n}{true}\PYGgithub{p}{)}
+\PYGgithub{k}{end}
+
+\PYGgithub{n}{sqrt\PYGgithubZus{}bench}\PYGgithub{p}{()}
+\end{Verbatim}

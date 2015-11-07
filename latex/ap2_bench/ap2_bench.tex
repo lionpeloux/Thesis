@@ -2,7 +2,7 @@
 \chapter{Bench for HPC}
 
 \section{Introduction}
-% ====================
+% ==================== de
 
 In this section aims at providing basic but reliable guidlines to produce fast and mannagable code
 for our algorithms
@@ -75,5 +75,81 @@ A short story about how a code is translated to get machin instructions
 Results are given relatively to MKL performance (MKL = 1). }
 \end{figure}
 
+\newpage
+\section{Memory allocation and garbage collection}
+\usemintedstyle{github}
+\inputminted[linenos,breaklines]{julia}{ap2_bench/bench/sqrt_memoryusage_code.jl}
+
+
+\begin{table}[h]
+\centering
+\pgfplotstabletypeset[
+	every head row/.style={before row=\toprule, after row=\midrule}, 
+	every last row/.style={after row=\bottomrule},
+	col sep=comma,
+	columns={SQRT,CPU,ALLOC},
+	columns/SQRT/.style={string type, column name = sqrt | Float64, column type = {l}},
+	columns/CPU/.style={fixed zerofill,precision=0, column name = CPU (ns/el), column type = {r}},
+	columns/ALLOC/.style={fixed zerofill,precision=0, column name = Allocation (Bytes), column type = {r}},
+	]{ap2_bench/bench/sqrt_memoryusage_data.csv}
+\caption{Memory allocations for various methods computing sqrt(a) for $n = 10^4$}
+\end{table}
+
+
+
+Toutes les syntaxes ne sont pas égales en termes de gestion de la mémoire.
+Le problème, c'est le passage de la GC qui est couteux en temps. Donc il faut essayer de minimiser l'utilisation mémoire. Idéalement le problème peu rester dans le cache du processeur (mémoire d'accès bcp plus rapide que la RAM). Donc la meilleur stratégie consiste à pré-allouer les tableaux et à faire des opération "in-place" au maximum, c'est à dire d'écraser les donner au fur et à mesure du calcul.
+
+On remarque que l'allocation mémoire est très différente d'une fonction à l'autre. Il est important de privilégier des opération "in-place" pour contenir l'allocation mémoire, sinon on risque de déclencher la GC qui est couteuse.
+
+Les temps CPU sont indicatifs car le bench est fait sur une durée caractéristique trop courte
+
+\newpage
+
+\usemintedstyle{github}
+\inputminted[linenos,breaklines]{julia}{ap2_bench/bench/sqrt_allocationimpact_code.jl}
+
+
+Ici on met en évidence la non linéarité du coût d'allocation par élément d'un tableau de taille n.
+On remarque que la différence entre le coût de sqrt et le coût de l'allocation est constante : c'est le coût de sqrt 
+hors allocation. Attention, cette notion est "language dependent" car les allocations sont gérées par la GC.
+
+Remarque, on trouverait sans doute la même chose pour MKL, à cause du marshalling : le coût d'appel à une fonction C est supérieur à celui d'une fonction managée (cf HPC .Net)
+
+\begin{figure}[h]
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[
+	xmode=log,
+	width = 12cm,
+	grid=major,
+	legend entries={allocation, sqrt, diff}
+	]
+	
+	\pgfplotsset{table/col sep = comma}
+ 	\pgfplotstableread{ap2_bench/bench/sqrt_allocationimpact_data.csv}\data;
+	
+	\addplot [black, smooth, thick, dashed]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{1}] {\data};
+
+	\addplot [black, smooth, thick]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\data};
+	
+	\addplot [Tblue, smooth, thick]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\data};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\caption{Nonlinear cost of memory allocation for arrays (Float64).}
+\end{figure}
+
+
+
+\newpage
+
+https://msdn.microsoft.com/en-us/library/ms973852.aspx
+
+%{ap2_bench/csv/sqrt_memoryusage.csv}
 \bibliographystyle{alpha}
 \bibliography{../bibliography}

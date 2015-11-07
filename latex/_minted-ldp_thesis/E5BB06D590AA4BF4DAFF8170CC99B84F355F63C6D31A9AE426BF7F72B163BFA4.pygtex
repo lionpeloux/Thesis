@@ -1,0 +1,37 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGemacs{k}{import} \PYGemacs{n}{VML}
+
+\PYGemacs{c}{\PYGemacsZsh{} wrap functions to avoid global scoping while testing}
+\PYGemacs{n}{sqrt\PYGemacsZus{}jvectorized}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{o}{\PYGemacsZlt{}:}\PYGemacs{n}{Number}\PYGemacs{p}{\PYGemacsZcb{}(}\PYGemacs{n}{a}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{})} \PYGemacs{o}{=}
+    \PYGemacs{n}{sqrt}\PYGemacs{p}{(}\PYGemacs{n}{a}\PYGemacs{p}{)}
+
+\PYGemacs{n}{sqrt\PYGemacsZus{}jbroadcast}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{o}{\PYGemacsZlt{}:}\PYGemacs{n}{Number}\PYGemacs{p}{\PYGemacsZcb{}(}\PYGemacs{n}{a}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{})} \PYGemacs{o}{=}
+    \PYGemacs{n}{broadcast}\PYGemacs{p}{(}\PYGemacs{n}{sqrt}\PYGemacs{p}{,}\PYGemacs{n}{a}\PYGemacs{p}{)}
+
+\PYGemacs{n}{sqrt\PYGemacsZus{}jbroadcast}\PYGemacs{o}{!}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{o}{\PYGemacsZlt{}:}\PYGemacs{n}{Number}\PYGemacs{p}{\PYGemacsZcb{}(}\PYGemacs{n}{dest}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{},} \PYGemacs{n}{a}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{})} \PYGemacs{o}{=}
+    \PYGemacs{n}{broadcast}\PYGemacs{o}{!}\PYGemacs{p}{(}\PYGemacs{n}{sqrt}\PYGemacs{p}{,}\PYGemacs{n}{dest}\PYGemacs{p}{,}\PYGemacs{n}{a}\PYGemacs{p}{)}
+
+\PYGemacs{n}{sqrt\PYGemacsZus{}jmap}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{o}{\PYGemacsZlt{}:}\PYGemacs{n}{Number}\PYGemacs{p}{\PYGemacsZcb{}(}\PYGemacs{n}{a}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{})} \PYGemacs{o}{=}
+    \PYGemacs{n}{map}\PYGemacs{o}{!}\PYGemacs{p}{(}\PYGemacs{n}{sqrt}\PYGemacs{p}{,}\PYGemacs{n}{a}\PYGemacs{p}{)}
+
+\PYGemacs{n}{sqrt\PYGemacsZus{}jmap}\PYGemacs{o}{!}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{o}{\PYGemacsZlt{}:}\PYGemacs{n}{Number}\PYGemacs{p}{\PYGemacsZcb{}(}\PYGemacs{n}{dest}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{},} \PYGemacs{n}{a}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{})} \PYGemacs{o}{=}
+    \PYGemacs{n}{map}\PYGemacs{o}{!}\PYGemacs{p}{(}\PYGemacs{n}{sqrt}\PYGemacs{p}{,}\PYGemacs{n}{dest}\PYGemacs{p}{,}\PYGemacs{n}{a}\PYGemacs{p}{)}
+
+\PYGemacs{n}{sqrt\PYGemacsZus{}jloop}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{o}{\PYGemacsZlt{}:}\PYGemacs{n}{Number}\PYGemacs{p}{\PYGemacsZcb{}(}\PYGemacs{n}{dest}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{},}\PYGemacs{n}{a}\PYGemacs{p}{::}\PYGemacs{n}{Vector}\PYGemacs{p}{\PYGemacsZob{}}\PYGemacs{n}{T}\PYGemacs{p}{\PYGemacsZcb{})} \PYGemacs{o}{=}
+    \PYGemacs{p}{@}\PYGemacs{n}{inbounds} \PYGemacs{k}{for} \PYGemacs{n}{i} \PYGemacs{k}{in} \PYGemacs{n}{eachindex}\PYGemacs{p}{(}\PYGemacs{n}{a}\PYGemacs{p}{)} \PYGemacs{n}{dest}\PYGemacs{p}{[}\PYGemacs{n}{i}\PYGemacs{p}{]}\PYGemacs{o}{=}\PYGemacs{n}{sqrt}\PYGemacs{p}{(}\PYGemacs{n}{a}\PYGemacs{p}{[}\PYGemacs{n}{i}\PYGemacs{p}{])} \PYGemacs{k}{end}
+
+\PYGemacs{c}{\PYGemacsZsh{} define vectors and floating precision}
+\PYGemacs{n}{n} \PYGemacs{o}{=} \PYGemacs{l+m+mi}{1\PYGemacsZus{}000}
+\PYGemacs{n}{T} \PYGemacs{o}{=} \PYGemacs{k+kt}{Float64}
+\PYGemacs{p}{@}\PYGemacs{n}{time} \PYGemacs{n}{a} \PYGemacs{o}{=} \PYGemacs{n}{rand}\PYGemacs{p}{(}\PYGemacs{n}{T}\PYGemacs{p}{,}\PYGemacs{n}{n}\PYGemacs{p}{);}
+\PYGemacs{p}{@}\PYGemacs{n}{time} \PYGemacs{n}{dest}  \PYGemacs{o}{=} \PYGemacs{n}{ones}\PYGemacs{p}{(}\PYGemacs{n}{T}\PYGemacs{p}{,}\PYGemacs{n}{n}\PYGemacs{p}{);}
+
+\PYGemacs{c}{\PYGemacsZsh{} bench functions}
+\PYGemacs{p}{@}\PYGemacs{n}{timev} \PYGemacs{n}{sqrt\PYGemacsZus{}jvectorized}\PYGemacs{p}{(}\PYGemacs{n}{a}\PYGemacs{p}{);}
+\PYGemacs{p}{@}\PYGemacs{n}{timev} \PYGemacs{n}{sqrt\PYGemacsZus{}jbroadcast}\PYGemacs{p}{(}\PYGemacs{n}{a}\PYGemacs{p}{);}
+\PYGemacs{p}{@}\PYGemacs{n}{timev} \PYGemacs{n}{sqrt\PYGemacsZus{}jbroadcast}\PYGemacs{o}{!}\PYGemacs{p}{(}\PYGemacs{n}{dest}\PYGemacs{p}{,}\PYGemacs{n}{a}\PYGemacs{p}{);}
+\PYGemacs{p}{@}\PYGemacs{n}{timev} \PYGemacs{n}{sqrt\PYGemacsZus{}jmap}\PYGemacs{p}{(}\PYGemacs{n}{a}\PYGemacs{p}{);}
+\PYGemacs{p}{@}\PYGemacs{n}{timev} \PYGemacs{n}{sqrt\PYGemacsZus{}jmap}\PYGemacs{o}{!}\PYGemacs{p}{(}\PYGemacs{n}{dest}\PYGemacs{p}{,}\PYGemacs{n}{a}\PYGemacs{p}{);}
+\PYGemacs{p}{@}\PYGemacs{n}{timev} \PYGemacs{n}{VML}\PYGemacs{o}{.}\PYGemacs{n}{sqrt}\PYGemacs{p}{(}\PYGemacs{n}{a}\PYGemacs{p}{);}
+\PYGemacs{p}{@}\PYGemacs{n}{timev} \PYGemacs{n}{VML}\PYGemacs{o}{.}\PYGemacs{n}{sqrt}\PYGemacs{o}{!}\PYGemacs{p}{(}\PYGemacs{n}{dest}\PYGemacs{p}{,}\PYGemacs{n}{a}\PYGemacs{p}{);}
+\end{Verbatim}
