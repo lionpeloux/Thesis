@@ -141,14 +141,36 @@ Remarque, on trouverait sans doute la même chose pour MKL, à cause du marshall
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\caption{Nonlinear cost of memory allocation for arrays (Float64).}
+\caption{Nonlinear cost of CPU time in ns/el of memory allocation for arrays (Float64).}
 \end{figure}
 
 
 
 \newpage
 
-https://msdn.microsoft.com/en-us/library/ms973852.aspx
+
+
+profiling :
+https://software.intel.com/en-us/intel-vtune-amplifier-xe
+
+
+SIMD :
+http://www.drdobbs.com/architecture-and-design/simd-enabled-vector-types-with-c/240168888
+
+https://software.intel.com/en-us/articles/optimize-for-intel-avx-using-intel-math-kernel-librarys-basic-linear-algebra-subprograms-blas-with-dgemm-routine
+
+\begin{itemize}
+\item https://msdn.microsoft.com/en-us/library/ms973852.aspx
+\item http://www.sebastiansylvan.com/post/why-most-high-level-languages-are-slow/
+\item http://creamysoft.blogspot.fr/2013/05/c-vs-c-performance.html
+\item http://www.codeproject.com/Articles/212856/Head-to-head-benchmark-Csharp-vs-NET
+\item http://www.codeproject.com/Articles/212856/Head-to-head-benchmark-Csharp-vs-NET
+\item https://software.intel.com/en-us/articles/speeding-up-c-code-with-the-vtune-amplifier-xe-performance-profiler
+\end{itemize}
+
+
+
+
 
 %{ap2_bench/csv/sqrt_memoryusage.csv}
 \bibliographystyle{alpha}

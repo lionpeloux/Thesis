@@ -23,18 +23,18 @@ function sqrt_bench()
 
         # trigger garbage collection
         gc()
-        talloc = 0.0 ; tcpu1 = 0.0 ; tcpu2 = 0.0
+        talloc = 0.0 ; talloc = 0.0 ; tsqrt = 0.0
         for j in 1:nrep
             talloc += @elapsed for k in 1:ncycle Vector{T}(n) end
-            tcpu1 += @elapsed for k in 1:ncycle sqrt(a) end
+            tsqrt += @elapsed for k in 1:ncycle sqrt(a) end
         end
 
         # scale results (ns/element)
         talloc = talloc / nrep / ncycle / n * 1e9
-        tcpu1  = tcpu1 / nrep / ncycle / n * 1e9
+        tsqrt  = tcpu / nrep / ncycle / n * 1e9
 
         # write results
-        push!(df,[n,talloc, tcpu1])
+        push!(df,[n,talloc, tsqrt])
     end
     df
 end

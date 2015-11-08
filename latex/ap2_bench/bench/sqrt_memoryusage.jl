@@ -7,7 +7,7 @@ end
 
 # wrap functions to avoid global scoping while testing
 sqrt_jvectorized{T<:Number}(a::Vector{T}) =
-    sqrt(a)
+    Base.sqrt(a)
 sqrt_jbroadcast{T<:Number}(a::Vector{T}) =
     broadcast(sqrt,a)
 sqrt_jbroadcast!{T<:Number}(dest::Vector{T}, a::Vector{T}) =

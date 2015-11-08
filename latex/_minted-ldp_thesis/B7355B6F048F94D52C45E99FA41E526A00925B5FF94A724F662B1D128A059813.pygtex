@@ -24,18 +24,18 @@
 
         \PYGgithub{c}{\PYGgithubZsh{} trigger garbage collection}
         \PYGgithub{n}{gc}\PYGgithub{p}{()}
-        \PYGgithub{n}{talloc} \PYGgithub{o}{=} \PYGgithub{l+m+mf}{0.0} \PYGgithub{p}{;} \PYGgithub{n}{tcpu1} \PYGgithub{o}{=} \PYGgithub{l+m+mf}{0.0} \PYGgithub{p}{;} \PYGgithub{n}{tcpu2} \PYGgithub{o}{=} \PYGgithub{l+m+mf}{0.0}
+        \PYGgithub{n}{talloc} \PYGgithub{o}{=} \PYGgithub{l+m+mf}{0.0} \PYGgithub{p}{;} \PYGgithub{n}{talloc} \PYGgithub{o}{=} \PYGgithub{l+m+mf}{0.0} \PYGgithub{p}{;} \PYGgithub{n}{tsqrt} \PYGgithub{o}{=} \PYGgithub{l+m+mf}{0.0}
         \PYGgithub{k}{for} \PYGgithub{n}{j} \PYGgithub{k}{in} \PYGgithub{l+m+mi}{1}\PYGgithub{p}{:}\PYGgithub{n}{nrep}
             \PYGgithub{n}{talloc} \PYGgithub{o}{+=} \PYGgithub{p}{@}\PYGgithub{n}{elapsed} \PYGgithub{k}{for} \PYGgithub{n}{k} \PYGgithub{k}{in} \PYGgithub{l+m+mi}{1}\PYGgithub{p}{:}\PYGgithub{n}{ncycle} \PYGgithub{n}{Vector}\PYGgithub{p}{\PYGgithubZob{}}\PYGgithub{n}{T}\PYGgithub{p}{\PYGgithubZcb{}(}\PYGgithub{n}{n}\PYGgithub{p}{)} \PYGgithub{k}{end}
-            \PYGgithub{n}{tcpu1} \PYGgithub{o}{+=} \PYGgithub{p}{@}\PYGgithub{n}{elapsed} \PYGgithub{k}{for} \PYGgithub{n}{k} \PYGgithub{k}{in} \PYGgithub{l+m+mi}{1}\PYGgithub{p}{:}\PYGgithub{n}{ncycle} \PYGgithub{n}{sqrt}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{)} \PYGgithub{k}{end}
+            \PYGgithub{n}{tsqrt} \PYGgithub{o}{+=} \PYGgithub{p}{@}\PYGgithub{n}{elapsed} \PYGgithub{k}{for} \PYGgithub{n}{k} \PYGgithub{k}{in} \PYGgithub{l+m+mi}{1}\PYGgithub{p}{:}\PYGgithub{n}{ncycle} \PYGgithub{n}{sqrt}\PYGgithub{p}{(}\PYGgithub{n}{a}\PYGgithub{p}{)} \PYGgithub{k}{end}
         \PYGgithub{k}{end}
 
         \PYGgithub{c}{\PYGgithubZsh{} scale results (ns/element)}
         \PYGgithub{n}{talloc} \PYGgithub{o}{=} \PYGgithub{n}{talloc} \PYGgithub{o}{/} \PYGgithub{n}{nrep} \PYGgithub{o}{/} \PYGgithub{n}{ncycle} \PYGgithub{o}{/} \PYGgithub{n}{n} \PYGgithub{o}{*} \PYGgithub{l+m+mf}{1e9}
-        \PYGgithub{n}{tcpu1}  \PYGgithub{o}{=} \PYGgithub{n}{tcpu1} \PYGgithub{o}{/} \PYGgithub{n}{nrep} \PYGgithub{o}{/} \PYGgithub{n}{ncycle} \PYGgithub{o}{/} \PYGgithub{n}{n} \PYGgithub{o}{*} \PYGgithub{l+m+mf}{1e9}
+        \PYGgithub{n}{tsqrt}  \PYGgithub{o}{=} \PYGgithub{n}{tcpu} \PYGgithub{o}{/} \PYGgithub{n}{nrep} \PYGgithub{o}{/} \PYGgithub{n}{ncycle} \PYGgithub{o}{/} \PYGgithub{n}{n} \PYGgithub{o}{*} \PYGgithub{l+m+mf}{1e9}
 
         \PYGgithub{c}{\PYGgithubZsh{} write results}
-        \PYGgithub{n}{push}\PYGgithub{o}{!}\PYGgithub{p}{(}\PYGgithub{n}{df}\PYGgithub{p}{,[}\PYGgithub{n}{n}\PYGgithub{p}{,}\PYGgithub{n}{talloc}\PYGgithub{p}{,} \PYGgithub{n}{tcpu1}\PYGgithub{p}{])}
+        \PYGgithub{n}{push}\PYGgithub{o}{!}\PYGgithub{p}{(}\PYGgithub{n}{df}\PYGgithub{p}{,[}\PYGgithub{n}{n}\PYGgithub{p}{,}\PYGgithub{n}{talloc}\PYGgithub{p}{,} \PYGgithub{n}{tsqrt}\PYGgithub{p}{])}
     \PYGgithub{k}{end}
     \PYGgithub{n}{df}
 \PYGgithub{k}{end}
