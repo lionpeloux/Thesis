@@ -1,0 +1,101 @@
+\begin{figure}
+\subfloat[Float32]  
+{  
+\centering
+\begin{tikzpicture}
+\pgfplotstableread[col sep=comma]{ap2_bench/bench/arithmetic_cpu_conf_Float32.csv}\mydata;
+\begin{axis}[
+ymajorgrids,
+width=15cm,
+height=10cm,
+%ymode = log, 
+%log origin=infty,
+%legend pos=outer north east,
+enlargelimits={abs=0.5},
+ybar=0pt,
+bar width=0.2,
+xticklabels from table={\mydata}{Generic},
+xtick=data,
+x tick label style={rotate=90},
+%legend cell align=left
+%legend style={area legend, draw=white, legend columns=1},
+%,xtick=\empty,
+%ytick=\empty,
+tick style={draw=none},
+separate axis lines,
+%x axis line style=white,
+%y axis line style=white,
+%%xticklabels from table={\mydata}{Generic} % Get tables from second column of data table
+]
+
+%\addplot[style={white,fill=Tdarkgray,mark=none}, error bars/.cd, y dir=both, y explicit]
+%              table [x index=0, y index=1, y error index=2] {\mydata};
+
+%\addplot[style={white,fill=Tdarkgray,mark=none}] 
+%		table [x expr=\coordindex, y index=1]{\mydata};
+		
+\addplot[style={black,fill=Tgray,mark=none}, error bars/.cd, y dir=both, y explicit] 
+		table [x expr=\coordindex, y index=1, y error index=2]{\mydata};
+		
+\addplot[style={black,fill=Tblue,mark=none}, error bars/.cd, y dir=both, y explicit] 
+		table [x expr=\coordindex, y index=3, y error index=4]{\mydata};
+
+\addplot[style={black,fill=Tred,mark=none}, error bars/.cd, y dir=both, y explicit] 
+		table [x expr=\coordindex, y index=5, y error index=6]{\mydata};
+
+\legend{OpenBLAS, Intel MKL, vectorized Julia}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subfloat[Float64]  
+{  
+\centering
+\begin{tikzpicture}
+\pgfplotstableread[col sep=comma]{ap2_bench/bench/arithmetic_cpu_conf_Float64.csv}\mydata;
+\begin{axis}[
+ymajorgrids,
+width=15cm,
+height=10cm,
+%ymode = log, 
+%log origin=infty,
+%legend pos=outer north east,
+enlargelimits={abs=0.5},
+ybar=0pt,
+bar width=0.2,
+xticklabels from table={\mydata}{Generic},
+xtick=data,
+x tick label style={rotate=90},
+%legend cell align=left
+%legend style={area legend, draw=white, legend columns=1},
+%,xtick=\empty,
+%ytick=\empty,
+tick style={draw=none},
+separate axis lines,
+%x axis line style=white,
+%y axis line style=white,
+%%xticklabels from table={\mydata}{Generic} % Get tables from second column of data table
+]
+
+%\addplot[style={white,fill=Tdarkgray,mark=none}, error bars/.cd, y dir=both, y explicit]
+%              table [x index=0, y index=1, y error index=2] {\mydata};
+
+%\addplot[style={white,fill=Tdarkgray,mark=none}] 
+%		table [x expr=\coordindex, y index=1]{\mydata};
+		
+\addplot[style={black,fill=Tgray,mark=none}, error bars/.cd, y dir=both, y explicit] 
+		table [x expr=\coordindex, y index=1, y error index=2]{\mydata};
+		
+\addplot[style={black,fill=Tblue,mark=none}, error bars/.cd, y dir=both, y explicit] 
+		table [x expr=\coordindex, y index=3, y error index=4]{\mydata};
+
+\addplot[style={black,fill=Tred,mark=none}, error bars/.cd, y dir=both, y explicit] 
+		table [x expr=\coordindex, y index=5, y error index=6]{\mydata};
+
+\legend{OpenBLAS, Intel MKL, vectorized Julia}
+\end{axis}
+\end{tikzpicture}
+}
+\caption{Each operator is evaluated on a vector of Float64 of size $n=10^6$ for about 10s.
+Results are given relatively to MKL performance (MKL = 1). }
+\end{figure}

@@ -1,0 +1,39 @@
+\begin{figure}
+\vspace{3mm}
+\centering \ref{legend_3}
+
+\centering
+\begin{tikzpicture}
+\pgfplotstableread[col sep=comma]{ap2_bench/bench/arithmetic_cpu_type.csv}\mydata;
+\begin{axis}[
+width=15cm, height=9cm,
+ymajorgrids,
+ymin=0, ymax=6, enlargelimits={abs=0.6},
+bar width=0.2, ybar=0pt,
+xtick=data, xticklabels from table={\mydata}{Generic}, x tick label style={rotate=90},
+tick style={draw=none},
+x axis line style=white, y axis line style=white,
+legend entries={OpenBLAS, Intel MKL, vectorized Julia},
+legend style={
+	draw=white, 
+	legend columns=-1,
+	/tikz/every even column/.append style={column sep=0.75cm}
+	},
+legend to name=legend_3,
+]
+
+\addplot[style={Tdarkgray,fill=Tred,mark=none}] 
+		table [x expr=\coordindex, y index=3]{\mydata};
+			
+\addplot[style={Tdarkgray,fill=Tblue,mark=none}] 
+		table [x expr=\coordindex, y index=2]{\mydata};
+
+\addplot[style={Tdarkgray,fill=Tgray,mark=none}] 
+		table [x expr=\coordindex, y index=1]{\mydata};
+
+\legend{OpenBLAS, Intel MKL, vectorized Julia}
+\end{axis}
+\end{tikzpicture}
+\vspace{5mm}
+\caption{CPU time relative to Intel MKL for $n=1e4$ elements.}
+\end{figure}
