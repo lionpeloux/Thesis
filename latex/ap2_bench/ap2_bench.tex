@@ -32,10 +32,27 @@ L3 = 4096kB
 - Intel MKL
 - OpenBLAS
 
+Parallelization vs. Vectorization (SIMD)
+
+SIMD :
+
+http://www.drdobbs.com/windows/64-bit-simd-code-from-c/240168851
+
 \section{From syntax to processor}
 % ================================
 
 A short story about how a code is translated to get machin instructions
+
+\section{Data Structure}
+% ================================
+
+Array of Structures (AOS) vs Structure of Arrays (SOA)
+
+The most common and likely well-known data structure is the array, which contains a contiguous collection of data items that can be accessed by an ordinal index. This data can be organized as an Array Of Structures (AOS) or a Structure Of Arrays (SOA). While AOS organization is excellent for encapsulation it can be poor for use of vector processing. Selecting appropriate data structures can also make vectorization of the resulting code more effective. To illustrate this point, compare the traditional array-of- structures (AoS) arrangement for storing the r, g, b components of a set of three- dimensional points with the alternative structure-of-arrays (SoA) arrangement for storing this set.
+
+http://hectorgon.blogspot.fr/2006/08/array-of-structures-vs-structure-of.html
+
+http://arxiv.org/pdf/1402.4986.pdf
 
 \newpage
 \section{Memory allocation and garbage collection}
@@ -52,7 +69,7 @@ http://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-ca
 MOST CPU’s today uses the memory on multiple level.  Generally  the  memory  at  the  proximity  of  CPU  is costly and less, whereas the memory at the distance (wire distance)  is  bigger,  slower  and  cheap [1].  Today  getting  the  computer  in  market  with  8GB  DRAM  is  cheap,  but  L1/L2  cache  of  such  computer  is  very  small  in  terms  of 10’s  of  KB’s  and  few  MB’s  respectively.  The  access time  of  L1  (that  is  generally  SRAM) is  few  cycles whereas  L2  is  few  10’s  cycles  and  accessing  main memory  is  considered  a  bad  programming  if  accessed too  frequently.  The  access  time  is  huge  and  in  terms  of 100’s of cycles. So optimizing the code to run and access L1  Instruction  and  Data  cache  is  the  simplest  way  to optimizing the code.
 
 \usemintedstyle{github}
-\begin{listing}[ht]
+\begin{listing}[]
 \inputminted[
 linenos,
 breaklines,
@@ -69,7 +86,7 @@ fontsize=\footnotesize]
 
 On remarque que l'allocation mémoire est très différente d'une fonction à l'autre. Il est important de privilégier des opération "in-place" pour contenir l'allocation mémoire, sinon on risque de déclencher la GC qui est couteuse.
 
-\begin{table}[h]
+\begin{table}[]
 \centering
 \pgfplotstabletypeset[
 	every head row/.style={before row=\toprule, after row=\midrule}, 
