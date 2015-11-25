@@ -1,0 +1,33 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{using} \PYG{n+nn}{System}\PYG{p}{;}
+\PYG{k}{using} \PYG{n+nn}{System.Diagnostics}\PYG{p}{;}
+\PYG{k}{using} \PYG{n+nn}{MathNet.Numerics}\PYG{p}{;}
+\PYG{k}{using} \PYG{n+nn}{MathNet.Numerics.LinearAlgebra}\PYG{p}{;}
+
+\PYG{k}{class} \PYG{n+nc}{Program}
+\PYG{p}{\PYGZob{}}
+  \PYG{k}{static} \PYG{k}{void} \PYG{n+nf}{Main}\PYG{p}{(}\PYG{k+kt}{string}\PYG{p}{[]} \PYG{n}{args}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{c+c1}{// Using managed code only}
+    \PYG{n}{Control}\PYG{p}{.}\PYG{n}{UseManaged}\PYG{p}{();}
+    \PYG{n}{Console}\PYG{p}{.}\PYG{n}{WriteLine}\PYG{p}{(}\PYG{n}{Control}\PYG{p}{.}\PYG{n}{LinearAlgebraProvider}\PYG{p}{);}
+
+    \PYG{k+kt}{var} \PYG{n}{m} \PYG{p}{=} \PYG{n}{Matrix}\PYG{p}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{p}{\PYGZgt{}.}\PYG{n}{Build}\PYG{p}{.}\PYG{n}{Random}\PYG{p}{(}\PYG{l+m}{500}\PYG{p}{,} \PYG{l+m}{500}\PYG{p}{);}
+    \PYG{k+kt}{var} \PYG{n}{v} \PYG{p}{=} \PYG{n}{Vector}\PYG{p}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{p}{\PYGZgt{}.}\PYG{n}{Build}\PYG{p}{.}\PYG{n}{Random}\PYG{p}{(}\PYG{l+m}{500}\PYG{p}{);}
+
+    \PYG{k+kt}{var} \PYG{n}{w} \PYG{p}{=} \PYG{n}{Stopwatch}\PYG{p}{.}\PYG{n}{StartNew}\PYG{p}{();}
+    \PYG{k+kt}{var} \PYG{n}{y1} \PYG{p}{=} \PYG{n}{m}\PYG{p}{.}\PYG{n}{Solve}\PYG{p}{(}\PYG{n}{v}\PYG{p}{);}
+    \PYG{n}{Console}\PYG{p}{.}\PYG{n}{WriteLine}\PYG{p}{(}\PYG{n}{w}\PYG{p}{.}\PYG{n}{Elapsed}\PYG{p}{);}
+    \PYG{n}{Console}\PYG{p}{.}\PYG{n}{WriteLine}\PYG{p}{(}\PYG{n}{y1}\PYG{p}{);}
+
+    \PYG{c+c1}{// Using the Intel MKL native provider}
+    \PYG{n}{Control}\PYG{p}{.}\PYG{n}{UseNativeMKL}\PYG{p}{();}
+    \PYG{n}{Console}\PYG{p}{.}\PYG{n}{WriteLine}\PYG{p}{(}\PYG{n}{Control}\PYG{p}{.}\PYG{n}{LinearAlgebraProvider}\PYG{p}{);}
+
+    \PYG{n}{w}\PYG{p}{.}\PYG{n}{Restart}\PYG{p}{();}
+    \PYG{k+kt}{var} \PYG{n}{y2} \PYG{p}{=} \PYG{n}{m}\PYG{p}{.}\PYG{n}{Solve}\PYG{p}{(}\PYG{n}{v}\PYG{p}{);}
+    \PYG{n}{Console}\PYG{p}{.}\PYG{n}{WriteLine}\PYG{p}{(}\PYG{n}{w}\PYG{p}{.}\PYG{n}{Elapsed}\PYG{p}{);}
+    \PYG{n}{Console}\PYG{p}{.}\PYG{n}{WriteLine}\PYG{p}{(}\PYG{n}{y2}\PYG{p}{);}
+  \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

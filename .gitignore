@@ -192,8 +192,9 @@ FakesAssemblies/
 *.gz
 *.bbl
 *.blg
-images/
-img/
+
+#images/
+#img/
 
 # Mac OSX
 *.DS_Store

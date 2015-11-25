@@ -1,4 +1,4 @@
-cd "/Users/Lionel/Public/Git/GitHub/Thesis/latex/"
+cd "/Users/Lionel/Public/GitHub/Thesis/latex/"
 pdflatex -shell-escape ldp_thesis.tex
 cd "ap1_variational"
 bibtex ap1_variational.aux
