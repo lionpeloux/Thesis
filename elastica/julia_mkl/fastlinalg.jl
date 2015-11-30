@@ -1,8 +1,19 @@
 # FastLinalg
 using Base.LinAlg.BLAS
+using MKL
 # X,Y désignent des vecteurs
 # W désigne un vecteur de pondération
 # alpha et beta désignent des scalaires
+
+# ==============================================================================
+#                             EXTENDED MKL
+# ==============================================================================
+
+# function fl_xtoy_offset!{T<:Number}(n::Integer, X::Vector{T}, sx::Integer, Y::Vector{T}, sy::Integer)
+#   # copy X[sx:sx+n] to Y starting at sy : Y = X + Y
+#   MKL.mkl_copy!(n, pointer(X)+(sx-1)*sizeof(T), stride(X,1), pointer(Y)+(sy-1)*sizeof(T), stride(Y,1))
+#   return Y
+# end
 
 # ==============================================================================
 #                             EXTENDED BLAS
