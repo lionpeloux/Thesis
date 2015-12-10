@@ -923,6 +923,16 @@ On retrouve les équations de kirchhoff dynamique où l'on a négligé les force
 	\end{gather}
 \end{subequations}
 
+Notes : 
+\begin{subequations}
+	\begin{gather}
+	\vect{d}_3 \cdot (\vect{M} \times \vect{d}_3) = \kappa_1 M_1 + \kappa_2 M_1 \\
+	\vect{d}_3 \cdot (\kappa\vect{b} \times \vect{M}) = \kappa_1 M_2 - \kappa_2 M_1 \\
+	(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} 
+	 = - \kappa\vect{b} \cdot (\vect{d}_3 \times \mat{M})
+	 = \kappa_1 \mat{M}_2 -  \kappa_2 \mat{M}_1
+	\end{gather}
+\end{subequations}
 
 \subsubsection{Shear Force}
 \begin{equation}
@@ -932,6 +942,7 @@ On retrouve les équations de kirchhoff dynamique où l'on a négligé les force
 \subsubsection{Rotational Moment}
 \begin{equation}
 	\vect{\Gamma(s)} = (Q' + \kappa_1 M_2 - \kappa_2 M_1)\vect{d}_3
+	= Q' \vect{d}_3 + \kappa\vect{b} \times \vect{M}
 \end{equation}
 \subsubsection{Quasistatic hypothesis}
 \begin{equation}
@@ -953,8 +964,8 @@ On retrouve les équations de kirchhoff dynamique où l'on a négligé les force
 	\vect{d}_3 \times \mat{M}'
 	+ Q\kappa\vect{b}
 	\right]_{i-1/2}^{i+1/2} \\
-	&= 	\frac{\vect{e}_i}{|\vect{e}_i|} \times (\mat{M}_{i+1} - \mat{M}_{i})
-		- \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times (\mat{M}_{i} - \mat{M}_{i-1}) 
+	&= 	\frac{\vect{e}_i}{|\vect{e}_i|} \times (\mat{M}^g_{i+1} - \mat{M}^d_{i})
+		- \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times (\mat{M}^d_{i} - \mat{M}^g_{i-1}) 
 		+ Q_i\frac{\kappa\vect{b}_{i+1}-\kappa\vect{b}_i}{2}
 		- Q_{i-1}\frac{\kappa\vect{b}_{i}-\kappa\vect{b}_{i-1}}{2}\\
 	&= (\vect{F}^1_{i} + \vect{F}^2_{i} + \vect{H}_{i}) - (\vect{F}^1_{i-1} + \vect{F}^2_{i-1} +  \vect{H}_{i-1})
@@ -966,12 +977,30 @@ With
 	\begin{gather}
 	\tau_i		= \frac{\theta_{i+1} - \theta_i}{|\vect{e}_i|} \\
 	Q_i 			= \beta_i \tau_i \\
-	\vect{F}^1_{i} 	= - \frac{\vect{e}_i \times \mat{M}_i}{|\vect{e}_i|} \\
-	\vect{F}^2_{i} 	=	\frac{\vect{e}_i \times \mat{M}_{i+1}}{|\vect{e}_i|} \\
+	\vect{M}^{d}_{i} 	= (EI_1)_i \kappa_{1,i} \vect{d}_{1,i} + (EI_2)_i\kappa_{2,i}\vect{d}_{2,i} \\ 
+	\vect{M}^{g}_{i} 	= (EI_1)_{i-1} \kappa_{1,i} \vect{d}_{1,i} + (EI_2)_{i-1}\kappa_{2,i}\vect{d}_{2,i} \\ 
+	\vect{F}^{1,d}_{i} 	= - \frac{\vect{e}_i \times \mat{M}^d_i}{|\vect{e}_i|} \; ; \; 
+	\vect{F}^{1,g}_{i} 	= - \frac{\vect{e}_i \times \mat{M}^g_i}{|\vect{e}_i|} \\
+	\vect{F}^{2,d}_{i} 	= - \frac{\vect{e}_i \times \mat{M}^d_{i+1}}{|\vect{e}_i|} \; ; \; 
+	\vect{F}^{2,g}_{i} 	= - \frac{\vect{e}_i \times \mat{M}^g_{i+1}}{|\vect{e}_i|} \\
 	\vect{H}_{i} 	= Q_i\frac{\kappa\vect{b}_{i+1}-\kappa\vect{b}_i}{2} 
 	\end{gather}
 \end{subequations}
+\note{Ici il y a une ambiguité sur $M_i$ en fonction d'un éventuel changement de propriété méca $EI_1$ ou $EI_2$. En fait il faudrait préciser un moment à droite et un moment à gauche (ce qui correspond à la réalité). Le moment étant la courbure au noeud i pondérée par $2EI$ à droite ou à gauche  }.
 
+
+\begin{equation}
+	\begin{aligned}
+	\Gamma_i 
+		&= \int_{i-1/2}^{i-1/2} m(s)  
+		= Q_{i} - Q_{i-1}
+		+ \int_{i-1/2}^{i} \kappa_{1} M_{2} - \kappa_{2} M_{1}
+		+ \int_{i}^{i+1/2} \kappa_{1} M_{2} - \kappa_{2} M_{1}\\
+		&= Q_{i} - Q_{i-1}
+		+ \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \cdot (\kappa\vect{b}_i \times \vect{M}^g_i )
+		+ \frac{\vect{e}_i}{|\vect{e}_i|} \cdot (\kappa\vect{b}_i \times \vect{M}^d_i )
+	\end{aligned}
+\end{equation}
 
 \subsubsection{Internal forces}
 
