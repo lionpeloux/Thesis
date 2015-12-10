@@ -964,8 +964,8 @@ Notes :
 	\vect{d}_3 \times \mat{M}'
 	+ Q\kappa\vect{b}
 	\right]_{i-1/2}^{i+1/2} \\
-	&= 	\frac{\vect{e}_i}{|\vect{e}_i|} \times (\mat{M}^g_{i+1} - \mat{M}^d_{i})
-		- \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times (\mat{M}^d_{i} - \mat{M}^g_{i-1}) 
+	&= 	\frac{\vect{e}_i}{|\vect{e}_i|} \times (\mat{M}_{i+1} - \mat{M}_{i})
+		- \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times (\mat{M}_{i} - \mat{M}_{i-1}) 
 		+ Q_i\frac{\kappa\vect{b}_{i+1}-\kappa\vect{b}_i}{2}
 		- Q_{i-1}\frac{\kappa\vect{b}_{i}-\kappa\vect{b}_{i-1}}{2}\\
 	&= (\vect{F}^1_{i} + \vect{F}^2_{i} + \vect{H}_{i}) - (\vect{F}^1_{i-1} + \vect{F}^2_{i-1} +  \vect{H}_{i-1})
@@ -975,19 +975,55 @@ Notes :
 With
 \begin{subequations}
 	\begin{gather}
+	[EI]_i \\ 
+	[GJ]_i \\
+	\kappa\vect{b}_i = \frac{2 \vect{e}_{i-1} \times \vect{e}_{i}}{|\vect{e}_{i-1}| |\vect{e}_i| |\vect{e}_{i-1} + \vect{e}_{i}|} \\
 	\tau_i		= \frac{\theta_{i+1} - \theta_i}{|\vect{e}_i|} \\
-	Q_i 			= \beta_i \tau_i \\
-	\vect{M}^{d}_{i} 	= (EI_1)_i \kappa_{1,i} \vect{d}_{1,i} + (EI_2)_i\kappa_{2,i}\vect{d}_{2,i} \\ 
-	\vect{M}^{g}_{i} 	= (EI_1)_{i-1} \kappa_{1,i} \vect{d}_{1,i} + (EI_2)_{i-1}\kappa_{2,i}\vect{d}_{2,i} \\ 
-	\vect{F}^{1,d}_{i} 	= - \frac{\vect{e}_i \times \mat{M}^d_i}{|\vect{e}_i|} \; ; \; 
-	\vect{F}^{1,g}_{i} 	= - \frac{\vect{e}_i \times \mat{M}^g_i}{|\vect{e}_i|} \\
-	\vect{F}^{2,d}_{i} 	= - \frac{\vect{e}_i \times \mat{M}^d_{i+1}}{|\vect{e}_i|} \; ; \; 
-	\vect{F}^{2,g}_{i} 	= - \frac{\vect{e}_i \times \mat{M}^g_{i+1}}{|\vect{e}_i|} \\
+	Q_i 			= \beta_i (\tau_i - \overbar{\tau_i}) \quad where \quad \beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}\\
+	\vect{M}_{i} 	= [EI]_{1,i}(\kappa_{1,i} - \overbar{\kappa}_{1,i})\vect{d}_{1,i} + [EI]_{2,i}(\kappa_{2,i} - \overbar{\kappa}_{2,i})\vect{d}_{2,i} \\ 
+	\vect{F}^{1}_{i} 	= - \frac{\vect{e}_i \times \mat{M}_i}{|\vect{e}_i|} \\
+	\vect{F}^{2}_{i} 	= \frac{\vect{e}_i \times \mat{M}_{i+1}}{|\vect{e}_i|} \\ 
 	\vect{H}_{i} 	= Q_i\frac{\kappa\vect{b}_{i+1}-\kappa\vect{b}_i}{2} 
 	\end{gather}
 \end{subequations}
-\note{Ici il y a une ambiguité sur $M_i$ en fonction d'un éventuel changement de propriété méca $EI_1$ ou $EI_2$. En fait il faudrait préciser un moment à droite et un moment à gauche (ce qui correspond à la réalité). Le moment étant la courbure au noeud i pondérée par $2EI$ à droite ou à gauche  }.
+\note{Ici il y a une ambiguité sur $M_i$ en fonction d'un éventuel changement de propriété méca $EI_1$ ou $EI_2$. En fait il faudrait préciser un moment à droite et un moment à gauche (ce qui correspond à la réalité). Le moment étant la courbure au noeud i pondérée par $2EI$ à droite ou à gauche
 
+Toutes les discrétisations ne se valent pas ....
+
+En fait, ça n'a pas vraiment de sens de définir $EI$ sur le segment. Le moment est continu. Donc il est uniquement défini par la donnée de la courbure en un noeud et du $EI$ associé à ce noeuds. Introduire un moment à gauche et un moment à droite est problématique.
+Ce qui ce passe, pour une poutre isostatique simple qui change de $EI$ à mi-travée, c'est une discontinuité de courbure $y''$ alors que $y$ et $y'$ restent continues.
+Donc il semble plus pertinent de définir $EI$ aux noeuds car notre modèle ne peut pas représenter des discontinuitées de courbure (ou alors il faut connecter des poutres entre-elles.
+
+Pour la torsion, on peut s'en sortir également en définissant $\beta$ aux noeuds et en supposant $GJ$ constant entre $[i-1/2,i+1/2]$. Il y a donc (éventuellement) un saut de $\beta$ au milieu de chaque $\vect{e}_i$. 
+
+On ne peut pas faire autrement que supposer la torsion uniforme entre 2 noeuds, c'est à dire une variation linéaire (par morceaux) de $\theta$. Et il y a donc une discontinuité potentielle aux noeuds.
+
+On écrit la continuité du champs de torsion entre les noeuds $1$ et $2$ malgré le saut de $\beta$ :
+
+A mi travée
+\begin{equation}
+	\begin{aligned}
+	Q_{12} = Q_{mid} =  Q_{1}^+ = Q_{2}^-
+	&= [GJ]_1\frac{\theta_{mid} - \theta_{1}}{|\vect{e}|/2}
+	= [GJ]_2 \frac{\theta_{2} - \theta_{mid}}{|\vect{e}|/2}
+	\end{aligned}
+\end{equation}
+D'où :
+\begin{equation}
+	\theta_{mid} = \frac{[GJ]_1}{[GJ]_1 + [GJ]_2}\theta_1 + \frac{[GJ]_2}{[GJ]_1 + [GJ]_2}\theta_2
+\end{equation}
+On en déduit :
+\begin{equation}
+	Q_{12} = Q_{mid} =  Q_{1}^+ = Q_{2}^-
+	= \frac{2 [GJ]_1 [GJ]_2}{[GJ]_1 + [GJ]_2} (\frac{\theta_{2} - \theta_{1}}{|\vect{e}|})
+\end{equation}
+Donc il faut plutôt définit $Q_i$ la torsion uniforme sur le segment $\vect{e}_i$ comme :
+\begin{equation}
+	Q_i = \beta_i (\tau_i - \overbar{\tau_i}) \quad where \quad \beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}
+\end{equation}
+
+On retrouve bien le cas d'une poutre de propriété constante lorsque $[GJ]_i= [GJ]_{i+1} = GJ$ alors $\beta_i = GJ$.
+ }
 
 \begin{equation}
 	\begin{aligned}
