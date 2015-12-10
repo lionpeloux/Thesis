@@ -13,14 +13,15 @@ function Relax2(debug::Bool, output::Bool)
 
   # DYNAMIC RELAXATION CONTROL
    trace = false
-   n_iterations = 100_000
+   n_iterations = 2
+
    dt = 1.0            # PAS DE TEMPS
    g = 1.0             # COEFFICIENT DR
    Eclim = 1e-16       # ENERGIE CINETIQUE LIMITE
    alpha = 0.5*dt^2   # 1/2 dt²
 
   # DYNAMIC RELAXATION MODEL
-   n = 300           # NOMBRE TOTAL D'ELEMENTS
+   n = 11           # NOMBRE TOTAL D'ELEMENTS
    n_elements = 0        # NOMBRE TOTAL DE NOEUDS
 
   # SECTION & MATERIAL PROPERTIES
@@ -117,6 +118,50 @@ function Relax2(debug::Bool, output::Bool)
    Ry = zeros(n)
    Rz = zeros(n)
 
+
+   function show()
+     println(Xx_0)
+     println(Xy_0)
+     println(Xz_0)
+
+     println("")
+     println(Xx)
+     println(Xy)
+     println(Xz)
+
+     println("L0, L")
+     println(1 ./ _L0)
+     println(1 ./ _L)
+
+     println("E")
+     println(Ex)
+     println(Ey)
+     println(Ez)
+
+     println("EE")
+     println(1 ./ _LL)
+     println(EE)
+
+     println("N")
+     println(Nx)
+     println(Ny)
+     println(Nz)
+
+     println("F1")
+     println(F1x)
+     println(F1y)
+     println(F1z)
+
+     println("F2")
+     println(F2x)
+     println(F2y)
+     println(F2z)
+
+     println("R")
+     println(Rx)
+     println(Ry)
+     println(Rz)
+  end
   function Update2_R(n::Integer)
 
     # ei = xi+1 - xi
@@ -169,6 +214,10 @@ function Relax2(debug::Bool, output::Bool)
 
     # COMPUTE PIC INTERPOLATION
     q = (Ec1 - Ec0) / (Ec0 - 2 * Ec1 + Ec2)
+    # println("Ec0 = ", Ec0)
+    # println("Ec1 = ", Ec1)
+    # println("Ec2 = ", Ec2)
+    # println("q = ",q)
     qq = q*dt^2
 
     # COMPUTE BACKWARD VELOCITY
@@ -222,7 +271,7 @@ function Relax2(debug::Bool, output::Bool)
     Ect = 0.5 * (fl_wdot(n, LM, Vx, Vx, EE2) + fl_wdot(n, LM, Vy, Vy, EE2) + fl_wdot(n, LM, Vz, Vz, EE2))
     Ec1 = Ect          # Ec(t -)
     Ec0 = Ect          # Ec(t -)
-    #println("PIC[",numPic,"] = ", Ect)
+    # println("PIC[",numPic,"] = ", Ect)
     numPic += 1
   end
 
@@ -275,9 +324,10 @@ function Relax2(debug::Bool, output::Bool)
       # X(t*) = f[Ec(t - 3dt/2), Ec(t - dt/2), Ec(t + dt/2)]
       InterpolateEc2(n, Ec0, Ec1, Ect)
       Reset2(n)
+
       numPic += 1
     end
-    # TRACKING
+    # TRACKING|
     numIteration += 1
     time_run_rest += toq()
 end
@@ -289,9 +339,11 @@ end
   for i=1:n
     Xx_0[i] = (i-1)*a/(n-1)
     Xx[i] = (i-1)*a/(n-1)
-    FEy[i] = -100.0
+    FEz[i] = -100.0
     _L0[i] = 1/(l0/(n-1))
   end
+
+
 
   # profiling
   time_init = toq()
@@ -304,7 +356,7 @@ end
 
   EC = [Ect]
   stop = false
-
+  n_iterations = 2
   begin
     Reset2(n)
     for i in 1:n_iterations
@@ -320,6 +372,9 @@ end
       end
     end
   end
+
+show()
+
 
   time_run_total = time_run_force + time_run_velocity + time_run_position + time_run_energy + time_run_rest
 
@@ -366,8 +421,8 @@ end
 end
 
 #@time Relax2()
-println("")
-Relax2(false,false)
+# println("")
+# Relax2(false,false)
 
 #Profile.clear()  # in case we have any previous profiling data
 #@profile Relax2(true,false)
