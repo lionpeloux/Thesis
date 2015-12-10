@@ -281,7 +281,15 @@ Since the progression of any moving frame along $\gamma$ is ruled by a first-ord
 \subsubsection{Darboux vector}
 It is relevant to consider the mobile frame's evolution along $\gamma$ introducing the so-called \emph{Darboux vector} ($\vect{\Omega}$), which corresponds to the instantaneous angular velocity of $F$ at each point of arc-length $s$. Thus, the previous differential system governing the evolution of $F(s)$ along $\gamma$ becomes :
 \begin{equation}
-	
+	\vect{e}'_{i}(s) = \vect{\Omega}(s) \times \vect{e}_{i}(s)
+	\quad avec \quad
+	\vect{\Omega}(s)
+	=
+	\begin{bmatrix}
+		\tau(s) \\
+		k_1(s) \\
+		k_2(s)
+	\end{bmatrix}
 \end{equation}
 This result is straightforward deduced from \eqref{eq:3_12}. Note that the cross product \guil{reveals} that the system is skew-symmetric, which could already be seen in \eqref{eq:3_12}.
 Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc-length $s$ and $s+ds$ (\autoref{fig:3_2}) shows that the scalar functions $\tau(s)$, $k_{1}(s)$, $k_{2}(s)$ effectively correspond to the angular speed of the frame, respectively around $\vect{e}_{3}(s)$, $\vect{e}_{1}(s)$, $\vect{e}_{2}(s)$ :

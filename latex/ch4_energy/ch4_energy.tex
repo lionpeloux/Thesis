@@ -1,10 +1,11 @@
+% !TEX encoding = UTF-8 Unicode
 \chapter{Elastic rod : variational approch}
 
 % #######################################################
 \section{Introduction}
 % #######################################################
 
-In this section a novel element with 4 degrees of freedom accounting for torsion and bending behaviours is presented. The beam is considered in Kirchhoff’s theory framework, so that it is supposed to be inextensible and its sections are supposed to remain orthogonal to the centreline during deformation. The reduction from the classic 6-DoF model to this 4-DoF model is achieved by an appropriate curve-angle representation based on a relevant curve framing. Energies are then formulated and leads to internal forces and moments acting on the beam. The static equilibrium is deduced from a damped fictitious dynamic with an adapted dynamic relaxation algorithm.
+In this section a novel element with 4 degrees of freedom accounting for torsion and bending behaviours is presented. The beam is considered in Kirchhoff's theory framework, so that it is supposed to be inextensible and its sections are supposed to remain orthogonal to the centreline during deformation. The reduction from the classic 6-DoF model to this 4-DoF model is achieved by an appropriate curve-angle representation based on a relevant curve framing. Energies are then formulated and leads to internal forces and moments acting on the beam. The static equilibrium is deduced from a damped fictitious dynamic with an adapted dynamic relaxation algorithm.
 
 Basile \cite{Bergou2010}
 
@@ -23,9 +24,9 @@ En particulier,voir pour un comparatif avec une méthode implicite.
 \note{
 \begin{enumerate}
 \item quaternion pour piloter les input / ouput ?
-\item calcul de la hessienne au moins pour les $\theta$ comme Audoly. Ne serait-ce pas possible pour les $x$ ?  Avec ma technique du transport parallèle il me semble pourvoir avoir accès au DL à l'ordre 2 ...
+\item calcul de la hessienne au moins pour les $\theta$ comme Audoly. Ne serait-ce pas possible pour les $x$ ?  Avec ma technique du transport parallèle il me semble pourvoir avoir accès au DL à  l'ordre 2 ...
 \item Formulation pour les efforts ponctuels / moments extérieurs en vue d'une résolution par minimisation. Voir F. Bertails
-\item prise en compte des contraintes => méthode des multiplicateurs de lagrange
+\item prise en compte des contraintes => méméthide des multiplicateurs de lagrange
 \end{enumerate}
 
 
@@ -36,14 +37,14 @@ En particulier,voir pour un comparatif avec une méthode implicite.
 
 % #######################################################
 \section{Kirchhoff rod}
-The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross sections. The centerline is parameterized by its arc-length. Cross sections orientations are followed along the centerline by their material frame $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ which is an adapted orthonormal moving frame aligned to section’s principal axes of inertia. Here, \guil{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned to the centerline’s tangent. In the literature, this description is also known as a \emph{Cosserat Curve} \cite{Spillmann2007}.
+The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross sections. The centerline is parameterized by its arc-length. Cross sections orientations are followed along the centerline by their material frame $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ which is an adapted orthonormal moving frame aligned to section's principal axes of inertia. Here, \guil{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned to the centerline's tangent. In the literature, this description is also known as a \emph{Cosserat Curve} \cite{Spillmann2007}.
 
 \subsection{Inextensibility}
 Note the previous description is only valid for inextensible rods in order to follow material points by their arc-length indifferently in their rest or deformed configuration. As explained in \cite{Audoly2010}, this hypothesis is usually relevant for slender beams. Indeed, in practice, if a slender member faces substantial axial strain the bending behaviour would become negligible due to the important difference between axial and bending stiffness. The length of the rod will be denoted $L$ and the arc-length $s$ will vary (with no loss of generality) in $[0,L]$.
 
 \subsection{Euler-Bernouilli}
 Strains are supposed to remain small so that material frame remains orthogonal to the centerline in the deformed configuration. Thus, differentiating the conditions of orthonormality leads to the following differential equations governing the evolution of $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ along the centerline :
-\begin{gather}
+\begin{equation} \label{eq:3_1}
 	\begin{bmatrix}
 		\mathbf{d'_{3}}(s) \\
 		\mathbf{d'_{1}}(s) \\
@@ -60,15 +61,15 @@ Strains are supposed to remain small so that material frame remains orthogonal t
 		\mathbf{d_{1}}(s) \\
 		\mathbf{d_{2}}(s)
 	\end{bmatrix}
-\end{gather}
+\end{equation}
 
 \note{La théorie des poutres est une application de la théorie de l'élasticité isotrope. Pour mener les calculs de résistance des matériaux, on considère les hypothèses suivantes :
 
-(1) hypothèse de Bernoulli : au cours de la déformation, les sections droites restent perpendiculaires à la courbe moyenne ;
+(1) hypothèse de Bernoulli : au cours de la déformation, les sections droites restent perpendiculaires à  la courbe moyenne ;
 
 (2) les sections droites restent planes selon Navier-Bernoulli (pas de gauchissement).
 
-L'hypothèse de Bernoulli permet de négliger le cisaillement dans le cas de la flexion : le risque de rupture est alors dû à l'extension des fibres situées à l'extérieur de la flexion, et la flèche est due au moment fléchissant. Cette hypothèse n'est pas valable pour les poutres courtes car ces dernières sont hors des limites de validité du modèle de poutre, à savoir que la dimension des sections doit être petite devant la longueur de la courbe moyenne. Le cisaillement est pris en compte dans le modèle de Timoshenko et Mindlin.}
+L'hypothèse de Bernoulli permet de négliger le cisaillement dans le cas de la flexion : le risque de rupture est alors due à  l'extension des fibres situées à  l'extérieur de la flexion, et la flèche est due au moment fléchissant. Cette hypothèse n'est pas valable pour les poutres courtes car ces dernières sont hors des limites de validité du modèle de poutre, à  savoir que la dimension des sections doit être petite devant la longueur de la courbe moyenne. Le cisaillement est pris en compte dans le modèle de Timoshenko et Mindlin.}
 
 \subsection{Darboux vector}
 Those equations can be formulated with the \emph{Darboux vector} of the chosen material frame, which represents the rotational velocity of the frame along $\vect{x}(s)$ :
@@ -86,7 +87,7 @@ Those equations can be formulated with the \emph{Darboux vector} of the chosen m
 Where $\kappa_1(s)$, $\kappa_2(s)$ and $\tau(s)$ represent respectively the rate of rotation of the material frame around the axis  $\vect{d}_1 (s)$, $\vect{d}_2 (s)$ and $\vect{d}_3 (s)$.
 
 \subsection{Curvatures and twist}
-The material curvatures are denoted $\kappa_1(s)$ and $\kappa_2(s)$ and represent the rod’s flexion in the principal planes respectively normal to $\vect{d}_1(s)$ and $\vect{d}_2(s)$ .The material twist is denoted $\tau(s)$ and represents the section’s rate of rotation around $\vect{d}_3(s)$. Those scalar functions measure directly the strain as defined in Kirchhoff’s theory (Figure 4). Recall that the Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ defines the osculating plane and the total curvature ($\kappa$) of a spatial curve :
+The material curvatures are denoted $\kappa_1(s)$ and $\kappa_2(s)$ and represent the rod's flexion in the principal planes respectively normal to $\vect{d}_1(s)$ and $\vect{d}_2(s)$ .The material twist is denoted $\tau(s)$ and represents the section's rate of rotation around $\vect{d}_3(s)$. Those scalar functions measure directly the strain as defined in Kirchhoff's theory (Figure 4). Recall that the Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ defines the osculating plane and the total curvature ($\kappa$) of a spatial curve :
 \begin{equation}
 	\vect{t}'(s) = \kappa(s) \vect{n}(s)
 	\quad,\quad
@@ -94,10 +95,10 @@ The material curvatures are denoted $\kappa_1(s)$ and $\kappa_2(s)$ and represen
 	\quad,\quad
 	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) = \frac{\vect{t}(s) \times \vect{t}'(s)}{\kappa(s)}
 \end{equation}
-To describe the osculating plane in which lies the bending part of the deformation, let’s introduce the \emph{curvature binormal} $\kappa\vect{b}(s) = \vect{t}(s)\times\vect{t}'(s)$, the vector of direction $\vect{b}(s)$ and norm $\kappa(s)$. At each point of arc-length $s$ the osculating plane is normal to $\kappa\vect{b}(s)$.
+To describe the osculating plane in which lies the bending part of the deformation, let's introduce the \emph{curvature binormal} $\kappa\vect{b}(s) = \vect{t}(s)\times\vect{t}'(s)$, the vector of direction $\vect{b}(s)$ and norm $\kappa(s)$. At each point of arc-length $s$ the osculating plane is normal to $\kappa\vect{b}(s)$.
 
 \subsection{Elastic energy}
-Kirrchhoff’s theory assigns an elastic energy to beams according to their strain \cite{Audoly2010}. In this theory, a beam is supposed to be inextensible. Thus the elastic energy ($\mathcal{E}_p$) only accounts for torsion and bending behaviors and is given by :
+Kirrchhoff's theory assigns an elastic energy to beams according to their strain \cite{Audoly2010}. In this theory, a beam is supposed to be inextensible. Thus the elastic energy ($\mathcal{E}_p$) only accounts for torsion and bending behaviors and is given by :
 \begin{equation}
 	\mathcal{E}_{p} =
 	\tfrac{1}{2} \int_{0}^{L}EI_1(\kappa_1-\overbar{\kappa_1})^2 + EI_2(\kappa_2-\overbar{\kappa_2})^2 ds
@@ -109,12 +110,12 @@ Here, $\overbar{\kappa_1}$, $\overbar{\kappa_2}$ and $\overbar{\tau}$  denote th
 \section{Curve-angle representation}
 The previous paragraph has shown how the elastic potential energy of a rod can be computed following both its centerline and its cross sections orientations, which represents a model with 6-DoF : 3 for centerline positions and 3 for cross section orientations.
 
-Following \cite{Bergou2008}, let’s introduce a reduced coordinate formulation of the rod that account for only 4-DoF. This reduction of DoF relies on the concept of zero-twisting frame which gives a reference frame with zero twist along a given centerline. Thus, cross section orientations $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ can be tracked only by the measure of an angle $\theta$ from this reference frame denoted $\{\vect{d}_3(s),\vect{u}(s),\vect{v}(s)\}$ (Figure 5).
+Following \cite{Bergou2008}, let's introduce a reduced coordinate formulation of the rod that account for only 4-DoF. This reduction of DoF relies on the concept of zero-twisting frame which gives a reference frame with zero twist along a given centerline. Thus, cross section orientations $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ can be tracked only by the measure of an angle $\theta$ from this reference frame denoted $\{\vect{d}_3(s),\vect{u}(s),\vect{v}(s)\}$ (Figure 5).
 
-Note that an alternative solution could be to parameterize the global rotations of local material frame and to compute the rotation needed to align two successive frames along the curve’s tangent.
+Note that an alternative solution could be to parameterize the global rotations of local material frame and to compute the rotation needed to align two successive frames along the curve's tangent.
 
 \note{
-Ici, expliquer la succession des dépendances : les vecteurs matériaux dépendent du repère de bishop par la seule variable theta. Le repère de bishop quand à lui est entièrement déterminé (au choix d'une constante de départ près) par la donnée de la centerline x.
+Ici, expliquer la succession des dépendances : les vecteurs matériaux dépendent du repère de bishop par la seule variable theta. Le repère de bishop quand à  lui est entièrement déterminé (au choix d'une constante de départ près) par la donnée de la centerline x.
 
 Faire un schéma explicatif.
 
@@ -131,7 +132,7 @@ Zero-twisting frame, also known as Bishop frame, was introduced by Bishop in 196
 	\end{bmatrix}
 =
 	\begin{bmatrix}
-		0 & k_{2}(s) & -\kappa_{1}(s) \\
+		0 & k_{2}(s) & -k_{1}(s) \\
 		-k_{2}(s) & 0 & \tau(s) \\
 		k_{1}(s) & -\tau(s) & 0
 	\end{bmatrix}
@@ -142,18 +143,25 @@ Zero-twisting frame, also known as Bishop frame, was introduced by Bishop in 196
 	\end{bmatrix}
 \end{gather}
 For instance, a Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ is a frame which satisfies $k_1(s)=0$. Note that this frame suffers from major disadvantages : it is undefined where the curvature vanishes and it flips at inflexion points.
-A Bishop frame $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$ is a frame which satisfies $\tau(s)=0$. By construction, this frame has no angular velocity (i.e. no twist) around the curve’s tangent ($\vect{u}\cdot\vect{v}' = \vect{u'}\cdot\vect{v}=0$). Its evolution along the curve is described by the corresponding Darboux vector : $\vect{\Omega}_b(s)=\kappa\vect{b}=\vect{t}\times\vect{t'}$. Remark that $\vect{\Omega}_b(s)$ only depends on the centerline and is well defined even when the curvature vanishes.
+A Bishop frame $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$ is a frame which satisfies $\tau(s)=0$. By construction, this frame has no angular velocity (i.e. no twist) around the curve's tangent ($\vect{u}\cdot\vect{v}' = \vect{u'}\cdot\vect{v}=0$). Its evolution along the curve is described by the corresponding Darboux vector : $\vect{\Omega}_b(s)=\kappa\vect{b}=\vect{t}\times\vect{t'}$. Remark that $\vect{\Omega}_b(s)$ only depends on the centerline and is well defined even when the curvature vanishes.
 
-Thus, by the help of $\vect{\Omega}_b(s)$, it’s possible to transport a given vector $\vect{e}$ along the centerline with no twist : $\vect{e'}=\kappa\vect{b}\times\vect{e}$. This is called \emph{parallel transport}.
+Thus, by the help of $\vect{\Omega}_b(s)$, it's possible to transport a given vector $\vect{e}$ along the centerline with no twist : $\vect{e'}=\kappa\vect{b}\times\vect{e}$. This is called \emph{parallel transport}.
 
 \section{Strains}
 
 \subsection{Axial strain}
 There is no axial strain to be considered as far as the rod is supposed to be unstretchable.
 
+Remark that the inextensibility hypothesis implies that any admissible perturbation ($\lambda\vect{h}_x$) of the rod's centerline ($\vect{x}$) is locally tangential to the centerline itself. Indeed, at each arc-length $s$ an inextensible rod must satisfies :
+\begin{equation}\label{eq:3_6}
+	\|\vect{x}'\| = \|(\vect{x}+\lambda\vect{h}_x)'\| = 1 \Rightarrow \vect{d}_3 \cdot \vect{h}'_x = -\tfrac{\lambda^2}{2}\|\vect{h}'_x\|^2 = o(\lambda) \simeq 0
+\end{equation}
+
+In other words, this means that the same arc-length parametrization can be used to locate beam sections along the centerline along the deformation path. This would not be the case if the centerline would shorten or stretch out during its deformation. It is worth to mention here that this property ($\vect{d}_3 \cdot \vect{h}'_x = 0$) will be used several times in the following sections.
+
 \subsection{Bending strain}
 
-Let’s compute the bending strains $\kappa_1$ and $\kappa_2$ regarding the geometric configuration of the rod. Remark that :
+Let's compute the bending strains $\kappa_1$ and $\kappa_2$ regarding the geometric configuration of the rod. Remark that :
 \begin{subequations}
 	\begin{gather}
 	\kappa\vect{b}\cdot\vect{d}_1 = (\vect{d}_3\times\vect{d}'_3)\cdot\vect{d}_1 = (\vect{d}_1\times\vect{d}_3)\cdot\vect{d}'_3 = -\vect{d}_2\cdot\vect{d}'_3 = \kappa_1 \\
@@ -182,7 +190,7 @@ Thus, the vector of material curvatures ($\vect{\omega}$) expressed on material 
 \end{equation}
 
 \subsection{Torsional strain}
-Let’s compute the twist or torsional strain $\tau$ regarding the geometric configuration of the rod. Decomposing the material frame on the bishop frame gives :
+Let's compute the twist or torsional strain $\tau$ regarding the geometric configuration of the rod. Decomposing the material frame on the bishop frame gives :
 \begin{equation}
 	\begin{bmatrix}
 		\vect{d}_1\\
@@ -220,7 +228,7 @@ Where $B$ is the bending stiffness matrix along the principal axes of inertia an
 	\beta = GJ
 \end{equation}
 
-Recall that the rod is supposed to be inextensible in Kirchhoff’s theory. Thus, there is no stretching energy associated with an axial strain. However, this constraint may be enforced via a penalty energy, which in practice is somehow very similar as considering an axial stiffness into the beam …
+Recall that the rod is supposed to be inextensible in Kirchhoff's theory. Thus, there is no stretching energy associated with an axial strain. However, this constraint may be enforced via a penalty energy, which in practice is somehow very similar as considering an axial stiffness into the beam's
 
 \note{
 Remark that the twisting energy ($\mathcal{E}_{t}$) only depends on $\theta$ and is independent regarding $\vect{x}$ while the bending energy ($\mathcal{E}_{b}$) depends on both $\theta$ and $\vect{x}$ variables (remind that $\kappa_1$ and $\kappa_2$ are the projections of $\kappa\vect{b}$ over $\vect{d}_1$ over $\vect{d}_2$). Thus, a coupling between bending and twisting appears as the minimum of the whole elastic energy is not necessarily reached for concomitant minimums of bending and twisting energies.
@@ -344,36 +352,50 @@ Finally, we can conclude on the expression of the internal moment of torsion :
 
 Internal torsional moments and forces acting on the rod are classically obtained by differentiating the potential energy of the system with respect to $\theta$ and $\vect{x}$. Here, the calculus is a bit tricky as far as the differentiation takes place in function spaces. After a brief reminder on functional derivative, the main results of the calculations of the energy derivatives are given.
 
-\note{paragraphe entièrment à revoir. Expliquer le cheminement. x fixe bishop et theta fixe d1,d2 par rapport à bishop. x est indépendant de theta. Seul des CL peuvent créer des couplages entre x et theta
+\note{paragraphe entièrment à  revoir. Expliquer le cheminement. x fixe bishop et theta fixe d1,d2 par rapport à  bishop. x est indépendant de theta. Seul des CL peuvent créer des couplages entre x et theta
 
-Donc les vrais degrés de liberté du problème sont en fait les vecteurs matériels et les positions x. Se reporter à une modélisation du pb dans SO3 comme Spillmann par exemple.
+Donc les vrais degrés de liberté du problème sont en fait les vecteurs matériels et les positions x. Se reporter à  une modélisation du pb dans SO3 comme Spillmann par exemple.
 
-Le calcul des gradients se résume donc à calculer les gradients des vecteurs matériels par rapport à des perturbations infinitésimales en x et theta. Pour theta, c'est facile. Pour kb, c'est facile. Reste la variation par rapport à x, qui est en fait la variation de bishop qu'on explique avec le writhe (défaut de fermeture de bishop sur une boucle fermée) et le transport parallèle.
+Le calcul des gradients se résume donc à  calculer les gradients des vecteurs matériels par rapport à  des perturbations infinitésimales en x et theta. Pour theta, c'est facile. Pour kb, c'est facile. Reste la variation par rapport à  x, qui est en fait la variation de bishop qu'on explique avec le writhe (défaut de fermeture de bishop sur une boucle fermée) et le transport parallèle.
 Le calcul se fait aisément en écrivant la double rotation et en effectuant le DL au premier ordre.
 
 Le reste est quasiment immédiat. Reste la question des CL et des termes aux bords.
 
-Il faut aussi se positionner par rapport à l'article de Basile. Regarder la question applied displacement vs settlement pour imposer une CL.
+Il faut aussi se positionner par rapport à  l'article de Basile. Regarder la question applied displacement vs settlement pour imposer une CL.
 }
 
 \subsection{Derivative of material directors with respect to $\vect{x}$}
 
 \note{ici expliquer le fonctionnement de la figure}
 
-A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation in the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame.
+A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation in the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame. Let us denote :
 
-$F_\epsilon = \{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$
-$\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$
-$F = \{\vect{t}, \vect{u},\vect{v}\}$
+\begin{itemize}
+\item
+$F = \{\vect{t}, \vect{u},\vect{v}\}$ : the Bishop frame in the reference configuration ;
+\item 
+ $F_\epsilon = \{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ : the Bishop frame in the deformed configuration ;
+ \item
+$\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$ : the frame obtained by parallel transporting $F_\epsilon$ back on $F$.
+\end{itemize}
 
-What we want to achive is to write at arc-length $s$ the Bishop frame in the deformed configuration $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the Bishop frame in the reference configuration $\{\vect{t}, \vect{u},\vect{v}\}$.
+What we want to achive is to write at arc-length $s$ the Bishop frame in the deformed configuration $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the Bishop frame in the reference configuration $\{\vect{t}, \vect{u},\vect{v}\}$ for a small perturbation $\epsilon$ of the centerline. This transformation can be decomposed in two rotations :
 
-We first write $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the the basis $\{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$. Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. Denoting :
+\begin{itemize}
+\item
+$F_\epsilon \rightarrow \tilde{F}_\epsilon$ : parallel transporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. 
+This is equivalent to a rotation around $\vect{t}_\epsilon \times \vect{t}$ by an angle $\alpha_\epsilon$.
+\item 
+$\tilde{F}_\epsilon \rightarrow F$ : aligning $\tilde{F}_\epsilon$ over $F$. 
+This is equivalent to a rotation around $\vect{t}$ of an angle $\Psi_\epsilon$.
+\end{itemize}
+
+Firstly, let's decompose $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the basis $\{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$. Note that $\tilde{F}_\epsilon$ is expressed by rotating $\tilde{F}_\epsilon$ by an angle $\Psi_\epsilon[\vect{x}](s)$ around $\vect{t}$ because $\tilde{F}_\epsilon$ is obtained by parallel transporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{writhe.pdf}
-\caption{Repères de Frenet attachés à $\gamma$.}
+\caption{Repères de Frenet attachés à  $\gamma$.}
 \label{fig:1_1}
 \end{figure}
 
@@ -382,7 +404,7 @@ We first write $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on t
 \begin{figure}[p]
 \centering
 \includegraphics[width=\textwidth]{rotation_A.pdf}
-\caption{$\tilde{F}$ is obtained by rotating $\tilde{F}_\epsilon$ around $\vect{t}$ of an angle $\Psi_\epsilon$.}
+\caption{$F$ is obtained by rotating $\tilde{F}_\epsilon$ around $\vect{t}$ of an angle $\Psi_\epsilon$.}
 \includegraphics[width=\textwidth]{rotation_B.pdf}
 \caption{$\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha_\epsilon$.}
 \label{A}
@@ -439,13 +461,9 @@ $\delta_s : t \mapsto \delta(t-s)$ est la distribution de dirac centrée en $s$.
 Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$.
 $\tilde{F}_\epsilon$ results from the rotation of $F_\epsilon$ around $\vect{b} = \vect{t}_\epsilon \times \vect{t}$ by an angle $\alpha_\epsilon$.
 
-Because the rod is supposed to be inextensible, the following properties hold :
+Recall from \eqref{eq:3_6} that because the rod is supposed to be unstretchable, $\vect{t}_\epsilon$ stays collinear to $\vect{t}$ for an infinitesimal perturbation of the centerline :
 \begin{equation}
-	\|\vect{t}\| = \|\vect{x}'\| = 1 \quad,\quad \|\vect{t}_\epsilon\| = \|(\vect{x}+\vect{\epsilon})'\| = 1
-\end{equation}
-Thus, when the perturbation $\vect{\epsilon}$ of the centerline gets infinitesimal $\vect{t}_\epsilon$ stays collinear to $\vect{t}$. Indeed :
-\begin{equation}
-		\|\vect{t}_\epsilon\| = 1
+		\|\vect{t}\| = \|\vect{t}_\epsilon\| = 1
 		\Rightarrow  (\vect{x}+\vect{\epsilon})' \cdot (\vect{x}+\vect{\epsilon})' = 1
 		\Leftrightarrow  \vect{x}'\cdot\vect{\epsilon}' = - \tfrac{\lambda^2}{2}\|\vect{h}_x'\|^2
 \end{equation}
@@ -480,7 +498,7 @@ Finally, it's possible to conclude that $\alpha_\epsilon(s)$ is in first order o
 %\end{figure}
 
 \subsubsection{Aligning $\tilde{F}_\epsilon$ towards $F_\epsilon$}
-
+Recall that aligning $\tilde{F}_\epsilon$ over $F$ is nothing but a rotation around $\vect{t}$ by an angle $\Psi_\epsilon$. This leads to :
 \begin{subequations}
 %	\left\{
 	\begin{gather}
@@ -498,31 +516,33 @@ Recall that $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsil
 	 = \cos{\gamma}\;\vect{\tilde{u}}_\epsilon + \sin{\gamma}\;\vect{\tilde{v}}_\epsilon
 	 = \cos{\gamma}\;\vect{u}_\epsilon + \sin{\gamma}\;\vect{v}_\epsilon
 \end{equation}
-Expressing $F_\epsilon$ on the basis $\tilde{F}_\epsilon$ gives for $\vect{u}_\epsilon$ :
-\begin{equation}
-	\begin{aligned}
-	\vect{u}_\epsilon &= \sin{\gamma}\;\vect{b} + \cos{\gamma}\;\big(\sin{\alpha_\epsilon}\;\vect{\tilde{t}}
+Expressing $F_\epsilon$ on the basis $\tilde{F}_\epsilon$ gives for $\vect{u}_\epsilon$ and $\vect{v}_\epsilon$ :
+\begin{subequations}
+\begin{gather}
+		\vect{u}_\epsilon = \sin{\gamma}\;\vect{b} + \cos{\gamma}\;\big(\sin{\alpha_\epsilon}\;\vect{\tilde{t}}
 	+ \cos{\alpha_\epsilon}\;(\cos{\gamma}\;\vect{\tilde{u}_\epsilon}
-	- \sin{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
-	&=\cos{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
+	- \sin{\gamma}\;\vect{\tilde{v}_\epsilon})\big) 
+		\\
+		\vect{v}_\epsilon = \cos{\gamma}\;\vect{b} + \sin{\gamma}\;\big(-\sin{\alpha_\epsilon}\;\vect{\tilde{t}}
+	+ \cos{\alpha_\epsilon}\;(\sin{\gamma}\;\vect{\tilde{u}_\epsilon}
+	- \cos{\gamma}\;\vect{\tilde{v}_\epsilon})\big) 
+\end{gather}
+\end{subequations}
+Which can be rearranged in :
+\begin{subequations}
+\begin{gather}
+		\vect{u}_\epsilon = \cos{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
 	+ (\cos{\alpha_\epsilon}\cos^2{\gamma}+ \cos^2{\gamma})\vect{\tilde{u}_\epsilon}
 	+ \sin{\gamma}\cos{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{v}_\epsilon}
-	\end{aligned}
-\end{equation}
-And for $\vect{v}_\epsilon$:
-\begin{equation}
-	\begin{aligned}
-	\vect{v}_\epsilon &= \cos{\gamma}\;\vect{b} + \sin{\gamma}\;\big(-\sin{\alpha_\epsilon}\;\vect{\tilde{t}}
-	+ \cos{\alpha_\epsilon}\;(\sin{\gamma}\;\vect{\tilde{u}_\epsilon}
-	- \cos{\gamma}\;\vect{\tilde{v}_\epsilon})\big) \\
-	&=-\sin{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
+		\\
+		\vect{v}_\epsilon = -\sin{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
 	+ \cos{\gamma}\sin{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{u}_\epsilon}
 	+ (\cos^2{\gamma} + \cos{\alpha_\epsilon}\sin^2{\gamma})\vect{\tilde{v}_\epsilon}
-	\end{aligned}
-\end{equation}
+\end{gather}
+\end{subequations}
 
 \subsubsection{Variation of Bishop frame with respect to $\vect{x}$}
-Thus, one can finally express $F_\epsilon$ on the basis $F$ as the composition of two rotations :
+Finally, one can express $F_\epsilon$ on the basis $F$ as the composition of two rotations :
 \begin{subequations}
 	\begin{gather}
 	\vect{u}_\epsilon =
@@ -568,7 +588,7 @@ Thus, one can finally express $F_\epsilon$ on the basis $F$ as the composition o
 %\begin{equation}
 %
 %\end{equation}
-Here, the expressions avec been developed in first order of $\lambda$ as far as $\alpha_\epsilon$ and $\Psi_\epsilon$ it's been proofed in eq [] that those quantities tends two zero when the perturbation of the centerline is infinitesimal.
+Here, the expressions have been developed in first order of $\lambda$ as far as $\alpha_\epsilon$ and $\Psi_\epsilon$ it's been proofed in eq [] that those quantities tends two zero when the perturbation of the centerline is infinitesimal.
 
 Finally, one can express the variation of material directors with respect to an infinitesimal variation of rod's centerline :
 \begin{subequations}
@@ -589,7 +609,7 @@ Recalling the expression of the material frame expressed in the reference Bishop
 			-\sin{\theta} \; \vect{u}_\epsilon + \cos{\theta} \; \vect{v}_\epsilon
 		\end{gather}
 \end{subequations}
-Which leads according to the previous équation to :
+Which leads according to the previous equation to :
 \begin{subequations}
 	\begin{gather}
 		\vect{d}_1[\vect{x}+\lambda \vect{h}_x] = \vect{d}_1[\vect{x}] + \Psi_\epsilon\vect{d}_2[\vect{x}] + \alpha_\epsilon\cos{(\theta-\gamma)}\;\vect{t}[\vect{x}] + o(\lambda) \\
@@ -692,40 +712,63 @@ Where :
 
 Calculus of $\mathcal{A}$ :
 \begin{equation}
-	\begin{split}
 	\mathcal{A}
-	& = \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
+	= \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
 		\end{bmatrix}\cdot \vect{h}_x'' \;dt \\
-	& = \left[(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
+\end{equation}
+
+Recalling the bending moment is given by : 
+\begin{equation}
+	\vect{M}  
+	= (\kappa_1 - \overbar{\kappa_1})EI_1\vect{d}_1 + (\kappa_2 - \overbar{\kappa_2})EI_2\vect{d}_2
+	= M_1\vect{d}_1 + M_2\vect{d}_2
+\end{equation}
+One can remark that :
+\begin{equation}
+	\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B} 
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
-		\end{bmatrix} \cdot \vect{h}_x'\right]_0^L
-		- \int_{0}^{L} \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
-		\begin{bmatrix}
-			-{\vect{d}_2}^T\\
-			{\vect{d}_1}^T\\
-		\end{bmatrix}\right)'\cdot \vect{h}_x' \;dt \\
-	& = \left[(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
-		\begin{bmatrix}
-			-{\vect{d}_2}^T\\
-			{\vect{d}_1}^T\\
-		\end{bmatrix} \cdot \vect{h}_x'
-		- \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
-		\begin{bmatrix}
-			-{\vect{d}_2}^T\\
-			{\vect{d}_1}^T\\
-		\end{bmatrix}\right)'\cdot \vect{h}_x
-		\right]_0^L\\
-		&+ \int_{0}^{L} \left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
-		\begin{bmatrix}
-			-{\vect{d}_2}^T\\
-			{\vect{d}_1}^T\\
-		\end{bmatrix}\right)''\cdot \vect{h}_x \;dt \\
-	\end{split}
+		\end{bmatrix}
+	=  M_2{\vect{d}_1}^T - M_1{\vect{d}_2}^T
+	= - ({\vect{d}_3} \times \vect{M})^T
+\end{equation}
+
+\note{
+Rq : on mixe abusivement 2 formes d'écritures, matricielle et vectorielle, à cause du produit scalaire que l'on écrit tantôt sous sa forme vectorielle et parfois matricielle (à l'aide de la transposée).}
+
+Thus,  $\mathcal{A}$ could be rewritten in it's vectoriel form :
+\begin{equation}
+	\begin{aligned}
+	\mathcal{A}
+	& = -\int_{0}^{L} ({\vect{d}_3} \times \vect{M}) \cdot \vect{h}_x'' \;dt \\
+	& = -\left[\left({\vect{d}_3} \times \vect{M}\right) \cdot \vect{h}_x'\right]_0^L
+		+ \int_{0}^{L} \left({\vect{d}_3} \times \vect{M}\right)'\cdot \vect{h}_x' \;dt \\
+	& = -\left[\left({\vect{d}_3} \times \vect{M}\right) \cdot \vect{h}_x'\right]_0^L
+		+ \int_{0}^{L} \left(
+			\left({\vect{d}_3} \times \vect{M}'\right) \cdot \vect{h}_x'
+			+ \left({\vect{h}'_x} \times \vect{d}_3'\right) \cdot \vect{M}
+			 \right)\;dt \\
+	\end{aligned}
+\end{equation}
+Recall that from \eqref{eq:3_6} that $\vect{h}'_x \cdot \vect{d}_3 = 0$  and from \eqref{eq:3_1} that $\vect{d}'_3 \cdot \vect{d}_3 = 0$. Hence, $\vect{h}'_x \times \vect{d}_3'$ is colinear to $\vect{d}_3$. Or by definition $\vect{M}$ is orthogonal to $\vect{d}_3$. Thus, $\left({\vect{h}'_x} \times \vect{d}_3'\right) \cdot \vect{M} = 0$.
+Finally, after a second integration by parts :
+\begin{equation}
+	\begin{aligned}
+	\mathcal{A}
+	& = -\left[\left({\vect{d}_3} \times \vect{M}\right) \cdot \vect{h}_x'\right]_0^L
+		+ \int_{0}^{L} \left(
+			{\vect{d}_3} \times \vect{M}'\right) \cdot \vect{h}_x'
+			 \;dt \\
+	& = 	\left[
+			({\vect{d}_3} \times \vect{M}') \cdot \vect{h}''_x\
+			- ({\vect{d}_3} \times \vect{M}) \cdot \vect{h}_x'
+		\right]_0^L
+		- \int_{0}^{L} \left({\vect{d}_3} \times \vect{M}'\right)' \cdot \vect{h}_x \;dt \\
+	\end{aligned}
 \end{equation}
 
 Calculus of $\mathcal{B}$ :
@@ -763,7 +806,7 @@ Calculus of $\mathcal{C}$ :
 	\\
 	\end{aligned}
 \end{equation}
-By several integration by parts, using Fubini’s theorem once and supposing that the terms vanishes at $s=0$ and $s=L$ :
+By several integration by parts, using Fubini's theorem once and supposing that the terms vanishes at $s=0$ and $s=L$ :
 \begin{equation}
 	\begin{aligned}
 	\mathcal{B}+\mathcal{C} &=
@@ -826,96 +869,178 @@ Finally :
 		\pdiffof{x}{\mathcal{E}_b[\vect{\omega}[\vect{x}]]}{s}{\vect{h}_x}
 		=
 		\int_{0}^{L} \left(
-		\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
-		\begin{bmatrix}
-			-{\vect{d}_2}^T\\
-			{\vect{d}_1}^T\\
-		\end{bmatrix}\right)''
-		-
-		\left(\beta(\theta' -{\overbar{\theta'}})
-		\kappa\vect{b}\right)'
+		- \left({\vect{d}_3} \times \vect{M}'\right)' 
+		- \left(\beta(\theta' -{\overbar{\theta'}}) \kappa\vect{b}\right)'
 		\right)\cdot \vect{h}_x \;dt\\
 \end{equation}
 
 \subsubsection{Internal forces}
 
-
-
-
-Thus, the
+Thus, the internal forces are related to the variation of internal elastic energy as :
 \begin{equation}
 	\begin{aligned}
-	\scalar{-f(s)}{\vect{h}_x} &= \pdiffof{x}{\mathcal{E}_p}{s}{\vect{h}_x}\\
-		&=
-		\int_{0}^{L} \left(
-		\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
-		\begin{bmatrix}
-			-{\vect{d}_2}^T\\
-			{\vect{d}_1}^T\\
-		\end{bmatrix}\right)''
-		-
-		\left(\beta(\theta' -{\overbar{\theta'}})
-		\kappa\vect{b}\right)'
+	\scalar{-\vect{f}(s)}{\vect{h}_x} &= \pdiffof{x}{\mathcal{E}_p}{s}{\vect{h}_x}
+		=
+		- \int_{0}^{L} \left(
+		\left({\vect{d}_3} \times \vect{M}'\right)' 
+		+ \left(\beta(\theta' -{\overbar{\theta'}}) \kappa\vect{b}\right)'
 		\right)\cdot \vect{h}_x \;dt\\
 	\end{aligned}
 \end{equation}
-Finally, we can conclude on the expression of the internal moment of torsion :
+Finally, we can conclude on the expression of the internal forces :
 \begin{equation}
-	f(s) =
-	-\left(\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
-		\begin{bmatrix}
-			-{\vect{d}_2}^T\\
-			{\vect{d}_1}^T\\
-		\end{bmatrix}\right)''
-		+
-		\left(\beta(\theta' -{\overbar{\theta'}})
-		\kappa\vect{b}\right)'
+	\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}'\right)' 
+		+ \left(\beta(\theta' -{\overbar{\theta'}}) \kappa\vect{b}\right)'
+\end{equation}
+The shear force acting on the right side of a section is nothing but $\vect{T} = \int \vect{f}$ :
+\begin{equation}
+	\vect{T}(s) = \vect{d}_3 \times \vect{M}'
+		+ \beta(\theta' -{\overbar{\theta'}}) \kappa\vect{b}
 \end{equation}
 
 \note{
-Remarquer ici que l'espression est purement locale.
+Remarquer ici que l'expression est purement locale.
 Elle ne dépend pas du sens de parcours de la poutre, contrairement au raisonnement suivi.
 Cette différence est notable avec la démarche de B. Audoly.
 Faire le bilan des bénéfices de l'hypothèse quasi-statique :
-- expressions rigoureusement vraies à l'équilibre statique
+- expressions rigoureusement vraies à  l'équilibre statique
 - simplification ds le calcul des efforts
 - rapidité dans le calcul avec des expressions plus simples
 - il n'est pas forcément intéressant en terme d'algorithmie d'imposer l'hypothèse quasistatique au cours du calcul. Il faudrait faire un bench pour savoir.
 }
 
+\section{Conclusion}
+
+On retrouve les équations de kirchhoff dynamique où l'on a négligé les forces inertielles de rotation d'un élément de poutre autour de $\vect{d}_1$ et $\vect{d}_2$ pour ne garder que la dynamique de rotation de la section autour de la fibre neutre $\vect{d}_3$. 
+
+\subsubsection{Constitutive Equations}
+\begin{subequations}
+	\begin{gather}
+	\tau = \theta' \\
+	Q = GJ(\tau -{\overbar{\tau}}) \\
+	M1 = (\kappa_1-{\overbar{\kappa_1}})EI_1 \\
+	M1 = (\kappa_2-{\overbar{\kappa_2}})EI_2
+	\end{gather}
+\end{subequations}
 
 
+\subsubsection{Shear Force}
+\begin{equation}
+	\vect{T}= \vect{d}_3 \times \vect{M}'
+		  + Q\kappa\vect{b}
+\end{equation}
+\subsubsection{Rotational Moment}
+\begin{equation}
+	\vect{\Gamma(s)} = (Q' + \kappa_1 M_2 - \kappa_2 M_1)\vect{d}_3
+\end{equation}
+\subsubsection{Quasistatic hypothesis}
+\begin{equation}
+	Q' + \kappa_1 M_2 - \kappa_2 M_1 \simeq 0
+\end{equation}
+\subsubsection{Inextensibility hypothesis}
+\begin{equation}
+	\|\vect{x}'\| = \|(\vect{x} + \vect{\epsilon})'\| = 1
+\end{equation}
 
 % #######################################################
 \section{Numerical Model}
 % #######################################################
 
+\begin{equation}
+	\begin{aligned}
+	\vect{T}_i 
+	&= \int_{i-1/2}^{i-1/2} f(s)  = \left[
+	\vect{d}_3 \times \mat{M}'
+	+ Q\kappa\vect{b}
+	\right]_{i-1/2}^{i+1/2} \\
+	&= 	\frac{\vect{e}_i}{|\vect{e}_i|} \times (\mat{M}_{i+1} - \mat{M}_{i})
+		- \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times (\mat{M}_{i} - \mat{M}_{i-1}) 
+		+ Q_i\frac{\kappa\vect{b}_{i+1}-\kappa\vect{b}_i}{2}
+		- Q_{i-1}\frac{\kappa\vect{b}_{i}-\kappa\vect{b}_{i-1}}{2}\\
+	&= (\vect{F}^1_{i} + \vect{F}^2_{i} + \vect{H}_{i}) - (\vect{F}^1_{i-1} + \vect{F}^2_{i-1} +  \vect{H}_{i-1})
+	\end{aligned}
+\end{equation}
 
-% #######################################################
-\section{Discretization}
-% #######################################################
-
-
-
-
-% #######################################################
-\section{Connection}
-% #######################################################
+With
+\begin{subequations}
+	\begin{gather}
+	\tau_i		= \frac{\theta_{i+1} - \theta_i}{|\vect{e}_i|} \\
+	Q_i 			= \beta_i \tau_i \\
+	\vect{F}^1_{i} 	= - \frac{\vect{e}_i \times \mat{M}_i}{|\vect{e}_i|} \\
+	\vect{F}^2_{i} 	=	\frac{\vect{e}_i \times \mat{M}_{i+1}}{|\vect{e}_i|} \\
+	\vect{H}_{i} 	= Q_i\frac{\kappa\vect{b}_{i+1}-\kappa\vect{b}_i}{2} 
+	\end{gather}
+\end{subequations}
 
 
 \subsubsection{Internal forces}
 
-Note that :
+
 \begin{equation}
-	\mat{M} = \left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
-	= (\kappa_1 - \overbar{\kappa_1})EI_1\vect{d}_1 + (\kappa_2 - \overbar{\kappa_2})EI_2\vect{d}_2
+	\begin{aligned}
+	 (\vect{d}_3 \times \mat{M})' 
+	 &= (\vect{d}_3 \times (M_1 \vect{d}_1 + M_2 \vect{d}_2))' 
+	 = (M_1 \vect{d}_2 - M_2 \vect{d}_1 )' \\
+	 &= M_1' \vect{d}_2 - M_2' \vect{d}_1 
+	 + M_1 (\kappa_{1}\vect{d}_3 - \tau\vect{d}_1)
+	 - M_2(-\kappa_{2}\vect{d}_3 + \tau\vect{d}_2) \\
+	 &= (M_1\kappa_1 + M_2\kappa_2)\vect{d}_3 - (\tau M_1 + M_2')\vect{d}_1 - (\tau M_2 - M_1')\vect{d}_2  
+	 \end{aligned}
 \end{equation}
 
+Thus,
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_i 
+	&= \int_{i-1/2}^{i-1/2} f(s)  = \left[(\vect{d}_3 \times \mat{M})'\right]_{i-1/2}^{i+1/2} \\
+	&= \frac{\vect{e}_i}{|\vect{e}_i|} \times (\mat{M}_{i+1} - \mat{M}_{i}) - 
+		\frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times (\mat{M}_{i} - \mat{M}_{i-1}) \\
+	&= \vect{F}^1_{i} + \vect{F}^2_{i} - \vect{F}^1_{i-1} - \vect{F}^2_{i-1}
+	\end{aligned}
+\end{equation}
+
+With
+\begin{equation}
+	\vect{F}^1_i = \frac{\vect{e}_i}{|\vect{e}_i|} \times \mat{M}_{i} \\
+	\vect{F}^2_i = \frac{\vect{e}_i}{|\vect{e}_i|} \times \mat{M}_{i+1}
+\end{equation}
+
+%\note{
+%Valable en partie courante, mais pas aux bords. Attention au changement de propriétés mécaniques sur le segment. Il ya un couac avec M qui dépend à la fois de kb (pointwise) et de EI (edgewise).  Pas forcément pour beta.
+%}
 And
 \begin{equation}
 	\mat{Q} = \left(\beta\left(\theta - \overbar{\theta}\right)\right)' \vect{d}_3
 \end{equation}
 
+Thus
+\begin{equation}
+	\begin{aligned}
+	\mat{Q}_i &= \beta_i \frac{(\theta_{i+1} - \overbar{\theta_{i+1}})-(\theta_{i} - \overbar{\theta_{i}})}{|\vect{e}_i|}\\
+	&= \beta_i \left(\frac{\theta_{i+1} - \theta_{i}}{|\vect{e}_i|}-\frac{\overbar{\theta_{i+1}} - \overbar{\theta_{i}}}{|\vect{e}_i|}\right) \\
+	&= \beta_i \left(\tau_{i} - \overbar{\tau_{i}}\right) \\
+	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\begin{aligned}
+	\vect{H}_i 
+	&= \int_{i-1/2}^{i-1/2} f(s)  = \left[\mat{Q} \kappa\vect{b} \right]_{i-1/2}^{i+1/2} \\
+	&= \mat{Q}_i \frac{ \kappa\vect{b}_{i+1} -  \kappa\vect{b}_i}{2}
+	- \mat{Q}_{i-1} \frac{ \kappa\vect{b}_{i} -  \kappa\vect{b}_{i-1}}{2}
+	\end{aligned}
+\end{equation}
+
+
+\begin{equation}
+	m(s) = - \left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) + (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}
+\end{equation}
+
+\begin{equation}
+	(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} 
+	 = - \kappa\vect{b} \cdot (\vect{d}_3 \times \mat{M})
+	 = \kappa_1 \mat{M}_2 -  \kappa_2 \mat{M}_1
+\end{equation}
 
 \bibliographystyle{alpha}
 \bibliography{../bibliography}
