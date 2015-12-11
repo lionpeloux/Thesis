@@ -919,7 +919,9 @@ On retrouve les équations de kirchhoff dynamique où l'on a négligé les force
 	\tau = \theta' \\
 	Q = GJ(\tau -{\overbar{\tau}}) \\
 	M1 = (\kappa_1-{\overbar{\kappa_1}})EI_1 \\
-	M1 = (\kappa_2-{\overbar{\kappa_2}})EI_2
+	M1 = (\kappa_2-{\overbar{\kappa_2}})EI_2 \\
+	\vect{M} = M_1\vect{d}_1 + M_2\vect{d}_2 \\
+	\vect{Q} = Q\vect{d}_3	
 	\end{gather}
 \end{subequations}
 
@@ -934,6 +936,11 @@ Notes :
 	\end{gather}
 \end{subequations}
 
+\subsubsection{Axial Force}
+\begin{equation}
+	\vect{N} = (ES \epsilon) \vect{d}_3
+\end{equation}
+
 \subsubsection{Shear Force}
 \begin{equation}
 	\vect{T}= \vect{d}_3 \times \vect{M}'
@@ -941,7 +948,7 @@ Notes :
 \end{equation}
 \subsubsection{Rotational Moment}
 \begin{equation}
-	\vect{\Gamma(s)} = (Q' + \kappa_1 M_2 - \kappa_2 M_1)\vect{d}_3
+	\vect{\Gamma}(s) = (Q' + \kappa_1 M_2 - \kappa_2 M_1)\vect{d}_3
 	= Q' \vect{d}_3 + \kappa\vect{b} \times \vect{M}
 \end{equation}
 \subsubsection{Quasistatic hypothesis}
@@ -949,28 +956,153 @@ Notes :
 	Q' + \kappa_1 M_2 - \kappa_2 M_1 \simeq 0
 \end{equation}
 \subsubsection{Inextensibility hypothesis}
-\begin{equation}
-	\|\vect{x}'\| = \|(\vect{x} + \vect{\epsilon})'\| = 1
-\end{equation}
+\begin{subequations}
+	\begin{gather}
+	\|\vect{x}'\| = \|(\vect{x} + \vect{\epsilon})'\| = 1 \\
+	\|\vect{e}_i\| = \|\overbar{\vect{e}_i}\|
+	\end{gather}
+\end{subequations}
 
 % #######################################################
 \section{Numerical Model}
 % #######################################################
 
+En fait il faut faire quelques hypothèses sur la nature des efforts pour pourvoir les interpoler convenablement le long de la courbe. On va faire qqch qui ressemble à la super-clothoide de Bertails, et qui semble une hypothèse naturelle pour une poutre continue sur plusieurs appuis soumise à des forces et moments ponctuels :
+\begin{itemize}
+\item le moment est continu et linéaire par morceaux. Il est évalué ponctuellement aux noeuds et interpolé linéairement entre les noeuds.
+\item la courbure est donc continue par morceaux et linéaire par morceaux. Elle est obtenue à partir du moment et de $\vect{B}$
+\item N et Q sont constants par morceaux
+\end{itemize}
+\begin{subequations}
+	\begin{gather}
+		\vect{N}(s) = \vect{N}_{i}  \quad , \quad s \in ]0,|\vect{e}_i|[ \\
+		\vect{M}(s) = \vect{M}_{i} + s \vect{M}'_{i} \quad s \in [0,|\vect{e}_i|]
+		\quad , \quad \vect{M}'_{i}= \frac{\vect{M}_{i+1} - \vect{M}_{i}}{|\vect{e}_i|} \\
+		\vect{Q}(s) = \vect{Q}_{i}  \quad , \quad s \in ]0,|\vect{e}_i|[ 
+	\end{gather}
+\end{subequations}
+
+Faire un tableau vertex / edge quantities :
+\begin{itemize}
+\item les propriétés mécaniques sont définies aux noeuds
+\item les repères matériels sont définis aux noeuds
+\item les courbures sont définies aux noeuds
+\item les moments sont définis aux noeuds et sont interpolés linéairement entre les noeuds
+\item l'effort normal et le moment de torsion sont supposés uniformes sur les segments (ils sont donc définis aux segments)
+\item $\alpha$ et $\beta$ sont des propriétés équivalentess définies sur les segments (égales à celles de noeuds s'il n'y a pas de saut de propriété).
+\end{itemize}
+
+\subsection{Force}
+
+\subsubsection{Axial Force}
+
+Axial Force exercée par la poutre sur le point courant $\vect{x}_i$ :
 \begin{equation}
 	\begin{aligned}
-	\vect{T}_i 
-	&= \int_{i-1/2}^{i-1/2} f(s)  = \left[
-	\vect{d}_3 \times \mat{M}'
-	+ Q\kappa\vect{b}
-	\right]_{i-1/2}^{i+1/2} \\
-	&= 	\frac{\vect{e}_i}{|\vect{e}_i|} \times (\mat{M}_{i+1} - \mat{M}_{i})
-		- \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times (\mat{M}_{i} - \mat{M}_{i-1}) 
-		+ Q_i\frac{\kappa\vect{b}_{i+1}-\kappa\vect{b}_i}{2}
-		- Q_{i-1}\frac{\kappa\vect{b}_{i}-\kappa\vect{b}_{i-1}}{2}\\
-	&= (\vect{F}^1_{i} + \vect{F}^2_{i} + \vect{H}_{i}) - (\vect{F}^1_{i-1} + \vect{F}^2_{i-1} +  \vect{H}_{i-1})
+	\vect{F}_i^{\parallel}
+	&= \left[\vect{N}\right]_{i-1/2}^{i+1/2}
+	= \vect{N}_{i+1} - \vect{N}_{i}
 	\end{aligned}
 \end{equation}
+
+Axial Force exercée par la poutre sur le premier point $\vect{x}_0$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_i^{\parallel}
+	&= \left[\vect{N}\right]_{0}
+	= \vect{N}_{0}
+	\end{aligned}
+\end{equation}
+
+Axial Force exercée par la poutre sur le dernier point $\vect{x}_n$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_i^{\parallel}
+	&= -\left[\vect{N}\right]_{0}
+	= -\vect{N}_{n}
+	\end{aligned}
+\end{equation}
+
+
+
+\subsubsection{Shear Force}
+
+Shear Force exercée par la poutre sur le point courant $\vect{x}_i$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_i^{\perp}
+	&= \left[\vect{d}_3 \times \mat{M}' + Q\kappa\vect{b} \right]_{i-1/2}^{i+1/2} \\
+	&= 	\frac{\vect{e}_i}{|\vect{e}_i|} \times \frac{\mat{M}_{i+1} - \mat{M}_{i}}{|\vect{e}_i|}
+		- \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times \frac{\mat{M}_{i} - \mat{M}_{i-1}}{|\vect{e}_{i-1}|}
+		+ Q_i\kappa\vect{b}^{-}_{i+1/2}
+		- Q_{i-1}\kappa\vect{b}^{+}_{i-1/2}\\
+	&= (\vect{F}^1_{i} + \vect{F}^2_{i} + \vect{H}^{-}_{i}) - (\vect{F}^1_{i-1} + \vect{F}^2_{i-1} +  \vect{H}^{+}_{i-1})
+	\end{aligned}
+\end{equation}
+
+\note{Ici, on a un problème de définition de $\kappa\vect{b}$ en milieu de segment. En effet, bien que le moment soit continu, la courbure ne l'est pas nécessairement. Lorsqu'il y a un saut de $EI$ il y a nécessairement un saut de $\kappa\vect{b}$. On pourrait plutôt interpoler le moment à mi-travée et remonter à la courbure - soit à gauche, soit à droite - en fonction des propriétés géométriques locales :
+\begin{subequations}
+	\begin{gather}
+	\vect{M}_{i+1/2} = \frac{\vect{M}_{i} + \vect{M}_{i+1}}{2} \\
+	\kappa\vect{b}^{-}_{i+1/2} = \mat{B}_i^{-1}\vect{M}_{i+1/2} \\
+	\kappa\vect{b}^{+}_{i+1/2} = \mat{B}_{i+1}^{-1}\vect{M}_{i+1/2}\\
+	\vect{H}^-_{i} = Q_i\kappa\vect{b}^{-}_{i+1/2} = Q_i \mat{B}_i^{-1}\vect{M}_{i+1/2}\\
+	\vect{H}^+_{i} = Q_i\kappa\vect{b}^{+}_{i+1/2} = Q_i \mat{B}_{i+1}^{-1}\vect{M}_{i+1/2}
+	\end{gather}
+\end{subequations}
+
+L'autre approche consiste à ignorer la discontinuité et à simplement prendre la moyenne :
+\begin{subequations}
+	\begin{gather}
+	\kappa\vect{b}_{i+1/2} = \kappa\vect{b}^{-}_{i+1/2} = \kappa\vect{b}^{+}_{i+1/2} 
+	= \frac{\kappa\vect{b}_{i} + \kappa\vect{b}_{i+1}}{2} \\
+	\vect{H}^-_{i} = Q_i\kappa\vect{b}^{-}_{i+1/2} \\
+	\vect{H}^+_{i} = Q_i\kappa\vect{b}^{+}_{i+1/2} \\
+	\vect{H}^-_{i} = \vect{H}^+_{i} = \frac{\kappa\vect{b}_{i} + \kappa\vect{b}_{i+1}}{2}
+	\end{gather}
+\end{subequations}
+Cette idée reste intéressante et élégante. Elle n'a de sens que pour une poutre à propriétés variables (sinon on a la continuité de la courbure également).
+}
+
+Shear Force  exercée par la poutre sur le premier point $\vect{x}_0$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_0^{\perp} 
+	&= \left[\vect{d}_3 \times \mat{M}'+ Q\kappa\vect{b}\right]_{0} \\
+	&= \frac{\vect{e}_0}{|\vect{e}_0|} \times \frac{\mat{M}_{1} - \mat{M}_{0}}{|\vect{e}_0|} 
+	+ Q_0\frac{\kappa\vect{b}_{0}}{2} \\
+	& = \vect{F}^1_{0} + \vect{F}^2_{0}  +  \vect{H}^-_{0}  \\
+	\end{aligned}
+\end{equation}
+
+Shear Force  exercée par la poutre sur le dernier point $\vect{x}_n$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_n^{\perp} 
+	&= - \left[ \vect{d}_3 \times \mat{M}'+ Q\kappa\vect{b}\right]_{n} \\
+	&= - \frac{\vect{e}_{n-1}}{|\vect{e}_{n-1}|} \times \frac{\mat{M}_{n} - \mat{M}_{n-1}}{|\vect{e}_{n-1}|} 
+	- Q_n\frac{\kappa\vect{b}_{n}}{2} \\
+	& = -(\vect{F}^1_{n} + \vect{F}^2_{n}  +  \vect{H}^+_{n}) \\
+	\end{aligned}
+\end{equation}
+
+
+\subsubsection{Moment of Torsion}
+
+\begin{equation}
+	\begin{aligned}
+	\Gamma_i 
+		&= \int_{i-1/2}^{i-1/2} m(s)  
+		= Q_{i} - Q_{i-1}
+		+ \int_{i-1/2}^{i+1/2} \kappa_{1} M_{2} - \kappa_{2} M_{1}\\
+		&= Q_{i} - Q_{i-1} + 
+		+ \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \cdot (\kappa\vect{b}_i \times \vect{M}^g_i )
+		+ \frac{\vect{e}_i}{|\vect{e}_i|} \cdot (\kappa\vect{b}_i \times \vect{M}^d_i )
+	\end{aligned}
+\end{equation}
+
+
+
 
 With
 \begin{subequations}
@@ -979,11 +1111,13 @@ With
 	[GJ]_i \\
 	\kappa\vect{b}_i = \frac{2 \vect{e}_{i-1} \times \vect{e}_{i}}{|\vect{e}_{i-1}| |\vect{e}_i| |\vect{e}_{i-1} + \vect{e}_{i}|} \\
 	\tau_i		= \frac{\theta_{i+1} - \theta_i}{|\vect{e}_i|} \\
-	Q_i 			= \beta_i (\tau_i - \overbar{\tau_i}) \quad where \quad \beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}\\
+	\vect{N}_{i} = N_i\vect{d}_3  \quad where \quad N_i = \alpha_i \epsilon_i \quad \alpha_i = \frac{2 [ES]_i [ES]_{i+1}}{[ES]_i + [ES]_{i+1}}\\
 	\vect{M}_{i} 	= [EI]_{1,i}(\kappa_{1,i} - \overbar{\kappa}_{1,i})\vect{d}_{1,i} + [EI]_{2,i}(\kappa_{2,i} - \overbar{\kappa}_{2,i})\vect{d}_{2,i} \\ 
-	\vect{F}^{1}_{i} 	= - \frac{\vect{e}_i \times \mat{M}_i}{|\vect{e}_i|} \\
-	\vect{F}^{2}_{i} 	= \frac{\vect{e}_i \times \mat{M}_{i+1}}{|\vect{e}_i|} \\ 
-	\vect{H}_{i} 	= Q_i\frac{\kappa\vect{b}_{i+1}-\kappa\vect{b}_i}{2} 
+	\vect{Q}_{i} = Q_i\vect{d}_3 \quad where \quad Q_i = \beta_i (\tau_i - \overbar{\tau_i}) \quad \beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}\\
+	\vect{F}^{1}_{i} 	= - \frac{\vect{e}_i \times \mat{M}_i}{|\vect{e}_i|^2} \\
+	\vect{F}^{2}_{i} 	= + \frac{\vect{e}_i \times \mat{M}_{i+1}}{|\vect{e}_i|^2} \\ 
+	\vect{H}^-_{i} 	= Q_i\kappa\vect{b}^{-}_{i+1/2} \\
+	\vect{H}^+_{i} 	= Q_i\kappa\vect{b}^{+}_{i+1/2} \\
 	\end{gather}
 \end{subequations}
 \note{Ici il y a une ambiguité sur $M_i$ en fonction d'un éventuel changement de propriété méca $EI_1$ ou $EI_2$. En fait il faudrait préciser un moment à droite et un moment à gauche (ce qui correspond à la réalité). Le moment étant la courbure au noeud i pondérée par $2EI$ à droite ou à gauche
@@ -1023,89 +1157,34 @@ Donc il faut plutôt définit $Q_i$ la torsion uniforme sur le segment $\vect{e}
 \end{equation}
 
 On retrouve bien le cas d'une poutre de propriété constante lorsque $[GJ]_i= [GJ]_{i+1} = GJ$ alors $\beta_i = GJ$.
- }
-
-\begin{equation}
-	\begin{aligned}
-	\Gamma_i 
-		&= \int_{i-1/2}^{i-1/2} m(s)  
-		= Q_{i} - Q_{i-1}
-		+ \int_{i-1/2}^{i} \kappa_{1} M_{2} - \kappa_{2} M_{1}
-		+ \int_{i}^{i+1/2} \kappa_{1} M_{2} - \kappa_{2} M_{1}\\
-		&= Q_{i} - Q_{i-1}
-		+ \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \cdot (\kappa\vect{b}_i \times \vect{M}^g_i )
-		+ \frac{\vect{e}_i}{|\vect{e}_i|} \cdot (\kappa\vect{b}_i \times \vect{M}^d_i )
-	\end{aligned}
-\end{equation}
-
-\subsubsection{Internal forces}
 
 
-\begin{equation}
-	\begin{aligned}
-	 (\vect{d}_3 \times \mat{M})' 
-	 &= (\vect{d}_3 \times (M_1 \vect{d}_1 + M_2 \vect{d}_2))' 
-	 = (M_1 \vect{d}_2 - M_2 \vect{d}_1 )' \\
-	 &= M_1' \vect{d}_2 - M_2' \vect{d}_1 
-	 + M_1 (\kappa_{1}\vect{d}_3 - \tau\vect{d}_1)
-	 - M_2(-\kappa_{2}\vect{d}_3 + \tau\vect{d}_2) \\
-	 &= (M_1\kappa_1 + M_2\kappa_2)\vect{d}_3 - (\tau M_1 + M_2')\vect{d}_1 - (\tau M_2 - M_1')\vect{d}_2  
-	 \end{aligned}
-\end{equation}
+De manière identique, on résonne pour l'effort axial entre deux noeuds 1 et 2 auxquels sont associés des raideurs axiales $[ES]_1$ et $[ES_2]$. On cherche la raideur équivalente connaissant uniquement l'allongement de l'ensemble du segment :
+\begin{subequations}
+	\begin{gather}
+	N_1 = [ES]_1 \cdot \epsilon_1 \\
+	N_2 = [ES]_2 \cdot \epsilon_2 \\
+	N =  [ES]_2 \cdot \frac{\epsilon_1 + \epsilon_2}{2}
+	\end{gather}
+\end{subequations}
+
+Avec : 
+\begin{subequations}
+	\begin{gather}
+	\epsilon_1 = \frac{l_1 - l_0/2}{l_0/2} \\
+	\epsilon_2 = \frac{l_2 - l_0/2}{l_0/2} \\
+	\epsilon = \frac{l}{l_0} = \frac{\epsilon_1}{2} + \frac{\epsilon_2}{2}  \\
+	\end{gather}
+\end{subequations}
 
 Thus,
-\begin{equation}
-	\begin{aligned}
-	\vect{F}_i 
-	&= \int_{i-1/2}^{i-1/2} f(s)  = \left[(\vect{d}_3 \times \mat{M})'\right]_{i-1/2}^{i+1/2} \\
-	&= \frac{\vect{e}_i}{|\vect{e}_i|} \times (\mat{M}_{i+1} - \mat{M}_{i}) - 
-		\frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times (\mat{M}_{i} - \mat{M}_{i-1}) \\
-	&= \vect{F}^1_{i} + \vect{F}^2_{i} - \vect{F}^1_{i-1} - \vect{F}^2_{i-1}
-	\end{aligned}
-\end{equation}
-
-With
-\begin{equation}
-	\vect{F}^1_i = \frac{\vect{e}_i}{|\vect{e}_i|} \times \mat{M}_{i} \\
-	\vect{F}^2_i = \frac{\vect{e}_i}{|\vect{e}_i|} \times \mat{M}_{i+1}
-\end{equation}
-
-%\note{
-%Valable en partie courante, mais pas aux bords. Attention au changement de propriétés mécaniques sur le segment. Il ya un couac avec M qui dépend à la fois de kb (pointwise) et de EI (edgewise).  Pas forcément pour beta.
-%}
-And
-\begin{equation}
-	\mat{Q} = \left(\beta\left(\theta - \overbar{\theta}\right)\right)' \vect{d}_3
-\end{equation}
-
-Thus
-\begin{equation}
-	\begin{aligned}
-	\mat{Q}_i &= \beta_i \frac{(\theta_{i+1} - \overbar{\theta_{i+1}})-(\theta_{i} - \overbar{\theta_{i}})}{|\vect{e}_i|}\\
-	&= \beta_i \left(\frac{\theta_{i+1} - \theta_{i}}{|\vect{e}_i|}-\frac{\overbar{\theta_{i+1}} - \overbar{\theta_{i}}}{|\vect{e}_i|}\right) \\
-	&= \beta_i \left(\tau_{i} - \overbar{\tau_{i}}\right) \\
-	\end{aligned}
-\end{equation}
-
-\begin{equation}
-	\begin{aligned}
-	\vect{H}_i 
-	&= \int_{i-1/2}^{i-1/2} f(s)  = \left[\mat{Q} \kappa\vect{b} \right]_{i-1/2}^{i+1/2} \\
-	&= \mat{Q}_i \frac{ \kappa\vect{b}_{i+1} -  \kappa\vect{b}_i}{2}
-	- \mat{Q}_{i-1} \frac{ \kappa\vect{b}_{i} -  \kappa\vect{b}_{i-1}}{2}
-	\end{aligned}
+ \begin{equation}
+	N_i = N_1 = N_2 \quad \Rightarrow \quad  \alpha_i = \frac{2 [ES]_i [ES]_{i+1}}{[ES]_i + [ES]_{i+1}} 
 \end{equation}
 
 
-\begin{equation}
-	m(s) = - \left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) + (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}
-\end{equation}
-
-\begin{equation}
-	(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} 
-	 = - \kappa\vect{b} \cdot (\vect{d}_3 \times \mat{M})
-	 = \kappa_1 \mat{M}_2 -  \kappa_2 \mat{M}_1
-\end{equation}
+ }
+ 
 
 \bibliographystyle{alpha}
 \bibliography{../bibliography}
