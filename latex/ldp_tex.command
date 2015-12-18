@@ -21,6 +21,12 @@ cd ..
 cd "ch5_kirchhoff"
 bibtex ch5_kirchhoff.aux
 cd ..
+cd "ch6_model"
+bibtex ch6_model.aux
+cd ..
+cd "ch7_marsupilami"
+bibtex ch7_marsupilami.aux
+cd ..
 pdflatex -shell-escape ldp_thesis.tex
 pdflatex -shell-escape ldp_thesis.tex
 osascript -e 'tell application "Terminal" to quit' &
