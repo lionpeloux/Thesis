@@ -195,6 +195,9 @@ FakesAssemblies/
 
 #images/
 #img/
+_minted-ldp_thesis/
 
 # Mac OSX
 *.DS_Store
+
+
