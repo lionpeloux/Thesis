@@ -54,21 +54,90 @@ We suppose that the sections are defined at verticies and that section propertie
 \end{equation}
 Note that this functions may be discontinous at edges midspan ($s_{i+1/2}$).
 
-\subsection{Axial force}
+\subsection{Axial force and strain}
+
+\subsubsection{Axial force}
 $\vect{N}$ is supposed to be piecewise constant between verticies on $[0,L]$ :
 \begin{equation}
-	\vect{N}(s) = N_i \vect{t}_i , \quad s \in ]s_i,s_{i+1}[
+	\vect{N}(s) = N_i \vect{t}_i \quad , \quad s \in ]s_i,s_{i+1}[
 \end{equation}
 Note that this functions may be discontinous at edges midspan ($s_{i+1/2}$).
 
-\subsection{Torsion moment}
+\subsubsection{Axial strain}
+Nous avons défini les propriétés géométriques et matérielles aux noeuds et nous avons fait l'hypothèse qu'elles restaient uniformes sur l'intervalle $]s_{i-1/2},s_{i+1/2}[$. Par ailleurs, nous avons supposé l'effort normal ($\vect{N}$) uniforme sur l'interval  $]s_i,s_{i+1}[$. De fait, la déformation axiale ($\epsilon$) est une fonction constante par morceaux sur les intervalles $]s_i,s_{i+1/2}[$.
+
+Connaissant l'élongation totale du segment $\vect{e}_i$, et puisque nous avons supposé l'effort normal uniforme sur le segment, il est possible de calculer les déformations axiales $\epsilon_{i}^{+}$ et $\epsilon_{i+1}^{-}$ respectivement pour les intervalles $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ :
+\begin{equation}
+	N_i = [ES]_{i} \epsilon_{i}^{+}
+	= [ES]_{i+1} \epsilon_{i+1}^{-}
+	= \alpha_i \epsilon_i
+\end{equation}
+Avec $\alpha_i$ la raideur axiale équivalente sur le segment $\vect{e}_i$ qui permet de calculer l'effort normal sur le segment en fonction de l'élongation totale du segment $\vect{e}_i$ bien que, comme énoncé précédemment, la déformation axiale puisse être différente entre $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ si l'on a un changement de raideur axiale $ES$ entre les noeuds $\vect{x}_i$ et $\vect{x}_{i+1}$.
+
+Les élongations des demis segments et du segment entier sont données par les équations suivantes, où l'on a considéré $l_i^+$ et $l_{i+1}^-$ les longueurs respectives des demi segments $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ :
+\begin{equation}
+	\epsilon_{i}^{+} = \frac{l_i^+ - \overbar{l_i}/2}{\overbar{l_i}/2} \quad , \quad
+	\epsilon_{i+1}^{-} = \frac{l_i^- - \overbar{l_i}/2}{\overbar{l_i}/2} \quad , \quad
+	\epsilon_i = \frac{l_i}{\overbar{l_i}} = \frac{\epsilon_{i}^{+}}{2} + \frac{\epsilon_{i+1}^{-}}{2}
+\end{equation}
+Ces équations de continuité permettent de déduire la raideur axiale équivalente $\alpha_i$ à considérer sur le segement $\vect{e}_i$ pour obtenir l'effort normal à partir de la déformation globale du segment :
+ \begin{equation}
+	N(s) = N_i = \alpha_i\epsilon_i \quad , \quad s \in ]s_i,s_{i+1}[
+	\quad with \quad \alpha_i = \frac{2 [ES]_i [ES]_{i+1}}{[ES]_i + [ES]_{i+1}}
+\end{equation}
+On obtient également les déformations axiales sur chacun des intervalles :
+\begin{subequations}
+	\begin{gather}
+		\epsilon(s) = \epsilon_{i}^{+} = \frac{\alpha_i}{[ES]_i}\epsilon_i \quad , \quad s \in ]s_i,s_{i+1/2}[ \\
+		\epsilon(s) = \epsilon_{i+1}^{-} = \frac{\alpha_i}{[ES]_{i+1}}\epsilon_i \quad , \quad s \in ]s_{i+1/2},s_{i+1}[
+	\end{gather}
+\end{subequations}
+On remarque que pour une poutre aux propriétés uniformes, les déformations sont continues (il n'y a plus de saut) et $\alpha_i = [ES]_i = [ES]_{i+1}$.
+
+\subsection{Moment of torsion and rate of twist}
+
+\subsubsection{Moment of torsion}
 $\vect{Q}$ is supposed to be piecewise constant between verticies on $[0,L]$ :
 \begin{equation}
 	\vect{Q}(s) = Q_i \vect{t}_i , \quad s \in ]s_i,s_{i+1}[
 \end{equation}
 Note that this function may be discontinous at edges midspan ($s_{i+1/2}$).
 
-\subsection{Bending moment}
+\subsubsection{Rate of twist}
+Nous avons défini les propriétés géométriques et matérielles aux noeuds et nous avons fait l'hypothèse qu'elles restaient uniformes sur l'intervalle $]s_{i-1/2},s_{i+1/2}[$. Par ailleurs, nous avons supposé le moment de torsion ($\vect{Q}$) uniforme sur l'interval  $]s_i,s_{i+1}[$. 
+De fait, the rate of twist ($\tau = \theta'$) est une fonction constante par morceaux sur les intervalles $]s_i,s_{i+1/2}[$.
+
+Connaissant le twist, c'est à dire la variation de $\theta$, sur le segment $\vect{e}_i$, et puisque nous avons supposé le moment de torsion uniforme sur le segment, il est possible de calculer les rate of twist $\tau_{i}^{+}$ et $\tau_{i+1}^{-}$ respectivement pour les intervalles $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ :
+\begin{equation}
+	Q_i = [GJ]_{i} \tau_{i}^{+}
+	= [GJ]_{i+1} \tau_{i+1}^{-}
+	= \beta_i \tau_i
+\end{equation}
+Avec $\beta_i$ la raideur en torsion équivalente sur le segment $\vect{e}_i$ qui permet de calculer le moment de torsion sur le segment en fonction de l'élongation totale du segment $\vect{e}_i$ bien que, comme énoncé précédemment, le rate of twist puisse être différente entre $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ si l'on a un changement de raideur en torsion $GJ$ entre les noeuds $\vect{x}_i$ et $\vect{x}_{i+1}$.
+
+Les twists des demis segments et du segment entier sont données par les équations suivantes, où l'on a considéré $\theta_i^{mid}$ l'angle de rotation de la section en $s_{i+1/2}$ :
+\begin{equation}
+	\tau_{i}^{+} = \frac{\theta_i^{mid} - \theta_i}{l_i/2} \quad , \quad
+	\tau_{i+1}^{-} = \frac{\theta_{i+1} - \theta_i^{mid}}{l_i/2} \quad , \quad
+	\tau_i = \frac{\theta_{i+1}-\theta_{i}}{\overbar{l_i}} = \frac{\tau_{i}^{+}}{2} + \frac{\tau_{i+1}^{-}}{2}
+\end{equation}
+Ces équations de continuité permettent de déduire la raideur en torsion équivalente $\beta_i$ à considérer sur le segment $\vect{e}_i$ pour obtenir le moment de torsion à partir du twist global le long du segment :
+ \begin{equation}
+	Q(s) = Q_i = \beta_i(\tau_i - \overbar{\tau_i}) \quad , \quad s \in ]s_i,s_{i+1}[
+	\quad with \quad \beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}
+\end{equation}
+On obtient également les rate of twist sur chacun des intervalles dans la configuration au repos ($\overbar{\tau}$) comme déformée ($\tau$) :
+\begin{subequations}
+	\begin{gather}
+		\tau(s) = \tau_{i}^{+} = \frac{\beta_i}{[GJ]_i}\tau_i \quad , \quad s \in ]s_i,s_{i+1/2}[ \\
+		\tau(s) = \tau_{i+1}^{-} = \frac{\beta_i}{[GJ]_{i+1}}\tau_i \quad , \quad s \in ]s_{i+1/2},s_{i+1}[
+	\end{gather}
+\end{subequations}
+On remarque que pour une poutre aux propriétés uniformes, les déformations sont continues (il n'y a plus de saut) et $\beta_i = [GJ]_i = [GJ]_{i+1}$.
+
+\subsection{Bending moment and curvature}
+
+\subsubsection{Bending moment}
 $\vect{M}$ is supposed to be continuous and piecewise linear on $[0,L]$. This assumption is quite reasonable because the bending moment is effectively continous for a beam subject to punctual forces and moments. Thus, $\vect{M}$ is interpolated from the moment computed at vertices :
 \begin{equation}
 	\vect{M}(s) = \vect{M}_{i+1/2} + (s-\tfrac{l_i}{2}) \vect{M}'_{i+1/2} \quad , \quad s \in [s_i,s_{i+1}]
@@ -81,7 +150,7 @@ With
 	\end{gather}
 \end{subequations}
 
-\subsection{Curvature}
+\subsubsection{Curvature}
 Il y a une sorte de dualité entre le moment et la courbure.
 Parfois c'est la mesure de la courbure qui donne accès au moment de flexion.
 Parfois la courbure c'est la connaissance du moment de flexion qui donne la courbure.
