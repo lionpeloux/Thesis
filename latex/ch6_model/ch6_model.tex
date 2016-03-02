@@ -1,12 +1,36 @@
 \chapter{Numerical model}
 
 \section{Introduction}
+
+\subsection{Goals and contribution}
 Dans ce chapitre on s'attache à la résolution de l'équilibre statique par relaxation dynamique.
 Peut-être qu'il faudra faire un chapitre "Marsupilami" plus détaillé qui regroupe les différents éléments formulés et les connexions / liaisons
 On formule l'élément en torsion à partir des équations de Kirchhoff et non du modèle énergétique (un terme est manquant).
 On effectue une validation numérique. Penser à tracer la contribution de chaque terme pour vérifier les approximations effectuées.
 
-\cite{Dill1992}
+\subsection{Related work}
+\cite{Day1965}
+\cite{Otter1965}
+\cite{Papadrakakis1981}
+\cite{Miki2014}
+\cite{Alamatian2012}
+\cite{Rezaiee-pajand2011a}
+
+Idée pour l'article avec sigrid \cite{Alamatian2012}
+
+\subsection{Overview}
+
+% #######################################################
+\section{Dynamic relaxation}
+% #######################################################
+
+\subsection{Overview}
+Ici, repartir de l'explication donnée par Alister Days en 65.
+Proposer une illustration avec un pendule. Pourquoi pas le système masse-ressort proposé par Days, à savoir une masse au bout d'une poutre encastrée.
+
+\subsection{Finite difference integration}
+
+\subsection{Kinetic damping}
 
 
 % #######################################################
@@ -23,7 +47,7 @@ On discrétise la centerline de la façon suivante :
 	\end{gather}
 \end{subequations}
 
-\subsection{Discrete Bishop frame}
+\subsection{Discrete bishop frame}
 
 \subsubsection{Discrete parallel transport at edges}
 
@@ -80,10 +104,13 @@ Les élongations des demis segments et du segment entier sont données par les �
 	\epsilon_{i+1}^{-} = \frac{l_i^- - \overbar{l_i}/2}{\overbar{l_i}/2} \quad , \quad
 	\epsilon_i = \frac{l_i}{\overbar{l_i}} = \frac{\epsilon_{i}^{+}}{2} + \frac{\epsilon_{i+1}^{-}}{2}
 \end{equation}
-Ces équations de continuité permettent de déduire la raideur axiale équivalente $\alpha_i$ à considérer sur le segement $\vect{e}_i$ pour obtenir l'effort normal à partir de la déformation globale du segment :
+Ces équations de continuité permettent de déduire la raideur axiale équivalente $\alpha_i$ à considérer sur le segement $\vect{e}_i$ pour obtenir l'effort normal à partir de la déformation globale du segment sur $s \in ]s_i,s_{i+1}[$ :
  \begin{equation}
-	N(s) = N_i = \alpha_i\epsilon_i \quad , \quad s \in ]s_i,s_{i+1}[
-	\quad with \quad \alpha_i = \frac{2 [ES]_i [ES]_{i+1}}{[ES]_i + [ES]_{i+1}}
+	N(s) = N_i = \alpha_i\epsilon_i
+	\quad , \quad
+	\alpha_i = \frac{2 [ES]_i [ES]_{i+1}}{[ES]_i + [ES]_{i+1}}
+	\quad , \quad
+	\epsilon_i = \frac{|l_i| - |\overbar{l_i}|}{|\overbar{l_i}|}
 \end{equation}
 On obtient également les déformations axiales sur chacun des intervalles :
 \begin{subequations}
@@ -104,10 +131,10 @@ $\vect{Q}$ is supposed to be piecewise constant between verticies on $[0,L]$ :
 Note that this function may be discontinous at edges midspan ($s_{i+1/2}$).
 
 \subsubsection{Rate of twist}
-Nous avons défini les propriétés géométriques et matérielles aux noeuds et nous avons fait l'hypothèse qu'elles restaient uniformes sur l'intervalle $]s_{i-1/2},s_{i+1/2}[$. Par ailleurs, nous avons supposé le moment de torsion ($\vect{Q}$) uniforme sur l'interval  $]s_i,s_{i+1}[$. 
+Nous avons défini les propriétés géométriques et matérielles aux noeuds et nous avons fait l'hypothèse qu'elles restaient uniformes sur l'intervalle $]s_{i-1/2},s_{i+1/2}[$. Par ailleurs, nous avons supposé le moment de torsion ($\vect{Q}$) uniforme sur l'interval  $]s_i,s_{i+1}[$.
 De fait, the rate of twist ($\tau = \theta'$) est une fonction constante par morceaux sur les intervalles $]s_i,s_{i+1/2}[$.
 
-Connaissant le twist, c'est à dire la variation de $\theta$, sur le segment $\vect{e}_i$, et puisque nous avons supposé le moment de torsion uniforme sur le segment, il est possible de calculer les rate of twist $\tau_{i}^{+}$ et $\tau_{i+1}^{-}$ respectivement pour les intervalles $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ :
+Considérons une poutre droite sans twist au repos. Connaissant le twist dans l'état déformé, c'est à dire la variation de $\theta$, sur le segment $\vect{e}_i$, et puisque nous avons supposé le moment de torsion uniforme sur le segment, il est possible de calculer les rate of twist $\tau_{i}^{+}$ et $\tau_{i+1}^{-}$ respectivement pour les intervalles $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ :
 \begin{equation}
 	Q_i = [GJ]_{i} \tau_{i}^{+}
 	= [GJ]_{i+1} \tau_{i+1}^{-}
@@ -119,12 +146,15 @@ Les twists des demis segments et du segment entier sont données par les équati
 \begin{equation}
 	\tau_{i}^{+} = \frac{\theta_i^{mid} - \theta_i}{l_i/2} \quad , \quad
 	\tau_{i+1}^{-} = \frac{\theta_{i+1} - \theta_i^{mid}}{l_i/2} \quad , \quad
-	\tau_i = \frac{\theta_{i+1}-\theta_{i}}{\overbar{l_i}} = \frac{\tau_{i}^{+}}{2} + \frac{\tau_{i+1}^{-}}{2}
+	\tau_i = \frac{\theta_{i+1}-\theta_{i}}{l_i} = \frac{\tau_{i}^{+}}{2} + \frac{\tau_{i+1}^{-}}{2}
 \end{equation}
-Ces équations de continuité permettent de déduire la raideur en torsion équivalente $\beta_i$ à considérer sur le segment $\vect{e}_i$ pour obtenir le moment de torsion à partir du twist global le long du segment :
+Ces équations de continuité permettent de déduire la raideur en torsion équivalente $\beta_i$ à considérer sur le segment $\vect{e}_i$ pour obtenir le moment de torsion à partir du twist global le long du segment sur $s \in ]s_i,s_{i+1}[$ :
  \begin{equation}
-	Q(s) = Q_i = \beta_i(\tau_i - \overbar{\tau_i}) \quad , \quad s \in ]s_i,s_{i+1}[
-	\quad with \quad \beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}
+	Q(s) = Q_i = \beta_i(\tau_i - \overbar{\tau_i})
+	\quad , \quad
+	\beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}
+	\quad , \quad
+	\tau_i = \frac{\theta_{i+1}-\theta_{i}}{l_i}
 \end{equation}
 On obtient également les rate of twist sur chacun des intervalles dans la configuration au repos ($\overbar{\tau}$) comme déformée ($\tau$) :
 \begin{subequations}
@@ -193,7 +223,7 @@ Ainsi, on peut donner les lois d'interpolation des courbures en tout point de la
 		\quad s \in ]s_{i+1/2}, s_{i+1}]
 	\end{gather}
 \end{subequations}
-Dans le cas où les propriétés de la poutre sont conservées ($\mat{A}_i = \mat{I}$), on écrira plus simplement:
+Dans le cas où les propriétés de la poutre sont conservées ($\mat{A}_i = \mat{I}$), on écrira :
 \begin{equation}
 	\kappa\vect{b}(s) = \kappa\vect{b}_{i+1/2} + (s-\tfrac{l_i}{2}) \kappa\vect{b}'_{i+1/2} \quad , \quad s \in [s_i,s_{i+1}]
 \end{equation}
@@ -296,7 +326,7 @@ Axial Force exercée par la poutre sur le point courant $\vect{x}_i$ :
 	\begin{aligned}
 	\vect{F}_i^{\parallel}
 	&= \left[\vect{N}\right]_{i-1/2}^{i+1/2}
-	= \vect{N}_{i+1} - \vect{N}_{i}
+	= \vect{N}_{i} - \vect{N}_{i-1}
 	\end{aligned}
 \end{equation}
 

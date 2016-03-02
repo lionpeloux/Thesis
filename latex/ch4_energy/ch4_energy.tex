@@ -5,21 +5,24 @@
 \section{Introduction}
 % #######################################################
 
+\subsection{Goals and contribution}
 In this section a novel element with 4 degrees of freedom accounting for torsion and bending behaviours is presented. The beam is considered in Kirchhoff's theory framework, so that it is supposed to be inextensible and its sections are supposed to remain orthogonal to the centreline during deformation. The reduction from the classic 6-DoF model to this 4-DoF model is achieved by an appropriate curve-angle representation based on a relevant curve framing. Energies are then formulated and leads to internal forces and moments acting on the beam. The static equilibrium is deduced from a damped fictitious dynamic with an adapted dynamic relaxation algorithm.
 
+\subsection{Related work}
 Basile \cite{Bergou2010}
-
 Basile \cite{Bergou2008}
-Je
 Basile \cite{Audoly2000}
-
 Sina \cite{Nabei2014}
-
 \cite{Fuller1978}, \cite{deVries2005},  \cite{Vauquelin2000}, \cite{Berger2009}
 
 Dynamic relaxation :
 \cite{Lewis2003}
 En particulier,voir pour un comparatif avec une méthode implicite.
+
+\subsection{Overview}
+
+
+
 
 \note{
 \begin{enumerate}
@@ -152,7 +155,7 @@ Thus, by the help of $\vect{\Omega}_b(s)$, it's possible to transport a given ve
 \subsection{Axial strain}
 There is no axial strain to be considered as far as the rod is supposed to be unstretchable.
 
-Remark that the inextensibility hypothesis implies that any admissible perturbation ($\lambda\vect{h}_x$) of the rod's centerline ($\vect{x}$) is locally tangential to the centerline itself. Indeed, at each arc-length $s$ an inextensible rod must satisfies :
+Remark that the inextensibility hypothesis implies that any admissible perturbation ($\lambda\vect{h}_x$) of the rod's centerline ($\vect{x}$) is locally orthogonal to the centerline itself. Indeed, at each arc-length $s$ an inextensible rod must satisfies :
 \begin{equation}\label{eq:3_6}
 	\|\vect{x}'\| = \|(\vect{x}+\lambda\vect{h}_x)'\| = 1 \Rightarrow \vect{d}_3 \cdot \vect{h}'_x = -\tfrac{\lambda^2}{2}\|\vect{h}'_x\|^2 = o(\lambda) \simeq 0
 \end{equation}

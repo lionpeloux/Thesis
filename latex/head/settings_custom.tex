@@ -24,6 +24,7 @@
 \usepackage{pgfplots,pgfplotstable}
 \usepackage{cleveref} % attention a loader apres hypperef
 \usepackage{csvsimple, booktabs, longtable} % pour les tables CSV
+% \usepackage{etoc}
 
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{patterns}
@@ -92,11 +93,11 @@
 
 % LDP Custom functions
 %--------------------------------------
-  
+
 % typo
 \newcommand{\guil}[1]{\og#1\fg{}}
 \newcommand{\note}[1]{\color{blue}#1\color{black}}
- 
+
 % fonction inline (SHORT)
 \newcommand{\fonction}[3]{#1 : #2 \longmapsto #3}
 
@@ -119,7 +120,7 @@
 
 % vector and matrix
 \newcommand{\vect}{\boldsymbol}
-\newcommand{\mat}[1]{\boldsymbol{\mathit{#1}}} 
+\newcommand{\mat}[1]{\boldsymbol{\mathit{#1}}}
 
 \newcommand{\scalar}[2]{\langle #1\,; #2\rangle}
 
