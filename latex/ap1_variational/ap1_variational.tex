@@ -1,4 +1,4 @@
-%\appendix
+\appendix
 \chapter{Calculus of variations}
 
 % --------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ Mathematical concepts extended well-known notions of derivative, jacobian and he
 \subsubsection{Differentiability}
 Let $\mathcal{B}_V$ and $\mathcal{B}_W$ be two Banach spaces and $U \subset \mathcal{B}_V$ an open subset of $\mathcal{B}_V$.
 Let $\fonction{f}{u}{f(u)}$ be a function of  $U^{\mathcal{B}_W}$.
-$f$ is said to be \emph{Fréchet differentiable} at $u_0\in U$ if there exists a continious linear operator $\diff{f}{u_0} \in 
+$f$ is said to be \emph{Fréchet differentiable} at $u_0\in U$ if there exists a continious linear operator $\diff{f}{u_0} \in
 \mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ such that :
 \begin{subequations}
 \begin{align}
@@ -98,7 +98,7 @@ $f$ is said to be \emph{Fréchet differentiable} at $u_0\in U$ if there exists a
 \end{align}
 \text{Or, equivalently :}
 \begin{align}
-	f(u_0+h) = f(u_0) + \diffof{f}{u_0}{h} + o(h) \quad , \quad 
+	f(u_0+h) = f(u_0) + \diffof{f}{u_0}{h} + o(h) \quad , \quad
 	\lim_{h \to 0} \frac{o(h)}{\|h\|} = 0
 \end{align}
 \end{subequations}
@@ -107,7 +107,7 @@ In the literature, it is common to found the following notations : $df = \diffof
 
 \subsubsection{Derivative}
 
-If $f$ is Fréchet differentiable at $u_0 \in U$, the continous linear operator $\diff{f}{u_0} \in 
+If $f$ is Fréchet differentiable at $u_0 \in U$, the continous linear operator $\diff{f}{u_0} \in
 \mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ is called the \emph{Fréchet derivative} of $f$ at $u_0$ and is also denoted :
 \begin{align}
 	f'(u_0) = \diff{f}{u_0}
@@ -119,9 +119,9 @@ $f$ is said to be $\mathcal{C}^1$ in the sens of Fréchet if $f$ is Fréchet dif
 $df = \diffof{f}{u_0}{h}$ is sometimes called the \emph{differential} or \emph{total derivative} of $f$ and represents the change in the function $f$ for a perturbation $h$ from $u_0$.
 
 \subsubsection{Higer derivatives}
- 
+
 Because the differential of $f$ is a linear map from $\mathcal{B}_V$ to $\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ it is possible to look for the differentiability of $\boldsymbol{D}f$. If it exists, it is denoted $\boldsymbol{D}^2f$ and maps $\mathcal{B}_V$ to $\mathcal{L}(\mathcal{B}_V,\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W}))$.
- 
+
 \subsection{Gâteaux derivative}
 % --------------------------------------------------------------------------------------------
 \subsubsection{Directional derivative}
@@ -136,7 +136,7 @@ exists. This element of $\mathcal{B}_W$ is called the \emph{directional derivati
 \subsubsection{Differentiability}
 Let $\mathcal{B}_V$ and $\mathcal{B}_W$ be two Banach spaces and $U \subset \mathcal{B}_V$ an open subset of $\mathcal{B}_V$.
 Let $\fonction{f}{u}{f(u)}$ be a function of  $U^{\mathcal{B}_W}$.
-$f$ is said to be \emph{Gâteaux differentiable} at $u_0\in U$ if there exists a continious linear operator $\diff{f}{u_0} \in 
+$f$ is said to be \emph{Gâteaux differentiable} at $u_0\in U$ if there exists a continious linear operator $\diff{f}{u_0} \in
 \mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ such that :
 \begin{subequations}
 \begin{align}
@@ -149,21 +149,21 @@ Or, equivalently :
 \end{align}
 \end{subequations}
 
-In other words, it means that all the directional derivatives of $f$ exist at $u_0$. 
+In other words, it means that all the directional derivatives of $f$ exist at $u_0$.
 
 \subsubsection{Derivative}
-If $f$ is Gâteaux differentiable at $u_0 \in U$, the continous linear operator $\diff{f}{u_0} \in 
+If $f$ is Gâteaux differentiable at $u_0 \in U$, the continous linear operator $\diff{f}{u_0} \in
 \mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ is called the \emph{Gâteaux derivative} of $f$ at $u_0$ and is also denoted :
 \begin{align}
 	f'(u_0) = \diff{f}{u_0}
 \end{align}
 $f$ is said to be $\mathcal{C}^1$ in the sens of Gâteaux if $f$ is Gâteaux differentiable for all $u \in U$ and the function $\fonction{\boldsymbol{D}f}{u}{f'(u)}$ of $U^{\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})}$ is continuous.
- 
+
 The Gâteaux derivative is a weaker form of derivative than the Fréchet derivative. If $f$ is Fréchet differentiable, then it is also Gâteaux differentiable and its Fréchet and Gâteaux derivatives agree, but the converse does not hold generally.
 
 \subsection{Useful properties}
 
-Let $\mathcal{B}_V$, $\mathcal{B}_W$ and $\mathcal{B}_Z$ be three Banach spaces. 
+Let $\mathcal{B}_V$, $\mathcal{B}_W$ and $\mathcal{B}_Z$ be three Banach spaces.
 Let $f,g : \mathcal{B}_V \longmapsto \mathcal{B}_W$ and $h : \mathcal{B}_W \longmapsto \mathcal{B}_Z$ be three Gâteaux differentiable functions. Then, the following useful properties holds :
 \begin{align}
 	&\diff{(f+g)}{u} = \diff{f}{u} + \diff{g}{u}\\
@@ -180,14 +180,14 @@ Following \cite{Abraham2002} the main results on partial derivatives of two-vari
 Let $\mathcal{B}_{V_1}$, $\mathcal{B}_{V_2}$ and $\mathcal{B}_W$ be three Banach spaces and $U \subset \mathcal{B}_{V_1}\oplus\mathcal{B}_{V_2}$ an open subset of $\mathcal{B}_{V_1}\oplus\mathcal{B}_{V_2}$.
 Let $\fonction{f}{u}{f(u)}$ be a function of  $U^{\mathcal{B}_W}$.
 Let $u_0 = (u_{01},u_{02}) \in U$.
-If the derivatives of the following functions exist : 
+If the derivatives of the following functions exist :
 \begin{equation}
 	\fonctionL{f_1}{\mathcal{B}_{V_1}}{\mathcal{B}_{W}}{u_1}{f(u_1,u_{02})}
 	\quad , \quad
 	\fonctionL{f_2}{\mathcal{B}_{V_2}}{\mathcal{B}_{W}}{u_2}{f(u_{01},u_{2})}
 \end{equation}
-they are called \emph{partial derivatives} of $f$ at $u_0$ and are denoted $\pdiff{1}{f}{u_0} \in 
-\mathcal{L}(\mathcal{B}_{V_1},{\mathcal{B}_W})$ and $\pdiff{2}{f}{u_0} \in 
+they are called \emph{partial derivatives} of $f$ at $u_0$ and are denoted $\pdiff{1}{f}{u_0} \in
+\mathcal{L}(\mathcal{B}_{V_1},{\mathcal{B}_W})$ and $\pdiff{2}{f}{u_0} \in
 \mathcal{L}(\mathcal{B}_{V_2},{\mathcal{B}_W})$.
 
 \subsubsection{Differentiability}
@@ -226,7 +226,7 @@ In this case it is common to denote $\grad{F} = \frac{\delta F}{\delta x}$. The 
 \section{Jacobian matrix}
 Let $f$ be a differentiable function from $\mathbb{R}^n$ to $\mathbb{R}^m$. The \emph{differential} or \emph{total derivative} of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^m$ which could be represented with the following matrix called the \emph{jacobian matrix} :
 \begin{align}
-	&\diff{f}{x} = \mat{J}_x = \frac{df}{dx} = 
+	&\diff{f}{x} = \mat{J}_x = \frac{df}{dx} =
 	\begin{bmatrix}
 		\frac{\partial f}{\partial x_1}&\cdots&\frac{\partial f}{\partial x_n}
 	\end{bmatrix}=
@@ -243,7 +243,7 @@ Thus, with the matrix notation, the Taylor expansion takes the following form :
 \end{align}
 In the cas $m=1$, the jacobian matrix of the functional $F$ is nothing but the gradient vector transpose itself :
 \begin{align}
-	\diff{F}{x} = \mat{J}_x = \frac{dF}{dx} = 
+	\diff{F}{x} = \mat{J}_x = \frac{dF}{dx} =
 	\begin{bmatrix}
 		\frac{\partial F}{\partial x_1}& \cdots&\frac{\partial F}{\partial x_n}
 	\end{bmatrix} = \nabla F^T
@@ -252,7 +252,7 @@ In the cas $m=1$, the jacobian matrix of the functional $F$ is nothing but the g
 \section{Hessian}
 Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$. The second order differential of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^n$ which could be represented with the following matrix called the \emph{hessian matrix} :
 \begin{align}
-	&\boldsymbol{D}^{2}F(x) = \mat{H}_{x} = \frac{d^2F}{dx}(x) = 
+	&\boldsymbol{D}^{2}F(x) = \mat{H}_{x} = \frac{d^2F}{dx}(x) =
 	\begin{bmatrix}
 		\frac{\partial F^2_1}{\partial x_1^2} & \frac{\partial F^2_1}{\partial x_1\partial x_2} &\cdots & \frac{\partial F^2_1}{\partial x_1\partial x_n} \\
 		\frac{\partial F^2_1}{\partial x_2\partial x_1} & \frac{\partial F^2_1}{\partial x_2^2} &\cdots & \frac{\partial F^2_1}{\partial x_2\partial x_n} \\

@@ -1,4 +1,4 @@
-%\appendix
+\appendix
 \chapter{Bench for HPC}
 
 \section{Introduction}
@@ -61,7 +61,7 @@ http://arxiv.org/pdf/1402.4986.pdf
 Toutes les syntaxes ne sont pas égales en terme de gestion de la mémoire.
 Le problème, c'est le passage de la GC qui est couteux en temps. Donc il faut essayer de minimiser l'utilisation mémoire. Idéalement le problème peut rester dans le cache du processeur (mémoire d'accès bcp plus rapide que la RAM). Donc la meilleur stratégie consiste à pré-allouer les tableaux et à faire des opération "in-place" au maximum, c'est à dire d'écraser les donner au fur et à mesure du calcul.
 
-Par ailleurs les accès mémoires sont lents. 
+Par ailleurs les accès mémoires sont lents.
 Plus la taille du problème reste petite, plus le problème peut être résolu en restant dans le cache. (latency).
 
 http://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-caches-and-main-memory
@@ -89,7 +89,7 @@ On remarque que l'allocation mémoire est très différente d'une fonction à l'
 \begin{table}[]
 \centering
 \pgfplotstabletypeset[
-	every head row/.style={before row=\toprule, after row=\midrule}, 
+	every head row/.style={before row=\toprule, after row=\midrule},
 	every last row/.style={after row=\bottomrule},
 	col sep=comma,
 	columns={SQRT,CPU,ALLOC},
@@ -108,7 +108,7 @@ Les temps CPU sont indicatifs car le bench est fait sur une durée caractéristi
 
 
 Ici on met en évidence la non linéarité du coût d'allocation par élément d'un tableau de taille n.
-On remarque que la différence entre le coût de sqrt et le coût de l'allocation est constante : c'est le coût de sqrt 
+On remarque que la différence entre le coût de sqrt et le coût de l'allocation est constante : c'est le coût de sqrt
 hors allocation. Attention, cette notion est "language dependent" car les allocations sont gérées par la GC.
 
 \begin{listing}[]
@@ -141,16 +141,16 @@ Remarque, on trouverait sans doute la même chose pour MKL, à cause du marshall
 	grid=major,
 	legend entries={allocation, sqrt, diff}
 	]
-	
+
 	\pgfplotsset{table/col sep = comma}
  	\pgfplotstableread{ap2_bench/bench/sqrt_allocationimpact_data.csv}\data;
-	
+
 	\addplot [black, smooth, thick, dashed]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{1}] {\data};
 
 	\addplot [black, smooth, thick]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\data};
-	
+
 	\addplot [Tblue, smooth, thick]
        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\data};
 

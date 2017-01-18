@@ -1,0 +1,170 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%		Thesis Settings
+%		Custom settings
+%
+%		2011
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+%   Use this file for your own custom packages, command-definitions, etc...
+%
+
+% LDP Packages
+%--------------------------------------
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{lipsum}
+\usepackage{MnSymbol}
+%\usepackage{minted}
+\usepackage{tikz}
+\usepackage{pgfplots,pgfplotstable}
+\usepackage{cleveref} % attention a loader apres hypperef
+\usepackage{csvsimple, booktabs, longtable} % pour les tables CSV
+\usepackage{float}
+\usepackage{csquotes}
+% \usepackage{etoc}
+
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+ % cross referencing \autoref
+\renewcommand{\sectionautorefname}{\S}
+\renewcommand{\subsectionautorefname}{\S}
+\renewcommand{\subsubsectionautorefname}{\S}
+
+
+% use [sectionbib] option so bibliography appears like a not numbered section at the end of each chapter
+\usepackage[sectionbib]{chapterbib}
+
+
+% LDP Theorem
+%--------------------------------------
+\newtheoremstyle{mystyleA} % style name
+    {}              % space above, empty = `usual value'
+    {20pt}          % space below
+    {}              % body font
+    {}              % indent
+    {\bfseries}     % head font
+    {.}             % punctuation after head
+    {5pt}           % space after head (\newline)
+    {}              % Thm head spec
+
+\theoremstyle{mystyleA}
+\newtheorem*{mydef}{Definition}
+\newtheorem*{myrk}{Remark}
+
+\newtheoremstyle{mystyleB} % style name
+    {}              % space above, empty = `usual value'
+    {20pt}          % space below
+    {\itshape}      % body font
+    {}              % indent"
+    {\itshape}      % head font
+    {.}             % punctuation after head
+    {5pt}           % space after head (\newline)
+    {}              % Thm head spec
+\theoremstyle{mystyleB}
+\newtheorem*{myproof}{Preuve}
+
+% LDP PfgPlots definition
+%--------------------------------------
+\pgfplotsset{width=10cm, compat=newest}
+%\pgfplotsset{every axis plot post/.append  style={line width = 2pt}}
+\pgfplotsset{grid style = {
+%    dash pattern = on 0.05mm off 1mm,
+    line cap = round,
+    Tgray,
+    line width = 0.25pt}
+}
+
+% 3pt-circle-curvature where curvatureA(phi, alpha)
+\def\curvatureA(#1,#2){2*sin(#1)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5}
+%  Bi-tangent-circle-curvature where curvatureA(phi, alpha)
+\def\curvatureB(#1,#2){4*tan(#1/2)/(1+(#2))}
+% curvature A / curvature B
+\def\curvatureRap(#1,#2){(1+#2)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5*cos(#1/2)^2}
+
+\definecolor{Tblue}{RGB}{104, 135, 255}
+\definecolor{Tred}{RGB}{255, 110, 103}
+\definecolor{Tgreen}{RGB}{147, 250, 103}
+\definecolor{Tgray}{RGB}{184, 184, 184}
+\definecolor{Tdarkgray}{RGB}{56, 56, 56}
+
+% LDP Custom functions
+%--------------------------------------
+
+% typo
+\newcommand{\guil}[1]{\og#1\fg{}}
+\newcommand{\note}[1]{\color{blue}#1\color{black}}
+
+% fonction inline (SHORT)
+\newcommand{\fonction}[3]{#1 : #2 \longmapsto #3}
+
+% fonction 2 lines (LONG)
+\newcommand{\fonctionL}[5]{\begin{array}{lrcl}
+#1: & #2 & \longrightarrow & #3 \\
+    & #4 & \longmapsto & #5 \end{array}}
+
+% differential
+\newcommand{\diff}[2]{\boldsymbol{D}#1(#2)}
+\newcommand{\diffN}[3]{\boldsymbol{D}^#1#2(#3)}
+\newcommand{\diffof}[3]{\boldsymbol{D}#1(#2)\cdot#3}
+\newcommand{\diffNof}[4]{\boldsymbol{D}^#1#2(#3)\cdot#4}
+
+% partial differential
+\newcommand{\pdiff}[3]{\boldsymbol{D}_#1#2(#3)}
+\newcommand{\pdiffN}[4]{\boldsymbol{D}^#1_#2#3(#4)}
+\newcommand{\pdiffof}[4]{\boldsymbol{D}_#1#2(#3)\cdot#4}
+\newcommand{\pdiffNof}[5]{\boldsymbol{D}^#1_#2#3(#4)\cdot#5}
+
+% vector and matrix
+\newcommand{\vect}{\boldsymbol}
+\newcommand{\mat}[1]{\boldsymbol{\mathit{#1}}}
+
+\newcommand{\scalar}[2]{\langle #1\,; #2\rangle}
+
+\newcommand{\grad}[1]{grad\;#1}
+\newcommand{\norm}[1]{\left\|#1\right\|    }
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+
+% LDP Julia
+%--------------------------------------
+
+\usepackage{framed}
+
+\definecolor{shadecolor}{gray}{.92}
+\definecolor{incolor}{rgb}{0,0,.7}
+\definecolor{outcolor}{rgb}{.65,0,0}
+\definecolor{syntaxcolor}{rgb}{.65,0,0}
+\usepackage{verbatim}
+\newcommand{\sh}[1]{\textcolor{syntaxcolor}{#1}}
+
+\newcounter{jcounter}
+\newenvironment{jinput}[1][]{\ifx#1\relax\else\setcounter{jcounter}{#1}\addtocounter{jcounter}{-1}\fi\refstepcounter{jcounter}\ttfamily\hspace*{-.7in}\noindent\begin{minipage}[t]{.19\textwidth}\vskip2ex\hspace*{\fill}\textcolor{incolor}{In[\arabic{jcounter}]: }\end{minipage}\begin{minipage}[t]{.8\textwidth}\vskip-0ex\begin{shaded}}{\end{shaded}\end{minipage}\par}
+
+\newenvironment{joutput}[1][]{\vskip1ex plus .2ex minus .1ex\ifx#1\relax\else\setcounter{jcounter}{#1}\fi\addtocounter{jcounter}{-1}\refstepcounter{jcounter}\ttfamily\noindent\hspace*{-.2in}\begin{minipage}[t]{.19\textwidth}\vskip0ex\hspace*{\fill}\textcolor{outcolor}{Out[\arabic{jcounter}]: }\end{minipage}\begin{minipage}[t]{.8\textwidth}\vskip-0ex}{\end{minipage}\par\vskip1.5ex}
+
+     \newcommand{\ja}{\begin{jinput}}
+     \newcommand{\jb}{\end{jinput}\begin{joutput}}
+     \newcommand{\jc}{\end{joutput}}
+
+    \newcommand{\jav}{\begin{jinput}\begin{verbatim}}
+     \newcommand{\jbv}{\end{verbatim}\end{jinput}\begin{joutput}\begin{verbatim}}
+     \newcommand{\jcv}{\end{verbatim} \end{joutput}}
+
+\usepackage{fancyvrb}
+
+% \fonction{f}{E}{F}{x}{f(x)}
+
+% the following lines are for creating a simplified TO-DO box. However since boites is not per default installed with all latex-distributions, we have removed this example again
+% if you want to use it and do not have "boites" installed, you can get it from here: http://www.ctan.org/tex-archive/macros/latex/contrib/boites
+%
+%\usepackage{boites,boites_exemples}
+%\newcommand{\todolist}[1]{\begin{boiteepaisseavecuntitre}{TO DO in this chapter} #1 \end{boiteepaisseavecuntitre}}  % creates a little box
+% %\newcommand{\todolist}[1]{}  % to be used when to do is not to be printed
