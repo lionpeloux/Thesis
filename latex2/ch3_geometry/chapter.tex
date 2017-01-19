@@ -185,11 +185,11 @@ Likewise, in modern differential geometry, the \emph{osculating plane} is define
 
 \section{Curves of double curvature}
 
-The study of space curves belongs to the field of differential geometry. According to \cite[p.28]{Delcourt2007}, the terminology \emph{curve of double curvature} is attributed to Pitot around 1724 \footnote{
+The study of space curves belongs to the field of differential geometry. According to \cite[p.28]{Delcourt2007}, the terminology \emph{curve of double curvature} is attributed to Pitot around 1724\footnote{
 \blockcquote[p.28]{Pitot1726}{
 Les Anciens ont nommé cette courbe Spirale ou Hélice ; parce que la formation sur le cylindre suit la même analogie que la formation d’une spirale ordinaire sur un plan; mais elle est bien différente de la spirale ordinaire, étant une des courbes à double courbure, ou une des lignes qu’on conçoit tracée sur la surface des Solides. Peut-être que ces sortes de courbes à double courbure, ou prises sur la surface des Solides, feront un jour l’objet des recherches des géomètres. Celle que nous venons d’examiner est, je crois, la plus simple de toutes.
 }}.
-However, as stated in \cite[p.321]{Coolidge2013}, curvature and torsion where probably first thought by Monge around 1771 \footnote{
+However, as stated in \cite[p.321]{Coolidge2013}, curvature and torsion where probably first thought by Monge around 1771\footnote{
 \blockcquote[p.363]{Monge1809}{
 On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point ; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.
 }}. It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g.\ \emph{elastica}) and the study of curves of double curvature were intimately related to each other.
@@ -198,7 +198,7 @@ Space curves were historically understood as \emph{curves of double curvature} b
 
 %Curvature
 \subsection{First invariant : curvature}\label{sec:curvature}
-In differential geometry, the \emph{osculating circle} is defined as the limit of the circle passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ (\cref{fig:3_1}). This circle lies on the osculating plane and its radius is nothing but the inverse of the local curvature of a curve \footnote{
+In differential geometry, the \emph{osculating circle} is defined as the limit of the circle passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ (\cref{fig:3_1}). This circle lies on the osculating plane and its radius is nothing but the inverse of the local curvature of a curve\footnote{
 As explained by Euler itself, at a given arc-length parameter ($s$), the osculating plane is the plane in which a curve takes its curvature :  \blockcquote[p.364]{Euler1775}{in quo bina fili elementa proxima in curvantur}.
 }. While the tangent gives the best local approximation of the curve as a straight line, the osculating circle gives the best local approximation of that curve as an arc.
 
@@ -307,11 +307,20 @@ Because the Frenet trihedron satisfies a first order differential equation of pa
 
 \section{Curve framing}
 
-While the Frenet trihedron is 
+While the Frenet trihedron \blockcquote[p.1]{Bishop1975}{has long been the standard vehicle for analysing properties of the curve invariant\footnote{Namely the curvature and the torsion} under euclidean motions}, a curve can be potentially framed with any arbitrary \emph{moving frame}, understood as an \emph{orthonormal basis field}.
 
-In his paper \textquote{There is more than one way to frame a curve}, Bishop remarks that \blockcquote[p.1]{\Bishop1975}{the Frenet frame has long been the standard vehicle for analysing properties of the curve invariant under euclidean motions}.
+In his paper Bishop establishes the differential equation that this kind of field must satisfy and remarks that, because of the orthnormality condition, the derivatives of the vector field can be expressed in terms of the frame itself through a skew-symmetric coefficient matrix. The understanding of the motion of such a frame is thus reduced to the knowledge of only three coefficients£.
 
-introduces the differential equation that any arbitrary moving frame would satisfy. He states that this 
+
+
+Bishop remarks that, although the Frenet trihedron exibts
+
+In this section, following \cite{Bishop1975} we introduce the notion of \emph{moving frame} and exhibits the 
+
+
+
+
+he differential equation that any arbitrary moving frame would satisfy. He states that this 
 
 \note{
 Vraiment repartir de l'intro de Bishop \citep[p.~1]{Bishop1975}}
