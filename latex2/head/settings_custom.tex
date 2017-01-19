@@ -16,6 +16,7 @@
 \usepackage{natbib}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{stmaryrd}
 \usepackage{lipsum}
@@ -23,7 +24,7 @@
 %\usepackage{minted}
 \usepackage{tikz}
 \usepackage{pgfplots,pgfplotstable}
-\usepackage{cleveref} % attention a loader apres hypperef
+\usepackage[nameinlink, noabbrev]{cleveref} % attention a loader apres hypperef
 \usepackage{csvsimple, booktabs, longtable} % pour les tables CSV
 \usepackage{float}
 \usepackage{csquotes}
@@ -37,6 +38,16 @@
 \renewcommand{\subsectionautorefname}{\S}
 \renewcommand{\subsubsectionautorefname}{\S}
 
+% cross referencing with cref
+% http://tex.stackexchange.com/questions/119214/cross-referencing-equations-figures-and-chapters-sections-etc
+\crefname{section}{§}{§§}
+\Crefname{section}{§}{§§}
+
+\crefname{figure}{figure}{figures}
+\Crefname{figure}{Figure}{Figures}
+
+\crefname{equation}{eq.}{eq.}
+\Crefname{figure}{Eq.}{Eq.}
 
 % use [sectionbib] option so bibliography appears like a not numbered section at the end of each chapter
 \usepackage[sectionbib]{chapterbib}
