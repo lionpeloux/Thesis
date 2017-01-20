@@ -197,7 +197,7 @@ On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, a
 Space curves were historically understood as \emph{curves of double curvature} by extension to the case of planar curves, where the curvature measures the deviance of a curve from being a straight line. The second curvature, nowadays known as the \textquote{torsion} or \textquote{second generalized curvature}, measures the deviance of a curve from being plane. 
 
 %Curvature
-\subsection{First invariant : curvature}\label{sec:curvature}
+\subsection{First invariant : the curvature}\label{sec:curvature}
 In differential geometry, the \emph{osculating circle} is defined as the limit of the circle passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ (\cref{fig:3_1}). This circle lies on the osculating plane and its radius is nothing but the inverse of the local curvature of a curve\footnote{
 As explained by Euler itself, at a given arc-length parameter ($s$), the osculating plane is the plane in which a curve takes its curvature :  \blockcquote[p.364]{Euler1775}{in quo bina fili elementa proxima in curvantur}.
 }. While the tangent gives the best local approximation of the curve as a straight line, the osculating circle gives the best local approximation of that curve as an arc.
@@ -244,12 +244,12 @@ This vector will be useful as it embed all the necessary information on the curv
 \begin{figure}[t]
 	\centering
 	\includegraphics[]{osculating_circle.pdf}
-	\caption{Osculating circles for a spiral curve at different vertices.}
+	\caption{Osculating circles for a spiral curve at different parameters.}
 	\label{fig:3_2}
 \end{figure}
 
 % Torsion
-\subsection{Second invariant : torsion}\label{sec:torsion}
+\subsection{Second invariant : the torsion}\label{sec:torsion}
 
 The \emph{torsion} is a scalar quantity defined at any given parameter $s \in J$ as :
 \begin{equation}
@@ -272,10 +272,10 @@ This is equivalent as measuring how fast the osculating plane is rotating around
 Remark that here the torsion is denoted \textquote{$\tau_f$} and not simply \textquote{$\tau$} as the latter will be reserved to denote any angular velocity of a moving adapted frame around its tangent vector. Thus, $\tau_f$ refers to the particular angular velocity of the Frenet trihedron around it's tangent vector. This torsion, which is a geometric property of the curve, will be indifferently referred to as the \emph{torsion of Frenet} or the \emph{geometric torsion}.
 
 % Fundamental theorem of space curves
-\subsection{Fundamental theorem of space curves}
+\subsection{Fundamental theorem of space curves}\label{sec:fundamental}
 This two \emph{generalized curvatures}, respectively the curvature ($\kappa$) and the torsion ($\tau_f$), are \emph{invariant} regarding the choice of parametrization and under \emph{euclidean motions}. The \emph{Fundamental theorem of space curves} states that a curve is fully described, up to a Euclidean motion of ${\mathbb{R}}^3$, by its positive curvature ($\kappa > 0$) and torsion ($\tau$) \cite[p.229]{Gray2006}.
 
-This is easily understood by expressing the first order differential equation satisfied by the Frenet trihedron $\{\vect{t},\vect{n},\vect{b}\}$ and known as the \emph{Serret-Frenet formulas} :
+This is easily understood by expressing the first-order system of differential equations satisfied by the Frenet trihedron $\{\vect{t},\vect{n},\vect{b}\}$ and known as the \emph{Serret-Frenet formulas} :
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -285,11 +285,34 @@ This is easily understood by expressing the first order differential equation sa
 	\end{aligned}
 	\right.
 \end{equation}
-
-Because the Frenet trihedron satisfies a first order differential equation of parameters $\kappa$ and $\tau_f$ it is possible, by integration, to reconstruct the trace of the moving frame and thus the curve, up to a constant of integration (a trihedron in this case). For instance, those classic combinations of curvature and torsion leads to :
+This system can be seen as the \emph{equations of motion} of the Frenet trihedron moving along the curve $\gamma$. Introducing its \emph{angular velocity vector} also known as the \emph{Darboux vector} ($\vect{\Omega_f}$), the system is expressed as :
+\begin{equation}
+	\begin{bmatrix}		
+		\vect{t^{'}}(s) \\
+		\vect{n^{'}}(s) \\
+		\vect{b^{'}}(s) \\
+	\end{bmatrix}
+	=
+	\vect{\Omega_f}(s)
+	\times
+	\begin{bmatrix}		
+		\vect{t}(s) \\
+		\vect{n}(s) \\
+		\vect{b}(s) \\
+	\end{bmatrix}
+	\quad where \quad
+	\vect{\Omega_f}(s)
+	=
+	\begin{bmatrix}
+		\tau(s) \\
+		k_1(s) \\
+		k_2(s)
+	\end{bmatrix}
+\end{equation}
+Because the Frenet trihedron satisfies a first-order system of differential equations of parameters $\kappa$ and $\tau_f$ it is possible, by integration, to reconstruct the trace of the moving frame and thus the curve, up to a constant of integration (a trihedron in this case). For instance, those classic combinations of curvature and torsion leads to :
 \begin{itemize}
-	\item a curve of null curvature and null torsion is a straight line;
-	\item a curve of constant curvature and null torsion is a circle;
+	\item a curve of null curvature and null torsion is a straight line ;
+	\item a curve of constant curvature and null torsion is a circle ;
 	\item a curve of constant curvature and constant torsion is a circular helix.
 \end{itemize}
 
@@ -304,30 +327,13 @@ Because the Frenet trihedron satisfies a first order differential equation of pa
 % CURVE FRAMING
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
-
 \section{Curve framing}
 
-While the Frenet trihedron \blockcquote[p.1]{Bishop1975}{has long been the standard vehicle for analysing properties of the curve invariant\footnote{Namely the curvature and the torsion} under euclidean motions}, a curve can be potentially framed with any arbitrary \emph{moving frame}, understood as an \emph{orthonormal basis field}.
+While the Frenet trihedron \blockcquote[p.1]{Bishop1975}{has long been the standard vehicle for analysing properties of the curve invariant\footnote{Namely the curvature ($\kappa$) and the Frenet torsion ($\tau_f$).} under euclidean motions}, a curve can be potentially framed with any arbitrary \emph{moving frame}, understood as an \emph{orthonormal basis field}. Thus, the Frenet frame is not the only way to frame a curve\footnote{Recall the title of Bishop's paper : \blockcquote[]{Bishop1975}{There is more than one way to frame a curve}.} and other frames may or may not exhibit some interesting properties.
 
-In his paper Bishop establishes the differential equation that this kind of field must satisfy and remarks that, because of the orthnormality condition, the derivatives of the vector field can be expressed in terms of the frame itself through a skew-symmetric coefficient matrix. The understanding of the motion of such a frame is thus reduced to the knowledge of only three coefficients£.
+In his paper \cite{Bishop1975} Bishop establishes the differential equation that a moving frame must satisfy and remarks that, because of the orthnormality condition, the first derivatives of the frame components can be expressed in terms of themselves through a skew-symmetric coefficient matrix. For such a frame, the understanding of its motion along the curve is thus reduced to the knowledge of only three scalar coefficient functions. He remarks that most of the interesting properties that the Frenet frame exhibits are due to the fact that one of this coefficient function is vanishing everywhere on the curve (that is the frame is \emph{rotation-minimizing} regarding one of its components), and that it is \emph{adapted} to the curve (that is one of its components is nothing but the unit tangent vector).
 
-
-
-Bishop remarks that, although the Frenet trihedron exibts
-
-In this section, following \cite{Bishop1975} we introduce the notion of \emph{moving frame} and exhibits the 
-
-
-
-
-he differential equation that any arbitrary moving frame would satisfy. He states that this 
-
-\note{
-Vraiment repartir de l'intro de Bishop \citep[p.~1]{Bishop1975}}
-Nous avons précédement définit le repère de Frenet. Introduit les notions de courbure et de torsion, des invariants.
-Nous précisions maintenant la notion de repère mobile le long d'une courbe à double courbure, c'est à dire d'une courbe gauche de l'espace.
-Cette notion nous permettra, pour l'étude des poutres élancées, de positionner une section le long d'une fibre neutre.
-
+In this section we introduce the notion of \emph{moving frame} and two properties of interest such a frame can exhibit in addition, that is : to be \emph{adapted} to the curve ; and to be \emph{rotation-minimizing} regrading a given direction. We then reconsider the case of the Frenet frame regrading this mathematical framework. Finally, we introduce the \emph{zero-twisting} frame also known as the \emph{bishop} frame\footnote{Named after Bishop who he introduced it.}. This tool will be fundamental for our study of slender beams.
 
 % moving frame
 \subsection{Moving frame}
@@ -336,7 +342,7 @@ Let $\gamma : s \rightarrow \gamma(s)$ be an arc-length parametrized curve. A ma
 \begin{equation}
 	\fonctionL{F}{[0,L]}{\mathcal{SO}_{3}(\mathbb{R})}{s}{F(s) = \{\vect{e}_{3}(s),\vect{e}_{1}(s),\vect{e}_{2}(s)\}}
 \end{equation}
-Thus, inherently, a moving frame $F$ attached to $\gamma$ satisfies for all $s \in [0,L]$ :
+Consequently, a moving frame $F$ attached to $\gamma$ satisfies for all $s \in [0,L]$ :
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -345,11 +351,11 @@ Thus, inherently, a moving frame $F$ attached to $\gamma$ satisfies for all $s \
 	\end{aligned}
 	\right.
 \end{equation}
-The terme \guil{moving frame} will refer indifferently to the map ($F$) itself, or to a specific evaluation of the map ($F(s)$).
+The term \textquote{moving frame} will refer indifferently to the map ($F$) itself, or to a specific evaluation of the map ($F(s)$).
 
 % governing equations
 \subsubsection{Governing equations}
-Computing the derivatives of the previous relationships leads to the following differential equations :
+Computing the derivatives of the previous relationships leads to the following system of differential equations that the frame must satisfy :
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -368,8 +374,9 @@ Thus, there exists 3 scalar functions $\tau(s)$, $k_{1}(s)$, $k_{2}(s)$ such tha
 	\end{aligned}
 	\right.
 \end{equation}
-
-It is common to rewrite this first-order linear differential equations system as a matrix equation :
+It is common to rewrite this first-order linear system of differential equations\footnote{In the case of a space curve, where $\vect{e}_3$ is chosen to be the curve tangent unit vector and $\vect{e}_1$ is chosen to be the curve normal unit vector, this set of equations is known as the \emph{Serret-Frenet formulas}.}\footnote{In the case of a space curve drawn on a surface, where $\vect{e}_3$ is chosen to be the curve tangent unit vector and $\vect{e}_1$ is chosen to be the surface normal unit vector, this set of equations is known as the \emph{Darboux-Ribaucour formulas}.
+} 
+as a matrix equation :
 \begin{equation}
 	\begin{bmatrix}
 		\vect{e}'_{3}(s) \\
@@ -389,9 +396,9 @@ It is common to rewrite this first-order linear differential equations system as
 	\end{bmatrix}
 \label{eq:3_12}
 \end{equation}
-Since the progression of any moving frame along $\gamma$ is ruled by a first-order differential equation, a unique triplet $\{\tau, k_{1}, k_{2}\}$ leads to a set of moving frames equal to each other within a constant of integration. Basically, with a given triplet $\{\tau, k_{1}, k_{2}\}$, one would \guil{propagate} a given initial direct orthonormal trihedron (at $s=0$ for instance) through the whole curve by integrating the differential system. In general, a moving frame will be fully determined by $\tau$, $\kappa_{1}$, $\kappa_{2}$ plus $\{\vect{e}_{3}(s=0),\vect{e}_{1}(s=0),\vect{e}_{2}(s=0)\}$.
-
-\note{formules de Darboux-Ribaucour dans le cas des courbes tracées sur des surfaces - cas plus général que les formules de Serret-Frenet}
+Since the progression of any moving frame along $\gamma$ is ruled by a first-order system of differential equations, a unique triplet $\{\tau, k_{1}, k_{2}\}$ leads to a set of moving frames equal to each other within a constant of integration\footnote{
+This assumption reminds the \emph{Fundamental theorem of space curves} (\cref{sec:fundamental}).
+}. Basically, with a given triplet $\{\tau, k_{1}, k_{2}\}$, one would \guil{propagate} a given initial direct orthonormal trihedron (at $s=0$ for instance) through the whole curve by integrating the differential system. In general, a moving frame will be fully determined by $\tau$, $\kappa_{1}$, $\kappa_{2}$ together with $\{\vect{e}_{3}(s=0),\vect{e}_{1}(s=0),\vect{e}_{2}(s=0)\}$.
 
 % vecteur de Darboux
 \begin{figure}[t]
@@ -401,7 +408,7 @@ Since the progression of any moving frame along $\gamma$ is ruled by a first-ord
 \label{fig:3_4}
 \end{figure}
 
-\subsubsection{Angular velocity : the Darboux vector}
+\subsubsection{Angular velocity}
 
 \note{Rigoureusement, le vecteur de Darboux est le vecteur vitesse angulaire du repère de Frenet. Ici, on propose donc une généralisation de l'appelation}
 
@@ -435,9 +442,11 @@ Geometrically, decomposing the infinitesimal rotation of the moving frame around
 \label{fig:3_5}
 \end{figure}
 
-% ROTATION_MINIMIZING FRAME
-\subsection{Rotation-minimizing frame}
-Following \cite{Farouki2014} we introduce the notion of \emph{rotation-miniminzing frame}. Both the Frenet and Bishop adapted moving frames are also rotation-minimizing frames.
+\subsection{Parallel transport}
+
+Quid du parallel transport ??
+
+On transporte d'abord le point d'application de $\vect{t1}$ sur $\vect{t2}$. $\vect{t1}$ et $\vect{t2}$ forment un plan de normal $\vect{t1} \times \vect{t2}$. On réaligne $\vect{t1}$ sur $\vect{t2}$ par une rotation d'angle $\angle(\vect{t1},\vect{t2})$ autour de cet axe. La rotation a lieu autour d'un axe perpendiculaire à la fois à $\vect{t1}$ et à $\vect{t2}$. Elle n'implique donc aucune rotation autour des axes $\vect{t1}$ et $\vect{t2}$ eux-mêmes et c'est pourquoi l'on dit que le transport se fait parallèlement de $\vect{t1}$ à $\vect{t2}$.
 
 \subsection{Adapted moving frame}
 Let $F$ be a moving frame as defined in the previous section. $F$ is said to be \emph{adapted} to $\gamma$ if at each point $\gamma(s)$, $\vect{e}_{3}(s)$ is tangent to $\gamma$ :
@@ -452,6 +461,10 @@ For an adapted frame, the components $k_1$ and $k_2$ of the Darboux vector are r
 La courbure est une quantité géométrique intrinsèque, indépendante du choix du repère mobile attaché à la courbe. C'est donc un invariant. Et donc quelque soit le choix du repère mobile adapté $\|\vect{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$ est un invariant (la courbure).
 
 Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géométrie de la courbe dans le cas d'une isotropic rod $\mathcal{E}_b = EI\kappa^2$.}
+
+% ROTATION_MINIMIZING FRAME
+\subsection{Rotation-minimizing frame}
+Following \cite{Farouki2014} we introduce the notion of \emph{rotation-miniminzing frame}. Both the Frenet and Bishop adapted moving frames are also rotation-minimizing frames.
 
 % FRENET FRAME
 \subsection{Frenet frame}

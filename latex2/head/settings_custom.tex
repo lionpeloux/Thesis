@@ -28,6 +28,7 @@
 \usepackage{csvsimple, booktabs, longtable} % pour les tables CSV
 \usepackage{float}
 \usepackage{csquotes}
+\usepackage{fnpct} % for multiple footnotes
 % \usepackage{etoc}
 
 \usepgfplotslibrary{fillbetween}
@@ -40,8 +41,9 @@
 
 % cross referencing with cref
 % http://tex.stackexchange.com/questions/119214/cross-referencing-equations-figures-and-chapters-sections-etc
-\crefname{section}{§}{§§}
-\Crefname{section}{§}{§§}
+\crefformat{section}{§#2#1#3}
+%\crefname{section}{§}{§§}
+%\Crefname{section}{§}{§§}
 
 \crefname{figure}{figure}{figures}
 \Crefname{figure}{Figure}{Figures}
