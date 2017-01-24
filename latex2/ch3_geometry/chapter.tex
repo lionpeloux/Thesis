@@ -3,6 +3,9 @@
 
 \note{idée :
 Rapprocher l'étude des courbes continues et des discrétisées avec le concept de modèle de la «courbe polygone» de Leibniz et de ses successeurs, une infinité de côtés infiniment petits. \cite[p.235]{Delcourt2011}
+
+Voir aussi que la geometry des space curves semble intimement liée à celle des surface.
+\cite{Coolidge2013,Delcourt2011}
 }
 
 \blockcquote[Liebniz]{}{Car les courbes n’étant que des polygones d’une infinité de côtés, et ne différent
@@ -54,14 +57,11 @@ Let $I$ be an interval of $\mathbb{R}$ and $F\colon t \mapsto F(t)$ be a map of 
 	\item $\gamma = F(I) = \{F(t), t \in I\}$ is called the \emph{graph} or \emph{trace} of $\gamma$
 	\item $\gamma$ is said to be ${\mathcal{C}}^{k}$ if $F \in {\mathcal{C}^{k}}^{}(I,{\mathbb{R}}^3)$
 \end{itemize}
-
-\begin{myrk}
-Note that for a given graph in ${\mathbb{R}}^3$ they may be different possible parameterizations. From now, $\gamma$ will simply refer to $F(I)$, its graph.
-\end{myrk}
+Note that for a given graph in ${\mathbb{R}}^3$ they may be different possible parameterizations. Thereafter $\gamma$ will simply refers to its graph $F(I)$. 
 
 % regularity
 \subsection{Regularity}
-Let $\gamma=(I,F)$ be a parametric curve, and $t_0 \in I$ a parameter.
+Let $\gamma=(I,F)$ be a parametric curve, and $t_0 \in I$ be a parameter.
 \begin{itemize}
 	\item A point of parameter $t_0$ is called \emph{regular} if $F'(t_0) \neq 0$.
 	\\The curve $\gamma$ is called \emph{regular} if $\gamma$ is $\mathcal{C}^{1}$ and $F'(t) \neq 0, \forall t \in I$
@@ -71,7 +71,7 @@ Let $\gamma=(I,F)$ be a parametric curve, and $t_0 \in I$ a parameter.
 
 % reparametrization
 \subsection{Reparametrization}
-Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\mathbb{R}}^{3}$ an interval, and $\varphi\colon I\mapsto J$ a ${\mathcal{C}}^{k}$ diffeomorphisme. Lets define $G=F\circ\varphi$. Then :
+Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\mathbb{R}}^{3}$ an interval, and $\varphi\colon I\mapsto J$ be a ${\mathcal{C}}^{k}$ diffeomorphisme. Lets define $G=F\circ\varphi$. Then :
 \begin{itemize}
 	\item $G\in{\mathcal{C}}^{k}(J,{\mathbb{R}}^3)$
 	\item $G(J)=F(I)$
@@ -97,7 +97,7 @@ Note that the length of $\gamma$ is invariant under reparametrization.
 
 % arc-length
 \subsection{Arc-length parametrization}
-Let $\gamma=(I,F)$ be a regular parametric curve of class ${\mathcal{C}}^{1}$. Let $t_0 \in I$ be a given parameter. The following map is said to be the \emph{arc-length of origin $t_0$} of $\gamma$ :
+Let $\gamma=(I,F)$ be a regular parametric curve. Let $t_0 \in I$ be a given parameter. The following map is said to be the \emph{arc-length of origin $t_0$} of $\gamma$ :
 \begin{equation}
 	s \colon t \mapsto \int_{t_{0}}^{t}\|F'(u)\|du
 	\quad,\quad
@@ -105,23 +105,49 @@ Let $\gamma=(I,F)$ be a regular parametric curve of class ${\mathcal{C}}^{1}$. L
 \end{equation}
 The arc-length $s \colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
 
-Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\|G'(s)\| = 1, \forall s \in J$.
+Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\|G'(s)\| = 1, \forall s \in J$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed\footnote{Regular curves are also known as \emph{unit-speed} curves.} ($\|G'\| = 1$).
 
-This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed ($\|G'\| = 1$).
-
+Thereafter, for a regular curve $\gamma$ : $\gamma(t)$ will denote the point $F(t)$ of parameter $t \in I$ ; while $\gamma(s)$ will denote the point $G(s)$ of arc-length $s \in J=[0,L]$.
 
 % --------------------------------------------------------------------------------------------------------------------------------------------
 % FRENET THRIEDRON
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Frenet trihedron}\label{sec:frenettrihedron}
-The Frenet trihedron is a fundamental mathematical tool from the field of differential geometry to study local characterization of planar and non-planar space curves. It is a direct orthonormal basis attached to any point $P$ on a parametric curve $\gamma$. This basis is composed of three unit vectors called the \emph{tangent} ($\vect{t}$), the \emph{normal} ($\vect{n}$) and the \emph{binormal} ($\vect{b}$) unit vectors.
 
-Introduced by Frenet in 1847 in his thesis \blockcquote[]{Frenet1852}{Courbes à Double Courbure}, it brings out intrinsic local properties of space curves, namely the curvature ($\kappa$) which evaluates the deviance of $\gamma$ from being a straight line (\cref{sec:curvature}) and the torsion ($\tau_f$) which evaluates the deviance of $\gamma$ from being a planar curve (\cref{sec:torsion}).
+%\note{From now, we will assume that the curve $\gamma$ is a regular parametric curve of class ${\mathcal{C}}^{1}$ parametrized by its arc-length $s \in [0,L]$.}
 
-These quantities, also known as \textquote{generalized curvatures}, are essential to understand the geometry of space curves. As stated by the \emph{Fundamental Theorem of Space Curves} \footnote{The full demonstration of this theorem is attributed to Darboux in \cite[p.11]{Delcourt2007}.}, a curve is fully determined by its curvature and torsion up to a solid movement in space.
+The Frenet trihedron is a fundamental mathematical tool from the field of differential geometry to study local characterization of planar and non-planar space curves. It is a direct orthonormal basis attached to any point $P$, of parameter $t \in I$, on a parametric curve $\gamma$. This basis is composed of three unit vectors $\{\vect{t}(t),\vect{n}(t),\vect{b}(t)\}$ called respectively the \emph{tangent}, the \emph{normal}, and the \emph{binormal} unit vectors\footnote{
+Strictly speaking, the map $\fonction{\vect{t}}{t}{\vect{t}(t)}$ is a \emph{vector field} while $\vect{t}(t)$ is a \emph{vector} of $\mathbb{R}^3$. For the sake of simplicity, and if there is no ambiguity, these two notions will not be explicitly distinguished hereinafter.
+}.
 
-In this section we consider $\gamma=(J,G)$ to be a regular ($\|\gamma'\|=1$) parametric curve of class ${\mathcal{C}}^{2}$, parametrized by its arc-length (denoted $s$). For the sake of simplicity we will refer to $G(s)$ as $\gamma(s)$.
+Introduced by Frenet in 1847 in his thesis \blockcquote[]{Frenet1852}{Courbes à Double Courbure}, it brings out intrinsic local properties of space curves : the curvature ($\kappa$) which evaluates the deviance of $\gamma$ from being a straight line (see \cref{sec:curvature}) ; and the torsion ($\tau_f$) which evaluates the deviance of $\gamma$ from being a planar curve (see \cref{sec:torsion}).
+
+These quantities, also known as \textquote{generalized curvatures} in modern differential geometry, are essential to understand the geometry of space curves. As stated by the \emph{Fundamental Theorem of Space Curves}\footnote{The full demonstration of this theorem is attributed to Darboux in \cite[p.11]{Delcourt2007}.}, a curve is fully determined by its curvature and torsion up to a solid movement in space (see \cref{sec:fundamental}).
+
+% tangent vector
+\subsection{Tangent vector}
+The first component of the Frenet trihedron is called the \emph{unit tangent vector}. 
+Let $\gamma = (I,F)$ be a regular parametric curve. Let $t \in I$ be a parameter. The \emph{unit tangent vector} is defined as :
+\begin{equation}
+	\vect{t}(t) = \frac{\gamma'(t)}{\|\gamma'(t)\|}
+	\quad,\quad
+	\|\vect{t}(t)\|=1
+\end{equation}
+For an arc-length parametrized curve, this expression simply becomes :
+\begin{equation}
+	\vect{t}(s) = \gamma'(s)
+	\quad,\quad
+	s \in [0,L]
+\end{equation}
+In differential geometry, the unit tangente to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P}$, as $P$ approches $P_0$ on the path $\gamma$ (\cref{fig:3_1}). For a regular curve, the left-sided and right-sided limits coïncide as $P^-$ and $P^+$ approche $P_0$ respectively from its left and right sides :
+\begin{equation}
+	\vect{t}(P_0)
+	= \lim_{P \to P_0}\frac{\overrightarrow{P_0 P}}{\norm{\overrightarrow{P_0 P}}}
+	= \lim_{P^- \to P_0}\frac{\overrightarrow{P_0 P^-}}{\norm{\overrightarrow{P_0 P^-}}}
+	= \lim_{P^+ \to P_0}\frac{\overrightarrow{P_0 P^+}}{\|\overrightarrow{P_0 P^+}\|}
+\label{eq:3_4}
+\end{equation}
 
 \begin{figure}[t]
      \centering
@@ -131,53 +157,63 @@ In this section we consider $\gamma=(J,G)$ to be a regular ($\|\gamma'\|=1$) par
      \label{fig:3_1}
 \end{figure}
 
-% tangent vector
-\subsection{Tangent vector}
-The first vector of Frenet's trihedron is called the \emph{unit tangent vector} ($\vect{t}$). At any given parameter $s \in J$,  it is defined as :
-\begin{equation}
-	\vect{t}(s) = \frac{\gamma'(s)}{\|\gamma'(s)\|} = \gamma'(s)
-	\quad,\quad
-	\|\vect{t}(s)\|=1
-\end{equation}
-In differential geometry, the tangente to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P}$, as $P$ approches $P_0$ on the path $\gamma$ (\cref{fig:3_1}). For a regular curve, the left-sided and right-sided limits coïncide as $P^-$ and $P^+$ approche $P_0$ respectively from its left and the right sides :
-\begin{equation}
-	\vect{t}(P_0)
-	= \lim_{P \to P_0}\frac{\overrightarrow{P_0 P}}{\norm{\overrightarrow{P_0 P}}}
-	= \lim_{P^- \to P_0}\frac{\overrightarrow{P_0 P^-}}{\norm{\overrightarrow{P_0 P^-}}}
-	= \lim_{P^+ \to P_0}\frac{\overrightarrow{P_0 P^+}}{\|\overrightarrow{P_0 P^+}\|}
-\label{eq:3_4}
-\end{equation}
-
 %Normal vector
 \subsection{Normal vector}
-The second vector of Frenet's trihedron is called the \emph{unit normal vector} ($\vect{n}$). It is constructed from $\vect{t'}$ which is orthogonal to $\vect{t}$ : $\|\vect{t}\|=1 \Rightarrow \vect{t^{'}} \cdot  \vect{t} = 0 \Leftrightarrow  \vect{t^{'}} \perp \vect{t}$. Thus, at any given parameter $s \in J$, it is defined as :
+The second component of the Frenet trihedron is called the \emph{unit normal vector}. It is constructed from $\vect{t'}$ which is necessarily orthogonal to $\vect{t}$. Indeed :
 \begin{equation}
-	\vect{n}(s) = \frac{\vect{t}'(s)}{\|\vect{t}'(s)\|} = \frac{\gamma''(s)}{\|\gamma''(s)\|}
-	\quad,\quad
-	\|\vect{n}(s)\|=1
+	\|\vect{t}\|=1 \Rightarrow \vect{t^{'}} \cdot  \vect{t} = 0 \Leftrightarrow  \vect{t^{'}} \perp \vect{t}
 \end{equation}
-It is not possible to define $\vect{n}(s)$ where $\gamma$ is a straight line since $\vect{t}(s)$ is a constant vector and $\vect{t'}(s)$ vanishes. However, one can choose to take $\vect{n}(s)$ as a constant vector fields along $\gamma$ and to define the torsion of $\gamma$ to be zero. Although this trihedron does not correspond to the Frenet trihedron (not defined in that case), it will still satisfy the same governing differential equations known as the \emph{Serret-Frenet formulas} (\cref{sec:serretfrenet}).
-
-Remark that the notion of \emph{normal vector} would be ambiguous for non-planar curves as far as there is an infinite number of possible vectors lying in the plane orthogonal to the curve's tangent. In practice, the tangent derivative is a convenient choice as it allows to extend the notion of curvature from planar to non-planar space curves. However, we will see (\cref{sec:bishop}) that other choices are possible and that one of them is especially suitable for the study of slender beams.
+Let $\gamma = (I,F)$ be a biregular\footnote{
+Note that $\vect{n}$ exists if only $\gamma$ is biregular, that is $\vect{t}'$ never vanishes or, equivalently, $\gamma$ is never locally a straight line.} parametric curve. 
+Let $t \in I$ be a parameter. The \emph{unit normal vector} is defined as :
+\begin{equation}
+	\vect{n}(t) = \frac{\vect{t}'(t)}{\|\vect{t}'(t)\|} 
+	= \frac{\gamma'(t) \times (\gamma''(t) \times \gamma'(t))}{\|\gamma'(t)\|^3}
+	\quad,\quad
+	\|\vect{n}(t)\|=1
+\end{equation}
+For an arc-length parametrized curve, this expression simply becomes :
+\begin{equation}
+	\vect{n}(s) = \frac{\vect{t}'(s)}{\|\vect{t}'(s)\|} 
+	= \gamma'(s) \times (\gamma''(s) \times \gamma'(s))
+	\quad,\quad
+	s \in [0,L]
+\end{equation}
+In differential geometry, the unit normal to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P^+}-\overrightarrow{P_0 P^-}$, as $P^-$ and $P^+$ approche $P_0$ respectively from its left and right sides (\cref{fig:3_1}) :
+\begin{equation}
+	\vect{n}(P_0)
+	= \lim_{}\frac{\overrightarrow{P_0 P^+}-\overrightarrow{P_0 P^-}}{\norm{\overrightarrow{P_0 P^+}-\overrightarrow{P_0 P^-}}}
+\label{eq:3_4}
+\end{equation}
+Remark that the notion of \emph{normal vector} is ambiguous for non-planar curves as there is an infinite number of possible normal vectors lying in the plane orthogonal to the curve's tangent. In practice, the tangent derivative is a convenient choice as it allows to extend the notion of curvature from planar to non-planar space curves. However, we will see (\cref{sec:bishop}) that other kind of trihedron can be constructed regarding this choice and that one of them is especially suitable for the study of slender beams.
 
 %Binormal vector and torsion
 \subsection{Binormal vector}
-The third vector of Frenet's trihedron is called the \emph{unit binormal vector} ($\vect{b}$). It is constructed from $\vect{t}$ and $\vect{n}$ to form an orthonormal direct basis of $\mathbb{R}^{3}$. Thus, at any given parameter $s \in J$, it is defined as :
+The third vector of Frenet's trihedron is called the \emph{unit binormal vector}. It is constructed from $\vect{t}$ and $\vect{n}$ to form an orthonormal direct basis of $\mathbb{R}^{3}$. 
+Let $\gamma = (I,F)$ be a biregular parametric curve. Let $t \in I$ be a parameter. The \emph{unit binormal vector} is defined as :
+\begin{equation}
+	\vect{b}(t) = \vect{t}(t) \times \vect{n}(t)
+	= \frac{\gamma'(t) \times \gamma''(t)}{\|\gamma'(t) \times \gamma''(t)\|}
+	\quad,\quad
+	\|\vect{b}(t)\|=1
+\end{equation}
+For an arc-length parametrized curve, this expression simply becomes :
 \begin{equation}
 	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s)
+	= \gamma'(s) \times \gamma''(s)
 	\quad,\quad
-	\|\vect{b}(s)\|=1
+	s \in [0,L]
 \end{equation}
-The normal unit vector and the binormal unit vector $\{\vect{n},\vect{b}\}$ define the so-called \emph{normal plane}. The normal tangent vector and the binormal unit vector $\{\vect{t},\vect{b}\}$ define the so-called \emph{rectifying plane}.
 
 % Osculating plane
 \subsection{Osculating plane}\label{sec:osculatingplane}
-As reported in \cite[p.45]{Delcourt2007}, the \emph{osculating plane} seems to have been first introduced by Bernoulli as the plane passing through three infinitely near points on a curve
-\footnote{
-\blockcquote[p.113]{Bernoulli1728}{Voco autem planum osculans, quod transit per tria curvae quaesitae puncta infinite sibi invicem propinqua}.
-}.
+The tangent and normal unit vectors $\{\vect{t},\vect{n}\}$ form an orthonormal basis of the so-called \emph{osculating plane}, whereas the binormal vector $(\vect{b})$ is orthogonal to it. This plane is of prime importance because it is the plane in which the curve takes its curvature (see \cref{sec:curvature}).
 
-Likewise, in modern differential geometry, the \emph{osculating plane} is defined as the limit of the plane passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ respectively from its left and right side (\cref{fig:3_1}). The tangent and normal unit vectors $\{\vect{t},\vect{n}\}$ form an orthonormal basis of this plane whereas the binormal vector $(\vect{b})$ is orthogonal to it.
+As reported in \cite[p.45]{Delcourt2007}, the osculating plane seems to have been first introduced by Bernoulli as the plane passing through three infinitely near points on a curve\footnote{
+\blockcquote[p.113]{Bernoulli1728}{Voco autem planum osculans, quod transit per tria curvae quaesitae puncta infinite sibi invicem propinqua}.
+}. Likewise, in modern differential geometry, the osculating plane is defined as the limit of the plane passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ respectively from its left and right side (\cref{fig:3_1}).
+
+Note that the normal unit vector and the binormal unit vector $\{\vect{n},\vect{b}\}$ define the so-called \emph{normal plane}, while the normal tangent vector and the binormal unit vector $\{\vect{t},\vect{b}\}$ define the so-called \emph{rectifying plane}. This planes are secondary for the present study.
 
 % --------------------------------------------------------------------------------------------------------------------------------------------
 % CURVE INVARIANTS
@@ -190,56 +226,12 @@ The study of space curves belongs to the field of differential geometry. Accordi
 Les Anciens ont nommé cette courbe Spirale ou Hélice ; parce que la formation sur le cylindre suit la même analogie que la formation d’une spirale ordinaire sur un plan; mais elle est bien différente de la spirale ordinaire, étant une des courbes à double courbure, ou une des lignes qu’on conçoit tracée sur la surface des Solides. Peut-être que ces sortes de courbes à double courbure, ou prises sur la surface des Solides, feront un jour l’objet des recherches des géomètres. Celle que nous venons d’examiner est, je crois, la plus simple de toutes.
 }}.
 However, as stated in \cite[p.321]{Coolidge2013}, curvature and torsion where probably first thought by Monge around 1771\footnote{
-\blockcquote[p.363]{Monge1809}{
-On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point ; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.
+\blockcquote[p.363]{Monge1809}{On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point ; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.
 }}. It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g.\ \emph{elastica}) and the study of curves of double curvature were intimately related to each other.
 
 Space curves were historically understood as \emph{curves of double curvature} by extension to the case of planar curves, where the curvature measures the deviance of a curve from being a straight line. The second curvature, nowadays known as the \textquote{torsion} or \textquote{second generalized curvature}, measures the deviance of a curve from being plane. 
 
-%Curvature
-\subsection{First invariant : the curvature}\label{sec:curvature}
-In differential geometry, the \emph{osculating circle} is defined as the limit of the circle passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ (\cref{fig:3_1}). This circle lies on the osculating plane and its radius is nothing but the inverse of the local curvature of a curve\footnote{
-As explained by Euler itself, at a given arc-length parameter ($s$), the osculating plane is the plane in which a curve takes its curvature :  \blockcquote[p.364]{Euler1775}{in quo bina fili elementa proxima in curvantur}.
-}. While the tangent gives the best local approximation of the curve as a straight line, the osculating circle gives the best local approximation of that curve as an arc.
-
-\subsubsection{Curvature}
-
-The \emph{curvature} is a positive scalar quantity defined everywhere $\gamma$ is ${\mathcal{C}}^{2}$ as the norm of $\vect{t}'$ :
-\begin{equation}
-	\kappa(s) = \|\vect{t}'(s)\| = \|\gamma''(s)\| \ge 0 
-	\quad,\quad
-	\vect{t}'(s) = \kappa(s) \vect{n}(s)
-\end{equation}
-The curvature is \emph{independent} regarding the choice of parametrization. This makes the curvature an \emph{intrinsic property} of a given curve and that is why it is also referred to as a \emph{geometric invariant}. Following \cite[p.204]{Gray2006} it can be computed as :
-\begin{equation}
-	\kappa(s) = \frac{\|\gamma'(s) \times \gamma''(s) \|}{\|\gamma'(s)\|^3} 
-	\quad where \quad
-	\|\gamma'(s)\| > 0
-\end{equation}
-The curvature measures how much a curve bends instantaneously in its osculating plane, that is to say how fast the tangent vector is rotating in the osculating plane around the binormal vector. In differential geometry this is expressed as :
-\begin{equation}
-	\kappa(s)
-	= \lim_{ds \to 0}\frac{\angle(\vect{t}(s),\vect{t}(s+ds))}{ds}
-	= \lim_{ds \to 0}\frac{(\vect{t}(s+ds) - \vect{t}(s)) \cdot \vect{n}(s)}{ds}
-\end{equation}
-This is equivalent as measuring how fast the osculating plane itself is rotating around the binormal vector. Note that consequently a curve is locally a \emph{straight line} when its curvature vanishes ($\kappa(s)= 0$).
-
-%Radius of curvature
-\subsubsection{Radius of curvature}
-The \emph{radius of curvature} is defined as the inverse of the curvature ($r(s) = 1/\kappa(s)$). From a geometric point of view, one can demonstrate that it is the radius of the osculating circle (\cref{fig:3_2}). Remark that where the curvature vanishes the radius of curvature goes to infinity and that the osculating circle becomes a line (a circle of infinit radius).
-
-%Osculating circle
-\subsubsection{Center of curvature}
-The \emph{center of curvature} is the center of the osculating circle (\cref{fig:3_2}).
-
-\subsubsection{Curvature binormal vector}
-Finally, following \cite{Bergou2008} we define the \emph{curvature binormal vector} at any given parameter $s \in J$ as :
-\begin{equation}
-	\vect{\kappa b}(s) = \vect{t}(s) \times \vect{t}'(s) = \kappa(s)\cdot\vect{b}(s)
-	\quad,\quad
-	\|\vect{\kappa b}(s)\|= \kappa(s)
-\end{equation}
-This vector will be useful as it embed all the necessary information on the curve's curvature. We will see (\cref{sec:bishopvelocity}) that this vector is associated to the angular velocity of a specific adapted moving frame attached to the curve and called the \emph{Bishop frame}.
+%\note{arclength is a Euclidean invariant of the curve.}
 
 \begin{figure}[t]
 	\centering
@@ -248,34 +240,84 @@ This vector will be useful as it embed all the necessary information on the curv
 	\label{fig:3_2}
 \end{figure}
 
+%Curvature
+\subsection{First invariant : the curvature}\label{sec:curvature}
+In differential geometry, the \emph{osculating circle} is defined as the limit of the circle passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ (\cref{fig:3_1}). This circle lies on the osculating plane and its radius is nothing but the inverse of the local curvature of a curve\footnote{
+As explained by Euler itself, at a given arc-length parameter ($s$), the osculating plane is the plane in which a curve takes its curvature :  
+\blockcquote[p.364]{Euler1775}{in quo bina fili elementa proxima in curvantur}.}. While the tangent gives the best local approximation of the curve as a straight line, the osculating circle gives the best local approximation of that curve as an arc.
+\subsubsection{Curvature}
+Let $\gamma$ be a regular arc-length parametrized curve. Let $s \in [0,L]$ be an arc-length parameter. The \emph{curvature} is a positive scalar quantity defined as :
+\begin{equation}
+	\kappa(s) = \|\vect{t}'(s)\| \ge 0 
+	\quad,\quad
+	\vect{t}'(s) = \kappa(s) \vect{n}(s)
+\label{eq:curvaturedef}
+\end{equation}
+The curvature is \emph{independent} regarding the choice of parametrization. This makes the curvature an \emph{intrinsic property} of a given curve and that is why it is also referred to as a \emph{geometric invariant}. Following \cite[pp.203-204]{Gray2006} it can be computed for any parametrization $(I,F)$ of $\gamma$ as :
+\begin{equation}
+	\kappa(t) = \frac{\|\gamma'(t) \times \gamma''(t) \|}{\|\gamma'(t)\|^3}
+	\quad,\quad
+	\vect{t}'(t) = \|\gamma'(t)\| \kappa(t) \vect{n}(t)
+\label{eq:curvaturedef2}
+\end{equation}
+Note that in \cref{eq:curvaturedef} the prime denotes the derivative regarding the natural parameter ($s$) while it denotes the derivative regarding any parameter ($t$) in \cref{eq:curvaturedef2}. Consequently, the \emph{speed} of the curve's parametrization appears in the latter equation :
+\begin{equation}
+	v(t) = \frac{ds}{dt} = \|\gamma'(t)\| = s'(t)
+\end{equation}
+The curvature measures how much a curve \emph{bends instantaneously} in its osculating plane, that is how fast the tangent vector is rotating in the osculating plane around the binormal vector. In differential geometry this is expressed as :
+\begin{equation}
+	\kappa(s)
+	= \lim_{ds \to 0}\frac{\angle(\vect{t}(s),\vect{t}(s+ds))}{ds}
+	= \lim_{ds \to 0}\frac{(\vect{t}(s+ds) - \vect{t}(s)) \cdot \vect{n}(s)}{ds}
+\end{equation}
+This is equivalent as measuring how fast the osculating plane itself is rotating around the binormal vector. Consequently a curve is locally a \emph{straight line} when its curvature vanishes ($\kappa(s)= 0$).
+
+%Radius of curvature
+\subsubsection{Radius of curvature}
+The \emph{radius of curvature} is defined as the inverse of the curvature ($r= 1/\kappa$). From a geometric point of view, one can demonstrate that it is the radius of the osculating circle (\cref{fig:3_2}). Remark that where the curvature vanishes the radius of curvature goes to infinity ; that is the osculating circle becomes a line, a circle of infinite radius.
+
+%Osculating circle
+\subsubsection{Center of curvature}
+The \emph{center of curvature} is defined as the center of the osculating circle (\cref{fig:3_2}). The locus of all the centers of curvature of a curve is called the \emph{evolute}.
+
+\subsubsection{Curvature binormal vector}
+Finally, following \cite{Bergou2008} we define the \emph{curvature binormal vector}. Let $\gamma$ be a biregular arc-length parametrized curve. Let $s\in [0,L]$ be an arc-length parameter. The \emph{curvature binormal vector} is defined as :
+\begin{equation}
+	\vect{\kappa b}(s) = \vect{t}(s) \times \vect{t}'(s) = \kappa(s)\cdot\vect{b}(s)
+	\quad,\quad
+	\|\vect{\kappa b}(s)\|= \kappa(s)
+\end{equation}
+This vector will be useful as it embed all the necessary information on the curve's curvature. We will see (\cref{sec:bishopvelocity}) that this vector is associated to the angular velocity of a specific adapted moving frame attached to the curve and called the \emph{Bishop frame}.
+
 % Torsion
 \subsection{Second invariant : the torsion}\label{sec:torsion}
-
-The \emph{torsion} is a scalar quantity defined at any given parameter $s \in J$ as :
+Let $\gamma$ be a biregular arc-length parametrized curve. Let $s \in [0,L]$ be an arc-length parameter. The \emph{torsion} is a scalar quantity defined as :
 \begin{equation}
 	\tau_f(s) = \vect{n}'(s) \cdot \vect{b}(s) = - \vect{b}'(s) \cdot \vect{n}(s)
 \end{equation}
 The torsion is \emph{independent} regarding the choice of parametrization. This makes the torsion an \emph{intrinsic property} of a given curve and that is why it is also referred to as a \emph{geometric invariant}. Following \cite[p.204]{Gray2006} it can be computed as :
 \begin{equation}
 	\tau_f(s) = \frac{(\gamma'(s) \times \gamma'(s)) \cdot \gamma''(s)}{\|\gamma'(s) \times \gamma''(s)\|^2}
-	\quad where \quad
-	\|\gamma'(s)\| > 0
+	\quad when \quad
+	\kappa(s) > 0
 \end{equation}
-The torsion measures how much a curve goes instantaneously out of its plane, that is to say how fast the normal or binormal vectors are rotating in the normal plane around the tangent vector. In differential geometry this is expressed as :
+The torsion measures how much a curve goes \emph{instantaneously out of its plane}, that is to say how fast the normal or binormal vectors are rotating in the normal plane around the tangent vector. In differential geometry this is expressed as :
 \begin{equation}
 	\tau_f(s) 
 	= \lim_{ds \to 0}\frac{\angle(\vect{n}(s),\vect{n}(s+ds))}{ds}
 	= \lim_{ds \to 0}\frac{(\vect{n}(s+ds) - \vect{n}(s)) \cdot \vect{b}(s)}{ds}
 \end{equation}
-This is equivalent as measuring how fast the osculating plane is rotating around the tangent vector. Note that consequently a curve is locally \emph{plane} when its torsion vanishes ($\tau_f(s) = 0$).
+This is equivalent as measuring how fast the osculating plane is rotating around the tangent vector. Consequently a curve is locally \emph{plane} when its torsion vanishes ($\tau_f(s) = 0$).
 
-Remark that here the torsion is denoted \textquote{$\tau_f$} and not simply \textquote{$\tau$} as the latter will be reserved to denote any angular velocity of a moving adapted frame around its tangent vector. Thus, $\tau_f$ refers to the particular angular velocity of the Frenet trihedron around it's tangent vector. This torsion, which is a geometric property of the curve, will be indifferently referred to as the \emph{torsion of Frenet} or the \emph{geometric torsion}.
+Remark that the \emph{torsion} is denoted \textquote{$\tau_f$} and not simply \textquote{$\tau$} as the latter will be reserved to denote any angular velocity of a moving adapted frame around its tangent vector. Thus, $\tau_f$ refers to the particular angular velocity of the Frenet trihedron around it's tangent vector. This torsion, which is a geometric property of the curve, will be indifferently referred to as the \emph{torsion of Frenet} or the \emph{geometric torsion}.
 
 % Fundamental theorem of space curves
 \subsection{Fundamental theorem of space curves}\label{sec:fundamental}
 This two \emph{generalized curvatures}, respectively the curvature ($\kappa$) and the torsion ($\tau_f$), are \emph{invariant} regarding the choice of parametrization and under \emph{euclidean motions}. The \emph{Fundamental theorem of space curves} states that a curve is fully described, up to a Euclidean motion of ${\mathbb{R}}^3$, by its positive curvature ($\kappa > 0$) and torsion ($\tau$) \cite[p.229]{Gray2006}.
 
-This is easily understood by expressing the first-order system of differential equations satisfied by the Frenet trihedron $\{\vect{t},\vect{n},\vect{b}\}$ and known as the \emph{Serret-Frenet formulas} :
+% The Serret-Frenet formulas
+\subsection{Serret-Frenet formulas}\label{sec:serret}
+The \emph{Fundamental theorem of space curves} is somehow a consequence of the \emph{Serret-Frenet formulas}, which is the first-order system of differential equations satisfied by the Frenet trihedron $\{\vect{t},\vect{n},\vect{b}\}$ at any given parameter $s \in J$ :
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -305,8 +347,8 @@ This system can be seen as the \emph{equations of motion} of the Frenet trihedro
 	=
 	\begin{bmatrix}
 		\tau(s) \\
-		k_1(s) \\
-		k_2(s)
+		0 \\
+		\kappa(s)
 	\end{bmatrix}
 \end{equation}
 Because the Frenet trihedron satisfies a first-order system of differential equations of parameters $\kappa$ and $\tau_f$ it is possible, by integration, to reconstruct the trace of the moving frame and thus the curve, up to a constant of integration (a trihedron in this case). For instance, those classic combinations of curvature and torsion leads to :
@@ -328,6 +370,8 @@ Because the Frenet trihedron satisfies a first-order system of differential equa
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Curve framing}
+
+From now, we consider $\gamma=(J,G)$ to be a regular ($\|\gamma'\|=1$) parametric curve of class ${\mathcal{C}}^{2}$, parametrized by its arc-length (denoted $s \in J=[0,L]$). For the sake of simplicity we will refer to $G(s)$ as $\gamma(s)$.
 
 While the Frenet trihedron \blockcquote[p.1]{Bishop1975}{has long been the standard vehicle for analysing properties of the curve invariant\footnote{Namely the curvature ($\kappa$) and the Frenet torsion ($\tau_f$).} under euclidean motions}, a curve can be potentially framed with any arbitrary \emph{moving frame}, understood as an \emph{orthonormal basis field}. Thus, the Frenet frame is not the only way to frame a curve\footnote{Recall the title of Bishop's paper : \blockcquote[]{Bishop1975}{There is more than one way to frame a curve}.} and other frames may or may not exhibit some interesting properties.
 
@@ -351,11 +395,11 @@ Consequently, a moving frame $F$ attached to $\gamma$ satisfies for all $s \in [
 	\end{aligned}
 	\right.
 \end{equation}
-The term \textquote{moving frame} will refer indifferently to the map ($F$) itself, or to a specific evaluation of the map ($F(s)$).
+The term \textquote{moving frame} will refer indifferently to the map itself (denoted $F$ or $\{\vect{e}_{3},\vect{e}_{1},\vect{e}_{2}\}$), or to a specific evaluation of the map (denoted $F(s)$ or $\{\vect{e}_{3}(s),\vect{e}_{1}(s),\vect{e}_{2}(s)\}$).
 
 % governing equations
 \subsubsection{Governing equations}
-Computing the derivatives of the previous relationships leads to the following system of differential equations that the frame must satisfy :
+Computing the derivatives of the previous relationships leads to the following system of differential equations that the frame must satisfy for all $s \in [0,L]$ :
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -364,7 +408,7 @@ Computing the derivatives of the previous relationships leads to the following s
 	\end{aligned}
 	\right.
 \end{equation}
-Thus, there exists 3 scalar functions $\tau(s)$, $k_{1}(s)$, $k_{2}(s)$ such that :
+Thus, there exists 3 scalar functions ($\tau$, $k_{1}$, $k_{2}$) such that $\{\vect{e}'_{3}, \vect{e}'_{1}, \vect{e}'_{2}\}$ can be expressed in the basis $\{\vect{e}_{3}, \vect{e}_{1}, \vect{e}_{2}\}$ :
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -394,11 +438,11 @@ as a matrix equation :
 		\vect{e}_{1}(s) \\
 		\vect{e}_{2}(s)
 	\end{bmatrix}
-\label{eq:3_12}
+\label{eq:movingframe}
 \end{equation}
 Since the progression of any moving frame along $\gamma$ is ruled by a first-order system of differential equations, a unique triplet $\{\tau, k_{1}, k_{2}\}$ leads to a set of moving frames equal to each other within a constant of integration\footnote{
 This assumption reminds the \emph{Fundamental theorem of space curves} (\cref{sec:fundamental}).
-}. Basically, with a given triplet $\{\tau, k_{1}, k_{2}\}$, one would \guil{propagate} a given initial direct orthonormal trihedron (at $s=0$ for instance) through the whole curve by integrating the differential system. In general, a moving frame will be fully determined by $\tau$, $\kappa_{1}$, $\kappa_{2}$ together with $\{\vect{e}_{3}(s=0),\vect{e}_{1}(s=0),\vect{e}_{2}(s=0)\}$.
+}. Basically, with a given triplet $\{\tau, k_{1}, k_{2}\}$, one would \guil{propagate} a given initial direct orthonormal trihedron (at $s=0$ for instance) through the whole curve by integrating the system of differential equations. In general, a moving frame will be fully determined by $\tau$, $\kappa_{1}$ and $\kappa_{2}$ together with the initial condition $\{\vect{e}_{3}(s=0),\vect{e}_{1}(s=0),\vect{e}_{2}(s=0)\}$.
 
 % vecteur de Darboux
 \begin{figure}[t]
@@ -409,10 +453,7 @@ This assumption reminds the \emph{Fundamental theorem of space curves} (\cref{se
 \end{figure}
 
 \subsubsection{Angular velocity}
-
-\note{Rigoureusement, le vecteur de Darboux est le vecteur vitesse angulaire du repère de Frenet. Ici, on propose donc une généralisation de l'appelation}
-
-It is relevant to consider the mobile frame's evolution along $\gamma$ introducing the so-called \emph{Darboux vector} ($\vect{\Omega}$), which corresponds to the instantaneous angular velocity of $F$ at each point of arc-length $s$. Thus, the previous differential system governing the evolution of $F(s)$ along $\gamma$ becomes :
+It is relevant to consider the mobile frame evolution along $\gamma$ introducing the so-called \emph{Darboux vector} ($\vect{\Omega}$), which corresponds to the instantaneous angular velocity of $F$ at each point of arc-length $s$. Thus, the previous system of differential equations governing the evolution of $F(s)$ along $\gamma$ becomes :
 \begin{equation}
 	\vect{e}'_{i}(s) = \vect{\Omega}(s) \times \vect{e}_{i}(s)
 	\quad avec \quad
@@ -424,17 +465,16 @@ It is relevant to consider the mobile frame's evolution along $\gamma$ introduci
 		k_2(s)
 	\end{bmatrix}
 \end{equation}
-This result is straightforward deduced from \eqref{eq:3_12}. Note that the cross product \guil{reveals} that the system is skew-symmetric, which could already be seen in \eqref{eq:3_12}.
-Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc-length $s$ and $s+ds$ (\cref{fig:3_4}) shows that the scalar functions $\tau(s)$, $k_{1}(s)$, $k_{2}(s)$ effectively correspond to the angular speed of the frame, respectively around $\vect{e}_{3}(s)$, $\vect{e}_{1}(s)$, $\vect{e}_{2}(s)$ :
+This result is straightforward deduced from \cref{eq:movingframe}. Note that the cross product \guil{reveals} that the system is skew-symmetric, which could already be seen in \cref{eq:movingframe}.
+Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc-length $s$ and $s+ds$ (\cref{fig:3_4}) shows that the scalar functions $\tau$, $k_{1}$, $k_{2}$ effectively correspond to the angular speed of the frame, respectively around $\vect{e}_{3}$, $\vect{e}_{1}$, $\vect{e}_{2}$ :
 \begin{equation}
-	\frac{d\theta_3}{dt}(s) = \tau(s)
+	\frac{d\theta_3}{ds}(s) = \tau(s)
 	\quad,\quad
-	\frac{d\theta_1}{dt}(s) = k_{1}(s)
+	\frac{d\theta_1}{ds}(s) = k_{1}(s)
 	\quad,\quad
-	\frac{d\theta_2}{dt}(s) = k_{2}(s)
+	\frac{d\theta_2}{ds}(s) = k_{2}(s)
 \end{equation}
 
-% adapted frame
 \begin{figure}[t]
 \centering
 \includegraphics[]{adapted_moving_frame.pdf}
@@ -442,34 +482,36 @@ Geometrically, decomposing the infinitesimal rotation of the moving frame around
 \label{fig:3_5}
 \end{figure}
 
-\subsection{Parallel transport}
-
-Quid du parallel transport ??
-
-On transporte d'abord le point d'application de $\vect{t1}$ sur $\vect{t2}$. $\vect{t1}$ et $\vect{t2}$ forment un plan de normal $\vect{t1} \times \vect{t2}$. On réaligne $\vect{t1}$ sur $\vect{t2}$ par une rotation d'angle $\angle(\vect{t1},\vect{t2})$ autour de cet axe. La rotation a lieu autour d'un axe perpendiculaire à la fois à $\vect{t1}$ et à $\vect{t2}$. Elle n'implique donc aucune rotation autour des axes $\vect{t1}$ et $\vect{t2}$ eux-mêmes et c'est pourquoi l'on dit que le transport se fait parallèlement de $\vect{t1}$ à $\vect{t2}$.
-
+% ADAPTED FRAME
 \subsection{Adapted moving frame}
-Let $F$ be a moving frame as defined in the previous section. $F$ is said to be \emph{adapted} to $\gamma$ if at each point $\gamma(s)$, $\vect{e}_{3}(s)$ is tangent to $\gamma$ :
+Let $F$ be a moving frame as defined in the previous section. $F$ is said to be \emph{adapted} to $\gamma$ if at each point $\gamma(s)$, $\vect{e}_{3}(s)$ is the unit tangent of $\gamma$ :
 \begin{equation}
-	\vect{d_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}, \quad \forall s \in [0,L]
+	\vect{d_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
+	v
 \end{equation}
-For an adapted frame, the components $k_1$ and $k_2$ of the Darboux vector are related to the curve's curvature. Indeed, recall from that $\kappa \equiv \|\gamma''\| = \|\vect{t}'\|$. Or $\vect{t} = \vect{d}_3$ for an adapted frame. Thus, the following relation holds :
+For an adapted frame, the components $k_1$ and $k_2$ of the Darboux vector are related to the curve's curvature. Indeed, recall from \cref{eq:curvaturedef} that $\kappa \equiv \|\gamma''\| = \|\vect{t}'\|$. Or $\vect{t} = \vect{d}_3$ for an adapted frame. Thus, the following relation holds\footnote{\note{Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géométrie de la courbe dans le cas d'une isotropic rod $\mathcal{E}_b = EI\kappa^2$.}} :
 \begin{equation}
 	\kappa = \|\vect{d}'_3\| = \sqrt{{k_{1}}^2 + {k_{2}}^2}
 \end{equation}
-\note{
-La courbure est une quantité géométrique intrinsèque, indépendante du choix du repère mobile attaché à la courbe. C'est donc un invariant. Et donc quelque soit le choix du repère mobile adapté $\|\vect{t'}\| = \sqrt{\kappa_1^2 + \kappa_2^2}$ est un invariant (la courbure).
 
-Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géométrie de la courbe dans le cas d'une isotropic rod $\mathcal{E}_b = EI\kappa^2$.}
-
-% ROTATION_MINIMIZING FRAME
+% ROTATION MINIMIZING FRAME
 \subsection{Rotation-minimizing frame}
-Following \cite{Farouki2014} we introduce the notion of \emph{rotation-miniminzing frame}. Both the Frenet and Bishop adapted moving frames are also rotation-minimizing frames.
+\cite{Wang2008}
+Following \cite{Farouki2014} we introduce the notion of \emph{rotation-miniminzing frame}. A frame $\{\vect{e}_{3}$, $\vect{e}_{1}$, $\vect{e}_{2}\}$ is said to be \emph{rotation-miniminzing} regrading a given direction $\vect{d}$ if :
+\begin{equation}
+	\vect{\Omega}(s) \cdot \vect{d}(s) = 0
+	\quad, \quad 
+	\forall s \in [0,L]
+\end{equation}
+
+% PARALLEL TRANSPORT
+\subsection{Parallel transport}
+Quid du parallel transport ??
+On transporte d'abord le point d'application de $\vect{t1}$ sur $\vect{t2}$. $\vect{t1}$ et $\vect{t2}$ forment un plan de normal $\vect{t1} \times \vect{t2}$. On réaligne $\vect{t1}$ sur $\vect{t2}$ par une rotation d'angle $\angle(\vect{t1},\vect{t2})$ autour de cet axe. La rotation a lieu autour d'un axe perpendiculaire à la fois à $\vect{t1}$ et à $\vect{t2}$. Elle n'implique donc aucune rotation autour des axes $\vect{t1}$ et $\vect{t2}$ eux-mêmes et c'est pourquoi l'on dit que le transport se fait parallèlement de $\vect{t1}$ à $\vect{t2}$.
 
 % FRENET FRAME
 \subsection{Frenet frame}
 
-% definition
 \subsubsection{Definition}
 The Frenet frame is a well-known particular adapted moving frame (\cref{sec:frenettrihedron}). At any given regular point $\gamma(s)$ it is defined as the Frenet trihedron $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ where :
 \begin{gather}
@@ -529,24 +571,19 @@ Consequently, the angular velocity vector ($\vect{\Omega_{f}}$) of the Frenet fr
 One can remark that the Frenet frame satisfies $\vect{\Omega_f}(s) \cdot \vect{n}(s) = 0$ and is thus a \emph{rotation-miniminzing} frame regarding the normal vector ($\vect{n}$). The motion of this frame through the curve is known as "\emph{pitch-free}".
 
 \subsubsection{Specific points}
+The frenet frame has unwanted discontinuities \footnote{\note{montrer un exemple graphique.}} when $\kappa = 0$ and must be ${\mathcal{C}}^{2}$ to be defined \cite{Bloomenthal1990, Wang2008}.
 
 This assertion is equivalent to the well-known \emph{Serret-Frenet formulas}, which give the first-order linear differential equations system that govern the evolution of Frenet's trihedron along a space curve. For a given curvature and torsion, and a given initial trihedron, the geometry of the space curve can be constructed by integration these differential equations.
 
-\note{undefined when curvature vanishes : montrer des examples
+\footnote{\note{une perturbation de la courbe dans le sens le sens de la courbure engendre une variation de longueur de la courbe proportionnelle à l'inverse de la courbure (au premier ordre) + schéma.}}
+\footnote{\note{une perturbation de la courbe dans le sens de la binormale (en tout point) préserve la longueur de la courbe au 1er ordre : c'est un déplacement qui conserve l'hypothèse d'inextensibilité au premier ordre.}}
+\footnote{\note{Examiner la question de la fermeture sur une boucle fermée. Schéma.}}
 
-not related to mechanical torsion
+Although it is not possible to define $\vect{n}$ where $\gamma$ is a straight line since $\vect{t}$ is a constant vector and $\vect{t'}$ vanishes ; one can choose to take $\vect{n}$ as a constant vector fields along $\gamma$ and to define the torsion of $\gamma$ to be zero. Although this trihedron does not correspond to the Frenet trihedron (not defined in that case), it will still satisfy the same governing differential equations known as the \emph{Serret-Frenet formulas} (\cref{sec:serretfrenet}).
 
-une perturbation de la courbe dans le sens le sens de la courbure engendre une variation de longueur de la courbe proportionnelle à l'inverse de la courbure (au premier ordre) + schéma
-
-une perturbation de la courbe dans le sens de la binormale (en tout point) préserve la longueur de la courbe au 1er ordre : c'est un déplacement qui conserve l'hypothèse d'inextensibilité au premier ordre
-
-Examiner la question de la fermeture sur une boucle fermée. Schéma.
-}
-
-% REPERE DE BISHOP
+% BISHOP FRAME
 \subsection{Bishop frame}\label{sec:bishop}
 
-% definition
 \subsubsection{Definition}
 Different ways to frame a curve. The usual one is Frenet. But, it could not be as relevant as we want in our field of interest.
 
@@ -554,6 +591,14 @@ The Bishop frame is defined as a a well-known particular adapted moving frame (\
 
 \cite{Guggenheimer1989}
 \cite{Klok1986}
+\cite{Bloomenthal1990}
+\cite{Wang2008}
+\cite{Poston1995}
+
+\blockcquote[p.6]{Wang2008}{The Frenet frame coincides with the RMF for planar
+curves, for which $\tau = 0$.}
+
+\blockcquote[p.6]{Wang2008}{Regarder la méthode de la bi-reflexion pour le calcul du repère de bishop}
 
 Although the Frenet frame is not rotation-minimizing with respect to t, one can easily derive such a rotation-minimizing frame from it. New normal-plane vectors (u,v) are specified through a rotation of (p,b) according to u=cos
 
@@ -644,19 +689,21 @@ Expliquer le défaut de fermeture sur une boucle fermée. Calcul du writhe. Quel
 \subsubsection{Application A : circular helix}
 \begin{equation}
 	\left\{
-	\begin{array}{c}
+	\begin{aligned}
 		\rho = a\\
 		z = b\theta
-	\end{array}\right.
+	\end{aligned}
+	\right.
 \end{equation}
 
 \subsubsection{Application B : conical helix (spiral)}
 \begin{equation}
 	\left\{
-	\begin{array}{c}
+	\begin{aligned}
 		\rho = a e^{k\theta}\\
 		z = \rho \cot{\alpha}\\
-	\end{array}\right.
+	\end{aligned}
+	\right.
 \end{equation}
 
 
