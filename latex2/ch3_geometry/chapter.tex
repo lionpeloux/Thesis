@@ -549,28 +549,44 @@ Following \cite{Farouki2014, Wang2008} we introduce the \emph{rotation-miniminzi
 \end{equation}
 
 % PARALLEL TRANSPORT
-\subsection{Parallel transport}
-\cite{Hanson95}
-The notion of \emph{parallel transport} is somehow a generalization of the classical notion of collinearity in flat euclidean spaces (e.g.\ $\mathbb{R}^2$ or $\mathbb{R}^3$ spaces) to spaces that exhibit some non vanishing curvature (e.g.\ spheric or hyperbolic spaces).
+\subsection{Parallel transport}\label{sec:paralleltransport}
+The notion of \emph{parallel transport} is somehow a generalization of the classical notion of collinearity in flat euclidean spaces (e.g.\ $\mathbb{R}^2$ or $\mathbb{R}^3$), to spaces that exhibit some non vanishing curvature (e.g.\ spheric or hyperbolic spaces)\footnote{\url{https://www.youtube.com/watch?v=p1tfZD2Bm0w}}.
 
-Following \cite{Bishop1975}, we define a \emph{(relatively) parallel field}. Let $\gamma$ be a regular arc-length parametrized curve. Let $\vect{p}$ be a vector field along $\gamma$. The vector field $\vect{p}$ si said to be \emph{parallel} if its derivative is purely tangential, that is :
+\subsubsection{Relatively parallel fields}
+Following \cite{Bishop1975}, we define what is a \emph{(relatively) parallel field}. Let $\gamma$ be a regular arc-length parametrized curve. Let $\vect{p}$ be a vector field along $\gamma$. The vector field $\vect{p}$ is said to be \emph{parallel} if its derivative is purely tangential, that is :
 \begin{equation}
 	\vect{p}'(s) \times \vect{t}(s) = 0
 \end{equation}
 Consequently, for an adapted moving frame, the \emph{normal fields}\footnote{
-A vector field $\vect{p}$ is said to be \emph{normal} along a curve $\gamma$ if $\forall s \in [0,L] \vect{p}\cdot\vect{t} = 0$.
-} $\vect{e}_1$ and $\vect{e}_2$ are both \emph{parallels} if and only if the frame angular velocity is itself a normal field, that is :
+A vector field $\vect{p}$ is said to be \emph{normal} along a curve $\gamma$ if : $\forall s \in [0,L]$, $\vect{p}\cdot\vect{t} = 0$.
+} $\vect{e}_1$ and $\vect{e}_2$ are both \emph{relatively parallels} if and only if the frame angular velocity is itself a normal field, that is :
 \begin{equation}
-	\vect{\Omega}(s) \cdot \vect{t}(s) = 0 \Leftrightarrow \tau(s) = 0
+	\vect{\Omega}(s) = \vect{\Omega}_{\perp}(s) =  \vect{\kappa b}(s) \Leftrightarrow \vect{\Omega}(s) \cdot \vect{t}(s) = 0  \Leftrightarrow \tau(s) = 0  
 \end{equation}
-Reciprocally, a vector $\vect{p}(0)$ can be \emph{parallel transported} along the curve if it is propagated at angular speed 
-as a vector field 
-Relatively parallel fields \cite[p.4]{Carroll2007}, \cite{Bishop1975}
+In other words, a \emph{relatively parallel normal field} : \blockcquote{Bishop1975}{turns, only whatever amount is necessary for it to remain normal, so it is as close to being parallel as possible without losing normality}. 
+%
+%In addition, relatively parallel normal vector fields exhibit some interesting properties \cite{Hanson95} : 
+%\begin{itemize}
+%	\item $\|\vect{p}\|$ is of constant length;
+%	\item $\|\vect{p}\|$ is of constant length;
+%\end{itemize}
 
-Parallel transport of vectors in curved space \footnote{\url{https://www.youtube.com/watch?v=p1tfZD2Bm0w}}.
+\subsubsection{Parallel transport of vectors along a curve}
+Reciprocally, it is possible to define the \emph{parallel transport} of a vector along a curve $\gamma$ as its propagation along $\gamma$ at angular speed $\vect{\kappa b}$. An initial vector $\vect{p}_0 = \vect{p}(s_0)$ is parallel transported at arc-length parameter $s$ into the vector $\vect{p}(s)$ by integrating the following first-order differential equation along $\gamma$ :
+\begin{equation}
+	\vect{p}'(s) = \vect{\kappa b}(s) \times  \vect{p}(s)
+\end{equation}
+Consequently, the resulting vector field $\vect{p}$ is a parallel field. Note that a parallel field is not necessarily a normal field. 
 
-Quid du parallel transport ??
-On transporte d'abord le point d'application de $\vect{t1}$ sur $\vect{t2}$. $\vect{t1}$ et $\vect{t2}$ forment un plan de normal $\vect{t1} \times \vect{t2}$. On réaligne $\vect{t1}$ sur $\vect{t2}$ par une rotation d'angle $\angle(\vect{t1},\vect{t2})$ autour de cet axe. La rotation a lieu autour d'un axe perpendiculaire à la fois à $\vect{t1}$ et à $\vect{t2}$. Elle n'implique donc aucune rotation autour des axes $\vect{t1}$ et $\vect{t2}$ eux-mêmes et c'est pourquoi l'on dit que le transport se fait parallèlement de $\vect{t1}$ à $\vect{t2}$.
+From the point of view of differential geometry, this means that the next vector $\vect{p}(s+ds)$ is obtained by rotating the previous one $\vect{p}(s)$ around the curve binormal $\vect{b}(s)$ by an infinitesimal angle $d\theta(s) = \kappa(s) ds$. Note that $\vect{b}(s)$ has the same direction as $\vect{t}(s) \times \vect{t}(s+ds)$.
+
+\subsubsection{Parallel transport of frames along a curve}
+Identically, the \emph{parallel transport} of an adapted frame is defined as the parallel transport of its components along $\gamma$.
+
+%\subsubsection{Parallel curves and inextensibility}
+%Let $\vect{p}$ be a \emph{relatively parallel normal vector field}.
+%
+%Relatively parallel fields \cite[p.4]{Carroll2007}, \cite{Bishop1975}, \cite{Hanson95}
 
 % FRENET FRAME
 \subsection{Frenet frame}
@@ -626,13 +642,13 @@ Consequently, the angular velocity vector ($\vect{\Omega_{f}}$) of the Frenet fr
 		0 \\
 		\kappa(s)
 	\end{bmatrix}
-	= \vect{\kappa b}(s) +\tau_{f}
+	= \vect{\kappa b}(s) +\tau_{f}(s) \vect{t}(s)
 \end{equation}
 Remark that the Frenet frame satisfies $\vect{\Omega_f}(s) \cdot \vect{n}(s) = 0$ and is thus a \emph{rotation-miniminzing} frame regarding the normal vector ($\vect{n}$). The motion of this frame through the curve is known as \textquote{pitch-free}.
 
 Note also that $\vect{t^{'}}(s)$ and $\vect{b^{'}}(s)$ are colinear to $\vect{n}(s)$. This means that the projection of $\vect{t}(s)$ and $\vect{b}(s)$ is conserved from one normal plane to another, that is $\vect{t}$ and $\vect{b}$ are parallel transported along the vector field $\vect{n}$.
 
-\subsubsection{Drawbacks and benefits}
+\subsubsection{Drawbacks and benefits}\label{sec:frenetdrawbacks}
 \footnote{\note{une perturbation de la courbe dans le sens de la courbure engendre une variation de longueur de la courbe proportionnelle à l'inverse de la courbure (au premier ordre) + schéma.}}
 ${}^,$
 \footnote{\note{une perturbation de la courbe dans le sens de la binormale (en tout point) préserve la longueur de la courbe au 1er ordre : c'est un déplacement qui conserve l'hypothèse d'inextensibilité au premier ordre.}}
@@ -650,11 +666,11 @@ A second benefit is that any adapted frame can be obtained by a rotation of the 
 % BISHOP FRAME
 \subsection{Bishop frame}\label{sec:bishop}
 
-A \emph{Bishop frame} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity :
+A \emph{Bishop frame}\footnote{Introduce as \emph{relatively parallel adapted frame} in \cite{Bishop}.} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity :
 \begin{equation}
 	\vect{\Omega} \cdot \vect{t} = \tau =\vect{u^{'}} \cdot \vect{v} = - \vect{u} \cdot \vect{v^{'}} = 0
 \end{equation}
-Because a Bishop frame is an adapted frame, it can be defined relatively to the Frenet frame by a rotation around the unit tangent vector. A Bishop frame is a frame that cancels out the rotational movement of the Frenet frame around the tangent vector. At arc-length parameter $s$, the Frenet frame has continuously rotated around its tangent vector of a cumulative angle : $\int_0^s \tau_f(t)dt$. Thus, any Bishop frame will be obtained, within a constant rotation angle $\theta_0$, through a rotation of the Frenet frame around the tangent vector of an angle :
+Because a Bishop frame is an adapted frame, it can be defined relatively to the Frenet frame by a rotation around the unit tangent vector. A Bishop frame is a frame that cancels out the rotational movement of the Frenet frame around the tangent vector. At arc-length parameter $s$, the Frenet frame has continuously rotated around its tangent vector of a cumulative angle : $\int_0^s \tau_f(t)dt$. Thus, any Bishop frame will be obtained, within a constant rotation angle $\theta_0$, through a rotation of the Frenet frame around the tangent vector by an angle :
 \begin{equation}
 	\theta(s)  =  - \int_0^s \tau_f(t)dt + \theta_0(s)
 \end{equation}
@@ -691,7 +707,7 @@ The Bishop frame satisfies the following system of differential equations, which
 One can remember the generic differential equations of an adapted moving frame attached to a curve, where\footnote{
 \begin{equation}
 	\begin{aligned}
-		&\tau =\vect{u^{'}} \cdot \vect{v} = (\vect{\Omega_f} \times \vect{u} + \theta^{'} \vect{v})\cdot  \vect{v} = 0\\
+		&\tau =\vect{u^{'}} \cdot \vect{v} = (\vect{\Omega_f} \times \vect{u} + \theta^{'} \vect{v})\cdot  \vect{v} = \tau_f - \tau_f = 0\\
 		&k_1 = -\vect{t^{'}} \cdot \vect{v} = -\kappa \vect{n} \cdot \vect{v} = \kappa \sin \theta \\
 		&k_2 = \vect{t^{'}} \cdot \vect{u} = \kappa \vect{n} \cdot \vect{u} = \kappa \cos \theta
 	\end{aligned}
@@ -706,7 +722,7 @@ k_{2}(s) = \kappa(s) \cos \theta(s)
 \end{equation}
 
 \subsubsection{Angular velocity}\label{sec:bishopvelocity}
-Consequently, the Darboux vector ($\vect{\Omega_{b}}$) of the Bishop frame is given by :
+Consequently, the angular velocity vector ($\vect{\Omega_{b}}$) of the Bishop frame is given by :
 \begin{equation}
 	\vect{\Omega_b}(s) 
 	=
@@ -717,23 +733,21 @@ Consequently, the Darboux vector ($\vect{\Omega_{b}}$) of the Bishop frame is gi
 	\end{bmatrix}
 	= \vect{\kappa b}(s) 
 \end{equation}
-Consequently, the Bishop frame satisfies $\vect{\Omega_b}(s) \cdot \vect{t}(s) = 0$ and is thus \emph{rotation-miniminzing} regarding the tangent vector. The motion of this frame through the curve is known as \textquote{roll-free}.
+Remark that the Bishop frame satisfies $\vect{\Omega_b}(s) \cdot \vect{t}(s) = 0$ and is thus \emph{rotation-miniminzing} regarding the tangent vector. The motion of this frame through the curve is known as \textquote{roll-free}.
+
+Because the motion of this frame is described by an angular velocity vector that is nothing but the curvature binormal vector ($\vect{\Omega_b} = \vect{\kappa b}$), it can be interpreted in terms of \emph{parallel transport} as defined in \cref{sec:paralleltransport}. Thus, given an initial frame at arc-length parameter $s=0$, the Bishop frame at any arc-length parameter ($s$) is obtained by parallel transporting the initial frame $\{\vect{t}(0),\vect{u}(0), \vect{v}(0)\}$ along the curve from $0$ to $s$.
 
 \subsubsection{Drawbacks and benefits}
 \footnote{\cite{Guggenheimer1989, Klok1986, Bloomenthal1990, Wang2008, Poston1995, Menninger2013}}
 \footnote{\blockcquote[p.6]{Wang2008}{Regarder la méthode de la bi-reflexion pour le calcul du repère de bishop}}
 
-\blockcquote{Bloomenthal1990}{The mechanism to minimize torsion defines an initial reference frame at the beginning of the curve; this frame is propagated along the curve using small, local rotations. This method is immune to degeneracies in the curvature vector \textelp{}}
+One of the main benefits of the Bishop frame is that its generative method : \blockcquote{Bloomenthal1990}{is immune to degeneracies in the curvature vector}. Although we first expressed the construction of the Bishop frame relatively to the Frenet frame (which exists wherever $\gamma$ is biregular), the existence of the Bishop frame, understood in terms of parallel transport, is guaranteed wherever the curvature binormal ($\vect{\kappa b} = \vect{t} \times \vect{t}'$) is defined. To be continuously defined over $[0,L]$, a Bishop frame only needs the curvature binormal vector to be picewise continuously defined over  $[0,L]$, which only requires that $\gamma'$ is $\mathcal{C}^0$ and that $\gamma''$ is picewise $\mathcal{C}^0$. Obviously, those weaker existence conditions are profitables to bypass the drawbacks of the Frenet frame regarding the modeling of slender beams listed in \cref{sec:frenetdrawbacks}.
 
-Bien que nous ayons exprimé le repère de Bishop par rapport au repère de Frenet, ses conditions d'existence sont moins sévères. Il est continument défini si et seulement si $\gamma$ est $\mathbb{C}^1$, même lorsque la courbure s'annule. En effet, le repère de Bishop est construit à partir de la vitess $\vect{\Omega_b}(s) = \vect{\kappa b}(s)$ qui est définit partout où la courbure est définit. Comme on procède par intégration, il nous suffit que $\vect{\kappa b}$ soit continu par morceaux pour que l'intégrale, et donc le repère de Bishop soit définit continument sur $[0,L]$.
-
-Given an initial frame at arc-length parameter $s=0$, the Bishop frame at any arc-length parameter $s$ is obtained by parallel transporting the initial frame $\{\vect{t}(0),\vect{u}(0), \vect{v}(0)\}$ through the curve from $t=0$ to $t=s$.
-
-
+Strictly speaking, a Bishop frame is not a reference frame as it is defined within an initial condition. However, we will see later that strains in a beam are modeled as a rate of change in the Bishop frame, and consequently the initial condition will disappear in the equations.
 
 Unlike the Frenet frame, when transported along a \emph{closed curve}, the Bishop frame at the end of the curve will not necessarily align back with the frame at the beginning of the curve\footnote{\blockcquote{Hanson95}{it is possible for closed curves to have parallel transport frames that do not match up after one full circuit of the curve}}. Even if the frame returns to its initial value after a complete turn, it may returns in its position after several complete turns ($2k\pi$) around the curve tangent. During its trip, the frame will make a total twist of $\int_0^L \tau_f(s)ds = \alpha[2\pi]$ around the tangent vector. This difference of angle is related to the concept of  \emph{holonomy}.
 
-As a consequence, Frenet and Bishop frames coincide within a constant rotation around the unit tangent vector for planar curves ($\tau_f = 0$).
+Remark also that Frenet and Bishop frames coincide for planar curves ($\tau_f = 0$), within a constant rotation around the unit tangent vector.
  
  %related to mechanical torsion
 
