@@ -286,6 +286,7 @@ Finally, following \cite{Bergou2008} we define the \emph{curvature binormal vect
 	\vect{\kappa b}(s) = \vect{t}(s) \times \vect{t}'(s) = \kappa(s)\cdot\vect{b}(s)
 	\quad,\quad
 	\|\vect{\kappa b}(s)\|= \kappa(s)
+\label{eq:kb}
 \end{equation}
 This vector will be useful as it embed all the necessary information on the curve's curvature. We will see (\cref{sec:bishopvelocity}) that this vector is associated to the angular velocity of a specific adapted moving frame attached to the curve and called the \emph{Bishop frame}.
 
@@ -517,12 +518,12 @@ Geometrically, decomposing the infinitesimal rotation of the moving frame around
 \centering
 \includegraphics[]{adapted_moving_frame.pdf}
 \caption{Adapted moving frame $F(s) =\{\vect{e}_{3}(s),\vect{e}_{1}(s),\vect{e}_{2}(s)\}$ where $\vect{e}_3(s) = \vect{t}(s)$.}
-\label{fig:3_5}
+\label{fig:adapted}
 \end{figure}
 
 % ADAPTED FRAME
 \subsection{Adapted moving frame}
-Let $F$ be a moving frame as defined in the previous section. $F$ is said to be \emph{adapted} to $\gamma$ if at each point $\gamma(s)$, $\vect{e}_{3}(s)$ is the unit tangent vector of $\gamma$ :
+Let $F$ be a moving frame as defined in the previous section. $F$ is said to be \emph{adapted} to $\gamma$ if at each point $\gamma(s)$, $\vect{e}_{3}(s)$ is the unit tangent vector of $\gamma$ (\cref{fig:adapted}) :
 \begin{equation}
 	\vect{e_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
 \end{equation}
@@ -530,21 +531,40 @@ For an adapted frame, the components $k_1$ and $k_2$ of the angular velocity vec
 \begin{equation}
 	\kappa(s) = \|\vect{e}'_{3}(s)\| = \|k_2(s)\vect{e}_1(s) + k_1(s)\vect{e}_2(s)\| = \sqrt{{k_{1}(s)}^2 + {k_{2}(s)}^2}
 \end{equation}
+Moreover, recalling the definition of the curvature binormal vector ($\vect{\kappa b}$) from \cref{eq:kb}, it is easy to see that for an adapted moving frame the following relation holds :
+ \begin{equation}
+	\vect{\kappa b}(s) = k_1(s) \vect{e}_1(s) +  k_2(s) \vect{e}_2(s)
+\end{equation}
+Consequently, the angular velocity vector of an adapted moving frame can be written as :
+ \begin{equation}
+	\vect{\Omega}(s) = \vect{\kappa b}(s)  + \tau(s) \vect{t}(s)
+\end{equation}
+This last result is very interesting as it shows that any adapted moving frame will differ from each other only by their twisting speed as $\vect{\Omega}_{\perp} =  \vect{\kappa b}$ only depends on the curve.
 
 % ROTATION MINIMIZING FRAME
 \subsection{Rotation-minimizing frame}
 Following \cite{Farouki2014, Wang2008} we introduce the \emph{rotation-miniminzing frame} notion. A frame $\{\vect{e}_{3}$, $\vect{e}_{1}$, $\vect{e}_{2}\}$ is said to be \emph{rotation-miniminzing} regrading a given direction $\vect{d}$ if :
 \begin{equation}
 	\vect{\Omega}(s) \cdot \vect{d}(s) = 0
-	\quad, \quad 
-	\forall s \in [0,L]
 \end{equation}
 
 % PARALLEL TRANSPORT
 \subsection{Parallel transport}
 \cite{Hanson95}
-On connais usuellement la notion de parallelisme dans un espace euclidien, typiquement R2 ou R3. Ces espaces n'ont pas de courbure.
-2 vecteurs sont parallèles si leur 
+The notion of \emph{parallel transport} is somehow a generalization of the classical notion of collinearity in flat euclidean spaces (e.g.\ $\mathbb{R}^2$ or $\mathbb{R}^3$ spaces) to spaces that exhibit some non vanishing curvature (e.g.\ spheric or hyperbolic spaces).
+
+Following \cite{Bishop1975}, we define a \emph{(relatively) parallel field}. Let $\gamma$ be a regular arc-length parametrized curve. Let $\vect{p}$ be a vector field along $\gamma$. The vector field $\vect{p}$ si said to be \emph{parallel} if its derivative is purely tangential, that is :
+\begin{equation}
+	\vect{p}'(s) \times \vect{t}(s) = 0
+\end{equation}
+Consequently, for an adapted moving frame, the \emph{normal fields}\footnote{
+A vector field $\vect{p}$ is said to be \emph{normal} along a curve $\gamma$ if $\forall s \in [0,L] \vect{p}\cdot\vect{t} = 0$.
+} $\vect{e}_1$ and $\vect{e}_2$ are both \emph{parallels} if and only if the frame angular velocity is itself a normal field, that is :
+\begin{equation}
+	\vect{\Omega}(s) \cdot \vect{t}(s) = 0 \Leftrightarrow \tau(s) = 0
+\end{equation}
+Reciprocally, a vector $\vect{p}(0)$ can be \emph{parallel transported} along the curve if it is propagated at angular speed 
+as a vector field 
 Relatively parallel fields \cite[p.4]{Carroll2007}, \cite{Bishop1975}
 
 Parallel transport of vectors in curved space \footnote{\url{https://www.youtube.com/watch?v=p1tfZD2Bm0w}}.
@@ -606,8 +626,9 @@ Consequently, the angular velocity vector ($\vect{\Omega_{f}}$) of the Frenet fr
 		0 \\
 		\kappa(s)
 	\end{bmatrix}
+	= \vect{\kappa b}(s) +\tau_{f}
 \end{equation}
-Remark that the Frenet frame satisfies $\vect{\Omega_f}(s) \cdot \vect{n}(s) = 0$ and is thus a \emph{rotation-miniminzing} frame regarding the normal vector ($\vect{n}$). The motion of this frame through the curve is known as \textquote{pitch-free}".
+Remark that the Frenet frame satisfies $\vect{\Omega_f}(s) \cdot \vect{n}(s) = 0$ and is thus a \emph{rotation-miniminzing} frame regarding the normal vector ($\vect{n}$). The motion of this frame through the curve is known as \textquote{pitch-free}.
 
 Note also that $\vect{t^{'}}(s)$ and $\vect{b^{'}}(s)$ are colinear to $\vect{n}(s)$. This means that the projection of $\vect{t}(s)$ and $\vect{b}(s)$ is conserved from one normal plane to another, that is $\vect{t}$ and $\vect{b}$ are parallel transported along the vector field $\vect{n}$.
 
@@ -622,14 +643,14 @@ The Frenet frame is not continuously defined if $\gamma$ is not $\mathcal{C}^2$.
 
 Moreover, even if $\gamma$ is $\mathcal{C}^2$, the Frenet frame is not defined where the curvature vanishes, which obviously is an admissible configuration for a beam centerline. This issue can be partially addressed by parallel transporting the normal vector along the straight regions of the curve. Thus, the extended frame will still satisfy the governing equations exposed in \cref{eq:frenetframegoverning}. However, if the osculating planes are not parallels on both sides of a region of null curvature, torsion will be subject to a discontinuity and so the Frenet frame\footnote{This is also highlighted in \cite{Bloomenthal1990, Wang2008}.} (\cref{fig:3_3}). Again, if the region of null curvature is not a point, that is the region is not an inflexion point but a locus where the curve is locally a straight line, the change in torsion on both sides of the region can be accommodated by a continuous rotation from one end to the other.
 
-One benefit of the Frenet frame is that, when transported along a \emph{closed curve}, the frame at the end of the curve will align back with the frame at the beginning of the curve.
+One benefit of the Frenet frame is that, when transported along a \emph{closed curve}, the frame at the end of the curve will align back with the frame at the beginning of the curve, that is the frame will returns to its initial value after a complete turn. During its trip, the frame will make a total twist of $\int_0^L \tau_f(s)ds = 0[2\pi]$ around the tangent vector.
 
 A second benefit is that any adapted frame can be obtained by a rotation of the Frenet frame around the unit tangent vector \cite[p.2]{Guggenheimer1989}.
 
 % BISHOP FRAME
 \subsection{Bishop frame}\label{sec:bishop}
 
-A \emph{Bishop frame} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as a \emph{zero-twisting frame}, is an adapted moving frame that has no tangential angular velocity :
+A \emph{Bishop frame} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity :
 \begin{equation}
 	\vect{\Omega} \cdot \vect{t} = \tau =\vect{u^{'}} \cdot \vect{v} = - \vect{u} \cdot \vect{v^{'}} = 0
 \end{equation}
@@ -646,17 +667,6 @@ Consequently, a Bishop frame can be expressed relatively to the Frenet frame as 
 	\end{aligned}
 	\right.
 \end{equation}
-And :
-\begin{equation}
-	\left\{
-	\begin{aligned}
-		&\tau =\vect{u^{'}} \cdot \vect{v} = (\vect{\Omega_f} \times \vect{u} + \theta^{'} \vect{v})\cdot  \vect{v} = 0\\
-		&k_1 = -\vect{t^{'}} \cdot \vect{v} = -\kappa \vect{n} \cdot \vect{v} = \kappa \sin \theta \\
-		&k_2 = \vect{t^{'}} \cdot \vect{u} = \kappa \vect{n} \cdot \vect{u} = \kappa \cos \theta
-	\end{aligned}
-	\right.
-\end{equation}
-
 \subsubsection{Governing equations}
 The Bishop frame satisfies the following system of differential equations, which govern the evolution of the frame along the curve $\gamma$ :
 \begin{equation}
@@ -678,7 +688,15 @@ The Bishop frame satisfies the following system of differential equations, which
 	\end{bmatrix}
 \label{eq:3_12}
 \end{equation}
-One can remember the generic differential equations of an adapted moving frame attached to a curve, where :
+One can remember the generic differential equations of an adapted moving frame attached to a curve, where\footnote{
+\begin{equation}
+	\begin{aligned}
+		&\tau =\vect{u^{'}} \cdot \vect{v} = (\vect{\Omega_f} \times \vect{u} + \theta^{'} \vect{v})\cdot  \vect{v} = 0\\
+		&k_1 = -\vect{t^{'}} \cdot \vect{v} = -\kappa \vect{n} \cdot \vect{v} = \kappa \sin \theta \\
+		&k_2 = \vect{t^{'}} \cdot \vect{u} = \kappa \vect{n} \cdot \vect{u} = \kappa \cos \theta
+	\end{aligned}
+\end{equation}
+} :
 \begin{equation}
 k_{1}(s) = \kappa(s) \sin \theta(s)
 \quad,\quad
@@ -690,37 +708,38 @@ k_{2}(s) = \kappa(s) \cos \theta(s)
 \subsubsection{Angular velocity}\label{sec:bishopvelocity}
 Consequently, the Darboux vector ($\vect{\Omega_{b}}$) of the Bishop frame is given by :
 \begin{equation}
-	\vect{\Omega_b}(s) = \vect{\kappa b}(s) 
+	\vect{\Omega_b}(s) 
 	=
 	\begin{bmatrix}
 		0\\
 		\kappa(s) \sin \theta(s)\\
 		\kappa(s) \cos \theta(s)
 	\end{bmatrix}
+	= \vect{\kappa b}(s) 
 \end{equation}
-Consequently, the Bishop frame satisfies $\vect{\Omega_b}(s) \cdot \vect{t}(s) = 0$ and is thus \emph{rotation-miniminzing} regarding the tangent vector. This is a roll-free movement.
+Consequently, the Bishop frame satisfies $\vect{\Omega_b}(s) \cdot \vect{t}(s) = 0$ and is thus \emph{rotation-miniminzing} regarding the tangent vector. The motion of this frame through the curve is known as \textquote{roll-free}.
 
 \subsubsection{Drawbacks and benefits}
-well defined when curvature vanishes
+\footnote{\cite{Guggenheimer1989, Klok1986, Bloomenthal1990, Wang2008, Poston1995, Menninger2013}}
+\footnote{\blockcquote[p.6]{Wang2008}{Regarder la méthode de la bi-reflexion pour le calcul du repère de bishop}}
+
+\blockcquote{Bloomenthal1990}{The mechanism to minimize torsion defines an initial reference frame at the beginning of the curve; this frame is propagated along the curve using small, local rotations. This method is immune to degeneracies in the curvature vector \textelp{}}
 
 Bien que nous ayons exprimé le repère de Bishop par rapport au repère de Frenet, ses conditions d'existence sont moins sévères. Il est continument défini si et seulement si $\gamma$ est $\mathbb{C}^1$, même lorsque la courbure s'annule. En effet, le repère de Bishop est construit à partir de la vitess $\vect{\Omega_b}(s) = \vect{\kappa b}(s)$ qui est définit partout où la courbure est définit. Comme on procède par intégration, il nous suffit que $\vect{\kappa b}$ soit continu par morceaux pour que l'intégrale, et donc le repère de Bishop soit définit continument sur $[0,L]$.
 
 Given an initial frame at arc-length parameter $s=0$, the Bishop frame at any arc-length parameter $s$ is obtained by parallel transporting the initial frame $\{\vect{t}(0),\vect{u}(0), \vect{v}(0)\}$ through the curve from $t=0$ to $t=s$.
 
-For planar curves ($\tau_f = 0$), Frenet and Bishop frames coincides within a constant rotation around the unit tangent vector.
 
-%related to mechanical torsion
 
-\cite{Guggenheimer1989, Klok1986, Bloomenthal1990, Wang2008, Poston1995, Menninger2013}
-\blockcquote[p.6]{Wang2008}{Regarder la méthode de la bi-reflexion pour le calcul du repère de bishop}
+Unlike the Frenet frame, when transported along a \emph{closed curve}, the Bishop frame at the end of the curve will not necessarily align back with the frame at the beginning of the curve\footnote{\blockcquote{Hanson95}{it is possible for closed curves to have parallel transport frames that do not match up after one full circuit of the curve}}. Even if the frame returns to its initial value after a complete turn, it may returns in its position after several complete turns ($2k\pi$) around the curve tangent. During its trip, the frame will make a total twist of $\int_0^L \tau_f(s)ds = \alpha[2\pi]$ around the tangent vector. This difference of angle is related to the concept of  \emph{holonomy}.
+
+As a consequence, Frenet and Bishop frames coincide within a constant rotation around the unit tangent vector for planar curves ($\tau_f = 0$).
+ 
+ %related to mechanical torsion
 
 %expliquer la notion de parallèle comme l'a formulé Laurent Hauswirth : la projection de $u'$ et $v'$ dans le plan normal à la tangente $t$ est nulle, cad que d'un plan à un autre la projection de $u$ et $v$ est conservée + faire schéma.
 
 %Laurent Hauswirth : la complexité d'un problème est en général proportionnelle à la codimension de l'objet étudié et donc, de ce fait les courbes ($codim = 3-1 = 2$) sont des objets plus compliqués que les surfaces ($codim = 3-2=1$) ds $\mathbb{R}^3$.
-
-Expliquer le défaut de fermeture sur une boucle fermée. Calcul du writhe. Quelle différence avec Frenet ?
-
-Unlike the Frenet frame, when transported along a \emph{closed curve}, the Bishop frame at the end of the curve will not necessarily align back with the frame at the beginning of the curve : \blockcquote{Hanson95}{it is possible for closed curves to have parallel transport frames that do not match up after one full circuit of the curve}. This is linked with the notion of \emph{writhe} \cite{McCormick2013}.
 
 \subsection{Comparison between Frenet and Bishop frames}
 
