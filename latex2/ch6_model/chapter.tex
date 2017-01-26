@@ -1,0 +1,554 @@
+\chapter{Numerical model}
+
+\section{Introduction}
+\note{
+Introduction du chapitre
+}
+
+\subsection{Goals and contribution}
+\note{
+Ici on rappelle les objectifs du chapitre ; on identifie clairement mes contributions.
+}
+Dans ce chapitre on s'attache à la résolution de l'équilibre statique par relaxation dynamique.
+Peut-être qu'il faudra faire un chapitre "Marsupilami" plus détaillé qui regroupe les différents éléments formulés et les connexions / liaisons
+On formule l'élément en torsion à partir des équations de Kirchhoff et non du modèle énergétique (un terme est manquant).
+On effectue une validation numérique. Penser à tracer la contribution de chaque terme pour vérifier les approximations effectuées.
+
+\subsection{Related work}
+\note{
+Ici on fait l'analyse bibliographique pour le chapitre concerné.
+}
+\cite{Day1965}
+\cite{Otter1965}
+\cite{Papadrakakis1981}
+\cite{Miki2014}
+\cite{Alamatian2012}
+\cite{Rezaiee-pajand2011a}
+
+Idée pour l'article avec sigrid \cite{Alamatian2012}
+
+\subsection{Overview}
+
+% #######################################################
+\section{Dynamic relaxation}
+% #######################################################
+
+\subsection{Overview}
+Ici, repartir de l'explication donnée par Alister Days en 65.
+Proposer une illustration avec un pendule. Pourquoi pas le système masse-ressort proposé par Days, à savoir une masse au bout d'une poutre encastrée.
+
+\subsection{Finite difference integration}
+
+\subsection{Kinetic damping}
+
+
+% #######################################################
+\section{Discret curve-angle representation}
+% #######################################################
+
+\subsection{Discrete centerline}
+On discrétise la centerline de la façon suivante :
+\begin{subequations}
+	\begin{gather}
+		s_i = \sum\limits_0^i |\vect{e}_{i-1}|  \quad , \quad i=0..n \\
+		\vect{x}_i \quad , \quad i=0..n \\
+		\vect{e}_i = \vect{x}_{i+1}-\vect{x}_i \quad , \quad i=0..n-1
+	\end{gather}
+\end{subequations}
+
+\subsection{Discrete bishop frame}
+
+\subsubsection{Discrete parallel transport at edges}
+
+\subsubsection{Discrete parallel at vertices}
+
+On définit ici le transport parrallele discret entre edges et entre vertices.
+A chaque vertex, on associe un repère de bishop et un repère matériel
+\begin{subequations}
+	\begin{gather}
+		\theta_i \quad , \quad i=0..n \\
+		\{\vect{u}_i, \vect{v}_i\} \quad , \quad i=0..n \\
+		\{\vect{d}^1_{i}, \vect{d}^2_{i}\} \quad , \quad i=0..n
+	\end{gather}
+\end{subequations}
+
+\subsection{Discrete material frame}
+
+
+\section{Interpolation rules}
+
+On fait des hypothèses sur la forme des efforts pour pouvoir effectuer une interpolation entre les noeuds.
+Thus, we define edge quantities and vertex quantities.
+
+\subsection{Geometric and material properties}
+We suppose that the sections are defined at verticies and that section properties remain uniform over $]s_{i-1/2}, s_{i+1/2}[$. Thus, the material and geometric properties ($P$) of the beam ($E_i, G_i, S_i, I^1_{i}, I^2_{i}, J_i, m_i$) are supposed to be piecewise constant functions of $s$ on [0,L] :
+\begin{equation}
+	P(s) = P_i \quad , \quad s \in [s_{i-1/2},s_{i+1/2}]
+\end{equation}
+Note that this functions may be discontinous at edges midspan ($s_{i+1/2}$).
+
+\subsection{Axial force and strain}
+
+\subsubsection{Axial force}
+$\vect{N}$ is supposed to be piecewise constant between verticies on $[0,L]$ :
+\begin{equation}
+	\vect{N}(s) = N_i \vect{t}_i \quad , \quad s \in ]s_i,s_{i+1}[
+\end{equation}
+Note that this functions may be discontinous at edges midspan ($s_{i+1/2}$).
+
+\subsubsection{Axial strain}
+Nous avons défini les propriétés géométriques et matérielles aux noeuds et nous avons fait l'hypothèse qu'elles restaient uniformes sur l'intervalle $]s_{i-1/2},s_{i+1/2}[$. Par ailleurs, nous avons supposé l'effort normal ($\vect{N}$) uniforme sur l'interval  $]s_i,s_{i+1}[$. De fait, la déformation axiale ($\epsilon$) est une fonction constante par morceaux sur les intervalles $]s_i,s_{i+1/2}[$.
+
+Connaissant l'élongation totale du segment $\vect{e}_i$, et puisque nous avons supposé l'effort normal uniforme sur le segment, il est possible de calculer les déformations axiales $\epsilon_{i}^{+}$ et $\epsilon_{i+1}^{-}$ respectivement pour les intervalles $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ :
+\begin{equation}
+	N_i = [ES]_{i} \epsilon_{i}^{+}
+	= [ES]_{i+1} \epsilon_{i+1}^{-}
+	= \alpha_i \epsilon_i
+\end{equation}
+Avec $\alpha_i$ la raideur axiale équivalente sur le segment $\vect{e}_i$ qui permet de calculer l'effort normal sur le segment en fonction de l'élongation totale du segment $\vect{e}_i$ bien que, comme énoncé précédemment, la déformation axiale puisse être différente entre $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ si l'on a un changement de raideur axiale $ES$ entre les noeuds $\vect{x}_i$ et $\vect{x}_{i+1}$.
+
+Les élongations des demis segments et du segment entier sont données par les équations suivantes, où l'on a considéré $l_i^+$ et $l_{i+1}^-$ les longueurs respectives des demi segments $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ :
+\begin{equation}
+	\epsilon_{i}^{+} = \frac{l_i^+ - \overbar{l_i}/2}{\overbar{l_i}/2} \quad , \quad
+	\epsilon_{i+1}^{-} = \frac{l_i^- - \overbar{l_i}/2}{\overbar{l_i}/2} \quad , \quad
+	\epsilon_i = \frac{l_i}{\overbar{l_i}} = \frac{\epsilon_{i}^{+}}{2} + \frac{\epsilon_{i+1}^{-}}{2}
+\end{equation}
+Ces équations de continuité permettent de déduire la raideur axiale équivalente $\alpha_i$ à considérer sur le segement $\vect{e}_i$ pour obtenir l'effort normal à partir de la déformation globale du segment sur $s \in ]s_i,s_{i+1}[$ :
+ \begin{equation}
+	N(s) = N_i = \alpha_i\epsilon_i
+	\quad , \quad
+	\alpha_i = \frac{2 [ES]_i [ES]_{i+1}}{[ES]_i + [ES]_{i+1}}
+	\quad , \quad
+	\epsilon_i = \frac{|l_i| - |\overbar{l_i}|}{|\overbar{l_i}|}
+\end{equation}
+On obtient également les déformations axiales sur chacun des intervalles :
+\begin{subequations}
+	\begin{gather}
+		\epsilon(s) = \epsilon_{i}^{+} = \frac{\alpha_i}{[ES]_i}\epsilon_i \quad , \quad s \in ]s_i,s_{i+1/2}[ \\
+		\epsilon(s) = \epsilon_{i+1}^{-} = \frac{\alpha_i}{[ES]_{i+1}}\epsilon_i \quad , \quad s \in ]s_{i+1/2},s_{i+1}[
+	\end{gather}
+\end{subequations}
+On remarque que pour une poutre aux propriétés uniformes, les déformations sont continues (il n'y a plus de saut) et $\alpha_i = [ES]_i = [ES]_{i+1}$.
+
+\subsection{Moment of torsion and rate of twist}
+
+\subsubsection{Moment of torsion}
+$\vect{Q}$ is supposed to be piecewise constant between verticies on $[0,L]$ :
+\begin{equation}
+	\vect{Q}(s) = Q_i \vect{t}_i , \quad s \in ]s_i,s_{i+1}[
+\end{equation}
+Note that this function may be discontinous at edges midspan ($s_{i+1/2}$).
+
+\subsubsection{Rate of twist}
+Nous avons défini les propriétés géométriques et matérielles aux noeuds et nous avons fait l'hypothèse qu'elles restaient uniformes sur l'intervalle $]s_{i-1/2},s_{i+1/2}[$. Par ailleurs, nous avons supposé le moment de torsion ($\vect{Q}$) uniforme sur l'interval  $]s_i,s_{i+1}[$.
+De fait, the rate of twist ($\tau = \theta'$) est une fonction constante par morceaux sur les intervalles $]s_i,s_{i+1/2}[$.
+
+Considérons une poutre droite sans twist au repos. Connaissant le twist dans l'état déformé, c'est à dire la variation de $\theta$, sur le segment $\vect{e}_i$, et puisque nous avons supposé le moment de torsion uniforme sur le segment, il est possible de calculer les rate of twist $\tau_{i}^{+}$ et $\tau_{i+1}^{-}$ respectivement pour les intervalles $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ :
+\begin{equation}
+	Q_i = [GJ]_{i} \tau_{i}^{+}
+	= [GJ]_{i+1} \tau_{i+1}^{-}
+	= \beta_i \tau_i
+\end{equation}
+Avec $\beta_i$ la raideur en torsion équivalente sur le segment $\vect{e}_i$ qui permet de calculer le moment de torsion sur le segment en fonction de l'élongation totale du segment $\vect{e}_i$ bien que, comme énoncé précédemment, le rate of twist puisse être différente entre $]s_i,s_{i+1/2}[$ et $]s_{i+1/2},s_{i+1}[$ si l'on a un changement de raideur en torsion $GJ$ entre les noeuds $\vect{x}_i$ et $\vect{x}_{i+1}$.
+
+Les twists des demis segments et du segment entier sont données par les équations suivantes, où l'on a considéré $\theta_i^{mid}$ l'angle de rotation de la section en $s_{i+1/2}$ :
+\begin{equation}
+	\tau_{i}^{+} = \frac{\theta_i^{mid} - \theta_i}{l_i/2} \quad , \quad
+	\tau_{i+1}^{-} = \frac{\theta_{i+1} - \theta_i^{mid}}{l_i/2} \quad , \quad
+	\tau_i = \frac{\theta_{i+1}-\theta_{i}}{l_i} = \frac{\tau_{i}^{+}}{2} + \frac{\tau_{i+1}^{-}}{2}
+\end{equation}
+Ces équations de continuité permettent de déduire la raideur en torsion équivalente $\beta_i$ à considérer sur le segment $\vect{e}_i$ pour obtenir le moment de torsion à partir du twist global le long du segment sur $s \in ]s_i,s_{i+1}[$ :
+ \begin{equation}
+	Q(s) = Q_i = \beta_i(\tau_i - \overbar{\tau_i})
+	\quad , \quad
+	\beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}
+	\quad , \quad
+	\tau_i = \frac{\theta_{i+1}-\theta_{i}}{l_i}
+\end{equation}
+On obtient également les rate of twist sur chacun des intervalles dans la configuration au repos ($\overbar{\tau}$) comme déformée ($\tau$) :
+\begin{subequations}
+	\begin{gather}
+		\tau(s) = \tau_{i}^{+} = \frac{\beta_i}{[GJ]_i}\tau_i \quad , \quad s \in ]s_i,s_{i+1/2}[ \\
+		\tau(s) = \tau_{i+1}^{-} = \frac{\beta_i}{[GJ]_{i+1}}\tau_i \quad , \quad s \in ]s_{i+1/2},s_{i+1}[
+	\end{gather}
+\end{subequations}
+On remarque que pour une poutre aux propriétés uniformes, les déformations sont continues (il n'y a plus de saut) et $\beta_i = [GJ]_i = [GJ]_{i+1}$.
+
+\subsection{Bending moment and curvature}
+
+\subsubsection{Bending moment}
+$\vect{M}$ is supposed to be continuous and piecewise linear on $[0,L]$. This assumption is quite reasonable because the bending moment is effectively continous for a beam subject to punctual forces and moments. Thus, $\vect{M}$ is interpolated from the moment computed at vertices :
+\begin{equation}
+	\vect{M}(s) = \vect{M}_{i+1/2} + (s-\tfrac{l_i}{2}) \vect{M}'_{i+1/2} \quad , \quad s \in [s_i,s_{i+1}]
+\end{equation}
+With
+\begin{subequations}
+	\begin{gather}
+	\vect{M}_{i+1/2} = \frac{\vect{M}_{i} + \vect{M}_{i+1}}{2} \\
+	\vect{M}'_{i+1/2} = \frac{\vect{M}_{i+1} - \vect{M}_{i}}{l_i}
+	\end{gather}
+\end{subequations}
+
+\subsubsection{Curvature}
+Il y a une sorte de dualité entre le moment et la courbure.
+Parfois c'est la mesure de la courbure qui donne accès au moment de flexion.
+Parfois la courbure c'est la connaissance du moment de flexion qui donne la courbure.
+Si le moment est continu et linéaire par morceaux, la courbure elle est seulement linéaire par morceau.
+En effet, il peut y a voir un saut de courbure entre deux éléments de $EI$ distinct.
+
+On interpole la courbure à partir des courbures discrètes aux noeuds et des $EI$ (également définis aux noeuds) de part et d'autre des noeuds.
+On revient à la continuité du moment. Puis on déduit la courbure du moment.
+
+Donc au repos, on considère que $\mat{B}\kappa\vect{b}$ est continu et linéaire par morceaux, qui donne l'interpolation de la courbure suivante :
+\begin{equation}
+	\mat{B}\kappa\vect{b}(s) =
+	\frac{\mat{B}_{i}\kappa\vect{b}_{i} + \mat{B}_{i+1}\kappa\vect{b}_{i+1}}{2}
+	+ (s-\tfrac{l_i}{2}) \frac{\mat{B}_{i+1}\kappa\vect{b}_{i+1} - \mat{B}_{i}\kappa\vect{b}_{i}}{l_i}
+	\quad , \quad s \in [s_i,s_{i+1}]
+\end{equation}
+
+On défnit alors les courbures binormales à gauche ($\kappa\vect{b}_{i+1/2}^-$) et à droite ($\kappa\vect{b}_{i+1/2}^+$) du point $\vect{x}_{i+1/2}$ tel que :
+\begin{subequations}
+	\begin{gather}
+		\kappa\vect{b}_{i+1/2}^- = \frac{\kappa\vect{b}_{i} + \mat{A}_i \kappa\vect{b}_{i+1}}{2} \\
+		\kappa\vect{b}_{i+1/2}^+ = \frac{{\mat{A}_{i}}^{-1}\kappa\vect{b}_{i} + \kappa\vect{b}_{i+1}}{2}
+	\end{gather}
+\end{subequations}
+Où l'on a posé $\mat{A}_i = {\mat{B}_{i}}^{-1}\mat{B}_{i+1}$, la matrice qui représente le saut des propriétés matérielles de flexion entre les noeuds $i$ et $i+1$. Comme attendu, $\mat{A}_i$ vaut l'identité lorsque $\mat{B}_i = \mat{B}_{i+1}$.
+
+De même, on défnit la dérivée de la courbure binormale à gauche (${\kappa\vect{b}'}^{-}_{i+1/2}$) et à droite (${\kappa\vect{b}'}^{+}_{i+1/2}$) du point $\vect{x}_{i+1/2}$ tel que :
+\begin{subequations}
+	\begin{gather}
+		{\kappa\vect{b}'}^{-}_{i+1/2} = \frac{\mat{A}_i\kappa\vect{b}_{i+1} - \kappa\vect{b}_{i}}{l_i} \\
+		{\kappa\vect{b}'}^{+}_{i+1/2} = \frac{\kappa\vect{b}_{i+1} - {\mat{A}_i}^{-1}\kappa\vect{b}_{i}}{l_i}
+	\end{gather}
+\end{subequations}
+Ainsi, on peut donner les lois d'interpolation des courbures en tout point de la centerline, dans n'importe quelle configuration (repos ou déformée) :
+\begin{subequations}
+	\begin{gather}
+		\kappa\vect{b}(s) = \kappa\vect{b}_{i+1/2}^- + (s-\tfrac{l_i}{2}) {\kappa\vect{b}'}^{-}_{i+1/2}
+		\quad s \in [s_i,s_{i+1/2}[ \\
+		\kappa\vect{b}(s) = \kappa\vect{b}_{i+1/2}^+ + (s-\tfrac{l_i}{2}) {\kappa\vect{b}'}^{+}_{i+1/2}
+		\quad s \in ]s_{i+1/2}, s_{i+1}]
+	\end{gather}
+\end{subequations}
+Dans le cas où les propriétés de la poutre sont conservées ($\mat{A}_i = \mat{I}$), on écrira :
+\begin{equation}
+	\kappa\vect{b}(s) = \kappa\vect{b}_{i+1/2} + (s-\tfrac{l_i}{2}) \kappa\vect{b}'_{i+1/2} \quad , \quad s \in [s_i,s_{i+1}]
+\end{equation}
+With
+\begin{subequations}
+	\begin{gather}
+		\kappa\vect{b}_{i+1/2} = \kappa\vect{b}_{i+1/2}^- = \kappa\vect{b}_{i+1/2}^+ =
+		\frac{\kappa\vect{b}_{i} + \kappa\vect{b}_{i+1}}{2} \\
+		\kappa\vect{b}'_{i+1/2} = {\kappa\vect{b}'}_{i+1/2}^- = {\kappa\vect{b}'}_{i+1/2}^+ =
+		\frac{\kappa\vect{b}_{i+1} - \kappa\vect{b}_{i}}{l_i}
+	\end{gather}
+\end{subequations}
+
+\note{En pratique, si la correction apportée n'est pas pertinente, on négligera le saut de courbure dans les calculs discrets.}
+
+\subsection{Discretization}
+
+\subsubsection{Constitutive Equations}
+\begin{subequations}
+	\begin{gather}
+	\tau = \theta' \\
+	Q = ES\epsilon \\
+	Q = GJ(\tau -{\overbar{\tau}}) \\
+	M1 = EI_1(\kappa_1-{\overbar{\kappa_1}}) \\
+	M1 = EI_2(\kappa_2-{\overbar{\kappa_2}}) \\
+	\vect{M} = M_1\vect{d}_1 + M_2\vect{d}_2 \\
+	\vect{Q} = Q\vect{d}_3
+	\end{gather}
+\end{subequations}
+
+Notes :
+\begin{subequations}
+	\begin{gather}
+	\vect{d}_3 \cdot (\vect{M} \times \vect{d}_3) = \kappa_1 M_1 + \kappa_2 M_1 \\
+	\vect{d}_3 \cdot (\kappa\vect{b} \times \vect{M}) = \kappa_1 M_2 - \kappa_2 M_1 \\
+	(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}
+	 = - \kappa\vect{b} \cdot (\vect{d}_3 \times \mat{M})
+	 = \kappa_1 \mat{M}_2 -  \kappa_2 \mat{M}_1
+	\end{gather}
+\end{subequations}
+
+\subsubsection{Axial Force}
+\begin{equation}
+	\vect{N} = (ES \epsilon) \vect{d}_3
+\end{equation}
+
+\subsubsection{Shear Force}
+\begin{equation}
+	\vect{T}= \vect{d}_3 \times \vect{M}'
+		  + Q\kappa\vect{b} - \tau \vect{M}
+\end{equation}
+\subsubsection{Rotational Moment}
+\begin{equation}
+	\vect{\Gamma}(s) = (Q' + \kappa_1 M_2 - \kappa_2 M_1)\vect{d}_3
+	= Q' \vect{d}_3 + \kappa\vect{b} \times \vect{M}
+\end{equation}
+\subsubsection{Quasistatic hypothesis}
+\begin{equation}
+	Q' + \kappa_1 M_2 - \kappa_2 M_1 \simeq 0
+\end{equation}
+\subsubsection{Inextensibility hypothesis}
+\begin{subequations}
+	\begin{gather}
+	\|\vect{x}'\| = \|(\vect{x} + \vect{\epsilon})'\| = 1 \\
+	\|\vect{e}_i\| = \|\overbar{\vect{e}_i}\|
+	\end{gather}
+\end{subequations}
+
+En fait il faut faire quelques hypothèses sur la nature des efforts pour pourvoir les interpoler convenablement le long de la courbe. On va faire qqch qui ressemble à la super-clothoide de Bertails, et qui semble une hypothèse naturelle pour une poutre continue sur plusieurs appuis soumise à des forces et moments ponctuels :
+\begin{itemize}
+\item le moment est continu et linéaire par morceaux. Il est évalué ponctuellement aux noeuds et interpolé linéairement entre les noeuds.
+\item la courbure est donc continue par morceaux et linéaire par morceaux. Elle est obtenue à partir du moment et de $\vect{B}$
+\item N et Q sont constants par morceaux
+\end{itemize}
+\begin{subequations}
+	\begin{gather}
+		\vect{N}(s) = \vect{N}_{i}  \quad , \quad s \in ]0,|\vect{e}_i|[ \\
+		\vect{M}(s) = \vect{M}_{i} + s \vect{M}'_{i} \quad s \in [0,|\vect{e}_i|]
+		\quad , \quad \vect{M}'_{i}= \frac{\vect{M}_{i+1} - \vect{M}_{i}}{|\vect{e}_i|} \\
+		\vect{Q}(s) = \vect{Q}_{i}  \quad , \quad s \in ]0,|\vect{e}_i|[
+	\end{gather}
+\end{subequations}
+
+Faire un tableau vertex / edge quantities :
+\begin{itemize}
+\item les propriétés mécaniques sont définies aux noeuds
+\item les repères matériels sont définis aux noeuds
+\item les courbures sont définies aux noeuds
+\item les moments sont définis aux noeuds et sont interpolés linéairement entre les noeuds
+\item l'effort normal et le moment de torsion sont supposés uniformes sur les segments (ils sont donc définis aux segments)
+\item $\alpha$ et $\beta$ sont des propriétés équivalentess définies sur les segments (égales à celles de noeuds s'il n'y a pas de saut de propriété).
+\end{itemize}
+
+\subsection{Force}
+
+\subsubsection{Axial Force}
+
+Axial Force exercée par la poutre sur le point courant $\vect{x}_i$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_i^{\parallel}
+	&= \left[\vect{N}\right]_{i-1/2}^{i+1/2}
+	= \vect{N}_{i} - \vect{N}_{i-1}
+	\end{aligned}
+\end{equation}
+
+Axial Force exercée par la poutre sur le premier point $\vect{x}_0$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_i^{\parallel}
+	&= \left[\vect{N}\right]_{0}
+	= \vect{N}_{0}
+	\end{aligned}
+\end{equation}
+
+Axial Force exercée par la poutre sur le dernier point $\vect{x}_n$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_i^{\parallel}
+	&= -\left[\vect{N}\right]_{0}
+	= -\vect{N}_{n}
+	\end{aligned}
+\end{equation}
+
+
+
+\subsubsection{Shear Force}
+
+Shear Force exercée par la poutre sur le point courant $\vect{x}_i$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_i^{\perp}
+	&= \left[\vect{d}_3 \times \mat{M}' + Q\kappa\vect{b} \right]_{i-1/2}^{i+1/2} \\
+	&= 	\frac{\vect{e}_i}{|\vect{e}_i|} \times \frac{\mat{M}_{i+1} - \mat{M}_{i}}{|\vect{e}_i|}
+		- \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \times \frac{\mat{M}_{i} - \mat{M}_{i-1}}{|\vect{e}_{i-1}|}
+		+ Q_i\kappa\vect{b}^{-}_{i+1/2}
+		- Q_{i-1}\kappa\vect{b}^{+}_{i-1/2}\\
+	&= (\vect{F}^1_{i} + \vect{F}^2_{i} + \vect{H}^{-}_{i}) - (\vect{F}^1_{i-1} + \vect{F}^2_{i-1} +  \vect{H}^{+}_{i-1})
+	\end{aligned}
+\end{equation}
+
+\note{Ici, on a un problème de définition de $\kappa\vect{b}$ en milieu de segment. En effet, bien que le moment soit continu, la courbure ne l'est pas nécessairement. Lorsqu'il y a un saut de $EI$ il y a nécessairement un saut de $\kappa\vect{b}$. On pourrait plutôt interpoler le moment à mi-travée et remonter à la courbure - soit à gauche, soit à droite - en fonction des propriétés géométriques locales :
+\begin{subequations}
+	\begin{gather}
+	\vect{M}_{i+1/2} = \frac{\vect{M}_{i} + \vect{M}_{i+1}}{2} \\
+	\kappa\vect{b}^{-}_{i+1/2} = \mat{B}_i^{-1}\vect{M}_{i+1/2} + \overbar{\kappa\vect{b}}^{-}_{i+1/2}\\
+	\kappa\vect{b}^{+}_{i+1/2} = \mat{B}_{i+1}^{-1}\vect{M}_{i+1/2} + \overbar{\kappa\vect{b}}^{+}_{i+1/2}\\
+	\vect{H}^-_{i} = Q_i\kappa\vect{b}^{-}_{i+1/2}
+	= Q_i (\mat{B}_i^{-1}\vect{M}_{i+1/2} + \overbar{\kappa\vect{b}}^{-}_{i+1/2})\\
+	\vect{H}^+_{i} = Q_i\kappa\vect{b}^{+}_{i+1/2}
+	= Q_i (\mat{B}_{i+1}^{-1}\vect{M}_{i+1/2} + \overbar{\kappa\vect{b}}^{-}_{i+1/2})
+	\end{gather}
+\end{subequations}
+
+L'autre approche consiste à ignorer la discontinuité et à simplement prendre la moyenne :
+\begin{subequations}
+	\begin{gather}
+	\kappa\vect{b}_{i+1/2} = \kappa\vect{b}^{-}_{i+1/2} = \kappa\vect{b}^{+}_{i+1/2}
+	= \frac{\kappa\vect{b}_{i} + \kappa\vect{b}_{i+1}}{2} \\
+	\vect{H}^-_{i} = Q_i\kappa\vect{b}^{-}_{i+1/2} \\
+	\vect{H}^+_{i} = Q_i\kappa\vect{b}^{+}_{i+1/2} \\
+	\vect{H}^-_{i} = \vect{H}^+_{i} = \frac{\kappa\vect{b}_{i} + \kappa\vect{b}_{i+1}}{2}
+	\end{gather}
+\end{subequations}
+Cette idée reste intéressante et élégante. Elle n'a de sens que pour une poutre à propriétés variables (sinon on a la continuité de la courbure également).
+}
+
+Shear Force  exercée par la poutre sur le premier point $\vect{x}_0$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_0^{\perp}
+	&= \left[\vect{d}_3 \times \mat{M}'+ Q\kappa\vect{b} \right]_{0} \\
+	&= \frac{\vect{e}_0}{|\vect{e}_0|} \times \frac{\mat{M}_{1} - \mat{M}_{0}}{|\vect{e}_0|}
+	+ Q_0\frac{\kappa\vect{b}_{0}}{2} \\
+	& = \vect{F}^1_{0} + \vect{F}^2_{0}  +  \vect{H}^-_{0}  \\
+	\end{aligned}
+\end{equation}
+
+Shear Force  exercée par la poutre sur le dernier point $\vect{x}_n$ :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}_n^{\perp}
+	&= - \left[ \vect{d}_3 \times \mat{M}'+ Q\kappa\vect{b}\right]_{n} \\
+	&= - \frac{\vect{e}_{n-1}}{|\vect{e}_{n-1}|} \times \frac{\mat{M}_{n} - \mat{M}_{n-1}}{|\vect{e}_{n-1}|}
+	- Q_n\frac{\kappa\vect{b}_{n}}{2} \\
+	& = -(\vect{F}^1_{n} + \vect{F}^2_{n}  +  \vect{H}^+_{n}) \\
+	\end{aligned}
+\end{equation}
+
+
+\subsubsection{Moment of Torsion}
+
+\begin{equation}
+	\begin{aligned}
+	\Gamma_i
+		&= \int_{i-1/2}^{i-1/2} m(s)
+		= Q_{i} - Q_{i-1}
+		+ \int_{i-1/2}^{i+1/2} \kappa_{1} M_{2} - \kappa_{2} M_{1}\\
+	\end{aligned}
+\end{equation}
+
+Note que le terme dans l'intégrale est nul pour une section isotrope. On retrouve les résultats bien connus sur les poutres axisymétriques à courbure au repos nulle.
+Ici, 2 possibilitées :
+\begin{itemize}
+\item soit on considère que le moment varie lentement sur l'intervalle $]i-1/2,i+1/2[$ et on considère donc le terme $\kappa\vect{b}_i \times \vect{M}_i$ constant dans l'intégrale, ce qui donne en découpant l'intervalle en $[i-1/2,i]$ et  $[i,i+1/2]$ :
+\begin{equation}
+	\begin{aligned}
+	\Gamma_i
+		&= Q_{i} - Q_{i-1}
+		+ \frac{\vect{e}_{i-1}}{|\vect{e}_{i-1}|} \cdot (\kappa\vect{b}_i \times \vect{M}_i ) \frac{|\vect{e}_{i-1}|}{2}
+		+ \frac{\vect{e}_{i}}{|\vect{e}_{i}|} \cdot (\kappa\vect{b}_i \times \vect{M}_i ) \frac{|\vect{e}_{i}|}{2}\\
+		&= Q_{i} - Q_{i-1}
+		+ \frac{\vect{e}_{i-1} + \vect{e}_{i}}{2} \cdot (\kappa\vect{b}_i \times \vect{M}_i )		\end{aligned}
+\end{equation}
+\item soit on revient à l'hypothèse de continuité et de linéarité par morceaux sur le moment:
+\begin{subequations}
+	\begin{gather}
+	\vect{M}(s) = \vect{M}_{i} + s \vect{M}'_{i} \quad \forall s \in [0,|\vect{e}_i|]
+		\quad , \quad \vect{M}'_{i}= \frac{\vect{M}_{i+1} - \vect{M}_{i}}{|\vect{e}_i|} \\
+	\kappa\vect{b}(s) = \mat{B}_i^{-1}\vect{M}(s) + \overbar{\kappa\vect{b}}(s) \\
+	\end{gather}
+\end{subequations}
+d'où :
+\begin{equation}
+	\begin{aligned}
+		&=\int_{i-1/2}^{i} \kappa_{1} M_{2} - \kappa_{2} M_{1} \\
+		&= \int_{i-1/2}^{i} (\tfrac{1}{[EI]_{1,i}} - \tfrac{1}{[EI]_{2,i}})M_1M_2
+	\end{aligned}
+\end{equation}
+\end{itemize}
+
+
+
+
+
+With
+\begin{subequations}
+	\begin{gather}
+	[EI]_i \\
+	[GJ]_i \\
+	\kappa\vect{b}_i = \frac{2 \vect{e}_{i-1} \times \vect{e}_{i}}{|\vect{e}_{i-1}| |\vect{e}_i| |\vect{e}_{i-1} + \vect{e}_{i}|} \\
+	\tau_i		= \frac{\theta_{i+1} - \theta_i}{|\vect{e}_i|} \\
+	\vect{N}_{i} = N_i\vect{d}_3  \quad where \quad N_i = \alpha_i \epsilon_i \quad \alpha_i = \frac{2 [ES]_i [ES]_{i+1}}{[ES]_i + [ES]_{i+1}}\\
+	\vect{M}_{i} 	= [EI]_{1,i}(\kappa_{1,i} - \overbar{\kappa}_{1,i})\vect{d}_{1,i} + [EI]_{2,i}(\kappa_{2,i} - \overbar{\kappa}_{2,i})\vect{d}_{2,i} \\
+	\vect{Q}_{i} = Q_i\vect{d}_3 \quad where \quad Q_i = \beta_i (\tau_i - \overbar{\tau_i}) \quad \beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}\\
+	\vect{F}^{1}_{i} 	= - \frac{\vect{e}_i \times \mat{M}_i}{|\vect{e}_i|^2} \\
+	\vect{F}^{2}_{i} 	= + \frac{\vect{e}_i \times \mat{M}_{i+1}}{|\vect{e}_i|^2} \\
+	\vect{H}^-_{i} 	= Q_i\kappa\vect{b}^{-}_{i+1/2} \\
+	\vect{H}^+_{i} 	= Q_i\kappa\vect{b}^{+}_{i+1/2} \\
+	\end{gather}
+\end{subequations}
+\note{Ici il y a une ambiguité sur $M_i$ en fonction d'un éventuel changement de propriété méca $EI_1$ ou $EI_2$. En fait il faudrait préciser un moment à droite et un moment à gauche (ce qui correspond à la réalité). Le moment étant la courbure au noeud i pondérée par $2EI$ à droite ou à gauche
+
+Toutes les discrétisations ne se valent pas ....
+
+En fait, ça n'a pas vraiment de sens de définir $EI$ sur le segment. Le moment est continu. Donc il est uniquement défini par la donnée de la courbure en un noeud et du $EI$ associé à ce noeuds. Introduire un moment à gauche et un moment à droite est problématique.
+Ce qui ce passe, pour une poutre isostatique simple qui change de $EI$ à mi-travée, c'est une discontinuité de courbure $y''$ alors que $y$ et $y'$ restent continues.
+Donc il semble plus pertinent de définir $EI$ aux noeuds car notre modèle ne peut pas représenter des discontinuitées de courbure (ou alors il faut connecter des poutres entre-elles.
+
+Pour la torsion, on peut s'en sortir également en définissant $\beta$ aux noeuds et en supposant $GJ$ constant entre $[i-1/2,i+1/2]$. Il y a donc (éventuellement) un saut de $\beta$ au milieu de chaque $\vect{e}_i$.
+
+On ne peut pas faire autrement que supposer la torsion uniforme entre 2 noeuds, c'est à dire une variation linéaire (par morceaux) de $\theta$. Et il y a donc une discontinuité potentielle aux noeuds.
+
+On écrit la continuité du champs de torsion entre les noeuds $1$ et $2$ malgré le saut de $\beta$ :
+
+A mi travée
+\begin{equation}
+	\begin{aligned}
+	Q_{12} = Q_{mid} =  Q_{1}^+ = Q_{2}^-
+	&= [GJ]_1\frac{\theta_{mid} - \theta_{1}}{|\vect{e}|/2}
+	= [GJ]_2 \frac{\theta_{2} - \theta_{mid}}{|\vect{e}|/2}
+	\end{aligned}
+\end{equation}
+D'où :
+\begin{equation}
+	\theta_{mid} = \frac{[GJ]_1}{[GJ]_1 + [GJ]_2}\theta_1 + \frac{[GJ]_2}{[GJ]_1 + [GJ]_2}\theta_2
+\end{equation}
+On en déduit :
+\begin{equation}
+	Q_{12} = Q_{mid} =  Q_{1}^+ = Q_{2}^-
+	= \frac{2 [GJ]_1 [GJ]_2}{[GJ]_1 + [GJ]_2} (\frac{\theta_{2} - \theta_{1}}{|\vect{e}|})
+\end{equation}
+Donc il faut plutôt définit $Q_i$ la torsion uniforme sur le segment $\vect{e}_i$ comme :
+\begin{equation}
+	Q_i = \beta_i (\tau_i - \overbar{\tau_i}) \quad where \quad \beta_i = \frac{2 [GJ]_i [GJ]_{i+1}}{[GJ]_i + [GJ]_{i+1}}
+\end{equation}
+
+On retrouve bien le cas d'une poutre de propriété constante lorsque $[GJ]_i= [GJ]_{i+1} = GJ$ alors $\beta_i = GJ$.
+
+
+De manière identique, on résonne pour l'effort axial entre deux noeuds 1 et 2 auxquels sont associés des raideurs axiales $[ES]_1$ et $[ES_2]$. On cherche la raideur équivalente connaissant uniquement l'allongement de l'ensemble du segment :
+\begin{subequations}
+	\begin{gather}
+	N_1 = [ES]_1 \cdot \epsilon_1 \\
+	N_2 = [ES]_2 \cdot \epsilon_2 \\
+	N =  [ES]_2 \cdot \frac{\epsilon_1 + \epsilon_2}{2}
+	\end{gather}
+\end{subequations}
+
+Avec :
+\begin{subequations}
+	\begin{gather}
+	\epsilon_1 = \frac{l_1 - l_0/2}{l_0/2} \\
+	\epsilon_2 = \frac{l_2 - l_0/2}{l_0/2} \\
+	\epsilon = \frac{l}{l_0} = \frac{\epsilon_1}{2} + \frac{\epsilon_2}{2}  \\
+	\end{gather}
+\end{subequations}
+
+Thus,
+ \begin{equation}
+	N_i = N_1 = N_2 \quad \Rightarrow \quad  \alpha_i = \frac{2 [ES]_i [ES]_{i+1}}{[ES]_i + [ES]_{i+1}}
+\end{equation}
+
+
+ }
+
+
+\bibliographystyle{alpha}
+\bibliography{../library}

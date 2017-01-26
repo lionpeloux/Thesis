@@ -758,14 +758,71 @@ Remark also that Frenet and Bishop frames coincide for planar curves ($\tau_f = 
 \subsection{Comparison between Frenet and Bishop frames}
 
 \subsubsection{Application A : circular helix}
+Let $\gamma$ be a \emph{circular helix} of parameter $a$ and $k$. In a cartesian coordinate system, it is defined as :
 \begin{equation}
-	\left\{
-	\begin{aligned}
-		\rho = a\\
-		z = b\theta
-	\end{aligned}
-	\right.
+	\vect{r}(\theta) 
+	=
+	\begin{bmatrix}
+		a \cos \theta, a \sin \theta, k \theta
+	\end{bmatrix}
+	= a \cos \theta \vect{e}_x + a \sin \theta \vect{e}_y + k \theta \vect{e}_z
 \end{equation}
+The speed of this parametrization, the curvature and the geometric torsion are uniform and given by :
+\begin{equation}
+	v(\theta) = \sqrt{a^2+k^2}
+	\quad,\quad
+	\kappa(\theta) = \frac{a}{a^2 + k^2}
+	\quad,\quad
+	\tau_f(\theta) = \frac{k}{a^2 + k^2}
+\end{equation}
+The Frenet frame components are given by (with $\alpha = v \kappa$ and $\beta = v \tau_f$) :
+\begin{equation}
+	\begin{aligned}
+	\vect{t}(\theta) &=
+		\begin{bmatrix} 
+			- \alpha \cos \theta, \alpha \sin \theta, \beta \theta 
+		\end{bmatrix}
+	\\
+	\vect{n}(\theta) &= 
+		\begin{bmatrix} 
+			-\cos \theta, -\sin \theta, 0 
+		\end{bmatrix}
+	\\
+	\vect{b}(\theta) &=
+		\begin{bmatrix} 
+			\beta \sin \theta, - \beta \cos \theta, \alpha
+	\end{bmatrix} 	
+	\end{aligned}
+\end{equation}
+And the Bishop frame components are given by :
+\begin{equation}
+	\begin{aligned}
+		\vect{u}(\theta) &= 
+		\begin{bmatrix} 	
+			-\cos \theta \cos \beta \theta - \beta  \sin \theta \sin \beta \theta, -\sin \theta \cos \beta \theta + \beta  \cos \theta \sin \beta \theta, - \alpha \sin \beta \theta
+		\end{bmatrix}
+		\\
+		\vect{v}(\theta) &= 
+		\begin{bmatrix} 
+			-\cos \theta \sin \beta \theta + \beta  \sin \theta \cos \beta \theta, -\sin \theta \sin \beta \theta - \beta  \cos \theta \cos \beta \theta, \alpha \cos \beta \theta
+		\end{bmatrix}
+	\end{aligned}
+\end{equation}
+
+
+
+
+%\begin{align}
+%	& F_f(\theta)  =
+%	\left\{
+%	\begin{aligned}
+%		& a \cos \theta, a \sin \theta, k \theta \\
+%		& a \cos \theta, a \sin \theta, k \theta \\
+%		& a \cos \theta, a \sin \theta, k \theta
+%	\end{aligned}
+%	\right . \\
+%\end{align}
+
 
 \subsubsection{Application B : conical helix (spiral)}
 \begin{equation}
