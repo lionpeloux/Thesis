@@ -1,4 +1,4 @@
-\chapter{Geometry of smooth and discret space curves}
+\chapter{Geometry of smooth and discrete space curves}
 \section{Introduction}
 
 \note{idée :
@@ -81,7 +81,7 @@ Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\
 
 % natural parametrization
 \subsection{Natural parametrization}
-Let $\gamma$ be a space curve of class ${\mathcal{C}}^{1}$. A parametrization $(I,F)$ of $\gamma$ is called \emph{natural} if $\|F'(t)\| = 1, \forall t \in I$. Thus :
+Let $\gamma$ be a space curve of class ${\mathcal{C}}^{1}$. A parametrization $(I,F)$ of $\gamma$ is called \emph{natural} if $\norm{F'(t)} = 1, \forall t \in I$. Thus :
 \begin{itemize}
 	\item The curve is necessarily regular
 	\item F is strictly monotonic
@@ -91,7 +91,7 @@ Let $\gamma$ be a space curve of class ${\mathcal{C}}^{1}$. A parametrization $(
 \subsection{Curve length}
 Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{1}$. The length of $\gamma$ is define as :
 \begin{equation}
-	L=\int_{I}\|F'(t)\|dt
+	L=\int_{I}\norm{F'(t)}dt
 \end{equation}
 Note that the length of $\gamma$ is invariant under reparametrization.
 
@@ -99,13 +99,13 @@ Note that the length of $\gamma$ is invariant under reparametrization.
 \subsection{Arc-length parametrization}
 Let $\gamma=(I,F)$ be a regular parametric curve. Let $t_0 \in I$ be a given parameter. The following map is said to be the \emph{arc-length of origin $t_0$} of $\gamma$ :
 \begin{equation}
-	s \colon t \mapsto \int_{t_{0}}^{t}\|F'(u)\|du
+	s \colon t \mapsto \int_{t_{0}}^{t}\norm{F'(u)}du
 	\quad,\quad
 	s \in I \times \mathbb{R}
 \end{equation}
 The arc-length $s \colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
 
-Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\|G'(s)\| = 1, \forall s \in J$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed\footnote{Regular curves are also known as \emph{unit-speed} curves.} ($\|G'\| = 1$).
+Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\norm{G'(s)} = 1, \forall s \in J$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed\footnote{Regular curves are also known as \emph{unit-speed} curves.} ($\norm{G'} = 1$).
 
 Thereafter, for a regular curve $\gamma$ : $\gamma(t)$ will denote the point $F(t)$ of parameter $t \in I$ ; while $\gamma(s)$ will denote the point $G(s)$ of arc-length $s \in J=[0,L]$.
 
@@ -130,9 +130,9 @@ These quantities, also known as \textquote{generalized curvatures} in modern dif
 The first component of the Frenet trihedron is called the \emph{unit tangent vector}. 
 Let $\gamma = (I,F)$ be a regular parametric curve. Let $t \in I$ be a parameter. The \emph{unit tangent vector} is defined as :
 \begin{equation}
-	\vect{t}(t) = \frac{\gamma'(t)}{\|\gamma'(t)\|}
+	\vect{t}(t) = \frac{\gamma'(t)}{\norm{\gamma'(t)}}
 	\quad,\quad
-	\|\vect{t}(t)\|=1
+	\norm{\vect{t}(t)}=1
 \end{equation}
 For an arc-length parametrized curve, this expression simply becomes :
 \begin{equation}
@@ -145,7 +145,7 @@ In differential geometry, the unit tangente to the curve $\gamma$ at point $P_0$
 	\vect{t}(P_0)
 	= \lim_{P \to P_0}\frac{\overrightarrow{P_0 P}}{\norm{\overrightarrow{P_0 P}}}
 	= \lim_{P^- \to P_0}\frac{\overrightarrow{P_0 P^-}}{\norm{\overrightarrow{P_0 P^-}}}
-	= \lim_{P^+ \to P_0}\frac{\overrightarrow{P_0 P^+}}{\|\overrightarrow{P_0 P^+}\|}
+	= \lim_{P^+ \to P_0}\frac{\overrightarrow{P_0 P^+}}{\norm{\overrightarrow{P_0 P^+}}}
 \label{eq:3_4}
 \end{equation}
 
@@ -161,20 +161,20 @@ In differential geometry, the unit tangente to the curve $\gamma$ at point $P_0$
 \subsection{Normal vector}
 The second component of the Frenet trihedron is called the \emph{unit normal vector}. It is constructed from $\vect{t'}$ which is necessarily orthogonal to $\vect{t}$. Indeed :
 \begin{equation}
-	\|\vect{t}\|=1 \Rightarrow \vect{t^{'}} \cdot  \vect{t} = 0 \Leftrightarrow  \vect{t^{'}} \perp \vect{t}
+	\norm{\vect{t}}=1 \Rightarrow \vect{t^{'}} \cdot  \vect{t} = 0 \Leftrightarrow  \vect{t^{'}} \perp \vect{t}
 \end{equation}
 Let $\gamma = (I,F)$ be a biregular\footnote{
 Note that $\vect{n}$ exists if only $\gamma$ is biregular, that is $\vect{t}'$ never vanishes or, equivalently, $\gamma$ is never locally a straight line.} parametric curve. 
 Let $t \in I$ be a parameter. The \emph{unit normal vector} is defined as :
 \begin{equation}
-	\vect{n}(t) = \frac{\vect{t}'(t)}{\|\vect{t}'(t)\|} 
-	= \frac{\gamma'(t) \times (\gamma''(t) \times \gamma'(t))}{\|\gamma'(t)\|^3}
+	\vect{n}(t) = \frac{\vect{t}'(t)}{\norm{\vect{t}'(t)}} 
+	= \frac{\gamma'(t) \times (\gamma''(t) \times \gamma'(t))}{\norm{\gamma'(t)}^3}
 	\quad,\quad
-	\|\vect{n}(t)\|=1
+	\norm{\vect{n}(t)}=1
 \end{equation}
 For an arc-length parametrized curve, this expression simply becomes :
 \begin{equation}
-	\vect{n}(s) = \frac{\vect{t}'(s)}{\|\vect{t}'(s)\|} 
+	\vect{n}(s) = \frac{\vect{t}'(s)}{\norm{\vect{t}'(s)}} 
 	= \gamma'(s) \times (\gamma''(s) \times \gamma'(s))
 	\quad,\quad
 	s \in [0,L]
@@ -193,9 +193,9 @@ The third vector of Frenet's trihedron is called the \emph{unit binormal vector}
 Let $\gamma = (I,F)$ be a biregular parametric curve. Let $t \in I$ be a parameter. The \emph{unit binormal vector} is defined as :
 \begin{equation}
 	\vect{b}(t) = \vect{t}(t) \times \vect{n}(t)
-	= \frac{\gamma'(t) \times \gamma''(t)}{\|\gamma'(t) \times \gamma''(t)\|}
+	= \frac{\gamma'(t) \times \gamma''(t)}{\norm{\gamma'(t) \times \gamma''(t)}}
 	\quad,\quad
-	\|\vect{b}(t)\|=1
+	\norm{\vect{b}(t)}=1
 \end{equation}
 For an arc-length parametrized curve, this expression simply becomes :
 \begin{equation}
@@ -248,21 +248,21 @@ As explained by Euler itself, at a given arc-length parameter ($s$), the osculat
 \subsubsection{Curvature}
 Let $\gamma$ be a regular arc-length parametrized curve. Let $s \in [0,L]$ be an arc-length parameter. The \emph{curvature} is a positive scalar quantity defined as :
 \begin{equation}
-	\kappa(s) = \|\vect{t}'(s)\| \ge 0 
+	\kappa(s) = \norm{\vect{t}'(s)} \ge 0 
 	\quad,\quad
 	\vect{t}'(s) = \kappa(s) \vect{n}(s)
 \label{eq:curvaturedef}
 \end{equation}
 The curvature is \emph{independent} regarding the choice of parametrization. This makes the curvature an \emph{intrinsic property} of a given curve and that is why it is also referred to as a \emph{geometric invariant}. Following \cite[pp.203-204]{Gray2006} it can be computed for any parametrization $(I,F)$ of $\gamma$ as :
 \begin{equation}
-	\kappa(t) = \frac{\|\gamma'(t) \times \gamma''(t) \|}{\|\gamma'(t)\|^3}
+	\kappa(t) = \frac{\norm{\gamma'(t) \times \gamma''(t)}}{\norm{\gamma'(t)}^3}
 	\quad,\quad
-	\vect{t}'(t) = \|\gamma'(t)\| \kappa(t) \vect{n}(t)
+	\vect{t}'(t) = \norm{\gamma'(t)} \kappa(t) \vect{n}(t)
 \label{eq:curvaturedef2}
 \end{equation}
 Note that in \cref{eq:curvaturedef} the prime denotes the derivative regarding the natural parameter ($s$) while it denotes the derivative regarding any parameter ($t$) in \cref{eq:curvaturedef2}. Consequently, the \emph{speed} of the curve's parametrization appears in the latter equation :
 \begin{equation}
-	v(t) = \frac{ds}{dt} = \|\gamma'(t)\| = s'(t)
+	v(t) = \frac{ds}{dt} = \norm{\gamma'(t)} = s'(t)
 \end{equation}
 The curvature measures how much a curve \emph{bends instantaneously} in its osculating plane, that is how fast the tangent vector is rotating in the osculating plane around the binormal vector. In differential geometry this is expressed as :
 \begin{equation}
@@ -285,7 +285,7 @@ Finally, following \cite{Bergou2008} we define the \emph{curvature binormal vect
 \begin{equation}
 	\vect{\kappa b}(s) = \vect{t}(s) \times \vect{t}'(s) = \kappa(s)\cdot\vect{b}(s)
 	\quad,\quad
-	\|\vect{\kappa b}(s)\|= \kappa(s)
+	\norm{\vect{\kappa b}(s)}= \kappa(s)
 \label{eq:kb}
 \end{equation}
 This vector will be useful as it embed all the necessary information on the curve's curvature. We will see (\cref{sec:bishopvelocity}) that this vector is associated to the angular velocity of a specific adapted moving frame attached to the curve and called the \emph{Bishop frame}.
@@ -298,7 +298,7 @@ Let $\gamma$ be a biregular arc-length parametrized curve. Let $s \in [0,L]$ be 
 \end{equation}
 The torsion is \emph{independent} regarding the choice of parametrization. This makes the torsion an \emph{intrinsic property} of a given curve and that is why it is also referred to as a \emph{geometric invariant}. Following \cite[p.204]{Gray2006} it can be computed for any parametrization $(I,F)$ of $\gamma$ as :
 \begin{equation}
-	\tau_f(s) = \frac{(\gamma'(s) \times \gamma'(s)) \cdot \gamma''(s)}{\|\gamma'(s) \times \gamma''(s)\|^2}
+	\tau_f(s) = \frac{(\gamma'(s) \times \gamma'(s)) \cdot \gamma''(s)}{\norm{\gamma'(s) \times \gamma''(s)}^2}
 	\quad when \quad
 	\kappa(s) > 0
 \end{equation}
@@ -328,7 +328,7 @@ The \emph{Fundamental theorem of space curves} is somehow a consequence of the \
 	\end{aligned}
 	\right.
 \end{equation}
-This system can be seen as the \emph{equations of motion} of the Frenet trihedron moving along the curve $\gamma$ at unit speed ($\|\gamma'\|=1$). Indeed, introducing its \emph{angular velocity vector} also known as the \emph{Darboux vector} ($\vect{\Omega_f}$), the previous system is expressed as :
+This system can be seen as the \emph{equations of motion} of the Frenet trihedron moving along the curve $\gamma$ at unit speed ($\norm{\gamma'}=1$). Indeed, introducing its \emph{angular velocity vector} also known as the \emph{Darboux vector} ($\vect{\Omega_f}$), the previous system is expressed as :
 \begin{equation}
 	\begin{bmatrix}		
 		\vect{t^{'}}(s) \\
@@ -370,7 +370,7 @@ Finally, those formulas can be generalized to any non unit-speed parametrization
 	\end{aligned}
 	\right.
 \end{equation}
-Again, this system can be seen as the \emph{equations of motion} of the Frenet trihedron moving along the curve $\gamma$ at non unit-speed ($v(t) = \|\gamma'(t)\|$). This time the \emph{angular velocity vector} ($\vect{\Omega}$) is distinct from the \emph{Darboux vector} ($\vect{\Omega_f}$) and the previous system is expressed as :
+Again, this system can be seen as the \emph{equations of motion} of the Frenet trihedron moving along the curve $\gamma$ at non unit-speed ($v(t) = \norm{\gamma'(t)}$). This time the \emph{angular velocity vector} ($\vect{\Omega}$) is distinct from the \emph{Darboux vector} ($\vect{\Omega_f}$) and the previous system is expressed as :
 \begin{equation}
 	\begin{bmatrix}		
 		\vect{t^{'}}(t) \\
@@ -429,7 +429,7 @@ Consequently, a moving frame $F$ attached to $\gamma$ satisfies for all $s \in [
 \begin{equation}
 	\left\{
 	\begin{aligned}
-		& \| \vect{e}_i(s) \| = 1 \\
+		& \norm{\vect{e}_i(s)} = 1 \\
 		& \vect{e}_i(s) \cdot \vect{e}_j(s) = 0\quad , \quad i \neq j
 	\end{aligned}
 	\right.
@@ -492,7 +492,7 @@ This assumption reminds the \emph{Fundamental theorem of space curves} (\cref{se
 
 % ANGULAR VELOCITY VECTOR
 \subsubsection{Angular velocity}
-This system can be seen as the \emph{equations of motion} of the frame moving along the curve $\gamma$ at unit speed ($\|\gamma'\|=1$). Indeed, introducing its \emph{angular velocity vector} ($\vect{\Omega}$), the previous system is expressed as :
+This system can be seen as the \emph{equations of motion} of the frame moving along the curve $\gamma$ at unit speed ($\norm{\gamma'}=1$). Indeed, introducing its \emph{angular velocity vector} ($\vect{\Omega}$), the previous system is expressed as :
 \begin{equation}
 	\vect{e}'_{i}(s) = \vect{\Omega}(s) \times \vect{e}_{i}(s)
 	\quad avec \quad
@@ -525,11 +525,11 @@ Geometrically, decomposing the infinitesimal rotation of the moving frame around
 \subsection{Adapted moving frame}
 Let $F$ be a moving frame as defined in the previous section. $F$ is said to be \emph{adapted} to $\gamma$ if at each point $\gamma(s)$, $\vect{e}_{3}(s)$ is the unit tangent vector of $\gamma$ (\cref{fig:adapted}) :
 \begin{equation}
-	\vect{e_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma(s)\|}
+	\vect{e_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\norm{\gamma(s)}}
 \end{equation}
 For an adapted frame, the components $k_1$ and $k_2$ of the angular velocity vector are related to the curvature of $\gamma$\footnote{\note{Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géométrie de la courbe dans le cas d'une isotropic rod $\mathcal{E}_b = EI\kappa^2$.}} : 
 \begin{equation}
-	\kappa(s) = \|\vect{e}'_{3}(s)\| = \|k_2(s)\vect{e}_1(s) + k_1(s)\vect{e}_2(s)\| = \sqrt{{k_{1}(s)}^2 + {k_{2}(s)}^2}
+	\kappa(s) = \norm{\vect{e}'_{3}(s)} = \norm{k_2(s)\vect{e}_1(s) + k_1(s)\vect{e}_2(s)} = \sqrt{{k_{1}(s)}^2 + {k_{2}(s)}^2}
 \end{equation}
 Moreover, recalling the definition of the curvature binormal vector ($\vect{\kappa b}$) from \cref{eq:kb}, it is easy to see that for an adapted moving frame the following relation holds :
  \begin{equation}
@@ -593,9 +593,9 @@ Identically, the \emph{parallel transport} of an adapted frame is defined as the
 
 The Frenet frame is a well-known particular adapted moving frame. It is defined as the map that attach to any given point of $\gamma$ the corresponding Frenet trihedron $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ where :
 \begin{gather}
-\vect{t}(s) = \frac{\gamma^{'}(s)}{\|\gamma'(s)\|}
+\vect{t}(s) = \frac{\gamma^{'}(s)}{\norm{\gamma'(s)}}
 \quad,\quad
-\vect{n}(s) = \frac{\vect{t'}(s)}{\vect{\kappa}(s)}
+\vect{n}(s) = \frac{\vect{t'}(s)}{\kappa(s)}
 \quad,\quad
 \vect{b}(s)= \vect{t}(s)\times\vect{n}(s)
 \end{gather}
@@ -760,51 +760,51 @@ Remark also that Frenet and Bishop frames coincide for planar curves ($\tau_f = 
 \subsubsection{Application A : circular helix}
 Let $\gamma$ be a \emph{circular helix} of parameter $a$ and $k$. In a cartesian coordinate system, it is defined as :
 \begin{equation}
-	\vect{r}(\theta) 
+	\vect{r}(t) 
 	=
 	\begin{bmatrix}
-		a \cos \theta, a \sin \theta, k \theta
+		a \cos t, a \sin t, k t
 	\end{bmatrix}
-	= a \cos \theta \vect{e}_x + a \sin \theta \vect{e}_y + k \theta \vect{e}_z
+	= a \cos t \vect{e}_x + a \sin t \vect{e}_y + k t \vect{e}_z
 \end{equation}
 The speed of this parametrization, the curvature and the geometric torsion are uniform and given by :
 \begin{equation}
-	v(\theta) = \sqrt{a^2+k^2}
+	v(t) = \sqrt{a^2+k^2}
 	\quad,\quad
-	\kappa(\theta) = \frac{a}{a^2 + k^2}
+	\kappa(t) = \frac{a}{a^2 + k^2}
 	\quad,\quad
-	\tau_f(\theta) = \frac{k}{a^2 + k^2}
+	\tau_f(t) = \frac{k}{a^2 + k^2}
 \end{equation}
 The Frenet frame components are given by (with $\alpha = v \kappa$ and $\beta = v \tau_f$) :
 \begin{equation}
 	\begin{aligned}
-	\vect{t}(\theta) &=
+	\vect{t}(t) &=
 		\begin{bmatrix} 
-			- \alpha \cos \theta, \alpha \sin \theta, \beta \theta 
+			- \alpha \cos t, \alpha \sin t, \beta t 
 		\end{bmatrix}
 	\\
-	\vect{n}(\theta) &= 
+	\vect{n}(t) &= 
 		\begin{bmatrix} 
-			-\cos \theta, -\sin \theta, 0 
+			-\cos t, -\sin t, 0 
 		\end{bmatrix}
 	\\
-	\vect{b}(\theta) &=
+	\vect{b}(t) &=
 		\begin{bmatrix} 
-			\beta \sin \theta, - \beta \cos \theta, \alpha
+			\beta \sin t, - \beta \cos t, \alpha
 	\end{bmatrix} 	
 	\end{aligned}
 \end{equation}
 And the Bishop frame components are given by :
 \begin{equation}
 	\begin{aligned}
-		\vect{u}(\theta) &= 
+		\vect{u}(t) &= 
 		\begin{bmatrix} 	
-			-\cos \theta \cos \beta \theta - \beta  \sin \theta \sin \beta \theta, -\sin \theta \cos \beta \theta + \beta  \cos \theta \sin \beta \theta, - \alpha \sin \beta \theta
+			-\cos t \cos \beta t - \beta  \sin t \sin \beta t, -\sin t \cos \beta t + \beta  \cos t \sin \beta t, - \alpha \sin \beta t
 		\end{bmatrix}
 		\\
-		\vect{v}(\theta) &= 
+		\vect{v}(t) &= 
 		\begin{bmatrix} 
-			-\cos \theta \sin \beta \theta + \beta  \sin \theta \cos \beta \theta, -\sin \theta \sin \beta \theta - \beta  \cos \theta \cos \beta \theta, \alpha \cos \beta \theta
+			-\cos t \sin \beta t + \beta  \sin t \cos \beta t, -\sin t \sin \beta t - \beta  \cos t \cos \beta t, \alpha \cos \beta t
 		\end{bmatrix}
 	\end{aligned}
 \end{equation}
@@ -892,27 +892,43 @@ soit pour une spirale dont on connait
 \label{fig:3_6}
 \end{figure}
 
+% DISCRETE CURVES
+% ================
+\section{Discrete curves}
 
-\section{Discret curves}
+\cite{Hoffmann2008, Carroll2014, Crane2015}
 
-\subsection{Definition and arc-length parametrization}
+% definition
+% ------------
+\subsection{Definition}
 
-\subsection{Discret curvature : an equivocal concept}
 
+A discrete curve $\gamma$ is called regular if any three successive points are pairwise disjoined.
+
+arc-length of a discrete curve $\gamma$ is defined as :
+\begin{equation}
+	L = \sum_{i=0}^n \norm{\vect{e}_i}
+\end{equation}
+
+% parametrization
+% ---------------------
+\subsection{Parametrization}
+
+A discrete curve $\gamma$ is called parameterized by arc-length if $\norm{\gamma}=cst$.
+
+% DISCRETE CURVATURE
+% ===================
+\section{Discrete curvature}
+
+\footnote{
 Curvature is defined from the osculating circle, which is the best approcximation of a curve by a circle.
 We can define such a circle and it's radius will be the curvature at that point. Problem : there are several ways to define such a circle.
 
-\subsubsection{Definition}
-
-\note{
 Très intéressant de constater que cette vision 3 verticies  vs. 2 edges est déjà présente dès le début dans l'histoire de la compréhension de la courbure.
 
 Pour Euler, le rayon de courbure est le rapport de l’élément d’arc sur l’angle de contin-
 gence entre deux tangentes infiniment proches. Par ailleurs, la définition du plan osculateur n’est pas tout à fait lamêmeque chez Bernoulli, plan passant par trois points consécutifs, puis- qu’Euler dit que ce plan contient deux éléments successifs. Il le définit aussi en disant que c’est le plan où la courbe s’incurve. Pour le dire de façon un peu différente : la tangente contient un élément, c’est le lieu où la courbe est droite, la plan osculateur représente l’étape suivante, c’est le lieu où la courbe est arc de cercle. Nous ne pensons pas trahir Euler en faisant cette présen- tation : cela justifie que, pour lui, il est naturel de se placer sur le plan osculateur pour calculer le rayon de courbure. \cite{Delcourt2007}
 
-}
-
-\cite{Hoffmann2008}
 
 The edge osculating circle.
 The vertex osculating circle.
@@ -925,76 +941,59 @@ La définition du plan osculateur est univoque dans le cas discret : c'est local
 Ce n'est pas le cas de la courbure qui perd son côté intrinsèque.
 
 courbure discrete dans le cas général
+}
 
-\subsubsection{Vertex-based osculating circle}
+% vertex-based curvature
+% -------------------------------
+\subsection{Vertex-based osculating circle}
 
 \begin{equation}
-	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\|\vect{e}_{i-1} + \vect{e}_{i} \|},
+	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}},
 \end{equation}
 
 Problème de convergence lorsque l'angle tend vers pi et que les segments ont même longueur.
 En pratique peut probable.
 
-\begin{figure}[]
-\begin{center}
-\includegraphics[]{curvature_vertex.pdf}
-\caption{Variation of the vertex-based discrete curvature.}
-\label{fig:3_7}
-\end{center}
-\end{figure}
-
-\begin{figure}[!tbp]
-     \centering
-     \subfloat[][vertex-based osculating circle]{\includegraphics{curvature_vertex.pdf}\label{<figure1>}}
-     
-     \subfloat[][edge-based osculating circle]{\includegraphics{curvature_edge.pdf}\label{<figure2>}}
-     
-     \caption{Definition of the osculating circle for discrete curves.}
-     \label{steady_state}
-\end{figure}
-
-\subsubsection{Edge-based osculating circle}
+% edge-based curvature
+% ------------------------------
+\subsection{Edge-based osculating circle}
 
 \begin{equation}
-	\kappa_2 = \frac{tan(\varphi_i/2) + tan(\varphi_{i+1}/2)}{\|\vect{e}_{i}\|}
+	\kappa_2 = \frac{tan(\varphi_i/2) + tan(\varphi_{i+1}/2)}{\norm{\vect{e}_{i}}}
 \end{equation}
 
 Bon comportement lorsque l'angle tend vers pi. Demande que les 3 segments soient coplanaires.
+La courbure est plutot défini relativement au segment $\vect{e}_i$ qu'au vertex $\vect{x}_i$
 
-\subsubsection{Osculating circle for an arc-length parametrized curve}
+% mixed approach
+% ---------------------
+\subsection{Osculating circle for an arc-length parametrized curve}
+
 \begin{equation}
 	\kappa_3 = \frac{2 \,tan(\varphi_i/2)}{l}
 	\quad , \quad 
-	l = \|\vect{e}_{i} \| = cst
+	l = \norm{\vect{e}_{i}}= cst
 \end{equation}
 
 Qu'on peut réécrire pour des segments de longueur variable, avec la moyenne
 \begin{equation}
 	\kappa_3 = \frac{2 \,tan(\varphi_i/2)}{l_i}
 	\quad , \quad 
-	l_i = \frac{\|\vect{e}_{i-1} \| \|\vect{e}_{i} \|}{\|\vect{e}_{i-1}\| + \|\vect{e}_{i}\|}
+	l_i = \frac{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}}}{\norm{\vect{e}_{i-1}} + \norm{\vect{e}_{i}}}
 \end{equation}
 
 \note{
 Unlike the smooth case we can not reparameterize a curve. A discrete curve is parameterized by arc-length or it is not \citep[p. 10]{Hoffmann2008}.
 
-Cette condition est extrêmement exigente $\|\vect{e}_{i} \| = cst$. Elle est tenable pour des modèles de poutre non connectées (où le pas de disctrétisation peut-être choisi uniform) mais pour en cas de connexion. Ce point n'est pas éclairci dans les articles de Audoly.
+Cette condition est extrêmement exigente $\norm{\vect{e}_{i}} = cst$. Elle est tenable pour des modèles de poutre non connectées (où le pas de disctrétisation peut-être choisi uniform) mais pour en cas de connexion. Ce point n'est pas éclairci dans les articles de Audoly.
 }
 
-\begin{figure}[]
-\begin{center}
-\includegraphics[]{curvature_edge.pdf}
-\caption{Variation of the edge-based discrete curvature.}
-\label{fig:1_1}
-\end{center}
-\end{figure}
-
 \begin{figure}[h]
-     \centering
      \subfloat[][vertex-based osculating circle]{\includegraphics{osculating_circle_vertex.pdf}\label{<figure1>}}
      \subfloat[][edge-based osculating circle]{\includegraphics{osculating_circle_edge.pdf}\label{<figure2>}}
-     \caption{Definition of the osculating circle for discrete curves.}
      \label{steady_state}
+     \centering
+     \caption{Definition of the osculating circle for discrete curves.}
 \end{figure}
 
 \begin{figure}[H]
@@ -1005,31 +1004,49 @@ Cette condition est extrêmement exigente $\|\vect{e}_{i} \| = cst$. Elle est te
 \end{center}
 \end{figure}
 
-\subsection{Variability of discrete curvature regarding $\alpha$}
 
-Qu'on réécrit en posant $\|\vect{e}_{i-1}\| = \alpha \|\vect{e}_{i} \|$, $\alpha \geq 0$ :
+% sensitivity to non uniform discretization
+% ----------------------------------------------------
+\subsection{Benchmarking : sensitivity to non uniform discretization}
+Qu'on réécrit en posant $\norm{\vect{e}_{i-1}} = \alpha \norm{\vect{e}_{i}}$, $\alpha \geq 0$ :
 
 \begin{equation}
-	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\|\vect{e}_{i}\|(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}},
+	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\norm{\vect{e}_{i}}(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}},
 	\quad
-	\kappa_2 = \frac{4 \,tan(\varphi_i/2)}{\|\vect{e}_{i}\|(1+\alpha)}
+	\kappa_2 = \frac{4 \,tan(\varphi_i/2)}{\norm{\vect{e}_{i}}(1+\alpha)}
 \end{equation}
 
 \begin{equation}
 	\frac{\kappa_1}{\kappa_2}(\alpha) = \frac{\kappa_1}{\kappa_2}(1/\alpha)= \frac{1+\alpha}{(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}} \, cos^2(\varphi_i/2)
 \end{equation}
 
-\begin{figure}[H]
+\begin{figure}[b]
+\begin{center}
+\includegraphics[]{curvature_vertex.pdf}
+\caption{Variation of the vertex-based discrete curvature.}
+\label{fig:vertexbased}
+\includegraphics[]{curvature_edge.pdf}
+\caption{Variation of the vertex-based discrete curvature.}
+\label{fig:edgebased}
+\end{center}
+\end{figure}
+
+
+% accuracy in bending energy representation
+% ---------------------------------------------------------
+\subsection{Benchmarking : accuracy in bending energy representation}
+
+\begin{figure}[b]
 \begin{center}
 \input{ch3_geometry/plot/plot_1.tex}
 \end{center}
 \caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
 \end{figure}
 
-\subsection{Convergence benchmark $\kappa_1$ vs. $\kappa_2$}
-
+% Straight line
 \subsubsection{Straight line}
 
+% Circle
 \subsubsection{Circle}
 
 Smooth curve settings:
@@ -1067,10 +1084,6 @@ Remarque that ratios are independent of scale change (independent of R)
 \end{center}
 \end{figure}
 
-qsmldkqsmldk s qsd qsd
- sqd
-  qs dqs=dlk qs=ldk sq
-\newpage
 \begin{figure}[]
 \begin{center}
 \begin{tikzpicture}
@@ -1099,6 +1112,7 @@ qsmldkqsmldk s qsd qsd
 \caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
 \end{figure}
 
+% Elastica
 \subsubsection{Elastica}
 
 \begin{figure}[H]
@@ -1211,7 +1225,9 @@ qsmldkqsmldk s qsd qsd
 \label{g:nognot}
 \end{figure}
 
-\subsection{Edge versus vertex based tangent vector}
+% DISCRETE CURVATURE
+% ===================
+\section{Discrete tangent vector}
 
 Problème de définition. Facile de définir une tangente sur un edge. Mais une infinité de tangentes possibles à chaque vertex.
 
@@ -1219,6 +1235,76 @@ So in case of an arc-length parameterized curve the vertex tangent vector points
 
 Nous verrons que le cercle 3 points, en plus de mieux représenter l'énergie d'une courbe discrete dans les cas typiques, offre un choix de tangente non ambïgu.
 
+Edge tangent vector and unit edge tangent vector:
+\begin{equation}
+	\vect{e}_{i} = \vect{x}_{i+1} - \vect{x}_{i}
+	\quad , \quad
+	\vect{u}_{i} = \frac{\vect{e}_{i}}{\norm{\vect{e}_{i}}}
+\end{equation}
+
+Vertex tangent vector as harmonic mean for arc-length parametrized curve \cite[p.12]{Hoffmann2008} :
+\begin{equation}
+	\vect{T}_{i} = \frac{\vect{e}_{i-1} + \vect{e}_{i}}{1 + \vect{e}_{i-1} \cdot \vect{e}_{i}}	
+\end{equation}
+Is parallel to $\frac{1}{2} (\vect{e}_{i-1} + \vect{e}_{i})$ and leads to the same unit edge tangent vector : 
+\begin{equation}
+	\vect{t}_{i} = \frac{\vect{e}_{i-1} + \vect{e}_{i}}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}}
+			= \frac{\norm{\vect{e}_{i-1}}}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}} \vect{u}_{i-1}
+			+  \frac{\norm{\vect{e}_{i}}}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}} \vect{u}_{i}
+\end{equation}
+This is the same as our definition in the case $\norm{\vect{e}_i}=cst$
+\begin{equation}
+	\vect{t}_{i} =  	\frac{\norm{\vect{e}_{i}}}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}} \vect{u}_{i-1}
+			+ 	\frac{\norm{\vect{e}_{i-1}}}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}} \vect{u}_{i}
+\end{equation}
+
+\begin{equation}
+	\vect{t}_{i-1/2} = \vect{u}_{i-1}
+	\quad , \quad
+	\vect{t}_{i+1/2} = \vect{u}_{i}
+\end{equation}
+
+\begin{equation}
+	\vect{t}_{i-1} =  	(\vect{t}_{i} \cdot \vect{u}_{i-1}) \vect{u}_{i-1}
+			    - 	(\vect{t}_{i} - (\vect{t}_{i} \cdot \vect{u}_{i-1}) \vect{u}_{i-1})
+			    = 2 (\vect{t}_{i} \cdot \vect{u}_{i-1}) \vect{u}_{i-1} - \vect{t}_{i}
+\end{equation}
+
+\begin{equation}
+	\vect{t}_{i+1} =  (\vect{t}_{i} \cdot \vect{u}_{i+1}) \vect{u}_{i+1}
+			    - 	(\vect{t}_{i} - (\vect{t}_{i} \cdot \vect{u}_{i+1}) \vect{u}_{i+1})
+			    = 2 (\vect{t}_{i} \cdot \vect{u}_{i+1}) \vect{u}_{i+1} - \vect{t}_{i}
+\end{equation}
+
+\begin{equation}
+	\begin{aligned}
+	\vect{\kappa b}_{i} 
+		&	=  \frac{2}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}}  \vect{e}_{i-1} \times  \vect{e}_{i}
+		\\
+		&	= \frac{2}{\norm{\vect{e}_{i-1}}} \vect{t}_{i-1} \times  \vect{u}_{i-1}
+			= \frac{2}{\norm{\vect{e}_{i-1}}} \vect{u}_{i-1} \times  \vect{t}_{i}
+		\\
+		&	= \frac{2}{\norm{\vect{e}_{i}}} \vect{t}_{i} \times  \vect{u}_{i}
+			= \frac{2}{\norm{\vect{e}_{i}}} \vect{u}_{i} \times  \vect{t}_{i+1}
+	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\vect{\kappa b}_{i} =  \frac{2 \vect{e}_{i-1} \times  \vect{e}_{i}}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}}
+\end{equation}
+
+% DISCRETE FRAMES
+% =================
+\section{Discrete frames}
+
+\subsection{Discrete parallel transport}
+	\subsubsection{The rotation method}
+	\subsubsection{The double reflection method}
+
+\subsection{Discrete Frenet frame}
+\subsection{Discrete Bishop frame}
+
+\cite{Hanson95,Wang2008}
 
 \bibliographystyle{alpha}
 \bibliography{../library}
