@@ -896,70 +896,111 @@ soit pour une spirale dont on connait
 % ================
 \section{Discrete curves}
 
-\cite{Hoffmann2008, Carroll2014, Crane2015}
+The previous section has introduced the fundamental analytical tools to develop a solid understanding of the geometry of smooth space curves. These tools will be essentials for the construction of the beam model presented later in \cref{sec:energy} and \cref{sec:krichhoff}. In this section, we look for equivalent notions in the case of discrete space curves, as the developed model will be implemented in a numerical program to solve real mechanical problems through a finite-difference method (see \cref{sec:discretization}).
+
+The study of those discrete equivalent notions belong to the recent field of \emph{Discrete Differential Geometry} : \blockcquote[p.7]{Hoffmann2008}{In some sense discrete differential geometry can be considered more fundamental than differential geometry since the later can be obtained form the former as a limit}. In particular, we will see that they are several ways to define the discrete equivalents of the curvature and the unit tangent vector. Though these various ways are equivalent and match their smooth counterpart by passing to the limit, they exhibit different capabilities at the discrete level.
+
+%\cite{Hoffmann2008, Carroll2014, Crane2015}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[]{discrete_curve_full.pdf}
+	\caption{Discrete curve representation.}
+	\label{fig:discrete_curve}
+\end{figure}
 
 % definition
 % ------------
 \subsection{Definition}
 
+A discrete (or polygonal) space curve is defined as a finite sequence of $n+1$ points of $\mathbb{R}^3$ ($\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n$) called \emph{vertices} (see \cref{fig:discrete_curve}). Pairs of adjacent vertices define $n$ straight segments ($\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1}$) called \emph{edges}. Each edge is of length $l_i = \norm{\vect{e}_i}$.
 
-A discrete curve $\gamma$ is called regular if any three successive points are pairwise disjoined.
+\subsubsection{Turning angle}
+The angle between to adjacent edges is called the \emph{turning angle} : $\varphi_i = \angle(\vect{e}_{i-1},\vect{e}_i) \; , \; \forall i \in [1,n-1]$.
+
+% parametrization
+% ---------------------
+\subsection{Parametrization}
+
+\subsubsection{Arc-length}
+The curve arc-length is defined as : $\vect{x}_i = \vect{x}(s_i)$ with $s_i = \sum_{k=1}^i l_k$. Thus the length of the curve is :
+\begin{equation}
+	L = \sum_{i=0}^n \norm{\vect{e}_i}
+\end{equation}
+
+A discrete curve $\gamma$ is called parameterized by arc-length if $\norm{\gamma}=cst$. is called regular if any three successive points are pairwise disjoined.
 
 arc-length of a discrete curve $\gamma$ is defined as :
 \begin{equation}
 	L = \sum_{i=0}^n \norm{\vect{e}_i}
 \end{equation}
 
-% parametrization
-% ---------------------
-\subsection{Parametrization}
-
-A discrete curve $\gamma$ is called parameterized by arc-length if $\norm{\gamma}=cst$.
-
 % DISCRETE CURVATURE
 % ===================
 \section{Discrete curvature}
 
-\footnote{
-Curvature is defined from the osculating circle, which is the best approcximation of a curve by a circle.
-We can define such a circle and it's radius will be the curvature at that point. Problem : there are several ways to define such a circle.
+Plusieurs approches : le cercle osculateur ou la variation de longueur par transformation parallèle.
 
-Très intéressant de constater que cette vision 3 verticies  vs. 2 edges est déjà présente dès le début dans l'histoire de la compréhension de la courbure.
+\begin{figure}[!ht]
+	\centering
+%	\includegraphics[]{discrete_curve.pdf}
+%	\caption{Discrete curve representation.}
+%	\label{fig:discrete_curve}
+%	\vspace{40pt}
+	\subfloat[][vertex-based]{\includegraphics{kb_vertex.pdf}\label{fig:kb_vertex}}\hspace{5mm}
+    	\subfloat[][edge-based]{\includegraphics{kb_edge.pdf}\label{fig:kb_edge}} \\[-10pt]
+	\subfloat[][bitangent with $\norm{\vect{e}_{i-1}}$]{\includegraphics{kb_mixed_a.pdf}\label{fig:kb_mixed_a}}\hspace{5mm}
+	\subfloat[][bitangent with $\norm{\vect{e}_{i}}$]{\includegraphics{kb_mixed_b.pdf}\label{fig:kb_mixed_b}}
+	\vspace{10pt}
+	\caption{There is more than one way to define the osculating circle of a discrete curve.}
+	\label{fig:kb_def}
+\end{figure}
 
-Pour Euler, le rayon de courbure est le rapport de l’élément d’arc sur l’angle de contin-
-gence entre deux tangentes infiniment proches. Par ailleurs, la définition du plan osculateur n’est pas tout à fait lamêmeque chez Bernoulli, plan passant par trois points consécutifs, puis- qu’Euler dit que ce plan contient deux éléments successifs. Il le définit aussi en disant que c’est le plan où la courbe s’incurve. Pour le dire de façon un peu différente : la tangente contient un élément, c’est le lieu où la courbe est droite, la plan osculateur représente l’étape suivante, c’est le lieu où la courbe est arc de cercle. Nous ne pensons pas trahir Euler en faisant cette présen- tation : cela justifie que, pour lui, il est naturel de se placer sur le plan osculateur pour calculer le rayon de courbure. \cite{Delcourt2007}
+\cite{Romon2013}
 
-
-The edge osculating circle.
-The vertex osculating circle.
-La localité est meilleur dans le cas du vertex-based discret osculating circle.
-Pour des anlges élevés, le edge-based discret osculating circle est plus pertinent.
-La courbure tend vers l'infini quand les 2 edges deviennent colineaires.
-
-La définition du plan osculateur est univoque dans le cas discret : c'est localement le plan défini par 2 edges consécutifs.
-
-Ce n'est pas le cas de la courbure qui perd son côté intrinsèque.
-
-courbure discrete dans le cas général
-}
+%\footnote{
+%Curvature is defined from the osculating circle, which is the best approcximation of a curve by a circle.
+%We can define such a circle and it's radius will be the curvature at that point. Problem : there are several ways to define such a circle.
+%
+%Très intéressant de constater que cette vision 3 verticies  vs. 2 edges est déjà présente dès le début dans l'histoire de la compréhension de la courbure.
+%
+%Pour Euler, le rayon de courbure est le rapport de l’élément d’arc sur l’angle de contin-
+%gence entre deux tangentes infiniment proches. Par ailleurs, la définition du plan osculateur n’est pas tout à fait lamêmeque chez Bernoulli, plan passant par trois points consécutifs, puis- qu’Euler dit que ce plan contient deux éléments successifs. Il le définit aussi en disant que c’est le plan où la courbe s’incurve. Pour le dire de façon un peu différente : la tangente contient un élément, c’est le lieu où la courbe est droite, la plan osculateur représente l’étape suivante, c’est le lieu où la courbe est arc de cercle. Nous ne pensons pas trahir Euler en faisant cette présen- tation : cela justifie que, pour lui, il est naturel de se placer sur le plan osculateur pour calculer le rayon de courbure. \cite{Delcourt2007}
+%
+%
+%The edge osculating circle.
+%The vertex osculating circle.
+%La localité est meilleur dans le cas du vertex-based discret osculating circle.
+%Pour des anlges élevés, le edge-based discret osculating circle est plus pertinent.
+%La courbure tend vers l'infini quand les 2 edges deviennent colineaires.
+%
+%La définition du plan osculateur est univoque dans le cas discret : c'est localement le plan défini par 2 edges consécutifs.
+%
+%Ce n'est pas le cas de la courbure qui perd son côté intrinsèque.
+%
+%courbure discrete dans le cas général
+%}
 
 % vertex-based curvature
 % -------------------------------
 \subsection{Vertex-based osculating circle}
-
+Known as the \emph{Menger curvature}, it is defined as the inverse of the radius of the circle passing through three consecutive vertices.
 \begin{equation}
-	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}},
+	\vect{\kappa b} = \frac{2 \, \vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} \norm{\vect{e}_{i-1} + \vect{e}_{i}} }
+	\quad , \quad
+	\kappa_1 = \norm{\vect{\kappa b}} = \frac{2 \, \sin(\varphi_i)}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}}
 \end{equation}
 
+
 Problème de convergence lorsque l'angle tend vers pi et que les segments ont même longueur.
-En pratique peut probable.
+En pratique peut probable. Conduit à une limitation sur l'intégrale de courbure
 
 % edge-based curvature
 % ------------------------------
 \subsection{Edge-based osculating circle}
 
 \begin{equation}
-	\kappa_2 = \frac{tan(\varphi_i/2) + tan(\varphi_{i+1}/2)}{\norm{\vect{e}_{i}}}
+	\kappa_2 = \frac{\tan(\varphi_i/2) + \tan(\varphi_{i+1}/2)}{\norm{\vect{e}_{i}}}
 \end{equation}
 
 Bon comportement lorsque l'angle tend vers pi. Demande que les 3 segments soient coplanaires.
@@ -969,17 +1010,20 @@ La courbure est plutot défini relativement au segment $\vect{e}_i$ qu'au vertex
 % ---------------------
 \subsection{Osculating circle for an arc-length parametrized curve}
 
+The turning angle $\varphi_i$ is concentrated at vertex $\vect{x}_i$. The curvature is spread along the discrete curve from the middle of $\vect{e}_{i-1}$ to the middle of $\vect{e}_{i}$ :
+\begin{equation}
+	\vect{\kappa b} = \frac{2}{l} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
+	\quad , \quad
+	\kappa_3 = \norm{\vect{\kappa b}} = \frac{2}{l} \tan(\varphi_i/2)
+	\quad , \quad 
+	l = \frac{\norm{\vect{e}_{i-1}} + \norm{\vect{e}_{i}}}{2}
+\end{equation}
+
+Qu'on peut réécrire pour des segments de longueur constante :
 \begin{equation}
 	\kappa_3 = \frac{2 \,tan(\varphi_i/2)}{l}
 	\quad , \quad 
-	l = \norm{\vect{e}_{i}}= cst
-\end{equation}
-
-Qu'on peut réécrire pour des segments de longueur variable, avec la moyenne
-\begin{equation}
-	\kappa_3 = \frac{2 \,tan(\varphi_i/2)}{l_i}
-	\quad , \quad 
-	l_i = \frac{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}}}{\norm{\vect{e}_{i-1}} + \norm{\vect{e}_{i}}}
+	l = \norm{\vect{e}_{i}} = cst
 \end{equation}
 
 \note{
@@ -988,27 +1032,36 @@ Unlike the smooth case we can not reparameterize a curve. A discrete curve is pa
 Cette condition est extrêmement exigente $\norm{\vect{e}_{i}} = cst$. Elle est tenable pour des modèles de poutre non connectées (où le pas de disctrétisation peut-être choisi uniform) mais pour en cas de connexion. Ce point n'est pas éclairci dans les articles de Audoly.
 }
 
-\begin{figure}[h]
-     \subfloat[][vertex-based osculating circle]{\includegraphics{osculating_circle_vertex.pdf}\label{<figure1>}}
-     \subfloat[][edge-based osculating circle]{\includegraphics{osculating_circle_edge.pdf}\label{<figure2>}}
-     \label{steady_state}
-     \centering
-     \caption{Definition of the osculating circle for discrete curves.}
-\end{figure}
+%\begin{figure}[t]
+%     \subfloat[][vertex-based]{\includegraphics{kb_vertex.pdf}\label{fig:kb_vertex}}
+%     \subfloat[][edge-based]{\includegraphics{kb_edge.pdf}\label{fig:kb_edge}}
+%     \label{steady_state}
+%     \centering
+%     \caption{Main definition for the definition of the discrete osculating circle.}
+%\end{figure}
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[]{osculating_circle_edge_cst.pdf}
-\caption{Another definition of the osculating circle for arc-length parametrized curves.}
-\label{fig:1_1}
-\end{center}
-\end{figure}
+
+
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[]{osculating_circle_edge_cst.pdf}
+%\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+%\label{fig:1_1}
+%\end{center}
+%\end{figure}
 
 
 % sensitivity to non uniform discretization
 % ----------------------------------------------------
 \subsection{Benchmarking : sensitivity to non uniform discretization}
 Qu'on réécrit en posant $\norm{\vect{e}_{i-1}} = \alpha \norm{\vect{e}_{i}}$, $\alpha \geq 0$ :
+
+\begin{figure}[h]
+\begin{center}
+\input{ch3_geometry/plot/plot_1.tex}
+\end{center}
+\caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
+\end{figure}
 
 \begin{equation}
 	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\norm{\vect{e}_{i}}(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}},
@@ -1019,29 +1072,34 @@ Qu'on réécrit en posant $\norm{\vect{e}_{i-1}} = \alpha \norm{\vect{e}_{i}}$, 
 \begin{equation}
 	\frac{\kappa_1}{\kappa_2}(\alpha) = \frac{\kappa_1}{\kappa_2}(1/\alpha)= \frac{1+\alpha}{(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}} \, cos^2(\varphi_i/2)
 \end{equation}
+%
+%\begin{figure}[t]
+%	\centering
+%	\subfloat[][]{\includegraphics{kb_anim_vertex_a.pdf}\label{fig:}}
+%	\subfloat[][]{\includegraphics{kb_anim_vertex_b.pdf}\label{fig:}}\\
+%	\subfloat[][]{\includegraphics{kb_anim_edge_a.pdf}\label{fig:}}
+%	\subfloat[][]{\includegraphics{kb_anim_edge_b.pdf}\label{fig:}}
+%	\vspace{10pt}
+%	\caption{Benchmarking vertex-based and edge-based discrete curvatures.}
+%	\label{fig:kb_bench}
+%\end{figure}
 
-\begin{figure}[b]
-\begin{center}
-\includegraphics[]{curvature_vertex.pdf}
-\caption{Variation of the vertex-based discrete curvature.}
-\label{fig:vertexbased}
-\includegraphics[]{curvature_edge.pdf}
-\caption{Variation of the vertex-based discrete curvature.}
-\label{fig:edgebased}
-\end{center}
+\begin{figure}[t]
+	\captionsetup[subfloat]{captionskip=10pt}
+	\centering
+	\subfloat[][vertex-based]{\includegraphics{kb_anim_vertex_a.pdf}\label{fig:1}}\hspace{5mm}
+	\subfloat[][vertex-based]{\includegraphics{kb_anim_vertex_b.pdf}\label{fig:2}} \\
+	\subfloat[][edge-based]{\includegraphics{kb_anim_edge_a.pdf}\label{fig:3}}\hspace{5mm}
+	\subfloat[][edge-based]{\includegraphics{kb_anim_edge_b.pdf}\label{fig:4}}
+	\vspace{10pt}
+	\caption{There is more than one way to define the osculating circle of a discrete curve.}
 \end{figure}
-
 
 % accuracy in bending energy representation
 % ---------------------------------------------------------
 \subsection{Benchmarking : accuracy in bending energy representation}
 
-\begin{figure}[b]
-\begin{center}
-\input{ch3_geometry/plot/plot_1.tex}
-\end{center}
-\caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
-\end{figure}
+
 
 % Straight line
 \subsubsection{Straight line}
@@ -1225,9 +1283,16 @@ Remarque that ratios are independent of scale change (independent of R)
 \label{g:nognot}
 \end{figure}
 
-% DISCRETE CURVATURE
+% DISCRETE TANGENT VECTOR
 % ===================
 \section{Discrete tangent vector}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[]{kb_vertex_tangent.pdf}
+	\caption{Tangent vector at verticies.}
+	\label{fig:1_1}
+\end{figure}
 
 Problème de définition. Facile de définir une tangente sur un edge. Mais une infinité de tangentes possibles à chaque vertex.
 

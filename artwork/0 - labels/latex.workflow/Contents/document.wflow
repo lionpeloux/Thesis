@@ -105,7 +105,23 @@
 				<dict>
 					<key>equationFilesDestination</key>
 					<dict/>
+					<key>equationMode</key>
+					<dict/>
 					<key>equationType</key>
+					<dict/>
+					<key>exportFormat</key>
+					<dict/>
+					<key>exportJpegBackgroundColor</key>
+					<dict/>
+					<key>exportJpegQualityPercent</key>
+					<dict/>
+					<key>exportSvgPdfToSvgPath</key>
+					<dict/>
+					<key>exportTextExportBody</key>
+					<dict/>
+					<key>exportTextExportEnvironment</key>
+					<dict/>
+					<key>exportTextExportPreamble</key>
 					<dict/>
 					<key>fontColorData</key>
 					<dict/>
@@ -211,7 +227,7 @@
 				<key>OutputUUID</key>
 				<string>31398A99-5322-492F-B564-A368D3315CB2</string>
 				<key>ShowWhenRun</key>
-				<true/>
+				<false/>
 				<key>UUID</key>
 				<string>D68AD899-BCDB-4CD7-BCAD-66744D51BDD2</string>
 				<key>UnlocalizedApplications</key>
@@ -286,12 +302,10 @@
 						<string>3</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>363.000000:622.000000</string>
+				<string>332.500000:314.000000</string>
 				<key>nibPath</key>
 				<string>/Applications/TeX/LaTeXiT.app/Contents/Library/Automator/CreateEquations.action/Contents/Resources/main.nib</string>
 			</dict>
@@ -301,7 +315,7 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>4901E4BE-CE00-4281-B6BD-2270A89FF335</key>
+		<key>5B93B5A3-8025-4F08-BEAB-E00866CA8766</key>
 		<dict>
 			<key>from</key>
 			<string>4E1CC055-799A-483B-8F17-2519574AA8E6 - 4E1CC055-799A-483B-8F17-2519574AA8E6</string>
