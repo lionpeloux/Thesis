@@ -95,19 +95,19 @@ Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{1}$. The lengt
 \end{equation}
 Note that the length of $\gamma$ is invariant under reparametrization.
 
-% arc-length
-\subsection{Arc-length parametrization}
-Let $\gamma=(I,F)$ be a regular parametric curve. Let $t_0 \in I$ be a given parameter. The following map is said to be the \emph{arc-length of origin $t_0$} of $\gamma$ :
+% arc length
+\subsection{arc length parametrization}
+Let $\gamma=(I,F)$ be a regular parametric curve. Let $t_0 \in I$ be a given parameter. The following map is said to be the \emph{arc length of origin $t_0$} of $\gamma$ :
 \begin{equation}
 	s \colon t \mapsto \int_{t_{0}}^{t}\norm{F'(u)}du
 	\quad,\quad
 	s \in I \times \mathbb{R}
 \end{equation}
-The arc-length $s \colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
+The arc length $s \colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
 
 Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\norm{G'(s)} = 1, \forall s \in J$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed\footnote{Regular curves are also known as \emph{unit-speed} curves.} ($\norm{G'} = 1$).
 
-Thereafter, for a regular curve $\gamma$ : $\gamma(t)$ will denote the point $F(t)$ of parameter $t \in I$ ; while $\gamma(s)$ will denote the point $G(s)$ of arc-length $s \in J=[0,L]$.
+Thereafter, for a regular curve $\gamma$ : $\gamma(t)$ will denote the point $F(t)$ of parameter $t \in I$ ; while $\gamma(s)$ will denote the point $G(s)$ of arc length $s \in J=[0,L]$.
 
 % --------------------------------------------------------------------------------------------------------------------------------------------
 % FRENET THRIEDRON
@@ -115,7 +115,7 @@ Thereafter, for a regular curve $\gamma$ : $\gamma(t)$ will denote the point $F(
 
 \section{Frenet trihedron}\label{sec:frenettrihedron}
 
-%\note{From now, we will assume that the curve $\gamma$ is a regular parametric curve of class ${\mathcal{C}}^{1}$ parametrized by its arc-length $s \in [0,L]$.}
+%\note{From now, we will assume that the curve $\gamma$ is a regular parametric curve of class ${\mathcal{C}}^{1}$ parametrized by its arc length $s \in [0,L]$.}
 
 The Frenet trihedron is a fundamental mathematical tool from the field of differential geometry to study local characterization of planar and non-planar space curves. It is a direct orthonormal basis attached to any point $P$, of parameter $t \in I$, on a parametric curve $\gamma$. This basis is composed of three unit vectors $\{\vect{t}(t),\vect{n}(t),\vect{b}(t)\}$ called respectively the \emph{tangent}, the \emph{normal}, and the \emph{binormal} unit vectors\footnote{
 Strictly speaking, the map $\fonction{\vect{t}}{t}{\vect{t}(t)}$ is a \emph{vector field} while $\vect{t}(t)$ is a \emph{vector} of $\mathbb{R}^3$. For the sake of simplicity, and if there is no ambiguity, these two notions will not be explicitly distinguished hereinafter.
@@ -134,7 +134,7 @@ Let $\gamma = (I,F)$ be a regular parametric curve. Let $t \in I$ be a parameter
 	\quad,\quad
 	\norm{\vect{t}(t)}=1
 \end{equation}
-For an arc-length parametrized curve, this expression simply becomes :
+For a curve parametrized by arc length, this expression simply becomes :
 \begin{equation}
 	\vect{t}(s) = \gamma'(s)
 	\quad,\quad
@@ -172,7 +172,7 @@ Let $t \in I$ be a parameter. The \emph{unit normal vector} is defined as :
 	\quad,\quad
 	\norm{\vect{n}(t)}=1
 \end{equation}
-For an arc-length parametrized curve, this expression simply becomes :
+For a curve parametrized by arc length, this expression simply becomes :
 \begin{equation}
 	\vect{n}(s) = \frac{\vect{t}'(s)}{\norm{\vect{t}'(s)}} 
 	= \gamma'(s) \times (\gamma''(s) \times \gamma'(s))
@@ -197,7 +197,7 @@ Let $\gamma = (I,F)$ be a biregular parametric curve. Let $t \in I$ be a paramet
 	\quad,\quad
 	\norm{\vect{b}(t)}=1
 \end{equation}
-For an arc-length parametrized curve, this expression simply becomes :
+For a curve parametrized by arc length, this expression simply becomes :
 \begin{equation}
 	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s)
 	= \gamma'(s) \times \gamma''(s)
@@ -227,7 +227,7 @@ Les Anciens ont nommé cette courbe Spirale ou Hélice ; parce que la formation 
 }}.
 However, as stated in \cite[p.321]{Coolidge2013}, curvature and torsion where probably first thought by Monge around 1771\footnote{
 \blockcquote[p.363]{Monge1809}{On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point ; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.
-}}. It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g.\ \emph{elastica}) and the study of curves of double curvature were intimately related to each other.
+}.}. It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g.\ \emph{elastica}) and the study of curves of double curvature were intimately related to each other.
 
 Space curves were historically understood as \emph{curves of double curvature} by extension to the case of planar curves, where the curvature measures the deviance of a curve from being a straight line. The second curvature, nowadays known as the \textquote{torsion} or \textquote{second generalized curvature}, measures the deviance of a curve from being plane. 
 
@@ -243,10 +243,27 @@ Space curves were historically understood as \emph{curves of double curvature} b
 %Curvature
 \subsection{First invariant : the curvature}\label{sec:curvature}
 In differential geometry, the \emph{osculating circle} is defined as the limit of the circle passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ (\cref{fig:3_1}). This circle lies on the osculating plane and its radius is nothing but the inverse of the local curvature of a curve\footnote{
-As explained by Euler itself, at a given arc-length parameter ($s$), the osculating plane is the plane in which a curve takes its curvature :  
+As explained by Euler itself, at a given arc length parameter ($s$), the osculating plane is the plane in which a curve takes its curvature :  
 \blockcquote[p.364]{Euler1775}{in quo bina fili elementa proxima in curvantur}.}. While the tangent gives the best local approximation of the curve as a straight line, the osculating circle gives the best local approximation of that curve as an arc.
+
+The curvature is also known to be the \emph{gradient of arc length} (see \cite[p.4]{Vouga2014}) and calculated as : $\nabla{L} = \kappa \vect{n}$ . Thus, the curvature gives the first-order variation in arc length when deforming a curve $\gamma$ in a closed enough curve $\gamma + \epsilon \delta\gamma$ :
+\begin{equation}
+	L(\gamma + \epsilon \delta\gamma) = L(\gamma) + \epsilon (\nabla L \cdot \delta\gamma) + o(\epsilon)
+	\quad , \quad
+	\nabla L \cdot \delta\gamma
+	= \frac{d}{d\epsilon}L(\gamma+\epsilon \delta \gamma)\Bigr|_{\epsilon = 0}
+%	= \lim_{\epsilon \to 0} \frac{L(\gamma+\epsilon \delta \gamma) - L(\gamma)}{\epsilon} 
+%	=  \scalar{\nabla L}{\delta\gamma}
+%	\quad , \quad
+%	\nabla L = \scalar{\kappa \vect{n}}{\delta\gamma}
+\end{equation}
+This is easily understood in the case of a circle of radius $r$ extended to a circle of radius $r+dr$, where the total arc length variation is given by : 
+$L(r + dr) - L(r) = \kappa dr L(r) $.
+
+Note that due to the inner product with the normal vector, only the normal component of the deformation results in an effective extension of the curve. This point is worth to note as it will be related to the \emph{inextensibility assumption} made later in our beam model.
+
 \subsubsection{Curvature}
-Let $\gamma$ be a regular arc-length parametrized curve. Let $s \in [0,L]$ be an arc-length parameter. The \emph{curvature} is a positive scalar quantity defined as :
+Let $\gamma$ be a regular arc length parametrized curve. Let $s \in [0,L]$ be an arc length parameter. The \emph{curvature} is a positive scalar quantity defined as :
 \begin{equation}
 	\kappa(s) = \norm{\vect{t}'(s)} \ge 0 
 	\quad,\quad
@@ -281,7 +298,7 @@ The \emph{radius of curvature} is defined as the inverse of the curvature ($r= 1
 The \emph{center of curvature} is defined as the center of the osculating circle (\cref{fig:3_2}). The locus of all the centers of curvature of a curve is called the \emph{evolute}.
 
 \subsubsection{Curvature binormal vector}
-Finally, following \cite{Bergou2008} we define the \emph{curvature binormal vector}. Let $\gamma$ be a biregular arc-length parametrized curve. Let $s\in [0,L]$ be an arc-length parameter. The \emph{curvature binormal vector} is defined as :
+Finally, following \cite{Bergou2008} we define the \emph{curvature binormal vector}. Let $\gamma$ be a biregular arc length parametrized curve. Let $s\in [0,L]$ be an arc length parameter. The \emph{curvature binormal vector} is defined as :
 \begin{equation}
 	\vect{\kappa b}(s) = \vect{t}(s) \times \vect{t}'(s) = \kappa(s)\cdot\vect{b}(s)
 	\quad,\quad
@@ -292,7 +309,7 @@ This vector will be useful as it embed all the necessary information on the curv
 
 % Torsion
 \subsection{Second invariant : the torsion}\label{sec:torsion}
-Let $\gamma$ be a biregular arc-length parametrized curve. Let $s \in [0,L]$ be an arc-length parameter. The \emph{torsion} is a scalar quantity defined as :
+Let $\gamma$ be a biregular arc length parametrized curve. Let $s \in [0,L]$ be an arc length parameter. The \emph{torsion} is a scalar quantity defined as :
 \begin{equation}
 	\tau_f(s) = \vect{n}'(s) \cdot \vect{b}(s) = - \vect{b}'(s) \cdot \vect{n}(s)
 \end{equation}
@@ -318,7 +335,7 @@ This two \emph{generalized curvatures}, respectively the curvature ($\kappa$) an
 
 % The Serret-Frenet formulas
 \subsection{Serret-Frenet formulas}\label{sec:serret}
-The \emph{Fundamental theorem of space curves} is somehow a consequence of the \emph{Serret-Frenet formulas}, which is the first-order system of differential equations satisfied by the Frenet trihedron. Let $\gamma$ be a biregular arc-length parametrized curve. Let $s \in [0,L]$ be an arc-length parameter. Then, the Frenet trihedron satisfies the following formulas :
+The \emph{Fundamental theorem of space curves} is somehow a consequence of the \emph{Serret-Frenet formulas}, which is the first-order system of differential equations satisfied by the Frenet trihedron. Let $\gamma$ be a biregular arc length parametrized curve. Let $s \in [0,L]$ be an arc length parameter. Then, the Frenet trihedron satisfies the following formulas :
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -410,7 +427,7 @@ Again, this system can be seen as the \emph{equations of motion} of the Frenet t
 
 \section{Curve framing}
 
-%From now on, we consider $\gamma$ to be a biregular arc-length parametrized curve.
+%From now on, we consider $\gamma$ to be a biregular arc length parametrized curve.
 
 While the Frenet trihedron \blockcquote[p.1]{Bishop1975}{has long been the standard vehicle for analysing properties of the curve invariant\footnote{Namely the curvature ($\kappa$) and the Frenet torsion ($\tau_f$).} under euclidean motions}, a curve can be potentially framed with any arbitrary \emph{moving frame}, understood as an \emph{orthonormal basis field}. Thus, the Frenet frame is not the only way to frame a curve\footnote{Recall the title of Bishop's paper : \blockcquote[]{Bishop1975}{There is more than one way to frame a curve}.} and other frames may or may not exhibit some interesting properties.
 
@@ -421,7 +438,7 @@ In this section we introduce the \emph{moving frame} notion and two properties o
 % moving frame
 \subsection{Moving frame}
 
-Let $\gamma$ be an arc-length parametrized curve. A map $F$ which associates to each point of arc-length parameter $s$ a direct orthonormal trihedron is said toi be a \emph{moving frame} :
+Let $\gamma$ be a curve parametrized by arc length. A map $F$ which associates to each point of arc length parameter $s$ a direct orthonormal trihedron is said toi be a \emph{moving frame} :
 \begin{equation}
 	\fonctionL{F}{[0,L]}{\mathcal{SO}_{3}(\mathbb{R})}{s}{F(s) = \{\vect{e}_{3}(s),\vect{e}_{1}(s),\vect{e}_{2}(s)\}}
 \end{equation}
@@ -505,7 +522,7 @@ This system can be seen as the \emph{equations of motion} of the frame moving al
 	\end{bmatrix}
 \end{equation}
 This result is straightforward deduced from \cref{eq:movingframe}. Note that the cross product reveals the skew-symmetric nature of the system, which could already be seen in \cref{eq:movingframe}.
-Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc-length $s$ and $s+ds$ (\cref{fig:3_4}) shows that the scalar functions $\tau$, $k_{1}$ and $k_{2}$ effectively correspond to the angular speed of the frame moving along $\gamma$, respectively around $\vect{e}_{3}$, $\vect{e}_{1}$ and $\vect{e}_{2}$ :
+Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc length $s$ and $s+ds$ (\cref{fig:3_4}) shows that the scalar functions $\tau$, $k_{1}$ and $k_{2}$ effectively correspond to the angular speed of the frame moving along $\gamma$, respectively around $\vect{e}_{3}$, $\vect{e}_{1}$ and $\vect{e}_{2}$ :
 \begin{equation}
 	\frac{d\theta_3}{ds}(s) = \tau(s)
 	\quad,\quad
@@ -553,7 +570,7 @@ Following \cite{Farouki2014, Wang2008} we introduce the \emph{rotation-miniminzi
 The notion of \emph{parallel transport} is somehow a generalization of the classical notion of collinearity in flat euclidean spaces (e.g.\ $\mathbb{R}^2$ or $\mathbb{R}^3$), to spaces that exhibit some non vanishing curvature (e.g.\ spheric or hyperbolic spaces)\footnote{\url{https://www.youtube.com/watch?v=p1tfZD2Bm0w}}.
 
 \subsubsection{Relatively parallel fields}
-Following \cite{Bishop1975}, we define what is a \emph{(relatively) parallel field}. Let $\gamma$ be a regular arc-length parametrized curve. Let $\vect{p}$ be a vector field along $\gamma$. The vector field $\vect{p}$ is said to be \emph{parallel} if its derivative is purely tangential, that is :
+Following \cite{Bishop1975}, we define what is a \emph{(relatively) parallel field}. Let $\gamma$ be a regular curve parametrized by arc length. Let $\vect{p}$ be a vector field along $\gamma$. The vector field $\vect{p}$ is said to be \emph{parallel} if its derivative is purely tangential, that is :
 \begin{equation}
 	\vect{p}'(s) \times \vect{t}(s) = 0
 \end{equation}
@@ -572,7 +589,7 @@ In other words, a \emph{relatively parallel normal field} : \blockcquote{Bishop1
 %\end{itemize}
 
 \subsubsection{Parallel transport of vectors along a curve}
-Reciprocally, it is possible to define the \emph{parallel transport} of a vector along a curve $\gamma$ as its propagation along $\gamma$ at angular speed $\vect{\kappa b}$. An initial vector $\vect{p}_0 = \vect{p}(s_0)$ is parallel transported at arc-length parameter $s$ into the vector $\vect{p}(s)$ by integrating the following first-order differential equation along $\gamma$ :
+Reciprocally, it is possible to define the \emph{parallel transport} of a vector along a curve $\gamma$ as its propagation along $\gamma$ at angular speed $\vect{\kappa b}$. An initial vector $\vect{p}_0 = \vect{p}(s_0)$ is parallel transported at arc length parameter $s$ into the vector $\vect{p}(s)$ by integrating the following first-order differential equation along $\gamma$ :
 \begin{equation}
 	\vect{p}'(s) = \vect{\kappa b}(s) \times  \vect{p}(s)
 \end{equation}
@@ -670,7 +687,7 @@ A \emph{Bishop frame}\footnote{Introduce as \emph{relatively parallel adapted fr
 \begin{equation}
 	\vect{\Omega} \cdot \vect{t} = \tau =\vect{u^{'}} \cdot \vect{v} = - \vect{u} \cdot \vect{v^{'}} = 0
 \end{equation}
-Because a Bishop frame is an adapted frame, it can be defined relatively to the Frenet frame by a rotation around the unit tangent vector. A Bishop frame is a frame that cancels out the rotational movement of the Frenet frame around the tangent vector. At arc-length parameter $s$, the Frenet frame has continuously rotated around its tangent vector of a cumulative angle : $\int_0^s \tau_f(t)dt$. Thus, any Bishop frame will be obtained, within a constant rotation angle $\theta_0$, through a rotation of the Frenet frame around the tangent vector by an angle :
+Because a Bishop frame is an adapted frame, it can be defined relatively to the Frenet frame by a rotation around the unit tangent vector. A Bishop frame is a frame that cancels out the rotational movement of the Frenet frame around the tangent vector. At arc length parameter $s$, the Frenet frame has continuously rotated around its tangent vector of a cumulative angle : $\int_0^s \tau_f(t)dt$. Thus, any Bishop frame will be obtained, within a constant rotation angle $\theta_0$, through a rotation of the Frenet frame around the tangent vector by an angle :
 \begin{equation}
 	\theta(s)  =  - \int_0^s \tau_f(t)dt + \theta_0(s)
 \end{equation}
@@ -735,7 +752,7 @@ Consequently, the angular velocity vector ($\vect{\Omega_{b}}$) of the Bishop fr
 \end{equation}
 Remark that the Bishop frame satisfies $\vect{\Omega_b}(s) \cdot \vect{t}(s) = 0$ and is thus \emph{rotation-miniminzing} regarding the tangent vector. The motion of this frame through the curve is known as \textquote{roll-free}.
 
-Because the motion of this frame is described by an angular velocity vector that is nothing but the curvature binormal vector ($\vect{\Omega_b} = \vect{\kappa b}$), it can be interpreted in terms of \emph{parallel transport} as defined in \cref{sec:paralleltransport}. Thus, given an initial frame at arc-length parameter $s=0$, the Bishop frame at any arc-length parameter ($s$) is obtained by parallel transporting the initial frame $\{\vect{t}(0),\vect{u}(0), \vect{v}(0)\}$ along the curve from $0$ to $s$.
+Because the motion of this frame is described by an angular velocity vector that is nothing but the curvature binormal vector ($\vect{\Omega_b} = \vect{\kappa b}$), it can be interpreted in terms of \emph{parallel transport} as defined in \cref{sec:paralleltransport}. Thus, given an initial frame at arc length parameter $s=0$, the Bishop frame at any arc length parameter ($s$) is obtained by parallel transporting the initial frame $\{\vect{t}(0),\vect{u}(0), \vect{v}(0)\}$ along the curve from $0$ to $s$.
 
 \subsubsection{Drawbacks and benefits}
 \footnote{\cite{Guggenheimer1989, Klok1986, Bloomenthal1990, Wang2008, Poston1995, Menninger2013}}
@@ -900,8 +917,13 @@ The previous section has introduced the fundamental analytical tools to develop 
 
 The study of those discrete equivalent notions belong to the recent field of \emph{Discrete Differential Geometry} : \blockcquote[p.7]{Hoffmann2008}{In some sense discrete differential geometry can be considered more fundamental than differential geometry since the later can be obtained form the former as a limit}. In particular, we will see that they are several ways to define the discrete equivalents of the curvature and the unit tangent vector. Though these various ways are equivalent and match their smooth counterpart by passing to the limit, they exhibit different capabilities at the discrete level.
 
-%\cite{Hoffmann2008, Carroll2014, Crane2015}
+ \blockcquote[p.1]{Carroll2014}{There is no general theory or methodology in the literature, despite the ubiquitous use of discrete curves in mathematics and science. There are conflicting definitions of even basic concepts such as discrete curvature $\kappa$, discrete torsion $\tau$, or discrete Frenet frame.}.
 
+%\cite{Hoffmann2008, Carroll2014, Crane2015, Vouga2014}
+
+% definition
+% ------------
+\subsection{Definition}
 \begin{figure}[t]
 	\centering
 	\includegraphics[]{discrete_curve_full.pdf}
@@ -909,39 +931,87 @@ The study of those discrete equivalent notions belong to the recent field of \em
 	\label{fig:discrete_curve}
 \end{figure}
 
-% definition
-% ------------
-\subsection{Definition}
+Let $\Gamma$ be a discrete (or polygonal) space curve. $\Gamma$ is defined as an ordered sequence $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n) \in \mathbb{R}^{3(n+1)}$ of $n+1$ pairwise disjoint \emph{vertices} (see \cref{fig:discrete_curve}). Consecutive pairs of vertices define $n$ straight segments $(\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1})$ called \emph{edges}, pointing from one vertex to the next one : $\vect{e}_i = \vect{x}_{i+1} - \vect{x}_{i}$. The length of and edge is denoted $l_i = \norm{\vect{e}_i}$. Additionally, we define the vertex-based mean length $\overbar{l_i} = \tfrac{1}{2}(l_{i-1} + l_i)$ at vertex $\vect{x}_i$. The total length of $\Gamma$ is denoted $L = \sum_{i=0}^{n-1} \norm{\vect{e}_i}$.
 
-A discrete (or polygonal) space curve is defined as a finite sequence of $n+1$ points of $\mathbb{R}^3$ ($\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n$) called \emph{vertices} (see \cref{fig:discrete_curve}). Pairs of adjacent vertices define $n$ straight segments ($\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1}$) called \emph{edges}. Each edge is of length $l_i = \norm{\vect{e}_i}$.
+\subsubsection{Discrete unit tangent vector}
+Edge vectors lead to a natural definition of the \emph{discrete unit tangent vector} along each edge : $\vect{u}_i = \vect{e}_i / l_i$. However, this definition makes no sens at vertices where all the curvature is \emph{localized} and measured by the turning angle ($\varphi_i$). This is explained in terms of the Gau{\ss} map as edges will map to points but vertices will map to curves on the unit sphere.
 
-\subsubsection{Turning angle}
-The angle between to adjacent edges is called the \emph{turning angle} : $\varphi_i = \angle(\vect{e}_{i-1},\vect{e}_i) \; , \; \forall i \in [1,n-1]$.
+\subsubsection{Discrete osculating plane}
+Consecutive pairs of edges lead to a natural definition of the \emph{discrete osculating plane}, as the plane in which $\Gamma$ locally lies on. This plane is well defined by its normal vector known as the \emph{discrete unit binormal vector} ($\vect{b}_i = \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1} \times \vect{e}_{i}}}$) only if $\vect{e}_{i-1}$ and $\vect{e}_{i}$ are non-collinear ; that is the curve is not locally a straight line, or equivalently the curvature does not vanish.
+
+\subsubsection{Discrete turning angle}
+The \emph{turning angle} is defined as the oriented angle between to adjacent edges : $\varphi_i=\angle(\vect{e}_{i-1},\vect{e}_i)$. It is defined only for all $i \in [1,n-1]$. It corresponds to the angle of rotation, in the osculating plane, around the binormal vector ($\vect{b}_i$), to align $\vect{e}_{i-1}$ with $\vect{e}_{i}$. The sign of $\varphi_i$ is taken in accordance to the right-hand rule regarding the orientation of $\vect{b}_i$. The next section will highlight the central role of the turning angle in the possible measurements of the discrete curvature.
+
+Recall that for a planar curve, where $\varphi$ denotes the angle between the tangent vector ($\vect{t} = \cos\varphi \,\vect{e}_x + \sin\varphi \,\vect{e}_y$) and the horizontal line of direction $\vect{e}_x$, the following relation holds : $\varphi(s_1) - \varphi(s_2) = \int_{s_1}^{s_2} \frac{d \varphi}{d s} ds = \int_{s_1}^{s_2} \kappa ds$.
+
+% parametrization
+% ---------------------
+\subsection{Regularity}
+
+Let $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n)$ be a discrete curve of edges $\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1}$. $\Gamma$ is said to be :
+\begin{itemize}
+	\item  \emph{regular} if it has no kinks : $\vect{e}_{i-1} + \vect{e}_{i} \neq 0 \Leftrightarrow \varphi_i \neq \pi \; | \; \forall i \in [1,n-1] $
+	\item  \emph{biregular} if no vertex is flat : $\vect{e}_{i-1} - \vect{e}_{i} \neq 0 \Leftrightarrow \varphi_i \neq 0 \; | \; \forall i \in [1,n-1] $
+\end{itemize}
 
 % parametrization
 % ---------------------
 \subsection{Parametrization}
 
-\subsubsection{Arc-length}
-The curve arc-length is defined as : $\vect{x}_i = \vect{x}(s_i)$ with $s_i = \sum_{k=1}^i l_k$. Thus the length of the curve is :
+In the literature, discrete curves are usually considered as maps defined on $I = [0,n] \in \mathbb{N}^{n+1}$. As a consequence, the discrete derivative of $\Gamma$ is an edge-based quantity defined as : 
 \begin{equation}
-	L = \sum_{i=0}^n \norm{\vect{e}_i}
+	\Gamma'_i = \frac{ \Gamma(t_{i+1}) -  \Gamma(t_i)}{t_{i+1} - t_i} = \vect{e}_i 
+	\quad , \quad
+	\vect{x}_{i} = \Gamma(t_i)
+	\quad , \quad
+	t_i = i
 \end{equation}
+Thus, as in the smooth case, a discrete curve is said to be parametrized by arc length if $\norm{\Gamma'} = 1$, that is every edges are of unit length ($\norm{\vect{e}_i} = 1$). This constraint is sometimes relaxed to curves of constant edge length ($\norm{\vect{e}_i} = c$) that are said to be parametrized proportional to arc length.
 
-A discrete curve $\gamma$ is called parameterized by arc-length if $\norm{\gamma}=cst$. is called regular if any three successive points are pairwise disjoined.
+In the present work, to stick closer to the smooth case, we instead consider discrete curves as maps defined on $I = [t_0, t_1, \ldots, t_n] \in \mathbb{R}^{n+1}$ where $t$ denotes the discrete parametrization of $\Gamma$. As in the smooth case, the way to parametrized a curve is not unique.
 
-arc-length of a discrete curve $\gamma$ is defined as :
+\subsubsection{Arc length parameter}
+By analogy with the smooth case, we define the curve arc length at vertices as :
 \begin{equation}
-	L = \sum_{i=0}^n \norm{\vect{e}_i}
+	\left\{
+	\begin{aligned}
+		s_0 	&= 0 								& 	&i = 0		\\
+		s_i 	&= \sum_{k=1}^i \norm{\vect{e}_{k-1}}		&	&i \in [\|1, n-1\|]	\\
+		s_n 	&= \sum_{k=1}^{n} \norm{\vect{e}_{k-1}} = L 	&	&i = n		\\
+	\end{aligned}
+	\right.
 \end{equation}
+This definition naturally extends to the whole domain by piecewise linear interpolation. This is not different as considering the discrete curve as a continuous polygonal curve. Indeed, for any $s \in [s_i, s_{i+1}]$ there exist a normalized parameter $t = \frac{s - s_i}{s_{i+1} - s_i} \in [0,1]$ such that :
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		s(t) &= (1-t) s_i + t s_{i+1} = s_i + t l_i \\
+		\vect{x}(t) &= (1-t) \vect{x}_i  + t \vect{x}_{i+1} =  \vect{x}_i + t  \vect{e}_i 
+	\end{aligned}
+	\right.
+\end{equation}
+Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n ]s_{i-1}, s_i[$ but $\Gamma'$ remains undefined at vertices. This issue is the reason why defining the tangent vector at vertices can not be done unequivocally.
 
 % DISCRETE CURVATURE
 % ===================
 \section{Discrete curvature}
+Several approches. \cite{Vouga2014} defines and compares three different definitions of the discrete curvature that does not suppose that $\norm{\vect{e}_i} = cst$. By trying to mimic somme properties of the curvature in the smooth case. \cite{Bobenko2015}. \cite{Carroll2014} also defines and compares three different definitions of the discrete curvature from the osculating circle. One main drawback of all the said proposals is that the question of the curvature at  start and end points is never treated. But this si of main importance when dealing worth beams as the nature of the boundary condition can make the curvature to be null or not at its ends, depending if somme moment has to be transfer or not. In this sens, the question of discrete curvature could not be treated separately with the question of the tangent vector.
+%
+%Circumscribed : control (in position) over mid-edge points
+%
+%Inscribed : control (in position) over the vertices
 
-Plusieurs approches : le cercle osculateur ou la variation de longueur par transformation parallèle.
+%Plusieurs approches :
+%\begin{itemize}
+%	\item osculating circle (circumscribed, inscribed, centered)
+%	\item curve gradient
+%\end{itemize}
 
-\begin{figure}[!ht]
+\cite{Romon2013}
+
+\subsection{From osculating circles}
+
+\begin{figure}[!t]
 	\centering
 %	\includegraphics[]{discrete_curve.pdf}
 %	\caption{Discrete curve representation.}
@@ -952,11 +1022,9 @@ Plusieurs approches : le cercle osculateur ou la variation de longueur par trans
 	\subfloat[][bitangent with $\norm{\vect{e}_{i-1}}$]{\includegraphics{kb_mixed_a.pdf}\label{fig:kb_mixed_a}}\hspace{5mm}
 	\subfloat[][bitangent with $\norm{\vect{e}_{i}}$]{\includegraphics{kb_mixed_b.pdf}\label{fig:kb_mixed_b}}
 	\vspace{10pt}
-	\caption{There is more than one way to define the osculating circle of a discrete curve.}
+	\caption{Four possibilities to define the osculating circle for discrete curves, leading to different notions of discrete curvature.}
 	\label{fig:kb_def}
 \end{figure}
-
-\cite{Romon2013}
 
 %\footnote{
 %Curvature is defined from the osculating circle, which is the best approcximation of a curve by a circle.
@@ -983,34 +1051,39 @@ Plusieurs approches : le cercle osculateur ou la variation de longueur par trans
 
 % vertex-based curvature
 % -------------------------------
-\subsection{Vertex-based osculating circle}
-Known as the \emph{Menger curvature}, it is defined as the inverse of the radius of the circle passing through three consecutive vertices.
+\subsubsection{Vertex-based osculating circle}
+Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-based} (or circumscribed) osculating circle at vertex $\vect{x}_{i}$ is defined as the unique circle passing through the points $\vect{x}_{i-1}$, $\vect{x}_{i}$ and $\vect{x}_{i+1}$ (see \cref{fig:kb_vertex}). This circle leads to the following definition of the curvature, also known as the \emph{Menger curvature} : 
 \begin{equation}
 	\vect{\kappa b} = \frac{2 \, \vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} \norm{\vect{e}_{i-1} + \vect{e}_{i}} }
 	\quad , \quad
 	\kappa_1 = \norm{\vect{\kappa b}} = \frac{2 \, \sin(\varphi_i)}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}}
 \end{equation}
-
-
+This expression can be expressed in a more convenient way for futur comparisons ($\beta = 1$ if $l_{i-1} = l_i$) :
+\begin{equation}
+	\kappa_1 = \frac{2}{\overbar{l_i}} \sin(\varphi_i / 2) \times \beta_i
+	\quad , \quad 
+	\beta_i = 
+%		\frac{\cos(\varphi_i/2)}{\sqrt{1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}  \sin^2(\varphi_i/2)}} 
+		\frac{1}{\sqrt{1 + (1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}) \tan^2(\varphi_i/2)}} 
+\end{equation}
+This has the disadvantage that it does not diverge at kinks and is limited to $[0,2]$, thus a proper condition on the discretization must be satisfied.
 Problème de convergence lorsque l'angle tend vers pi et que les segments ont même longueur.
 En pratique peut probable. Conduit à une limitation sur l'intégrale de courbure
 
 % edge-based curvature
 % ------------------------------
-\subsection{Edge-based osculating circle}
-
+\subsubsection{Edge-based osculating circle}
+Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{edge-based} (or inscribed) osculating circle at edge $\vect{e}_{i}$ is defined as the unique circle tangent to the edges $\vect{e}_{i-1}$, $\vect{e}_{i}$ and $\vect{e}_{i+1}$ (see \cref{fig:kb_edge}).
 \begin{equation}
 	\kappa_2 = \frac{\tan(\varphi_i/2) + \tan(\varphi_{i+1}/2)}{\norm{\vect{e}_{i}}}
 \end{equation}
-
-Bon comportement lorsque l'angle tend vers pi. Demande que les 3 segments soient coplanaires.
-La courbure est plutot défini relativement au segment $\vect{e}_i$ qu'au vertex $\vect{x}_i$
+This definition shows an appropriate behavior when the curve tends to kicks, as the radius of curvature tends to zero ($\tan \pi/2 = \infty \Rightarrow \kappa = \infty$), and when the curve tends to be a straight line, as the curvature tends to $0$ ($\tan 0 = 0 \Rightarrow \kappa = 0$). However, it needs $\Gamma$ to be planar which is by far to restrictive regarding our purpose. Finally, this way of defining the curvature is not as local as one would expect as it is defined relatively to the edge $\vect{e}_{i}$ but not where the turning occurs, at vertices.
 
 % mixed approach
 % ---------------------
-\subsection{Osculating circle for an arc-length parametrized curve}
+\subsubsection{Osculating circle for a curve parametrized by arc length}
 
-The turning angle $\varphi_i$ is concentrated at vertex $\vect{x}_i$. The curvature is spread along the discrete curve from the middle of $\vect{e}_{i-1}$ to the middle of $\vect{e}_{i}$ :
+The turning angle $\varphi_i$ is concentrated at vertex $\vect{x}_i$. This has the advantage that it diverge at kinks. The curvature is spread along the discrete curve from the middle of $\vect{e}_{i-1}$ to the middle of $\vect{e}_{i}$ :
 \begin{equation}
 	\vect{\kappa b} = \frac{2}{l} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
 	\quad , \quad
@@ -1027,7 +1100,7 @@ Qu'on peut réécrire pour des segments de longueur constante :
 \end{equation}
 
 \note{
-Unlike the smooth case we can not reparameterize a curve. A discrete curve is parameterized by arc-length or it is not \citep[p. 10]{Hoffmann2008}.
+Unlike the smooth case we can not reparameterize a curve. A discrete curve is parameterized by arc length or it is not \citep[p. 10]{Hoffmann2008}.
 
 Cette condition est extrêmement exigente $\norm{\vect{e}_{i}} = cst$. Elle est tenable pour des modèles de poutre non connectées (où le pas de disctrétisation peut-être choisi uniform) mais pour en cas de connexion. Ce point n'est pas éclairci dans les articles de Audoly.
 }
@@ -1045,7 +1118,7 @@ Cette condition est extrêmement exigente $\norm{\vect{e}_{i}} = cst$. Elle est 
 %\begin{figure}[H]
 %\begin{center}
 %\includegraphics[]{osculating_circle_edge_cst.pdf}
-%\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+%\caption{Another definition of the osculating circle for curve parametrized by arc lengths.}
 %\label{fig:1_1}
 %\end{center}
 %\end{figure}
@@ -1137,7 +1210,7 @@ Remarque that ratios are independent of scale change (independent of R)
 \begin{figure}[H]
 \begin{center}
 \includegraphics[]{circle.pdf}
-\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+\caption{Another definition of the osculating circle for curves parametrized by arc length.}
 \label{fig:1_1}
 \end{center}
 \end{figure}
@@ -1176,7 +1249,7 @@ Remarque that ratios are independent of scale change (independent of R)
 \begin{figure}[H]
 \begin{center}
 \includegraphics[]{elastica_withnum.pdf}
-\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+\caption{Another definition of the osculating circle for curves parametrized by arc length.}
 \label{fig:1_1}
 \end{center}
 \end{figure}
@@ -1184,7 +1257,7 @@ Remarque that ratios are independent of scale change (independent of R)
 \begin{figure}[H]
 \begin{center}
 \includegraphics[]{elastica_detail.pdf}
-\caption{Another definition of the osculating circle for arc-length parametrized curves.}
+\caption{Another definition of the osculating circle for curves parametrized by arc length.}
 \label{fig:1_1}
 \end{center}
 \end{figure}
@@ -1296,7 +1369,7 @@ Remarque that ratios are independent of scale change (independent of R)
 
 Problème de définition. Facile de définir une tangente sur un edge. Mais une infinité de tangentes possibles à chaque vertex.
 
-So in case of an arc-length parameterized curve the vertex tangent vector points in the same direction as the averaged edge tangent vectors \cite[p. 12]{Hoffmann2008}.
+So in case of an arc length parameterized curve the vertex tangent vector points in the same direction as the averaged edge tangent vectors \cite[p. 12]{Hoffmann2008}.
 
 Nous verrons que le cercle 3 points, en plus de mieux représenter l'énergie d'une courbe discrete dans les cas typiques, offre un choix de tangente non ambïgu.
 
@@ -1307,7 +1380,7 @@ Edge tangent vector and unit edge tangent vector:
 	\vect{u}_{i} = \frac{\vect{e}_{i}}{\norm{\vect{e}_{i}}}
 \end{equation}
 
-Vertex tangent vector as harmonic mean for arc-length parametrized curve \cite[p.12]{Hoffmann2008} :
+Vertex tangent vector as harmonic mean for arc length parametrized curve \cite[p.12]{Hoffmann2008} :
 \begin{equation}
 	\vect{T}_{i} = \frac{\vect{e}_{i-1} + \vect{e}_{i}}{1 + \vect{e}_{i-1} \cdot \vect{e}_{i}}	
 \end{equation}
