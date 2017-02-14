@@ -1,0 +1,51 @@
+\begin{tikzpicture}
+\begin{axis}[
+	scale only axis,
+	legend style={at={(axis cs:0,6)},anchor=north west},
+	xmin=-3.1416/4/4, xmax= 3.1416+3.1416/4/4, restrict x to domain = 0 : 3.1416,
+	ymin=-2/4, ymax= 10+2/4, restrict y to domain = 0 : 10,
+	grid=major,
+	axis y line*= left,% the '*' avoids arrow heads
+%	xlabel={$\varphi$},
+	xtick={0, 0.7854, 1.5708, 2.3562, 3.14159},
+    	xticklabels={$0$, $\frac{\pi}{4}$,  $\frac{\pi}{2}$,  $\frac{3\pi}{4}$,$\pi$},
+	ylabel={$\kappa_1, \kappa_3$},
+	ytick={0, 2, 4, 6, 8,10} ]
+
+		% kappa 1
+		\addplot[black, samples = 100, domain = 0: 3.1416, solid,  thick]
+		{2*sin(deg(x)/2)};
+		\node[style={font=\scriptsize}] at (axis cs:3.0,2.4) {$\kappa_1$};
+		\addplot[Tgray, samples = 100, domain = 0:3.1416, solid, very thin]					
+		{\curvatureA(deg(x),2)};
+		\addplot[color=Tgray, samples = 100, domain = 0:3.1416, solid, very thin]
+		{\curvatureA(deg(x),0.5)};
+
+		% kappa 2
+		\addplot[black, samples = 400, domain = 0:3.1416, solid,  thick]
+		{\curvatureB(deg(x),1)};
+		\node[style={font=\scriptsize}] at (axis cs:3.0,9.5) {$\kappa_3$};
+		\addplot[color=Tgray, samples = 400, domain = 0:3.1416, solid, very thin]
+		{\curvatureB(deg(x),2)};
+		\addplot[color=Tgray, samples = 400, domain = 0:3.1416, solid, very thin]
+		{\curvatureB(deg(x),0.5)};
+
+
+	\end{axis}
+	\begin{axis}[
+	scale only axis,
+	xmin=-3.1416/4/4, xmax= 3.1416+3.1416/4/4, restrict x to domain = 0 : 3.1416,
+	ymin=-0.2/4, ymax= 1+0.2/4, restrict y to domain = 0 : 1,
+	axis y line*=right,
+	axis x line=none,
+%	ylabel style = {rotate=-90},
+	ylabel = {${\kappa_1}/{\kappa_3}$},
+	ytick={0, 0.2, 0.4, 0.6, 0.8, 1}
+	]
+		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid, thick]
+		{\curvatureRap(deg(x),1)};
+		\node[style={font=\scriptsize}] at (axis cs:1.1,0.95) {$\kappa_1/\kappa_3$};
+		\addplot[Tblue, samples = 500, domain = 0:3.1416, solid, very thin]
+		{\curvatureRap(deg(x),2)};
+	\end{axis}
+\end{tikzpicture}

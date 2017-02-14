@@ -1,0 +1,83 @@
+\begin{tikzpicture}
+\begin{axis}[
+	width = 7.5cm,
+	xmin=3, xmax= 52, restrict x to domain = 5 : 50,
+	ymin=-0.5, ymax= 10.5, restrict y to domain = 0 :100,
+	grid=major,
+	xtick={0,5,10,15,20,25,30,35,40,45,50},
+	ytick={0,2,4,6,8,10},
+	]
+	
+	\pgfplotstableread{ch3_geometry/plot/elastica/elastica_1.txt}\crvA;
+	\addplot [Tblue, smooth, thin]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\crvA};
+  	\node[Tgray, style={font=\scriptsize}] at (axis cs:7.5,1) {$1$};
+	
+	\pgfplotstableread{ch3_geometry/plot/elastica/elastica_5.txt}\crvB;
+	\addplot [Tblue, smooth, thin]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\crvB};
+%  	\node[Tgray, style={font=\scriptsize}] at (axis cs:9,1) {$5$};
+
+       	\pgfplotstableread{ch3_geometry/plot/elastica/elastica_10.txt}\crvC;
+	\addplot [Tblue, smooth, thin]
+        	table [x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\crvC};
+%    	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.985) {$10$};
+
+        \pgfplotstableread{ch3_geometry/plot/elastica/elastica_15.txt}\crvD;
+	\addplot [Tblue, smooth, thin]
+         table [x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\crvD};
+%         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.978) {$15$};
+
+     	\pgfplotstableread{ch3_geometry/plot/elastica/elastica_20.txt}	\crvE;
+	\addplot [Tblue, smooth, thin]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\crvE};
+%       	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.965) {$20$};
+
+     	\pgfplotstableread{ch3_geometry/plot/elastica/elastica_25.txt}	\crvF;
+	\addplot [Tblue, smooth, thin]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\crvF};
+%       	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.94) {$25$};
+
+     	\pgfplotstableread{ch3_geometry/plot/elastica/elastica_30.txt}	\crvG;
+	\addplot [Tblue, smooth, thin]
+        	table [x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\crvG};
+       	\node[Tgray, style={font=\scriptsize}] at (axis cs:17.5,7) {$30$};
+	
+	
+%	
+%
+%       	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica5.txt}\crvB;
+%	\addplot [black, smooth, thin]
+%       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvB};
+%  	\node[Tgray, style={font=\scriptsize}] at (axis cs:9,1) {$5$};
+%
+%       	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica10.txt}\crvC;
+%	\addplot [black, smooth, thin]
+%        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvC};
+%    	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.985) {$10$};
+%
+%        \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica15.txt}\crvD;
+%	\addplot [black, smooth, thin]
+%         table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvD};
+%         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.978) {$15$};
+%
+%     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica20.txt}	\crvE;
+%	\addplot [black, smooth, thin]
+%       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvE};
+%       	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.965) {$20$};
+%
+%     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica25.txt}	\crvF;
+%	\addplot [black, smooth, thin]
+%       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvF};
+%       	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.94) {$25$};
+%
+%     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica30.txt}	\crvG;
+%	\addplot [black, smooth, thin]
+%        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvG};
+%       	\node[Tgray, style={font=\scriptsize}] at (axis cs:15,0.92) {$30$};
+
+%         \addplot[Tblue, samples = 100, domain = 0: 50, solid,  thick]
+%	{1};
+	
+\end{axis}
+\end{tikzpicture}

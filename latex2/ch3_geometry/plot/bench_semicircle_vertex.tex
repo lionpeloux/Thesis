@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\begin{axis}[
+	width = 7.5cm,
+	xmin=3, xmax= 52, restrict x to domain = 5 : 50,
+	ymin=-0.5, ymax= 10.5, restrict y to domain = 0:100,
+	grid=major,
+	xtick={0,5,10,15,20,25,30,35,40,45,50},
+	ytick={0,2,4,6,8,10},
+	]
+%		\addplot[black, very thin, samples = 10, domain = 10: 50]
+%		{sin(deg(pi/(2*x))/(pi/(2*x))};
+
+		\pgfplotstableread{ch3_geometry/plot/semicircle/semicircle.txt}\crvC;
+		\addplot [Tblue, smooth, thin]
+        		table [x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\crvC};
+
+%		\addplot[Tblue, samples = 50, domain = 10: 50, solid,  thick]
+%		{1};
+%		 			
+	\end{axis}
+\end{tikzpicture}

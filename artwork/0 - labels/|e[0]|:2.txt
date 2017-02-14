@@ -1,0 +1,1 @@
+\frac{\|\boldsymbol{e}_0\|}{2}

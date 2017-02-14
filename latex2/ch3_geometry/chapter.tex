@@ -683,7 +683,7 @@ A second benefit is that any adapted frame can be obtained by a rotation of the 
 % BISHOP FRAME
 \subsection{Bishop frame}\label{sec:bishop}
 
-A \emph{Bishop frame}\footnote{Introduce as \emph{relatively parallel adapted frame} in \cite{Bishop}.} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity :
+A \emph{Bishop frame}\footnote{Introduce as \emph{relatively parallel adapted frame} in \cite{Bishop1975}.} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity :
 \begin{equation}
 	\vect{\Omega} \cdot \vect{t} = \tau =\vect{u^{'}} \cdot \vect{v} = - \vect{u} \cdot \vect{v^{'}} = 0
 \end{equation}
@@ -827,31 +827,6 @@ And the Bishop frame components are given by :
 \end{equation}
 
 
-
-
-%\begin{align}
-%	& F_f(\theta)  =
-%	\left\{
-%	\begin{aligned}
-%		& a \cos \theta, a \sin \theta, k \theta \\
-%		& a \cos \theta, a \sin \theta, k \theta \\
-%		& a \cos \theta, a \sin \theta, k \theta
-%	\end{aligned}
-%	\right . \\
-%\end{align}
-
-
-\subsubsection{Application B : conical helix (spiral)}
-\begin{equation}
-	\left\{
-	\begin{aligned}
-		\rho = a e^{k\theta}\\
-		z = \rho \cot{\alpha}\\
-	\end{aligned}
-	\right.
-\end{equation}
-
-
 soit pour une spirale dont on connait
 
 \begin{figure}[H]
@@ -927,20 +902,24 @@ The study of those discrete equivalent notions belong to the recent field of \em
 \begin{figure}[t]
 	\centering
 	\includegraphics[]{discrete_curve_full.pdf}
-	\caption{Discrete curve representation.}
+	\caption{Discrete curve representation and parametrization.}
 	\label{fig:discrete_curve}
 \end{figure}
 
-Let $\Gamma$ be a discrete (or polygonal) space curve. $\Gamma$ is defined as an ordered sequence $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n) \in \mathbb{R}^{3(n+1)}$ of $n+1$ pairwise disjoint \emph{vertices} (see \cref{fig:discrete_curve}). Consecutive pairs of vertices define $n$ straight segments $(\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1})$ called \emph{edges}, pointing from one vertex to the next one : $\vect{e}_i = \vect{x}_{i+1} - \vect{x}_{i}$. The length of and edge is denoted $l_i = \norm{\vect{e}_i}$. Additionally, we define the vertex-based mean length $\overbar{l_i} = \tfrac{1}{2}(l_{i-1} + l_i)$ at vertex $\vect{x}_i$. The total length of $\Gamma$ is denoted $L = \sum_{i=0}^{n-1} \norm{\vect{e}_i}$.
+Let $\Gamma$ be a discrete (or polygonal) space curve. $\Gamma$ is defined as an ordered sequence $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n) \in \mathbb{R}^{3(n+1)}$ of $n+1$ pairwise disjoint \emph{vertices} (see \cref{fig:discrete_curve}). Consecutive pairs of vertices define $n$ straight segments $(\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1})$ called \emph{edges}, pointing from one vertex to the next one : $\vect{e}_i = \vect{x}_{i+1} - \vect{x}_{i}$. The length of an edge is denoted $l_i = \norm{\vect{e}_i}$. Additionally, we define the vertex-based mean length $\overbar{l_i} = \tfrac{1}{2}(l_{i-1} + l_i)$ at vertex $\vect{x}_i$. The total length of $\Gamma$ is denoted $L = \sum_{i=0}^{n-1} \norm{\vect{e}_i}$.
 
 \subsubsection{Discrete unit tangent vector}
-Edge vectors lead to a natural definition of the \emph{discrete unit tangent vector} along each edge : $\vect{u}_i = \vect{e}_i / l_i$. However, this definition makes no sens at vertices where all the curvature is \emph{localized} and measured by the turning angle ($\varphi_i$). This is explained in terms of the Gau{\ss} map as edges will map to points but vertices will map to curves on the unit sphere.
+Edge vectors lead to a natural definition of the \emph{discrete unit tangent vector} along each edge : $\vect{u}_i = \vect{e}_i / l_i$. However, this definition makes no sens at vertices where all the curvature is \emph{condensed} and measured by the turning angle ($\varphi_i$). This is explained in terms of the Gau{\ss} map as edges will map to points but vertices will map to curves on the unit sphere.
 
 \subsubsection{Discrete osculating plane}
 Consecutive pairs of edges lead to a natural definition of the \emph{discrete osculating plane}, as the plane in which $\Gamma$ locally lies on. This plane is well defined by its normal vector known as the \emph{discrete unit binormal vector} ($\vect{b}_i = \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1} \times \vect{e}_{i}}}$) only if $\vect{e}_{i-1}$ and $\vect{e}_{i}$ are non-collinear ; that is the curve is not locally a straight line, or equivalently the curvature does not vanish.
 
 \subsubsection{Discrete turning angle}
-The \emph{turning angle} is defined as the oriented angle between to adjacent edges : $\varphi_i=\angle(\vect{e}_{i-1},\vect{e}_i)$. It is defined only for all $i \in [1,n-1]$. It corresponds to the angle of rotation, in the osculating plane, around the binormal vector ($\vect{b}_i$), to align $\vect{e}_{i-1}$ with $\vect{e}_{i}$. The sign of $\varphi_i$ is taken in accordance to the right-hand rule regarding the orientation of $\vect{b}_i$. The next section will highlight the central role of the turning angle in the possible measurements of the discrete curvature.
+The \emph{turning angle} is defined as the oriented angle between to adjacent edges : $\varphi_i=\angle(\vect{e}_{i-1},\vect{e}_i)$. It is defined only for all $i \in [1,n-1]$. It corresponds to the angle of rotation, in the osculating plane, around the binormal vector ($\vect{b}_i$), to align $\vect{e}_{i-1}$ with $\vect{e}_{i}$. The sign of $\varphi_i$ is taken in accordance to the right-hand rule regarding the orientation of $\vect{b}_i$. Thus, $\varphi_i$ is necessarily bounded to $[0,\pi]$ :
+\begin{equation}
+	0 \leqslant \varphi_i \leqslant \pi
+\end{equation}
+The next section will highlight the central role of the turning angle in the possible measurements of the discrete curvature.
 
 Recall that for a planar curve, where $\varphi$ denotes the angle between the tangent vector ($\vect{t} = \cos\varphi \,\vect{e}_x + \sin\varphi \,\vect{e}_y$) and the horizontal line of direction $\vect{e}_x$, the following relation holds : $\varphi(s_1) - \varphi(s_2) = \int_{s_1}^{s_2} \frac{d \varphi}{d s} ds = \int_{s_1}^{s_2} \kappa ds$.
 
@@ -966,22 +945,22 @@ In the literature, discrete curves are usually considered as maps defined on $I 
 	\quad , \quad
 	t_i = i
 \end{equation}
-Thus, as in the smooth case, a discrete curve is said to be parametrized by arc length if $\norm{\Gamma'} = 1$, that is every edges are of unit length ($\norm{\vect{e}_i} = 1$). This constraint is sometimes relaxed to curves of constant edge length ($\norm{\vect{e}_i} = c$) that are said to be parametrized proportional to arc length.
+Thus, as in the smooth case, a discrete curve is said to be parametrized by arc length if $\norm{\Gamma'} = 1$, that is every edges are of unit length ($\norm{\vect{e}_i} = 1$)\footnote{This assumption leads to the assertion that \blockcquote[p.10]{Hoffmann2008}{A discrete curve is parameterized by arc length or it is not}.}. This constraint is sometimes relaxed to curves of constant edge length ($\norm{\vect{e}_i} = c$) that are said to be parametrized \emph{proportional} to arc length.
 
 In the present work, to stick closer to the smooth case, we instead consider discrete curves as maps defined on $I = [t_0, t_1, \ldots, t_n] \in \mathbb{R}^{n+1}$ where $t$ denotes the discrete parametrization of $\Gamma$. As in the smooth case, the way to parametrized a curve is not unique.
 
 \subsubsection{Arc length parameter}
-By analogy with the smooth case, we define the curve arc length at vertices as :
+By analogy with the smooth case, we define the curve arc length at vertices (see \cref{fig:discrete_curve}) as :
 \begin{equation}
 	\left\{
 	\begin{aligned}
 		s_0 	&= 0 								& 	&i = 0		\\
 		s_i 	&= \sum_{k=1}^i \norm{\vect{e}_{k-1}}		&	&i \in [\|1, n-1\|]	\\
-		s_n 	&= \sum_{k=1}^{n} \norm{\vect{e}_{k-1}} = L 	&	&i = n		\\
+		s_n 	&=  L 								&	&i = n		\\
 	\end{aligned}
 	\right.
 \end{equation}
-This definition naturally extends to the whole domain by piecewise linear interpolation. This is not different as considering the discrete curve as a continuous polygonal curve. Indeed, for any $s \in [s_i, s_{i+1}]$ there exist a normalized parameter $t = \frac{s - s_i}{s_{i+1} - s_i} \in [0,1]$ such that :
+This definition naturally extends to the whole domain by piecewise linear interpolation. This is not different as considering the discrete curve as a continuous polygonal curve. Indeed, for any $s \in [s_i, s_{i+1}]$ there exist a normalized parameter $t = \frac{s - s_i}{s_{i+1} - s_i} \in [0,1]$ so that :
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -990,7 +969,7 @@ This definition naturally extends to the whole domain by piecewise linear interp
 	\end{aligned}
 	\right.
 \end{equation}
-Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n ]s_{i-1}, s_i[$ but $\Gamma'$ remains undefined at vertices. This issue is the reason why defining the tangent vector at vertices can not be done unequivocally.
+Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n ]s_{i-1}, s_i[$ but $\Gamma'$ remains undefined at vertices. This issue is the reason why defining the tangent vector at vertices can not be done unequivocally for discrete curves.
 
 % DISCRETE CURVATURE
 % ===================
@@ -1009,9 +988,10 @@ Several approches. \cite{Vouga2014} defines and compares three different definit
 
 \cite{Romon2013}
 
-\subsection{From osculating circles}
+\subsection{Definition from osculating circles}
+Curvature is defined from the osculating circle, which is the best approximation of a curve by a circle.
 
-\begin{figure}[!t]
+\begin{figure}[!b]
 	\centering
 %	\includegraphics[]{discrete_curve.pdf}
 %	\caption{Discrete curve representation.}
@@ -1022,7 +1002,7 @@ Several approches. \cite{Vouga2014} defines and compares three different definit
 	\subfloat[][bitangent with $\norm{\vect{e}_{i-1}}$]{\includegraphics{kb_mixed_a.pdf}\label{fig:kb_mixed_a}}\hspace{5mm}
 	\subfloat[][bitangent with $\norm{\vect{e}_{i}}$]{\includegraphics{kb_mixed_b.pdf}\label{fig:kb_mixed_b}}
 	\vspace{10pt}
-	\caption{Four possibilities to define the osculating circle for discrete curves, leading to different notions of discrete curvature.}
+	\caption{Several ways to define the osculating circle for discrete curves, leading to different notions of discrete curvature.}
 	\label{fig:kb_def}
 \end{figure}
 
@@ -1051,59 +1031,74 @@ Several approches. \cite{Vouga2014} defines and compares three different definit
 
 % vertex-based curvature
 % -------------------------------
-\subsubsection{Vertex-based osculating circle}
-Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-based} (or circumscribed) osculating circle at vertex $\vect{x}_{i}$ is defined as the unique circle passing through the points $\vect{x}_{i-1}$, $\vect{x}_{i}$ and $\vect{x}_{i+1}$ (see \cref{fig:kb_vertex}). This circle leads to the following definition of the curvature, also known as the \emph{Menger curvature} : 
+\subsubsection{Vertex-based osculating circle (circumscribed)}
+Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-based} (or circumscribed) osculating circle at vertex $\vect{x}_{i}$ is defined as the unique circle passing through the points $\vect{x}_{i-1}$, $\vect{x}_{i}$ and $\vect{x}_{i+1}$ (see \cref{fig:kb_vertex}). This circle leads to the following definition of the curvature\footnote{This curvature is also known as the \emph{Menger curvature}.} : 
 \begin{equation}
-	\vect{\kappa b} = \frac{2 \, \vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} \norm{\vect{e}_{i-1} + \vect{e}_{i}} }
+	\vect{\kappa b}_i = \frac{2 \, \vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} \norm{\vect{e}_{i-1} + \vect{e}_{i}} }
 	\quad , \quad
-	\kappa_1 = \norm{\vect{\kappa b}} = \frac{2 \, \sin(\varphi_i)}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}}
+	\kappa_i = \norm{\vect{\kappa b}_i} = \frac{2 \, \sin(\varphi_i)}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}}
+\label{eq:def_kb_vertex}
 \end{equation}
-This expression can be expressed in a more convenient way for futur comparisons ($\beta = 1$ if $l_{i-1} = l_i$) :
+This definition shows a good locality as the curvature is attached to the vertex $\vect{x}_{i}$, right in the place where it occurs on the discret curve. In addition, this definition leads to a natural local spline interpolation by the circumscribed osculating circle itself. This interpolation has the advantage to pass exactly through three vertices, to lie on the osculating plane and to share the same curvature as $\Gamma$ at $\vect{x}_{i}$. It also leads to a natural definition of the tangent vector at $\vect{x}_{i}$ (see \cref{sec:tangent}).
+
+Moreover, while this definition is valid only on the current portion of $\Gamma$ ($i \in[1, n-1]$), it is straightforward extended to its endings ($i=0,1$), provided that a unit tangent vector $\vect{t}_{0}$ (respectively $\vect{t}_{n}$) is given at $\vect{x}_{0}$ (resp. $\vect{x}_{n}$), as the unique circle tangent to $\vect{t}_{0}$ (resp. $\vect{t}_{n}$) passing through $\vect{x}_0$ and $\vect{x}_1$ (resp. $\vect{x}_{n-1}$ and $\vect{x}_n$) :
 \begin{equation}
-	\kappa_1 = \frac{2}{\overbar{l_i}} \sin(\varphi_i / 2) \times \beta_i
-	\quad , \quad 
-	\beta_i = 
-%		\frac{\cos(\varphi_i/2)}{\sqrt{1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}  \sin^2(\varphi_i/2)}} 
-		\frac{1}{\sqrt{1 + (1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}) \tan^2(\varphi_i/2)}} 
+	\vect{\kappa b}_0 = \frac{2 \, \vect{e}_{0} \times \vect{t}_{0}}{\norm{\vect{e}_{0}}^2} 
+	\quad , \quad
+	\vect{\kappa b}_n = \frac{2 \, \vect{t}_{n} \times \vect{e}_{n-1}}{\norm{\vect{e}_{n-1}}^2} 
 \end{equation}
-This has the disadvantage that it does not diverge at kinks and is limited to $[0,2]$, thus a proper condition on the discretization must be satisfied.
-Problème de convergence lorsque l'angle tend vers pi et que les segments ont même longueur.
-En pratique peut probable. Conduit à une limitation sur l'intégrale de courbure
+This property will be very profitable in the discrete beam model developed later in the manuscript. It is examined more in details in section \cref{sec:tangent} about the definition of the tangent vector.
+
+However, there are some important drawbacks as the curvature is bounded to $[0,2]$ (see \cref{fig:kb_bench}). When the curve tends to kinks ($\varphi \mapsto \pi$), one would expect the curvature to diverge toward infinity, but instead it tends to a finite value equals to $0$ ($l_{i-1} \neq l_i$) or $2$ ($l_{i-1} = l_i$). This issue can be bypassed if the discretization is refined \textquote{enough}. A criterion is given in the next section (\cref{sec:}).
+
+%This expression can be written in a more convenient way for futur comparisons :
+%\begin{equation}
+%	\kappa_1 = \frac{2}{\overbar{l_i}} \sin(\varphi_i / 2) \times \beta_i
+%	\quad , \quad 
+%	\beta_i = 
+%%		\frac{\cos(\varphi_i/2)}{\sqrt{1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}  \sin^2(\varphi_i/2)}} 
+%%		\frac{1}{\sqrt{1 + (1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}) \tan^2(\varphi_i/2)}} 
+%		\left( 1 + (1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}) \tan^2(\varphi_i/2) \right)^{-1/2}
+%\end{equation}
+%Note that $\beta_i = 1$ for a constant edge length curve ($l_{i-1} = l_i$).
 
 % edge-based curvature
 % ------------------------------
-\subsubsection{Edge-based osculating circle}
-Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{edge-based} (or inscribed) osculating circle at edge $\vect{e}_{i}$ is defined as the unique circle tangent to the edges $\vect{e}_{i-1}$, $\vect{e}_{i}$ and $\vect{e}_{i+1}$ (see \cref{fig:kb_edge}).
+\subsubsection{Edge-based osculating circle (inscribed)}
+Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{edge-based} osculating circle at edge $\vect{e}_{i}$ is defined as the unique circle tangent to the edges $\vect{e}_{i-1}$, $\vect{e}_{i}$ and $\vect{e}_{i+1}$ (see \cref{fig:kb_edge}).
 \begin{equation}
-	\kappa_2 = \frac{\tan(\varphi_i/2) + \tan(\varphi_{i+1}/2)}{\norm{\vect{e}_{i}}}
+	\kappa_i = \frac{\tan(\varphi_i/2) + \tan(\varphi_{i+1}/2)}{\norm{\vect{e}_{i}}}
+\label{eq:def_kb_edge}
 \end{equation}
-This definition shows an appropriate behavior when the curve tends to kicks, as the radius of curvature tends to zero ($\tan \pi/2 = \infty \Rightarrow \kappa = \infty$), and when the curve tends to be a straight line, as the curvature tends to $0$ ($\tan 0 = 0 \Rightarrow \kappa = 0$). However, it needs $\Gamma$ to be planar which is by far to restrictive regarding our purpose. Finally, this way of defining the curvature is not as local as one would expect as it is defined relatively to the edge $\vect{e}_{i}$ but not where the turning occurs, at vertices.
+This definition shows an appropriate behavior when the curve tends to kicks, as the radius of curvature tends to zero ($\tan \varphi/2 \mapsto \infty$), and when the curve tends to be a straight line, as the curvature tends to $0$ ($\tan \varphi/2 \mapsto 0$).
+
+However, it needs $\Gamma$ to be planar which is by far to restrictive regarding our goal (the modeling of 3D slender beams). Finally, this way of defining the curvature is not as local as one would expect as it is defined relatively to the edge $\vect{e}_{i}$ but not where the turning occurs, at vertices.
 
 % mixed approach
 % ---------------------
-\subsubsection{Osculating circle for a curve parametrized by arc length}
-
-The turning angle $\varphi_i$ is concentrated at vertex $\vect{x}_i$. This has the advantage that it diverge at kinks. The curvature is spread along the discrete curve from the middle of $\vect{e}_{i-1}$ to the middle of $\vect{e}_{i}$ :
+\subsubsection{Bitangent osculating circle (inscribed)}
+Let $\Gamma$ be a discrete curve parametrized by arc length. Following \cite{Vouga2014}\footnote{This definition is also presented in \cite{Bobenko2015, Carroll2014} but in the more restrictive case of constant edge length discrete curve ($l_i = cst$).} we define the curvature regrading the mean length $\overbar{l_i}$ attached to $\vect{x}_{i}$ as :
 \begin{equation}
-	\vect{\kappa b} = \frac{2}{l} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
+	\vect{\kappa b}_i = \frac{2}{\overbar{l_i}} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
 	\quad , \quad
-	\kappa_3 = \norm{\vect{\kappa b}} = \frac{2}{l} \tan(\varphi_i/2)
-	\quad , \quad 
-	l = \frac{\norm{\vect{e}_{i-1}} + \norm{\vect{e}_{i}}}{2}
+	\kappa_i = \norm{\vect{\kappa b}_i} = \frac{2}{\overbar{l_i}} \tan(\varphi_i/2)
 \end{equation}
+This other definition combines the good locality of the vertex-based approach (see \cref{eq:def_kb_vertex}) and the proper behavior at bounds of the edge-based approach (see \cref{eq:def_kb_edge}). Given two adjacent edges $\vect{e}_{i-1}$ and $\vect{e}_{i}$, there exist an infinite number of circles that are tangent to both edges (see \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b} for two remarkable circles among them), which center points all lie on the $\varphi_i-\pi$ angle bisector line. The corresponding osculating circle, known as the \emph{inscribed} circle, is constructed to touch both $\vect{e}_{i-1}$ and $\vect{e}_{i}$ at distance $\overbar{l_i}$ from $\vect{x}_{i}$. In the case of a constant edge length discrete curve, this definition of the osculating circle merges to the circles proposed in \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b}.
 
-Qu'on peut réécrire pour des segments de longueur constante :
-\begin{equation}
-	\kappa_3 = \frac{2 \,tan(\varphi_i/2)}{l}
-	\quad , \quad 
-	l = \norm{\vect{e}_{i}} = cst
-\end{equation}
+However, this definition still exhibits some drawbacks as there is no natural way to extend it to the end vertices $\vect{x}_{0}$ and $\vect{x}_{n-1}$. The lack of a natural interpolation spline that passes through vertices and that is in correlation to the osculating circle is also detrimental in the context of our application.
 
-\note{
-Unlike the smooth case we can not reparameterize a curve. A discrete curve is parameterized by arc length or it is not \citep[p. 10]{Hoffmann2008}.
+% mixed approach
+% ---------------------
+\subsubsection{Other definitions of osculating circles}
+In the literature, one can find other definitions for the discrete curvature that also correspond to the definition of an osculating circle. All these definitions are summarized in \cref{tab:kb_def}. For further informations, the reader should refer to \cite{Carroll2014, Vouga2014, Bobenko2015, Romon2013}.
 
-Cette condition est extrêmement exigente $\norm{\vect{e}_{i}} = cst$. Elle est tenable pour des modèles de poutre non connectées (où le pas de disctrétisation peut-être choisi uniform) mais pour en cas de connexion. Ce point n'est pas éclairci dans les articles de Audoly.
-}
+In particular, \cite{Vouga2014} details which discrete curvature definitions parallel which property of the smooth curvature. It remarks that there is no \textquote{free-lunch} as none of the proposed definition satisfies every properties of the smooth curvature.
+
+%\note{
+%Unlike the smooth case we can not reparameterize a curve. A discrete curve is parameterized by arc length or it is not \citep[p. 10]{Hoffmann2008}.
+%
+%Cette condition est extrêmement exigente $\norm{\vect{e}_{i}} = cst$. Elle est tenable pour des modèles de poutre non connectées (où le pas de disctrétisation peut-être choisi uniform) mais pour en cas de connexion. Ce point n'est pas éclairci dans les articles de Audoly.
+%}
 
 %\begin{figure}[t]
 %     \subfloat[][vertex-based]{\includegraphics{kb_vertex.pdf}\label{fig:kb_vertex}}
@@ -1123,253 +1118,185 @@ Cette condition est extrêmement exigente $\norm{\vect{e}_{i}} = cst$. Elle est 
 %\end{center}
 %\end{figure}
 
+\begin{table}[!t]
+\centering
+\renewcommand{\arraystretch}{1.8}
+	\begin{tabular}{l | c c c c c c}
+	\hline
+	Curvature ($\kappa_i$) 										&  Locality 	&  $\varphi \mapsto 0$ 	&  $\varphi \mapsto \pi$ 		& Ends  	& Dim 	&  Fitting	\\
+	\hline
+	$\kappa_1 = \frac{2\, \sin(\varphi_i)}{\norm{\vect{e}_{i-1}+\vect{e}_i}}$ 	&  $\vect{x}_i$ 	&  $0$				&  $0, 2$					&  yes	&  space	&  clothoid		\\
+	$\kappa_2 = \frac{\tan(\varphi_i/2)+\tan(\varphi_{i+1}/2)}{l_i}$ 			&  $\vect{e}_i$ 	&  $0$				&  $\infty$					&  no		&  planar	&  circle			\\
+ 	$\kappa_3 = \frac{2\, \tan(\varphi_i / 2)}{\overbar{l_i}} $				&  $\vect{x}_i$	&  $0$ 				&  $\infty$					&  no		&  space	&  circles			\\[5pt]
+	\hline
+	$\kappa_4 = \frac{2\,\sin(\varphi_i / 2)}{\overbar{l_i}}$ 				&  $\vect{x}_i$	&  $0$				&  $0, 2$					&  no		&  space	&  clothoid  		\\
+	$\kappa_5 = \frac{\varphi_i}{\overbar{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\overbar{l_i}$			&  no		&  space	&  elastica  		\\[5pt]
+	\hline
+	\end{tabular}
+	\caption{Review of several discrete curvature definitions mentioned in the literature.}
+	\label{tab:kb_def}
+\end{table}
 
 % sensitivity to non uniform discretization
 % ----------------------------------------------------
 \subsection{Benchmarking : sensitivity to non uniform discretization}
-Qu'on réécrit en posant $\norm{\vect{e}_{i-1}} = \alpha \norm{\vect{e}_{i}}$, $\alpha \geq 0$ :
+In this section we compare the two main discrete curvature notions (circumscribed versus inscribed) regarding their sensibility to non uniform discretization.
 
-\begin{figure}[h]
-\begin{center}
-\input{ch3_geometry/plot/plot_1.tex}
-\end{center}
-\caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
-\end{figure}
-
-\begin{equation}
-	\kappa_1 = \frac{2 \,sin(\varphi_i)}{\norm{\vect{e}_{i}}(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}},
-	\quad
-	\kappa_2 = \frac{4 \,tan(\varphi_i/2)}{\norm{\vect{e}_{i}}(1+\alpha)}
-\end{equation}
-
-\begin{equation}
-	\frac{\kappa_1}{\kappa_2}(\alpha) = \frac{\kappa_1}{\kappa_2}(1/\alpha)= \frac{1+\alpha}{(1+ \alpha^2 + 2 \alpha \, cos(\varphi_i))^{1/2}} \, cos^2(\varphi_i/2)
-\end{equation}
-%
-%\begin{figure}[t]
-%	\centering
-%	\subfloat[][]{\includegraphics{kb_anim_vertex_a.pdf}\label{fig:}}
-%	\subfloat[][]{\includegraphics{kb_anim_vertex_b.pdf}\label{fig:}}\\
-%	\subfloat[][]{\includegraphics{kb_anim_edge_a.pdf}\label{fig:}}
-%	\subfloat[][]{\includegraphics{kb_anim_edge_b.pdf}\label{fig:}}
-%	\vspace{10pt}
-%	\caption{Benchmarking vertex-based and edge-based discrete curvatures.}
-%	\label{fig:kb_bench}
-%\end{figure}
-
-\begin{figure}[t]
+\begin{figure}[!p]
 	\captionsetup[subfloat]{captionskip=10pt}
 	\centering
+	\vspace{-5mm}
 	\subfloat[][vertex-based]{\includegraphics{kb_anim_vertex_a.pdf}\label{fig:1}}\hspace{5mm}
-	\subfloat[][vertex-based]{\includegraphics{kb_anim_vertex_b.pdf}\label{fig:2}} \\
+	\subfloat[][vertex-based]{\includegraphics{kb_anim_vertex_b.pdf}\label{fig:2}} \\[-10mm]
 	\subfloat[][edge-based]{\includegraphics{kb_anim_edge_a.pdf}\label{fig:3}}\hspace{5mm}
 	\subfloat[][edge-based]{\includegraphics{kb_anim_edge_b.pdf}\label{fig:4}}
-	\vspace{10pt}
-	\caption{There is more than one way to define the osculating circle of a discrete curve.}
+	\caption{Comparison of circumscribed (a-b) and inscribed (c-d) osculating circles for different values of the turning angle ($\varphi$).}
+	\label{fig:kb_animation}
+	\vspace{10mm}
+	\input{ch3_geometry/plot/bench_kb.tex}
+	\caption{Sensitivity of discrete curvatures to non uniform discretization ($\alpha \in [0.5,2]$) over the whole domain of variation of the turning angle ($\varphi \in [0,\pi]$).}
+	\label{fig:kb_bench}
 \end{figure}
+
+This aspect is not treated in the actual literature, in which curves parametrized by arc length are usually treated as curves of constant edge length, though it is yet an important topic when it comes to the numerical modeling of true mechanical systems. Indeed, the presence of connexions between members will compromise the ability to enforce a constant discretization through all the elements of the structure. Additionally, vertices are obviously points of interest in a discrete model as they will be used to apply loads and enforce various constraints such as joints and support conditions. Finally, the accuracy of the discretized model is proportional to the sharpness of the discretization, whereas the computing time required to solve the model will grow as the sharpness increases. Consequently, one would distribute those points in the space as cleverly as possible and try to minimize their number as they increase the overall computation cost.
+
+Introducing the coefficient $\alpha = \frac{\norm{\vect{e}_{i-1}}}{\norm{\vect{e}_{i}}}$, we rewrite the previous formulas for $\kappa_1$ and $\kappa_3$ as :
+\begin{equation}
+\begin{aligned}
+	\kappa_1 &= \frac{2 \,\sin(\varphi)}{\norm{\vect{e}_{i}}(1+ \alpha^2 + 2 \alpha \, \cos(\varphi))^{1/2}} \\[10pt]
+	\kappa_3 &= \frac{4 \,\tan(\varphi/2)}{\norm{\vect{e}_{i}}(1+\alpha)}
+\end{aligned}
+\end{equation}
+These expressions lead to the following formula for the ratio $\kappa_1 / \kappa_3$, which relies only on $\alpha$ and the turning angle $\varphi$ between the edges $\vect{e}_{i-1}$ and $\vect{e}_{i}$ :
+\begin{equation}
+	\frac{\kappa_1}{\kappa_3}(\alpha) = \frac{\kappa_1}{\kappa_3}(1/\alpha)= \frac{(1+\alpha)\,cos^2(\varphi/2)}{((1- \alpha)^2 + 4 \alpha \, cos^2(\varphi/2))^{1/2}}
+	\label{eq:ratio_inv}
+\end{equation}
+Discrete curvatures are plotted in \cref{fig:kb_bench} for three values of $\alpha$. The thickest line is for the case of uniform discretization ($\alpha=1$), whereas the thin lines mark the boundary cases ($\alpha=0.5,2$). The ratio $\kappa_1/\kappa_3$ is plotted in blue and leads to only one thin line (remind \cref{eq:ratio_inv}). The graph shows that $\kappa_1$ and $\kappa_3$ have a very close behavior for small turning angles. The variability regarding $\alpha$ is small when $\varphi$ remains small and gets negligible as $\varphi$ gets smaller.
+
+Passing $\pi/4$ and increasing $\varphi$, $\kappa_3$ exhibits a good behavior : as the discrete curves tends to kink $\kappa_3$ diverges towards the infinity as the smooth curvature would for  
+
+
+
+
+However, for a given curvature, the turning angle decreases as the sharpness of the discretization increases ($\lim_{\norm{\vect{e}_i} \mapsto 0} \varphi_i = 0$). Thus, it is possible to adapted the discretization to make sure
+
 
 % accuracy in bending energy representation
 % ---------------------------------------------------------
 \subsection{Benchmarking : accuracy in bending energy representation}
 
-
+In this section we compare, for three remarkable types of curves (line, semicircle and elastica), the discrete bending energies $\mathcal{E}_1$ and $\mathcal{E}_3$ of the discrete curve, respectively based on definitions $\kappa_1$ and $\kappa_3$ (see \cref{tab:kb_def}), to the bending energy $\mathcal{E}$ of the smooth curve. We study the convergence of these energies as the sharpness of the discretization increases. The energies are defined as :
+\begin{equation}
+\begin{aligned}
+	\mathcal{E} &= \int_0^L \kappa^2 ds\\[10pt]
+	\mathcal{E}_i &= \sum_i \overbar{l_i} \kappa_i^2
+\end{aligned}
+\end{equation}
 
 % Straight line
 \subsubsection{Straight line}
 
+We consider any straight line. Its smooth curvature is null. So are the discrete curvatures $\kappa_1$ and $\kappa_3$ (see \cref{tab:kb_def}). In this case, the discrete bending energies perfectly match the bending energy of the smooth curve :
+\begin{equation}
+	\mathcal{E} = \mathcal{E}_1 = \mathcal{E}_3 = 0
+\end{equation}
+
 % Circle
-\subsubsection{Circle}
+\subsubsection{Semicircle}
 
-Smooth curve settings:
+We consider a semicircle of curvature $\kappa =1/r$ and length $L = \pi r$. This curve is discretized into $n$ edges of equal length $|\vect{e}_n| = 2r\sin (\varphi/2)$ where $\varphi = \tfrac{\pi}{n}$ (see \cref{fig:semicircle}). The total length of the discrete curve is given by : $L_n = n |\vect{e}_n| = L \frac{\sin(\varphi/2)}{\varphi/2}$. In this simple case, the bending energies can be expressed analytically :
 \begin{equation}
-	\mathcal{E} = \int_0^l \kappa^2 ds = \kappa \pi,
-	\quad
-	l = \pi r,
-	\quad
-	\kappa = \frac{1}{r}
+\begin{aligned}
+	\mathcal{E} &= L \kappa^2 \\[10pt]
+	\mathcal{E}_1 &= L_n  \kappa_1^2 = \frac{\sin (\varphi/2)}{\varphi/2} \cdot \mathcal{E}  \\[10pt]
+	\mathcal{E}_3 &= L_n  \kappa_3^2 = \frac{\sin (\varphi/2)}{(\varphi/2) \cos^2 (\varphi/2)} \cdot \mathcal{E} 
+\end{aligned}
 \end{equation}
+Note that $\kappa_1$ equals the curvature of the smooth curve. Consequently, the estimation error is only due to the estimation of the curve length ($L_n \neq L$). The ratios $\mathcal{E}_1/\mathcal{E}$ and $\mathcal{E}_3/\mathcal{E}$ are plotted in \cref{fig:bench_semicircle}. Graphs show that $\mathcal{E}_1$ converges to the smooth case faster than $\mathcal{E}_3$.
 
-Discrete curve :
-\begin{equation}
-	\varphi_N = \tfrac{\pi}{N},
-	\quad
-	|\vect{e}| = 2r\sin \tfrac{\varphi}{2},
-	\quad
-	l_N = N|\vect{e}| =2Nr\sin \tfrac{\varphi}{2} = l \frac{\sin \tfrac{\varphi}{2}}{\tfrac{\varphi}{2}}
-\end{equation}
-
-Discrete bending energies :
-\begin{equation}
-	\mathcal{E}_1 = \mathcal{E} \frac{\sin \tfrac{\varphi}{2}}{\tfrac{\varphi}{2}},
-	\quad
-	\mathcal{E}_2 = \mathcal{E} \frac{\sin \tfrac{\varphi}{2}}{\tfrac{\varphi}{2} \cos^2 \tfrac{\varphi}{2}},
-\end{equation}
-
-Remarque that ratios are independent of scale change (independent of R)
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[]{circle.pdf}
-\caption{Another definition of the osculating circle for curves parametrized by arc length.}
-\label{fig:1_1}
-\end{center}
-\end{figure}
-
-\begin{figure}[]
-\begin{center}
-\begin{tikzpicture}
-	\begin{axis}[
-	scale only axis,
-	xmin=0, xmax= 21, restrict x to domain = 1 : 20,
-	ymin=0.5, ymax= 1.7, restrict y to domain = 0 :1.6,
-	grid=major,
-	xlabel={$\mathcal{E}_i/\mathcal{E} = f_i(N=l/|e|)$},
-	xtick={1,5,10,15,20},
-	ylabel={},
-	]
-		\addplot[black, samples = 1000, domain = 1: 21, solid,  thin]
-		{sin(deg(pi/(2*x)))/(pi/(2*x))};
-		\node[style={font=\scriptsize}] at (axis cs:3.5,1.565) {$\mathcal{E}_1/\mathcal{E}$};
-
-		\addplot[black, samples = 1000, domain = 1: 21, solid,  thin, dashed]
-		{sin(deg(pi/(2*x)))/((pi/(2*x))*cos(deg(pi/(2*x)))^2)};
-		\node[style={font=\scriptsize}] at (axis cs:2.5,0.65) {$\mathcal{E}_2/\mathcal{E}$};
-
-		\addplot[Tblue, samples = 1000, domain = 0: 21, solid,  thick]
-		{1};
-	\end{axis}
-\end{tikzpicture}
-\end{center}
-\caption{Discrete curvature comparison for $\alpha \in [0.5,2]$}
+\begin{figure}[!t]
+	\captionsetup[subfloat]{captionskip=10pt}
+	\centering
+%	\vspace{-5mm}
+	\includegraphics[]{circle.pdf}
+	\caption{Discretization of a semicircle for discrete bending energies evaluation.}
+	\label{fig:semicircle}
+	\vspace{10mm}
+	\subfloat[][$| 1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/bench_semicircle_vertex.tex}
+		\label{plot:bench_semicircle_vertex}}\hspace{5mm}
+	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/bench_semicircle_edge.tex}
+		\label{plot:bench_semicircle_vertex}}
+	\vspace{8pt}
+	\caption{Relative error in the estimation of the smooth bending energy ($\mathcal{E}$) by the discrete bending energies ($\mathcal{E}_1$ and $\mathcal{E}_3$) regarding the sharpness of the discretization, for a semicircle.}
+	\label{fig:bench_semicircle}
 \end{figure}
 
 % Elastica
 \subsubsection{Elastica}
+We consider a sequence of elastica curves of fixed length $L$ and variable curvature $\kappa$ (see \cref{fig:elastica_seq}). This curves correspond to a buckled shape of a straight pinned-pinned beam that would have been forced to retract its span. These curves are discretized into $n$ edges of equal length (see \cref{fig:elastica_discretization}). This time, there is no analytical expressions available for $\mathcal{E}$, $\mathcal{E}_1$ and $\mathcal{E}_3$. Results are obtained by numerical integration and plotted in \cref{fig:bench_elastica}. Again, graphs show that $\mathcal{E}_1$ converges to the smooth case faster than $\mathcal{E}_3$ for most of the curves excepted the ones with low overall curvature (1 to 5).
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[]{elastica_withnum.pdf}
-\caption{Another definition of the osculating circle for curves parametrized by arc length.}
-\label{fig:1_1}
-\end{center}
+\begin{figure}[!p]
+	\captionsetup[subfloat]{captionskip=10pt}
+	\centering
+%	\vspace{-5mm}
+	\subfloat[][sequence of elastica curves]{\includegraphics{elastica_withnum.pdf}\label{fig:elastica_seq}}\\[5mm]
+	\subfloat[][zoom on the discretization]{\includegraphics{elastica_detail.pdf}\label{fig:elastica_discretization}}
+	\vspace{12pt}
+	\caption{Discretization (b) of a sequence of elastica curves (a) for discrete bending energies evaluation.}
+	\label{fig:elastica}
+	\vspace{10mm}
+	\subfloat[][$|1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/bench_elastica_vertex.tex}
+		\label{plot:bench_elastica_vertex}}\hspace{5mm}
+	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/bench_elastica_edge.tex}
+		\label{plot:bench_elastica_vertex}}
+	\vspace{8pt}
+	\caption{Relative error in the estimation of the smooth bending energy ($\mathcal{E}$) by the discrete bending energies ($\mathcal{E}_1$ and $\mathcal{E}_3$) regarding the sharpness of the discretization, for several elastica curves. The curves are chosen from \cref{fig:elastica_seq} (1,5,10,15,20,25,30).}
+	\label{fig:bench_elastica}
 \end{figure}
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[]{elastica_detail.pdf}
-\caption{Another definition of the osculating circle for curves parametrized by arc length.}
-\label{fig:1_1}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\subfloat[][$\mathcal{E}_1/\mathcal{E} = f(N = l/|e|)$]{%
-  \begin{tikzpicture}
-\begin{axis}[
-	width = 7.5cm,
-	xmin=8, xmax= 52, restrict x to domain = 10 : 50,
-	ymin=0.915, ymax= 1.005, restrict y to domain = 0 :1.6,
-	grid=major,
-	xtick={0,3,5,10,15,20,25,30,35,40,45,50},
-	]
-
-       	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica5.txt}\crvB;
-	\addplot [black, smooth, very thin]
-       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvB};
-%  	\node[Tgray, style={font=\scriptsize}] at (axis cs:9,1) {$5$};
-
-       	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica10.txt}\crvC;
-	\addplot [black, smooth, very thin]
-        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvC};
-    	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.985) {$10$};
-
-        \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica15.txt}\crvD;
-	\addplot [black, smooth, very thin]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvD};
-         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.978) {$15$};
-
-     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica20.txt}	\crvE;
-	\addplot [black, smooth, very thin]
-       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvE};
-       	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.965) {$20$};
-
-     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica25.txt}	\crvF;
-	\addplot [black, smooth, very thin]
-       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvF};
-       	\node[Tgray, style={font=\scriptsize}] at (axis cs:10,0.94) {$25$};
-
-     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica30.txt}	\crvG;
-	\addplot [black, smooth, very thin]
-        	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\crvG};
-       	\node[Tgray, style={font=\scriptsize}] at (axis cs:15,0.92) {$30$};
-
-         \addplot[Tblue, samples = 100, domain = 0: 50, solid,  thick]
-	{1};
-\end{axis}
-  \end{tikzpicture}}\quad
-\subfloat[][$\mathcal{E}_2/\mathcal{E} = f(N = l/|e|)$]{%
-  \begin{tikzpicture}
-\begin{axis}[
-	width = 7.5cm,
-	xmin=8, xmax= 52, restrict x to domain = 10 : 50,
-	ymin=0.995, ymax= 1.085, restrict y to domain = 1 :1.6,
-	grid=major,
-	xtick={0,3,5,10,15,20,25,30,35,40,45,50},
-	]
-
-         \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica5.txt}\crvB;
-	\addplot [black, smooth, very thin]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvB};
-         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,1.024) {$5$};
-
-        \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica10.txt}\crvC;
-	\addplot [black, smooth, very thin]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvC};
-         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,1.044) {$10$};
-
-         \pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica15.txt}\crvD;
-	\addplot [black, smooth, very thin]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvD};
-         \node[Tgray, style={font=\scriptsize}] at (axis cs:10,1.07) {$15$};
-
-     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica20.txt}	\crvE;
-	\addplot [black, smooth, very thin]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvE};
-         \node[Tgray, style={font=\scriptsize}] at (axis cs:13.5,1.08) {$20$};
-
-     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica25.txt}	\crvF;
-	\addplot [black, smooth, very thin]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvF};
-         \node[Tgray, style={font=\scriptsize}] at (axis cs:18,1.08) {$25$};
-
-     	\pgfplotstableread{ch3_geometry/plot/discrete_curvature_bench/elastica30.txt}	\crvG;
-	\addplot [black, smooth, very thin]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\crvG};
-         \node[Tgray, style={font=\scriptsize}] at (axis cs:27,1.08) {$30$};
-
-         \addplot[Tblue, samples = 100, domain = 0: 50, solid,  thick]
-	{1};
-\end{axis}
-  \end{tikzpicture}}
-\caption[]{Bending energy representativity}
-\label{g:nognot}
-\end{figure}
 
 % DISCRETE TANGENT VECTOR
 % ===================
-\section{Discrete tangent vector}
+\section{Discrete tangent vector}\label{sec:tangent}
 
-\begin{figure}[t]
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[]{kb_vertex_tangent.pdf}
+%	\caption{Tangent vector at verticies.}
+%	\label{fig:kb_vertex_tangent}
+%	\includegraphics[]{kb_edge_tangent.pdf}
+%	\caption{Tangent vector at vertices.}
+%	\label{fig:kb_edge_tangent}
+%\end{figure}
+
+\begin{figure}[!p]
+	\captionsetup[subfloat]{captionskip=20pt}
 	\centering
-	\includegraphics[]{kb_vertex_tangent.pdf}
-	\caption{Tangent vector at verticies.}
-	\label{fig:1_1}
+	\vspace{-5mm}
+	\subfloat[][current portion]{\includegraphics{kb_vertex_tangent.pdf}\label{fig:kb_vertex_tangent_a}}\\
+	\subfloat[][start]{\includegraphics{kb_vertex_start.pdf}\label{fig:kb_vertex_tangent_b}}\hspace{5mm}
+	\subfloat[][end]{\includegraphics{kb_vertex_end.pdf}\label{fig:kb_vertex_tangent_c}}
+	\vspace{8pt}
+	\caption{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices (circumscribed definition).}
+	\label{fig:kb_vertex_tangent}
+\end{figure}
+
+\begin{figure}[!p]
+	\captionsetup[subfloat]{captionskip=10pt}
+	\centering
+	\vspace{-5mm}
+	\subfloat[][current portion]{\includegraphics{kb_edge_tangent.pdf}\label{fig:kb_edge_tangent_a}}\\
+	\subfloat[][start]{\includegraphics{kb_edge_start.pdf}\label{fig:kb_edge_tangent_b}}\hspace{5mm}
+	\subfloat[][end]{\includegraphics{kb_edge_end.pdf}\label{fig:kb_edge_tangent_c}}
+	\vspace{8pt}
+	\caption{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices (inscribed definition).}
+	\label{fig:kb_edge_tangent}
 \end{figure}
 
 Problème de définition. Facile de définir une tangente sur un edge. Mais une infinité de tangentes possibles à chaque vertex.
 
-So in case of an arc length parameterized curve the vertex tangent vector points in the same direction as the averaged edge tangent vectors \cite[p. 12]{Hoffmann2008}.
+So in case of an arc length parameterized curve the vertex tangent vector points in the same direction as the averaged edge tangent vectors \cite[p.12]{Hoffmann2008}.
 
 Nous verrons que le cercle 3 points, en plus de mieux représenter l'énergie d'une courbe discrete dans les cas typiques, offre un choix de tangente non ambïgu.
 
