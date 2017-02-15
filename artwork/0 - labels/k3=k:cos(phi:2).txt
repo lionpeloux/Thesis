@@ -1,0 +1,1 @@
+\kappa_3 = \frac{\kappa}{\cos(\varphi/2)}
