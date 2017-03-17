@@ -1,0 +1,54 @@
+f = sin(x);
+g = sin(x) - x;
+
+canonical = on!;
+display = hexadecimal;
+display = decimal;
+
+I=[-Pi;Pi];
+prec = 128;
+basis = [|3,5,7,9|];
+
+L = [| x + taylor(g,9,0)|];
+L = L:. (x  + remez(g,basis,I/2));
+L = L:. (x  + remez(g,basis,I/4));
+L = L:. (x  + remez(g,basis,I/8));
+L = L:. (x  + remez(g,basis,I/16));
+
+
+// Plots
+Le = [|abs(asin(f-L[0])*180/Pi)|];
+
+for i from 1 to length(L)-1 do
+  Le = Le:. abs(asin(f-L[i])*180/Pi);
+
+for i from 0 to length(L)-1 do {
+  print("---------");
+  print("Optimization sur I/",2^i);
+  print(L[i]);
+  print("Abs error I/2 = ", dirtyinfnorm(Le[i],I/2), "°");
+  print("Abs error I/4 = ", dirtyinfnorm(Le[i],I/4), "°");
+  print("Abs error I/8 = ", dirtyinfnorm(Le[i],I/8), "°");
+  print("Abs error I/16 = ", dirtyinfnorm(Le[i],I/16), "°");
+  print("");
+
+  for j from 1 to 9 by 2 do {
+    print("double p",j," = ", coeff(L[i],j), ";");
+  };
+
+  print("");
+
+
+
+};
+
+
+
+print("length", length(Le));
+
+
+//plot(1e-6, 1e-7, 0,1*abs(f-p_remez),0*abs(f-p_taylor),I/4);
+plot(Le,I/2);
+plot(Le,I/4);
+plot(Le,I/8);
+plot(Le,I/16);

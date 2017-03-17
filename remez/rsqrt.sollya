@@ -1,0 +1,78 @@
+// Calcul d'une approximation polynomiale de 1/sqrt(x) au voisinage de 1
+// cette fonction permet de renormaliser un vecteur de norme quasiment égale à 1.
+// puis eventuellement, on fait des itérations de Newton (g = 1/x^2 - h)
+
+
+// Parameters
+canonical = off!;
+display = hexadecimal;
+display = decimal;
+prec = 64;
+
+// Target function
+f = 1/sqrt(x);
+
+// Domain
+eps = 5e-1;
+I=[1-eps;1+eps];
+print(I);
+
+// Remez Approx
+// Ici on cherche une approximation de f sous la forme : P = 1 + (1-x)*Q
+// cela permet de garantir que P(1) = 1
+Qr = remez( (1 - sqrt(x)) / (sqrt(x)*(1-x)) , 1, I);
+Pr = 1 + (1-x) * Qr(x);
+
+print("");
+
+print("Qr");
+for j from 0 to degree(Qr) do {
+  print("double p",j," = ", coeff(Qr,j), ";");
+};
+
+Print("");
+
+print("Pr");
+for j from 0 to degree(Pr) do {
+  print("double p",j," = ", coeff(Pr,j), ";");
+};
+
+
+print("Abs Pr error on I = ", dirtyinfnorm(abs(Pr-f),I));
+
+x2 = 1.05;
+print("Machine Exact");
+print("x2 = ", x2);
+print("1/sqrt(x2) = ", evaluate(f(x),x2));
+
+print("");
+print("Remez");
+y = evaluate(Pr(x),x2);
+print("y0 = ",y);
+print("err0 = ",evaluate(abs(y-f(x)),x2));
+
+for i from 1 to 2 do {
+  print("");
+  print("Newton step", i);
+  y = y * (3/2 - y*y*x2/2);
+  print("y",i," = ",y);
+  print("err1 = ",evaluate(abs(y-f(x)),x2));
+};
+
+N = proc(z,n){
+  r = Pr(z);
+  for i from 1 to n do {
+    r = r * (3/2 - r*r*z/2);
+  };
+  return r;
+};
+
+print("lkjlkjl");
+N(1);
+
+// plot err
+I2 = [0.5,1.5];
+plot(abs(f-Pr), I2);
+plot(abs(f-Pr), [1-1e-3;1+1e-3]);
+plot(abs(f(x)-N(x,1)), I2);
+plot(abs(f(x)-N(x,2)), I2);
