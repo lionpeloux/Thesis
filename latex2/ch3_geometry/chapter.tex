@@ -1461,7 +1461,7 @@ The rotation method is given in \cite{Bloomenthal1990}. First, the frame at $\ve
 	\subfloat[][rotation method]{\includegraphics{pt_rotation.pdf}\label{fig:pt_rotation}}\\
 	\subfloat[][double reflection method]{\includegraphics{pt_reflection.pdf}\label{fig:pt_reflection}}
 	\vspace{10pt}
-	\caption{Parallel transport of vectors and frames from $\{\vect{x}_i,\vect{t}_i\}$ to $\{\vect{x}_{i+1},\vect{t}_{i+1}\}$.}
+	\caption{Parallel transport of vectors from $\{\vect{x}_i,\vect{t}_i\}$ to $\{\vect{x}_{i+1},\vect{t}_{i+1}\}$.}
 	\label{fig:pt}
 \end{figure}
 
@@ -1484,19 +1484,21 @@ The rotation method is given in \cite{Bloomenthal1990}. First, the frame at $\ve
 %	\label{fig:pt_reflection}
 %\end{figure}
 
-The double reflection method is given by \cite{Wang2008}. It is supposed to be of order $o(h^4)$ whereas the rotation method is only $o(h^2)$, where $h = \sup_{i\in \llbracket 0,1 \rrbracket} \norm{\vect{e}_i}$ is the sharpness of the discretization. Though its computation cost is quite similar, it is not subjected to instability when $\vect{t}_i$ and $\vect{t}_{i+1}$ tend to be collinear, which is an obvious advantage.
+The double reflection method is given by \cite{Wang2008}. It is supposed to be of order $o(h^4)$ whereas the rotation method is only $o(h^2)$, where $h = \sup_{i\in \llbracket 0,1 \rrbracket} \norm{\vect{e}_i}$ is the sharpness of the discretization. Though their computation cost is quite similar, the double reflection method is not subjected to instability when $\vect{t}_i$ and $\vect{t}_{i+1}$ tend to be collinear, which is an obvious advantage.
 
-Let $\mathcal{R}_1$ be the reflection across the bisecting plane of $\vect{e}_i$. The unit vector $\vect{n}_1 = \vect{u}_i$ is normal to that plane. 
-Let $\vect{t}_i^*$ be the image of $\vect{t}_i$ by $\mathcal{R}_1$ ($\vect{t}_i^* = \mathcal{R}_1(\vect{t}_i)$).
-Let $\mathcal{R}_2$ be the reflection across the bisecting plane of the points $\vect{x}_{i+1} + \vect{t}_i^*$ and $\vect{x}_{i+1} + \vect{t}_{i+1}$. 
-The unit vector $\vect{n}_2 = \frac{ \vect{t}_{i+1} - \vect{t}_i^*}{\norm{\vect{t}_{i+1} - \vect{t}_i^*}}$ is normal to that plane (see \cref{fig:pt_reflection}).
+We denote $\mathcal{R}_{\vect{x}}^{\vect{n}}$ the reflection across the plane passing through the point $\vect{x}$ and normal to the vector $\vect{n}$ of unit length ($\norm{\vect{n}}=1$). Thus, $\vect{v}$ is maped through $\mathcal{R}$ into $\vect{v}^* = \vect{v} - 2(\vect{v}\cdot\vect{n})\vect{n}$.
 
-The parallel transport is defined as the \emph{double reflection} through $\mathcal{R}_1$ and $\mathcal{R}_2$ :
+Let $\mathcal{R}_{1} = \mathcal{R}_{\vect{x}_{i+1/2}}^{\vect{n}_{1}}$ be the reflection across the bisecting plane of $\vect{e}_i$ ($\vect{n}_{1} = \vect{u}_i$).
+Let $\vect{t}_i^* = \mathcal{R}_{1}(\vect{t}_i)$ be the image of $\vect{t}_i$ by $\mathcal{R}_{1}$.
+Let $\mathcal{R}_{2} = \mathcal{R}_{\vect{x}_{i+1}}^{\vect{n}_{2}}$ be the reflection across the bisecting plane of the points $\vect{x}_{i+1} + \vect{t}_i^*$ and $\vect{x}_{i+1} + \vect{t}_{i+1}$. 
+Thus, $\vect{n}_{2} = \frac{ \vect{t}_{i+1} - \vect{t}_i^*}{\norm{\vect{t}_{i+1} - \vect{t}_i^*}}$ (see \cref{fig:pt_reflection}).
+
+The parallel transport is defined as the \emph{double reflection} through $\mathcal{R}_{1}$ and $\mathcal{R}_{2}$ :
 \begin{equation}
-	\mathcal{P}_{(\vect{x}_{i},\vect{t}_{i})}^{(\vect{x}_{i+1},\vect{t}_{i+1})} = \mathcal{P}_i^{i+1} = \mathcal{R}_2 \circ \mathcal{R}_1
+	\mathcal{P}_{\{\vect{x}_{i}, \, \vect{t}_{i}\}}^{\{\vect{x}_{i+1}, \,\vect{t}_{i+1}\}} = \mathcal{P}_i^{i+1} = \mathcal{R}_{2} \circ \mathcal{R}_{1}
 \end{equation}
-Let $\mathcal{F}_i = \{ \vect{t}_i, \vect{d}_1, \vect{d}_2 \}$ be a direct orthonormal frame at $\vect{x}_i$. 
-Let $\mathcal{F}_i^* = \{ \vect{t}_i^*, \vect{d}_1^*, \vect{d}_2^* \}$ be the image of $\mathcal{F}_i$ by $\mathcal{R}_1$ : $\mathcal{F}_i^* = \mathcal{R}_1 (\mathcal{F}_i)$.
+Let $\mathcal{F}_i = \{ \vect{t}_i, \vect{d}_1, \vect{d}_2 \}$ be an orthonormal frame at $\vect{x}_i$. 
+Let $\mathcal{F}_i^* = \mathcal{R}_{1}(\mathcal{F}_i) = \{ \vect{t}_i^*, \vect{d}_{1}^*, \vect{d}_{2}^* \}$ be the image of $\mathcal{F}_i$ by $\mathcal{R}_{1}$. 
 Then : 
 \begin{subequations}
 \begin{alignat}{3}
@@ -1505,15 +1507,24 @@ Then :
 	&\vect{d}_2^* 	&& = \vect{d}_1^* \times \vect{t}_i^*
 \end{alignat}
 \end{subequations}
-Let $\mathcal{F}_i^{\parallel} = \{ \vect{t}_{i+1}, \vect{d}_1^{\parallel}, \vect{d}_2^{\parallel} \}$ be the image of $\mathcal{F}_i^*$ by $\mathcal{R}_2$ : $\mathcal{F}_i^{\parallel} = \mathcal{R}_2 (\mathcal{F}_i^*) = \mathcal{P}(\mathcal{F}_i)$. 
-Then the parallel transported vectors are :
+Let $\mathcal{F}_i^{\parallel} = \mathcal{R}_{2} (\mathcal{F}_i^*) = \{ \vect{t}_{i+1}, \vect{d}_1^{\parallel}, \vect{d}_2^{\parallel} \}$ be the image of $\mathcal{F}_i^*$ by $\mathcal{R}_{2}$. Then the parallel transported vectors are given by :
 \begin{subequations}
 \begin{alignat}{3}
 	&\vect{d}_1^{\parallel} 	&&= \vect{d}_1^* - 2 (\vect{d}_1^* \cdot \vect{n}_2) \vect{n}_2 \\
 	&\vect{d}_2^{\parallel}	&& = \vect{t}_{i+1} \times \vect{d}_1^{\parallel}
 \end{alignat}
 \end{subequations}
+The double reflection is equivalent to a rotation around the line $\mathcal{D}$ defined as the intersection of the two reflection planes, of direction $\vect{b} = \vect{n}_{1} \times \vect{n}_{2}$, by an angle $\alpha = 2\angle(\vect{n}_1, \vect{n}_2) = 2\arcsin (\norm{\vect{b}})$. 
 
+\note{Ici il faudrait calculer les coordonnées du centre de rotaion. Idem pour la méthode par rotation (translation + rotation = rotation ??) => trouver l'axe de rotation, l'angle et le centre la rotation équivalente. Comparer les méthodes.}
+
+Remark that for both the circumscribed (see \cref{fig:kb_vertex_tangent_a}) and inscribed (see \cref{fig:kb_edge_tangent_a}) osculating circles :
+\begin{subequations}
+\begin{alignat}{3}
+	&\vect{t}_i 	&&= \mathcal{R}_{\vect{x}_{i-1/2}}^{\vect{u}_{i-1}} \circ \mathcal{R}_{\vect{x}_{i}}^{\vect{t}_{i}}  (\vect{t}_i^-) \\
+	&\vect{t}_i 	&&= \mathcal{R}_{\vect{x}_{i}}^{\vect{t}_{i}} \circ \mathcal{R}_{\vect{x}_{i+1/2}}^{\vect{u}_{i}}  (\vect{t}_i^+)
+\end{alignat}
+\end{subequations}
 
 % CONCLUSION
 % =================
@@ -1522,9 +1533,9 @@ Then the parallel transported vectors are :
 Apres un rappel sur les courbes continues de l'espace, nous avons introduit, pour le cas continu, les notions de courbure, torsion géométrique, interinsèque à la courbe.
 Puis nous avons introduit les repères mobiles : adapté, de Frenet, de Bishop.
 
-Nous avons fait le passage en discret et ca augmente en complexité. EN particulier, nous avons vu que la definition de la courbure n'est pas univoque. Nous avons identifé 2 approches, que nous avons comparé. Bien que la seconde est le comportement désiré pour pénaliser les courbures importantes, l'autre présente bcp d'avantages. Localité parfaite, interpolation par un arc, compatibilité des courbures droite/gauche et 3 points. Extension de la définiiton aux extrémitées. Meilleur représentativité" de l'énergie pour une discrétization régulière sur des cas classiques.
+Nous avons fait le passage en discret et ca augmente en complexité. EN particulier, nous avons vu que la definition de la courbure n'est pas univoque. Nous avons identifé 2 approches, que nous avons comparé. Bien que la seconde est le comportement désiré pour pénaliser les courbures importantes, l'autre présente bcp d'avantages. Localité parfaite, interpolation par un arc, compatibilité des courbures droite/gauche et 3 points. Extension de la définiiton aux extrémitées. Meilleur représentativité" de l'énergie pour une discretization régulière sur des cas classiques.
 
-Nous avons ensuite regardé la question de la déinfition du vecteur tangent pour ces 2 définitions. Et sa corrélation avec la courbure. 
+Nous avons ensuite regardé la question de la definfition du vecteur tangent pour ces 2 définitions. Et sa corrélation avec la courbure. 
 
 En fin, nous avons exposé 2 méthodes pour le calcul du transport parallel sur une courbe discrete : la rotation et la double reflection, qui ne presente pas d'iunstabilité lorsque la courbure tend à s'annuler. (donc ti ti+1 colineaires).
 
