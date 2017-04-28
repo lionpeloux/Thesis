@@ -17,6 +17,11 @@ eps = 5e-1;
 I=[1-eps;1+eps];
 print(I);
 
+// Taylor
+print("Pt");
+Pt = taylor(f,3,1);
+print(Pt);
+
 // Remez Approx
 // Ici on cherche une approximation de f sous la forme : P = 1 + (1-x)*Q
 // cela permet de garantir que P(1) = 1
@@ -30,7 +35,7 @@ for j from 0 to degree(Qr) do {
   print("double p",j," = ", coeff(Qr,j), ";");
 };
 
-Print("");
+print("");
 
 print("Pr");
 for j from 0 to degree(Pr) do {

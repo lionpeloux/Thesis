@@ -1,0 +1,1 @@
+d \theta_2 = \kappa_2 ds

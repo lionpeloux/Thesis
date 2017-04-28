@@ -1,0 +1,1 @@
+\boldsymbol{Q}(s+ds)
