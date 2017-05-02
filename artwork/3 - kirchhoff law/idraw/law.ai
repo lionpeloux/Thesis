@@ -1,0 +1,107 @@
+%!PS-Adobe-3.0
+%%Creator: Rhinoceros
+%%Title: (law.ai)
+%%BoundingBox: 506 -21 989 236
+%%DocumentProcessColors: Black
+%%DocumentNeededResources: procset Adobe_packedarray 2.0 0
+%%+ procset Adobe_cmykcolor 1.1 0
+%%+ procset Adobe_cshow 1.1 0
+%%+ procset Adobe_customcolor 1.0 0
+%%+ procset Adobe_typography_AI3 1.0 0
+%%+ procset Adobe_IllustratorA_AI3 1.0 0
+%AI3_ColorUsage: Color
+%AI3_TemplateBox: 288 384 288 384
+%AI3_TileBox: 0 0 576 768
+%AI3_DocumentPreview: None
+%%Template:
+%%PageOrigin:0 0
+%%EndComments
+%%BeginProlog
+%%IncludeResource: procset Adobe_packedarray 2.0 0
+Adobe_packedarray /initialize get exec
+%%IncludeResource: procset Adobe_cmykcolor 1.1 0
+%%IncludeResource: procset Adobe_cshow 1.1 0
+%%IncludeResource: procset Adobe_customcolor 1.0 0
+%%IncludeResource: procset Adobe_typography_AI3 1.0 0
+%%IncludeResource: procset Adobe_IllustratorA_AI3 1.0 0
+%%EndProlog
+%%BeginSetup
+Adobe_cmykcolor /initialize get exec
+Adobe_cshow /initialize get exec
+Adobe_customcolor /initialize get exec
+Adobe_typography_AI3 /initialize get exec
+Adobe_IllustratorA_AI3 /initialize get exec
+%%EndSetup
+%AI5_BeginLayer
+1 1 1 1 0 0 -1 0 0 0 Lb
+(forces) Ln
+0 A
+0 R
+0.0000 0.0000 0.0000 XA
+0.0000 0.0000 0.0000 Xa
+0 i 1 J 1 j 1.0000 w 4 M []0 d
+0 D
+507.0659 -20.0218 m
+988.9556 -20.0218 L
+988.9556 235.0963 L
+507.0659 235.0963 L
+507.0659 -20.0218 L
+s
+LB
+%AI5_EndLayer--
+%AI5_BeginLayer
+1 1 1 1 0 0 -1 0 0 0 Lb
+(Make2D::visible::lines::Pkb) Ln
+0 A
+0 R
+0.0000 0.0000 0.0000 XA
+0.0000 0.0000 0.0000 Xa
+0 i 1 J 1 j 1.0000 w 4 M []0 d
+0 D
+810.3309 155.0255 m
+803.4871 155.1176 796.6561 155.0035 789.8192 154.6830 c
+787.3936 155.3857 784.9680 156.0884 782.5424 156.7910 c
+791.8406 156.6151 801.0856 156.0523 810.3309 155.0255 C
+s
+LB
+%AI5_EndLayer--
+%AI5_BeginLayer
+1 1 1 1 0 0 -1 0 255 255 Lb
+(Make2D::visible::lines::outlines) Ln
+0 A
+0 R
+0.0000 1.0000 1.0000 XA
+0.0000 1.0000 1.0000 Xa
+0 i 1 J 1 j 1.0000 w 4 M []0 d
+0 D
+850.3608 174.6099 m
+850.3608 165.4773 850.3608 156.3447 850.3608 147.2121 c
+837.2029 151.0623 823.9339 153.5148 810.3309 155.0255 c
+801.0856 156.0523 791.8406 156.6151 782.5424 156.7910 c
+783.0987 166.1326 783.6550 175.4742 784.2113 184.8158 c
+793.5350 184.8389 802.7859 184.3858 812.0529 183.3095 c
+825.2101 181.7813 837.8597 179.1340 850.3608 174.6099 C
+s
+0.0000 1.0000 1.0000 XA
+0.0000 1.0000 1.0000 Xa
+0 i 1 J 1 j 1.0000 w 4 M []0 d
+0 D
+818.6252 183.1575 m
+816.4349 183.2383 814.2445 183.2883 812.0529 183.3095 c
+825.2101 181.7813 837.8597 179.1340 850.3608 174.6099 c
+853.8717 175.4209 857.3826 176.2319 860.8936 177.0428 c
+847.1196 180.8512 833.3374 182.5846 819.1183 183.1388 c
+818.9539 183.1452 818.7896 183.1515 818.6252 183.1575 C
+s
+LB
+%AI5_EndLayer--
+%%PageTrailer
+gsave annotatepage grestore showpage
+%%Trailer
+Adobe_IllustratorA_AI3 /terminate get exec
+Adobe_typography_AI3 /terminate get exec
+Adobe_customcolor /terminate get exec
+Adobe_cshow /terminate get exec
+Adobe_cmykcolor /terminate get exec
+Adobe_packedarray /terminate get exec
+%%EOF
