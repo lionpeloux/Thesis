@@ -31,7 +31,7 @@ Résumé du chapitre
 
 \section{Dynamic Kirchhoff equations}
 
-\subsection{Balance of the linear momentum}
+\subsection{Balance of linear momentum}
 On fait un bilan sur une tranche d'épaisseur $ds$, de centre de gravité $G$ positionné en $\vect{x}_G$ :
 \begin{equation}
 	\vect{F}(s+ds)-\vect{F}(s) + \vect{f}(s)ds = \left(\frac{\partial \vect{F}}{\partial s}(s)+\vect{f}(s)\right)ds = (\rho Sds)\ddot{\vect{x}}_G
@@ -41,7 +41,7 @@ Which leads to the first equation of Kirchhoff law :
 	\frac{\partial \vect{F}}{\partial s}+\vect{f} = \rho S \ddot{\vect{x}}_G
 \end{equation}
 
-\subsection{Balance of the angular momentum}
+\subsection{Balance of angular momentum}
 On fait un bilan sur une tranche d'épaisseur $ds$, de centre de gravité $G$ positionné en $\vect{x}_G$. On applique le théorème du moment cinétique dans un référentiel inertiel :
 \begin{equation}
 	\begin{aligned}
@@ -238,6 +238,223 @@ Second Kirchhoff law projecting on the material frame basis :
 
 Ici, on peut mettre l'interprétation géométrique (cf pdf LDP notes).
 Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écrire les projections au 1er ordre.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[]{kirchhoff_geometry.pdf}
+	\caption{Osculating circles for a spiral curve at different parameters.}
+	\label{fig:5}
+\end{figure}
+
+%\begin{figure}[H]
+%	\captionsetup[subfloat]{captionskip=10pt}
+%     	\centering
+%     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_kb.pdf}\label{<figure1>}} \\
+%	\subfloat[][Contribution of the internal force.]{\includegraphics{kirchhoff_balance_T_kb.pdf}\label{<figure1>}}
+%	\subfloat[][Contribution of the internal moment.]{\includegraphics{kirchhoff_balance_M_kb.pdf}\label{<figure2>}}
+%	\vspace{10pt}
+%	\caption{Projection of the static equilibrium equations in the plane normal to $\kappa\vect{b}$.}
+%     \label{fig:5_2}
+%\end{figure}
+
+%\begin{figure}[H]
+%	\captionsetup[subfloat]{captionskip=10pt}
+%     	\centering
+%     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_d1.pdf}\label{<figure1>}} \\
+%	\subfloat[][Contribution of the internal force.]{\includegraphics{kirchhoff_balance_T_d1.pdf}\label{<figure1>}}
+%	\subfloat[][Contribution of the internal moment.]{\includegraphics{kirchhoff_balance_M_d1.pdf}\label{<figure2>}}
+%	\vspace{10pt}
+%	\caption{Projection of the static equilibrium equations in the plane normal to $\vect{d}_1$.}
+%     \label{fig:5_2}
+%\end{figure}
+%
+%\begin{figure}[H]
+%	\captionsetup[subfloat]{captionskip=10pt}
+%     	\centering
+%     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_d2.pdf}\label{<figure1>}} \\
+%	\subfloat[][Contribution of the internal force.]{\includegraphics{kirchhoff_balance_T_d2.pdf}\label{<figure1>}}
+%	\subfloat[][Contribution of the internal moment.]{\includegraphics{kirchhoff_balance_M_d2.pdf}\label{<figure2>}}
+%	\vspace{10pt}
+%	\caption{Projection of the static equilibrium equations in the plane normal to $\vect{d}_2$.}
+%     \label{fig:5_2}
+%\end{figure}
+
+% ============
+ 
+\begin{figure}[p]
+  \begin{leftfullpage}
+    \captionsetup[subfloat]{captionskip=10pt}
+     	\centering
+     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_kb.pdf}\label{fig:5_2_a}} \\
+	\vspace{30pt}
+	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_kb.pdf}\label{fig:5_2_b}}
+	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_kb.pdf}\label{fig:5_2_c}}
+	\vspace{30pt}
+	\caption{Influence of the centerline curvature ($\kappa$) in the deviation of internal forces and moments along the centerline.}     
+	\label{fig:5_2}
+ \end{leftfullpage}
+\end{figure}
+\begin{figure}[p]
+	\begin{fullpage}
+	\subsubsection{Contributions to the balance of forces}
+	\vspace{10pt}
+	$\vect{N}(s+ds)$ is deviated from $\vect{d}_3(s)$ by an angle $d\theta = \kappa ds$ along $ds$ (\cref{fig:5_2_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_3(s)$ is : 
+	\begin{equation*}
+		N(s+ds) \cos(\kappa ds) - N(s) = N'(s) ds + o(ds)
+	\end{equation*}	
+	\vspace{10pt}
+	\subsubsection{Contributions to the balance of moments}
+	\vspace{10pt}
+	$\vect{Q}(s+ds)$ is deviated from $\vect{d}_3(s)$ by an angle $d\theta = \kappa ds$ along $ds$ (\cref{fig:5_2_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_3(s)$ is : 
+	\begin{equation*}
+		Q(s+ds) \cos(\kappa ds) - Q(s) = Q'(s) ds + o(ds)
+	\end{equation*}	
+	  \end{fullpage}
+\end{figure}
+
+% ============
+ 
+\begin{figure}[p]
+  \begin{leftfullpage}
+    \captionsetup[subfloat]{captionskip=10pt}
+     	\centering
+     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_d1.pdf}\label{fig:5_3_a}} \\
+	\vspace{30pt}
+	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_d1.pdf}\label{fig:5_3_b}}
+	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_d1.pdf}\label{fig:5_3_c}}
+	\vspace{30pt}
+	\caption{Influence of the first material curvature ($\kappa_1$) in the deviation of internal forces and moments along the centerline.}     
+	\label{fig:5_3}
+ \end{leftfullpage}
+\end{figure}
+\begin{figure}[p]
+	\begin{fullpage}
+	\subsubsection{Contributions to the balance of forces}
+	\vspace{10pt}
+	
+	$\vect{T}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_3_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_1(s)$ is : 
+	\begin{equation*}
+		-T_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau T_2(s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{T}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_2(s)$ is : 
+	\begin{equation*}
+		-T_2(s) + T_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = T'_2 (s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{T}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_3(s)$ is : 
+	\begin{equation*}
+		T_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 T_2(s) ds + o(ds)
+	\end{equation*}
+		
+	$\vect{N}(s+ds)$ is deviated from $\vect{d}_3(s)$ by the combined angles $d\theta_2 = \kappa_2 ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_2(s)$ is : 
+	\begin{equation*}
+		-N(s+ds) \cos(\kappa_2 ds) \sin(\kappa_1 ds) = -\kappa_1 N(s) ds + o(ds)
+	\end{equation*}	
+	\vspace{10pt}
+
+	\subsubsection{Contributions to the balance of moments}
+	\vspace{10pt}
+	
+	$\vect{T}_2(s+ds)$ is deviated from the plane normal to $\vect{d}_1(s)$ by the angle $d\theta_3 = \tau ds$ along $ds$ (\cref{fig:5_3_b}). It produces a moment around $\vect{d}_1$ with the lever arm $b =  \cos(\kappa_2 ds) ds$. Thus, its overall contribution to the balance of moments over $\vect{d}_1(s)$ is : 
+	\begin{equation*}
+		-T_2(s+ds) \cos(\tau ds) (\cos(\kappa_2 ds) ds) = -T_2(s) ds + o(ds)
+	\end{equation*}
+	
+	$\vect{M}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_3_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_1(s)$ is : 
+	\begin{equation*}
+		-M_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau M_2 (s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{M}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_2(s)$ is : 
+	\begin{equation*}
+		-M_2(s) + M_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = M'_2 (s) ds + o(ds)
+	\end{equation*}
+	
+	$\vect{M}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_3(s)$ is : 
+	\begin{equation*}
+		M_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 M_2 (s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{Q}(s+ds)$ is deviated from $\vect{d}_3(s)$ by the combined angles $d\theta_2 = \kappa_2 ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_2(s)$ is : 
+	\begin{equation*}
+		-Q(s+ds) \cos(\kappa_2 ds) \sin(\kappa_1 ds) = -\kappa_1 Q(s) ds + o(ds)
+	\end{equation*}	
+	  \end{fullpage}
+\end{figure}
+
+% ============
+ 
+\begin{figure}[p]
+  \begin{leftfullpage}
+    \captionsetup[subfloat]{captionskip=10pt}
+     	\centering
+     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_d2.pdf}\label{fig:5_4_a}} \\
+	\vspace{30pt}
+	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_d2.pdf}\label{fig:5_4_b}}
+	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_d2.pdf}\label{fig:5_4_c}}
+	\vspace{30pt}
+	\caption{Influence of the second material curvature ($\kappa_2$) in the deviation of internal forces and moments along the centerline.}     
+	\label{fig:5_4}
+ \end{leftfullpage}
+\end{figure}
+\begin{figure}[p]
+	\begin{fullpage}
+	\subsubsection{Contributions to the balance of forces}
+	\vspace{10pt}
+	
+	$\vect{T}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_1(s)$ is : 
+	\begin{equation*}
+		-T_1(s) + T_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = T'_1 (s) ds + o(ds)
+	\end{equation*}
+	
+	$\vect{T}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_4_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_2(s)$ is : 
+	\begin{equation*}
+		T_1(s+ds) \sin(\tau ds) \cos(\kappa_1 ds) = \tau T_1 (s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{T}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_3(s)$ is : 
+	\begin{equation*}
+		-T_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = - \kappa_2 T_1(s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{N}(s+ds)$ is deviated from $\vect{d}_3(s)$ by the combined angles $d\theta_1 = \kappa_1 ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_1(s)$ is : 
+	\begin{equation*}
+		N(s+ds) \cos(\kappa_1 ds) \sin(\kappa_2 ds) = \kappa_2 N(s) ds + o(ds)
+	\end{equation*}	
+	\vspace{10pt}
+	
+	\subsubsection{Contributions to the balance of moments}
+	\vspace{10pt}
+	
+		$\vect{T}_1(s+ds)$ is deviated from the plane normal to $\vect{d}_2(s)$ by the angle $d\theta_3 = \tau ds$ along $ds$ (\cref{fig:5_4_b}). It produces a moment around $\vect{d}_2$ with the lever arm $b =  \cos(\kappa_1 ds) ds$. Thus, its overall contribution to the balance of moments over $\vect{d}_2(s)$ is : 
+	\begin{equation*}
+		T_1(s+ds) \cos(\tau ds) (\cos(\kappa_1 ds) ds) = T_1(s) ds + o(ds)
+	\end{equation*}
+	
+	$\vect{M}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_1(s)$ is : 
+	\begin{equation*}
+		-M_1(s) + M_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = M'_1 (s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{M}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_2(s)$ is : 
+	\begin{equation*}
+		M_1(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = \tau M_1 (s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{M}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_3(s)$ is : 
+	\begin{equation*}
+		-M_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = -\kappa_2 M_1 (s) ds + o(ds)
+	\end{equation*}	
+	
+	$\vect{Q}(s+ds)$ is deviated from $\vect{d}_3(s)$ by the combined angles $d\theta_1 = \kappa_1 ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_1(s)$ is : 
+	\begin{equation*}
+		Q(s+ds) \cos(\kappa_1 ds) \sin(\kappa_2 ds) = \kappa_2 Q(s) ds + o(ds)
+	\end{equation*}	
+	  \end{fullpage}
+\end{figure}
+
+
 
 \section{Main hypothesis}
 

@@ -1,7 +1,7 @@
 %!PS-Adobe-3.0
 %%Creator: Rhinoceros
 %%Title: (balance.ai)
-%%BoundingBox: 531 -30 819 229
+%%BoundingBox: 332 390 440 582
 %%DocumentProcessColors: Black
 %%DocumentNeededResources: procset Adobe_packedarray 2.0 0
 %%+ procset Adobe_cmykcolor 1.1 0
@@ -34,33 +34,40 @@ Adobe_IllustratorA_AI3 /initialize get exec
 %%EndSetup
 %AI5_BeginLayer
 1 1 1 1 0 0 -1 0 0 0 Lb
-(Make2D::Pkb) Ln
+(Make2D::visible::lines::FINAL) Ln
 0 A
 0 R
-0.0000 0.0000 1.0000 XA
-0.0000 0.0000 1.0000 Xa
+0.0000 0.0000 0.0000 XA
+0.0000 0.0000 0.0000 Xa
 0 i 1 J 1 j 1.0000 w 4 M []0 d
 0 D
-623.6029 139.4540 m
-598.1959 103.5445 L
+400.1625 507.9644 m
+380.9969 485.8338 L
 S
-1.0000 0.0000 1.0000 XA
-1.0000 0.0000 1.0000 Xa
+0.0000 0.0000 0.0000 XA
+0.0000 0.0000 0.0000 Xa
 0 i 1 J 1 j 1.0000 w 4 M []0 d
 0 D
-532.8317 -29.7936 m
-818.3108 -29.7936 L
-818.3108 228.8316 L
-532.8317 228.8316 L
-532.8317 -29.7936 L
+400.1625 507.9644 m
+402.6138 510.7949 L
+S
+LB
+%AI5_EndLayer--
+%AI5_BeginLayer
+1 1 1 1 0 0 -1 0 0 0 Lb
+(FINAL::FRAME) Ln
+0 A
+0 R
+0.0000 0.0000 0.0000 XA
+0.0000 0.0000 0.0000 Xa
+0 i 1 J 1 j 1.0000 w 4 M []0 d
+0 D
+439.2472 452.2614 m
+333.9411 391.4630 L
+333.9411 521.0654 L
+439.2472 581.8639 L
+439.2472 452.2614 L
 s
-0.0000 0.0000 1.0000 XA
-0.0000 0.0000 1.0000 Xa
-0 i 1 J 1 j 1.0000 w 4 M []0 d
-0 D
-675.5712 186.3119 m
-715.6592 209.4567 L
-S
 LB
 %AI5_EndLayer--
 %%PageTrailer
