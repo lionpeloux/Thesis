@@ -173,7 +173,7 @@ Et l'on peut alors écrire la seconde loi de Kirchhoff sous la forme suivante :
 	\end{aligned}
 \end{equation}
 On peut alors conclure sur l'expression de l'equation de kirchoff
-\footnote{Recall that : $\ddot{\vect{d}_i} = \vect{\Lambda} \times \vect{d}_i$}
+\footnote{Recall that : $\dot{\vect{d}_i} = \vect{\Lambda} \times \vect{d}_i$}
 \footnote{Remark that : $(\vect{\Lambda}\times\dot{\vect{d}_i})\times\vect{d}_i = \Lambda_i(\vect{\Lambda}\times\dot{\vect{d}_i})$} :
 \begin{equation}
 	\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{d}_3 \times \vect{F}(s) = I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + I_2 \vect{d}_2 \times \ddot{\vect{d}_2}
@@ -508,6 +508,23 @@ Principe :
 \subsection{Discret beam model}
 % =======================
 
+ 
+\begin{figure}[t]
+	\centering
+	\includegraphics[]{discrete_model.pdf}
+	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments. Each \emph{segment} is defined as a three-vertices (two-edges) element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematic description and is not accessible to the end user.}
+	\label{fig:5}
+\end{figure} 
+
+The discrete beam is divided into $n_s$ segments : $]\vect{x}_{2i},  \vect{x}_{2i+2}[ \quad i \in [0,ns] $.
+The i-th segment is composed of three vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) defining two edges ($\vect{e}_{2i} = \vect{x}_{2i+1} - \vect{x}_{2i}, \vect{e}_{2i+1} = \vect{x}_{2i+2} - \vect{x}_{2i+1}$).
+A segment has uniform section ($I_1$, $I_2$, $J$) and material ($E$, $G$) properties over its length.
+It is subjected to uniform external distributed forces ($\vect{f}_{ext}$) and moments ($\vect{m}_{ext}$).
+External concentrated forces ($\vect{F}_{ext}$) and moments ($\vect{M}_{ext}$) are applied to the segment end vertices ($\vect{x}_{2i}$,  $\vect{x}_{2i+2}$).
+End vertices are called \emph{handle}. Mid vertices are called \emph{ghost} as they can't be involved in any link, restrain or loading in the present model. Ghost vertices are used only to give a higher richness in the kinematic description of a segment as a two-noded segment would.
+
+This discret model involves that axial, bending and torsion strains, section and material properties will be continuous fonctions of the arc length over each segment $]\vect{x}_{2i},  \vect{x}_{2i+2}[$. Discontinuities in strains, internal and external forces, internal and external moments will be located at handle vertices. The left and right limits of this fonctions at handle vertices will be denoted respectively by $f^-$ and $f^+$. Possibly they are continuous at handle nodes that is the left and right limits agree ($f^- = f^+$).
+
 Lets call : $l_i = \norm{\vect{e}_{i}}$ with $i \in [0,n_e]$.
 Lets call : $u_i = \frac{\vect{e}_{i}}{l_i}$ with $i \in [0,n_e]$.
 
@@ -523,6 +540,11 @@ Let $\mat{B}_i$ be the material stiffness matrix along the principal axes of ine
 			0		&	EI_{2}	&	0		\\
 			0		&	0		&	GJ_{}	\\
 		\end{bmatrix}_i
+\end{equation}
+
+Thus, one will write the constitutive equations for the bending moment in matrix notation as :
+\begin{equation}
+	\vect{M}_i =  \mat{B}_{i}(\vect{\kappa b}_{i} - \overbar{\vect{\kappa b}}_{i})
 \end{equation}
 
 \subsection{Discret bending moments and curvatures}
@@ -591,6 +613,12 @@ Then, it is possible to give the updated curvatures :
 
 \subsection{Discret twisting moment}
 % ==========================
+
+\begin{figure}[t]
+	\includegraphics[]{comics_1.pdf}
+	\caption{Stage 1}
+	\label{fig:5}
+\end{figure} 
 
 We assume the twisting moment and the rate of twist to vary linearly over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$.
 Thus, the rate of twist at mid edge is given by :
