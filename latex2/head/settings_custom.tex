@@ -26,6 +26,7 @@
 \usepackage{pgfplots,pgfplotstable}
 \usepackage[nameinlink, noabbrev]{cleveref} % attention a loader apres hypperef (use nameinlink or noabbrev options)
 \usepackage{csvsimple, booktabs, longtable} % pour les tables CSV
+\usepackage{tabularx}
 \usepackage{float}
 \usepackage{csquotes}
 \usepackage{dpfloat} % for double page float figures aand tables side by side
@@ -149,6 +150,9 @@
 
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
 \newcommand{\para}{{\mkern3mu\vphantom{\perp}\vrule depth 0pt\mkern2mu\vrule depth 0pt\mkern3mu}} % reduced heigth parallel symbol
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
 
 % LDP Julia

@@ -204,7 +204,7 @@ Qu'apporte l'hypothèse d'inextensibilité. Est-elle raisonnable. Tps de calcul 
 
 \begin{subequations}
 	\begin{align}
-		\vect{N} &= ES(\|\vect{d}_3'\|-\|\overbar{\vect{d}_3}'\|)\vect{d}_3
+		\vect{N} &= ES \epsilon \vect{d}_3
 		\\
 		\vect{M_1} &= EI_1(\kappa_1-\overbar{\kappa_1})\vect{d}_1
 		\\
@@ -229,7 +229,6 @@ with $\phi(x_1, x_2)$ is the warping function of the cross section.
 
 
 \subsection{Internal forces and moments}
-
 Efforts internes de coupure :
 \begin{subequations}
 	\begin{align}
@@ -238,7 +237,6 @@ Efforts internes de coupure :
 		\vect{M}_{int} &= Q\vect{d}_3 + M_1\vect{d}_1 + M_2\vect{d}_2
 	\end{align}
 \end{subequations}
-
 Efforts externes appliqués linéiques :
 \begin{subequations}
 	\begin{align}
@@ -254,10 +252,11 @@ First Kirchhoff law projecting on the material frame basis :
 \begin{subequations}
 	\begin{align}
 		N' + \kappa_1 F_2 - \kappa_2 F_1 + f_3 &= \rho S \ddot{x_3}
-		\\
+		\label{eq:K1_3}\\
 		F_1' + \kappa_2 N - \tau F_2 + f_1 &= \rho S \ddot{x_1}
-		\\
+		\label{eq:K1_1}\\
 		F_2' - \kappa_1 N + \tau F_1 + f_2 &= \rho S \ddot{x_2}
+		\label{eq:K1_2}
 	\end{align}
 \end{subequations}
 Qu'on écrit vectoriellement : 
@@ -272,15 +271,16 @@ This is nothing but the application of the transport theorem when differentiatin
 	\frac{\partial \vect{F}}{\partial s}\Bigr|_{global} = \frac{\partial \vect{F}}{\partial s}\Bigr|_{local} + \vect{\Omega}(s) \times \vect{F}
 \end{equation}
 
-Second Kirchhoff law projecting on the material frame basis :
+Second Kirchhoff law projecting on the material frame basis 
+\footnote{As explained in \cite[p. 18]{Dill1992}, if the inextensibility assumption does not hold, the right terms to consider are $-(1+\epsilon)F_2$ in \cref{eq:K2_1} and $(1+\epsilon)F_1$ in \cref{eq:K2_2}.} :
 \begin{subequations}
 	\begin{align}
 		Q' + \kappa_1 M_2 - \kappa_2 M_1 + m_3 &= (I_1 + I_2)\dot{\Lambda}_3 + (I_2 - I_1)\Lambda_1\Lambda_2
-		\label{eq:3_16_a}\\
+		\label{eq:K2_2}\\
 		M_1' + \kappa_2 Q - \tau M_2 - F_2 + m_1 &= I_1 (\dot{\Lambda}_1 + \Lambda_2 \Lambda_3)
-		\label{eq:3_16_b}\\
+		\label{eq:K2_1}\\
 		M_2' - \kappa_1 Q + \tau M_1 + F_1 + m_2 &= I_2 (\dot{\Lambda}_2 - \Lambda_3 \Lambda_1)
-		\label{eq:3_16_c}
+		\label{eq:K2_2}
 	\end{align}
 \end{subequations}
 Qu'on écrit vectoriellement : 
@@ -491,8 +491,9 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 
 On néglige les forces d'inertie liées à la rotation de l'élément  (devant quoi ?? traitement quasi-statique par rapport à la rotation). Cette hypothèse est faite explicitement chez Florence Bertail :
 
-\cite{Casati2013}
-\guil{neglecting inertial momentum due to the vanishing cross-section lead to the following dynamic equations for a Kirchhoff rod}
+\blockcquote[]{Casati2013}{neglecting inertial momentum due to the vanishing cross-section lead to the following dynamic equations for a Kirchhoff rod}
+\blockcquote[p. 17]{Dill1992}{It follows that $\omega_1$ and $\omega_2$ can be neglected in the kinetic energy [\ldots]. However, $\omega_3$, which provides the angular momentum about the axis of the rod, must be retained, This assumption of Kirchhoff is consistent with the technical theory of beams where rotary inertia is known to provide corrections to the natural frequencies of vibration of $O(\alpha^2)$ if the length measure is the half-wave length.}
+
 
 Cette hypothèse est faite mais passée sous silence chez Douthe, Adriaenssen, D'Amico lorsqu'ils déduisent l'effort tranchant du moment de flexion.
 
@@ -508,18 +509,25 @@ Principe :
 \subsection{Discret beam model}
 % =======================
 
- 
 \begin{figure}[t]
 	\centering
 	\includegraphics[]{discrete_model.pdf}
-	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments. Each \emph{segment} is defined as a three-vertices (two-edges) element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematic description and is not accessible to the end user.}
+	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments. Each segment is defined as a three-vertices (two-edges) element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
 	\label{fig:5}
 \end{figure} 
 
+\subsubsection{Centerline}
+
 The discrete beam is divided into $n_s$ segments : $]\vect{x}_{2i},  \vect{x}_{2i+2}[ \quad i \in [0,ns] $.
+
+\subsubsection{Segments}
+
 The i-th segment is composed of three vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) defining two edges ($\vect{e}_{2i} = \vect{x}_{2i+1} - \vect{x}_{2i}, \vect{e}_{2i+1} = \vect{x}_{2i+2} - \vect{x}_{2i+1}$).
 A segment has uniform section ($I_1$, $I_2$, $J$) and material ($E$, $G$) properties over its length.
 It is subjected to uniform external distributed forces ($\vect{f}_{ext}$) and moments ($\vect{m}_{ext}$).
+
+\subsubsection{External loads}
+
 External concentrated forces ($\vect{F}_{ext}$) and moments ($\vect{M}_{ext}$) are applied to the segment end vertices ($\vect{x}_{2i}$,  $\vect{x}_{2i+2}$).
 End vertices are called \emph{handle}. Mid vertices are called \emph{ghost} as they can't be involved in any link, restrain or loading in the present model. Ghost vertices are used only to give a higher richness in the kinematic description of a segment as a two-noded segment would.
 
@@ -546,79 +554,138 @@ Thus, one will write the constitutive equations for the bending moment in matrix
 \begin{equation}
 	\vect{M}_i =  \mat{B}_{i}(\vect{\kappa b}_{i} - \overbar{\vect{\kappa b}}_{i})
 \end{equation}
+With $\vect{\kappa b} = \begin{bmatrix}\kappa_1 & \kappa_2 & \tau \end{bmatrix}^T$ expressed in the material frame.
+
 
 \subsection{Discret bending moments and curvatures}
+We assume that the internal bending moment and curvature are quadratic functions of the arc length over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$.
+While they must be continuous over this interval, they might be discontinuous at handle vertices and be subjected to jump discontinuities in direction and magnitude.
 
-We assume bending moments and curvatures to be quadratic over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$.
+\clearpage
 
-\subsubsection{At ghost vertices}
+\def\tabularxcolumn#1{m{#1}} % vertical center in X column
+% -------------------------------------------------------------------------------------
+\subsubsection{Curvature at ghost vertices}
+% -------------------------------------------------------------------------------------
 
-\begin{equation}
-	\vect{\kappa b}_{2i-1} =  \frac{2}{L_{i-1}} \vect{u}_{2i-2} \times \vect{u}_{2i-1}
-	\\
-	\vect{\kappa b}_{2i+1} =  \frac{2}{L_{i}} \vect{u}_{2i} \times \vect{u}_{2i+1}
-\end{equation}
-\begin{equation}
-	\vect{t}_{2i-1} =  \frac{l_{2i-1}}{L_{i-1}} \vect{u}_{2i-2}	
-				 + 	\frac{l_{2i-2}}{L_{i-1}} \vect{u}_{2i-1} 			
-	\\
-	\vect{t}_{2i+1} =  \frac{l_{2i+1}}{L_{i}} \vect{u}_{2i}	
-				 + 	\frac{l_{2i}}{L_{i}} \vect{u}_{2i+1} 			
-\end{equation}
-\begin{equation}
-	\vect{t}_{2i}^- = 2 (\vect{t}_{2i-1} \cdot \vect{u}_{2i-1}) \vect{u}_{2i-1} - \vect{t}_{2i-1} 
-	\\
-	\vect{t}_{2i}^+ = 2 (\vect{t}_{2i+1} \cdot \vect{u}_{2i}) \vect{u}_{2i} - \vect{t}_{2i+1}
-\end{equation}
-\begin{equation}
-	\vect{t}_{2i} = \frac{\vect{t}_{2i}^- + \vect{t}_{2i}^+ }{\norm{\vect{t}_{2i}^- + \vect{t}_{2i}^+}}
-\end{equation}
+For a given geometry of the centerline, the curvature binormal vector at ghost vertex  $\vect{x}_{2i-1}$ (resp. $\vect{x}_{2i+1}$) is computed considering the circumscribed osculating circle passing through the vertices ($\vect{x}_{2i-2}, \vect{x}_{2i-1},  \vect{x}_{2i}$) of the ($i-1$)\textit{th} segment -- resp. through the vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) of the $i$-\textit{th} segment.
 
-\subsubsection{At handle vertices}
+\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
+	\includegraphics[]{E1.pdf}
+	& 
+	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
+	\vect{\kappa b}_{2i-1} 	& =  \frac{2}{L_{i-1}} \vect{u}_{2i-2} \times \vect{u}_{2i-1}\\[0.5em]
+	\vect{\kappa b}_{2i+1} 	& =  \frac{2}{L_{i}} \vect{u}_{2i} \times \vect{u}_{2i+1} 
+	\end{aligned}$
+\end{tabularx}
 
-Rajouter les conditions aux limites moment nul vs moment prescrit
+% -------------------------------------------------------------------------------------
+\subsubsection{Unit tangent vectors at ghost vertices}
+% -------------------------------------------------------------------------------------
 
-\begin{equation}
-	\vect{\kappa b}_{2i}^- =  \frac{2}{l_{2i-1}} \vect{u}_{2i-1} \times \vect{t}_{2i}
-	\\
-	\vect{\kappa b}_{2i}^+ =  \frac{2}{l_{2i}} \vect{t}_{2i} \times \vect{u}_{2i}
-\end{equation}
-\begin{equation}
-	\vect{M}_{2i-1} =  \mat{B}_{i-1}(\vect{\kappa b}_{2i-1} - \overbar{\vect{\kappa b}}_{2i-1})
-\end{equation}
-\begin{equation}
-		\vect{M}_{2i+1} =  \mat{B}_{i}(\vect{\kappa b}_{2i+1} - \overbar{\vect{\kappa b}}_{2i+1})
-\end{equation}
+This definition of the curvature leads to a natural definition of the unit tangent vector at ghost vertex $\vect{x}_{2i-1}$ (resp. $\vect{x}_{2i+1}$), as the unit vector tangent to the osculating circle of the ($i-1$)\textit{th} segment (resp. $i$-\textit{th} segment) at that point. 
+
+\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
+	\includegraphics[]{E2.pdf}
+	& 
+	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
+	\vect{t}_{2i-1}	&=  \frac{l_{2i-1}}{L_{i-1}} \vect{u}_{2i-2}	+ 	\frac{l_{2i-2}}{L_{i-1}} \vect{u}_{2i-1} 	\\[0.5em]
+	\vect{t}_{2i+1} 	&=  \frac{l_{2i+1}}{L_{i}} \vect{u}_{2i}		+ 	\frac{l_{2i}}{L_{i}} \vect{u}_{2i+1} 	
+	\end{aligned}$
+\end{tabularx}
+
+% -------------------------------------------------------------------------------------
+\subsubsection{Left/right unit tangent vectors at handle vertices}
+% -------------------------------------------------------------------------------------
+
+Equivalently, the definition of the osculating circles of the ($i-1$)\textit{th} and $i$-\textit{th} segments leads to a natural definition of the left ($\vect{t}_{2i}^-$) and right ($\vect{t}_{2i}^+$) unit tangent vectors at handle vertex $\vect{x}_{2i}$, for segments of uniform curvature. When both segments have the same curvature, left and right vectors agree.
+
+\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
+	\includegraphics[]{E3.pdf}
+	& 
+	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
+	\vect{t}_{2i}^- 	&= 2 (\vect{t}_{2i-1} \cdot \vect{u}_{2i-1}) \vect{u}_{2i-1} - \vect{t}_{2i-1} \\[0.5em]
+	\vect{t}_{2i}^+ 	&= 2 (\vect{t}_{2i+1} \cdot \vect{u}_{2i}) \vect{u}_{2i} - \vect{t}_{2i+1}
+	\end{aligned}$
+\end{tabularx}
+
+% -------------------------------------------------------------------------------------
+\subsubsection{Unit tangent vectors at handle vertices}
+% -------------------------------------------------------------------------------------
+
+The unit tangent vector $\vect{t}_{2i}$ -- that is the beam section normal -- at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex. \footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.}
+
+\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
+	\includegraphics[]{E4.pdf}
+	& 
+	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
+	\vect{t}_{2i} 	&= \frac{\vect{t}_{2i}^- + \vect{t}_{2i}^+ }{\norm{\vect{t}_{2i}^- + \vect{t}_{2i}^+}}
+	\end{aligned}$
+\end{tabularx}
+
+This way, the determination of the tangent vectors -- or equivalently the section normals -- in the static equilibrium configuration will be done in the flow of the dynamic relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the section normals.
+
+% -------------------------------------------------------------------------------------
+\subsubsection{Left/right bending moments at handle vertices}
+% -------------------------------------------------------------------------------------
+
+Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\kappa}_{2i}^-$) and right ($\vect{\kappa}_{2i}^+$) curvatures at handle vertex $\vect{x}_{2i}$. The left curvature is initially evaluated from the left osculating circle, defined as the circle passing through $\vect{x}_{2i-1}$ and $\vect{x}_{2i}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$. The right curvature is initially evaluated from the right osculating circle, defined as the circle passing through $\vect{x}_{2i}$ and $\vect{x}_{2i+1}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$. 
+\footnote{Remark that the centerline is now approximated with a biarc in the vicinity of $\vect{x}_{2i}$. This is the reason why this model is called the \textquote{biarc model}.}
+\footnote{This model offers the ability to represent discontinuities in curvature -- thus in bending moment -- at handle vertices as the left and right curvatures does not necessarily agree. This is quite different from the classical 3-dof element \cite{Barnes1999, Adriaenssens1999, Douthe2006} which assumes that the curvature -- thus the bending moment -- is $\mathcal{C}^0$ and can be evaluated at every vertices from the circumscribed osculating circle.}
+
+\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
+	\includegraphics[]{E5.pdf}
+	& 
+	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
+	\vect{\kappa b}_{2i}^- &=  \frac{2}{l_{2i-1}} \vect{u}_{2i-1} \times \vect{t}_{2i}
+	\\[0.5em]
+	\vect{\kappa b}_{2i}^+ &=  \frac{2}{l_{2i}} \vect{t}_{2i} \times \vect{u}_{2i}
+	\end{aligned}$
+\end{tabularx}
+
+However, this values need to be adjusted so that the static condition for rotational equilibrium ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$) is satisfied at all time. Then, this condition will be satisfied -- in particular -- at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}$) for the internal bending moment as :
 \begin{equation}
 		\vect{M}_{2i} 	=  \frac{1}{2} \mat{B}_{i-1}(\vect{\kappa b}_{2i}^- - \overbar{\vect{\kappa b}}_{2i}^-)
 					+  \frac{1}{2} \mat{B}_{i}(\vect{\kappa b}_{2i}^+ - \overbar{\vect{\kappa b}}_{2i}^+)
 \end{equation}
-\begin{equation}
-		\vect{M}_{2i}^- 	=  \vect{M}_{2i} + \frac{1}{2} \vect{M}_{2i}^{ext} 
-\end{equation}
-\begin{equation}
-		\vect{M}_{2i}^+ 	=  \vect{M}_{2i} - \frac{1}{2} \vect{M}_{2i}^{ext} 
-\end{equation}
+To enforce the jump discontinuity in bending moment ($\vect{M}^{ext} = \vect{M}^- - \vect{M}^+$) across the handle vertex, we define the left and right bending moments at $\vect{x}_{2i}$ as :
+\begin{subequations}
+	\begin{align}
+		\vect{M}_{2i}^- 	&=  \vect{M}_{2i} + \frac{1}{2} \vect{M}_{2i}^{ext} 
+		\\[0.5em]
+		\vect{M}_{2i}^+ 	&=  \vect{M}_{2i} - \frac{1}{2} \vect{M}_{2i}^{ext} 
+	\end{align}
+\end{subequations}
+Note that in the case where no external concentrated bending moment is applied to the handle vertex, the internal bending moment is continuous across the vertex.
 
-This ensure that the static condition is satisfied at all time : $\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$
+% -------------------------------------------------------------------------------------
+\subsubsection{Left/right curvatures at handle vertices}
+% -------------------------------------------------------------------------------------
 
-Then, it is possible to give the updated curvatures :
+Finally, the left and right curvatures at handle vertex $\vect{x}_{2i}$ are computed back with the material constitutive law :
+\begin{subequations}
+	\begin{align}
+		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} \vect{M}_{2i}^- + \overbar{\vect{\kappa b}}_{2i}^- 
+		\\[0.5em]
+		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} \vect{M}_{2i}^+ + \overbar{\vect{\kappa b}}_{2i}^+ 
+	\end{align}
+\end{subequations}
 
-\begin{equation}
-		\vect{\kappa b}_{2i}^-  =  \mat{B}_{i-1}^{\;-1} \vect{M}_{2i}^- + \overbar{\vect{\kappa b}}_{2i}^- 
-\end{equation}
-\begin{equation}
-		\vect{\kappa b}_{2i}^+  =  \mat{B}_{i}^{\;-1} \vect{M}_{2i}^+ + \overbar{\vect{\kappa b}}_{2i}^+ 
-\end{equation}
+% -------------------------------------------------------------------------------------
+\subsubsection{Bending moment at ghost vertices}
+% -------------------------------------------------------------------------------------
+
+The internal bending moment at ghost vertices is simply given by the material constitutive law as :
+\begin{subequations}
+	\begin{align}
+		\vect{M}_{2i-1} &=  \mat{B}_{i-1}(\vect{\kappa b}_{2i-1} - \overbar{\vect{\kappa b}}_{2i-1})
+		\\[0.5em]
+		\vect{M}_{2i+1} &=  \mat{B}_{i}(\vect{\kappa b}_{2i+1} - \overbar{\vect{\kappa b}}_{2i+1})
+	\end{align}
+\end{subequations}
 
 \subsection{Discret twisting moment}
 % ==========================
-
-\begin{figure}[t]
-	\includegraphics[]{comics_1.pdf}
-	\caption{Stage 1}
-	\label{fig:5}
-\end{figure} 
 
 We assume the twisting moment and the rate of twist to vary linearly over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$.
 Thus, the rate of twist at mid edge is given by :
@@ -672,6 +739,10 @@ Sections are subject to the following rotational moment around the centerline :
 	\vect{\Gamma}(s) = Q' + \vect{d}_3 \cdot ( \kappa\vect{b} \times \mat{M} + \vect{m}_{ext})
 	\end{aligned}
 \end{equation}
+
+\clearpage
+
+
 
 \clearpage
 \bibliographystyle{alpha}
