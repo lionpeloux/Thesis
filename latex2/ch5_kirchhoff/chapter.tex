@@ -111,7 +111,7 @@ On fait un bilan sur une tranche d'épaisseur $ds$, de centre de gravité $G$ po
 		&= \left(\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{x}'\times \vect{F}(s)\right)ds
 	\end{aligned}
 \end{equation}
-L'évolution temporelle des vecteurs matériels est cette fois décrite par un vecteur de Darboux temporel (spin vector in \cite{Bernard1993} noté $\vect{\Lambda}$ tel que :
+L'évolution temporelle des vecteurs matériels est cette fois décrite par un vecteur de Darboux temporel -- spin vector in \cite{Bernard1993} -- noté $\vect{\Lambda}$ tel que :
 Compatibility equation between the curvature vector and the spin vector ($\dot{\kappa\vect{b}} - \vect{\Lambda}^{'} = \vect{\Lambda} \times \kappa\vect{b}$).
 \begin{equation}
 	\dot{\vect{d}_{i}}(s) =\vect{\Lambda}(t) \times \vect{d}_i(s)	\quad,\quad
@@ -172,9 +172,7 @@ Et l'on peut alors écrire la seconde loi de Kirchhoff sous la forme suivante :
 			\end{bmatrix}
 	\end{aligned}
 \end{equation}
-On peut alors conclure sur l'expression de l'equation de kirchoff
-\footnote{Recall that : $\dot{\vect{d}_i} = \vect{\Lambda} \times \vect{d}_i$}
-\footnote{Remark that : $(\vect{\Lambda}\times\dot{\vect{d}_i})\times\vect{d}_i = \Lambda_i(\vect{\Lambda}\times\dot{\vect{d}_i})$} :
+On peut alors conclure sur l'expression de l'equation de kirchoff : \footnote{Recall that : $\dot{\vect{d}_i} = \vect{\Lambda} \times \vect{d}_i$}\textsuperscript{,}\footnote{Remark that : $(\vect{\Lambda}\times\dot{\vect{d}_i})\times\vect{d}_i = \Lambda_i(\vect{\Lambda}\times\dot{\vect{d}_i})$}
 \begin{equation}
 	\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{d}_3 \times \vect{F}(s) = I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + I_2 \vect{d}_2 \times \ddot{\vect{d}_2}
 \end{equation}
@@ -271,8 +269,7 @@ This is nothing but the application of the transport theorem when differentiatin
 	\frac{\partial \vect{F}}{\partial s}\Bigr|_{global} = \frac{\partial \vect{F}}{\partial s}\Bigr|_{local} + \vect{\Omega}(s) \times \vect{F}
 \end{equation}
 
-Second Kirchhoff law projecting on the material frame basis 
-\footnote{As explained in \cite[p. 18]{Dill1992}, if the inextensibility assumption does not hold, the right terms to consider are $-(1+\epsilon)F_2$ in \cref{eq:K2_1} and $(1+\epsilon)F_1$ in \cref{eq:K2_2}.} :
+Second Kirchhoff law projecting on the material frame basis : \footnote{As explained in \cite[p. 18]{Dill1992}, if the inextensibility assumption does not hold, the right terms to consider are $-(1+\epsilon)F_2$ in \cref{eq:K2_1} and $(1+\epsilon)F_1$ in \cref{eq:K2_2}.}
 \begin{subequations}
 	\begin{align}
 		Q' + \kappa_1 M_2 - \kappa_2 M_1 + m_3 &= (I_1 + I_2)\dot{\Lambda}_3 + (I_2 - I_1)\Lambda_1\Lambda_2
@@ -505,31 +502,136 @@ Principe :
 
 - La seconde loi de kirchhoff projetée sur les axes matériel 3 (tangente à la centerline) de la section me donnent l"hypothèse quasi-statique de Audoly.
 
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[]{discrete_model.pdf}
+%	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a 3-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
+%	\label{fig:discrete_model}
+%\end{figure} 
 
+
+\begin{figure}[p]
+\begin{fullpage}
+	\captionsetup[subfloat]{captionskip=20pt}
+     	\centering
+     	\subfloat[][Biarc model discrete centerline.]{\includegraphics{discrete_model.pdf}\label{fig:discrete_model}} \\
+	\vspace{30pt}
+	\subfloat[][Number of segments, edges and vertices whether the centerline is closed or open.]{
+		\begin{tabular}{l  l | c  c } 
+		 &  & open & closed \\
+		\hline
+		segments & $n_s$ & $n_s$ & $n_s$ \\
+		\hline
+		edges & $n_e$ & $2 n_s$ & $2 n_s$ \\
+		\hline
+		vertices & $n$ & $2 n_s + 1$ & $2 n_s$ \\
+		\hline
+		ghosts & $n_g$ & $n_s$ & $n_s$ \\
+		\hline
+		handles & $n_h$ & $n_s+1$ & $n_s$ \\
+	\end{tabular}\label{tab:count}}
+	\vspace{20pt}
+	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a 3-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
+\end{fullpage}
+\end{figure}
+
+
+
+\clearpage
 \subsection{Discret beam model}
 % =======================
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[]{discrete_model.pdf}
-	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments. Each segment is defined as a three-vertices (two-edges) element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
-	\label{fig:5}
-\end{figure} 
+
+
+Let's introduce the discrete biarc model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent segments which are three-vertices and two-edges elements with uniform material and section properties.
+
+Beams can either be closed or open. The corresponding number of vertices, edges and segments are reported in \cref{tab:count} :
+%\begin{table}[h]
+%	\centering
+%	\begin{tabular}{l  l | c  c } 
+%		 &  & open & closed \\
+%		\hline
+%		segments & $n_s$ & $n_s$ & $n_s$ \\
+%		\hline
+%		edges & $n_e$ & $2 n_s$ & $2 n_s$ \\
+%		\hline
+%		vertices & $n$ & $2 n_s + 1$ & $2 n_s$ \\
+%		\hline
+%		ghosts & $n_g$ & $n_s$ & $n_s$ \\
+%		\hline
+%		handles & $n_h$ & $n_s+1$ & $n_s$ \\
+%	\end{tabular}
+%\caption{Number of segments, edges and vertices whether the centerline is closed or open.}
+%\label{tab:count}
+%\end{table}
 
 \subsubsection{Centerline}
 
-The discrete beam is divided into $n_s$ segments : $]\vect{x}_{2i},  \vect{x}_{2i+2}[ \quad i \in [0,ns] $.
+The discrete centerline is a polygonal space curve (\cref{fig:discrete_model}) defined as an ordered sequence of $n+1$ pairwise disjoint \emph{vertices} : $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n) \in \mathbb{R}^{3(n+1)}$. Consecutive pairs of vertices define $n$ straight segments $(\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1})$ called \emph{edges} and pointing from one vertex to the next one : $\vect{e}_i = \vect{x}_{i+1} - \vect{x}_{i}$ : 
+\begin{equation}
+%\setlength{\jot}{8pt}
+	\left\{
+	\begin{aligned}
+		\vect{e}_i 	&= \vect{x}_{i+1} - \vect{x}_{i} \\
+		l_i 		&= \norm{\vect{e}_i} \\
+		\vect{u}_i 	&= \vect{e}_i / l_i\\
+	\end{aligned}
+	\right.
+\end{equation}
+
+The length of the ith edge is denoted $l_i $ and its unit director is denoted $\vect{u}_i$. The arc length of the ith vertex is denoted $s_i$ and is given by : 
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		s_0 	&= 0 				& 	&i = 0		\\
+		s_i 	&= \sum_{k=0}^{i-1} l_k	&	&i \in \llbracket 1, n-1 \rrbracket	\\
+		s_n 	&=  L 				&	&i = n		\\
+	\end{aligned}
+	\right.
+\end{equation}
+Thus, the centerline is parametrized by arc length and $\Gamma(s_i) = \vect{x}_i$. Additionally, we define the vertex-based mean length at vertex $\vect{x}_i$ : 
+\begin{equation}
+%\setlength{\jot}{8pt}
+	\left\{
+	\begin{aligned}
+		\overbar{l_0} 	& =  \tfrac{1}{2}l_0				&		&i = 0					\\
+		\overbar{l_i}	& =  \tfrac{1}{2}(l_{i-1} + l_i)		&		&i \in \llbracket 1, n-1 \rrbracket	\\
+		\overbar{l_n} 	& =  \tfrac{1}{2}l_{n-1} 			&		&i = n					\\
+	\end{aligned}
+	\right.
+\end{equation}
 
 \subsubsection{Segments}
 
-The i-th segment is composed of three vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) defining two edges ($\vect{e}_{2i} = \vect{x}_{2i+1} - \vect{x}_{2i}, \vect{e}_{2i+1} = \vect{x}_{2i+2} - \vect{x}_{2i+1}$).
-A segment has uniform section ($I_1$, $I_2$, $J$) and material ($E$, $G$) properties over its length.
-It is subjected to uniform external distributed forces ($\vect{f}_{ext}$) and moments ($\vect{m}_{ext}$).
+The discrete centerline is divided into $n_s$ curved segments. Each segment is a three-noded element -- see \cref{fig:discrete_model} where the area covered by a segment is represented as a grey solid hatch. The ith segment is composed of three vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) spanning two edges ($\vect{e}_{2i}, \vect{e}_{2i+1}$). The (i-1)th segment and the ith segment share the same vertex $\vect{x}_{2i}$ at arc length $s_{2i}$.
+
+Each segment has two end vertices called \emph{handle} ($\vect{x}_{2i}, \vect{x}_{2i+2}$) and one mid vertex called \emph{ghost} ($\vect{x}_{2i+1}$) as this one is not accessible to the end user in order to interact with the model (link, restrain, loading, ...). Ghost vertices are used only for internal purpose to give a higher richness in the kinematic description of a segment than a two-noded segment would.
+
+We define the \emph{chord length} of the ith segment as the distance between $\vect{x}_{2i}$ and $\vect{x}_{2i+2}$ : $L_i = \norm{\vect{e}_{2i} + \vect{e}_{2i+1}}$.
+
+\subsubsection{Material and section properties}
+
+In addition, the model assumes that a segment has uniform section ($S$, $I_1$, $I_2$, $J$)\footnote{$S$ is the cross section area ; $I_1$, $I_2$ and $J$ are the cross section principal moments of inertia.} and material ($E$, $G$)\footnote{$E$ is the elastic modulus and $G$ is the shear  modulus for the considered material} properties over its length : $s \in ]s_{2i},s_{2i+2}[$. For the sake of simplicity, we introduce for further calculations the \emph{material stiffness matrix} ($\mat{B}_i$) attached to each segment. It has the following form in the material frame basis :
+\begin{equation}
+	\mat{B}_i = \begin{bmatrix} 
+			EI_1		&	0		&	0		\\
+			0		&	EI_{2}	&	0		\\
+			0		&	0		&	GJ_{}	\\
+		\end{bmatrix}_i
+\end{equation}
+ 
+
+\subsubsection{External loads}
+
+Also, the model assumes that each segment can be loaded with uniform external distributed forces ($\vect{f}_{ext}$) and moments ($\vect{m}_{ext}$).
+
+
+
+
 
 \subsubsection{External loads}
 
 External concentrated forces ($\vect{F}_{ext}$) and moments ($\vect{M}_{ext}$) are applied to the segment end vertices ($\vect{x}_{2i}$,  $\vect{x}_{2i+2}$).
-End vertices are called \emph{handle}. Mid vertices are called \emph{ghost} as they can't be involved in any link, restrain or loading in the present model. Ghost vertices are used only to give a higher richness in the kinematic description of a segment as a two-noded segment would.
 
 This discret model involves that axial, bending and torsion strains, section and material properties will be continuous fonctions of the arc length over each segment $]\vect{x}_{2i},  \vect{x}_{2i+2}[$. Discontinuities in strains, internal and external forces, internal and external moments will be located at handle vertices. The left and right limits of this fonctions at handle vertices will be denoted respectively by $f^-$ and $f^+$. Possibly they are continuous at handle nodes that is the left and right limits agree ($f^- = f^+$).
 
@@ -613,7 +715,7 @@ Equivalently, the definition of the osculating circles of the ($i-1$)\textit{th}
 \subsubsection{Unit tangent vectors at handle vertices}
 % -------------------------------------------------------------------------------------
 
-The unit tangent vector $\vect{t}_{2i}$ -- that is the beam section normal -- at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex. \footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.}
+The unit tangent vector $\vect{t}_{2i}$ -- that is the beam section normal -- at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex.\footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.}
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E4.pdf}
@@ -629,9 +731,7 @@ This way, the determination of the tangent vectors -- or equivalently the sectio
 \subsubsection{Left/right bending moments at handle vertices}
 % -------------------------------------------------------------------------------------
 
-Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\kappa}_{2i}^-$) and right ($\vect{\kappa}_{2i}^+$) curvatures at handle vertex $\vect{x}_{2i}$. The left curvature is initially evaluated from the left osculating circle, defined as the circle passing through $\vect{x}_{2i-1}$ and $\vect{x}_{2i}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$. The right curvature is initially evaluated from the right osculating circle, defined as the circle passing through $\vect{x}_{2i}$ and $\vect{x}_{2i+1}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$. 
-\footnote{Remark that the centerline is now approximated with a biarc in the vicinity of $\vect{x}_{2i}$. This is the reason why this model is called the \textquote{biarc model}.}
-\footnote{This model offers the ability to represent discontinuities in curvature -- thus in bending moment -- at handle vertices as the left and right curvatures does not necessarily agree. This is quite different from the classical 3-dof element \cite{Barnes1999, Adriaenssens1999, Douthe2006} which assumes that the curvature -- thus the bending moment -- is $\mathcal{C}^0$ and can be evaluated at every vertices from the circumscribed osculating circle.}
+Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\kappa}_{2i}^-$) and right ($\vect{\kappa}_{2i}^+$) curvatures at handle vertex $\vect{x}_{2i}$. The left curvature is initially evaluated from the left osculating circle, defined as the circle passing through $\vect{x}_{2i-1}$ and $\vect{x}_{2i}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$. The right curvature is initially evaluated from the right osculating circle, defined as the circle passing through $\vect{x}_{2i}$ and $\vect{x}_{2i+1}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$.\footnote{Remark that the centerline is now approximated with a biarc in the vicinity of $\vect{x}_{2i}$. This is the reason why this model is called the \textquote{biarc model}.}${}^,$\footnote{This model offers the ability to represent discontinuities in curvature -- thus in bending moment -- at handle vertices as the left and right curvatures does not necessarily agree. This is quite different from the classical 3-dof element \cite{Barnes1999, Adriaenssens1999, Douthe2006} which assumes that the curvature -- thus the bending moment -- is $\mathcal{C}^0$ and can be evaluated at every vertices from the circumscribed osculating circle.}
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E5.pdf}
@@ -662,7 +762,7 @@ Note that in the case where no external concentrated bending moment is applied t
 \subsubsection{Left/right curvatures at handle vertices}
 % -------------------------------------------------------------------------------------
 
-Finally, the left and right curvatures at handle vertex $\vect{x}_{2i}$ are computed back with the material constitutive law :
+Finally, the left and right curvatures at handle vertex $\vect{x}_{2i}$ are computed back with the constitutive law :
 \begin{subequations}
 	\begin{align}
 		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} \vect{M}_{2i}^- + \overbar{\vect{\kappa b}}_{2i}^- 
@@ -675,7 +775,7 @@ Finally, the left and right curvatures at handle vertex $\vect{x}_{2i}$ are comp
 \subsubsection{Bending moment at ghost vertices}
 % -------------------------------------------------------------------------------------
 
-The internal bending moment at ghost vertices is simply given by the material constitutive law as :
+The internal bending moment at ghost vertices is simply given by the constitutive law as :
 \begin{subequations}
 	\begin{align}
 		\vect{M}_{2i-1} &=  \mat{B}_{i-1}(\vect{\kappa b}_{2i-1} - \overbar{\vect{\kappa b}}_{2i-1})

@@ -15,7 +15,7 @@ position de ces cotés pour avoir la courbure qu’ils forment [...]}.
 
 Attention à la terminologie smooth vs. continious :
 
-\blockquote{A smooth curve is a curve which is a smooth function, where the word "curve" is interpreted in the analytic geometry context. In particular, a smooth curve is a continuous map f from a one-dimensional space to an n-dimensional space which on its domain has continuous derivatives up to a desired order. \footnote{Definition of a smooth curve from mathworld : \url{http://mathworld.wolfram.com/SmoothCurve.html}}
+\blockquote{A smooth curve is a curve which is a smooth function, where the word "curve" is interpreted in the analytic geometry context. In particular, a smooth curve is a continuous map f from a one-dimensional space to an n-dimensional space which on its domain has continuous derivatives up to a desired order.\footnote{Definition of a smooth curve from mathworld : \url{http://mathworld.wolfram.com/SmoothCurve.html}}
 } 
 
 \subsection{Goals and contributions}
@@ -105,7 +105,7 @@ Let $\gamma=(I,F)$ be a regular parametric curve. Let $t_0 \in I$ be a given par
 \end{equation}
 The arc length $s \colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
 
-Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\norm{G'(s)} = 1, \forall s \in J$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed\footnote{Regular curves are also known as \emph{unit-speed} curves.} ($\norm{G'} = 1$).
+Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\norm{G'(s)} = 1, \forall s \in J$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed ($\norm{G'} = 1$).\footnote{Regular curves are also known as \emph{unit speed} curves.}
 
 Thereafter, for a regular curve $\gamma$ : $\gamma(t)$ will denote the point $F(t)$ of parameter $t \in I$ ; while $\gamma(s)$ will denote the point $G(s)$ of arc length $s \in J=[0,L]$.
 
@@ -117,9 +117,8 @@ Thereafter, for a regular curve $\gamma$ : $\gamma(t)$ will denote the point $F(
 
 %\note{From now, we will assume that the curve $\gamma$ is a regular parametric curve of class ${\mathcal{C}}^{1}$ parametrized by its arc length $s \in [0,L]$.}
 
-The Frenet trihedron is a fundamental mathematical tool from the field of differential geometry to study local characterization of planar and non-planar space curves. It is a direct orthonormal basis attached to any point $P$, of parameter $t \in I$, on a parametric curve $\gamma$. This basis is composed of three unit vectors $\{\vect{t}(t),\vect{n}(t),\vect{b}(t)\}$ called respectively the \emph{tangent}, the \emph{normal}, and the \emph{binormal} unit vectors\footnote{
-Strictly speaking, the map $\fonction{\vect{t}}{t}{\vect{t}(t)}$ is a \emph{vector field} while $\vect{t}(t)$ is a \emph{vector} of $\mathbb{R}^3$. For the sake of simplicity, and if there is no ambiguity, these two notions will not be explicitly distinguished hereinafter.
-}.
+The Frenet trihedron is a fundamental mathematical tool from the field of differential geometry to study local characterization of planar and non-planar space curves. It is a direct orthonormal basis attached to any point $P$, of parameter $t \in I$, on a parametric curve $\gamma$. This basis is composed of three unit vectors $\{\vect{t}(t),\vect{n}(t),\vect{b}(t)\}$ called respectively the \emph{tangent}, the \emph{normal}, and the \emph{binormal} unit vectors.\footnote{
+Strictly speaking, the map $\fonction{\vect{t}}{t}{\vect{t}(t)}$ is a \emph{vector field} while $\vect{t}(t)$ is a \emph{vector} of $\mathbb{R}^3$. For the sake of simplicity, and if there is no ambiguity, these two notions will not be explicitly distinguished hereinafter.}
 
 Introduced by Frenet in 1847 in his thesis \blockcquote[]{Frenet1852}{Courbes à Double Courbure}, it brings out intrinsic local properties of space curves : the curvature ($\kappa$) which evaluates the deviance of $\gamma$ from being a straight line (see \cref{sec:curvature}) ; and the torsion ($\tau_f$) which evaluates the deviance of $\gamma$ from being a planar curve (see \cref{sec:torsion}).
 
@@ -163,9 +162,7 @@ The second component of the Frenet trihedron is called the \emph{unit normal vec
 \begin{equation}
 	\norm{\vect{t}}=1 \Rightarrow \vect{t^{'}} \cdot  \vect{t} = 0 \Leftrightarrow  \vect{t^{'}} \perp \vect{t}
 \end{equation}
-Let $\gamma = (I,F)$ be a biregular\footnote{
-Note that $\vect{n}$ exists if only $\gamma$ is biregular, that is $\vect{t}'$ never vanishes or, equivalently, $\gamma$ is never locally a straight line.} parametric curve. 
-Let $t \in I$ be a parameter. The \emph{unit normal vector} is defined as :
+Let $\gamma = (I,F)$ be a biregular parametric curve.\footnote{Note that $\vect{n}$ exists if only $\gamma$ is biregular, that is $\vect{t}'$ never vanishes or, equivalently, $\gamma$ is never locally a straight line.} Let $t \in I$ be a parameter. The \emph{unit normal vector} is defined as :
 \begin{equation}
 	\vect{n}(t) = \frac{\vect{t}'(t)}{\norm{\vect{t}'(t)}} 
 	= \frac{\gamma'(t) \times (\gamma''(t) \times \gamma'(t))}{\norm{\gamma'(t)}^3}
@@ -209,9 +206,8 @@ For a curve parametrized by arc length, this expression simply becomes :
 \subsection{Osculating plane}\label{sec:osculatingplane}
 The tangent and normal unit vectors $\{\vect{t},\vect{n}\}$ form an orthonormal basis of the so-called \emph{osculating plane}, whereas the binormal vector $(\vect{b})$ is orthogonal to it. This plane is of prime importance because it is the plane in which the curve takes its curvature (see \cref{sec:curvature}).
 
-As reported in \cite[p.45]{Delcourt2007}, the osculating plane seems to have been first introduced by Bernoulli as the plane passing through three infinitely near points on a curve\footnote{
-\blockcquote[p.113]{Bernoulli1728}{Voco autem planum osculans, quod transit per tria curvae quaesitae puncta infinite sibi invicem propinqua}.
-}. Likewise, in modern differential geometry, the osculating plane is defined as the limit of the plane passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ respectively from its left and right side (\cref{fig:3_1}).
+As reported in \cite[p.45]{Delcourt2007}, the osculating plane seems to have been first introduced by Bernoulli as the plane passing through three infinitely near points on a curve.\footnote{\blockcquote[p.113]{Bernoulli1728}{Voco autem planum osculans, quod transit per tria curvae quaesitae puncta infinite sibi invicem propinqua}.
+} Likewise, in modern differential geometry, the osculating plane is defined as the limit of the plane passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ respectively from its left and right side (\cref{fig:3_1}).
 
 Note that the normal unit vector and the binormal unit vector $\{\vect{n},\vect{b}\}$ define the so-called \emph{normal plane}, while the normal tangent vector and the binormal unit vector $\{\vect{t},\vect{b}\}$ define the so-called \emph{rectifying plane}. This planes are secondary for the present study.
 
@@ -221,13 +217,8 @@ Note that the normal unit vector and the binormal unit vector $\{\vect{n},\vect{
 
 \section{Curves of double curvature}
 
-The study of space curves belongs to the field of differential geometry. According to \cite[p.28]{Delcourt2007}, the terminology \emph{curve of double curvature} is attributed to Pitot around 1724\footnote{
-\blockcquote[p.28]{Pitot1726}{
-Les Anciens ont nommé cette courbe Spirale ou Hélice ; parce que la formation sur le cylindre suit la même analogie que la formation d’une spirale ordinaire sur un plan; mais elle est bien différente de la spirale ordinaire, étant une des courbes à double courbure, ou une des lignes qu’on conçoit tracée sur la surface des Solides. Peut-être que ces sortes de courbes à double courbure, ou prises sur la surface des Solides, feront un jour l’objet des recherches des géomètres. Celle que nous venons d’examiner est, je crois, la plus simple de toutes.
-}}.
-However, as stated in \cite[p.321]{Coolidge2013}, curvature and torsion where probably first thought by Monge around 1771\footnote{
-\blockcquote[p.363]{Monge1809}{On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point ; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.
-}.}. It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g.\ \emph{elastica}) and the study of curves of double curvature were intimately related to each other.
+The study of space curves belongs to the field of differential geometry. According to \cite[p.28]{Delcourt2007}, the terminology \emph{curve of double curvature} is attributed to Pitot around 1724.\footnote{\blockcquote[p.28]{Pitot1726}{Les Anciens ont nommé cette courbe Spirale ou Hélice ; parce que la formation sur le cylindre suit la même analogie que la formation d’une spirale ordinaire sur un plan; mais elle est bien différente de la spirale ordinaire, étant une des courbes à double courbure, ou une des lignes qu’on conçoit tracée sur la surface des Solides. Peut-être que ces sortes de courbes à double courbure, ou prises sur la surface des Solides, feront un jour l’objet des recherches des géomètres. Celle que nous venons d’examiner est, je crois, la plus simple de toutes.
+}} However, as stated in \cite[p.321]{Coolidge2013} curvature and torsion where probably first thought by Monge around 1771.\footnote{\blockcquote[p.363]{Monge1809}{On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point ; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.}.} It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g.\ \emph{elastica}) and the study of curves of double curvature were intimately related to each other.
 
 Space curves were historically understood as \emph{curves of double curvature} by extension to the case of planar curves, where the curvature measures the deviance of a curve from being a straight line. The second curvature, nowadays known as the \textquote{torsion} or \textquote{second generalized curvature}, measures the deviance of a curve from being plane. 
 
@@ -242,11 +233,9 @@ Space curves were historically understood as \emph{curves of double curvature} b
 
 %Curvature
 \subsection{First invariant : the curvature}\label{sec:curvature}
-In differential geometry, the \emph{osculating circle} is defined as the limit of the circle passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ (\cref{fig:3_1}). This circle lies on the osculating plane and its radius is nothing but the inverse of the local curvature of a curve\footnote{
-As explained by Euler itself, at a given arc length parameter ($s$), the osculating plane is the plane in which a curve takes its curvature :  
-\blockcquote[p.364]{Euler1775}{in quo bina fili elementa proxima in curvantur}.}. While the tangent gives the best local approximation of the curve as a straight line, the osculating circle gives the best local approximation of that curve as an arc.
+In differential geometry, the \emph{osculating circle} is defined as the limit of the circle passing through the points $P^-$, $P_0$ and $P^+$ while $P^-$ and $P^+$ approche $P_0$ (\cref{fig:3_1}). This circle lies on the osculating plane and its radius is nothing but the inverse of the local curvature of a curve.\footnote{ As explained by Euler itself, at a given arc length parameter ($s$), the osculating plane is the plane in which a curve takes its curvature : \blockcquote[p.364]{Euler1775}{in quo bina fili elementa proxima in curvantur}.} While the tangent gives the best local approximation of the curve as a straight line, the osculating circle gives the best local approximation of that curve as an arc.
 
-The curvature is also known to be the \emph{gradient of arc length} (see \cite[p.4]{Vouga2014}) and calculated as : $\nabla{L} = \kappa \vect{n}$ . Thus, the curvature gives the first-order variation in arc length when deforming a curve $\gamma$ in a closed enough curve $\gamma + \epsilon \delta\gamma$ :
+The curvature is also known to be the \emph{gradient of arc length} (see \cite[p.4]{Vouga2014}) and calculated as : $\nabla{L} = \kappa \vect{n}$. Thus, the curvature gives the first-order variation in arc length when deforming a curve $\gamma$ in a closed enough curve $\gamma + \epsilon \delta\gamma$ :
 \begin{equation}
 	L(\gamma + \epsilon \delta\gamma) = L(\gamma) + \epsilon (\nabla L \cdot \delta\gamma) + o(\epsilon)
 	\quad , \quad
@@ -429,11 +418,11 @@ Again, this system can be seen as the \emph{equations of motion} of the Frenet t
 
 %From now on, we consider $\gamma$ to be a biregular arc length parametrized curve.
 
-While the Frenet trihedron \blockcquote[p.1]{Bishop1975}{has long been the standard vehicle for analysing properties of the curve invariant\footnote{Namely the curvature ($\kappa$) and the Frenet torsion ($\tau_f$).} under euclidean motions}, a curve can be potentially framed with any arbitrary \emph{moving frame}, understood as an \emph{orthonormal basis field}. Thus, the Frenet frame is not the only way to frame a curve\footnote{Recall the title of Bishop's paper : \blockcquote[]{Bishop1975}{There is more than one way to frame a curve}.} and other frames may or may not exhibit some interesting properties.
+While the Frenet trihedron \blockcquote[p.1]{Bishop1975}{has long been the standard vehicle for analysing properties of the curve invariant\footnote{Namely the curvature ($\kappa$) and the Frenet torsion ($\tau_f$).} under euclidean motions}, a curve can be potentially framed with any arbitrary \emph{moving frame}, understood as an \emph{orthonormal basis field}. Thus, the Frenet frame is not the only way to frame a curve and other frames may or may not exhibit some interesting properties.\footnote{Recall the title of Bishop's paper : \blockcquote[]{Bishop1975}{There is more than one way to frame a curve}.} 
 
 In his paper \cite{Bishop1975} Bishop establishes the differential equation that a moving frame must satisfy and remarks that, because of the orthnormality condition, the first derivatives of the frame components can be expressed in terms of themselves through a skew-symmetric coefficient matrix. For such a frame, the understanding of its motion along the curve is thus reduced to the knowledge of only three scalar coefficient functions. He remarks that most of the interesting properties that the Frenet frame exhibits are due to the fact that one of this coefficient function is vanishing everywhere on the curve (that is the frame is \emph{rotation-minimizing} regarding one of its components) ; and that the Frenet frame is \emph{adapted} to the curve (that is one of its components is nothing but the unit tangent vector).
 
-In this section we introduce the \emph{moving frame} notion and two properties of interest such a frame can exhibit in addition, that is : to be \emph{adapted} to the curve ; and to be \emph{rotation-minimizing} regrading a given direction. We then reconsider the case of the Frenet frame regrading this mathematical framework. Finally, we introduce the \emph{zero-twisting} frame also known as the \emph{bishop} frame\footnote{Named after Bishop who introduced it.}. This tool will be fundamental for our futur study of slender beams.
+In this section we introduce the \emph{moving frame} notion and two properties of interest such a frame can exhibit in addition, that is : to be \emph{adapted} to the curve ; and to be \emph{rotation-minimizing} regrading a given direction. We then reconsider the case of the Frenet frame regrading this mathematical framework. Finally, we introduce the \emph{zero-twisting} frame also known as the \emph{bishop} frame.\footnote{Named after Bishop who introduced it.} This tool will be fundamental for our futur study of slender beams.
 
 % moving frame
 \subsection{Moving frame}
@@ -474,9 +463,7 @@ Thus, there exists 3 scalar functions ($\tau$, $k_{1}$, $k_{2}$) such that $\{\v
 	\end{aligned}
 	\right.
 \end{equation}
-It is common to rewrite this first-order linear system of differential equations\footnote{In the case of a space curve, where $\vect{e}_3$ is chosen to be the curve tangent unit vector and $\vect{e}_1$ is chosen to be the curve normal unit vector, this set of equations is known as the \emph{Serret-Frenet formulas}.}${}^,$\footnote{In the case of a space curve drawn on a surface, where $\vect{e}_3$ is chosen to be the curve tangent unit vector and $\vect{e}_1$ is chosen to be the surface normal unit vector, this set of equations is known as the \emph{Darboux-Ribaucour formulas}.
-} 
-as a matrix equation :
+It is common to rewrite this first-order linear system of differential equations as a matrix equation : \footnote{In the case of a space curve, where $\vect{e}_3$ is chosen to be the curve tangent unit vector and $\vect{e}_1$ is chosen to be the curve normal unit vector, this set of equations is known as the \emph{Serret-Frenet formulas}.}\textsuperscript{,}\footnote{In the case of a space curve drawn on a surface, where $\vect{e}_3$ is chosen to be the curve tangent unit vector and $\vect{e}_1$ is chosen to be the surface normal unit vector, this set of equations is known as the \emph{Darboux-Ribaucour formulas}.}
 \begin{equation}
 	\begin{bmatrix}
 		\vect{e}'_{3}(s) \\
@@ -496,9 +483,7 @@ as a matrix equation :
 	\end{bmatrix}
 \label{eq:movingframe}
 \end{equation}
-Since the progression of any moving frame along $\gamma$ is ruled by a first-order system of differential equations, a unique triplet $\{\tau, k_{1}, k_{2}\}$ leads to a set of moving frames equal to each other within a constant of integration\footnote{
-This assumption reminds the \emph{Fundamental theorem of space curves} (\cref{sec:fundamental}).
-}. Basically, with a given triplet $\{\tau, k_{1}, k_{2}\}$, one can propagate a given initial direct orthonormal trihedron (at $s=0$ for instance) through the whole curve by integrating the system of differential equations. In general, a moving frame will be fully determined by $\tau$, $\kappa_{1}$ and $\kappa_{2}$ together with the initial condition $\{\vect{e}_{3}(s=0),\vect{e}_{1}(s=0),\vect{e}_{2}(s=0)\}$.
+Since the progression of any moving frame along $\gamma$ is ruled by a first-order system of differential equations, a unique triplet $\{\tau, k_{1}, k_{2}\}$ leads to a set of moving frames equal to each other within a constant of integration.\footnote{This assumption reminds the \emph{Fundamental theorem of space curves} (\cref{sec:fundamental}).} Basically, with a given triplet $\{\tau, k_{1}, k_{2}\}$, one can propagate a given initial direct orthonormal trihedron (at $s=0$ for instance) through the whole curve by integrating the system of differential equations. In general, a moving frame will be fully determined by $\tau$, $\kappa_{1}$ and $\kappa_{2}$ together with the initial condition $\{\vect{e}_{3}(s=0),\vect{e}_{1}(s=0),\vect{e}_{2}(s=0)\}$.
 
 \begin{figure}[t]
 \centering
@@ -567,16 +552,14 @@ Following \cite{Farouki2014, Wang2008} we introduce the \emph{rotation-miniminzi
 
 % PARALLEL TRANSPORT
 \subsection{Parallel transport}\label{sec:paralleltransport}
-The notion of \emph{parallel transport} is somehow a generalization of the classical notion of collinearity in flat euclidean spaces (e.g.\ $\mathbb{R}^2$ or $\mathbb{R}^3$), to spaces that exhibit some non vanishing curvature (e.g.\ spheric or hyperbolic spaces)\footnote{\url{https://www.youtube.com/watch?v=p1tfZD2Bm0w}}.
+The notion of \emph{parallel transport} is somehow a generalization of the classical notion of collinearity in flat euclidean spaces (e.g.\ $\mathbb{R}^2$ or $\mathbb{R}^3$), to spaces that exhibit some non vanishing curvature (e.g.\ spheric or hyperbolic spaces).\footnote{\url{https://www.youtube.com/watch?v=p1tfZD2Bm0w}}
 
 \subsubsection{Relatively parallel fields}
 Following \cite{Bishop1975}, we define what is a \emph{(relatively) parallel field}. Let $\gamma$ be a regular curve parametrized by arc length. Let $\vect{p}$ be a vector field along $\gamma$. The vector field $\vect{p}$ is said to be \emph{parallel} if its derivative is purely tangential, that is :
 \begin{equation}
 	\vect{p}'(s) \times \vect{t}(s) = 0
 \end{equation}
-Consequently, for an adapted moving frame, the \emph{normal fields}\footnote{
-A vector field $\vect{p}$ is said to be \emph{normal} along a curve $\gamma$ if : $\forall s \in [0,L]$, $\vect{p}\cdot\vect{t} = 0$.
-} $\vect{e}_1$ and $\vect{e}_2$ are both \emph{relatively parallels} if and only if the frame angular velocity is itself a normal field, that is :
+Consequently, for an adapted moving frame, the \emph{normal fields} $\vect{e}_1$ and $\vect{e}_2$ are both \emph{relatively parallels} if and only if the frame angular velocity is itself a normal field, that is : \footnote{A vector field $\vect{p}$ is said to be \emph{normal} along a curve $\gamma$ if : $\forall s \in [0,L]$, $\vect{p}\cdot\vect{t} = 0$.}
 \begin{equation}
 	\vect{\Omega}(s) = \vect{\Omega}_{\perp}(s) =  \vect{\kappa b}(s) \Leftrightarrow \vect{\Omega}(s) \cdot \vect{t}(s) = 0  \Leftrightarrow \tau(s) = 0  
 \end{equation}
@@ -666,15 +649,11 @@ Remark that the Frenet frame satisfies $\vect{\Omega_f}(s) \cdot \vect{n}(s) = 0
 Note also that $\vect{t^{'}}(s)$ and $\vect{b^{'}}(s)$ are colinear to $\vect{n}(s)$. This means that the projection of $\vect{t}(s)$ and $\vect{b}(s)$ is conserved from one normal plane to another, that is $\vect{t}$ and $\vect{b}$ are parallel transported along the vector field $\vect{n}$.
 
 \subsubsection{Drawbacks and benefits}\label{sec:frenetdrawbacks}
-\footnote{\note{une perturbation de la courbe dans le sens de la courbure engendre une variation de longueur de la courbe proportionnelle à l'inverse de la courbure (au premier ordre) + schéma.}}
-${}^,$
-\footnote{\note{une perturbation de la courbe dans le sens de la binormale (en tout point) préserve la longueur de la courbe au 1er ordre : c'est un déplacement qui conserve l'hypothèse d'inextensibilité au premier ordre.}}
-${}^,$
-\footnote{\note{Examiner la question de la fermeture sur une boucle fermée. Schéma.}}
+\footnote{\note{une perturbation de la courbe dans le sens de la courbure engendre une variation de longueur de la courbe proportionnelle à l'inverse de la courbure (au premier ordre) + schéma.}}\textsuperscript{,}\footnote{\note{une perturbation de la courbe dans le sens de la binormale (en tout point) préserve la longueur de la courbe au 1er ordre : c'est un déplacement qui conserve l'hypothèse d'inextensibilité au premier ordre.}}\textsuperscript{,}\footnote{\note{Examiner la question de la fermeture sur une boucle fermée. Schéma.}}
 
 The Frenet frame is not continuously defined if $\gamma$ is not $\mathcal{C}^2$. This is problematic for the study of slender beams as the centerline of a beam subject to punctual external forces and moments or to material discontinuities will not be $\mathcal{C}^2$ but only picewise $\mathcal{C}^2$. In that case, the centerline tangent will be continuously defined everywhere but the curvature will be subject to discontinuities, that is $\vect{t}'$ will not be continuously defined.
 
-Moreover, even if $\gamma$ is $\mathcal{C}^2$, the Frenet frame is not defined where the curvature vanishes, which obviously is an admissible configuration for a beam centerline. This issue can be partially addressed by parallel transporting the normal vector along the straight regions of the curve. Thus, the extended frame will still satisfy the governing equations exposed in \cref{eq:frenetframegoverning}. However, if the osculating planes are not parallels on both sides of a region of null curvature, torsion will be subject to a discontinuity and so the Frenet frame\footnote{This is also highlighted in \cite{Bloomenthal1990, Wang2008}.} (\cref{fig:3_3}). Again, if the region of null curvature is not a point, that is the region is not an inflexion point but a locus where the curve is locally a straight line, the change in torsion on both sides of the region can be accommodated by a continuous rotation from one end to the other.
+Moreover, even if $\gamma$ is $\mathcal{C}^2$, the Frenet frame is not defined where the curvature vanishes, which obviously is an admissible configuration for a beam centerline. This issue can be partially addressed by parallel transporting the normal vector along the straight regions of the curve. Thus, the extended frame will still satisfy the governing equations exposed in \cref{eq:frenetframegoverning}. However, if the osculating planes are not parallels on both sides of a region of null curvature, torsion will be subject to a discontinuity and so the Frenet frame (\cref{fig:3_3}).\footnote{This is also highlighted in \cite{Bloomenthal1990, Wang2008}.} Again, if the region of null curvature is not a point, that is the region is not an inflexion point but a locus where the curve is locally a straight line, the change in torsion on both sides of the region can be accommodated by a continuous rotation from one end to the other.
 
 One benefit of the Frenet frame is that, when transported along a \emph{closed curve}, the frame at the end of the curve will align back with the frame at the beginning of the curve, that is the frame will returns to its initial value after a complete turn. During its trip, the frame will make a total twist of $\int_0^L \tau_f(s)ds = 0[2\pi]$ around the tangent vector.
 
@@ -683,7 +662,7 @@ A second benefit is that any adapted frame can be obtained by a rotation of the 
 % BISHOP FRAME
 \subsection{Bishop frame}\label{sec:bishop}
 
-A \emph{Bishop frame}\footnote{Introduce as \emph{relatively parallel adapted frame} in \cite{Bishop1975}.} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity :
+A \emph{Bishop frame} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity : \footnote{Bishop frames were Introduced as \emph{relatively parallel adapted frames} in \cite{Bishop1975}.}
 \begin{equation}
 	\vect{\Omega} \cdot \vect{t} = \tau =\vect{u^{'}} \cdot \vect{v} = - \vect{u} \cdot \vect{v^{'}} = 0
 \end{equation}
@@ -721,7 +700,7 @@ The Bishop frame satisfies the following system of differential equations, which
 	\end{bmatrix}
 \label{eq:3_12}
 \end{equation}
-One can remember the generic differential equations of an adapted moving frame attached to a curve, where\footnote{
+One can remember the generic differential equations of an adapted moving frame attached to a curve, where : \footnote{
 \begin{equation*}
 	\begin{aligned}
 		&\tau =\vect{u^{'}} \cdot \vect{v} = (\vect{\Omega_f} \times \vect{u} + \theta^{'} \vect{v})\cdot  \vect{v} = \tau_f - \tau_f = 0\\
@@ -729,7 +708,7 @@ One can remember the generic differential equations of an adapted moving frame a
 		&k_2 = \vect{t^{'}} \cdot \vect{u} = \kappa \vect{n} \cdot \vect{u} = \kappa \cos \theta
 	\end{aligned}
 \end{equation*}
-} :
+}
 \begin{equation}
 k_{1}(s) = \kappa(s) \sin \theta(s)
 \quad,\quad
@@ -755,14 +734,13 @@ Remark that the Bishop frame satisfies $\vect{\Omega_b}(s) \cdot \vect{t}(s) = 0
 Because the motion of this frame is described by an angular velocity vector that is nothing but the curvature binormal vector ($\vect{\Omega_b} = \vect{\kappa b}$), it can be interpreted in terms of \emph{parallel transport} as defined in \cref{sec:paralleltransport}. Thus, given an initial frame at arc length parameter $s=0$, the Bishop frame at any arc length parameter ($s$) is obtained by parallel transporting the initial frame $\{\vect{t}(0),\vect{u}(0), \vect{v}(0)\}$ along the curve from $0$ to $s$.
 
 \subsubsection{Drawbacks and benefits}
-\footnote{\cite{Guggenheimer1989, Klok1986, Bloomenthal1990, Wang2008, Poston1995, Menninger2013}}
-\footnote{\blockcquote[p.6]{Wang2008}{Regarder la méthode de la bi-reflexion pour le calcul du repère de bishop}}
+\footnote{\cite{Guggenheimer1989, Klok1986, Bloomenthal1990, Wang2008, Poston1995, Menninger2013}}\textsuperscript{,}\footnote{\blockcquote[p.6]{Wang2008}{Regarder la méthode de la bi-reflexion pour le calcul du repère de bishop}}
 
 One of the main benefits of the Bishop frame is that its generative method : \blockcquote{Bloomenthal1990}{is immune to degeneracies in the curvature vector}. Although we first expressed the construction of the Bishop frame relatively to the Frenet frame (which exists wherever $\gamma$ is biregular), the existence of the Bishop frame, understood in terms of parallel transport, is guaranteed wherever the curvature binormal ($\vect{\kappa b} = \vect{t} \times \vect{t}'$) is defined. To be continuously defined over $[0,L]$, a Bishop frame only needs the curvature binormal vector to be picewise continuously defined over  $[0,L]$, which only requires that $\gamma'$ is $\mathcal{C}^0$ and that $\gamma''$ is picewise $\mathcal{C}^0$. Obviously, those weaker existence conditions are profitables to bypass the drawbacks of the Frenet frame regarding the modeling of slender beams listed in \cref{sec:frenetdrawbacks}.
 
 Strictly speaking, a Bishop frame is not a reference frame as it is defined within an initial condition. However, we will see later that strains in a beam are modeled as a rate of change in the Bishop frame, and consequently the initial condition will disappear in the equations.
 
-Unlike the Frenet frame, when transported along a \emph{closed curve}, the Bishop frame at the end of the curve will not necessarily align back with the frame at the beginning of the curve\footnote{\blockcquote{Hanson95}{it is possible for closed curves to have parallel transport frames that do not match up after one full circuit of the curve}}. Even if the frame returns to its initial value after a complete turn, it may returns in its position after several complete turns ($2k\pi$) around the curve tangent. During its trip, the frame will make a total twist of $\int_0^L \tau_f(s)ds = \alpha[2\pi]$ around the tangent vector. This difference of angle is related to the concept of  \emph{holonomy}.
+Unlike the Frenet frame, when transported along a \emph{closed curve}, the Bishop frame at the end of the curve will not necessarily align back with the frame at the beginning of the curve.\footnote{\blockcquote{Hanson95}{it is possible for closed curves to have parallel transport frames that do not match up after one full circuit of the curve}} Even if the frame returns to its initial value after a complete turn, it may returns in its position after several complete turns ($2k\pi$) around the curve tangent. During its trip, the frame will make a total twist of $\int_0^L \tau_f(s)ds = \alpha[2\pi]$ around the tangent vector. This difference of angle is related to the concept of  \emph{holonomy}.
 
 Remark also that Frenet and Bishop frames coincide for planar curves ($\tau_f = 0$), within a constant rotation around the unit tangent vector.
  
@@ -955,7 +933,7 @@ In the literature, discrete curves are usually considered as maps defined on $I 
 	\quad , \quad
 	t_i = i
 \end{equation}
-Thus, as in the smooth case, a discrete curve is said to be parametrized by arc length if $\norm{\Gamma'} = 1$, that is every edges are of unit length ($\norm{\vect{e}_i} = 1$)\footnote{This assumption leads to the assertion that \blockcquote[p.10]{Hoffmann2008}{A discrete curve is parameterized by arc length or it is not}.}. This constraint is sometimes relaxed to curves of constant edge length ($\norm{\vect{e}_i} = c$) that are said to be parametrized \emph{proportional} to arc length.
+Thus, as in the smooth case, a discrete curve is said to be parametrized by arc length if $\norm{\Gamma'} = 1$, that is every edges are of unit length ($\norm{\vect{e}_i} = 1$).\footnote{This assumption leads to the assertion that \blockcquote[p.10]{Hoffmann2008}{A discrete curve is parameterized by arc length or it is not}.} This constraint is sometimes relaxed to curves of constant edge length ($\norm{\vect{e}_i} = c$) that are said to be parametrized \emph{proportional} to arc length.
 
 In the present work, to stick closer to the smooth case, we instead consider discrete curves as maps defined on $I = [t_0, t_1, \ldots, t_n] \in \mathbb{R}^{n+1}$ where $t$ denotes the discrete parametrization of $\Gamma$. As in the smooth case, the way to parametrized a curve is not unique.
 
@@ -1063,7 +1041,7 @@ Curvature is defined from the osculating circle, which is the best approximation
 % vertex-based curvature
 % -------------------------------
 \subsubsection{Vertex-based osculating circle (circumscribed)}\label{sec:circumscribed}
-Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-based} (or circumscribed) osculating circle at vertex $\vect{x}_{i}$ is defined as the unique circle passing through the points $\vect{x}_{i-1}$, $\vect{x}_{i}$ and $\vect{x}_{i+1}$ (see \cref{fig:kb_vertex}). This circle leads to the following definition of the curvature\footnote{This curvature is also known as the \emph{Menger curvature}.} : 
+Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-based} (or circumscribed) osculating circle at vertex $\vect{x}_{i}$ is defined as the unique circle passing through the points $\vect{x}_{i-1}$, $\vect{x}_{i}$ and $\vect{x}_{i+1}$ (see \cref{fig:kb_vertex}). This circle leads to the following definition of the curvature : \footnote{This curvature is also known as the \emph{Menger curvature}.}
 \begin{equation}
 	\vect{\kappa b}_i = \frac{2 \, \vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} \norm{\vect{e}_{i-1} + \vect{e}_{i}} }
 	\quad , \quad
@@ -1108,7 +1086,7 @@ However, it needs $\Gamma$ to be planar which is by far to restrictive regarding
 % mixed approach
 % ---------------------
 \subsubsection{Bitangent osculating circle (inscribed)} \label{sec:inscribed}
-Let $\Gamma$ be a discrete curve parametrized by arc length. Following \cite{Vouga2014}\footnote{This definition is also presented in \cite{Bobenko2015, Carroll2014} but in the more restrictive case of constant edge length discrete curve ($l_i = cst$).} we define the curvature regrading the mean length $\overbar{l_i}$ attached to $\vect{x}_{i}$ as :
+Let $\Gamma$ be a discrete curve parametrized by arc length. Following \cite{Vouga2014} we define the curvature regrading the mean length $\overbar{l_i}$ attached to $\vect{x}_{i}$ as : \footnote{This definition is also presented in \cite{Bobenko2015, Carroll2014} but in the more restrictive case of constant edge length discrete curves ($l_i = cst$).}
 \begin{equation}
 	\vect{\kappa b}_i = \frac{2}{\overbar{l_i}} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
 	\quad , \quad
