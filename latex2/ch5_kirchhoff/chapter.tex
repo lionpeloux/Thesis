@@ -27,6 +27,16 @@ Pourquoi pas proposer une frise chronologique + un tableau de synthèse des hypt
 
 Dans les tentatives dans notre domaine, citer :
 
+Kirchhoff : \cite{Kirchhoff1850, Kirchhoff1876} \\
+Clebsch : \cite{Clebsch1883} \\
+Love : \cite{Love1892} \\
+Timoshenko : \cite{Timoshenko1921, Timoshenko1922, Timoshenko1951}
+
+\blockcquote[p.~607]{Langer1996}{Note that $\gamma$ having unit speed corresponds to the rod being inextensible; this is not always assumed in the theory, nor is the material frame necessarily assumed to be orthonormal as it is here}
+
+\blockcquote[p.~607]{Langer1996}{Natural frames and the curve angle representation of rod}
+
+
 Départ :
 \cite{Day1965} : already includes a rotational DOF !!
 \cite{Wakefield1980}
@@ -54,12 +64,33 @@ Dans le champ de l'animation  avec élément finis
 \subsection{Overview}
 Résumé du chapitre
 
+\blockcquote[p.~xvii]{Benvenuto1991b}{The battle between weight and rigidity constitutes, in itself, the single aesthetic theme of art in architecture : and to bring out this conflict in the most varied and clearest way is its office.}
+
+\blockcquote[p.~xvii]{Villaggio1997}{The theory of elastic structures is, by definition, the collection of all reasonable models, proposed during almost three centuries, concerned with simplifying the solutions of problems involving elastic bodies. The equations describing the motion and equilibrium of a three-dimensional elastic body were formulated in full generality during the first half of the nineteenth century, but their solutions are known only in a few cases.}
+
+\blockcquote[p.~68]{Audoly2010}{In a deformed state, the center line has no particular reason to remain straight and, in general, $\vect{d}_1$ and $\vect{d}_2$ will twist along the center line. However, in the case of small strain that we consider, the triad $(\vect{d}_1,\vect{d}_2,\vect{d}_3)$ remains approximately orthonormal, provided it has been chosen orthonormal in the reference configuration. This is known as the Euler-Bernoulli or Navier-Bernoulli kinematical hypothesis,or sometimes the assumption of unshearable rods.}
 
 \section{Dynamical equations for Kirchhoff rods}
 
-A thorough order-of-magnitude analysis is exposed in \cite{Dill1992, Bernard1993}
+Attention, en faisant l'hypothèse du repère mobile attaché à la courbe pour représenter les sections, ont fait une hypothèse sérieuse.
 
-A larger scope full development is given in \cite{Antman2005}
+A thorough order-of-magnitude analysis is exposed in \cite{Dill1992, Coleman1993}
+
+A larger scope full development is given in chapter 8 from \cite[pp.~270-274]{Antman2005}
+
+\footnote{\blockcquote[p.~1]{Coleman1993}{We discuss here the dynamical equations of a theory of elastic rods that is due to Kirchhoff and Clebsch. This properly invariant theory is applicable to motions in which the strains relative to an undistorted configuration remain small, although rotations may be large. It is constructed to be a first-order theory, i.e., a theory that is complete to within an error of order two in an appropriate dimensionless measure of thickness, curvature, twist, and extension.}}
+\footnote{\blockcquote[p.~1]{Coleman1993}{In a first-order theory of thin rods, one can treat the rod as inextensible [\dots]}}
+
+\blockcquote[p.~270]{Antman2005}{[we formulate] a general dynamical theory of rods that can undergo large deformations in space by suffering flexure, torsion, extension, and shear. We call the resulting geometrically exact theory the \emph{special Cosserat theory of rods}.}
+
+\blockcquote[p.~238]{Antman2005}{The classical elastic rod theory of Kirchhoff (1859), called the kinetic analogue, is is a special case of our rod theory [...]}
+
+\blockcquote[p.~341]{Antman2005}{If the reference configuration is not straight, then the uncoupling between the extension and the flexure and shear is lost.}
+
+\cite[pp.~283]{Antman2005} defines the stretch (strain rate) as :
+\begin{equation}
+	v_3 = \vect{x}' \cdot (\vect{d}_1 \times \vect{d}_2) =  \vect{x}' \cdot \vect{d}_3 = 1+\epsilon
+\end{equation}
 
 \subsection{Assumptions}
 
@@ -80,9 +111,9 @@ dynamical equations
 
 Writing the balance of linear and angular momentum of a beam slice of infinitesimal yields to the dynamic Kirchhoff equations for a slender beam. An extensive proof of this development is available in \cite{Dill1992}.
 
-\footnote{\blockcquote[p.5]{Dill1992}{The principal normal, binormal, and torsion of the axis, viewed as an element of a space curve, have no special significance in the theory of rods. Use of those special directions as base vectors does not simplify the theory and can mislead the reader into attributing significance to them when none exists. In particular, the curvature of the rod should not be confused with the curvature of the space curve which the axis forms.}}
-\footnote{\blockcquote[p.18]{Dill1992}{Kirchhoff's theory can only apply to that class of problems for three dimensional bodies such that the loads on the sides are relatively small and slowly varying. The dominate mode of deformation must be a global bending and twisting with small axial extension. If there are substantial local variations in curvatures or substantial transverse shears, his theory of bending of rods will not provide a satisfactory first approximation.}}
-\footnote{\blockcquote[p.15]{Dill1992}{There are no constitutive relations for $F_1$ or $F_2$. They are determined by the balance of momentum as in the elementary linear theory of bending of rods.}}
+\footnote{\blockcquote[p.~5]{Dill1992}{The principal normal, binormal, and torsion of the axis, viewed as an element of a space curve, have no special significance in the theory of rods. Use of those special directions as base vectors does not simplify the theory and can mislead the reader into attributing significance to them when none exists. In particular, the curvature of the rod should not be confused with the curvature of the space curve which the axis forms.}}
+\footnote{\blockcquote[p.~18]{Dill1992}{Kirchhoff's theory can only apply to that class of problems for three dimensional bodies such that the loads on the sides are relatively small and slowly varying. The dominate mode of deformation must be a global bending and twisting with small axial extension. If there are substantial local variations in curvatures or substantial transverse shears, his theory of bending of rods will not provide a satisfactory first approximation.}}
+\footnote{\blockcquote[p.~15]{Dill1992}{There are no constitutive relations for $F_1$ or $F_2$. They are determined by the balance of momentum as in the elementary linear theory of bending of rods.}}
 
 \begin{figure}[t]
 	\centering
@@ -111,7 +142,7 @@ On fait un bilan sur une tranche d'épaisseur $ds$, de centre de gravité $G$ po
 		&= \left(\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{x}'\times \vect{F}(s)\right)ds
 	\end{aligned}
 \end{equation}
-L'évolution temporelle des vecteurs matériels est cette fois décrite par un vecteur de Darboux temporel -- spin vector in \cite{Bernard1993} -- noté $\vect{\Lambda}$ tel que :
+L'évolution temporelle des vecteurs matériels est cette fois décrite par un vecteur de Darboux temporel -- spin vector in \cite{Coleman1993} -- noté $\vect{\Lambda}$ tel que :
 Compatibility equation between the curvature vector and the spin vector ($\dot{\kappa\vect{b}} - \vect{\Lambda}^{'} = \vect{\Lambda} \times \kappa\vect{b}$).
 \begin{equation}
 	\dot{\vect{d}_{i}}(s) =\vect{\Lambda}(t) \times \vect{d}_i(s)	\quad,\quad
@@ -292,10 +323,13 @@ This is nothing but the application of the transport theorem when differentiatin
 	\frac{\partial \vect{M}}{\partial s}\Bigr|_{global} = \frac{\partial \vect{M}}{\partial s}\Bigr|_{local} + \vect{\Omega}(s) \times \vect{M}
 \end{equation}
 
+
+\clearpage
+\makebox[\textwidth]{} % necessaire pour le saut de page et le flush des floats
+%\newpage
 \section{Geometric interpretation}
 
-Ici, on peut mettre l'interprétation géométrique (cf pdf LDP notes).
-Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écrire les projections au 1er ordre.
+The previous section has established the dynamical equations for elastic rods. This section gives a simple and straight forward geometric interpretation of this equations as they can be 
  
 \begin{figure}[h]
 	\centering
@@ -303,10 +337,6 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 	\caption{Osculating circles for a spiral curve at different parameters.}
 	\label{fig:5}
 \end{figure} 
- 
-%\clearpage
-%\makebox[\textwidth]{} % necessaire pour le saut de page et le flush des floats
-
 
 \begin{figure}[p]
   \begin{leftfullpage}
@@ -317,7 +347,7 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_kb.pdf}\label{fig:5_2_b}}
 	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_kb.pdf}\label{fig:5_2_c}}
 	\vspace{30pt}
-	\caption{Influence of the centerline curvature ($\kappa$) in the deviation of internal forces and moments along the centerline.}     
+	\caption{Influence of the curvature ($\kappa$) in the deflection of internal forces and moments along the centerline.}     
 	\label{fig:5_2}
  \end{leftfullpage}
 \end{figure}
@@ -325,14 +355,15 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 	\begin{fullpage}
 	\subsubsection{Contributions to the balance of forces}
 	\vspace{10pt}
-	$\vect{N}(s+ds)$ is deviated from $\vect{d}_3(s)$ by an angle $d\theta = \kappa ds$ along $ds$ (\cref{fig:5_2_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_3(s)$ is : 
+	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the rotation of angle $\kappa ds$ around $\vect{\kappa b}$ (\cref{fig:5_2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is : 
 	\begin{equation*}
 		N(s+ds) \cos(\kappa ds) - N(s) = N'(s) ds + o(ds)
 	\end{equation*}	
 	\vspace{10pt}
+	
 	\subsubsection{Contributions to the balance of moments}
 	\vspace{10pt}
-	$\vect{Q}(s+ds)$ is deviated from $\vect{d}_3(s)$ by an angle $d\theta = \kappa ds$ along $ds$ (\cref{fig:5_2_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_3(s)$ is : 
+	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the rotation of angle $\kappa ds$ around $\vect{\kappa b}$ (\cref{fig:5_2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is : 
 	\begin{equation*}
 		Q(s+ds) \cos(\kappa ds) - Q(s) = Q'(s) ds + o(ds)
 	\end{equation*}	
@@ -350,7 +381,7 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_d1.pdf}\label{fig:5_3_b}}
 	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_d1.pdf}\label{fig:5_3_c}}
 	\vspace{30pt}
-	\caption{Influence of the first material curvature ($\kappa_1$) in the deviation of internal forces and moments along the centerline.}     
+	\caption{Influence of the first material curvature ($\kappa_1$) in the deflection of internal forces and moments along the centerline.}     
 	\label{fig:5_3}
  \end{leftfullpage}
 \end{figure}
@@ -359,22 +390,22 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 	\subsubsection{Contributions to the balance of forces}
 	\vspace{10pt}
 	
-	$\vect{T}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_3_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_1(s)$ is : 
+	$\vect{T}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_3_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is : 
 	\begin{equation*}
 		-T_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau T_2(s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{T}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_2(s)$ is : 
+	$\vect{T}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:5_3_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is : 
 	\begin{equation*}
 		-T_2(s) + T_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = T'_2 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{T}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_3(s)$ is : 
+	$\vect{T}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:5_3_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is : 
 	\begin{equation*}
 		T_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 T_2(s) ds + o(ds)
 	\end{equation*}
 		
-	$\vect{N}(s+ds)$ is deviated from $\vect{d}_3(s)$ by the combined angles $d\theta_2 = \kappa_2 ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_2(s)$ is : 
+	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_2 ds$ around $\vect{d}_2$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:5_3_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is : 
 	\begin{equation*}
 		-N(s+ds) \cos(\kappa_2 ds) \sin(\kappa_1 ds) = -\kappa_1 N(s) ds + o(ds)
 	\end{equation*}	
@@ -383,27 +414,27 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 	\subsubsection{Contributions to the balance of moments}
 	\vspace{10pt}
 	
-	$\vect{T}_2(s+ds)$ is deviated from the plane normal to $\vect{d}_1(s)$ by the angle $d\theta_3 = \tau ds$ along $ds$ (\cref{fig:5_3_b}). It produces a moment around $\vect{d}_1$ with the lever arm $b =  \cos(\kappa_2 ds) ds$. Thus, its overall contribution to the balance of moments over $\vect{d}_1(s)$ is : 
+	$\vect{T}_2(s+ds)$ is deflected from the plane normal to $\vect{d}_1(s)$ by a rotation of angle $\tau ds$ around $\vect{d}_3$ (\cref{fig:5_3_b}). It produces a moment around $\vect{d}_1$ with the lever arm $b =  \cos(\kappa_2 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is : 
 	\begin{equation*}
 		-T_2(s+ds) \cos(\tau ds) (\cos(\kappa_2 ds) ds) = -T_2(s) ds + o(ds)
 	\end{equation*}
 	
-	$\vect{M}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_3_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_1(s)$ is : 
+	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_3_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is : 
 	\begin{equation*}
 		-M_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau M_2 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{M}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_2(s)$ is : 
+	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:5_3_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is : 
 	\begin{equation*}
 		-M_2(s) + M_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = M'_2 (s) ds + o(ds)
 	\end{equation*}
 	
-	$\vect{M}_2(s+ds)$ is deviated from $\vect{d}_2(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_3(s)$ is : 
+	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:5_3_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is : 
 	\begin{equation*}
 		M_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 M_2 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{Q}(s+ds)$ is deviated from $\vect{d}_3(s)$ by the combined angles $d\theta_2 = \kappa_2 ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_3_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_2(s)$ is : 
+	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_2 ds$ around $\vect{d}_2$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:5_3_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is : 
 	\begin{equation*}
 		-Q(s+ds) \cos(\kappa_2 ds) \sin(\kappa_1 ds) = -\kappa_1 Q(s) ds + o(ds)
 	\end{equation*}	
@@ -421,7 +452,7 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_d2.pdf}\label{fig:5_4_b}}
 	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_d2.pdf}\label{fig:5_4_c}}
 	\vspace{30pt}
-	\caption{Influence of the second material curvature ($\kappa_2$) in the deviation of internal forces and moments along the centerline.}     
+	\caption{Influence of the second material curvature ($\kappa_2$) in the deflection of internal forces and moments along the centerline.}     
 	\label{fig:5_4}
  \end{leftfullpage}
 \end{figure}
@@ -430,51 +461,51 @@ Cela consiste essentiellement à 2/3 schémas bien pensés à produire + à écr
 	\subsubsection{Contributions to the balance of forces}
 	\vspace{10pt}
 	
-	$\vect{T}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_1(s)$ is : 
+	$\vect{T}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_4_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is : 
 	\begin{equation*}
 		-T_1(s) + T_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = T'_1 (s) ds + o(ds)
 	\end{equation*}
 	
-	$\vect{T}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_1 = \kappa_1 ds$ along $ds$ (\cref{fig:5_4_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_2(s)$ is : 
+	$\vect{T}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:5_4_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is : 
 	\begin{equation*}
 		T_1(s+ds) \sin(\tau ds) \cos(\kappa_1 ds) = \tau T_1 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{T}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_3(s)$ is : 
+	$\vect{T}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_4_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is : 
 	\begin{equation*}
 		-T_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = - \kappa_2 T_1(s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{N}(s+ds)$ is deviated from $\vect{d}_3(s)$ by the combined angles $d\theta_1 = \kappa_1 ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_b}). Thus, its overall contribution to the balance of forces over $\vect{d}_1(s)$ is : 
+	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_1 ds$ around $\vect{d}_1$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_4_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is : 
 	\begin{equation*}
 		N(s+ds) \cos(\kappa_1 ds) \sin(\kappa_2 ds) = \kappa_2 N(s) ds + o(ds)
-	\end{equation*}	
+	\end{equation*}
 	\vspace{10pt}
-	
+
 	\subsubsection{Contributions to the balance of moments}
 	\vspace{10pt}
 	
-		$\vect{T}_1(s+ds)$ is deviated from the plane normal to $\vect{d}_2(s)$ by the angle $d\theta_3 = \tau ds$ along $ds$ (\cref{fig:5_4_b}). It produces a moment around $\vect{d}_2$ with the lever arm $b =  \cos(\kappa_1 ds) ds$. Thus, its overall contribution to the balance of moments over $\vect{d}_2(s)$ is : 
+		$\vect{T}_1(s+ds)$ is deflected from the plane normal to $\vect{d}_2(s)$ by the angle $\tau ds$ around $\vect{d}_3$ along $ds$ (\cref{fig:5_4_b}). It produces a moment around $\vect{d}_2$ with the lever arm $b =  \cos(\kappa_1 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is : 
 	\begin{equation*}
 		T_1(s+ds) \cos(\tau ds) (\cos(\kappa_1 ds) ds) = T_1(s) ds + o(ds)
 	\end{equation*}
 	
-	$\vect{M}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_1(s)$ is : 
+	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_4_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is : 
 	\begin{equation*}
 		-M_1(s) + M_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = M'_1 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{M}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_2(s)$ is : 
+	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_4_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is : 
 	\begin{equation*}
 		M_1(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = \tau M_1 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{M}_1(s+ds)$ is deviated from $\vect{d}_1(s)$ by the combined angles $d\theta_3 = \tau ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_3(s)$ is : 
+	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_4_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is : 
 	\begin{equation*}
 		-M_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = -\kappa_2 M_1 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{Q}(s+ds)$ is deviated from $\vect{d}_3(s)$ by the combined angles $d\theta_1 = \kappa_1 ds$ and $d\theta_2 = \kappa_2 ds$ along $ds$ (\cref{fig:5_4_c}). Thus, its overall contribution to the balance of moments over $\vect{d}_1(s)$ is : 
+	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_1 ds$ around $\vect{d}_1$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:5_4_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is : 
 	\begin{equation*}
 		Q(s+ds) \cos(\kappa_1 ds) \sin(\kappa_2 ds) = \kappa_2 Q(s) ds + o(ds)
 	\end{equation*}	
@@ -514,7 +545,7 @@ Principe :
 \begin{fullpage}
 	\captionsetup[subfloat]{captionskip=20pt}
      	\centering
-     	\subfloat[][Biarc model discrete centerline.]{\includegraphics{discrete_model.pdf}\label{fig:discrete_model}} \\
+     	\subfloat[][Centerline of the discrete biarc model.]{\includegraphics{discrete_model.pdf}\label{fig:discrete_model}} \\
 	\vspace{30pt}
 	\subfloat[][Number of segments, edges and vertices whether the centerline is closed or open.]{
 		\begin{tabular}{l  l | c  c } 
@@ -531,7 +562,7 @@ Principe :
 		handles & $n_h$ & $n_s+1$ & $n_s$ \\
 	\end{tabular}\label{tab:count}}
 	\vspace{20pt}
-	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a 3-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
+	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a three-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
 \end{fullpage}
 \end{figure}
 
@@ -545,7 +576,7 @@ Principe :
 
 Let's introduce the discrete biarc model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent segments which are three-vertices and two-edges elements with uniform material and section properties.
 
-Beams can either be closed or open. The corresponding number of vertices, edges and segments are reported in \cref{tab:count} :
+Beams can either be closed or open. The corresponding number of vertices, edges and segments are reported in \cref{tab:count}.
 %\begin{table}[h]
 %	\centering
 %	\begin{tabular}{l  l | c  c } 
@@ -579,7 +610,7 @@ The discrete centerline is a polygonal space curve (\cref{fig:discrete_model}) d
 	\right.
 \end{equation}
 
-The length of the ith edge is denoted $l_i $ and its unit director is denoted $\vect{u}_i$. The arc length of the ith vertex is denoted $s_i$ and is given by : 
+The length of the ith edge is denoted $l_i $ and its normalized direction vector is denoted $\vect{u}_i$. The arc length of the ith vertex is denoted $s_i$ and is given by : 
 \begin{equation}
 	\left\{
 	\begin{aligned}
