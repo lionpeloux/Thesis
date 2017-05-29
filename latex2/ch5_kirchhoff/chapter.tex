@@ -75,15 +75,20 @@ Résumé du chapitre
 
 \blockcquote[p.~68]{Audoly2010}{In a deformed state, the center line has no particular reason to remain straight and, in general, $\vect{d}_1$ and $\vect{d}_2$ will twist along the center line. However, in the case of small strain that we consider, the triad $(\vect{d}_1,\vect{d}_2,\vect{d}_3)$ remains approximately orthonormal, provided it has been chosen orthonormal in the reference configuration. This is known as the Euler-Bernoulli or Navier-Bernoulli kinematical hypothesis, or sometimes the assumption of unshearable rods.}
 
-\section{An introduction to the Cosserat theory of rods}
+Extension to the case of thin-walled sections by \cite{Dias2015, Vetyukov2014} in the case of ribbons. From the Vlasov
 
-This paragraph gives a (very) brief overview of the \emph{Cosserat theory of rods}, as presented in \cite{Antman2005}, that accounts for bending, torsion, extension and shear  behaviors of slender beams.\footnote{\blockcquote[p.~270]{Antman2005}{[we formulate] a general dynamical theory of rods that can undergo large deformations in space by suffering flexure, torsion, extension, and shear. We call the resulting geometrically exact theory the \emph{special Cosserat theory of rods}.}} It gives a larger scope to the basements of the present work -- which relies on the \emph{Kirchhoff theory of rods} -- as the last is subsumed in this larger theoretical framework. Thus, what is presented in this paragraph could be considered as a reasonable starting point to extend the present work, for instance to take account for extensibility which might be relevant for some form-finding processes or engineering problems.
+\blockcquote[p.]{Dias2014}{For thin beams having a slender cross-section, $h \ll w$, the classical rod theory of Kirchhoff is known to be inapplicable. Such beams are usually modeled using Vlasov’s theory for thin-walled beams. Vlasov’s models can be justified from 3D elasticity but only in the case of moderate deformations, when the cross-sections bend by a small amount. In the present work, however, we have considered large deformations of thin strips. The strip has been modeled as an inextensible  plate, and the geometric  constraint of inextensibility has been treated exactly : the cross-sections are allowed to bend by a significant amount. Our model extends the classical strip model of Sadowsky, and reformulate it in a way that fits into the classical theory of rods.}
+
+\clearpage
+\section{Cosserat theory of rods : an introduction}
+
+This paragraph gives a (very) brief overview of the \emph{Cosserat theory of rods}, as presented in \cite{Antman2005}, that accounts for bending, torsion, extension and shear  behaviors of slender beams.\footnote{\blockcquote[p.~270]{Antman2005}{[we formulate] a general dynamical theory of rods that can undergo large deformations in space by suffering flexure, torsion, extension, and shear. We call the resulting geometrically exact theory the \emph{special Cosserat theory of rods}.}} It gives a larger scope to the basements of the present work -- which relies on the \emph{Kirchhoff theory of rods} -- as the last is subsumed in this larger theoretical framework. Thus, what is presented in this paragraph could be considered as a reasonable starting point to extend the present work, for instance to take account for shear which might be relevant for some form-finding processes or engineering problems.
 
 This theory was introduce by \cite{Antman1974}. It has been largely employed in various fields \cite{Shi1995, Bergou2010}.
 
 \subsubsection{Actual configuration}
 
-At time $t$, the \emph{actual} or \emph{deformed} configuration of the rod $\{{\vect{x}}, {\vect{d}_1}, {\vect{d}_2}\}$ is described by its \emph{centerline} $\gamma \in \mathcal{C}^1([0,\overbar{L}]\times \mathbb{R}^3)$, a regular space curve, 
+At time $t$, the \emph{actual} or \emph{deformed} configuration of the rod $\{{\vect{x}}, {\vect{d}_1}, {\vect{d}_2}\}$ is described by its \emph{centerline} $\gamma \in \mathcal{C}^1([0,{L}]\times \mathbb{R}^3)$, a regular space curve, 
 \begin{equation}
 	\fonctionL{\gamma(t, \cdot)}{[0,\overbar{L}]}{\mathbb{R}^3}{\overbar{s}}{\vect{x}(t,\overbar{s})}
 \end{equation}
@@ -118,9 +123,9 @@ The deformation of the material frame regarding the variable $\overbar{s}$ is de
 \begin{equation}	
 		\frac{\partial \vect{d}_i}{\partial \overbar{s}} (t, \overbar{s}) = \vect{\omega}(t, \overbar{s}) \times  \vect{d}_i (t, \overbar{s})
 \end{equation}
-The velocity of the material frame is described with the help of the Darboux vector $\vect{\lambda}$ with coordinates $(\lambda_1, \lambda_2, \lambda_3)^T$ in the material frame basis :
+The velocity of the material frame is described with the help of the spin vector $\vect{w}$ with coordinates $(w_1, w_2, w_3)^T$ in the material frame basis :
 \begin{equation}	
-		\frac{\partial \vect{d}_i}{\partial t} (t, \overbar{s}) = \vect{\lambda}(t, \overbar{s}) \times  \vect{d}_i (t, \overbar{s})
+		\frac{\partial \vect{d}_i}{\partial t} (t, \overbar{s}) = \vect{w}(t, \overbar{s}) \times  \vect{d}_i (t, \overbar{s})
 \end{equation}
 Now, the spatial derivative regarding $\overbar{s}$ will be denoted by a prime (${}'$) and the time derivative regardin $t$ by a dot ($\dot{}$).
 
@@ -152,8 +157,125 @@ The rod is said to be inextensible if $\epsilon(t, \overbar{s}) \ll 1$. In that 
 \subsubsection{To go further}
 
 The reader is invited to refer to \cite{Antman2005} to get a deeper understanding of the \emph{Cosserat theory for rods}. The geometric description of a Cosserat rod has been presented in a very generic but still concise manner. This description will be used in the next sections in the narrower scope of the (first order) \emph{Kirchhoff theory for rods} but could be usefully employed for richer theories. 
+\begin{equation}	
+	\chi
+\end{equation}
 
+\clearpage
+\section{Kirchhoff theory of rods}
+
+In this section we follow \cite{Dill1992} to introduce Kirchhoff theory of rods, where Dill \textquote{examine the classical theory of finite displacements of thin rods as developped by Kirchhoff and Clebesch, and presented by Love}.
+
+We assume that material and section properties are slowly varying along the centerline.
+Note that symbols referring to this configuration will carry an overbar.
+
+ces équations sont valables à l'ordre 2 en $\alpha$ \cite{Coleman1993} où :
+\begin{equation}
+	\alpha = \max_{s \in [0,L]} \{ \abs{\kappa(s)} h, \abs{\overbar{\kappa}(s)} h, h/L\}
+\end{equation}
+
+\subsubsection{Reference (or stress-free) configuration}
+
+We consider a \emph{stress-free} configuration of the rod that is called the \emph{reference} configuration.\footnote{See \cite[p.~20]{Audoly2010} for precisions when such a configuration may not exist.} The rod is fully described by its centerline ${\gamma}$ and its material frame $\{{\vect{d}_1}, {\vect{d}_2}, {\vect{d}_3}\}$.\footnote{This description is employed by Antman in his \emph{special Cosserat theory of rods} : \blockcquote[p.~270]{Antman2005}{The motion of a special Cosserat rod is defined by three vector-valued functions : $ [s_1, s_2] \times \mathbb{R} \ni  (s,t) \mapsto \vect{r}(s,t), \; \vect{d}_1 (s,t), \; \vect{d}_2 (s,t) \in \mathbb{E}^3$}.} The set of material points lying in a plane perpendicular to ${\gamma}$ defines a \emph{cross section} ($\mathcal{S}$) and is thus a planar surface. 
+
+We require that ${\gamma} \in \mathcal{C}^1$ is at least a regular space curve -- that is its tangent vector is continuously defined ${\vect{t}} = \frac{d \overbar{\vect{x}}}{d {s}}$. We denote ${s}$ its arc length parameter, ${L}$ its length and $\overbar{\vect{x}}$ the position vector in this configuration :
+\begin{equation}
+	\fonctionL{{\gamma}}{[0,{L}]}{\mathbb{R}^3}{{s}}{\overbar{\vect{x}}({s})}
+\end{equation}
+We also require that each cross section centroid belong to the centerline. We choose ${\vect{d}_1}({s})$ and ${\vect{d}_2}({s})$ to be  unit vectors aligned with the principal axes of the cross section so they are perpendicular to each other and they lie in the plane of $\mathcal{S}({s})$ :
+\begin{equation}
+	\fonctionL{({\vect{d}_1},{\vect{d}_2})}{[0,{L}]}{\mathbb{R}^3 \times \mathbb{R}^3}{{s}}{({\vect{d}_1}({s}), {\vect{d}_2}({s}))}
+\end{equation}
+For a sufficiently slender rod, the position of material point $\overbar{\vect{\mathcal{P}}}$ in section $\mathcal{S}$ can be expressed through its material coordinates as : \footnote{The lateral dimension of the rod must be smaller than the radius of curvature. Otherwise, this description would lead to self intersection of cross sections.}
+\begin{equation}
+	\overbar{\vect{\mathcal{P}}}({X_1}, {X_2}, {s}) = 
+	\overbar{\vect{x}}({s}) + {X_1} {\vect{d}_1}({s}) + {X_2} {\vect{d}_1}({s})
+\end{equation}
+Consequently, in the reference configuration, $({X_1}, {X_2})$ is a cartesian coordinate system in the plane of the cross section. In this system the local coordinates of the section's centroid are $(0,0)$.
+
+Finally, we define the third component of the material frame as the unit vector so that $\{{\vect{d}_1}, {\vect{d}_2}, {\vect{d}_3}\}$ form a direct orthonormal basis : 
+\begin{equation}
+	{\vect{d}_3} = {\vect{d}_1} \times {\vect{d}_2} = {\vect{t}}
+\end{equation}
+Since the material frame is orthonormal, it's evolution along the \emph{undeformed} centerline is described thanks to the \emph{reference strain vector} $\overbar{\vect{\omega}}$ defined as :
+\begin{equation}
+	\frac{d}{d s}\left(\vect{d}_i\right) = \overbar{\vect{\omega}}  \times \vect{d}_i
+\end{equation}
+In the reference configuration, because the centerline is parametrized by arc length, the strain vector components expressed in the material frame basis are given by :
+\begin{subequations}
+	\begin{align}
+		\overbar{\vect{\kappa b}} &=  \vect{t} \times  \vect{t}' 
+		\\
+		\overbar{\omega}_1 &= \overbar{\kappa_1} = \vect{\kappa b} \cdot \vect{d}_1
+		\\
+		\overbar{\omega}_2 &= \overbar{\kappa_2} = \vect{\kappa b} \cdot \vect{d}_2
+		\\
+		\overbar{\omega}_3 &= \overbar{\tau} = \vect{d}'_1  \cdot \vect{d}_2 = - \vect{d}'_2  \cdot \vect{d}_1
+	\end{align}
+\end{subequations}
+
+
+\subsubsection{Actual (or deformed) configuration}
+
+We now examine the motion of the rod and we call \emph{actual} configuration or \emph{deformed} configuration its configuration at time $t$. In this configuration the rod undergoes internal stresses under body loads, external loads and constrains. A material point $\overbar{\vect{\mathcal{P}}}$ is transported to ${\vect{\mathcal{P}}}$. The actual rod is fully described by its centerline $\gamma_t = \gamma(t)$, its material frame $\{{\vect{d}_1}, {\vect{d}_2}, {\vect{d}_3}\}(t)$ and a local displacement field $\vect{u}(t)$. The components $(u_1, u_2, u_3)^T$ of the local displacement field expressed in the material frame basis are assumed to be small in Kirchhoff's theory.\footnote{Note that this hypothesis is the one made by Kirchhoff and does not correspond to the well-known \emph{Euler-Bernoulli} or \emph{Navier-Bernoulli} assumption where the sections remain planar, undeformed and normal to the centerline during the rod deformation. In particular, torsion is responsible for the warping of cross sections -- that is sections don't remain planar -- and leads to a distinct value of the twist modulus ($J$). This is clearly stipulated in \cite{Dill1992, Audoly2010} but is often treated with confusion in the literature.}
+
+In his theory, Kirchhoff shows that the material frame in the reference configuration deforms in a rigid-body manner so that it remains orthonormal.\footnote{This is true within an error $O(\alpha^2)$ as explained in \cite[]{Coleman1993}.} Remark that this is different than assuming that cross sections deform in a rigid-body manner, which is known as the \emph{Euler-Bernoulli} hypothesis and is equivalent to the special case $\vect{u} = \vect{0}$. More over, the theory assumes that the material frame remains adapted to the centerline during deformation so that transverse shear deformations are neglected.\footnote{This is also known as the \textquote{unsherable} assumption. Indeed, if $\frac{\partial \vect{x}}{\partial s} = \nu_k \vect{d}_k = (1 + \epsilon)\vect{d}_3 \Leftrightarrow \nu_1 = \nu_2 = 0$.}
+
+The centerline of the rod is deformed into a new space curve with position vector $\vect{x}$ : 
+\begin{equation}
+	\fonctionL{\gamma_t}{[0,{L}]}{\mathbb{R}^3}{s}{\vect{x}(s)}
+\end{equation}
+The curve is still parametrized by the arc length parameter ($s$) of the \emph{reference} configuration as the constitutive laws will be expressed relatively to this configuration. But note that $s$ is no more the arc length parameter of the \emph{deformed} centerline as the rod may have suffer axial extension.\footnote{In Kirchhoff's theory, rods are not supposed to be strictly inextensible but extension has to remain small.} The extension of the centerline is characterized by $\epsilon$ defined such that :
+ \begin{equation}
+	\frac{\partial \vect{x}}{\partial s} = \nu_3 \vect{d}_3 =  (1 + \epsilon) \vect{d}_3
+\end{equation}
+However, one can parametrized the deformed centerline by its own arc length parameter, denoted $s_t$. We call $L_t$ the length of the deformed centerline and $g_t$ the $\mathcal{C}^1$ diffeomorphisme that maps $s$ onto $s_t$ ($s_t = g_t(s) \Leftrightarrow s = g_t^{-1}(s_t)$). Thus, the centerline is also described as :
+\begin{equation}
+	\fonctionL{\gamma_t}{[0,{L_t}]}{\mathbb{R}^3}{s_t}{\vect{x}(s_t)}
+\end{equation}
+Because $s_t$ is the arc length parameter of $\gamma_t$ the following relations hold :
+\begin{subequations}
+	\begin{align}
+		&\frac{\partial \vect{x}}{\partial s_t} = \vect{t} = \vect{d}_3
+		\\[0.5em]
+		&\frac{\partial s_t}{\partial s} = \nu_3 = 1+ \epsilon
+	\end{align}
+\end{subequations}
+Since the material frame is orthonormal, it's evolution along the \emph{deformed} centerline is described thanks to the \emph{actual strain vector} ${\vect{\omega}}$ defined as :
+\begin{equation}
+	\frac{\partial}{\partial s}\left(\vect{d}_i\right) = {\vect{\omega}}  \times \vect{d}_i
+\end{equation}
+Note that the strain vector is defined relatively to the arc length ($s$) of the \emph{reference} configuration and not the arc length of the \emph{actual} configuration  ($s_t$). Thus the strain vector components expressed in the material frame basis are given by :
+\begin{subequations}
+	\begin{align}
+		\vect{\kappa b} &=  \vect{t} \times  \frac{\partial \vect{t}}{\partial s_t} = (1+\epsilon) \vect{t} \times \vect{t}'
+		\\[0.5em]
+		{\omega}_1 &= (1+\epsilon) {\kappa_1} = (1+\epsilon) \vect{\kappa b} \cdot \vect{d}_1
+		\\
+		{\omega}_2 &= (1+\epsilon) {\kappa_2} = (1+\epsilon) \vect{\kappa b} \cdot \vect{d}_2
+		\\
+		{\omega}_3 &= (1+\epsilon) {\tau} = (1+\epsilon) \vect{d}'_1  \cdot \vect{d}_2 = - (1+\epsilon) \vect{d}'_2  \cdot \vect{d}_1
+	\end{align}
+\end{subequations}
+It is important that the material strains ($\omega_1$, $\omega_2$, $\omega_3$) are corrected according to the extension of the rod. These are the strains employed in the classical constitutive laws that lead to the determination of the internal axial force and moments. In the case of an inextensible rod ($\epsilon = 0$) there is no need to make the distinction between $s_t$ and $s$. The same parameter is an arc length parameter for all configurations at all time.
+
+
+\subsubsection{Balance of momentum}
+
+\subsubsection{Local displacements}
+
+\subsubsection{Local strains}
+
+\subsubsection{Dynamical equations}
+
+
+\clearpage
 \section{Dynamical equations for Kirchhoff rods}
+
+référence importante pour la rod \cite{Moulton2013} , \cite[p.~109]{Villaggio1997}.
+modeling of DNA molecules, pipes or hosing, plant, hair, surgery, 
+
+Pour la rod extensible : \cite{Cisternas2002}
 
 \emph{Unshearable}. The rod can be considered as unshearable if $\nu_1 \ll 1$ and $\nu_2 \ll 1$. In that case, the third material vector remains parallel to the centerline  $\vect{d}_3 \times \vect{t} = 0$ and the material frame is adapted to the centerline. 
 However, in the case of small strain that we consider, the triad $(\vect{d}_1,\vect{d}_2,\vect{d}_3)$ remains approximately orthonormal, provided it has been chosen orthonormal in the reference configuration. This is known as the Euler-Bernoulli or Navier-Bernoulli kinematical hypothesis, or sometimes the assumption of unshearable rods. 
@@ -413,7 +535,7 @@ This is nothing but the application of the transport theorem when differentiatin
 
 \clearpage
 \makebox[\textwidth]{} % necessaire pour le saut de page et le flush des floats
-%\newpage
+\newpage
 \section{Geometric interpretation}
 
 The previous section has established the dynamical equations for elastic rods. This section gives a simple and straight forward geometric interpretation of this equations as they can be 

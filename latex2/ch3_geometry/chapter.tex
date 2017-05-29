@@ -304,9 +304,9 @@ Let $\gamma$ be a biregular arc length parametrized curve. Let $s \in [0,L]$ be 
 \end{equation}
 The torsion is \emph{independent} regarding the choice of parametrization. This makes the torsion an \emph{intrinsic property} of a given curve and that is why it is also referred to as a \emph{geometric invariant}. Following \cite[p.204]{Gray2006} it can be computed for any parametrization $(I,F)$ of $\gamma$ as :
 \begin{equation}
-	\tau_f(s) = \frac{(\gamma'(s) \times \gamma'(s)) \cdot \gamma''(s)}{\norm{\gamma'(s) \times \gamma''(s)}^2}
+	\tau_f(t) = \frac{(\gamma'(t) \times \gamma'(t)) \cdot \gamma''(t)}{\norm{\gamma'(t) \times \gamma''(t)}^2}
 	\quad when \quad
-	\kappa(s) > 0
+	\kappa(t) > 0
 \end{equation}
 The torsion measures how much a curve goes \emph{instantaneously out of its plane}, that is to say how fast the normal or binormal vectors are rotating in the normal plane around the tangent vector. In differential geometry this is expressed as :
 \begin{equation}
@@ -527,7 +527,7 @@ Geometrically, decomposing the infinitesimal rotation of the moving frame around
 \subsection{Adapted moving frame}
 Let $F$ be a moving frame as defined in the previous section. $F$ is said to be \emph{adapted} to $\gamma$ if at each point $\gamma(s)$, $\vect{e}_{3}(s)$ is the unit tangent vector of $\gamma$ (\cref{fig:adapted}) :
 \begin{equation}
-	\vect{e_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\norm{\gamma(s)}}
+	\vect{e_{3}}(s) = \vect{t}(s) = \frac{\gamma^{'}(s)}{\norm{\gamma^{'}(s)}}
 \end{equation}
 For an adapted frame, the components $k_1$ and $k_2$ of the angular velocity vector are related to the curvature of $\gamma$\footnote{\note{Faire le lien avec l'énergie de flexion, qui ne dépend donc que de la géométrie de la courbe dans le cas d'une isotropic rod $\mathcal{E}_b = EI\kappa^2$.}} : 
 \begin{equation}
