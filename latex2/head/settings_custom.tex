@@ -140,15 +140,18 @@
 \newcommand{\pdiffof}[4]{\boldsymbol{D}_#1#2(#3)\cdot#4}
 \newcommand{\pdiffNof}[5]{\boldsymbol{D}^#1_#2#3(#4)\cdot#5}
 
-% vector and matrix
-\newcommand{\vect}{\boldsymbol}
+% vector, matrix and tensor
+\newcommand{\vect}{\boldsymbol} 
 \newcommand{\mat}[1]{\boldsymbol{\mathit{#1}}}
+\newcommand{\tens}[1]{\boldsymbol{\mathcal{#1}}}
 
 \newcommand{\scalar}[2]{\langle #1\,, #2\rangle}
 
 \newcommand{\grad}[1]{grad\;#1}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+\newcommand{\Tr}[1]{Tr(#1)} %trace operator
 
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
 \newcommand{\para}{{\mkern3mu\vphantom{\perp}\vrule depth 0pt\mkern2mu\vrule depth 0pt\mkern3mu}} % reduced heigth parallel symbol
