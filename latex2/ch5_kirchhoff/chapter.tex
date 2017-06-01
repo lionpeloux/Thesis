@@ -315,7 +315,7 @@ Let $\vect{\mathcal{P}}$ be the first \emph{Piola-Kirchhoff} stress tensor. $\ve
 		&\vect{\sigma_n}(X_1,X_2,s,t) &&= \vect{\mathcal{P}}(X_1,X_2,s,t) \cdot \vect{n} \label{eq:piola}
 	\end{alignat}
 \end{subequations}
-We have introduce the \emph{Piola stress vector} ($\vect{\sigma_n}$) which expresses the contact forces exerted on the body per unit area of the \emph{reference} configuration.
+We have introduce the \emph{Piola stress vector} ($\vect{\sigma_n}$) which expresses the contact forces exerted on the body per unit area of the \emph{reference} configuration.\footnote{For a detailed introduction to the Piola-Kirchhoff stress tensor, refer to \cite[p.~52]{Audoly2010}.}
 
 The generic laws for the balance of linear and angular momentums are obtained by summation over the reference configuration, where $\vect{b}$ are the body forces per unit volume of the \emph{reference} configuration :
 \begin{subequations}
@@ -352,16 +352,16 @@ We assume that the resultant distributed force and moment of the contact forces 
 	\begin{alignat}{2}
 		&\iint_{\mathcal{L}} \vect{\sigma_n} \;dS 
 		+ \iiint_{\mathcal{V}} \rho \vect{b} \;dV
-		= \int_s \overbar{\vect{f}} + (1+\epsilon) \vect{f} \;ds
+		= \int_s \overbar{\vect{f}} + (1+\epsilon) \vect{f}_t \;ds
 		\label{eq:f}
 		\\[0.5em]
 		&\iint_{\mathcal{L}} \vect{p} \times \vect{\sigma_n} \;dS 
 		+ \iiint_{\mathcal{V}} \rho (\vect{p} \times \vect{b}) \;dV
-		= \int_s \overbar{\vect{m}} + (1+\epsilon) \vect{m} + \vect{x} \times \big(\overbar{\vect{f}} + (1+\epsilon) \vect{f} \big) \;ds
+		= \int_s \overbar{\vect{m}} + (1+\epsilon) \vect{m}_t + \vect{x} \times \big(\overbar{\vect{f}} + (1+\epsilon) \vect{f}_t \big) \;ds
 		\label{eq:m}
 	\end{alignat}
 \end{subequations}
-where $\overbar{\vect{f}}$  (resp. $\vect{f}$) is the distributed resultant force per unit length of the reference (resp. deformed) configuration ; and $\overbar{\vect{m}}$  (resp. $\vect{m}$) is the distributed resultant moment per unit length of the reference (resp. deformed) configuration. For instance, these distributed forces and moments include external and body loads such as weight, snow, wind, ... \footnote{At this stage, although this is uncommon in the literature, it has been found convenient to mark the distinction between loads referring to the reference configuration and loads referring to the actual configuration. Indeed, various distributed loads depend on the actual length of an element such as pressure and wind loads. On the other hand, some loads are independent of the extension of the rod, such as its weight.}
+where $\overbar{\vect{f}}$  (resp. $\vect{f_t}$) is the distributed resultant force per unit length of the reference (resp. deformed) configuration ; and $\overbar{\vect{m}}$  (resp. $\vect{m}_t$) is the distributed resultant moment per unit length of the reference (resp. deformed) configuration. For instance, these distributed forces and moments include external and body loads such as weight, snow, wind, ... \footnote{At this stage, although this is uncommon in the literature, it has been found convenient to mark the distinction between loads referring to the reference configuration and loads referring to the actual configuration. Indeed, various distributed loads depend on the actual length of an element such as pressure and wind loads. On the other hand, some loads are independent of the extension of the rod, such as its weight.}
 
 Note that Kirchhoff's theory require that the stress components on the sides of the rod are small \cite[p.~11]{Dill1992} -- that is $\vect{\sigma_n}\cdot \vect{n} = O(\alpha^2)$ over $\mathcal{L}$. Thus, the first two terms in the above expression will be neglected :
 \begin{subequations}
@@ -371,7 +371,7 @@ Note that Kirchhoff's theory require that the stress components on the sides of 
 		&\iint_{\mathcal{L}} \vect{p} \times \vect{\sigma_n} \;dS \simeq 0
 	\end{alignat}
 \end{subequations}
-Although the continuous model does not account formally for punctual loads,\footnote{This is possible but would require more math.} they will be introduced seamlessly in the discrete model as the dynamical equations for the motion of the rod will translate into rigid body equations for the discrete segments composing the rod.
+Although the continuous model does not account formally for punctual loads,\footnote{This is possible but would require more math. However, local effects of such loads would not be properly modeled in the theory of Kirchhoff (Saint-Venant's Principle).} they will be introduced seamlessly in the discrete model as the dynamical equations for the motion of the rod will translate into rigid body equations for the discrete segments composing the rod.
 
 \subsubsection{Inertial forces}
 The inertial forces for a volume of the rod encompassed between cross-sections $\mathcal{S}_1$ and $\mathcal{S}_2$ are obtained by summation as : 
@@ -394,12 +394,10 @@ In the context of Kirchhoff's approximation, the local deformations of the cross
 		&\ddot{\vect{p}} &&= \ddot{\vect{x}} + \dot{\vect{\mathrm{w}}} \times (X_1\vect{d}_1 + X_2\vect{d}_2) + \vect{\mathrm{w}} \times ( \vect{\mathrm{w}} \times (X_1\vect{d}_1 + X_2\vect{d}_2))
 	\end{alignat}
 \end{subequations}
-Since $X_1$ and $X_2$ are the coordinates with respect to the centroid ($\vect{x}$) and the principal axes of the cross-section ($\vect{d}_1$, $\vect{d}_2$), the cross-section area ($S$) and principal moments of inertia ($I_1$, $I_2$) are given by : \footnote{This is exact in the reference configuration but only approximately true in the deformed configuration as the theory consider only small deformations of cross-sections.}\textsuperscript{,}\footnote{\cref{eq:centroid} is nothing but the definition of the centroid position. \cref{eq:diag} holds because the tensor of inertia of the cross-section is diagonal in the basis $\{\vect{d}_1, \vect{d}_2, \vect{d}_3\}$ and thus $I_{12} = I_{21} = 0$.}
+Since $X_1$ and $X_2$ are the coordinates with respect to the centroid ($\vect{x}$) and the principal axes of the cross-section ($\vect{d}_1$, $\vect{d}_2$), the cross-section area ($S$) and principal moments of inertia ($I_1$, $I_2$) are given by : \footnote{This is exact in the reference configuration but only approximately true in the deformed configuration as the theory consider only small deformations of cross-sections.}\textsuperscript{,}\footnote{\cref{eq:centroid_a} is nothing but the definition of the centroid position. \cref{eq:diag} holds because the tensor of inertia of the cross-section is diagonal in the basis $\{\vect{d}_1, \vect{d}_2, \vect{d}_3\}$ and thus $I_{12} = I_{21} = 0$.}
 \begin{subequations}
 \label{eq:sectionprop}
 	\begin{alignat}{2}
-		&\vect{0}  &&= \iint_{\mathcal{S}(s)} \left(X_1\vect{d}_1 + X_2\vect{d}_2\right) \;dX_1 dX_2 \label{eq:centroid}
-		\\
 		&0  		&&= \iint_{\mathcal{S}(s)} \left(X_1 X_2\right) \;dX_1 dX_2 \label{eq:diag}
 		\\
 		&S 		&&= \iint_{\mathcal{S}(s)} dX_1 dX_2
@@ -409,7 +407,18 @@ Since $X_1$ and $X_2$ are the coordinates with respect to the centroid ($\vect{x
 		&I_2 		&&= \iint_{\mathcal{S}(s)} {X_1}^2 \;dX_1 dX_2
 	\end{alignat}
 \end{subequations}
-For a thin slice of the rod ($\delta\mathcal{V}$) between cross-sections $\mathcal{S}(s)$ and $\mathcal{S}(s+ds)$, \cref{eq:inertial_a,eq:inertial_b} yield respectively : \footnote{Indeed, since $\iint_{\mathcal{S}(s)} \vect{r} \;dX_1 dX_2 = \vect{0}$ from \cref{eq:centroid} we have $\iint_{\mathcal{S}(s)} \ddot{\vect{r}} \;dX_1 dX_2 =  \iint_{\mathcal{S}(s)} \dot{\vect{\mathrm{w}}} \times \vect{r} + \vect{\mathrm{w}} \times ( \vect{\mathrm{w}} \times \vect{r}) \; dX_1 dX_2 = \vect{0}$ and $\iint_{\mathcal{S}(s)} \vect{r} \times \ddot{\vect{x}} \; dX_1 dX_2 = \vect{0}$ as $\vect{w}$ and $\vect{x}$ are independent of $X_1$ and $X_2$.}
+More over, for a given cross-section the definition of the centroid yields :
+\begin{subequations}
+\label{eq:centroid}
+	\begin{alignat}{2}
+		&\vect{0}  &&= \iint_{\mathcal{S}(s)} \left(X_1\vect{d}_1 + X_2\vect{d}_2\right) \;dX_1 dX_2 \label{eq:centroid_a}
+		\\
+		&0 		&&= \iint_{\mathcal{S}(s)} {X_1} \;dX_1 dX_2 \label{eq:centroid_b}
+		\\
+		&0 		&&= \iint_{\mathcal{S}(s)} {X_2} \;dX_1 dX_2 \label{eq:centroid_c}
+	\end{alignat}
+\end{subequations}
+For a thin slice of the rod ($\delta\mathcal{V}$) between cross-sections $\mathcal{S}(s)$ and $\mathcal{S}(s+ds)$, \cref{eq:inertial_a,eq:inertial_b} yield respectively : \footnote{Indeed, since $\iint_{\mathcal{S}(s)} \vect{r} \;dX_1 dX_2 = \vect{0}$ from \cref{eq:centroid_a} we have $\iint_{\mathcal{S}(s)} \ddot{\vect{r}} \;dX_1 dX_2 =  \iint_{\mathcal{S}(s)} \dot{\vect{\mathrm{w}}} \times \vect{r} + \vect{\mathrm{w}} \times ( \vect{\mathrm{w}} \times \vect{r}) \; dX_1 dX_2 = \vect{0}$ and $\iint_{\mathcal{S}(s)} \vect{r} \times \ddot{\vect{x}} \; dX_1 dX_2 = \vect{0}$ as $\vect{w}$ and $\vect{x}$ are independent of $X_1$ and $X_2$.}
 \begin{subequations}
 	\begin{alignat}{2}
 		&\iiint_{\delta\mathcal{V}} {\rho} \ddot{\vect{p}} \;dV= ({\rho}S \ddot{\vect{x}})ds
@@ -425,7 +434,7 @@ Finally, remark that :
 	+ X_1 X_2 (\vect{d}_1 \times \ddot{\vect{d}_2} 
 	+ \vect{d}_2 \times \ddot{\vect{d}_1})
 \end{equation}
-Thus, reminding \cref{eq:sectionprop}, one can conclude that the inertial forces reduce to :
+Thus, reminding \cref{eq:sectionprop,eq:centroid}, one can conclude that the inertial forces reduce to :
 \begin{subequations}
 	\begin{alignat}{2}
 		&\iiint_{\delta\mathcal{V}} {\rho} \ddot{\vect{x}} \;dV= ({\rho}S \ddot{\vect{x}})ds \label{eq:linearinertia}
@@ -447,18 +456,18 @@ For a thin slice of the rod ($\delta\mathcal{V}$) between cross-sections $\mathc
 		+ \left( \iint_{\delta\mathcal{L}} \vect{\sigma_n} \;dS
 		+ \iiint_{\delta\mathcal{V}} \rho \vect{b} \;dV \right)
 		\\[0.5em]
-		&= -\vect{F}(s) + \vect{F}(s+ds) + \big(\overbar{\vect{f}}(s) + (1+\epsilon) \vect{f}(s) \big) ds
+		&= -\vect{F}(s) + \vect{F}(s+ds) + \big(\overbar{\vect{f}}(s) + (1+\epsilon) \vect{f}_t(s) \big) ds
 		\\[0.5em]
-		&= \left( \frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon) \vect{f} \right)(s) ds
+		&= \left( \frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon) \vect{f}_t \right)(s) ds
 	\end{aligned}
 \end{equation}
 Thus, using \cref{eq:linearinertia}, the equation for the balance of linear momentum reduce to either equations :
 \begin{subequations}
 	\begin{alignat}{1}
-	\frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon) \vect{f} &= \rho S \ddot{\vect{x}}
+	\frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon)\vect{f}_t &= \rho S \ddot{\vect{x}}
 	\label{eq:linearmotion}
 	\\[0.5em]
-	(1+\epsilon)\frac{\partial \vect{F}}{\partial s_t} + \overbar{\vect{f}} + (1+\epsilon) \vect{f} &= \rho S \ddot{\vect{x}}
+	(1+\epsilon)\frac{\partial \vect{F}}{\partial s_t} + \overbar{\vect{f}} + (1+\epsilon)\vect{f}_t &= \rho S \ddot{\vect{x}}
 	\end{alignat}
 \end{subequations}
 
@@ -483,7 +492,7 @@ Using \cref{eq:m}, the balance of linear momentum referring to the \emph{referen
 		+ \iiint_{\delta\mathcal{V}} \rho (\vect{p} \times \vect{b}) \;dV
 		\\[0.5em]
 		&= \frac{\partial}{\partial s} \big( \vect{M} + \vect{x}\times\vect{F} \big)(s) ds 
-		+ \overbar{\vect{m}} + (1+\epsilon) \vect{m} + \vect{x} \times \big(\overbar{\vect{f}} + (1+\epsilon) \vect{f} \big) \;ds 
+		+ \overbar{\vect{m}} + (1+\epsilon)\vect{m}_t + \vect{x} \times \big(\overbar{\vect{f}} + (1+\epsilon)\vect{f}_t \big) \;ds 
 	\end{aligned}
 \end{equation}
 Finally, combining \cref{eq:angularbalance2} with \cref{eq:linearmotion,eq:angularinertia}, the equation for the balance of angular momentum reduce to either equations : \footnote{Note the simplification of the term $\rho S \ddot{\vect{x}}$. Alternatively, the balance equations could be written for the slice as for a rigid body. In the barycentric frame of the slice : $\frac{d}{dt}(dI_G) = \vect{M}(s+ds)-\vect{M}(s) + \vect{m}(s)ds + (\tfrac{1}{2}ds\vect{x}')\times \vect{F}(s+ds) + (-\tfrac{1}{2}ds\vect{x}')\times -\vect{F}(s) = \left(\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{x}'\times \vect{F}(s)\right)ds$ with $dI_G \simeq \rho ds (I_1 \vect{d}_1 + I_2 \vect{d}_2 + (I_1+I_2) \vect{d}_3)$.}
@@ -491,16 +500,18 @@ Finally, combining \cref{eq:angularbalance2} with \cref{eq:linearmotion,eq:angul
 	\begin{alignat}{1}
 	\frac{\partial \vect{M}}{\partial s} 
 	+ \frac{\partial \vect{x}}{\partial s} \times \vect{F}
-	+ \overbar{\vect{m}} + (1+\epsilon) \vect{m} 
+	+ \overbar{\vect{m}} + (1+\epsilon)\vect{m}_t 
 	&= \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}
 	\\[0.5em]
 	(1+\epsilon)\frac{\partial \vect{M}}{\partial s_t} 
 	+ (1+\epsilon)\frac{\partial \vect{x}}{\partial s_t} \times \vect{F}
-	+ \overbar{\vect{m}} + (1+\epsilon) \vect{m} 
+	+ \overbar{\vect{m}} + (1+\epsilon) \vect{m}_t 
 	&= \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}
 	\end{alignat}
 \end{subequations}
-With some scaling arguments \cite{Dill1992} shows that terms in $w_1$ and $w_2$ should be negligible in the inertial forces of the rod given in \cref{eq:angularinertia}. This yields :
+
+\subsection{Equations of motion}
+With some scaling arguments \cite{Dill1992} shows that terms in $w_1$ and $w_2$ should be negligible in the inertial forces of the rod given in \cref{eq:angularinertia}, which yields to :
 \begin{subequations}
 	\begin{alignat}{1}
 	\rho I_1 (\dot{w}_1 + w_2 w_3) &\simeq 0
@@ -511,6 +522,19 @@ With some scaling arguments \cite{Dill1992} shows that terms in $w_1$ and $w_2$ 
 	\end{alignat}
 \end{subequations}
 For our application -- a beam model for quasi-static analysis of gridshell structures -- this approximation is clearly sufficient as what matters is the quasi-static response of the structural system and there is no need for a too accurate modeling of the transient phase. More over, the quasi-static response will be determined through a fictitious dynamic process appropriately damped to speed up the convergence to the steady state, and so there is no reason that the transient phase has any real physical meaning. This means that its is enough to keep only the twisting dynamic of the rod around its centerline.
+
+Thus, the final dynamical equations for the motion of the rod to be retained are :
+\begin{subequations}
+	\begin{alignat}{1}
+	\frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon) \vect{f}_t 
+	&= \rho S \ddot{\vect{x}}
+	\\[0.5em]
+	\frac{\partial \vect{M}}{\partial s} 
+	+ \frac{\partial \vect{x}}{\partial s} \times \vect{F}
+	+ \overbar{\vect{m}} + (1+\epsilon) \vect{m}_t 
+	&\simeq \rho (I_1 + I_2)\dot{w}_3 \vect{d}_3
+	\end{alignat}
+\end{subequations}
 
 \subsection{Hookean elasticity}
 
@@ -531,7 +555,7 @@ where $\lambda$ and $\mu$ are known as the elastic coefficients of Lamé. This c
 A worthwhile presentation of the theory of elasticity in the specific context of rods can be found in \cite{Audoly2010}.
 
 \subsection{Deformation of cross-sections}
-In this paragraph, we simply recall the canonical form of the local displacement field ($\vect{u}$) for the cross-section $\mathcal{S}(s)$ in the context of Kirchhoff's approximation : 
+In this paragraph, we simply recall the canonical form of the local displacement field ($\vect{u}$) for the cross-section $\mathcal{S}(s)$ in the context of Kirchhoff's approximation : \footnote{Remark that the local displacement field results from the superposition of the three displacement fields obtained for pure and uniform extension, flexion and twist. For a detailed analysis of pure and uniform flexion and twist of rods; refer to \cite[ch.~3]{Audoly2010}.}
 \begin{subequations}
 	\begin{alignat}{1}
 	u_1 &=
@@ -547,7 +571,7 @@ In this paragraph, we simply recall the canonical form of the local displacement
 	u_3 &= (\omega_3 - \overbar{\omega}_3)\varphi_s(X_1,X_2)
 	\end{alignat}
 \end{subequations}
-where $\varphi_s$ is the warping function (in torsion) of $\mathcal{S}(s)$, determined by the following equation and boundary condition :
+where $\varphi_s$ is the warping function (in torsion) of $\mathcal{S}(s)$, determined by the differential equation and the boundary condition over the contour of the cross-section : \footnote{$\vect{n} = ({\partial f_s}/{\partial {X_1}}, {\partial f_s}/{\partial {X_1}})^T$ is the unit normal vector to the boundary curve of $\mathcal{S}(s)$ defined implicitly by the equation $f_s(X_1,X_2)=0$.}
 \begin{subequations}
 	\begin{alignat}{2}
 	0 &= \frac{\partial^2 \varphi_s}{\partial {X_1}^2} + \frac{\partial^2 \varphi_s}{\partial {X_2}^2}
@@ -558,16 +582,6 @@ where $\varphi_s$ is the warping function (in torsion) of $\mathcal{S}(s)$, dete
 	&& \forall (X_1,X_2)\in\mathcal{S}(s)\; / \; f_s(X_1,X_2) = 0
 	\end{alignat}
 \end{subequations}
-%\begin{subequations}
-%	\begin{alignat}{1}
-%	\frac{\partial^2 \varphi_s}{\partial {X_1}^2} + \frac{\partial^2 \varphi_s}{\partial {X_2}^2} &= 0
-%	\\[0.5em]
-%	n_1\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right) + n_2\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right) &= 0
-%	\quad\quad \forall (X_1,X_2) \in \mathcal{S}(s), \; f(X_1,X_2)=0
-%	\end{alignat}
-%\end{subequations}
-where $\vect{n} = (\partial_{1}f_s, \partial_{2}f_s)^T$ is the unit normal vector to the boundary curve of $\mathcal{S}(s)$ defined implicitly by the equation $f_s(X_1,X_2)=0$.
-
 These equations have known analytical solutions for classical shapes such as circles, ellipses, squares or rectangles. For other shapes, when it is not easy to find analytical solutions, the membrane analogy introduced by Prandtl \cite{Prandtl1903} is employed.\footnote{Recent advances \cite{Koohestani2014} in the formfinding of soap films with the force density method might be of practical use to evaluate the warping function.}
 
 \subsection{Strains}
@@ -607,7 +621,7 @@ Thus, the Piola stress vector defined in \cref{eq:piola} becomes :
 \subsection{Constitutive equations for internal forces and moments}
 In Kirchhoff's theory, constitutive equations for internal forces and moments should not be considered as assumptions. Indeed, as shown hereafter, they are somehow consequences of the assumptions made on the motion -- that is the rod remains close to a motion where cross-sections remain planar, undistorted and perpendicular to the centerline -- and on the material -- the Hookean elasticity -- of the rod.
 
-From \cref{eq:F,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive equation for the axial component of the internal forces : \footnote{Recall from \cref{eq:centroid} that $\iint_{\mathcal{S}(s)} \left(X_1\vect{d}_1 + X_2\vect{d}_2\right) \;dX_1 dX_2 = \vect{0}$. Thus $\iint_{\mathcal{S}(s)} {X_1} \;dX_1 dX_2 = 0$ and $\iint_{\mathcal{S}(s)} {X_2} \;dX_1 dX_2 = 0$.}
+From \cref{eq:F,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive equation for the axial component of the internal forces : \footnote{Also recall from \cref{eq:centroid} that $\iint_{\mathcal{S}(s)} {X_1} \;dX_1 dX_2 = 0$ and $\iint_{\mathcal{S}(s)} {X_2} \;dX_1 dX_2 = 0$.}
 \begin{equation}
 %	\label{eq:constitutive_F3}
 	\begin{aligned}
@@ -682,16 +696,12 @@ The rod is subjected to internal forces and moments :
 	\vect{M} &= M_1\vect{d}_1 + M_2\vect{d}_2 + M_3\vect{d}_3
 	\end{alignat}
 \end{subequations}
-The rod is subjected to external and body loads described as distributed forces and moments acting on the centerline :
+The rod is subjected to external and body loads described as distributed forces and moments acting on the centerline -- either given per unit length of the reference configuration ($\overbar{\vect{f}}$, $\overbar{\vect{m}}$) or per unit length of the actual configuration ($\vect{f}_t$, $\vect{m}_t$) -- and given in the condensed form :
 \begin{subequations}
 	\begin{alignat}{1}
-	\overbar{\vect{f}} &= \overbar{f}_1\vect{d}_1 + \overbar{f}_2\vect{d}_2 + \overbar{f}_3\vect{d}_3
+	\vect{f} &= \overbar{\vect{f}} + (1+\epsilon)\vect{f}_t = f_1\vect{d}_1 + f_2\vect{d}_2 + f_3\vect{d}_3
 	\\
-	\vect{f} &= f_1\vect{d}_1 + f_2\vect{d}_2 + f_3\vect{d}_3
-	\\
-	\overbar{\vect{m}} &= \overbar{m}_1\vect{d}_1 + \overbar{m}_2\vect{d}_2 + \overbar{m}_3\vect{d}_3
-	\\
-	\vect{m} &= m_1\vect{d}_1 + m_2\vect{d}_2 + m_3\vect{d}_3
+	\vect{m} &= \overbar{\vect{m}} + (1+\epsilon)\vect{m}_t = m_1\vect{d}_1 + m_2\vect{d}_2 + m_3\vect{d}_3
 	\end{alignat}
 \end{subequations}
 The internal axial force, the internal bending moments and the internal twisting moment are computed with the following constitutive equations :
@@ -733,29 +743,29 @@ and $\varphi_s$ is the warping fonction of the cross-section that satisfies the 
 The dynamical equations for the motion of the rod are :
 \begin{subequations}
 	\begin{alignat}{1}
-	\frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon) \vect{f} 
+	\frac{\partial \vect{F}}{\partial s} + \vect{f} 
 	&= \rho S \ddot{\vect{x}}
 	\\[0.5em]
 	\frac{\partial \vect{M}}{\partial s} 
 	+ \frac{\partial \vect{x}}{\partial s} \times \vect{F}
-	+ \overbar{\vect{m}} + (1+\epsilon) \vect{m} 
+	+ \vect{m} 
 	&= \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}
 	\end{alignat}
 \end{subequations}
 Neglecting the rotational dynamics around $\vect{d}_1$ and $\vect{d}_2$ the components of the above equations are written :
 \begin{subequations}
 	\begin{alignat}{1}
-	F'_1 + \omega_2 F_3 - \omega_3 F_2 + \overbar{f}_1 + (1+\epsilon)f_1 &= \rho S \ddot{x}_1
+	F'_1 + \omega_2 F_3 - \omega_3 F_2 + f_1 &= \rho S \ddot{x}_1
 	\\
-	F'_2 + \omega_3 F_1 - \omega_1 F_3 + \overbar{f}_2 + (1+\epsilon)f_2 &= \rho S \ddot{x}_2
+	F'_2 + \omega_3 F_1 - \omega_1 F_3 + f_2 &= \rho S \ddot{x}_2
 	\\
-	F'_3 + \omega_1 F_2 - \omega_2 F_1 + \overbar{f}_3 + (1+\epsilon)f_3 &= \rho S \ddot{x}_3
+	F'_3 + \omega_1 F_2 - \omega_2 F_1 + f_3 &= \rho S \ddot{x}_3
 	\\
-	M'_1 + \omega_2 M_3 - \omega_3 M_2 - (1+\epsilon)F_2  + \overbar{m}_1 + (1+\epsilon)m_1 & \simeq 0
+	M'_1 + \omega_2 M_3 - \omega_3 M_2 - (1+\epsilon)F_2  + m_1 & \simeq 0
 	\\
-	M'_2 + \omega_3 M_1 - \omega_1 M_3 + (1+\epsilon)F_1 + \overbar{m}_2 + (1+\epsilon)m_2 & \simeq 0
+	M'_2 + \omega_3 M_1 - \omega_1 M_3 + (1+\epsilon)F_1 + m_2 & \simeq 0
 	\\
-	M'_3 + \omega_1 M_2 - \omega_2 M_1 + \overbar{m}_3 + (1+\epsilon)m_3 & \simeq \rho (I_1 + I_2)\dot{w}_3
+	M'_3 + \omega_1 M_2 - \omega_2 M_1 + m_3 & \simeq \rho (I_1 + I_2)\dot{w}_3
 	\end{alignat}
 \end{subequations}
 The local displacements of the cross-sections are given by :
@@ -1059,8 +1069,8 @@ This is nothing but the application of the transport theorem when differentiatin
 
 
 \clearpage
-\makebox[\textwidth]{} % necessaire pour le saut de page et le flush des floats
-\newpage
+%\makebox[\textwidth]{} % necessaire pour le saut de page et le flush des floats
+%\newpage
 \section{Geometric interpretation}
 
 The previous section has established the dynamical equations for elastic rods. This section gives a simple and straight forward geometric interpretation of this equations as they can be 
