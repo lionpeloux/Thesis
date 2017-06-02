@@ -1,0 +1,26 @@
+\begin{thenomenclature} 
+
+ \nomgroup{Symbols}
+
+  \item [{$\gamma,\; \refconf{\gamma}$}]\begingroup The centerline curve -- reference configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$\gamma$}]\begingroup The centerline curve -- actual configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$s$}]\begingroup The arc length of the centerline -- reference configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$s_t$}]\begingroup The arc length of the centerline -- actual configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$\refconf{\vect{x}}$}]\begingroup The centerline position vector -- reference configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$\vect{x}$}]\begingroup The centerline position vector -- actual configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$\refconf{\vect{\nu}}$}]\begingroup The force strain vector -- reference configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$\vect{\nu}$}]\begingroup The force strain vector -- actual configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$\refconf{\vect{\varkappa}}$}]\begingroup The material curvature (or moment strain) vector -- reference configuration.\nomeqref {0}
+		\nompageref{ix}
+  \item [{$\vect{\varkappa}$}]\begingroup The material curvature (or moment strain) vector -- actual configuration.\nomeqref {0}
+		\nompageref{ix}
+
+\end{thenomenclature}
