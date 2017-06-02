@@ -66,7 +66,7 @@ Résumé du chapitre
 
 \footnote{For a shearable rod, the condition that $\vect{d}_3$ and $\vect{t}$ coincide is relaxed.}
 \footnote{in the directions of the principal axes of inertia of its cross-section}
-\footnote{The parameter $\overbar{s}$, usually chosen as the arc length parameter for the undeformed rod, is no longer the arc length parameter for the deformed rod, since there are deformations of shear and extension. The current arc length of the deformed rod is a function of $\overbar{s}$, which is often denoted by $s(\overbar{s})$.}
+\footnote{The parameter $\refconf{s}$, usually chosen as the arc length parameter for the undeformed rod, is no longer the arc length parameter for the deformed rod, since there are deformations of shear and extension. The current arc length of the deformed rod is a function of $\refconf{s}$, which is often denoted by $s(\refconf{s})$.}
 
 
 \blockcquote[p.~xvii]{Benvenuto1991b}{The battle between weight and rigidity constitutes, in itself, the single aesthetic theme of art in architecture : and to bring out this conflict in the most varied and clearest way is its office.}
@@ -86,66 +86,102 @@ This paragraph gives a (very) brief overview of the \emph{special Cosserat theor
 
 This theory was introduce by \cite{Antman1974}. It has been largely employed in various fields \cite{Shi1995, Bergou2010}.
 
+
 \subsection{Description of the motion}
+
+
+
+\begin{table}[p]
+\center
+	\renewcommand{\arraystretch}{1.8}
+	\begin{tabular}{l|c|c} 
+		 				& reference configuration										& actual configuration
+		\\ \hline
+		arc length 			& $s = \Psi_t^{-1}(s_t)$ 										& $s_t = \Psi_t(s)$
+		\\ \hline
+		length 			& $L$ 													& $L_t$
+		\\ \hline
+		centerline			& $\gamma$ 												& $\gamma_t$
+		\\ \hline
+		position vector		& $\refconf{\vect{x}}$ 										& ${\vect{x}}$
+		\\ \hline
+		material frame		& $\{\refconf{\vect{d}_1},\refconf{\vect{d}_2},\refconf{\vect{d}_3}\}$ 		& $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$
+		\\ \hline
+		force strains 		& $\refconf{\vect{\nu}}$ 										& ${\vect{\nu}}$ 	
+		\\ \hline
+		moment strains 	& $\refconf{\vect{\varkappa}}$ 									& ${\vect{\varkappa}}$
+		\\ \hline
+		spin vector 		& $\refconf{\vect{\omega}}$ 									& ${\vect{\omega}}$ 
+		\\ \hline
+		axial extension 		& $ \refconf{\epsilon} = 0$ 									& $\nu_3 = 1 + \epsilon = \Psi'_t(s)$		
+		\\ \hline
+		arc length derivative 	& $ \frac{\partial}{\partial s} \cdot = (\cdot)'	$						& $\frac{\partial}{\partial s_t} \cdot = (1 + \epsilon)^{-1} (\cdot)'$			
+		\\ \hline
+		time derivative 		& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$						& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$		
+		\\ \hline	
+	\end{tabular}
+	\label{tab:count}
+	\caption{Summary of the notations employed through out this chapter.}
+\end{table}
 
 \subsubsection{Actual configuration}
 
 At time $t$, the \emph{actual} or \emph{deformed} configuration of the rod $\{{\vect{x}}, {\vect{d}_1}, {\vect{d}_2}\}$ is described by its \emph{centerline} $\gamma \in \mathcal{C}^1([0,{L}]\times \mathbb{R}^3)$, a regular space curve, 
 \begin{equation}
-	\fonctionL{\gamma(t, \cdot)}{[0,\overbar{L}]}{\mathbb{R}^3}{\overbar{s}}{\vect{x}(t,\overbar{s})}
+	\fonctionL{\gamma(t, \cdot)}{[0,\refconf{L}]}{\mathbb{R}^3}{\refconf{s}}{\vect{x}(t,\refconf{s})}
 \end{equation}
 and two perpendicular unit vector fields : 
 \begin{equation}
-	\fonctionL{(\vect{d}_1,\vect{d}_2)(t, \cdot)}{[0,\overbar{L}]}{\mathbb{R}^3 \times \mathbb{R}^3}{\overbar{s}}{(\vect{d}_1(t,\overbar{s}), \vect{d}_2(t,\overbar{s})) \; / \; 
-	\vect{d}_1(t,\overbar{s}) \cdot \vect{d}_2(t,\overbar{s}) = 0
+	\fonctionL{(\vect{d}_1,\vect{d}_2)(t, \cdot)}{[0,\refconf{L}]}{\mathbb{R}^3 \times \mathbb{R}^3}{\refconf{s}}{(\vect{d}_1(t,\refconf{s}), \vect{d}_2(t,\refconf{s})) \; / \; 
+	\vect{d}_1(t,\refconf{s}) \cdot \vect{d}_2(t,\refconf{s}) = 0
 	}
 \end{equation}
 In addition, we define a third unit vector field as : 
 \begin{equation}
 	\vect{d}_3 = \vect{d}_1 \times \vect{d}_2
 \end{equation}
-Thus, the centerline is framed with the orthonormal moving frame $\{\vect{d}_1, \vect{d}_2, \vect{d}_3\}$. The unit vectors $\vect{d}_i(t,\overbar{s})$ are called \emph{material directors}.
+Thus, the centerline is framed with the orthonormal moving frame $\{\vect{d}_1, \vect{d}_2, \vect{d}_3\}$. The unit vectors $\vect{d}_i(t,\refconf{s})$ are called \emph{material directors}.
 
-Note that the centerline is parametrized by $\overbar{s}$ which is chosen to be the arc length parameter of the \emph{reference} configuration. It may not coincide with the arc length parameter of the \emph{actual} configuration denoted by $s = s(t, \overbar{s})$ as the rod may suffer elongation.
+Note that the centerline is parametrized by $\refconf{s}$ which is chosen to be the arc length parameter of the \emph{reference} configuration. It may not coincide with the arc length parameter of the \emph{actual} configuration denoted by $s = s(t, \refconf{s})$ as the rod may suffer elongation.
 
 \subsubsection{Reference configuration}
-We now identify a \emph{reference} configuration $\{\overbar{\vect{x}}, \overbar{\vect{d}_1}, \overbar{\vect{d}_2}\}$ of the rod as a stress-free configuration when no external loads are applied to the rod. With no loss of generality, this configuration is assumed to be the configuration at time $t=0$. 
+We now identify a \emph{reference} configuration $\{\refconf{\vect{x}}, \refconf{\vect{d}_1}, \refconf{\vect{d}_2}\}$ of the rod as a stress-free configuration when no external loads are applied to the rod. With no loss of generality, this configuration is assumed to be the configuration at time $t=0$. 
 
-In this configuration, the rod is assumed to be prismatic. The centerline is chosen to be the curve passing through the cross-section centroids. We call $\overbar{s}$ its arc length parameter and $\overbar{L}$ its length. The set of rod material points that belong to the plane perpendicular to the centerline at arc length $\overbar{s}$ is classically called a \emph{cross-section}. Note that while cross-sections are defined in the \emph{reference} configuration and are planar by definition, there is no reason that this surface stays planar in any other configuration \cite[p.~5]{Dill1992}.
+In this configuration, the rod is assumed to be prismatic. The centerline is chosen to be the curve passing through the cross-section centroids. We call $\refconf{s}$ its arc length parameter and $\refconf{L}$ its length. The set of rod material points that belong to the plane perpendicular to the centerline at arc length $\refconf{s}$ is classically called a \emph{cross-section}. Note that while cross-sections are defined in the \emph{reference} configuration and are planar by definition, there is no reason that this surface stays planar in any other configuration \cite[p.~5]{Dill1992}.
 
 \subsection{Strains}
 
-We decompose the rod deformations in the material frame basis of the \emph{actual} configuration at position $\overbar{s}$ of the \emph{reference} configuration $\{\vect{d}_1, \vect{d}_2, \vect{d}_3\}(\overbar{s})$.
+We decompose the rod deformations in the material frame basis of the \emph{actual} configuration at position $\refconf{s}$ of the \emph{reference} configuration $\{\vect{d}_1, \vect{d}_2, \vect{d}_3\}(\refconf{s})$.
 
-The deformation of the centerline regarding the variable $\overbar{s}$ is described with the help of the strain vector $\vect{\nu}$ with coordinates $(\nu_1, \nu_2, \nu_3 = 1 + \epsilon)^T$ in the material frame basis : \footnote{The elongation strain is defined in \cite[pp.~283]{Antman2005} as : $\nu_3 = \vect{x}' \cdot (\vect{d}_1 \times \vect{d}_2) =  \vect{x}' \cdot \vect{d}_3 = 1+\epsilon$. $\nu_1$ and $\nu_2$ are called shear strains.}
+The deformation of the centerline regarding the variable $\refconf{s}$ is described with the help of the strain vector $\vect{\nu}$ with coordinates $(\nu_1, \nu_2, \nu_3 = 1 + \epsilon)^T$ in the material frame basis : \footnote{The elongation strain is defined in \cite[pp.~283]{Antman2005} as : $\nu_3 = \vect{x}' \cdot (\vect{d}_1 \times \vect{d}_2) =  \vect{x}' \cdot \vect{d}_3 = 1+\epsilon$. $\nu_1$ and $\nu_2$ are called shear strains.}
 \begin{equation}
-		\frac{\partial \vect{x}}{\partial \overbar{s}} (t, \overbar{s})  = {\nu_1}(t, \overbar{s}) \vect{d}_1(t, \overbar{s})
-		+ {\nu_2}(t, \overbar{s}) \vect{d}_2(t, \overbar{s})
-		+ {\nu_3}(t, \overbar{s}) \vect{d}_3(t, \overbar{s})
+		\frac{\partial \vect{x}}{\partial \refconf{s}} (t, \refconf{s})  = {\nu_1}(t, \refconf{s}) \vect{d}_1(t, \refconf{s})
+		+ {\nu_2}(t, \refconf{s}) \vect{d}_2(t, \refconf{s})
+		+ {\nu_3}(t, \refconf{s}) \vect{d}_3(t, \refconf{s})
 \end{equation}
-The deformation of the material frame regarding the variable $\overbar{s}$ is described with the help of the strain vector $\vect{\omega}$ with coordinates $(\kappa_1, \kappa_2, \tau)^T$ in the material frame basis :
+The deformation of the material frame regarding the variable $\refconf{s}$ is described with the help of the strain vector $\vect{\omega}$ with coordinates $(\kappa_1, \kappa_2, \tau)^T$ in the material frame basis :
 \begin{equation}	
-		\frac{\partial \vect{d}_i}{\partial \overbar{s}} (t, \overbar{s}) = \vect{\omega}(t, \overbar{s}) \times  \vect{d}_i (t, \overbar{s})
+		\frac{\partial \vect{d}_i}{\partial \refconf{s}} (t, \refconf{s}) = \vect{\omega}(t, \refconf{s}) \times  \vect{d}_i (t, \refconf{s})
 \end{equation}
 The velocity of the material frame is described with the help of the spin vector $\vect{w}$ with coordinates $(w_1, w_2, w_3)^T$ in the material frame basis :
 \begin{equation}	
-		\frac{\partial \vect{d}_i}{\partial t} (t, \overbar{s}) = \vect{w}(t, \overbar{s}) \times  \vect{d}_i (t, \overbar{s})
+		\frac{\partial \vect{d}_i}{\partial t} (t, \refconf{s}) = \vect{w}(t, \refconf{s}) \times  \vect{d}_i (t, \refconf{s})
 \end{equation}
-Now, the spatial derivative regarding $\overbar{s}$ will be denoted by a prime (${}'$) and the time derivative regardin $t$ by a dot ($\dot{}$).
+Now, the spatial derivative regarding $\refconf{s}$ will be denoted by a prime (${}'$) and the time derivative regardin $t$ by a dot ($\dot{}$).
 
 \subsubsection{Parametrization}
 
 Because the centerline of the reference configuration is parametrized by arc length, the unit tangent vector is given by :
 \begin{equation}	
-	\overbar{\vect{t}}(t, \overbar{s}) = \frac{\partial \overbar{\vect{x}}}{\partial \overbar{s}} (t, \overbar{s}) = \overbar{\vect{x}}'(t, \overbar{s})
+	\refconf{\vect{t}}(t, \refconf{s}) = \frac{\partial \refconf{\vect{x}}}{\partial \refconf{s}} (t, \refconf{s}) = \refconf{\vect{x}}'(t, \refconf{s})
 	\quad , \quad
-	\norm{\overbar{\vect{x}}'} = 1
+	\norm{\refconf{\vect{x}}'} = 1
 \end{equation}
-In the deformed configuration, the centerline is still parametrized by $\overbar{s}$ which is no more an arc length parameter as extension happened. Thus, the unit tangent vector is given by :
+In the deformed configuration, the centerline is still parametrized by $\refconf{s}$ which is no more an arc length parameter as extension happened. Thus, the unit tangent vector is given by :
 \begin{equation}	
-	\vect{t}(t, \overbar{s}) = \frac{{\vect{x}}'(t, \overbar{s})}{\norm{{\vect{x}}'(t, \overbar{s})}}
+	\vect{t}(t, \refconf{s}) = \frac{{\vect{x}}'(t, \refconf{s})}{\norm{{\vect{x}}'(t, \refconf{s})}}
 	\quad , \quad
-	\norm{\vect{x}'} = \frac{\partial s}{\partial \overbar{s}}  \neq 1
+	\norm{\vect{x}'} = \frac{\partial s}{\partial \refconf{s}}  \neq 1
 \end{equation}
 However, this is just a convention and one can switch back to the arc length parametrization in the actual configuration, in which the unit tangent vector is also given by :
 \begin{equation}	
@@ -156,7 +192,7 @@ However, this is just a convention and one can switch back to the arc length par
 
 \subsubsection{Inextensibility}
 
-The rod is said to be inextensible if $\epsilon(t, \overbar{s}) \ll 1$. In that case, $s(t, \overbar{s}) = \overbar{s}$ at all time, and the same arc length parametrization is valid for every configurations.
+The rod is said to be inextensible if $\epsilon(t, \refconf{s}) \ll 1$. In that case, $s(t, \refconf{s}) = \refconf{s}$ at all time, and the same arc length parametrization is valid for every configurations.
 
 \subsubsection{To go further}
 
@@ -167,7 +203,11 @@ The reader is invited to refer to \cite{Antman2005} to get a deeper understandin
 
 The theory for the finite displacement of thin rods has been developed by Kirchhoff, Clebsch and Love.
 
+force and moment strains (Reissnner) :  $\varkappa $ 
+
 In this section we follow \cite{Dill1992} to introduce \emph{Kirchhoff's theory of rods}, where Dill \textquote{examine the classical theory of finite displacements of thin rods as developped by Kirchhoff and Clebesch, and presented by Love}. \blockcquote[p.~238]{Antman2005}{The classical elastic rod theory of Kirchhoff (1859), called the kinetic analogue, is is a special case of our rod theory [...]}
+
+Dans un même genre, le papier de Reissner (1973) vaut le détour \cite{Reissner1973}
 
 We assume that material and section properties are slowly varying along the centerline.
 Note that symbols referring to this configuration will carry an overbar.
@@ -190,8 +230,33 @@ ces équations sont valables à l'ordre 2 en $\alpha$ \cite{Coleman1993} où :
 Kirchhoff's theory is a first order theory regarding the parameter $\alpha$, valid when $\alpha$ is small. This means that terms of order $O(\alpha^2)$ will be considered negligible
  :
 \begin{equation}
-	\alpha = \sup_{s \in [0,L]} \{ h/L, h \norm{\vect{\omega}}, h\norm{\overbar{\vect{\omega}}}, \epsilon \}
+	\alpha = \sup_{s \in [0,L]} \{ h/L, h \norm{\vect{\omega}}, h\norm{\refconf{\vect{\omega}}}, \epsilon \}
 \end{equation}
+
+
+The model is valid for uniform torsion. No restrained warping. For more and warping, see :
+The correction for shear in Kirchhoff's theory, introduce by Timoshenko in \cite{Timoshenko1921}
+The \emph{Timoshenko theory of beams} : \cite{Timoshenko1945a,Timoshenko1945b,Timoshenko1945c}
+Include non uniform torsion \blockcquote{Timoshenko1945b}{The problem becomes more complicated if cross sections are not free to warp or if the torque varies along the length of the bar. Warping in such cases varies along the bar and tor- sion is accompanied by tension or compression of longitudinal fibers. The rate of change of the angle of twist along the axis of the bar also varies, and we call this the case of non-uniform torsion.}
+
+Linear theory for non uniform torsion \cite{Vlasov1961}
+Formula for shear center \cite{Elter1984}
+A geometrically exact Kirchhoff beam model including torsion warping : \cite{Manta2016}
+
+Pioneer works on non lieanr dynamics of rods \cite{Weiss2002}
+More recent works : \cite{Manta2016}
+
+For an historical review : \cite{Benvenuto1991a}
+Short review of the history of 1D beam models :\cite[p.~243]{Antman2005}
+
+
+See \cite{Reissner1973} for an extension of Kirchhoff's theory, as mentioned also in \cite{Reissner1981}
+
+going further with non uniform torsion \cite{Alves2014}
+
+\blockcquote{Campanile2009}{In the traditional theory of non-uniform torsion the axial displacement field is expressed as the product of the unit twist angle and the warping function. The first one, variable along the beam axis, is obtained by a global congruence condition; the second one, instead, defined over the cross-section, is determined by solving a Neumann problem associated to the Laplace equation, as well as for the uniform torsion problem. So, as in the classical theory the warping function doesn’t punctually satisfy the first indefinite equilibrium equation, the principal aim of this work is to develop a new theory for non-uniform torsion of beams with axial symmetric cross-section, fully restrained on both ends and loaded by a constant torque, that permits to punctually satisfy the previous equation, by means of a trigonometric expansion of the axial displacement and unit twist angle functions. Furthermore, as the classical theory is generally applied with good results to the global and local analysis of ship structures, two beams having the first one an open profile, the second one a closed section, have been analyzed, in order to compare the two theories.}
+
+\clearpage
 
 \subsection{Description of the motion}
 
@@ -206,28 +271,28 @@ Kirchhoff's theory is a first order theory regarding the parameter $\alpha$, val
 
 We consider a \emph{stress-free} configuration of the rod that is called the \emph{reference} configuration.\footnote{See \cite[p.~20]{Audoly2010} for precisions when such a configuration may not exist.} The rod is fully described by its centerline ${\gamma}$ and its material frame $\{{\vect{d}_1}, {\vect{d}_2}, {\vect{d}_3}\}$.\footnote{We use the notation employed by Antman in his \emph{special Cosserat theory of rods} : \blockcquote[p.~270]{Antman2005}{The motion of a special Cosserat rod is defined by three vector-valued functions : $ [s_1, s_2] \times \mathbb{R} \ni  (s,t) \mapsto \vect{r}(s,t), \; \vect{d}_1 (s,t), \; \vect{d}_2 (s,t) \in \mathbb{E}^3$}. However, somme specific assumptions will be made over the directors in the context of Kirchhoff's theory.} The set of material points lying in a plane perpendicular to ${\gamma}$ defines a \emph{cross-section} ($\mathcal{S}$) and is thus a planar surface. 
 
-We require that ${\gamma}$ is at least a regular space curve. We denote ${s}$ its arc length parameter, ${L}$ its length and $\overbar{\vect{x}}$ the position vector from some fixed origin :
+We require that ${\gamma}$ is at least a regular space curve. We denote ${s}$ its arc length parameter, ${L}$ its length and $\refconf{\vect{x}}$ the position vector from some fixed origin :
 \begin{equation}
-	\fonctionL{{\gamma}}{[0,{L}]}{\mathbb{R}^3}{{s}}{\overbar{\vect{x}}({s})}
+	\fonctionL{{\gamma}}{[0,{L}]}{\mathbb{R}^3}{{s}}{\refconf{\vect{x}}({s})}
 \end{equation}
 As a regular curve, ${\gamma}$ is $\mathcal{C}^1$ and its tangent vector is continuously defined over [0,L] :
 \begin{equation}
-	{\vect{t}} = \frac{d \overbar{\vect{x}}}{d {s}}
+	{\vect{t}} = \frac{d \refconf{\vect{x}}}{d {s}}
 \end{equation}
 We also require that each cross-section centroid belong to the centerline. We choose ${\vect{d}_1}({s})$ and ${\vect{d}_2}({s})$ to be  unit vectors aligned with the principal axes of the cross-section $\mathcal{S}(s)$ so they are perpendicular to each other and lie in the plane of $\mathcal{S}({s})$ :
 \begin{equation}
 	\fonctionL{({\vect{d}_1},{\vect{d}_2})}{[0,{L}]}{\mathbb{R}^3 \times \mathbb{R}^3}{{s}}{({\vect{d}_1}({s}), {\vect{d}_2}({s}))} 
 \end{equation}
-For a sufficiently slender rod, the position of material point $\overbar{\vect{p}}$ in section $\mathcal{S}(s)$ can be expressed through its material coordinates $(X_1, X_2)$ as : \footnote{The lateral dimension of the rod must be smaller than the radius of curvature. Otherwise, this description would lead to self intersecting cross-sections.}
+For a sufficiently slender rod, the position of material point $\refconf{\vect{p}}$ in section $\mathcal{S}(s)$ can be expressed through its material coordinates $(X_1, X_2)$ as : \footnote{The lateral dimension of the rod must be smaller than the radius of curvature. Otherwise, this description would lead to self intersecting cross-sections.}
 %\begin{equation}
-%	\overbar{\vect{p}}({X_1}, {X_2}, {s}) = 
-%	\overbar{\vect{x}}({s}) + {X_1} {\vect{d}_1}({s}) + {X_2} {\vect{d}_2}({s})
+%	\refconf{\vect{p}}({X_1}, {X_2}, {s}) = 
+%	\refconf{\vect{x}}({s}) + {X_1} {\vect{d}_1}({s}) + {X_2} {\vect{d}_2}({s})
 %\end{equation}
 \begin{subequations}
 	\begin{alignat}{2}
-		&\overbar{\vect{p}}(X_1, X_2, s) &&= \overbar{\vect{x}}({s}) + \overbar{\vect{r}}(X_1, X_2, s)
+		&\refconf{\vect{p}}(X_1, X_2, s) &&= \refconf{\vect{x}}({s}) + \refconf{\vect{r}}(X_1, X_2, s)
 		\\
-		 &\overbar{\vect{r}}(X_1, X_2, s) &&=  X_1 \vect{d}_1 (s) + X_2 \vect{d}_2 (s)
+		 &\refconf{\vect{r}}(X_1, X_2, s) &&=  X_1 \vect{d}_1 (s) + X_2 \vect{d}_2 (s)
 	\end{alignat}
 \end{subequations}
 Consequently, for each $s$ in the reference configuration, $({X_1}, {X_2})$ is a cartesian coordinate system for the plane $\mathcal{S}(s)$. In this system the local coordinates of the section's centroid are $(0,0)$. The cross-section is assumed to be bounded and the boundary curve is defined by the equation : $f_s(X_1,X_2) = 0$.
@@ -236,30 +301,30 @@ Finally, we define the third component of the material frame as the unit vector 
 \begin{equation}
 	{\vect{d}_3} = {\vect{d}_1} \times {\vect{d}_2} = {\vect{t}}
 \end{equation}
-Since the material frame is orthonormal, it's evolution along the \emph{undeformed} centerline is described thanks to the \emph{reference strain vector} $\overbar{\vect{\omega}}$ defined as :
+Since the material frame is orthonormal, it's evolution along the \emph{undeformed} centerline is described thanks to the \emph{reference strain vector} $\refconf{\vect{\omega}}$ defined as :
 \begin{equation}
-	\frac{d}{d s}\left(\vect{d}_i\right) = \overbar{\vect{\omega}}  \times \vect{d}_i
+	\frac{d}{d s}\left(\vect{d}_i\right) = \refconf{\vect{\omega}}  \times \vect{d}_i
 \end{equation}
 In the reference configuration, because the centerline is parametrized by arc length, the strain vector components expressed in the material frame take the form :
 \begin{subequations}
 	\begin{alignat}{3}
-		&\overbar{\omega}_1 &&= \overbar{\kappa}_1 &&= \overbar{\vect{\kappa b}} \cdot \vect{d}_1
+		&\refconf{\omega}_1 &&= \refconf{\kappa}_1 &&= \refconf{\vect{\kappa b}} \cdot \vect{d}_1
 		\\
-		&\overbar{\omega}_2 &&= \overbar{\kappa}_2 &&= \overbar{\vect{\kappa b}} \cdot \vect{d}_2
+		&\refconf{\omega}_2 &&= \refconf{\kappa}_2 &&= \refconf{\vect{\kappa b}} \cdot \vect{d}_2
 		\\
-		&\overbar{\omega}_3 &&= \overbar{\tau} &&= \vect{d}'_1  \cdot \vect{d}_2
+		&\refconf{\omega}_3 &&= \refconf{\tau} &&= \vect{d}'_1  \cdot \vect{d}_2
 	\end{alignat}
 \end{subequations}
-where $\overbar{\vect{\kappa b}}$ is the curvature binormal vector of $\gamma$ :
+where $\refconf{\vect{\kappa b}}$ is the curvature binormal vector of $\gamma$ :
 \begin{equation}
- 	\overbar{\vect{\kappa b}} =  \vect{t} \times  \frac{\partial \vect{t}}{\partial s} = \vect{t} \times \vect{t}'
+ 	\refconf{\vect{\kappa b}} =  \vect{t} \times  \frac{\partial \vect{t}}{\partial s} = \vect{t} \times \vect{t}'
 \end{equation}
-$\overbar{\omega}_1$ and $\overbar{\omega}_2$ are called the \emph{material} or \emph{rod} reference curvatures. $\overbar{\omega}_3$ is called the \emph{material} or \emph{rod} reference twist. Note the important distinction with the geometric notions of curvature ($\kappa$) and twist ($\tau_f$) for space curves as defined in \cref{sec:spacecurve}.
+$\refconf{\omega}_1$ and $\refconf{\omega}_2$ are called the \emph{material} or \emph{rod} reference curvatures. $\refconf{\omega}_3$ is called the \emph{material} or \emph{rod} reference twist. Note the important distinction with the geometric notions of curvature ($\kappa$) and twist ($\tau_f$) for space curves as defined in \cref{sec:spacecurve}.
 \subsubsection{Actual (or deformed) configuration}
 
 We now examine the motion of the rod and we call \emph{actual} or \emph{deformed} configuration its configuration at time $t$. In this configuration the rod undergoes internal stresses under body loads, external loads and constrains. 
 
-The deformed configuration of the rod at time $t$ is now described by its centerline $\gamma_t = \gamma(t)$, its material frame $\{{\vect{d}_1}, {\vect{d}_2}, {\vect{d}_3}\}(t)$ and a local displacement field $\vect{u}_t = \vect{u}(t)$. A material point $\overbar{\vect{p}}$ in the \emph{reference} configuration is transported to position $\vect{p}_t = \vect{p}(t)$ in the \emph{actual} configuration so that :
+The deformed configuration of the rod at time $t$ is now described by its centerline $\gamma_t = \gamma(t)$, its material frame $\{{\vect{d}_1}, {\vect{d}_2}, {\vect{d}_3}\}(t)$ and a local displacement field $\vect{u}_t = \vect{u}(t)$. A material point $\refconf{\vect{p}}$ in the \emph{reference} configuration is transported to position $\vect{p}_t = \vect{p}(t)$ in the \emph{actual} configuration so that :
 \begin{subequations}
 	\begin{alignat}{2}
 		&\vect{p}(X_1, X_2, s, t) &&= \vect{x}(s,t) + \vect{r}(X_1, X_2, s, t)
@@ -319,7 +384,7 @@ where $\vect{\kappa b}$ is the curvature binormal vector of $\gamma_t$ given by 
 \begin{equation}
  	\vect{\kappa b} =  \vect{t} \times  \frac{\partial \vect{t}}{\partial s_t} = (1+\epsilon) \vect{t} \times \vect{t}'
 \end{equation}
-${\omega}_1$ and ${\omega}_2$ are called the \emph{material} or \emph{rod} curvatures. ${\omega}_3$ is called the \emph{material} or \emph{rod} twist. Again, note the important distinction with the geometric notions of curvature ($\kappa$) and twist ($\tau_f$) for space curves as defined in \cref{sec:spacecurve}. In particular, the material strains ($\omega_1$, $\omega_2$, $\omega_3$) depend on the extension of the rod. These are the strains employed in the classical constitutive laws that lead to the determination of the internal axial force ($N = ES \epsilon$), internal bending moments ($M_1 = EI_1(\omega_1-\overbar{\omega}_1)$, $M_2 = EI_2(\omega_2-\overbar{\omega}_2)$) and internal twisting moment ($Q = GJ((\omega_3-\overbar{\omega}_3)$). 
+${\omega}_1$ and ${\omega}_2$ are called the \emph{material} or \emph{rod} curvatures. ${\omega}_3$ is called the \emph{material} or \emph{rod} twist. Again, note the important distinction with the geometric notions of curvature ($\kappa$) and twist ($\tau_f$) for space curves as defined in \cref{sec:spacecurve}. In particular, the material strains ($\omega_1$, $\omega_2$, $\omega_3$) depend on the extension of the rod. These are the strains employed in the classical constitutive laws that lead to the determination of the internal axial force ($N = ES \epsilon$), internal bending moments ($M_1 = EI_1(\omega_1-\refconf{\omega}_1)$, $M_2 = EI_2(\omega_2-\refconf{\omega}_2)$) and internal twisting moment ($Q = GJ((\omega_3-\refconf{\omega}_3)$). 
 
 In the case of an inextensible rod ($\epsilon = 0$) there is no need to make the distinction between $s_t$ and $s$. The same parameter is the arc length parameter for all configurations at all time.
 
@@ -370,16 +435,16 @@ We assume that the resultant distributed force and moment of the contact forces 
 	\begin{alignat}{2}
 		&\iint_{\mathcal{L}} \vect{\sigma_n} \;dS 
 		+ \iiint_{\mathcal{V}} \rho \vect{b} \;dV
-		= \int_s \overbar{\vect{f}} + (1+\epsilon) \vect{f}_t \;ds
+		= \int_s \refconf{\vect{f}} + (1+\epsilon) \vect{f}_t \;ds
 		\label{eq:f}
 		\\[0.5em]
 		&\iint_{\mathcal{L}} \vect{p} \times \vect{\sigma_n} \;dS 
 		+ \iiint_{\mathcal{V}} \rho (\vect{p} \times \vect{b}) \;dV
-		= \int_s \overbar{\vect{m}} + (1+\epsilon) \vect{m}_t + \vect{x} \times \big(\overbar{\vect{f}} + (1+\epsilon) \vect{f}_t \big) \;ds
+		= \int_s \refconf{\vect{m}} + (1+\epsilon) \vect{m}_t + \vect{x} \times \big(\refconf{\vect{f}} + (1+\epsilon) \vect{f}_t \big) \;ds
 		\label{eq:m}
 	\end{alignat}
 \end{subequations}
-where $\overbar{\vect{f}}$  (resp. $\vect{f_t}$) is the distributed resultant force per unit length of the reference (resp. deformed) configuration ; and $\overbar{\vect{m}}$  (resp. $\vect{m}_t$) is the distributed resultant moment per unit length of the reference (resp. deformed) configuration. For instance, these distributed forces and moments include external and body loads such as weight, snow, wind, ... \footnote{At this stage, although this is uncommon in the literature, it has been found convenient to mark the distinction between loads referring to the reference configuration and loads referring to the actual configuration. Indeed, various distributed loads depend on the actual length of an element such as pressure and wind loads. On the other hand, some loads are independent of the extension of the rod, such as its weight.}
+where $\refconf{\vect{f}}$  (resp. $\vect{f_t}$) is the distributed resultant force per unit length of the reference (resp. deformed) configuration ; and $\refconf{\vect{m}}$  (resp. $\vect{m}_t$) is the distributed resultant moment per unit length of the reference (resp. deformed) configuration. For instance, these distributed forces and moments include external and body loads such as weight, snow, wind, ... \footnote{At this stage, although this is uncommon in the literature, it has been found convenient to mark the distinction between loads referring to the reference configuration and loads referring to the actual configuration. Indeed, various distributed loads depend on the actual length of an element such as pressure and wind loads. On the other hand, some loads are independent of the extension of the rod, such as its weight.}
 
 Note that Kirchhoff's theory require that the stress components on the sides of the rod are small \cite[p.~11]{Dill1992} -- that is $\vect{\sigma_n}\cdot \vect{n} = O(\alpha^2)$ over $\mathcal{L}$. Thus, the first two terms in the above expression will be neglected :
 \begin{subequations}
@@ -474,18 +539,18 @@ For a thin slice of the rod ($\delta\mathcal{V}$) between cross-sections $\mathc
 		+ \left( \iint_{\delta\mathcal{L}} \vect{\sigma_n} \;dS
 		+ \iiint_{\delta\mathcal{V}} \rho \vect{b} \;dV \right)
 		\\[0.5em]
-		&= -\vect{F}(s) + \vect{F}(s+ds) + \big(\overbar{\vect{f}}(s) + (1+\epsilon) \vect{f}_t(s) \big) ds
+		&= -\vect{F}(s) + \vect{F}(s+ds) + \big(\refconf{\vect{f}}(s) + (1+\epsilon) \vect{f}_t(s) \big) ds
 		\\[0.5em]
-		&= \left( \frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon) \vect{f}_t \right)(s) ds
+		&= \left( \frac{\partial \vect{F}}{\partial s} + \refconf{\vect{f}} + (1+\epsilon) \vect{f}_t \right)(s) ds
 	\end{aligned}
 \end{equation}
 Thus, using \cref{eq:linearinertia}, the equation for the balance of linear momentum reduce to either equations :
 \begin{subequations}
 	\begin{alignat}{1}
-	\frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon)\vect{f}_t &= \rho S \ddot{\vect{x}}
+	\frac{\partial \vect{F}}{\partial s} + \refconf{\vect{f}} + (1+\epsilon)\vect{f}_t &= \rho S \ddot{\vect{x}}
 	\label{eq:linearmotion}
 	\\[0.5em]
-	(1+\epsilon)\frac{\partial \vect{F}}{\partial s_t} + \overbar{\vect{f}} + (1+\epsilon)\vect{f}_t &= \rho S \ddot{\vect{x}}
+	(1+\epsilon)\frac{\partial \vect{F}}{\partial s_t} + \refconf{\vect{f}} + (1+\epsilon)\vect{f}_t &= \rho S \ddot{\vect{x}}
 	\end{alignat}
 \end{subequations}
 
@@ -510,7 +575,7 @@ Using \cref{eq:m}, the balance of linear momentum referring to the \emph{referen
 		+ \iiint_{\delta\mathcal{V}} \rho (\vect{p} \times \vect{b}) \;dV
 		\\[0.5em]
 		&= \frac{\partial}{\partial s} \big( \vect{M} + \vect{x}\times\vect{F} \big)(s) ds 
-		+ \overbar{\vect{m}} + (1+\epsilon)\vect{m}_t + \vect{x} \times \big(\overbar{\vect{f}} + (1+\epsilon)\vect{f}_t \big) \;ds 
+		+ \refconf{\vect{m}} + (1+\epsilon)\vect{m}_t + \vect{x} \times \big(\refconf{\vect{f}} + (1+\epsilon)\vect{f}_t \big) \;ds 
 	\end{aligned}
 \end{equation}
 Finally, combining \cref{eq:angularbalance2} with \cref{eq:linearmotion,eq:angularinertia}, the equation for the balance of angular momentum reduce to either equations : \footnote{Note the simplification of the term $\rho S \ddot{\vect{x}}$. Alternatively, the balance equations could be written for the slice as for a rigid body. In the barycentric frame of the slice : $\frac{d}{dt}(dI_G) = \vect{M}(s+ds)-\vect{M}(s) + \vect{m}(s)ds + (\tfrac{1}{2}ds\vect{x}')\times \vect{F}(s+ds) + (-\tfrac{1}{2}ds\vect{x}')\times -\vect{F}(s) = \left(\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{x}'\times \vect{F}(s)\right)ds$ with $dI_G \simeq \rho ds (I_1 \vect{d}_1 + I_2 \vect{d}_2 + (I_1+I_2) \vect{d}_3)$.}
@@ -518,12 +583,12 @@ Finally, combining \cref{eq:angularbalance2} with \cref{eq:linearmotion,eq:angul
 	\begin{alignat}{1}
 	\frac{\partial \vect{M}}{\partial s} 
 	+ \frac{\partial \vect{x}}{\partial s} \times \vect{F}
-	+ \overbar{\vect{m}} + (1+\epsilon)\vect{m}_t 
+	+ \refconf{\vect{m}} + (1+\epsilon)\vect{m}_t 
 	&= \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}
 	\\[0.5em]
 	(1+\epsilon)\frac{\partial \vect{M}}{\partial s_t} 
 	+ (1+\epsilon)\frac{\partial \vect{x}}{\partial s_t} \times \vect{F}
-	+ \overbar{\vect{m}} + (1+\epsilon) \vect{m}_t 
+	+ \refconf{\vect{m}} + (1+\epsilon) \vect{m}_t 
 	&= \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}
 	\end{alignat}
 \end{subequations}
@@ -544,19 +609,19 @@ For our application -- a beam model for quasi-static analysis of gridshell struc
 Thus, the final dynamical equations for the motion of the rod to be retained are :
 \begin{subequations}
 	\begin{alignat}{1}
-	\frac{\partial \vect{F}}{\partial s} + \overbar{\vect{f}} + (1+\epsilon) \vect{f}_t 
+	\frac{\partial \vect{F}}{\partial s} + \refconf{\vect{f}} + (1+\epsilon) \vect{f}_t 
 	&= \rho S \ddot{\vect{x}}
 	\\[0.5em]
 	\frac{\partial \vect{M}}{\partial s} 
 	+ \frac{\partial \vect{x}}{\partial s} \times \vect{F}
-	+ \overbar{\vect{m}} + (1+\epsilon) \vect{m}_t 
+	+ \refconf{\vect{m}} + (1+\epsilon) \vect{m}_t 
 	&\simeq \rho (I_1 + I_2)\dot{w}_3 \vect{d}_3
 	\end{alignat}
 \end{subequations}
 
 \subsection{Hookean elasticity}
 
-From now on we consider that the rod material is isotropic and linear elastic.\footnote{This is true at first order for small strains anyway.} This is the framework of the so called \emph{Hookean Elasticity}. This assumption allows the determination of the local displacement field ($\vect{u}$), the strain tensor ($\tens{E}$), the stress tensor ($\tens{S}$) and the constitutive equations that link the axial force ($\vect{F}_1$), the bending moments ($\vect{M}_1$, $\vect{M}_2$) and the twisting moment ($\vect{M}_3$) to the strains ($\epsilon$, $\vect{\omega}$, $\overbar{\vect{\omega}}$).
+From now on we consider that the rod material is isotropic and linear elastic.\footnote{This is true at first order for small strains anyway.} This is the framework of the so called \emph{Hookean Elasticity}. This assumption allows the determination of the local displacement field ($\vect{u}$), the strain tensor ($\tens{E}$), the stress tensor ($\tens{S}$) and the constitutive equations that link the axial force ($\vect{F}_1$), the bending moments ($\vect{M}_1$, $\vect{M}_2$) and the twisting moment ($\vect{M}_3$) to the strains ($\epsilon$, $\vect{\omega}$, $\refconf{\vect{\omega}}$).
 
 Such a material is characterized by a linear relation between the strain and stress tensors that takes the form : \footnote{Using Einstein notation this expression yields : $\sigma_{ij} = \lambda \epsilon_{kk} \delta_{ij} + 2\mu\epsilon_{ij}$.}
 \begin{equation}
@@ -578,15 +643,15 @@ In this paragraph, we simply recall the canonical form of the local displacement
 	\begin{alignat}{1}
 	u_1 &=
 	-\nu \epsilon X_1 
-	- \nu(\omega_1 - \overbar{\omega}_1) X_1 X_2
-	+ \tfrac{1}{2}\nu(\omega_2 - \overbar{\omega}_2)({X_1}^2 - {X_2}^2)
+	- \nu(\omega_1 - \refconf{\omega}_1) X_1 X_2
+	+ \tfrac{1}{2}\nu(\omega_2 - \refconf{\omega}_2)({X_1}^2 - {X_2}^2)
 	\\[0.5em]
 	u_2 &= 
 	-\nu \epsilon X_2 
-	+ \nu(\omega_2 - \overbar{\omega}_2) X_1 X_2
-	+ \tfrac{1}{2}\nu(\omega_1 - \overbar{\omega}_1)({X_1}^2 - {X_2}^2)
+	+ \nu(\omega_2 - \refconf{\omega}_2) X_1 X_2
+	+ \tfrac{1}{2}\nu(\omega_1 - \refconf{\omega}_1)({X_1}^2 - {X_2}^2)
 	\\[0.5em]
-	u_3 &= (\omega_3 - \overbar{\omega}_3)\varphi_s(X_1,X_2)
+	u_3 &= (\omega_3 - \refconf{\omega}_3)\varphi_s(X_1,X_2)
 	\end{alignat}
 \end{subequations}
 where $\varphi_s$ is the warping function (in torsion) of $\mathcal{S}(s)$, determined by the differential equation and the boundary condition over the contour of the cross-section : \footnote{$\vect{n} = ({\partial f_s}/{\partial {X_1}}, {\partial f_s}/{\partial {X_1}})^T$ is the unit normal vector to the boundary curve of $\mathcal{S}(s)$ defined implicitly by the equation $f_s(X_1,X_2)=0$.}
@@ -606,15 +671,15 @@ These equations have known analytical solutions for classical shapes such as cir
 In this paragraph, we simply recall the canonical form of the strain tensor ($\tens{E}$) for the cross-section $\mathcal{S}(s)$ in the context of Kirchhoff's approximation : 
 \begin{subequations}
 	\begin{alignat}{1}
-	\epsilon_{33} &= \epsilon + (\omega_1 - \overbar{\omega}_1) X_2 - (\omega_2 - \overbar{\omega}_2) X_1 \label{eq:strain_a}
+	\epsilon_{33} &= \epsilon + (\omega_1 - \refconf{\omega}_1) X_2 - (\omega_2 - \refconf{\omega}_2) X_1 \label{eq:strain_a}
 	\\
 	\epsilon_{11} &=  \epsilon_{22} = -\nu \epsilon_{33}	\label{eq:strain_b}
 	\\
 	\epsilon_{12} &= 0 \label{eq:strain_c}
 	\\
-	\epsilon_{31} &= \tfrac{1}{2}(\omega_3 - \overbar{\omega}_3)\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right) \label{eq:strain_d}
+	\epsilon_{31} &= \tfrac{1}{2}(\omega_3 - \refconf{\omega}_3)\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right) \label{eq:strain_d}
 	\\
-	\epsilon_{32} &= \tfrac{1}{2}(\omega_3 - \overbar{\omega}_3)\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right) \label{eq:strain_e}
+	\epsilon_{32} &= \tfrac{1}{2}(\omega_3 - \refconf{\omega}_3)\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right) \label{eq:strain_e}
 	\end{alignat}
 \end{subequations}
 
@@ -646,8 +711,8 @@ From \cref{eq:F,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive eq
 		F_3 &= \iint_{\mathcal{S}(s)} \vect{\sigma_n}(X_1, X_2, s, t) \cdot \vect{d}_3 \;dX_1 dX_2 
 		\\[0.5em]
 		&= ES\epsilon 
-		- (\omega_2 - \overbar{\omega}_2) \iint_{\mathcal{S}(s)} {X_1} \;dX_1 dX_2
-		+ (\omega_1 - \overbar{\omega}_1) \iint_{\mathcal{S}(s)} {X_2} \;dX_1 dX_2
+		- (\omega_2 - \refconf{\omega}_2) \iint_{\mathcal{S}(s)} {X_1} \;dX_1 dX_2
+		+ (\omega_1 - \refconf{\omega}_1) \iint_{\mathcal{S}(s)} {X_2} \;dX_1 dX_2
 		\\[0.5em]
 		&= ES\epsilon
 	\end{aligned}
@@ -660,7 +725,7 @@ From \cref{eq:M,eq:piola2,eq:stress_c,eq:stress_d,eq:strain_e,eq:strain_d} we de
 		\\[0.5em]
 		&= \iint_{\mathcal{S}(s)} -X_2\sigma_{31} + X_1\sigma_{32}  \;dX_1 dX_2 
 		\\[0.5em]
-		&= G (\omega_3 - \overbar{\omega}_3) 
+		&= G (\omega_3 - \refconf{\omega}_3) 
 		\iint_{\mathcal{S}(s)} X_1 \left( \frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right ) - X_2 \left( \frac{\partial \varphi_s}{\partial {X_1}}  - X_2 \right )
 		 \;dX_1 dX_2 
 	\end{aligned}
@@ -673,7 +738,7 @@ From \cref{eq:M,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive eq
 		\\[0.5em]
 		&= \iint_{\mathcal{S}(s)} X_2\sigma_{33} \;dX_1 dX_2 
 		\\[0.5em]
-		&= E (\omega_1 - \overbar{\omega}_1) \iint_{\mathcal{S}(s)} {X_2}^2  \;dX_1 dX_2 
+		&= E (\omega_1 - \refconf{\omega}_1) \iint_{\mathcal{S}(s)} {X_2}^2  \;dX_1 dX_2 
 	\end{aligned}
 \end{equation}
 From \cref{eq:M,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive equation for the second component of the internal moments : 
@@ -684,7 +749,7 @@ From \cref{eq:M,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive eq
 		\\[0.5em]
 		&= \iint_{\mathcal{S}(s)} - X_1\sigma_{33} \;dX_1 dX_2 
 		\\[0.5em]
-		&= E (\omega_2 - \overbar{\omega}_2) \iint_{\mathcal{S}(s)} {X_1}^2  \;dX_1 dX_2 
+		&= E (\omega_2 - \refconf{\omega}_2) \iint_{\mathcal{S}(s)} {X_1}^2  \;dX_1 dX_2 
 	\end{aligned}
 \end{equation}
 
@@ -694,7 +759,7 @@ Let's summarize the assumptions and results of Kirchhoff's theory of rods on whi
 
 In the reference configuration the rod is described by its reference strains :
 \begin{equation}
-	\vect{d}'_i= \overbar{\vect{\omega}}  \times \vect{d}_i
+	\vect{d}'_i= \refconf{\vect{\omega}}  \times \vect{d}_i
 \end{equation}
 In the actual configuration the rod is described by its strains and spin vector :
 \begin{subequations}
@@ -714,12 +779,12 @@ The rod is subjected to internal forces and moments :
 	\vect{M} &= M_1\vect{d}_1 + M_2\vect{d}_2 + M_3\vect{d}_3
 	\end{alignat}
 \end{subequations}
-The rod is subjected to external and body loads described as distributed forces and moments acting on the centerline -- either given per unit length of the reference configuration ($\overbar{\vect{f}}$, $\overbar{\vect{m}}$) or per unit length of the actual configuration ($\vect{f}_t$, $\vect{m}_t$) -- and given in the condensed form :
+The rod is subjected to external and body loads described as distributed forces and moments acting on the centerline -- either given per unit length of the reference configuration ($\refconf{\vect{f}}$, $\refconf{\vect{m}}$) or per unit length of the actual configuration ($\vect{f}_t$, $\vect{m}_t$) -- and given in the condensed form :
 \begin{subequations}
 	\begin{alignat}{1}
-	\vect{f} &= \overbar{\vect{f}} + (1+\epsilon)\vect{f}_t = f_1\vect{d}_1 + f_2\vect{d}_2 + f_3\vect{d}_3
+	\vect{f} &= \refconf{\vect{f}} + (1+\epsilon)\vect{f}_t = f_1\vect{d}_1 + f_2\vect{d}_2 + f_3\vect{d}_3
 	\\
-	\vect{m} &= \overbar{\vect{m}} + (1+\epsilon)\vect{m}_t = m_1\vect{d}_1 + m_2\vect{d}_2 + m_3\vect{d}_3
+	\vect{m} &= \refconf{\vect{m}} + (1+\epsilon)\vect{m}_t = m_1\vect{d}_1 + m_2\vect{d}_2 + m_3\vect{d}_3
 	\end{alignat}
 \end{subequations}
 The internal axial force, the internal bending moments and the internal twisting moment are computed with the following constitutive equations :
@@ -727,11 +792,11 @@ The internal axial force, the internal bending moments and the internal twisting
 	\begin{alignat}{1}
 	F_3 &= ES\epsilon
 	\\
-	M_1 &= EI_1(\omega_1 - \overbar{\omega}_1)
+	M_1 &= EI_1(\omega_1 - \refconf{\omega}_1)
 	\\
-	M_2 &= EI_2(\omega_2 - \overbar{\omega}_2)
+	M_2 &= EI_2(\omega_2 - \refconf{\omega}_2)
 	\\
-	M_3 &= GJ(\omega_3 - \overbar{\omega}_3)
+	M_3 &= GJ(\omega_3 - \refconf{\omega}_3)
 	\end{alignat}
 \end{subequations}
 where $S$, $I_1$, $I_2$, $J$ are respectively the area, the second moments of inertia and the torsional stiffness of the cross-section :
@@ -792,25 +857,25 @@ The local displacements of the cross-sections are given by :
 	\begin{alignat}{1}
 	u_1 &=
 	-\nu \epsilon X_1 
-	- \nu(\omega_1 - \overbar{\omega}_1) X_1 X_2
-	+ \tfrac{1}{2}\nu(\omega_2 - \overbar{\omega}_2)({X_1}^2 - {X_2}^2)
+	- \nu(\omega_1 - \refconf{\omega}_1) X_1 X_2
+	+ \tfrac{1}{2}\nu(\omega_2 - \refconf{\omega}_2)({X_1}^2 - {X_2}^2)
 	\\[0.5em]
 	u_2 &= 
 	-\nu \epsilon X_2 
-	+ \nu(\omega_2 - \overbar{\omega}_2) X_1 X_2
-	+ \tfrac{1}{2}\nu(\omega_1 - \overbar{\omega}_1)({X_1}^2 - {X_2}^2)
+	+ \nu(\omega_2 - \refconf{\omega}_2) X_1 X_2
+	+ \tfrac{1}{2}\nu(\omega_1 - \refconf{\omega}_1)({X_1}^2 - {X_2}^2)
 	\\[0.5em]
-	u_3 &= (\omega_3 - \overbar{\omega}_3)\varphi_s(X_1,X_2)
+	u_3 &= (\omega_3 - \refconf{\omega}_3)\varphi_s(X_1,X_2)
 	\end{alignat}
 \end{subequations}
 The non-zero components of the strain tensor are given by :
 \begin{subequations}
 	\begin{alignat}{1}
-	\epsilon_{33} &= \epsilon + (\omega_1 - \overbar{\omega}_1) X_2 - (\omega_2 - \overbar{\omega}_2) X_1
+	\epsilon_{33} &= \epsilon + (\omega_1 - \refconf{\omega}_1) X_2 - (\omega_2 - \refconf{\omega}_2) X_1
 	\\
-	\epsilon_{31} &= \tfrac{1}{2}(\omega_3 - \overbar{\omega}_3)\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right)
+	\epsilon_{31} &= \tfrac{1}{2}(\omega_3 - \refconf{\omega}_3)\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right)
 	\\
-	\epsilon_{32} &= \tfrac{1}{2}(\omega_3 - \overbar{\omega}_3)\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right)
+	\epsilon_{32} &= \tfrac{1}{2}(\omega_3 - \refconf{\omega}_3)\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right)
 	\\
 	\epsilon_{11} &=  \epsilon_{22} = -\nu \epsilon_{33}
 	\end{alignat}
@@ -1142,9 +1207,9 @@ Thus, the centerline is parametrized by arc length and $\Gamma(s_i) = \vect{x}_i
 %\setlength{\jot}{8pt}
 	\left\{
 	\begin{aligned}
-		\overbar{l_0} 	& =  \tfrac{1}{2}l_0				&		&i = 0					\\
-		\overbar{l_i}	& =  \tfrac{1}{2}(l_{i-1} + l_i)		&		&i \in \llbracket 1, n-1 \rrbracket	\\
-		\overbar{l_n} 	& =  \tfrac{1}{2}l_{n-1} 			&		&i = n					\\
+		\refconf{l_0} 	& =  \tfrac{1}{2}l_0				&		&i = 0					\\
+		\refconf{l_i}	& =  \tfrac{1}{2}(l_{i-1} + l_i)		&		&i \in \llbracket 1, n-1 \rrbracket	\\
+		\refconf{l_n} 	& =  \tfrac{1}{2}l_{n-1} 			&		&i = n					\\
 	\end{aligned}
 	\right.
 \end{equation}
@@ -1202,7 +1267,7 @@ Let $\mat{B}_i$ be the material stiffness matrix along the principal axes of ine
 
 Thus, one will write the constitutive equations for the bending moment in matrix notation as :
 \begin{equation}
-	\vect{M}_i =  \mat{B}_{i}(\vect{\kappa b}_{i} - \overbar{\vect{\kappa b}}_{i})
+	\vect{M}_i =  \mat{B}_{i}(\vect{\kappa b}_{i} - \refconf{\vect{\kappa b}}_{i})
 \end{equation}
 With $\vect{\kappa b} = \begin{bmatrix}\kappa_1 & \kappa_2 & \tau \end{bmatrix}^T$ expressed in the material frame.
 
@@ -1293,8 +1358,8 @@ Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\
 
 However, this values need to be adjusted so that the static condition for rotational equilibrium ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$) is satisfied at all time. Then, this condition will be satisfied -- in particular -- at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}$) for the internal bending moment as :
 \begin{equation}
-		\vect{M}_{2i} 	=  \frac{1}{2} \mat{B}_{i-1}(\vect{\kappa b}_{2i}^- - \overbar{\vect{\kappa b}}_{2i}^-)
-					+  \frac{1}{2} \mat{B}_{i}(\vect{\kappa b}_{2i}^+ - \overbar{\vect{\kappa b}}_{2i}^+)
+		\vect{M}_{2i} 	=  \frac{1}{2} \mat{B}_{i-1}(\vect{\kappa b}_{2i}^- - \refconf{\vect{\kappa b}}_{2i}^-)
+					+  \frac{1}{2} \mat{B}_{i}(\vect{\kappa b}_{2i}^+ - \refconf{\vect{\kappa b}}_{2i}^+)
 \end{equation}
 To enforce the jump discontinuity in bending moment ($\vect{M}^{ext} = \vect{M}^- - \vect{M}^+$) across the handle vertex, we define the left and right bending moments at $\vect{x}_{2i}$ as :
 \begin{subequations}
@@ -1313,9 +1378,9 @@ Note that in the case where no external concentrated bending moment is applied t
 Finally, the left and right curvatures at handle vertex $\vect{x}_{2i}$ are computed back with the constitutive law :
 \begin{subequations}
 	\begin{align}
-		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} \vect{M}_{2i}^- + \overbar{\vect{\kappa b}}_{2i}^- 
+		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} \vect{M}_{2i}^- + \refconf{\vect{\kappa b}}_{2i}^- 
 		\\[0.5em]
-		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} \vect{M}_{2i}^+ + \overbar{\vect{\kappa b}}_{2i}^+ 
+		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} \vect{M}_{2i}^+ + \refconf{\vect{\kappa b}}_{2i}^+ 
 	\end{align}
 \end{subequations}
 
@@ -1326,9 +1391,9 @@ Finally, the left and right curvatures at handle vertex $\vect{x}_{2i}$ are comp
 The internal bending moment at ghost vertices is simply given by the constitutive law as :
 \begin{subequations}
 	\begin{align}
-		\vect{M}_{2i-1} &=  \mat{B}_{i-1}(\vect{\kappa b}_{2i-1} - \overbar{\vect{\kappa b}}_{2i-1})
+		\vect{M}_{2i-1} &=  \mat{B}_{i-1}(\vect{\kappa b}_{2i-1} - \refconf{\vect{\kappa b}}_{2i-1})
 		\\[0.5em]
-		\vect{M}_{2i+1} &=  \mat{B}_{i}(\vect{\kappa b}_{2i+1} - \overbar{\vect{\kappa b}}_{2i+1})
+		\vect{M}_{2i+1} &=  \mat{B}_{i}(\vect{\kappa b}_{2i+1} - \refconf{\vect{\kappa b}}_{2i+1})
 	\end{align}
 \end{subequations}
 
@@ -1342,7 +1407,7 @@ Thus, the rate of twist at mid edge is given by :
 \end{equation}
 And $\theta_{i+1} - \theta_{i}$ is the additional twisting angle between two frames with parallel transport.
 \begin{equation}
-	Q_{i+1/2} =  GJ(\tau_{i+1/2} - \overbar{\tau}_{i+1/2})
+	Q_{i+1/2} =  GJ(\tau_{i+1/2} - \refconf{\tau}_{i+1/2})
 \end{equation}
 
 \subsection{Discret axial force}
@@ -1350,7 +1415,7 @@ And $\theta_{i+1} - \theta_{i}$ is the additional twisting angle between two fra
 We assume the axial force and the axial strain to vary linearly over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$.
 Thus, the axial strain at mid edge is given by :
 \begin{equation}
-	\epsilon_{i+1/2} = \frac{l_{i}}{\overbar{l_i}} - 1
+	\epsilon_{i+1/2} = \frac{l_{i}}{\refconf{l_i}} - 1
 \end{equation}
 \begin{equation}
 	N_{i+1/2} =  ES\epsilon_{i+1/2}
