@@ -1,0 +1,1 @@
+\frac{\norm{\vect{e}_0}}{2}

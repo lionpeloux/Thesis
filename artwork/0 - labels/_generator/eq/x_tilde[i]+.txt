@@ -1,0 +1,1 @@
+\tilde{\vect{x}}_i^+
