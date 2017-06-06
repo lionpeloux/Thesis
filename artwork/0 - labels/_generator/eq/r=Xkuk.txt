@@ -1,0 +1,1 @@
+\vect{r} = X_{\alpha} \vect{d}_{\alpha} + \vect{u}_k \vect{d}_{k}

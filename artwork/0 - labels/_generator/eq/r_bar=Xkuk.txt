@@ -1,0 +1,1 @@
+\rconf{\vect{r}} = X_{\alpha} \rconf{\vect{d}}_{\alpha}

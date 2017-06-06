@@ -1,0 +1,1 @@
+s_t - (1+\epsilon)ds

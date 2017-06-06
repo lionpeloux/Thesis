@@ -28,13 +28,16 @@ TEXfiles=($( ls ./eq/*.txt ))
 cat doc_start.tex  > output.tex
 
 # include equations
-for fullfile in $(find ./eq -iname '*.txt'); do
-      	filename=$(basename "$fullfile")
-      	filename="${filename%.*}"
-      	echo -e "\n" >> output.tex
+p=0
+for ((i=0; i<${#TEXfiles[@]}; i++)); do
+	TEXfilename=$(basename "${TEXfiles[$i]}")
+      	TEXfilename="${TEXfilename%.*}"
+	echo -e "\n" >> output.tex
 	echo "\begin{equation}" >> output.tex
-	cat "$fullfile" >> output.tex
+	cat "./eq/$TEXfilename.txt" >> output.tex
 	echo -e "\n\end{equation}" >> output.tex
+	p=$[$p +1]
+	echo "$p : $TEXfilename"
 done
 
 # include end document
