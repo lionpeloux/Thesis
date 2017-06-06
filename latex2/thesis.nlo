@@ -1,0 +1,10 @@
+\nomenclatureentry{01$\gamma, \rconf{\gamma}$@[{$\gamma, \rconf{\gamma}$}]\begingroup Centerline curve -- reference configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{02$\gamma$@[{$\gamma$}]\begingroup The centerline curve -- actual configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{03$s$@[{$s$}]\begingroup The arc length of the centerline -- reference configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{04$s_t$@[{$s_t$}]\begingroup The arc length of the centerline -- actual configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{05$\rconf{\vect{x}}$@[{$\rconf{\vect{x}}$}]\begingroup The centerline position vector -- reference configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{06$\vect{x}$@[{$\vect{x}$}]\begingroup The centerline position vector -- actual configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{07$\rconf{\vect{\nu}}$@[{$\rconf{\vect{\nu}}$}]\begingroup The force strain vector -- reference configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{08$\vect{\nu}$@[{$\vect{\nu}$}]\begingroup The force strain vector -- actual configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{09$\rconf{\vect{\varkappa}}$@[{$\rconf{\vect{\varkappa}}$}]\begingroup The material curvature (or moment strain) vector -- reference configuration.\nomeqref {0}|nompageref}{vii}
+\nomenclatureentry{10$\vect{\varkappa}$@[{$\vect{\varkappa}$}]\begingroup The material curvature (or moment strain) vector -- actual configuration.\nomeqref {0}|nompageref}{vii}

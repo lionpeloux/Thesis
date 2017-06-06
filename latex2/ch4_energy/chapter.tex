@@ -10,7 +10,7 @@ In this section a novel element with 4 degrees of freedom accounting for torsion
 \subsection{Related work}
 Basile \cite{Bergou2010}
 Basile \cite{Bergou2008}
-Basile \cite{Audoly2000}
+Basile \cite{Audoly2010}
 Sina \cite{Nabei2014}
 \cite{Fuller1978}, \cite{deVries2005},  \cite{Vauquelin2000}, \cite{Berger2009}
 
@@ -103,11 +103,11 @@ To describe the osculating plane in which lies the bending part of the deformati
 Kirrchhoff's theory assigns an elastic energy to beams according to their strain \cite{Audoly2010}. In this theory, a beam is supposed to be inextensible. Thus the elastic energy ($\mathcal{E}_p$) only accounts for torsion and bending behaviors and is given by :
 \begin{equation}
 	\mathcal{E}_{p} =
-	\tfrac{1}{2} \int_{0}^{L}EI_1(\kappa_1-\overbar{\kappa_1})^2 + EI_2(\kappa_2-\overbar{\kappa_2})^2 ds
-	+ \tfrac{1}{2} \int_{0}^{L} \beta(\tau -{\overbar{\tau}})^2 ds
+	\tfrac{1}{2} \int_{0}^{L}EI_1(\kappa_1-\rconf{\kappa}_1)^2 + EI_2(\kappa_2-\rconf{\kappa}_2)^2 ds
+	+ \tfrac{1}{2} \int_{0}^{L} \beta(\tau -{\rconf{\tau}})^2 ds
 \end{equation}
 
-Here, $\overbar{\kappa_1}$, $\overbar{\kappa_2}$ and $\overbar{\tau}$  denote the natural curvature and twist of the rod in the rest position (no stress).
+Here, $\rconf{\kappa}_1$, $\rconf{\kappa}_2$ and $\rconf{\tau}$  denote the natural curvature and twist of the rod in the rest position (no stress).
 
 \section{Curve-angle representation}
 The previous paragraph has shown how the elastic potential energy of a rod can be computed following both its centerline and its cross sections orientations, which represents a model with 6-DoF : 3 for centerline positions and 3 for cross section orientations.
@@ -217,8 +217,8 @@ Note that the Frenet frame does not lead to a correct evaluation of the twist.
 Introducing $\vect{\omega}$ and $\theta$, the elastic energy can be rewritten as follow :
 \begin{equation}
 		\mathcal{E}_{p} = \mathcal{E}_{b} + \mathcal{E}_{t} =
-		\tfrac{1}{2} \int_{0}^{L} (\vect{\omega}-\overbar{\vect{\omega}})^T B (\vect{\omega}-\overbar{\vect{\omega}}) ds
-		+ \tfrac{1}{2} \int_{0}^{L} \beta(\theta' -{\overbar{\theta'}})^2 ds
+		\tfrac{1}{2} \int_{0}^{L} (\vect{\omega}-\rconf{\vect{\omega}})^T B (\vect{\omega}-\rconf{\vect{\omega}}) ds
+		+ \tfrac{1}{2} \int_{0}^{L} \beta(\theta' -{\rconf{\theta}'})^2 ds
 \end{equation}
 Where $B$ is the bending stiffness matrix along the principal axes of inertia and $\beta$ is the torsional stiffness :
 \begin{equation}
@@ -237,7 +237,7 @@ Remark that the twisting energy ($\mathcal{E}_{t}$) only depends on $\theta$ and
 
 From this energy formulation, an interesting an well-known result on elastic rods could be highlighted : \guil{torsion is uniform in an isotropic rod that is straight in its rest configuration} \cite{Adriaenssens1999}.
 
-Indeed, let's take an isotropic rod ($EI_1 = EI_2 = EI$) that is straight in its rest configuration ($\overbar{\kappa_1} = \overbar{\kappa_2} = 0$). Then, the bending energy becomes : $\mathcal{E}_{b} = EI_1\kappa_1^2 + EI_2\kappa_2^2 = EI\kappa^2$, and consequently doesn't depends on $\theta$ anymore. The curvature of the rod only depends on the geometry of its centerline ($\kappa = ||\kappa\vect{b}|| = ||\vect{x}'\times\vect{x}''||$). Thus, there is no more coupling between bending and twisting and the global minimum of elastic energy is reached while minimizing separately bending an twisting energies. That is to say the geometry of the rod ($\vect{x}$) is the one that minimized $\mathcal{E}_{b}$. The minimum of $\mathcal{E}_{t}$ is zero and is achieved for a uniform twist along the centerline, only prescribed by the boundary conditions.}
+Indeed, let's take an isotropic rod ($EI_1 = EI_2 = EI$) that is straight in its rest configuration ($\rconf{\kappa}_1 = \rconf{\kappa}_2 = 0$). Then, the bending energy becomes : $\mathcal{E}_{b} = EI_1\kappa_1^2 + EI_2\kappa_2^2 = EI\kappa^2$, and consequently doesn't depends on $\theta$ anymore. The curvature of the rod only depends on the geometry of its centerline ($\kappa = ||\kappa\vect{b}|| = ||\vect{x}'\times\vect{x}''||$). Thus, there is no more coupling between bending and twisting and the global minimum of elastic energy is reached while minimizing separately bending an twisting energies. That is to say the geometry of the rod ($\vect{x}$) is the one that minimized $\mathcal{E}_{b}$. The minimum of $\mathcal{E}_{t}$ is zero and is achieved for a uniform twist along the centerline, only prescribed by the boundary conditions.}
 
 \section{Quasistatic assumption}
 Following \cite{Bergou2008}, it is relevant to assume that the propagation of twist waves is instantaneous compared to the one of bending waves. Thus, internal forces $\vect{f}^{int}$ and moment of torsion $\vect{m}^{int}$ acts on two different timescales in the rod dynamic. Thus on the timescale of action of the force $\vect{f}^{int}$ on the center line, driving the bending waves, the twist waves propagate instantaneously, so that $\forall s \in [0,L],\; \delta\mathcal{E}_{p}/\delta\theta=0$ for the computation of $\vect{f}^{int}$. This assumption may not be enforced, as in \cite{Nabei2014}, but leads to simpler and faster computations.
@@ -301,10 +301,10 @@ Decomposing the previous calculus gives:
 	\begin{aligned}
 	\pdiffof{\theta}{\mathcal{E}_t[\theta]}{s}{h_\theta}
 		&= \frac{d}{d\lambda} \mathcal{E}_t[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0} \\
-		&= \frac{d}{d\lambda}\left( \tfrac{1}{2} \int_{0}^{L} \beta\left((\theta + \lambda h_\theta)' -{\overbar{\theta'}}\right)^2 \;dt \right)\Bigr|_{\lambda = 0} \\
-		&= \int_{0}^{L} \beta(\theta' -{\overbar{\theta'}}) \cdot h_\theta' \;dt \\
-		&= \left[\beta(\theta' -{\overbar{\theta'}}) \cdot h_\theta\right]_0^L - \int_{0}^{L} \left(\beta(\theta' -{\overbar{\theta'}})\right)' \cdot h_\theta \;dt \\
-		&= \int_{0}^{L} \left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) \cdot h_\theta \;dt \\
+		&= \frac{d}{d\lambda}\left( \tfrac{1}{2} \int_{0}^{L} \beta\left((\theta + \lambda h_\theta)' -{\rconf{\theta}'}\right)^2 \;dt \right)\Bigr|_{\lambda = 0} \\
+		&= \int_{0}^{L} \beta(\theta' -{\rconf{\theta}'}) \cdot h_\theta' \;dt \\
+		&= \left[\beta(\theta' -{\rconf{\theta}'}) \cdot h_\theta\right]_0^L - \int_{0}^{L} \left(\beta(\theta' -{\rconf{\theta}'})\right)' \cdot h_\theta \;dt \\
+		&= \int_{0}^{L} \left(\beta(\theta' -{\rconf{\theta}'})(\delta_L-\delta_0) - \left(\beta(\theta' -{\rconf{\theta}'})\right)'\right) \cdot h_\theta \;dt \\
 	\end{aligned}
 \end{equation}
 
@@ -315,8 +315,8 @@ The derivative of $\mathcal{E}_b$ is obtained with the chaine rule :
 	\begin{aligned}
 	\pdiffof{\omega}{\mathcal{E}_b[\vect{\omega}]}{s}{\vect{h}_\omega}
 		&= \frac{d}{d\lambda} \mathcal{E}_b[\vect{\omega} + \lambda \vect{h}_\omega]\Bigr|_{\lambda = 0} \\
-		&= \frac{d}{d\lambda}\left( \tfrac{1}{2} \int_{0}^{L} \left((\vect{\omega} + \lambda \vect{h}_\omega)-\overbar{\vect{\omega}}\right)^T \mat{B} \left((\vect{\omega} + \lambda \vect{h}_\omega)-\overbar{\vect{\omega}}\right) \;dt \right)\Bigr|_{\lambda = 0} \\
-		&= \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \cdot \vect{h}_\omega \;dt \\
+		&= \frac{d}{d\lambda}\left( \tfrac{1}{2} \int_{0}^{L} \left((\vect{\omega} + \lambda \vect{h}_\omega)-\rconf{\vect{\omega}}\right)^T \mat{B} \left((\vect{\omega} + \lambda \vect{h}_\omega)-\rconf{\vect{\omega}}\right) \;dt \right)\Bigr|_{\lambda = 0} \\
+		&= \int_{0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \cdot \vect{h}_\omega \;dt \\
 	\end{aligned}
 \end{equation}
 Finally, reminding eq 4.14 :
@@ -324,7 +324,7 @@ Finally, reminding eq 4.14 :
 	\begin{aligned}
 	\pdiffof{\theta}{\mathcal{E}_b[\vect{\omega}[\theta]]}{s}{h_\theta} &=
 	\pdiffof{\omega}{\mathcal{E}_b[\vect{\omega}]}{s}{(\pdiffof{\theta}{\vect{\omega}[\theta]}{s}{h_\theta})} \\
-	&= - \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\cdot h_\theta \;dt
+	&= - \int_{0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\cdot h_\theta \;dt
 	\end{aligned}
 \end{equation}
 
@@ -333,20 +333,18 @@ Thus, the
 \begin{equation}
 	\begin{aligned}
 		\scalar{-m(s)}{h_\theta} &= \pdiffof{\theta}{\mathcal{E}_b[\vect{\omega}[\theta]]}{s}{h_\theta} + \pdiffof{\theta}{\mathcal{E}_t[\theta]}{s}{h_\theta} \\
-		&= \int_{0}^{L} \left(\left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) - (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\right) \cdot h_\theta \;dt
+		&= \int_{0}^{L} \left(\left(\beta(\theta' -{\rconf{\theta}'})(\delta_L-\delta_0) - \left(\beta(\theta' -{\rconf{\theta}'})\right)'\right) - (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\right) \cdot h_\theta \;dt
 	\end{aligned}
 \end{equation}
 Finally, we can conclude on the expression of the internal moment of torsion :
 \begin{equation}
-	m(s) = - \left(\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\right) + (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}
+	m(s) = - \left(\beta(\theta' -{\rconf{\theta}'})(\delta_L-\delta_0) - \left(\beta(\theta' -{\rconf{\theta}'})\right)'\right) + (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}
 \end{equation}
 
 \subsubsection{Quasistatic hypothesis}
 \begin{equation}
-	\left(\beta(\theta' -{\overbar{\theta'}})\right)' + (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} = 0
+	\left(\beta(\theta' -{\rconf{\theta}'})\right)' + (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} = 0
 \end{equation}
-
-
 
 
 
@@ -366,7 +364,7 @@ Le reste est quasiment immédiat. Reste la question des CL et des termes aux bor
 Il faut aussi se positionner par rapport à  l'article de Basile. Regarder la question applied displacement vs settlement pour imposer une CL.
 }
 
-\subsection{Derivative of material directors with respect to $\vect{x}$}
+\subsection{Derivative of material directors with respect to $x$}
 
 \note{ici expliquer le fonctionnement de la figure}
 
@@ -543,7 +541,7 @@ Which can be rearranged in :
 \end{gather}
 \end{subequations}
 
-\subsubsection{Variation of Bishop frame with respect to $\vect{x}$}
+\subsubsection{Variation of Bishop frame with respect to $x$}
 Finally, one can express $F_\epsilon$ on the basis $F$ as the composition of two rotations :
 \begin{subequations}
 	\begin{gather}
@@ -619,7 +617,7 @@ Which leads according to the previous equation to :
 		\end{gather}
 \end{subequations}
 
-\subsection{Derivative of the material curvatures vector with respect to $\vect{x}$}
+\subsection{Derivative of the material curvatures vector with respect to $x$}
 
 It's know straightforward from the previous section to express the variation of the material curvatures with respect to a variation $\vect{\epsilon} =\lambda \vect{h}_x$ of $\vect{x}$ while $\theta$ remains unchanged.
 \begin{subequations}
@@ -685,7 +683,7 @@ The derivative of $\mathcal{E}_b$ is obtained with the chaine rule :
 \begin{equation}
 	\pdiffof{\omega}{\mathcal{E}_b[\vect{\omega}]}{s}{\vect{h}_\omega}
 		= \frac{d}{d\lambda} \mathcal{E}_b[\vect{\omega} + \lambda \vect{h}_\omega]\Bigr|_{\lambda = 0}
-		= \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B} \cdot \vect{h}_\omega \;dt
+		= \int_{0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \cdot \vect{h}_\omega \;dt
 \end{equation}
 Finally, reminding eq 4.14 :
 \begin{equation}
@@ -696,17 +694,17 @@ Finally, reminding eq 4.14 :
 Where :
 \begin{subequations}
 	\begin{gather}
-	\mathcal{A} = \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
+	\mathcal{A} = \int_{0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}
 	\begin{bmatrix}
 		-{\vect{d}_2}^T\\
 		{\vect{d}_1}^T\\
 	\end{bmatrix}\cdot \vect{h}_x'' \;dt \\
 	\mathcal{B} =
-	\int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\int_{t=0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
 	\left(\int_{u=0}^L \left(\delta_t-\delta_0\right)\kappa\vect{b}\cdot  \vect{h}_x \;du\right)
 	\;dt\\
 	\mathcal{C} =
-	\int_{t=0}^{L} -(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\int_{t=0}^{L} -(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
 	\left(\int_{u=0}^L \left(1-H_t\right)\kappa\vect{b}'\cdot  \vect{h}_x \;du\right)
 	\;dt
 	\end{gather}
@@ -715,7 +713,7 @@ Where :
 Calculus of $\mathcal{A}$ :
 \begin{equation}
 	\mathcal{A}
-	= \int_{0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}
+	= \int_{0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
@@ -725,12 +723,12 @@ Calculus of $\mathcal{A}$ :
 Recalling the bending moment is given by :
 \begin{equation}
 	\vect{M}
-	= (\kappa_1 - \overbar{\kappa_1})EI_1\vect{d}_1 + (\kappa_2 - \overbar{\kappa_2})EI_2\vect{d}_2
+	= (\kappa_1 - \rconf{\kappa}_1)EI_1\vect{d}_1 + (\kappa_2 - \rconf{\kappa}_2)EI_2\vect{d}_2
 	= M_1\vect{d}_1 + M_2\vect{d}_2
 \end{equation}
 One can remark that :
 \begin{equation}
-	\left(\vect{\omega} - \overbar{\vect{\omega}}\right)^T \mat{B}
+	\left(\vect{\omega} - \rconf{\vect{\omega}}\right)^T \mat{B}
 		\begin{bmatrix}
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
@@ -777,14 +775,14 @@ Calculus of $\mathcal{B}$ :
 \begin{equation}
 	\begin{aligned}
 	\mathcal{B} &=
-	\int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\int_{t=0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
 	\left(\int_{u=0}^L \left(\delta_t-\delta_0\right)\kappa\vect{b}\cdot  \vect{h}_x \,du\right)
 	\;dt
 	\\
 	&=
-	-\left(\kappa\vect{b}\cdot\vect{h}_x\right)(0) \int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;dt
+	-\left(\kappa\vect{b}\cdot\vect{h}_x\right)(0) \int_{t=0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;dt
 	+
-	\int_{t=0}^{L} (\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\int_{t=0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
 	\kappa\vect{b}\cdot\vect{h}_x
 	\;dt
 	\end{aligned}
@@ -794,16 +792,16 @@ Calculus of $\mathcal{C}$ :
 \begin{equation}
 	\begin{aligned}
 	\mathcal{C} &=
-	\int_{t=0}^{L} -(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	\int_{t=0}^{L} -(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
 	\left(\int_{u=0}^L \left(1-H_t\right)\kappa\vect{b}'\cdot  \vect{h}_x \;du\right)
 	\;dt
 	\\
 	&=
-	\int_{u=0}^{L}\int_{t=u}^{L}-\left((\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\right)(t)
+	\int_{u=0}^{L}\int_{t=u}^{L}-\left((\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\right)(t)
 	\left(\kappa\vect{b}'\cdot \vect{h}_x\right)(u) \;dt\;du
 	\\
 	&=
-	\int_{u=0}^{L}-\left(\int_{t=u}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;dt\right)
+	\int_{u=0}^{L}-\left(\int_{t=u}^{L}(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;dt\right)
 	\left(\kappa\vect{b}'\cdot \vect{h}_x\right)\;du
 	\\
 	\end{aligned}
@@ -813,23 +811,23 @@ By several integration by parts, using Fubini's theorem once and supposing that 
 	\begin{aligned}
 	\mathcal{B}+\mathcal{C} &=
 	\int_{t=0}^{L} \left(
-	(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
+	(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
 	\kappa\vect{b}
 	-
-	\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
+	\left(\int_{u=t}^{L}(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
 	\kappa\vect{b}'
 	\right)\cdot \vect{h}_x \;dt\\
 	&=
 	\int_{t=0}^{L} \left(
-	-\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)'
+	-\left(\int_{u=t}^{L}(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)'
 	\kappa\vect{b}
 	-
-	\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
+	\left(\int_{u=t}^{L}(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
 	\kappa\vect{b}'
 	\right)\cdot \vect{h}_x \;dt\\
 	&=
 	\int_{t=0}^{L} \left(
-	-\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
+	-\left(\int_{u=t}^{L}(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
 	\kappa\vect{b}
 	\right)'\cdot \vect{h}_x \;dt\\
 	\end{aligned}
@@ -841,26 +839,26 @@ Which can be rewritted using the quasi-static hypothesis :
 	\mathcal{B}+\mathcal{C}
 	&=
 	\int_{t=0}^{L} \left(
-	-\left(\int_{u=t}^{L}(\vect{\omega} - \overbar{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
+	-\left(\int_{u=t}^{L}(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}\;du\right)
 	\kappa\vect{b}
 	\right)'\cdot \vect{h}_x \;dt\\
 	&=
 	\int_{t=0}^{L} \left(
 	-\left(
-	\int_{u=t}^{L}\beta(\theta' -{\overbar{\theta'}})(\delta_L-\delta_0) - \left(\beta(\theta' -{\overbar{\theta'}})\right)'\;du
+	\int_{u=t}^{L}\beta(\theta' -{\rconf{\theta}'})(\delta_L-\delta_0) - \left(\beta(\theta' -{\rconf{\theta}'})\right)'\;du
 	\right)
 	\kappa\vect{b}
 	\right)'\cdot \vect{h}_x \;dt\\
 	&=
 	\int_{t=0}^{L} \left(
 	-\left(
-	\beta(\theta' -{\overbar{\theta'}})(L) - \left[\beta(\theta' -{\overbar{\theta'}})\right]_t^L
+	\beta(\theta' -{\rconf{\theta}'})(L) - \left[\beta(\theta' -{\rconf{\theta}'})\right]_t^L
 	\right)
 	\kappa\vect{b}
 	\right)'\cdot \vect{h}_x \;dt\\
 		&=
 	\int_{t=0}^{L} -\left(
-	\beta(\theta' -{\overbar{\theta'}})
+	\beta(\theta' -{\rconf{\theta}'})
 	\kappa\vect{b}
 	\right)'\cdot \vect{h}_x \;dt\\
 	\end{aligned}
@@ -872,7 +870,7 @@ Finally :
 		=
 		\int_{0}^{L} \left(
 		- \left({\vect{d}_3} \times \vect{M}'\right)'
-		- \left(\beta(\theta' -{\overbar{\theta'}}) \kappa\vect{b}\right)'
+		- \left(\beta(\theta' -{\rconf{\theta}'}) \kappa\vect{b}\right)'
 		\right)\cdot \vect{h}_x \;dt\\
 \end{equation}
 
@@ -885,14 +883,14 @@ Thus, the internal forces are related to the variation of internal elastic energ
 		=
 		- \int_{0}^{L} \left(
 		\left({\vect{d}_3} \times \vect{M}'\right)'
-		+ \left(\beta(\theta' -{\overbar{\theta'}}) \kappa\vect{b}\right)'
+		+ \left(\beta(\theta' -{\rconf{\theta}'}) \kappa\vect{b}\right)'
 		\right)\cdot \vect{h}_x \;dt\\
 	\end{aligned}
 \end{equation}
 Finally, we can conclude on the expression of the internal forces :
 \begin{equation}
 	\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}'\right)'
-		+ \left(\beta(\theta' -{\overbar{\theta'}}) \kappa\vect{b}\right)'
+		+ \left(\beta(\theta' -{\rconf{\theta}'}) \kappa\vect{b}\right)'
 \end{equation}
 
 
