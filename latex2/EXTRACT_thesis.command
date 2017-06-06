@@ -14,10 +14,10 @@ echo $DIR
 cd "$DIR"
 
 # make DVI
-latex -output-format=dvi "thesis.tex"
+#latex -output-format=dvi "thesis.tex"
 
 # make ps
-dvips "thesis.dvi"
+#dvips "thesis.dvi"
 
 
 # generate & rename pdf files
