@@ -159,11 +159,20 @@
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
     \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
  
- 
- % nomenclature of symbols
+% nomenclature of symbols
+% ---------------------------------
 \usepackage[intoc]{nomencl}
 \makenomenclature
 \renewcommand{\nomname}{Index of notation}
+\usepackage{etoolbox}
+\renewcommand\nomgroup[1]{%
+  \item[\bfseries
+  \ifstrequal{#1}{A}{Geometry of curves}{%
+  \ifstrequal{#1}{B}{Mechanics of rods}{%
+  \ifstrequal{#1}{C}{Other Symbols}{}}}%
+]\vspace{12pt}}
+%\renewcommand{\nomgroup}[1]{\medskip}
+
 % 
 %% index of notation entry
 %\usepackage[]{glossaries}

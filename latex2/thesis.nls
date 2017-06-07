@@ -1,26 +1,47 @@
 \begin{thenomenclature} 
 
- \nomgroup{Symbols}
+ \nomgroup{A}
+
+  \item [{$\vect{t}$}]\begingroup The unit tangent vector.\nomeqref {0}
+		\nompageref{vii}
+  \item [{$\vect{n}$}]\begingroup The unit normal vector.\nomeqref {0}
+		\nompageref{vii}
+  \item [{$\vect{b}$}]\begingroup The unit binormal vector.\nomeqref {0}
+		\nompageref{vii}
+  \item [{$\tau_f$}]\begingroup The torsion of Frenet.\nomeqref {0}
+		\nompageref{vii}
+  \item [{$\vect{\kappa b}$}]\begingroup The curvature binormal vector.\nomeqref {0}
+		\nompageref{vii}
+  \item [{$\vect{\Omega}$}]\begingroup The darboux vector.\nomeqref {0}
+		\nompageref{vii}
+
+ \nomgroup{B}
 
   \item [{$\gamma, \rconf{\gamma}$}]\begingroup Centerline curve -- reference configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$\gamma$}]\begingroup The centerline curve -- actual configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$s$}]\begingroup The arc length of the centerline -- reference configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$s_t$}]\begingroup The arc length of the centerline -- actual configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$\rconf{\vect{x}}$}]\begingroup The centerline position vector -- reference configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$\vect{x}$}]\begingroup The centerline position vector -- actual configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$\rconf{\vect{\nu}}$}]\begingroup The force strain vector -- reference configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$\vect{\nu}$}]\begingroup The force strain vector -- actual configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$\rconf{\vect{\varkappa}}$}]\begingroup The material curvature (or moment strain) vector -- reference configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
   \item [{$\vect{\varkappa}$}]\begingroup The material curvature (or moment strain) vector -- actual configuration.\nomeqref {0}
-		\nompageref{ix}
+		\nompageref{vii}
+  \item [{$\mathcal{E}_s$}]\begingroup The streching energy.\nomeqref {0}
+		\nompageref{vii}
+  \item [{$\mathcal{E}_b$}]\begingroup The bending energy.\nomeqref {0}
+		\nompageref{vii}
+  \item [{$\mathcal{E}_t$}]\begingroup The twisting energy.\nomeqref {0}
+		\nompageref{vii}
 
 \end{thenomenclature}

@@ -31,7 +31,7 @@ A \emph{norm} is a map $\| . \| : V \times V \longmapsto \mathbb{K}$ which satis
 % --------------------------------------------------------------------------------------------
 A \emph{inner product space} or \emph{pre-hilbert space} $E(\mathbb{K})$ is a vector space $E$ over the scalar field $\mathbb{K}$ with an inner product.
 
-An \emph{inner product} is a map $\langle \,; \rangle : E \times E \longmapsto \mathbb{K}$ which is bilinear, symmetric, positive-definite :
+An \emph{inner product} is a map $\langle \,; \rangle : E \times E \longmapsto \mathbb{K}$ which is bilinear, symmetric and positive-definite :
 \begin{subequations}
 \begin{align}
 	&\forall (x,y,z) \in E^3, \forall (\lambda,\mu) \in \mathbb{K}^2, 	&& \langle \lambda x\ + \mu y \,; z\rangle  = \lambda \langle  x \,; z\rangle + \mu \langle  y\,; z\rangle&&&\\
@@ -251,7 +251,9 @@ In the cas $m=1$, the jacobian matrix of the functional $F$ is nothing but the g
 
 \section{Hessian}
 Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$. The second order differential of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^n$ which could be represented with the following matrix called the \emph{hessian matrix} :
-\begin{align}
+\begin{equation}
+\renewcommand\arraystretch{1.5}
+\begin{aligned}
 	&\boldsymbol{D}^{2}F(x) = \mat{H}_{x} = \frac{d^2F}{dx}(x) =
 	\begin{bmatrix}
 		\frac{\partial F^2_1}{\partial x_1^2} & \frac{\partial F^2_1}{\partial x_1\partial x_2} &\cdots & \frac{\partial F^2_1}{\partial x_1\partial x_n} \\
@@ -260,7 +262,8 @@ Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$.
 		\frac{\partial F^2_p}{\partial x_n\partial x_1} & \frac{\partial F^2_p}{\partial x_n\partial x_2}&\cdots & \frac{\partial F^2_p}{\partial x_n^2}
 	\end{bmatrix}
 	\in\mathcal{M}_{n,n}(\mathbb{R})
-\end{align}
+\end{aligned}
+\end{equation}
 Thus, with the matrix notation, the Taylor expansion takes the following form :
 \begin{align}
 	\mat{F}_{x+h} = \mat{F}_{x} +  \mat{J}_{x} H + \tfrac{1}{2}H^T \mat{H}_{x} H + \mat{o}(H)
