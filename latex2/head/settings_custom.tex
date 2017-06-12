@@ -159,6 +159,15 @@
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
     \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
  
+% Footnotes
+% ---------------------------------
+ \makeatletter
+%%\def\footnoterule{\kern-8\p@
+%%  \hrule \@width 2in \kern 7.6\p@} % the \hrule is .4pt high
+\def\footnoterule{\kern-3\p@
+  \hrule \@width 2in \kern 2.6\p@} % the \hrule is .4pt high
+\makeatother
+\setlength{\skip\footins}{5mm}
 % nomenclature of symbols
 % ---------------------------------
 \usepackage[intoc]{nomencl}
