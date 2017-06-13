@@ -17,7 +17,7 @@ Recall how the notion of energy, gradients are extended to function spaces.
 % --------------------------------------------------------------------------------------------
 A \emph{normed space} $V(\mathbb{K})$ is a vector space $V$ over the scalar field $\mathbb{K}$ with a norm $\|.\|$.
 
-A \emph{norm} is a map $\| . \| : V \times V \longmapsto \mathbb{K}$ which satisfies :
+A \emph{norm} is a map $\| . \|~: V \times V \longmapsto \mathbb{K}$ which satisfies~:
 \begin{subequations}
 \begin{align}
 	&\forall x \in V, 							&& \|x\| = 0_\mathbb{K} \Rightarrow x = 0_V&&&\\
@@ -31,7 +31,7 @@ A \emph{norm} is a map $\| . \| : V \times V \longmapsto \mathbb{K}$ which satis
 % --------------------------------------------------------------------------------------------
 A \emph{inner product space} or \emph{pre-hilbert space} $E(\mathbb{K})$ is a vector space $E$ over the scalar field $\mathbb{K}$ with an inner product.
 
-An \emph{inner product} is a map $\langle \,; \rangle : E \times E \longmapsto \mathbb{K}$ which is bilinear, symmetric and positive-definite :
+An \emph{inner product} is a map $\langle \,; \rangle~: E \times E \longmapsto \mathbb{K}$ which is bilinear, symmetric and positive-definite~:
 \begin{subequations}
 \begin{align}
 	&\forall (x,y,z) \in E^3, \forall (\lambda,\mu) \in \mathbb{K}^2, 	&& \langle \lambda x\ + \mu y \,; z\rangle  = \lambda \langle  x \,; z\rangle + \mu \langle  y\,; z\rangle&&&\\
@@ -41,7 +41,7 @@ An \emph{inner product} is a map $\langle \,; \rangle : E \times E \longmapsto \
 	&\forall x \in E, 										&& \langle x\,; x\rangle = 0_\mathbb{K} \Rightarrow x = 0_E &&&
 \end{align}
 \end{subequations}
-Moreover, an inner product naturally induces a norm on $E$ defined by :
+Moreover, an inner product naturally induces a norm on $E$ defined by~:
 \begin{align}
 	\forall x \in E, \quad \|x\| = \sqrt{\langle x\,; x\rangle}
 \end{align}
@@ -91,24 +91,24 @@ Mathematical concepts extended well-known notions of derivative, jacobian and he
 Let $\mathcal{B}_V$ and $\mathcal{B}_W$ be two Banach spaces and $U \subset \mathcal{B}_V$ an open subset of $\mathcal{B}_V$.
 Let $\fonction{f}{u}{f(u)}$ be a function of  $U^{\mathcal{B}_W}$.
 $f$ is said to be \emph{Fréchet differentiable} at $u_0\in U$ if there exists a continious linear operator $\diff{f}{u_0} \in
-\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ such that :
+\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ such that~:
 \begin{subequations}
 \begin{align}
 \lim_{h \to 0} \frac{f(u_0+h) - f(u_0)- \diffof{f}{u_0}{h}}{\|h\|} = 0
 \end{align}
-\text{Or, equivalently :}
+\text{Or, equivalently~:}
 \begin{align}
 	f(u_0+h) = f(u_0) + \diffof{f}{u_0}{h} + o(h) \quad , \quad
 	\lim_{h \to 0} \frac{o(h)}{\|h\|} = 0
 \end{align}
 \end{subequations}
 
-In the literature, it is common to found the following notations : $df = \diffof{f}{u_0}{h} = \boldsymbol{D}f_{u_0}(h) = \boldsymbol{D}f(u_0,h)$ for the differential of $f$, which means nothing but $\boldsymbol{D}f(u_0)$ is linear regarding $h$. The dot denotes the evaluation of $\boldsymbol{D}f(u_0)$ at $h$. This notation can be ambiguous as far as the linearity of $\boldsymbol{D}f(u_0)$ in $h$ is denoted as a product which is not explicitly defined.
+In the literature, it is common to found the following notations~: $df = \diffof{f}{u_0}{h} = \boldsymbol{D}f_{u_0}(h) = \boldsymbol{D}f(u_0,h)$ for the differential of $f$, which means nothing but $\boldsymbol{D}f(u_0)$ is linear regarding $h$. The dot denotes the evaluation of $\boldsymbol{D}f(u_0)$ at $h$. This notation can be ambiguous as far as the linearity of $\boldsymbol{D}f(u_0)$ in $h$ is denoted as a product which is not explicitly defined.
 
 \subsubsection{Derivative}
 
 If $f$ is Fréchet differentiable at $u_0 \in U$, the continous linear operator $\diff{f}{u_0} \in
-\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ is called the \emph{Fréchet derivative} of $f$ at $u_0$ and is also denoted :
+\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ is called the \emph{Fréchet derivative} of $f$ at $u_0$ and is also denoted~:
 \begin{align}
 	f'(u_0) = \diff{f}{u_0}
 \end{align}
@@ -127,7 +127,7 @@ Because the differential of $f$ is a linear map from $\mathcal{B}_V$ to $\mathca
 \subsubsection{Directional derivative}
 Let $\mathcal{B}_V$ and $\mathcal{B}_W$ be two Banach spaces and $U \subset \mathcal{B}_V$ an open subset of $\mathcal{B}_V$.
 Let $\fonction{f}{u}{f(u)}$ be a function of  $U^{\mathcal{B}_W}$.
-$f$ is said to have a \emph{derivative in the direction} $h\in\mathcal{B}_V$ at $u_0\in U$ if :
+$f$ is said to have a \emph{derivative in the direction} $h\in\mathcal{B}_V$ at $u_0\in U$ if~:
 \begin{align}
 \frac{d}{d\lambda}f(u_0+\lambda h)\Bigr|_{\lambda = 0} = \lim_{\lambda \to 0} \frac{f(u_0+\lambda h) - f(u_0)}{\lambda}
 \end{align}
@@ -137,12 +137,12 @@ exists. This element of $\mathcal{B}_W$ is called the \emph{directional derivati
 Let $\mathcal{B}_V$ and $\mathcal{B}_W$ be two Banach spaces and $U \subset \mathcal{B}_V$ an open subset of $\mathcal{B}_V$.
 Let $\fonction{f}{u}{f(u)}$ be a function of  $U^{\mathcal{B}_W}$.
 $f$ is said to be \emph{Gâteaux differentiable} at $u_0\in U$ if there exists a continious linear operator $\diff{f}{u_0} \in
-\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ such that :
+\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ such that~:
 \begin{subequations}
 \begin{align}
 \forall h \in \mathcal{U}, \quad\lim_{\lambda \to 0} \frac{f(u_0+\lambda h) - f(u_0)}{\lambda} = \frac{d}{d\lambda}f(u_0+\lambda h)\Bigr|_{\lambda = 0} = \diffof{f}{u_0}{h}
 \end{align}
-Or, equivalently :
+Or, equivalently~:
 \begin{align}
 	\forall h \in \mathcal{U}, \quad f(u+\lambda h) = f(u) + \lambda \diffof{f}{u_0}{h} + o(\lambda)
 	\quad , \quad \lim_{\lambda \to 0} \frac{o(\lambda)}{\lambda} = 0
@@ -153,7 +153,7 @@ In other words, it means that all the directional derivatives of $f$ exist at $u
 
 \subsubsection{Derivative}
 If $f$ is Gâteaux differentiable at $u_0 \in U$, the continous linear operator $\diff{f}{u_0} \in
-\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ is called the \emph{Gâteaux derivative} of $f$ at $u_0$ and is also denoted :
+\mathcal{L}(\mathcal{B}_V,{\mathcal{B}_W})$ is called the \emph{Gâteaux derivative} of $f$ at $u_0$ and is also denoted~:
 \begin{align}
 	f'(u_0) = \diff{f}{u_0}
 \end{align}
@@ -164,7 +164,7 @@ The Gâteaux derivative is a weaker form of derivative than the Fréchet derivat
 \subsection{Useful properties}
 
 Let $\mathcal{B}_V$, $\mathcal{B}_W$ and $\mathcal{B}_Z$ be three Banach spaces.
-Let $f,g : \mathcal{B}_V \longmapsto \mathcal{B}_W$ and $h : \mathcal{B}_W \longmapsto \mathcal{B}_Z$ be three Gâteaux differentiable functions. Then, the following useful properties holds :
+Let $f,g~: \mathcal{B}_V \longmapsto \mathcal{B}_W$ and $h~: \mathcal{B}_W \longmapsto \mathcal{B}_Z$ be three Gâteaux differentiable functions. Then, the following useful properties holds~:
 \begin{align}
 	&\diff{(f+g)}{u} = \diff{f}{u} + \diff{g}{u}\\
 	&\diff{(f \circ h)}{u} = \diff{h}{f(u)}\circ\diff{f}{u} = \diff{h}{f(u)}\cdot\diff{f}{u}
@@ -173,14 +173,14 @@ Recall that the composition of $\diff{h}{f(u)}$ with $\diff{f}{u}$ means \guil{$
 
 \subsection{Partial derivative}
 
-Following \cite{Abraham2002} the main results on partial derivatives of two-variables functions are presented here. They are generalizable to n-variables functions.
+Following~\cite{Abraham2002} the main results on partial derivatives of two-variables functions are presented here. They are generalizable to n-variables functions.
 
 \subsubsection{Definition}
 
 Let $\mathcal{B}_{V_1}$, $\mathcal{B}_{V_2}$ and $\mathcal{B}_W$ be three Banach spaces and $U \subset \mathcal{B}_{V_1}\oplus\mathcal{B}_{V_2}$ an open subset of $\mathcal{B}_{V_1}\oplus\mathcal{B}_{V_2}$.
 Let $\fonction{f}{u}{f(u)}$ be a function of  $U^{\mathcal{B}_W}$.
 Let $u_0 = (u_{01},u_{02}) \in U$.
-If the derivatives of the following functions exist :
+If the derivatives of the following functions exist~:
 \begin{equation}
 	\fonctionL{f_1}{\mathcal{B}_{V_1}}{\mathcal{B}_{W}}{u_1}{f(u_1,u_{02})}
 	\quad , \quad
@@ -194,7 +194,7 @@ they are called \emph{partial derivatives} of $f$ at $u_0$ and are denoted $\pdi
 
 Let $\mathcal{B}_{V_1}$, $\mathcal{B}_{V_2}$ and $\mathcal{B}_W$ be three Banach spaces and $U \subset \mathcal{B}_{V_1}\oplus\mathcal{B}_{V_2}$ an open subset of $\mathcal{B}_{V_1}\oplus\mathcal{B}_{V_2}$.
 Let $\fonction{f}{u}{f(u)}$ be a function of  $U^{\mathcal{B}_W}$.
-If $f$ is differentiable, then the partial derivatives exist and satisfy for all $h = (h_1,h_2) \in \mathcal{B}_{V_1}\oplus\mathcal{B}_{V_2}$ :
+If $f$ is differentiable, then the partial derivatives exist and satisfy for all $h = (h_1,h_2) \in \mathcal{B}_{V_1}\oplus\mathcal{B}_{V_2}$~:
 \begin{align}
 	&\pdiffof{1}{f}{u}{h_1} = \diffof{f}{u}{(h_1,0)} \\
 	&\pdiffof{2}{f}{u}{h_2} = \diffof{f}{u}{(0,h_2)} \\
@@ -205,26 +205,26 @@ If $f$ is differentiable, then the partial derivatives exist and satisfy for all
 
 Let $\mathcal{H}$ be a Hilbert space with the inner product denoted $\scalar{}{}$. Let $U \subset \mathcal{H}$ an open subset of $\mathcal{H}$.
 Let $\fonction{F}{u}{F(u)}$ be a scalar function of  $U^{\mathbb{R}}$.
-The \emph{gradient} of $F$ is the map $\fonction{\grad{F}}{x}{(\grad{F})(x)}$ of $U^{\mathcal{H}}$ such that :
+The \emph{gradient} of $F$ is the map $\fonction{\grad{F}}{x}{(\grad{F})(x)}$ of $U^{\mathcal{H}}$ such that~:
 \begin{equation}
 	\forall h \in \mathcal{H}, \quad  \scalar{(\grad{F})(x)}{h} = \diffof{F}{x}{h}
 \end{equation}
 Note that the gradient vector depends on the chosen inner product.
-For $\mathcal{H} = \mathbb{R}^{n}$ with the canonical inner product, one can recall the usual definition of the gradient vector and the corresponding linear approximation of $F$ :
+For $\mathcal{H} = \mathbb{R}^{n}$ with the canonical inner product, one can recall the usual definition of the gradient vector and the corresponding linear approximation of $F$~:
 \begin{equation}
 	\mat{F}_{x+h} = \mat{F}_{x} + (\grad{F})_{x}^T H + \mat{o}(H)
 	\quad , \quad \grad{F}_{x} = \left[\begin{array}{c}\frac{\partial F}{\partial x_1} \\ \vdots \\ \frac{\partial F}{\partial x_n}\end{array}\right] \in \mathbb{R}^n
 \end{equation}
 Recall that the canonical inner product on $\mathbb{R}^{n}$ is such that $\scalar{x}{y} = X^{T}Y$ in a column vector representation. In this case it is common to denote $\grad{F} = \nabla{F}$.
 
-For function spaces the usual definition of the gradient can be extended. For instance if $F$ is a scalar function on $\mathcal{L}^2$, the gradient of $F$ is the unique function (if it exists) from $\mathcal{L}^2$ which satisfies :
+For function spaces the usual definition of the gradient can be extended. For instance if $F$ is a scalar function on $\mathcal{L}^2$, the gradient of $F$ is the unique function (if it exists) from $\mathcal{L}^2$ which satisfies~:
 \begin{equation}
 	\forall h \in \mathcal{L}^2, \quad \diffof{F}{x}{h} = \scalar{(\grad{F})(x)}{h} = \int (\grad{F})h
 \end{equation}
 In this case it is common to denote $\grad{F} = \frac{\delta F}{\delta x}$. The gradient is also known as the \emph{functional derivative}. The existence and unicity of $\grad{F}$ is ensured by the \emph{Riesz representation theorem}.
 
 \section{Jacobian matrix}
-Let $f$ be a differentiable function from $\mathbb{R}^n$ to $\mathbb{R}^m$. The \emph{differential} or \emph{total derivative} of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^m$ which could be represented with the following matrix called the \emph{jacobian matrix} :
+Let $f$ be a differentiable function from $\mathbb{R}^n$ to $\mathbb{R}^m$. The \emph{differential} or \emph{total derivative} of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^m$ which could be represented with the following matrix called the \emph{jacobian matrix}~:
 \begin{align}
 	&\diff{f}{x} = \mat{J}_x = \frac{df}{dx} =
 	\begin{bmatrix}
@@ -237,11 +237,11 @@ Let $f$ be a differentiable function from $\mathbb{R}^n$ to $\mathbb{R}^m$. The 
 	\end{bmatrix}
 	\in\mathcal{M}_{m,n}(\mathbb{R})
 \end{align}
-Thus, with the matrix notation, the Taylor expansion takes the following form :
+Thus, with the matrix notation, the Taylor expansion takes the following form~:
 \begin{align}
 	&\mat{F}_{x+h} = \mat{F}_{x} +  \boldsymbol{J}_x H + \mat{o}(H)
 \end{align}
-In the cas $m=1$, the jacobian matrix of the functional $F$ is nothing but the gradient vector transpose itself :
+In the cas $m=1$, the jacobian matrix of the functional $F$ is nothing but the gradient vector transpose itself~:
 \begin{align}
 	\diff{F}{x} = \mat{J}_x = \frac{dF}{dx} =
 	\begin{bmatrix}
@@ -250,7 +250,7 @@ In the cas $m=1$, the jacobian matrix of the functional $F$ is nothing but the g
 \end{align}
 
 \section{Hessian}
-Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$. The second order differential of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^n$ which could be represented with the following matrix called the \emph{hessian matrix} :
+Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$. The second order differential of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^n$ which could be represented with the following matrix called the \emph{hessian matrix}~:
 \begin{equation}
 \renewcommand\arraystretch{1.5}
 \begin{aligned}
@@ -264,7 +264,7 @@ Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$.
 	\in\mathcal{M}_{n,n}(\mathbb{R})
 \end{aligned}
 \end{equation}
-Thus, with the matrix notation, the Taylor expansion takes the following form :
+Thus, with the matrix notation, the Taylor expansion takes the following form~:
 \begin{align}
 	\mat{F}_{x+h} = \mat{F}_{x} +  \mat{J}_{x} H + \tfrac{1}{2}H^T \mat{H}_{x} H + \mat{o}(H)
 \end{align}
