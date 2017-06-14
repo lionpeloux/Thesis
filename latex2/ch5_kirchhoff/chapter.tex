@@ -1467,6 +1467,26 @@ With the help of the matrix notation, the constitutive equations \cref{eq:consti
 	+ EI_2(\varkappa_2 - \rconf{\varkappa}_2) \vect{d}_2
 	+ GJ (\varkappa_3 - \rconf{\varkappa}_3) \vect{d}_3
 \end{equation}
+We also introduce the matrix notation for the derivatives of the internal forces and moments referring to the inertial frame of reference $\{\vect{x},\vect{x},\vect{z}\}$ and to the local frame $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. The (spatial) velocity of $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$ implies that~:
+\begin{subequations}
+	\begin{alignat}{3}
+	&\vect{F}' = \vect{F}_{xyz}' = \vect{F}_{123}' + \vect{\varkappa} \times \vect{F}
+	\\
+	&\vect{M}' = \vect{M}_{xyz}' = \vect{M}_{123}' + \vect{\varkappa} \times \vect{M}
+	\end{alignat}
+\end{subequations}
+where $\vect{F}_{xyz}'$ and $\vect{M}_{xyz}'$ denote the derivative with respect to $s$ in the inertial frame of reference $\{\vect{x},\vect{x},\vect{z}\}$ whereas $\vect{F}_{123}'$ and $\vect{M}_{123}'$ denote the derivative with respect to $s$ in the local material frame basis $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. Thus the matrix notation for $\vect{F}_{123}'$ and $\vect{M}_{123}'$ are given by :
+\begin{subequations}
+	\begin{alignat}{3}
+	&\vect{F}_{123}' 
+	&&= F_1' \vect{d}_1 +  F_2' \vect{d}_2 + N' \vect{d}_3 
+	= \begin{bmatrix} F_1' & F_2' & N' \end{bmatrix}^T
+	\\
+	&\vect{M}_{123}' 
+	&&= M_1' \vect{d}_1 +  M_2' \vect{d}_2 + Q' \vect{d}_3 
+	= \begin{bmatrix} M_1' & M_2' & Q' \end{bmatrix}^T
+	\end{alignat}
+\end{subequations}
 
 % Discret extension and axial force
 % --------------------------------------------
@@ -1571,9 +1591,9 @@ However, this values need to be adjusted so that the static condition for rotati
 To enforce the jump discontinuity in bending moment ($\vect{M}^{ext} = \vect{M}^- - \vect{M}^+$) across the handle vertex, we define the left and right bending moments at $\vect{x}_{2i}$ as~:
 \begin{subequations}
 	\begin{align}
-		\vect{M}_{2i}^{\perp,-}	&=  \vect{M}_{2i} + \frac{1}{2} \vect{M}_{2i}^{ext} 
+		{\vect{M}_{2i}^{\perp}}^{-}	&=  \vect{M}_{2i} + \frac{1}{2} \vect{M}_{2i}^{ext} 
 		\\[0.5em]
-		\vect{M}_{2i}^{\perp,+}	&=  \vect{M}_{2i} - \frac{1}{2} \vect{M}_{2i}^{ext} 
+		{\vect{M}_{2i}^{\perp}}^{+}	&=  \vect{M}_{2i} - \frac{1}{2} \vect{M}_{2i}^{ext} 
 	\end{align}
 \end{subequations}
 Note that in the case where no external concentrated bending moment is applied to the handle vertex, the internal bending moment is continuous across the vertex.
@@ -1583,9 +1603,9 @@ Note that in the case where no external concentrated bending moment is applied t
 Finally, the left and right curvature at handle vertex $\vect{x}_{2i}$ are computed back with the constitutive law~:
 \begin{subequations}
 	\begin{align}
-		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} \vect{M}_{2i}^- + \rconf{\vect{\kappa b}}_{2i}^- 
+		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} {\vect{M}_{2i}^{\perp}}^{-} + \rconf{\vect{\kappa b}}_{2i}^- 
 		\\[0.5em]
-		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} \vect{M}_{2i}^+ + \rconf{\vect{\kappa b}}_{2i}^+ 
+		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} {\vect{M}_{2i}^{\perp}}^{+} + \rconf{\vect{\kappa b}}_{2i}^+ 
 	\end{align}
 \end{subequations}
 
@@ -1594,19 +1614,23 @@ Finally, the left and right curvature at handle vertex $\vect{x}_{2i}$ are compu
 The internal bending moment at ghost vertices is simply given by the constitutive law as~:
 \begin{subequations}
 	\begin{align}
-		\vect{M}_{2i-1} &=  \mat{B}_{i-1}(\vect{\kappa b}_{2i-1} - \rconf{\vect{\kappa b}}_{2i-1})
+		\vect{M}_{2i-1}^{\perp} &=  \mat{B}_{i-1}(\vect{\kappa b}_{2i-1} - \rconf{\vect{\kappa b}}_{2i-1})
 		\\[0.5em]
-		\vect{M}_{2i+1} &=  \mat{B}_{i}(\vect{\kappa b}_{2i+1} - \rconf{\vect{\kappa b}}_{2i+1})
+		\vect{M}_{2i+1}^{\perp} &=  \mat{B}_{i}(\vect{\kappa b}_{2i+1} - \rconf{\vect{\kappa b}}_{2i+1})
 	\end{align}
 \end{subequations}
 
 \subsection{Discret rate of twist and twisting moment}
 % =======================================
 We assume the twisting moment and the rate of twist to vary linearly over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$.
-Thus, the twist angle at mid edge is given by~:
-\begin{equation}
-	\tau_{i+1/2} = \frac{\Delta\theta_{i}}{l_i}\label{eq:d_twist}
-\end{equation}
+Thus, the material twist of the rod at mid edge is given by~:
+\begin{subequations}
+	\begin{align}
+		\tau_{i+1/2} = \frac{\Delta\theta_{i}}{{l}_i}\label{eq:d_twist}
+		\\[0.5em]
+		\varkappa_{3,i+1/2} = \frac{\Delta\theta_{i}}{\rconf{l}_i}\label{eq:d_twist}
+	\end{align}
+\end{subequations}
 To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod si framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta$ around $\vect{d}_3 =\vect{t}$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
 
 In the discrete case, although it is possible to frame the whole curve with a Bishop frame to achieve the computation of the rate of twist, it is more convenient to measure $\Delta\theta_{i}$ step by step using the existing material frames at vertices $\vect{x}_i$ and $\vect{x}_{i+1}$. This is done in a to step process : 
@@ -1624,13 +1648,20 @@ Consequently, the twisting moment at mid span of each edge is computed directly 
 		&Q_{2i+3/2} &&=  GJ_i(\tau_{2i+3/2} - \rconf{\tau}_{2i+3/2})
 	\end{alignat}
 \end{subequations}
-%\begin{equation}
-%	Q_{2i+1/2} =  GJ_i(\tau_{2i+1/2} - \rconf{\tau}_{2i+1/2})
-%\end{equation}
 
+% Discret shear force
+% --------------------------
 \subsection{Discret shear force}
+The shear force are computed directly from \cref{eq:motion_4,eq:motion_5}, assuming that inertial terms are negligible :
+\begin{equation}
+	\begin{aligned}
+	\vect{F}^{\perp} 
+	&= (1+\epsilon)^{-1}\vect{d}_3 \times (\vect{M}^{'|xyz} + \vect{m}_{ext})\\
+	&= (1+\epsilon)^{-1}\vect{d}_3 \times (\vect{M}^{'|123} + \vect{\varkappa} \times \vect{M} + \vect{m}_{ext})\\
+	&= (1+\epsilon)^{-1}\vect{d}_3 \times (\vect{M}^{'|123} + \vect{m}_{ext}) + Q\vect{\kappa b} - \tau \vect{M}^{\perp}
+	\end{aligned}
+\end{equation}
 
-Shear forces are computed from the second Kirchhoff law, considering that the inertial term is negligible.
 
 \begin{equation}
 	 \vect{F}_{i+1/2} = \vect{d}_{3, i+1/2} \times (\vect{M}_{i+1/2}^{'} + \vect{m}_{ext, i}) + Q_{i+1/2} \vect{\kappa b}_{i+1/2} - \tau_{i+1/2} \vect{M}_{i+1/2}
