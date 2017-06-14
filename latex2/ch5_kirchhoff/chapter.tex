@@ -1367,7 +1367,7 @@ Finally, we define the \emph{chord length} of the $i$th segment as the distance 
 
 \subsubsection{Material and section properties}
 % ------------------------------------------------------------
-In addition, the model assumes that a segment has uniform section ($S$, $I_1$, $I_2$, $J$)\footnote{$S$ is the cross-section area ; $I_1$, $I_2$ and $J$ are the cross-section principal moments of inertia.} and material ($E$, $G$)\footnote{$E$ is the elastic modulus and $G$ is the shear  modulus for the considered material} properties over its length ($s \in ]s_{2i},s_{2i+2}[$). For the sake of simplicity, we introduce for further calculations the \emph{material stiffness matrix} ($\mat{B}_i$) attached to each segment. It has the following form in the material frame basis~:
+In addition, the model assumes that a segment has uniform section ($S$, $I_1$, $I_2$, $J$)\footnote{$S$ is the cross-section area ; $I_1$, $I_2$ and $J$ are the principal moments of inertia of the cross-section.} and material ($E$, $G$)\footnote{$E$ is the elastic modulus and $G$ is the shear  modulus for the considered material} properties over its length $s \in ]s_{2i},s_{2i+2}[$. For the sake of simplicity, we introduce for further calculations the \emph{material stiffness matrix} ($\mat{B}_i$) attached to each segment. It has the following form in the material frame basis~:
 \begin{equation}
 	\mat{B}_i = \begin{bmatrix} 
 			EI_1		&	0		&	0		\\
@@ -1375,6 +1375,7 @@ In addition, the model assumes that a segment has uniform section ($S$, $I_1$, $
 			0		&	0		&	GJ_{}	\\
 		\end{bmatrix}_i
 	\quad , \quad i \in \llbracket 0, n_s-1 \rrbracket
+	\label{eq:stiffnessmatrix}
 \end{equation}
 where $EI_1$ and $EI_2$ are the bending stiffnesses and $GJ$ is the torsional stiffness. The axial stiffness of the $i$th segment is denoted by :
 \begin{equation}
@@ -1393,7 +1394,7 @@ Additional External concentrated forces ($\vect{F}^{ext}$) and moments ($\vect{M
 % ---------------------------------------------------------
 Under deformations the discrete rod is subject to internal forces and moments. Their components in the material frame basis are named as follow :
 \begin{itemize}
-\item The shear force : $\vect{F} = F_1 \vect{d}_1 + F_2 \vect{d}_2$ 
+\item The shear force : $\vect{F}^{\perp} = F_1 \vect{d}_1 + F_2 \vect{d}_2$ 
 \item The axial force : $\vect{N} = N \vect{d}_3$
 \item The bending moment : $\vect{M} = M_1 \vect{d}_1 + M_2 \vect{d}_2$ 
 \item The twisting moment : $\vect{Q} = Q \vect{d}_3$ 
@@ -1467,26 +1468,27 @@ With the help of the matrix notation, the constitutive equations \cref{eq:consti
 	+ EI_2(\varkappa_2 - \rconf{\varkappa}_2) \vect{d}_2
 	+ GJ (\varkappa_3 - \rconf{\varkappa}_3) \vect{d}_3
 \end{equation}
-We also introduce the matrix notation for the derivatives of the internal forces and moments referring to the inertial frame of reference $\{\vect{x},\vect{x},\vect{z}\}$ and to the local frame $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. The (spatial) velocity of $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$ implies that~:
-\begin{subequations}
-	\begin{alignat}{3}
-	&\vect{F}' = \vect{F}_{xyz}' = \vect{F}_{123}' + \vect{\varkappa} \times \vect{F}
-	\\
-	&\vect{M}' = \vect{M}_{xyz}' = \vect{M}_{123}' + \vect{\varkappa} \times \vect{M}
-	\end{alignat}
-\end{subequations}
-where $\vect{F}_{xyz}'$ and $\vect{M}_{xyz}'$ denote the derivative with respect to $s$ in the inertial frame of reference $\{\vect{x},\vect{x},\vect{z}\}$ whereas $\vect{F}_{123}'$ and $\vect{M}_{123}'$ denote the derivative with respect to $s$ in the local material frame basis $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. Thus the matrix notation for $\vect{F}_{123}'$ and $\vect{M}_{123}'$ are given by :
-\begin{subequations}
-	\begin{alignat}{3}
-	&\vect{F}_{123}' 
-	&&= F_1' \vect{d}_1 +  F_2' \vect{d}_2 + N' \vect{d}_3 
-	= \begin{bmatrix} F_1' & F_2' & N' \end{bmatrix}^T
-	\\
-	&\vect{M}_{123}' 
-	&&= M_1' \vect{d}_1 +  M_2' \vect{d}_2 + Q' \vect{d}_3 
-	= \begin{bmatrix} M_1' & M_2' & Q' \end{bmatrix}^T
-	\end{alignat}
-\end{subequations}
+
+%We also introduce the matrix notation for the derivatives of the internal forces and moments referring to the inertial frame of reference $\{\vect{x},\vect{y},\vect{z}\}$ and to the local frame $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. The (spatial) velocity of $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$ implies that~:
+%\begin{subequations}
+%	\begin{alignat}{3}
+%	&\vect{F}' = \vect{F}^{'|xyz} = \vect{F}^{'|123} + \vect{\varkappa} \times \vect{F}
+%	\\
+%	&\vect{M}' = \vect{M}^{'|xyz} = \vect{M}^{'|123} + \vect{\varkappa} \times \vect{M}
+%	\end{alignat}
+%\end{subequations}
+%where $\vect{F}_{xyz}'$ and $\vect{M}_{xyz}'$ denote the derivative with respect to $s$ in the inertial frame of reference $\{\vect{x},\vect{x},\vect{z}\}$ whereas $\vect{F}_{123}'$ and $\vect{M}_{123}'$ denote the derivative with respect to $s$ in the local material frame basis $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. Thus the matrix notation for $\vect{F}_{123}'$ and $\vect{M}_{123}'$ are given by :
+%\begin{subequations}
+%	\begin{alignat}{3}
+%	&\vect{F}^{'|123} 
+%	&&= F_1' \vect{d}_1 +  F_2' \vect{d}_2 + N' \vect{d}_3 
+%	= \begin{bmatrix} F_1' & F_2' & N' \end{bmatrix}^T
+%	\\
+%	&\vect{M}^{'|123} 
+%	&&= M_1' \vect{d}_1 +  M_2' \vect{d}_2 + Q' \vect{d}_3 
+%	= \begin{bmatrix} M_1' & M_2' & Q' \end{bmatrix}^T
+%	\end{alignat}
+%\end{subequations}
 
 % Discret extension and axial force
 % --------------------------------------------
@@ -1498,12 +1500,12 @@ We assume the axial force ($\vect{N}$) to vary linearly over $]\vect{x}_{2i},  \
 Consequently, the axial force at mid span of each edge is computed directly with the constitutive equation \cref{eq:constitutive_a} as~:
 \begin{subequations}
 	\begin{alignat}{1}
-	\vect{N}_{2i+1/2} &= N_{2i+1/2}\, \vect{d}_{3,2i+1/2} \quad \text{where} \quad {N_{i+1/2}} = ES_i \,\epsilon_{2i+1/2}
+	\vect{N}_{2i+1/2} &= N_{2i+1/2}\, \vect{u}_{2i} \quad \text{where} \quad {N_{i+1/2}} = ES_i \,\epsilon_{2i+1/2}
 	\\
-	\vect{N}_{2i+3/2} &= N_{2i+3/2}\, \vect{d}_{3,2i+3/2}\quad \text{where} \quad {N_{i+3/2}} = ES_i \,\epsilon_{2i+3/2}
+	\vect{N}_{2i+3/2} &= N_{2i+3/2}\, \vect{u}_{2i+1}\quad \text{where} \quad {N_{i+3/2}} = ES_i \,\epsilon_{2i+3/2}
 	\end{alignat}
 \end{subequations}
-Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive extension ($\epsilon_{i+1/2} > 0$), vertex $\vect{x}_i$ \textquote{attracts} vertex $\vect{x}_{i-1}$ to it as $\vect{d}_{3,i+1/2}$ is pointing from $\vect{x}_{i}$ towards $\vect{x}_{i+1}$. Remark also that $\epsilon_{i+1/2} = 0 \Leftrightarrow l_i = \rconf{l}_i$ when the rod is not stretched.
+Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive extension ($\epsilon_{i+1/2} > 0$), vertex $\vect{x}_{i+1}$ \textquote{attracts} vertex $\vect{x}_{i}$ to it as $\vect{d}_{3,i+1/2} = \vect{u}_{i}$ is pointing from $\vect{x}_{i}$ towards $\vect{x}_{i+1}$. Remark also that $\epsilon_{i+1/2} = 0 \Leftrightarrow l_i = \rconf{l}_i$ when the rod is not stretched.
 
 % Discret bending moments and curvatures
 % -------------------------------------------------------
@@ -1652,20 +1654,88 @@ Consequently, the twisting moment at mid span of each edge is computed directly 
 % Discret shear force
 % --------------------------
 \subsection{Discret shear force}
-The shear force are computed directly from \cref{eq:motion_4,eq:motion_5}, assuming that inertial terms are negligible :
+Recall that in Kirchhoff's theory the shear force is a reacting parameter, computed from the equilibrium equations and not from a constitutive law. Firstly, remark that the shear force can be factorized under the following expression~:
+\begin{equation}
+	\vect{F}^{\perp} = F_1 \vect{d}_1 + F_2 \vect{d_2} = - \vect{d}_3 \times (\vect{d}_3 \times \vect{F}) \label{eq:shearid}
+\end{equation}
+Then, combining \cref{eq:motion_4,eq:motion_5} --~where the inertial terms are neglected~-- with \cref{eq:shearid} leads to the following vectoriel form of the shear force~:
+\begin{equation}
+	\vect{F}^{\perp} 
+	= (1+\epsilon)^{-1} \vect{d}_3 \times \left(\frac{\partial \vect{M}}{\partial s} + \vect{m} \right)
+	=  \vect{d}_3 \times \left(\frac{\partial \vect{M}}{\partial s_t} + \frac{\vect{m}}{1+\epsilon} \right)
+	\label{eq:shear} 
+\end{equation}
+In the discrete case, the shear force is evaluated at mid span of each edge by :
+\begin{subequations}
+	\begin{alignat}{3}
+		&\vect{F}^{\perp}_{2i+1/2}
+		=  \vect{u}_{2i} \times \left( \frac{\vect{M}_{2i+1} - \vect{M}_{2i}}{l_{2i}}+ \frac{\rconf{l}_{2i}}{l_{2i}} \vect{m}_i \right)
+		\label{eq:dshear_a}
+		\\[0.5em]
+		&\vect{F}^{\perp}_{2i+3/2}
+		=  \vect{u}_{2i+1} \times \left( \frac{\vect{M}_{2i+2} - \vect{M}_{2i+1}}{l_{2i+1}}+ \frac{\rconf{l}_{2i+1}}{l_{2i+1}} \vect{m}_i \right)
+		\label{eq:dshear_b}
+	\end{alignat}
+\end{subequations}
+Remark that the derivative of the internal moments at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{sec:appendix}. 
+
+Expressed in the form of \cref{eq:dshear_a,eq:dshear_b}, the discrete shear force has the interesting property to remain strictly orthogonal to $\vect{d}_{3,i+1/2} = \vect{u}_i$. While this is true in the continuous world, this property can easily be lost in the discrete case where mean values and derivatives are evaluated through finite summations or finite differences.
+
+\subsubsection{Matrix notation}
+Because there is a derivation with respect to $s$ in \cref{eq:dshear_a,eq:dshear_b}, one must be very careful when writing these equations in matrix notation. Indeed, their counterparts will translate differently wether the symbols will be decomposed in the \emph{global} frame basis or in the \emph{material} frame basis.
+
+If the symbols are decomposed in the \emph{global} frame basis the translation is straightforward as the derivative of a vector is the vector of the derived components~:
+\begin{equation}
+	\vect{M} = {\begin{bmatrix}M_x \\ M_y \\ M_z\end{bmatrix}}
+	\quad , \quad
+	\vect{M}'
+	=
+	{\begin{bmatrix}M_x \\ M_y \\ M_z\end{bmatrix}}^{'}
+	=
+	\begin{bmatrix}M_x' \\ M_y' \\ M_z'\end{bmatrix}
+\end{equation}
+Thus, in the discrete case, the evaluation of the derivative of the moment at mid-edge is achieved thanks to the finite difference formula~:
+\begin{equation}
+	\vect{M}'_{2i+1/2}
+	\simeq
+	\frac{1}{\rconf{l}_{2i}}\left( {\begin{bmatrix}M_x & M_y & M_z\end{bmatrix}}_{2i+1}^T - {\begin{bmatrix}M_x & M_y & M_z\end{bmatrix}}_{2i}^T \right)
+\end{equation}
+However, if the symbols are given in the \emph{material} frame basis, the derivation must take into account the spatial velocity $\vect{\varkappa}$ of the material frame~:
+\begin{equation}
+	\vect{M} = {\begin{bmatrix}M_1 \\ M_2 \\ Q \end{bmatrix}}
+	\quad , \quad
+	\vect{M}'
+	=
+	{\begin{bmatrix}
+	M_1 \\ M_2 \\ Q
+	\end{bmatrix}}^{'}
+	=
+	\begin{bmatrix}
+	M_1' \\ M_2' \\ Q'
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+	\varkappa_1 \\ {\varkappa_2} \\ \varkappa_3
+	\end{bmatrix}
+	\times
+	\begin{bmatrix}
+	M_1 \\ M_2 \\ Q
+	\end{bmatrix}
+\end{equation}
+Thus, in the discrete case, the evaluation of the derivative of the moment at mid-edge is still achieved thanks to the finite difference formula, but takes a very different matrix form~:
 \begin{equation}
 	\begin{aligned}
-	\vect{F}^{\perp} 
-	&= (1+\epsilon)^{-1}\vect{d}_3 \times (\vect{M}^{'|xyz} + \vect{m}_{ext})\\
-	&= (1+\epsilon)^{-1}\vect{d}_3 \times (\vect{M}^{'|123} + \vect{\varkappa} \times \vect{M} + \vect{m}_{ext})\\
-	&= (1+\epsilon)^{-1}\vect{d}_3 \times (\vect{M}^{'|123} + \vect{m}_{ext}) + Q\vect{\kappa b} - \tau \vect{M}^{\perp}
+	\vect{M}'_{2i+1/2}
+	&\simeq
+	&&\frac{1}{\rconf{l}_{2i}}\left( {\begin{bmatrix}M_1 & M_2 & Q\end{bmatrix}}_{2i+1}^T - {\begin{bmatrix}M_1 & M_2 & Q\end{bmatrix}}_{2i}^T \right)
+	\\
+	&+ &&\frac{1}{2}\left( {\begin{bmatrix}\varkappa_1 & \varkappa_2 & \varkappa_3\end{bmatrix}}_{2i}^T + {\begin{bmatrix}\varkappa_1 & \varkappa_2 & \varkappa_3\end{bmatrix}}_{2i+1}^T \right)
+	\\
+	&\times 
+	&& \frac{1}{2} \left( {\begin{bmatrix}M_1 & M_2 & Q\end{bmatrix}}_{2i}^T + {\begin{bmatrix}M_1 & M_2 & Q\end{bmatrix}}_{2i+1}^T \right)
 	\end{aligned}
 \end{equation}
-
-
-\begin{equation}
-	 \vect{F}_{i+1/2} = \vect{d}_{3, i+1/2} \times (\vect{M}_{i+1/2}^{'} + \vect{m}_{ext, i}) + Q_{i+1/2} \vect{\kappa b}_{i+1/2} - \tau_{i+1/2} \vect{M}_{i+1/2}
-\end{equation}
+Although this paragraph could seem superfluous to the reader, this point is a matter of concern when implementing the model into an algorithm. Indeed, the developper always has the choice between two natural data structures where vectors are represented by a triplet either in the global frame basis or in the material frame basis (see \cref{eq:stiffnessmatrix}). Even more, he can decide to mix the two for practical reasons, for instance if it leads to less arithmetic computations. In particular, the stiffness matrix has a nice diagonal shape when written in the material frame basis. Thus it seems desirable to do the computation of the bending moment in this basis. On the contrary, we've just seen that it seems easier to compute the shear force in the global frame basis.
 
 \subsection{Interpolation}
 
