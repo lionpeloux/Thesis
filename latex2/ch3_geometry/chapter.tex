@@ -1361,12 +1361,11 @@ Let $\vect{x}_i$ be a vertex in the current portion of $\Gamma$. The inscribed o
 \begin{alignat}{4}
 	&\vect{t}_i^- 			& \quad 	&= 	 \quad 	&& \cos(\frac{\varphi_i}{2} + \varphi_i^-) \frac{\vect{u}_{i-1} + \vect{u}_{i}}{\norm{\vect{u}_{i-1} + \vect{u}_{i}}} 
 											+\sin(\frac{\varphi_i}{2} + \varphi_i^-) \frac{\vect{u}_{i-1} - \vect{u}_{i}}{\norm{\vect{u}_{i-1} - \vect{u}_{i}}}  
-											&\hspace{10mm}	& \\
+ 	\\
 	&\vect{t}_i 			& 		&=	 		&&\frac{\vect{u}_{i-1} + \vect{u}_{i}}{\norm{\vect{u}_{i-1} + \vect{u}_{i}}}  		
-											&				& \\
+	\\
 	&\vect{t}_i^+ 			& 		&= 	 		&& \cos(\frac{\varphi_i}{2} + \varphi_i^+) \frac{\vect{u}_{i-1} + \vect{u}_{i}}{\norm{\vect{u}_{i-1} + \vect{u}_{i}}} 
 											-\sin(\frac{\varphi_i}{2} + \varphi_i^+) \frac{\vect{u}_{i-1} - \vect{u}_{i}}{\norm{\vect{u}_{i-1} - \vect{u}_{i}}}  
-										&\hspace{10mm}	&
 \end{alignat}
 \end{subequations}
 In this form, the expressions of $\vect{t}_i^-$ and $\vect{t}_i^+$ exhibit lots of trigonometric computations. Consequently, they will be more costly to evaluate (numerically) than the ones given for the circumscribed case that exhibit only simple addition, product and division operations.
@@ -1376,9 +1375,8 @@ Though these points does not generally fall into mid-edge, the tangent vector ca
 \setlength{\jot}{6pt}
 \begin{alignat}{4}
 	&\tilde{\vect{t}}_i^- 	& \quad	&=	\quad 		&&\vect{u}_{i-1}		
-											&				& \\
+	\\
 	&\tilde{\vect{t}}_i^+ 	& 		&=	 			&&\vect{u}_{i}  												
-											&				&
 \end{alignat}
 \end{subequations}
 Similarly to the circumscribed case, one can remark that the curvature binormal vector at $\vect{x}_i$ can be computed in three different manners~:

@@ -1499,10 +1499,10 @@ We assume the axial force ($\vect{N}$) to vary linearly over $]\vect{x}_{2i},  \
 \end{equation}
 Consequently, the axial force at mid span of each edge is computed directly with the constitutive equation \cref{eq:constitutive_a} as~:
 \begin{subequations}
-	\begin{alignat}{1}
-	\vect{N}_{2i+1/2} &= N_{2i+1/2}\, \vect{u}_{2i} \quad \text{where} \quad {N_{i+1/2}} = ES_i \,\epsilon_{2i+1/2}
+	\begin{alignat}{3}
+	\vect{N}_{2i+1/2} &= N_{2i+1/2}\, \vect{u}_{2i} \quad &&\text{where} \quad {N_{2i+1/2}} = ES_i \,\epsilon_{2i+1/2}
 	\\
-	\vect{N}_{2i+3/2} &= N_{2i+3/2}\, \vect{u}_{2i+1}\quad \text{where} \quad {N_{i+3/2}} = ES_i \,\epsilon_{2i+3/2}
+	\vect{N}_{2i+3/2} &= N_{2i+3/2}\, \vect{u}_{2i+1}\quad &&\text{where} \quad {N_{2i+3/2}} = ES_i \,\epsilon_{2i+3/2}
 	\end{alignat}
 \end{subequations}
 Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive extension ($\epsilon_{i+1/2} > 0$), vertex $\vect{x}_{i+1}$ \textquote{attracts} vertex $\vect{x}_{i}$ to it as $\vect{d}_{3,i+1/2} = \vect{u}_{i}$ is pointing from $\vect{x}_{i}$ towards $\vect{x}_{i+1}$. Remark also that $\epsilon_{i+1/2} = 0 \Leftrightarrow l_i = \rconf{l}_i$ when the rod is not stretched.
@@ -1633,7 +1633,7 @@ Thus, the material twist of the rod at mid edge is given by~:
 		\varkappa_{3,i+1/2} = \frac{\Delta\theta_{i}}{\rconf{l}_i}\label{eq:d_twist}
 	\end{align}
 \end{subequations}
-To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod si framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta$ around $\vect{d}_3 =\vect{t}$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
+To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod si framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta(s)$ around $\vect{d}_3(s) =\vect{t}(s)$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
 
 In the discrete case, although it is possible to frame the whole curve with a Bishop frame to achieve the computation of the rate of twist, it is more convenient to measure $\Delta\theta_{i}$ step by step using the existing material frames at vertices $\vect{x}_i$ and $\vect{x}_{i+1}$. This is done in a to step process : 
 \begin{enumerate}
@@ -1645,11 +1645,12 @@ Measure $\Delta\theta_{i} = \angle{(\vect{d}_{1,i}^{\para},\vect{d}_{1,i+1})} = 
 Consequently, the twisting moment at mid span of each edge is computed directly with the appropriate constitutive equation :
 \begin{subequations}
 	\begin{alignat}{3}
-		&Q_{2i+1/2} &&=  GJ_i(\tau_{2i+1/2} - \rconf{\tau}_{2i+1/2})
-		\\[0.5em]
-		&Q_{2i+3/2} &&=  GJ_i(\tau_{2i+3/2} - \rconf{\tau}_{2i+3/2})
+	\vect{Q}_{2i+1/2} &= Q_{2i+1/2}\, \vect{u}_{2i} \quad &&,\quad {Q_{2i+1/2}} = GJ_i(\varkappa_{3,2i+1/2} - \rconf{\varkappa}_{3,2i+1/2})
+	\\
+	\vect{Q}_{2i+3/2} &= Q_{2i+3/2}\, \vect{u}_{2i+1}\quad &&, \quad {Q_{2i+3/2}} = GJ_i(\varkappa_{3,2i+3/2} - \rconf{\varkappa}_{3,2i+3/2})
 	\end{alignat}
 \end{subequations}
+Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive twist ($\varkappa_{3,i+1/2} > 0$), frame $\{\vect{d}_{1,i+1},\vect{d}_{2,i+1},\vect{d}_{3,i+1}\}$ makes frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ to rotate positively around $\vect{u}_i$ as $Q_{i+1/2} > 0$.
 
 % Discret shear force
 % --------------------------
@@ -1669,15 +1670,15 @@ In the discrete case, the shear force is evaluated at mid span of each edge by :
 \begin{subequations}
 	\begin{alignat}{3}
 		&\vect{F}^{\perp}_{2i+1/2}
-		=  \vect{u}_{2i} \times \left( \frac{\vect{M}_{2i+1} - \vect{M}_{2i}}{l_{2i}}+ \frac{\rconf{l}_{2i}}{l_{2i}} \vect{m}_i \right)
+		=  \vect{u}_{2i} &&\times \left( \frac{\vect{M}_{2i+1} - \vect{M}_{2i}^{+}}{l_{2i}}+ \frac{\rconf{l}_{2i}}{l_{2i}} \vect{m}_i \right)
 		\label{eq:dshear_a}
 		\\[0.5em]
 		&\vect{F}^{\perp}_{2i+3/2}
-		=  \vect{u}_{2i+1} \times \left( \frac{\vect{M}_{2i+2} - \vect{M}_{2i+1}}{l_{2i+1}}+ \frac{\rconf{l}_{2i+1}}{l_{2i+1}} \vect{m}_i \right)
+		=  \vect{u}_{2i+1} &&\times \left( \frac{\vect{M}_{2i+2}^- - \vect{M}_{2i+1}}{l_{2i+1}}+ \frac{\rconf{l}_{2i+1}}{l_{2i+1}} \vect{m}_i \right)
 		\label{eq:dshear_b}
 	\end{alignat}
 \end{subequations}
-Remark that the derivative of the internal moments at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{sec:appendix}. 
+Remark that the derivative of the internal moments at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{ch:interpolation}. 
 
 Expressed in the form of \cref{eq:dshear_a,eq:dshear_b}, the discrete shear force has the interesting property to remain strictly orthogonal to $\vect{d}_{3,i+1/2} = \vect{u}_i$. While this is true in the continuous world, this property can easily be lost in the discrete case where mean values and derivatives are evaluated through finite summations or finite differences.
 
