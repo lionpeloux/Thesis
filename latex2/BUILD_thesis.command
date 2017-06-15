@@ -30,6 +30,10 @@ cd "ap1_variational"
 bibtex appendix.aux
 cd ..
 
+cd "ap2_interpolation"
+bibtex appendix.aux
+cd ..
+
 makeindex thesis.nlo -s nomencl.ist -o thesis.nls
 pdflatex -synctex=1 -shell-escape thesis.tex
 

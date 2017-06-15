@@ -1,0 +1,167 @@
+\chapter{Parabolic interpolation}
+\label{ch:interpolation}
+
+% ----------------------------------------------
+% Lagrange interpolating polynomial
+% -----------------------------------------------
+\section{Introduction}
+In this appendix, we give the required formulas to conduct a parabolic interpolation of a scalar or vector-valued function over an interval.
+
+We look for a polynomial interpolation of order 2 of a continuous scalar or vector-valued function $\vect{V}\colon t \mapsto \vect{V}(t)$ over the interval $[t_0,t_2]$ ; supposing that the value of the function is known for three distinct parameters $t_0 < t_1 < t_2$~:
+\begin{subequations}
+	\begin{alignat}{1}
+	\vect{V}(t_0) = \vect{V}_0 \\
+	\vect{V}(t_1) = \vect{V}_1 \\
+	\vect{V}(t_2) = \vect{V}_2
+	\end{alignat}
+\end{subequations}
+This interpolation method is employed several times in this thesis, for instance to evaluate the position of a kinetic energy peak during the dynamic relaxation process. It is also employed for evaluating the bending moment and the curvature of a discrete rod at mid-edge, knowing its values at vertices.
+
+Note that this interpolation method is valid if the basis in which $\vect{V}$ is decomposed does not depend on the parameter $t$. Otherwise, the classical transportation term should be considered ($\vect{\omega} \times \vect{V}$).
+
+% ----------------------------------------------
+% Lagrange interpolating polynomial
+% ----------------------------------------------
+\section{Lagrange interpolating polynomial}
+The Lagrange interpolation of order two is given by the following polynomial~:
+\begin{equation}
+	\vect{V}(t) = 
+	\vect{V}_0 \frac{(t-t_1)(t-t_2)}{(t_0-t_1)(t_0-t_2)}
+	+ \vect{V}_1 \frac{(t-t_0)(t-t_2)}{(t_1-t_0)(t_1-t_2)}
+	+ \vect{V}_2 \frac{(t-t_0)(t-t_1)}{(t_2-t_0)(t_2-t_1)}
+	\label{eq:lagrange}
+\end{equation}
+% ----------------------------------------------
+% Lagrange interpolating polynomial
+% ----------------------------------------------
+\section{Reparametrization}
+Lets introduce the distances $l_0$ and $l_1$ in the parametric space~:
+\begin{subequations}
+	\begin{alignat}{1}
+	l_0 &= t_1 - t_0 \\
+	l_1 &= t_2 - t_1
+	\end{alignat}
+\end{subequations}
+Lets introduce the change of variable $u = t - t_1$. The polynomial in \cref{eq:lagrange} can be rewritten in the form~:
+\begin{equation}
+	\vect{V}(u) = 
+	\vect{V}_0 \frac{u(u-l_1)}{l_0(l_0+l_1)}
+	- \vect{V}_1 \frac{(u+l_0)(u-l_1)}{l_0 l_1}
+	+ \vect{V}_2 \frac{u(u+l_0)}{l_1(l_0+l_1)}
+	\label{eq:poly}
+\end{equation}
+where :
+\begin{subequations}
+	\begin{alignat}{1}
+	u_0 &= -l_0 \\
+	u_1 &= 0 \\
+	u_2 &= l_1
+	\end{alignat}
+\end{subequations}
+The derivative of this polynomial is also required to determine the extremum value of $\vect{V}$. Differentiating \cref{eq:poly} gives~:
+\begin{equation}
+	\vect{V}'(u) = 
+	\vect{V}_0 \frac{2u - l_1}{l_0(l_0+l_1)}
+	- \vect{V}_1 \frac{2u + (l_0 - l_1)}{l_0 l_1}
+	+ \vect{V}_2 \frac{2u + l_0}{l_1(l_0+l_1)}
+	\label{eq:dpoly}
+\end{equation}
+This expression can be factorized to give the more compact form :
+\begin{equation}
+	\vect{V}'(u) = 
+	\left(\frac{\vect{V}_1 - \vect{V}_0}{l_0}\right) \frac{l_1 - 2u}{l_0+l_1}
+	+
+	\left(\frac{\vect{V}_2 - \vect{V}_1}{l_1}\right)  \frac{l_0 + 2u}{l_0+l_1}
+	\label{eq:dpoly2}
+\end{equation}
+% ----------------------------------------------
+% Characteristic values
+% ----------------------------------------------
+\section{Characteristic values}
+Using \cref{eq:poly} the interpolated values of $\vect{V}$ at mid distance between $t_0$ and $t_1$ ($u = -l_0/2$), and at mid distance between $t_1$ and $t_2$ ($u =+l_1/2$) are given by~:
+\begin{subequations}
+	\begin{alignat}{7}
+	\vect{V}_{01}
+	&= 
+	&&\vect{V}_0 \frac{l_0 + 2 l_1}{4(l_0+l_1)}
+	&\,+\,&\vect{V}_1 \frac{l_0+2 l_1}{4 l_1}
+	&\,-\,&\vect{V}_2 \frac{{l_0}^2}{4 l_1 (l_0+l_1)}
+	\label{eq:V01_a}
+	\\[0.5em]
+	\vect{V}_{12}
+	&= 
+	- &&\vect{V}_0 \frac{{l_1}^2}{4 l_0 (l_0+l_1)}
+	&\,+\,&\vect{V}_1 \frac{2 l_0 + l_1}{4 l_0}
+	&\,+\,&\vect{V}_2 \frac{2 l_0 + l_1}{4 (l_0+l_1)}
+	\label{eq:V01_b}
+	\end{alignat}
+\end{subequations}
+Using \cref{eq:dpoly2} the interpolated values of $\vect{V}'$ at mid distance between $t_0$ and $t_1$ ($u = -l_0/2$), and at mid distance between $t_1$ and $t_2$ ($u =+l_1/2$) are given by~:
+\begin{subequations}
+	\begin{alignat}{5}
+	\vect{V}'_{01}
+	&= \frac{\vect{V}_1 - \vect{V}_0}{l_0}
+	\\[0.5em]
+	\vect{V}'_{12}
+	&= \frac{\vect{V}_2 - \vect{V}_1}{l_1}
+	\end{alignat}
+\end{subequations}
+Remark that this is an interesting result as at these parameters the evaluation of $\vect{V}'$ boils down to a finite difference scheme.
+
+Using \cref{eq:dpoly2} and introducing $\alpha = \frac{l_0}{l_0+l_1}$ the interpolated values of $\vect{V}'$ at $t_0$, $t_1$ and $t_2$ are given by :
+\begin{subequations}
+	\begin{alignat}{5}
+	\vect{V}'_0 &= (1+\alpha) \vect{V}'_{01} -  \alpha \vect{V}'_{12}
+	 \\
+	\vect{V}'_1 &= (1-\alpha) \vect{V}'_{01} +  \alpha \vect{V}'_{12}
+	\\
+	\vect{V}'_2 &= (\alpha-1) \vect{V}'_{01} +  (2 - \alpha) \vect{V}'_{12}
+	\end{alignat}
+\end{subequations}
+Lets rewrite \cref{eq:V01_a,eq:V01_b} with the help of $\alpha$ :
+\begin{subequations}
+	\begin{alignat}{5}
+	\vect{V}_{01} &= \frac{1}{4}
+	\left(
+	(2-\alpha)\vect{V}_0
+	+ \frac{2 - \alpha}{1 - \alpha} \vect{V}_1
+	- \frac{\alpha^2}{1 - \alpha} \vect{V}_2
+	\right)
+	\\
+	\vect{V}_{01} &= \frac{1}{4}
+	\left(
+	- \frac{(1 - \alpha)^2}{\alpha} \vect{V}_0
+	+ \frac{1 + \alpha}{\alpha} \vect{V}_1
+	+ (1 + \alpha) \vect{V}_2
+	\right)
+	\end{alignat}
+\end{subequations}
+
+\section{Extremum value}
+The extremum value of the parabola is obtained for $\vect{V}'(u^*) = 0$. It's a minimum if $\vect{V}'_{12} > \vect{V}'_{01}$ and it's a maximum if $\vect{V}'_{12} > \vect{V}'_{01}$~:
+\begin{equation}
+	u^* = \frac{l_1 \vect{V}'_{01} + l_0 \vect{V}'_{12}}{2(\vect{V}'_{01}-\vect{V}'_{12})}
+	\label{eq:u}
+\end{equation}
+Remark that if  $\vect{V}'_{12} = \vect{V}'_{01}$ it does not make sens to compute $u^*$ as in this case the parabola degenerates into a line. The value of the function at this parameter is given by~:
+\begin{equation}
+	\vect{V}(u^*) = \vect{V}_1 +  \frac{(l_1 \vect{V}'_{01} + l_0 \vect{V}'_{12})^2}{4(l_0 + l_1)(\vect{V}'_{01}-\vect{V}'_{12})}
+	\label{eq:Vu}
+\end{equation}
+The parabola in \cref{eq:poly} now writes~:
+\begin{equation}
+	\vect{V}(u) = - \frac{\vect{V}'_{01}-\vect{V}'_{12}}{l_0 + l_1} (u - u^*)^2 + \vect{V}(u^*)
+\end{equation}
+The extremum is located in $[t_0,t_2]$ if the sign of $\vect{V}'$ changes on this interval. This condition is satisfied whenever $\vect{V}'_{01} \cdot \vect{V}'_{12} < 0$. 
+
+Finally, in the special case of a uniform discretization where $l_0 = l_1 = l$, \cref{eq:u,eq:Vu} become~:
+\begin{subequations}
+	\begin{alignat}{5}
+		u^* &= \frac{l}{2}\left( \frac{\vect{V}_0 - \vect{V}_2}{\vect{V}_0 - 2\vect{V}_1 + \vect{V}_2} \right)
+		\\[0.5em]
+		\vect{V}(u^*) &= \vect{V}_1 - \frac{u^*}{4l} (\vect{V}_2 - \vect{V}_0)
+	\end{alignat}
+\end{subequations}
+
+\bibliographystyle{alpha}
+\bibliography{../library}
