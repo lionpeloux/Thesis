@@ -6,7 +6,11 @@ cd "ch1_gridshell"
 bibtex chapter.aux
 cd ..
 
-cd "ch2_experimenting"
+cd "ch2a_creteil"
+bibtex chapter.aux
+cd ..
+
+cd "ch2b_experimenting"
 bibtex chapter.aux
 cd ..
 

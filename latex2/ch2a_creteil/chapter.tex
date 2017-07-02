@@ -1,0 +1,278 @@
+\chapter{Ephemeral cathedral : the first GFRP gridshell building}
+
+\section{Introduction}
+%===================
+
+The Ephemeral Cathedral of Créteil, France, is an elastic gridshell structure made of composite materials. Built in 2013, this 350~m\textsuperscript{2} religious edifice was initially a temporary church meant to gather the parishioners during the two year (2013~-~2015) renovation of their permanent cathedral (see \cref{fig:situation_map}). At the time of writing, this building is still in activity and has been erected for almost five years. Although this structure is no more a church it has been converted to a space for community activities and is now the property of the city of Créteil.
+
+This large-scale prototype represents a first in the building industry which still shows excessive apprehension for the use of non-traditional materials such as composites, especially when it comes to structural applications. This is emphasized by the fact that only pre-norms or professional recommendations exists for composite materials, which is quite insufficient when one has to deal with insurers and legal technical controls.
+
+Although this structure is not the first elastic gridshell ever built in \emph{Glass Fiber Reinforced Polymer} (GFRP) composite material, it should be regarded as the first true building using this technology. Indeed, this prototype -- which can legally accommodate up to 500 people -- complies with all the required performances : structural stiffness, fire safety, waterproofness, lightning, thermal comfort, etc. To our knowledge, this building is still the only one of this kind ever built.
+
+It is worth to mentionne that this project arises thanks to a long-term collaboration between {T/E/S/S atelier d'ingénierie}\footnote{A structural design firm based in Paris, France : \url{http://tess.fr}} and the laboratory Navier\footnote{Architected Materials and Structures (AMS) research team, specializes in the field of mechanics of materials and structures : \url{http://navier.enpc.fr/Materiaux-et-Structures?lang=en}} and marks the accomplishment of a ten years research project in this field.\footnote{Note that I developed this project in 2012 while I was a structural engineer at T/E/S/S, using the knowledge I had previously gained on the gridshell project for the Solidays music festival in 2011 while I was a research engineer at Navier. I started this thesis in octobre 2014, 18 months after the opening of the temporary cathedral to pursue my research on this topic started in may 2010.} More over, this challenge was both technical and human as the structure was built by the parishioners them selfs.
+
+In this chapter, we present the main aspects of the design and construction of this structure. This project was at the heart of the motivations of this thesis as it acted as a proof of feasibility and as a validation of the design tools and methods developed until then ; and the gained experience has highlighted further research directions that are presented in this manuscript.
+
+\begin{figure}[p]
+	\centering
+	\captionsetup[subfloat]{captionskip=10pt}
+	\begin{fullpage}
+		\includegraphics[width=1\textwidth]{situation_map}
+		\caption{Situation map. The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.}\label{fig:situation_map}    
+		\vspace{1.5cm}
+		\includegraphics[width=0.7\textwidth]{form}
+		\caption{Architectural sketch. Major and minor volumes are agglomerated into one volume. Here, the morphological register allowed by elastic gridshells appears to be relevant.}\label{fig:form}    
+	\end{fullpage} 
+\end{figure}
+
+\section{Project overview}
+%===================
+\subsection{Context and challenges}
+% ----------------------------------------------
+Creteil is a city of 90.000 inhabitants in the southeast suburb of Paris. Its urbanization began in the late 50’s, impelled by the French architect Charles-Gustave Stoskopf. In 1976 he designed Notre Dame of Créteil, a modest catholic church made of concrete, which became a cathedral 10 years later (see item 2 in \cref{fig:situation_map}). Recently, the diocese of Créteil has undertaken a major architectural redevelopment project of its cathedral, including a timber shell covering the religious area and the creation of a new cultural area. Once transformed, the edifice shall be more visible, more hospitable and livelier for citizens. Inevitably, such a molt takes time and a temporary place of worship was required to ensure liturgical services during the two-years work. In November 2011, T/E/S/S, the structural design office in charge of the cathedral renovation project, made an ambitious proposal to the diocese~: based on a previous successful experience – the construction of a composite gridshell for the festival Solidays \cite{Baverel2012} – T/E/S/S suggested that rather installing a basic tent, the parishioners should construct themselves a temporary cathedral.\footnote{See the video of the construction of Solidays' gridshell here : \url{https://youtu.be/24LLfcVIZWw}.}\textsuperscript{,}\footnote{See the video of the construction of Creteil's gridshell here : \url{https://youtu.be/jLq-UfOdnQQ}.}
+
+\subsection{Architectural considerations on the form}
+% ------------------------------------------------------------------
+The origin of this building form was driven by two objectives, that is, to provide a variety of appropriate internal spaces within which the community could assemble, and to provide an externally welcoming and visually interesting form. According to the architect Tom Gray, today, the internal organization of a roman catholic church is in large part driven by the post Vatican II vision of a religious celebration being a collective gathering of the community around the Eucharist, center of spiritual life. A circular seating arrangement is often considered the most convivial form to create a sense of belonging while minimizing a sense of hierarchy. However the community is not only using the building for religious celebration but also for encounters on a more informal manner, for example spontaneous gatherings after religious ceremonies. In the early Roman church, such gathering of the community was facilitated by the presence of an anti-space to the main space called a \emph{narthex}, through which one passed on entering the church. It was therefore felt appropriate that the formal freedom which the gridshell system offered would be used to explore forms composed of an agglomeration of major and a minor volumes which contain the two functions~: formal and informal gatherings (see item 1 and 2 in \cref{fig:form}).
+
+Formal explorations were undertaken using modeling clay. The final form is based loosely on two adjacent semi spherical volumes of different size, which are merged into one complex form. Externally the fear of the design team was that the totally convex blob form could look intimidating. It was therefore decided that the two spherical virtual forms, which would be joined to make the final form, would be arranged not in a symmetrical axial manner, but in an asymmetrical curved composition. The resulting form seen in plan is convex on one side and concave on the other. The concave form in plan allows for double curvature to be introduced into what would be otherwise a simpler blob and gives sensuality and visual interest to the building.
+
+\begin{figure}[p]
+	\captionsetup[subfloat]{captionskip=10pt}
+     	\centering
+	\begin{fullpage}	
+		\includegraphics[width=0.80\textwidth]{gs_ext.jpg}
+		\caption{Exterior view. The connections mark the fabric suggesting the interior grid structure. This texture enriches the perception of the building viewed from the outside and creates effects with the light reflections -- \textcopyright~L. du Peloux for T/E/S/S.}
+		\label{fig:gs_ext}
+		\vspace{1cm}
+		\includegraphics[width=0.80\textwidth]{gs_int.jpg}\label{fig:gs_int}
+		\caption{Interior view. The grid pattern highlights the lightness of the structure and gives its tempo to the internal space. Lines converge to the altar, the heart of the liturgical area where the mass is offered on -- \textcopyright~C. Moissinac for T/E/S/S.}
+		\vspace{20pt}
+	\end{fullpage}
+\end{figure}
+
+%\begin{figure}[p]
+%	\begin{fullpage}
+%		\captionsetup[subfloat]{captionskip=10pt}
+%     		\centering
+%		\subfloat[][The connections mark the fabric suggesting the interior grid structure. This texture enriches the perception of the building viewed from the outside and creates effects with the light reflections -- \centering\textcopyright~L. du Peloux for T/E/S/S.
+%		]{\includegraphics[width=0.80\textwidth]{gs_ext.jpg}\label{fig:gs_ext}}
+%		\vspace{10pt}
+%		\subfloat[][The grid pattern highlights the lightness of the structure and gives its tempo to the internal space. Lines converge to the altar, the heart of the liturgical area where the mass is offered on -- \centering\textcopyright~C. Moissinac for T/E/S/S.]
+%		{\includegraphics[width=0.80\textwidth]{gs_int.jpg}\label{fig:gs_int}}
+%		\vspace{20pt}
+%		\caption{Interior and exterior views of the ephemeral cathedral in the city of Créteil, France.}
+%		\label{fig:gs}    
+%	\end{fullpage}
+%\end{figure}
+
+\subsection{Placing of the building on the site}The temporary cathedral is located on a land owned by the municipality, which is used for sporting and other communal gatherings. The curve in the building defines an external area where the church community could meet in the open air and this is where the entrance to the church is situated. The building was positioned on the site so that the entrance addresses a grass planted area forming a garden forecourt or “parvis” (see item 3 in \cref{fig:form}). A service building housing plant, toilets and vestry are housed in a portacabin positioned to the rear of the building.
+
+\subsection{Entrance}
+It is formally quite difficult to integrate doors, which must be verticals, into a complex geometry. Either the gridshell could be deformed to accommodate the geometrical requirements of doors, or the doors could be integrated into an independent form. The latter approach was chosen. In looking for forms to house the doors, reference was made to the conical monumental doorways with rings of concentric decoration, which welcome the faithful to romanesque and gothic churches in France. The conical forms were found to be coherent to the overall geometry of the building. The entrance doors were therefore inserted into a conical hooded form made of rolled steel plates and stiffened by concentric steel tubes, which not only make reference to historic precedence but also refer to the gridshell to be discovered inside (see \cref{fig:door_int}). The cone of the entrance doors was positioned in the concave side of the building giving access directly to the narthex part of the internal volume. To the rear of the church is situated a service door. The steel hood, which houses this door, is curved tightly around the door and takes up an ovoid form.
+
+\subsection{Daylight}
+The gridshell is covered in a PVC membrane, which is opaque. How to introduce daylight into the interior was a major subject of reflection. The simplest way found was to use transparent membrane placed occasionally on the membrane. A small amount of light was required in the interior to create a contemplative atmosphere. The lights would in consequence glow and would be seen as luminous insertions in the vault, like stars in the celestial vault or the apse of some Romanesque churches. The stars were patterned on the joints of the PVC membrane. The almond shape came from simplification of the cutting into the panels either side of the joints and to avoid stress concentrations around cuts in the membrane. This shape, known as Mandela, is frequently used in Marian religious imagery. The distribution of the transparent insertions is quite uniform but gets denser above the pinnacle.
+
+\subsection{Technical description}
+% ------------------------------------------
+
+The gridshell structure is made of long glass-fibre tubes (42~mm diameter) fastened together with scaffold swivel couplers (see, \cref{fig:swivel}). The structural members of the grid, all of different lengths, are built  from one, two or three composite tubes connected with steel sleeves (see \cref{fig:sleeve}). The length of the tubes is limited to 12~m to enable transportation through standard trucks. The tubes are organized in three layers. During assembly, the first two layers are first placed perpendicular to one another on the ground. They form the \emph{quadrangular primary grid}. The distance between the tubes of these two layers is constant, resulting in a regular grid. This primary grid is elastically deformed to obtain the final shape. The third layer of tubes acts as bracing. It gives the structure a shell-like behavior. The tubes are fixed to the primary grid once the shape has been obtained
+
+The structure is anchored to a concrete strip footing with a special steel system, which ensures transfer of loads from the composite structure to the ground (see \cref{fig:anchorage}). A similar system enables fixation of the structure to the doors (see \cref{fig:door_ext}). A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers the structure. The transparent portion of the structure allows daylight inside the gridshell. The fabric is stretched on the peripheral edge of a dedicated beam with a double-lacing system (halyard and strap, see \cref{fig:edge}). At the ground level, the lacing edge of the beam is made of a bent, composite rod nailed to the concrete slab. At the grid–door junction, a steel arch is welded to the doorframe (see \cref{fig:door_ext}).
+
+The PVC fabric is waterproof and, since it is a continuous membrane, has no joints except at the perimeter. At the perimeter, a continuous strip of membrane is prefixed to the internal surface of the membrane and fixed to the ground slab. At the doors, a flexible strip of the membrane is riveted to the doorframe.
+
+
+
+%\subsection{Cost}
+%% ------------------------------------------
+%The overall cost of the project is \$500.000, approximately 30\% more than the rental for a standard tent of the same size for over 2 years.
+
+\begin{figure}[p]
+	\captionsetup[subfloat]{captionskip=10pt}
+     	\centering
+	\begin{fullpage}	
+		%
+		\subfloat[][Exterior.]{\includegraphics[width=0.48\textwidth]{door_ext.jpg}\label{fig:door_ext}}
+		\hspace*{\fill}
+		\subfloat[][Interior.]{\includegraphics[width=0.48\textwidth]{door_int.jpg}\label{fig:door_int}}
+		\vspace{10pt}
+		\caption{Entrance. Two steel doors allow the entrance inside the building.}
+		\label{fig:door}
+		%    
+     		\vspace{1cm}
+		%
+		\subfloat[][Scaffold swivel coupler.]{\includegraphics[width=0.48\textwidth]{swivel.jpg}\label{fig:swivel}}
+		\hspace*{\fill}
+		\subfloat[][Steel sleeve.]{\includegraphics[width=0.48\textwidth]{sleeve.jpg}\label{fig:sleeve}} \\
+		%
+		\subfloat[][Ground anchorage.]{\includegraphics[width=0.48\textwidth]{anchorage.jpg}\label{fig:anchorage}}
+		\hspace*{\fill}
+		\subfloat[][Edge beam.]{\includegraphics[width=0.48\textwidth]{edge.jpg}\label{fig:edge}} \\
+		%
+		\vspace{10pt}
+		\caption{Standard elements that composed the structural system.}
+		\label{fig:parts}    
+	\end{fullpage}
+\end{figure}
+
+
+
+
+\begin{figure}[p]
+	\captionsetup[subfloat]{captionskip=20pt}
+     	\centering
+	\begin{fullpage}	
+		\includegraphics[width=\textwidth]{section_view}
+		\caption{Interior view of the Ephemeral Cathedral in Paris}
+		\label{fig:sec}
+		%
+		\vspace{1.5cm}
+		%
+		\includegraphics[width=\textwidth]{plan_view}
+		\caption{Interior view of the Ephemeral Cathedral in Paris}
+		\label{fig:plan_view}	
+	\end{fullpage}
+\end{figure}
+
+\clearpage
+
+
+\section{Design Process}
+
+\subsection{Overall design process}
+% ------------------------------------------
+
+The goal of the design process is to identify a gridshell structure that works and respects as faithfully as possible the architectural project – a shape and a program. It represents “the path from shape to structure”. Its progress, sequential and iterative, revolves around three major stages: shape, mesh and structure. It is not trivial to go through this complex process. Indeed, for each step, the method, the tool, the criteria, that offers both a sufficient explorative richness to find out enough candidate solutions, and the means to evaluate and compare the suitability of those solutions, have to be found.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{image8}
+\caption{Evaluating the mechanical potential of shapes regarding principal curvatures}
+\label{fig:7}
+\end{figure}
+
+\subsection{3D modelling of the intended shape}
+% ------------------------------------------
+The first step of the process consists in building a precise geometric model from the sketch of the architect and to evaluate its mechanical potential (\autoref{fig:7}). At this stage, the goal is to estimate the probability a given shape would lead to the generation of a structurally feasible gridshell.
+
+Stresses in the grid are mainly due to the bending of the profiles. They derive directly from their geometric curvature. Thus, the principal curvatures of the surface – because they give a qualitative measurement of the local curvature of any curve drawn on a surface – are relevant indicators to evaluate the stress rate of a grid laying on it. Particularly, one should ensure the following condition is satisfied everywhere, where $r$ is the pipe’s outer radius, $R_{min}$ is the minimum principal radius, E is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance :
+\begin{equation}
+	\mathrm{E} = \frac{r}{R_{min}} < \frac{\sigma_{k,flex}}{\gamma_{lt}} 
+\end{equation}
+
+Ideally, the shape is controlled by few key parameters. Thus, it can be adapted and optimized through an iterative process, towards this criterion.
+
+\subsection{Mesh from the compass method}
+% ------------------------------------------
+During the second step, the candidate surface is meshed and the mechanical potential of the resulting grid is evaluated. At this stage, we try to estimate the probability a given mesh could lead to the generation of a viable gridshell structure. Simultaneously, meshes are compared according to their architectural relevance.
+
+This time, the geometric curvature of the polylines drawn on the surface is the criterion to characterize the mechanical potential of the grid. In particular, one should ensure the following condition is satisfied everywhere, where $R_{spline}$ is the spline’s local curvature radius :
+\begin{equation}
+\mathrm{E} =  \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
+\end{equation}
+
+The mesh is obtained by the compass method, described in \citep{Otto1974}, which develops a regularly spaced grid on a surface from two secant directrix. For a given shape there are an infinite number of meshes. The aim is to identify at least one grid, suitable towards architectural and structural criteria. The laboratory tried various numerical methods to generate such grids \citep{Bouhaya2009}. Here, a specific software \citep{DuPeloux2011}, developed for rhino \& grasshopper, allows generating this kind of mesh on any NURBS surface.
+
+
+\subsection{Formfinding and bending prestress}
+% ------------------------------------------
+From now on, the initial form has been optimized and promising meshes for the materialization of the future gridshell have been identified. However, they do not take account of any true mechanical reality, because only geometric rules have led to their generation. The formfinding step consists precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses.
+The calculations, performed numerically thanks to a dynamic relaxation algorithm with kinetic damping \citep{Barnes1975}, is composed of the following steps:
+\begin{enumerate}
+\item The grid is bent by a set of applied displacements from rest to compass position
+\item The grid is then relaxed through its mechanical equilibrium
+\item Bending stresses of the triangulation are calculated relative to the relaxed geometry
+\item Geometry and bending stresses of the triangulation are reinjected in the model
+\end{enumerate}
+
+Two analysis models are built during this process to study the structure with or without bracing tubes.
+Note that the algorithm has been improved to take account for the eccentricity due to connections \citep{Douthe2006}.
+
+
+\subsection{Structural analysis}
+% ------------------------------------------
+A full structural analysis is performed on the gridshell, using the two mechanical models created previously during the formfinding stage.
+The non-braced model is used to check the grid’s behavior during the construction stages. In particular, it must be verified that the primary grid - the one with no triangulation tubes - has no risk of buckling, both for obvious safety reasons and to ensure the accuracy of the final geometry. Indeed, the more the form is likely to buckle, the more it can be triangulated in a buckled geometry different to the targeted geometry. The model with the triangulated grid is used to confirm the gridshell complies with all the structural requirements during its lifetime. Its behavior under standard loadings is evaluated.
+
+
+\section{Construction details}
+% ------------------------------------------
+In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (\autoref{fig:8}a); the steel sleeve for connecting several composite tubes to make long members from initially short piece of tubes (\autoref{fig:8}b); ground anchorages for fixing the structure to the concrete slab (\autoref{fig:8}c) and the lacing edge beam of the fabric (\autoref{fig:8}d).
+Note that the tricky issue of connecting steel and composite parts is solved in a similar way through sleeve and anchorage details.
+
+\section{Codes for composite materials}
+% ------------------------------------------
+
+Beyond the technical difficulties related to both design and structural analysis of the shell, the regulatory framework was a vital issue for the project’s success. Because it was the first time a structure of this kind would host regularly a large number of people in a long-term period, the question of its reliability over time was a major issue. To be built the gridshell had to comply with existing standards, which do not take into account such an innovative edifice, all in composite material. The strategy adopted to bypass this obstacle consisted in making the most of the existing regulatory framework to justify the compliance of a structure that would not, at first sight, be taken into account by standards that does not include composite materials.
+As far as possible, the design was led in compliance with the Eurocodes, where the structural design is made according to limit states under normalized loadings (self-weight, snow, wind, etc.). Despite the Eurocodes do not directly take into account composite materials, they propose some probabilistic methods to introduce new materials (Annexe D). As far as possible, the mechanical properties of the GFRP pipe were determined by tests in conformance with these methods. Otherwise, values where taken according to the Eurocomp \citep{Clarke2003}.  In some cases, as the sleeve, the design of the construction details has also benefited from this approach.
+
+\begin{figure}[t]
+	\centering
+		\includegraphics[width=\textwidth]{image13}
+	\caption{Section on the footer}
+	\label{fig:9}
+\end{figure}
+
+\subsection{Flexural strength of the tubes}
+% ------------------------------------------
+The characteristic flexural strength ($\sigma_{k,flex}$) of the GFRP tube has a critical impact on the structure’s reliability because in this particular application stresses in the tubes are mainly due to bending. Thus, it was important to confirm the manufacturer’s value by assays. 
+Three-point flexural tests were led with and without connexions (tightening torque set to 20Nm) to determine the characteristic strength according to the protocol of the Eurocode (Annex D) :
+\begin{equation}
+\sigma_{k,flex}=\overline{\sigma}(1-k_n\sigma_x)
+\end{equation}
+
+For five tests, the factor $k_{n,5\%}$ is 1.80 , assuming a normal distribution. One can note that the connections scatter the results more (Table 1). Finally, the manufacturer value of 400MPa (ASTM D790) was confirmed and retained for further calculations.
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+Connections & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & $\sigma_{k,flex}$ \\
+\hline
+Without & 456 & 441 & 445 & 460 & 477 & 430 \\
+\hline
+With & 444 & 478 & 434 & 479 & 427 & 408 \\
+\hline
+\end{tabular}
+\caption{Three-point flexural tests of the GFRP tubes (results in MPa)}
+\label{tab:1}
+\end{table}
+
+
+\subsection{Partial safety factors}
+% ------------------------------------------
+The partial coefficients of material resistance used in the project are calculated according to the Eurocomp (Table 2). The short-term coefficient proposed in the Eurocomp ($\gamma_{st} = 1.3$) was raised to consider the critical stage of erection, where the deformations are not controlled accurately. 
+
+\begin{table}[h]
+\label{tab:2}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Impact & Partial coefficient & Design flexural strength \\
+\hline
+Short-term & $\gamma_{st} = 2.0$ & 200 MPa \\
+\hline
+Long-term & $\gamma_{st} = 3.0$ & 133 MPa\\
+\hline
+\end{tabular}
+\caption{Short-term and long-term values for material resistance.}
+\end{table}
+
+Note that designers should take care about long-term effects in permanently loaded pultruded composite materials subjected to creeping and relaxation \citep{Kotelnikova-Weiler2012}. Here, it is reflected in a high partial coefficient for long-term effects.
+
+\section{Conclusions}
+% ------------------------------------------
+This paper has presented the different steps for the design of a gridshell in composite material : a Temporary Cathedral at Créteil, in Paris suburb, in 2013. The first step was the optimization of the shape in order to avoid local concentrations of curvature. The second step showed a tool to automatically mesh a surface using the compass method. With this tool, the orientation of the mesh is studied according to structural and architectural criterions. The last steps showed the structural analysis of the gridshell and how to get the as-built geometry from the analysis model.
+Architecturally, the structure offers a very interesting space where the textual richness of the tubes against the membrane accentuates the reading of the complex curved surfaces.
+
+This project demonstrates that gridshells in composite material are suitable for constructing freeform buildings. However, the long-term behavior of these materials needs to be better characterized to extend their lifespan.
+
+At the moment, further developments are conducted by the laboratory to take account for torsional effects and non axisymmetric sections in such structures, as it is studied in \citep{Barnes2013}.
+
+\subsection{Acknowledgements}
+% ------------------------------------------
+The authors would like to thank the Catholic Church of Créteil for their trust and their courage, which permitted to get into this ambitious and successful project. They also want to greet the engineers from T/E/S/S, which have developed this challenging project during 18th months. They also thank the firm Viry for the supervision of construction works, including the delicate erection stage.
+
+
+\bibliographystyle{alpha}
+\bibliography{../library}
