@@ -1,0 +1,48 @@
+% PREDIFINED COLORS
+\definecolor{Tblue}{RGB}{104, 135, 255}
+\definecolor{Tred}{RGB}{255, 110, 103}
+\definecolor{Tgreen}{RGB}{147, 250, 103}
+\definecolor{Tgray}{RGB}{184, 184, 184}
+\definecolor{Tdarkgray}{RGB}{56, 56, 56}
+
+\definecolor{gray2}{cmyk}{0,0,0,0.2}
+\definecolor{gray4}{cmyk}{0,0,0,0.4}
+\definecolor{gray6}{cmyk}{0,0,0,0.6}
+\definecolor{gray8}{cmyk}{0,0,0,0.9}
+
+\definecolor{gray1}{cmyk}{0,0,0,0.1}
+\definecolor{gray3}{cmyk}{0,0,0,0.3}
+\definecolor{gray5}{cmyk}{0,0,0,0.5}
+\definecolor{gray7}{cmyk}{0,0,0,0.7}
+\definecolor{gray9}{cmyk}{0,0,0,0.9}
+% PLOT STYLES
+
+% make sur that the plot area is centered
+\tikzset{TikzStyle/.style={trim axis left, trim axis right}}
+
+% use this command \PlotStyle{width}{height}{xmin}{xmax}{ymin}{ymax} to apply the default style
+% width and height must be given in mm
+\newcommand{\PlotStyle}[6]{
+	\def \plotwidth{#1}
+	\def \plotheight{#2}
+	\def \plotratio{\plotwidth / \plotheight}
+	\def \plotmargin{0.05}
+	\pgfplotsset{
+ 	compat=1.14,
+ 	width=\plotwidth mm,
+	height=\plotheight mm,
+	scale only axis,
+	%
+	xmin=#3 - (#4-#3) * \plotmargin,
+	xmax=#4 + (#4-#3) * \plotmargin, 
+	restrict x to domain = #3 : #4,
+	%
+	ymin=#5 - (#6-#5) * \plotmargin * \plotratio,
+	ymax=#6 + (#6-#5) * \plotmargin * \plotratio,
+	restrict y to domain = #5 : #6,
+	%
+	grid=major,
+	grid style = { line cap = round, Tgray, line width = 0.25pt},
+	%
+	every axis/.append style={font=\normalsize}, % normalsize, small, footnotesize or tiny
+}}

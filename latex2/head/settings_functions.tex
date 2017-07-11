@@ -1,0 +1,5 @@
+% CURVATURES
+
+\def\curvatureA(#1,#2){2*sin(#1)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5} 				% 3pt-circle-curvature where curvatureA(phi, alpha)
+\def\curvatureB(#1,#2){4*tan(#1/2)/(1+(#2))} 								%  Bi-tangent-circle-curvature where curvatureA(phi, alpha)
+\def\curvatureRap(#1,#2){(1+#2)/(1+(#2)^2 + 2*(#2)*cos(#1))^0.5*cos(#1/2)^2} 		% curvature A / curvature B

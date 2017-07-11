@@ -982,12 +982,10 @@ Several approches.~\cite{Vouga2014} defines and compares three different definit
 \subsection{Definition from osculating circles}
 Curvature is defined from the osculating circle, which is the best approximation of a curve by a circle.
 
-\afterpage{%    % defer execution until the next page break occurs anyway
-	\clearpage
-   	\begin{figure}[t!] % not "pt"
-      		\centering
-		\vspace{-5mm}
-      		% remaining contents of figure environment
+\begin{figure}[p]
+\centering
+\renewcommand{\arraystretch}{1.5}
+		\vspace{-0.5cm}
 		\subfloat[][vertex-based]{\includegraphics{kb_vertex.pdf}\label{fig:kb_vertex}}\hspace{5mm}
     		\subfloat[][edge-based]{\includegraphics{kb_edge.pdf}\label{fig:kb_edge}} \\[-10pt]
 		\subfloat[][bitangent with $\norm{\vect{e}_{i-1}}$]{\includegraphics{kb_mixed_a.pdf}\label{fig:kb_mixed_a}}\hspace{5mm}
@@ -995,28 +993,60 @@ Curvature is defined from the osculating circle, which is the best approximation
 		\vspace{10pt}
 		\caption{Several ways to define the osculating circle for discrete curves, leading to different notions of discrete curvature.}
 		\label{fig:kb_def}
-   	\end{figure}
-   	\begin{table}[h!] % not t or b or p
-		\centering
-      		% remaining contents of table environment
-      		\renewcommand{\arraystretch}{1.5}
- 		\begin{tabular}{l | c c c c c c}
-      		\hline
-		Curvature ($\kappa_i$) 										&  Locality 	&  $\varphi \mapsto 0$ 	&  $\varphi \mapsto \pi$ 		& Ends  	& Dim 	&  Fitting	\\
-		\hline
-		$\kappa_1 = \frac{2\, \sin(\varphi_i)}{\norm{\vect{e}_{i-1}+\vect{e}_i}}$ 	&  $\vect{x}_i$ 	&  $0$				&  $0, 2$					&  yes	&  space	&  clothoid		\\
+		\vspace{1cm}
+		\ra{1.8}
+ 		\begin{tabularx}{\textwidth}{@{} X c c c r r r @{}}
+      		\toprule
+		Curvature ($\kappa_i$) 										&  Locality 	&  $\varphi \mapsto 0$ 	&  $\varphi \mapsto \pi$ 		& Ends  	& Dim 	&  Fitting			\\
+		\midrule
+		$\kappa_1 = \frac{2\, \sin(\varphi_i)}{\norm{\vect{e}_{i-1}+\vect{e}_i}}$ 	&  $\vect{x}_i$ 	&  $0$				&  $0, 2$					&  yes	&  space	&  clothoid			\\
 		$\kappa_2 = \frac{\tan(\varphi_i/2)+\tan(\varphi_{i+1}/2)}{l_i}$ 			&  $\vect{e}_i$ 	&  $0$				&  $\infty$					&  no		&  planar	&  circle			\\
- 		$\kappa_3 = \frac{2\, \tan(\varphi_i / 2)}{\overbar{l_i}} $				&  $\vect{x}_i$	&  $0$ 				&  $\infty$					&  no		&  space	&  circles			\\[5pt]
-	\hline
+ 		$\kappa_3 = \frac{2\, \tan(\varphi_i / 2)}{\overbar{l_i}} $				&  $\vect{x}_i$	&  $0$ 				&  $\infty$					&  no		&  space	&  circles			\\
+		\midrule
 		$\kappa_4 = \frac{2\,\sin(\varphi_i / 2)}{\overbar{l_i}}$ 				&  $\vect{x}_i$	&  $0$				&  $0, 2$					&  no		&  space	&  clothoid  		\\
-		$\kappa_5 = \frac{\varphi_i}{\overbar{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\overbar{l_i}$			&  no		&  space	&  elastica  		\\[5pt]
-		\hline
-		\end{tabular}
+		$\kappa_5 = \frac{\varphi_i}{\overbar{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\overbar{l_i}$			&  no		&  space	&  elastica  		\\
+		\bottomrule
+		\end{tabularx}
 		\caption{Review of several discrete curvature definitions mentioned in the literature.}
-	\label{tab:kb_def}
-   \end{table}
-} % end of argument of `\afterpage` command
+		\label{tab:kb_def}
+\end{figure}
 
+%
+%\afterpage{%    % defer execution until the next page break occurs anyway
+%	\clearpage
+%   	\begin{figure}[t!] % not "pt"
+%      		\centering
+%		\vspace{-5mm}
+%      		% remaining contents of figure environment
+%		\subfloat[][vertex-based]{\includegraphics{kb_vertex.pdf}\label{fig:kb_vertex}}\hspace{5mm}
+%    		\subfloat[][edge-based]{\includegraphics{kb_edge.pdf}\label{fig:kb_edge}} \\[-10pt]
+%		\subfloat[][bitangent with $\norm{\vect{e}_{i-1}}$]{\includegraphics{kb_mixed_a.pdf}\label{fig:kb_mixed_a}}\hspace{5mm}
+%		\subfloat[][bitangent with $\norm{\vect{e}_{i}}$]{\includegraphics{kb_mixed_b.pdf}\label{fig:kb_mixed_b}}
+%		\vspace{10pt}
+%		\caption{Several ways to define the osculating circle for discrete curves, leading to different notions of discrete curvature.}
+%		\label{fig:kb_def}
+%   	\end{figure}
+%   	\begin{table}[h!] % not t or b or p
+%		\centering
+%      		% remaining contents of table environment
+%      		\renewcommand{\arraystretch}{1.5}
+% 		\begin{tabular}{l | c c c c c c}
+%      		\hline
+%		Curvature ($\kappa_i$) 										&  Locality 	&  $\varphi \mapsto 0$ 	&  $\varphi \mapsto \pi$ 		& Ends  	& Dim 	&  Fitting	\\
+%		\hline
+%		$\kappa_1 = \frac{2\, \sin(\varphi_i)}{\norm{\vect{e}_{i-1}+\vect{e}_i}}$ 	&  $\vect{x}_i$ 	&  $0$				&  $0, 2$					&  yes	&  space	&  clothoid		\\
+%		$\kappa_2 = \frac{\tan(\varphi_i/2)+\tan(\varphi_{i+1}/2)}{l_i}$ 			&  $\vect{e}_i$ 	&  $0$				&  $\infty$					&  no		&  planar	&  circle			\\
+% 		$\kappa_3 = \frac{2\, \tan(\varphi_i / 2)}{\overbar{l_i}} $				&  $\vect{x}_i$	&  $0$ 				&  $\infty$					&  no		&  space	&  circles			\\[5pt]
+%	\hline
+%		$\kappa_4 = \frac{2\,\sin(\varphi_i / 2)}{\overbar{l_i}}$ 				&  $\vect{x}_i$	&  $0$				&  $0, 2$					&  no		&  space	&  clothoid  		\\
+%		$\kappa_5 = \frac{\varphi_i}{\overbar{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\overbar{l_i}$			&  no		&  space	&  elastica  		\\[5pt]
+%		\hline
+%		\end{tabular}
+%		\caption{Review of several discrete curvature definitions mentioned in the literature.}
+%	\label{tab:kb_def}
+%   \end{table}
+%} % end of argument of `\afterpage` command
+%
 
 %\footnote{
 %Curvature is defined from the osculating circle, which is the best approcximation of a curve by a circle.
@@ -1044,7 +1074,7 @@ Curvature is defined from the osculating circle, which is the best approximation
 % vertex-based curvature
 % -------------------------------
 \subsubsection{Vertex-based osculating circle (circumscribed)}\label{sec:circumscribed}
-Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-based} (or circumscribed) osculating circle at vertex $\vect{x}_{i}$ is defined as the unique circle passing through the points $\vect{x}_{i-1}$, $\vect{x}_{i}$ and $\vect{x}_{i+1}$ (see \cref{fig:kb_vertex}). This circle leads to the following definition of the curvature~: \footnote{This curvature is also known as the \emph{Menger curvature}.}
+Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-based} (or circumscribed) osculating circle at vertex $\vect{x}_{i}$ is defined as the unique circle passing through the points $\vect{x}_{i-1}$, $\vect{x}_{i}$ and $\vect{x}_{i+1}$ (see \cref{fig:kb_vertex}). This circle leads to the following definition of the curvature~:~\footnote{This curvature is also known as the \emph{Menger curvature}.}
 \begin{equation}
 	\vect{\kappa b}_i = \frac{2 \, \vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} \norm{\vect{e}_{i-1} + \vect{e}_{i}} }
 	\quad , \quad
@@ -1148,7 +1178,7 @@ In this section we compare the two main discrete curvature notions (circumscribe
 	\caption{Comparison of circumscribed (a-b) and inscribed (c-d) osculating circles for different values of the turning angle ($\varphi$).}
 	\label{fig:kb_animation}
 	\vspace{10mm}
-	\input{ch3_geometry/plot/bench_kb.tex}
+	\input{ch3_geometry/plot/1_bench_kb/plot.tex}
 	\caption{Sensitivity of discrete curvatures to non uniform discretization ($\alpha \in [0.5,2]$) over the whole domain of variation of the turning angle ($\varphi \in [0,\pi]$).}
 	\label{fig:kb_bench}
 \end{figure}
@@ -1186,9 +1216,10 @@ However, for a given curvature, the turning angle decreases as the sharpness of 
 	\caption{Discretization of a semicircle for discrete bending energies evaluation.}
 	\label{fig:semicircle}
 	\vspace{10mm}
-	\subfloat[][$| 1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/bench_semicircle_vertex.tex}
-		\label{plot:bench_semicircle_vertex}}\hspace{5mm}
-	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/bench_semicircle_edge.tex}
+	\pgfplotstableread{ch3_geometry/plot/4_bench_semicircle/data.txt}\Table
+	\subfloat[][$| 1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/4_bench_semicircle/plot_vertex.tex}
+		\label{plot:bench_semicircle_vertex}}\hspace{10mm}
+	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/4_bench_semicircle/plot_edge.tex}
 		\label{plot:bench_semicircle_vertex}}
 	\vspace{8pt}
 	\caption{Relative error in the estimation of the smooth bending energy ($\mathcal{E}$) by the discrete bending energies ($\mathcal{E}_1$ and $\mathcal{E}_3$) regarding the sharpness of the discretization, for a semicircle.}
