@@ -1,7 +1,0 @@
-tikz/ch3-figure5.pdf: ch3_geometry/plot/elastica/elastica_1.txt
-tikz/ch3-figure5.pdf: ch3_geometry/plot/elastica/elastica_5.txt
-tikz/ch3-figure5.pdf: ch3_geometry/plot/elastica/elastica_10.txt
-tikz/ch3-figure5.pdf: ch3_geometry/plot/elastica/elastica_15.txt
-tikz/ch3-figure5.pdf: ch3_geometry/plot/elastica/elastica_20.txt
-tikz/ch3-figure5.pdf: ch3_geometry/plot/elastica/elastica_25.txt
-tikz/ch3-figure5.pdf: ch3_geometry/plot/elastica/elastica_30.txt

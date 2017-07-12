@@ -285,36 +285,39 @@ The reader is invited to refer to~\cite{Antman2005} to get a deeper understandin
 \begin{table}[p]
 \begin{fullpage}
 \center
-	\renewcommand{\arraystretch}{1.8}
-	\begin{tabular}{l|c|c} 
+		\ra{1.5}
+		\begin{tabularx}{0.75\textwidth}{@{} X c c @{}}
+		\toprule
 		 				& reference configuration										& actual configuration
-		\\ \hline
+		\\ \midrule
 		arc length 			& $s = \Psi_t^{-1}(s_t)$ 										& $s_t = \Psi_t(s)$
-		\\ \hline
+		\\
 		length 			& $L$ 													& $L_t$
-		\\ \hline
+		\\
 		centerline			& $\rconf{\gamma}$ 											& $\gamma_t$
-		\\ \hline
+		\\
 		position vector		& $\rconf{\vect{x}}$ 											& ${\vect{x}}$
-		\\ \hline
+		\\
 		material frame		& $\{\rconf{\vect{d}_1},\rconf{\vect{d}_2},\rconf{\vect{d}_3}\}$ 			& $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$
-		\\ \hline
+		\\
 		material coordinates	& $(X_1, X_2, s)$ 											& $(X_1, X_2, s)$
-		\\ \hline
+		\\
 		force strains 		& $\rconf{\vect{\eta}}$ 										& ${\vect{\eta}}$ 	
-		\\ \hline
+		\\
 		moment strains 	& $\rconf{\vect{\varkappa}}$ 									& ${\vect{\varkappa}}$
-		\\ \hline
+		\\
 		spin vector 		& $\rconf{\vect{\omega}}$ 									& ${\vect{\omega}}$ 
-		\\ \hline
+		\\
 		axial extension 		& $ \rconf{\epsilon} = 0$ 									& $\norm{\eta} = \Psi'_t(s) = 1 + \epsilon$		
-		\\ \hline
+		\\
 		arc length derivative 	& $ \frac{\partial}{\partial s} \cdot = (\cdot)'	$						& $\frac{\partial}{\partial s_t} \cdot = (1 + \epsilon)^{-1} (\cdot)'$			
-		\\ \hline
+		\\
 		time derivative 		& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$						& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$		
-		\\ \hline	
-	\end{tabular}
+		\\
+		\bottomrule	
+	\end{tabularx}
 	\label{tab:count}
+	\vspace{10pt}
 	\caption{Summary of the notations employed throughout this section.}
 \end{fullpage}
 \end{table}
@@ -1306,20 +1309,21 @@ Beams can either be closed or open. The corresponding number of vertices, edges 
      	\subfloat[][Centerline of the discrete biarc model.]{\includegraphics{discrete_model.pdf}\label{fig:discrete_model}} \\
 	\vspace{30pt}
 	\subfloat[][Number of segments, edges and vertices whether the centerline is closed or open.]{
-		\begin{tabular}{l  l | c  c } 
-		 &  & open & closed \\
-		\hline
+		 \ra{1.2}
+		 \begin{tabularx}{0.45\textwidth}{@{} X l r  r@{}}
+		 \toprule
+		 		&			& \multicolumn{2}{c}{Centerline} \\ \cmidrule(l){3-4}
+		 Item 	&  Symbol 	& Open 	& Closed \\
+		 \midrule
 		segments & $n_s$ & $n_s$ & $n_s$ \\
-		\hline
 		edges & $n_e$ & $2 n_s$ & $2 n_s$ \\
-		\hline
 		vertices & $n$ & $2 n_s + 1$ & $2 n_s$ \\
-		\hline
 		ghosts & $n_g$ & $n_s$ & $n_s$ \\
-		\hline
 		handles & $n_h$ & $n_s+1$ & $n_s$ \\
-	\end{tabular}\label{tab:count}}
-	\vspace{20pt}
+		\bottomrule
+	\end{tabularx}
+	\label{tab:count}}
+	\vspace{10pt}
 	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a three-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
 \end{fullpage}
 \end{figure}

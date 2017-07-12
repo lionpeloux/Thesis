@@ -810,60 +810,25 @@ And the Bishop frame components are given by~:
 
 soit pour une spirale dont on connait
 
-\begin{figure}[H]
+\begin{figure}[t]
 \centering
-\subfloat[][Frenet frame]{%
-  \begin{tikzpicture}
-\begin{axis}[
-	width = 7.5cm,
-	xmin=-0.1, xmax= 1.1, restrict x to domain = 0:1,
-	ymin=-4e-2, ymax= 7e-2, restrict y to domain = -4e-2:6e-2,
-	ytick={-3e-2, 0, 3e-2, 6e-2},
-	grid=major,
-	]
-
- 	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
-	\addplot [Tblue, smooth, thick]
-       	table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\frenet};
-
-	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
-	\addplot [black, smooth, thick, dashed]
-       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\frenet};
-
-	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/frenet.txt}\frenet;
-	\addplot [black, smooth, thick]
-       	table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\frenet};
-
-\end{axis}
-  \end{tikzpicture}}\quad
-\subfloat[][Bishop frame]{%
-  \begin{tikzpicture}
-\begin{axis}[
-	width = 7.5cm,
-	xmin=-0.1, xmax= 1.1, restrict x to domain = 0:1,
-	ymin=-4e-2, ymax= 7e-2, restrict y to domain = -4e-2:6e-2,
-	ytick={-3e-2, 0, 3e-2, 6e-2},
-	grid=major,
-	]
-
-       	\pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
-	\addplot [Tblue, smooth, thick]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\bishop};
-
-         \pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
-	\addplot [black, smooth, thick, dashed]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\bishop};
-
-         \pgfplotstableread{ch3_geometry/plot/frenet_bishop_darboux/bishop.txt}\bishop;
-	\addplot [black, smooth, thick]
-         table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\bishop};
-
-
-\end{axis}
-  \end{tikzpicture}}
-\caption[]{Comparison between Frenet and Bishop frame velocity for a spirale curve.}
-\label{fig:3_6}
+	\subfloat[][Frenet frame]{\includegraphics[]{ch3_geometry/plot/1_bench_frame/build_frenet.pdf}\label{plot:frenet}}
+  	 \hspace{0.5cm}
+	\subfloat[][Bishop frame]{\includegraphics[]{ch3_geometry/plot/1_bench_frame/build_bishop.pdf}\label{plot:bishop}}
+	\caption[]{Comparison between Frenet and Bishop frame velocity for a spirale curve.}
+	\label{fig:frame_bench}
 \end{figure}
+
+%\begin{figure}[t]
+%\centering
+%	\pgfplotstableread{ch3_geometry/plot/1_bench_frame/frenet.txt}\Table
+%	\subfloat[][Frenet frame]{\input{ch3_geometry/plot/1_bench_frame/plot_frenet.tex}\label{plot:frenet}}
+%  	 \hspace{1cm}
+%  	\pgfplotstableread{ch3_geometry/plot/1_bench_frame/bishop.txt}\Table
+%	\subfloat[][Bishop frame]{\input{ch3_geometry/plot/1_bench_frame/plot_bishop.tex}\label{plot:bishop}}
+%	\caption[]{Comparison between Frenet and Bishop frame velocity for a spirale curve.}
+%	\label{fig:frame_bench}
+%\end{figure}
 
 % DISCRETE CURVES
 % ================
@@ -993,9 +958,9 @@ Curvature is defined from the osculating circle, which is the best approximation
 		\vspace{10pt}
 		\caption{Several ways to define the osculating circle for discrete curves, leading to different notions of discrete curvature.}
 		\label{fig:kb_def}
-		\vspace{1cm}
-		\ra{1.8}
- 		\begin{tabularx}{\textwidth}{@{} X c c c r r r @{}}
+		\vspace{0.75cm}
+		\ra{1.5}
+ 		\begin{tabularx}{0.9\textwidth}{@{} X c c c r r r @{}}
       		\toprule
 		Curvature ($\kappa_i$) 										&  Locality 	&  $\varphi \mapsto 0$ 	&  $\varphi \mapsto \pi$ 		& Ends  	& Dim 	&  Fitting			\\
 		\midrule
@@ -1007,6 +972,7 @@ Curvature is defined from the osculating circle, which is the best approximation
 		$\kappa_5 = \frac{\varphi_i}{\overbar{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\overbar{l_i}$			&  no		&  space	&  elastica  		\\
 		\bottomrule
 		\end{tabularx}
+		\vspace{10pt}
 		\caption{Review of several discrete curvature definitions mentioned in the literature.}
 		\label{tab:kb_def}
 \end{figure}
@@ -1177,8 +1143,8 @@ In this section we compare the two main discrete curvature notions (circumscribe
 	\subfloat[][edge-based]{\includegraphics{kb_anim_edge_b.pdf}\label{fig:4}}
 	\caption{Comparison of circumscribed (a-b) and inscribed (c-d) osculating circles for different values of the turning angle ($\varphi$).}
 	\label{fig:kb_animation}
-	\vspace{10mm}
-	\input{ch3_geometry/plot/1_bench_kb/plot.tex}
+	\vspace{0mm}
+	\includegraphics{ch3_geometry/plot/2_bench_kb/build.pdf}
 	\caption{Sensitivity of discrete curvatures to non uniform discretization ($\alpha \in [0.5,2]$) over the whole domain of variation of the turning angle ($\varphi \in [0,\pi]$).}
 	\label{fig:kb_bench}
 \end{figure}
@@ -1206,40 +1172,44 @@ Passing $\pi/4$ and increasing $\varphi$, $\kappa_3$ exhibits a good behavior~: 
 
 However, for a given curvature, the turning angle decreases as the sharpness of the discretization increases ($\lim_{\norm{\vect{e}_i} \mapsto 0} \varphi_i = 0$). Thus, it is possible to adapted the discretization to make sure
 
-% DOUBLE PAGE SIDE BY SIDE FIGURES
-\begin{figure}[!p]
-\begin{leftfullpage}
-	\captionsetup[subfloat]{captionskip=10pt}
-	\centering
+%% DOUBLE PAGE SIDE BY SIDE FIGURES
+\begin{figure}[p]
+\centering
+\captionsetup[subfloat]{captionskip=10pt}
+\begin{fullpage}
 %	\vspace{-5mm}
 	\includegraphics[]{semicircle.pdf}
 	\caption{Discretization of a semicircle for discrete bending energies evaluation.}
 	\label{fig:semicircle}
-	\vspace{10mm}
-	\pgfplotstableread{ch3_geometry/plot/4_bench_semicircle/data.txt}\Table
-	\subfloat[][$| 1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/4_bench_semicircle/plot_vertex.tex}
-		\label{plot:bench_semicircle_vertex}}\hspace{10mm}
-	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/4_bench_semicircle/plot_edge.tex}
-		\label{plot:bench_semicircle_vertex}}
+	\vspace{20mm}
+	\pgfplotstableread{ch3_geometry/plot/3_bench_semicircle/data.txt}\Table
+	\subfloat[][$| 1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\includegraphics{ch3_geometry/plot/3_bench_semicircle/build_vertex.pdf}
+		\label{plot:bench_semicircle_vertex}}\hspace{5mm}
+	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\includegraphics{ch3_geometry/plot/3_bench_semicircle/build_edge.pdf}
+		\label{plot:bench_semicircle_edge}}
 	\vspace{8pt}
 	\caption{Relative error in the estimation of the smooth bending energy ($\mathcal{E}$) by the discrete bending energies ($\mathcal{E}_1$ and $\mathcal{E}_3$) regarding the sharpness of the discretization, for a semicircle.}
 	\label{fig:bench_semicircle}
-\end{leftfullpage}
+\end{fullpage}
 \end{figure}
-\begin{figure}[!p]
+\begin{figure}[p]
+\pgfplotstableread{ch3_geometry/plot/4_bench_elastica/elastica_1.txt}	\TableA
+\pgfplotstableread{ch3_geometry/plot/4_bench_elastica/elastica_5.txt}	\TableB
+\pgfplotstableread{ch3_geometry/plot/4_bench_elastica/elastica_10.txt}	\TableC
+\pgfplotstableread{ch3_geometry/plot/4_bench_elastica/elastica_15.txt}	\TableD
+\pgfplotstableread{ch3_geometry/plot/4_bench_elastica/elastica_20.txt}	\TableE
+\pgfplotstableread{ch3_geometry/plot/4_bench_elastica/elastica_25.txt}	\TableF
+\pgfplotstableread{ch3_geometry/plot/4_bench_elastica/elastica_30.txt}	\TableG
 \begin{fullpage}
-	\captionsetup[subfloat]{captionskip=10pt}
-	\centering
-%	\vspace{-5mm}
 	\subfloat[][sequence of elastica curves]{\includegraphics{elastica.pdf}\label{fig:elastica_seq}}\\[5mm]
 	\subfloat[][zoom on the discretization]{\includegraphics{elastica_zoom.pdf}\label{fig:elastica_discretization}}
 	\vspace{12pt}
 	\caption{Discretization (b) of a sequence of elastica curves (a) for discrete bending energies evaluation.}
 	\label{fig:elastica}
 	\vspace{10mm}
-	\subfloat[][$|1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/bench_elastica_vertex.tex}
+	\subfloat[][$|1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\includegraphics{ch3_geometry/plot/4_bench_elastica/build_vertex.pdf}
 		\label{plot:bench_elastica_vertex}}\hspace{5mm}
-	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\input{ch3_geometry/plot/bench_elastica_edge.tex}
+	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\includegraphics{ch3_geometry/plot/4_bench_elastica/build_edge.pdf}
 		\label{plot:bench_elastica_vertex}}
 	\vspace{8pt}
 	\caption{Relative error in the estimation of the smooth bending energy ($\mathcal{E}$) by the discrete bending energies ($\mathcal{E}_1$ and $\mathcal{E}_3$) regarding the sharpness of the discretization, for several elastica curves. The curves are chosen from \cref{fig:elastica_seq} (1,5,10,15,20,25,30).}
@@ -1594,5 +1564,6 @@ En fin, nous avons exposé 2 méthodes pour le calcul du transport parallel sur 
 %\end{fullpage}
 %\end{figure}
 
+\clearpage
 \bibliographystyle{alpha}
 \bibliography{../library}

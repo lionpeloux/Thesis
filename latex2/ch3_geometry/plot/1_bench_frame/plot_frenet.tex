@@ -1,0 +1,13 @@
+\begin{tikzpicture}[TikzStyle]
+\PlotStyle{60}{48}{0}{1}{-3e-2}{6e-2}
+\begin{axis}[
+	ytick={-3e-2, 0, 3e-2, 6e-2},
+	]
+	\addplot [Tblue, smooth, thick]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\Table};
+	\addplot [black, smooth, thick, dashed]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\Table};
+	\addplot [black, smooth, thick]
+       	table [x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\Table};
+\end{axis}
+\end{tikzpicture}
