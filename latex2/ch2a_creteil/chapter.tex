@@ -159,13 +159,14 @@ The PVC fabric is waterproof and, since it is a continuous membrane, has no join
 \section{Construction process}
 % ====================
 
+\subsection{Assembly of the grid}
 The first two directions of tubes were assembled perpendicularly on the ground with the swivel couplers (see \cref{fig:swivel}) to form the \emph{primary} grid. The resulting grid covered about 600~m\textsuperscript{2} (see \cref{fig:cp_1}). At each intersection, the tubes were fastened together with a coupler, installed manually by the volunteers. They were asked not to tighten the bolts but just to engage the collars in order to prevent potential damages from the collar over the tube. Once the assembly of the primary grid was complet, the swivel couplers were tightened with a torque wrench to the optimal torque specified specified by the laboratory Navier. The whole stage took two full days. Note that because the anchorages sticked out from the slab, it was decided not to assemble the grid on the concrete slab to ensure that the grid would be able to slide freely on the ground and not get clung in the anchorages during the erection stage.
 
+\subsection{Deformation of the grid}
 The next stage consisted in lifting the grid simultaneously with two mobile cranes (35t). Once lifted up, the grid took nearly its final form (see \cref{fig:cp_2}). The structure was slowly moved above the slab until tube endings faced at best their respective anchor points. Then, tube after tube, the workers pined the grid to the ground anchorages (see \cref{fig:cp_3}). This stage is tricky, especially at the beginning because only few tubes are connected to the ground. If the grid moves it can easily break these few tubes. The action of pinning a tube is done with a single bolt. The end of each composite tube is equipped with a rotating steel clevis. Similarly, each ground anchorage is composed of a steel plate fixed to the concrete slab and a rotating clevis. To pin a tube to an anchorage, their clevis are aligned one to each other and a pin is positioned in their central hole (see \cref{fig:anchorage}). When all the tubes were pinned to their anchorage, the grid was stable and secured and the cranes were removed (see \cref{fig:cp_4}). The stage lasted one full day.
 
-Once the primary grid was deformed into the final shape, it was braced by a third direction of tubes called the \emph{triangulation}. The triangulation tubes split the quadrangular mesh of the primary grid into triangles (see \cref{fig:cp_5}). This work was tedious as it required working at height in aerial buckets. Tubes were hand-conveyed in the structure and attached to the tubes of the second layer with an additional swivel coupler. Each node of the structure would then be composed of two connections (see \cref{fig:swivel_dwg}).
-
-
+\subsection{Bracing of the grid}
+Once the primary grid was deformed into the final shape, it was braced by a third direction of tubes called the \emph{triangulation}. The triangulation tubes split the quadrangular mesh of the primary grid into triangles (see \cref{fig:cp_5}). This work was tedious as it required working at height in aerial buckets. Tubes were hand-conveyed in the structure and attached to the tubes of the second layer with an additional swivel coupler. Each node of the structure would then be composed of two connections (see \cref{fig:swivel_dwg}). Once triangulated the structure behaves like a shell and its stiffness increases largely.
 
 \begin{figure}[p]
 	\captionsetup[subfloat]{captionskip=10pt}
@@ -189,46 +190,87 @@ Once the primary grid was deformed into the final shape, it was braced by a thir
 	\end{fullpage}
 \end{figure}
 
+\subsection{Covering of the gridshell}
+Finally, the structure is covered with a PVC coated fabric. The membrane comes rolled up. The roll is positioned at one side. Then it is progressively unrolled toward the other side (see \cref{fig:cp_6}). This step requires professional rope workers. Once the membrane is in place, it is hand tensioned with a system of halyard and strap (see \cref{fig:edge}). All included, this stage lasted no more than a single day for a team of six workers.
+
+This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis were successfully conducted with the required accuracy (see \cref{sec:formfinding}).
+
 \section{Construction details}
 % ====================
 In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (\autoref{fig:8}a); the steel sleeve for connecting several composite tubes to make long members from initially short piece of tubes (\autoref{fig:8}b); ground anchorages for fixing the structure to the concrete slab (\autoref{fig:8}c) and the lacing edge beam of the fabric (\autoref{fig:8}d).
 Note that the tricky issue of connecting steel and composite parts is solved in a similar way through sleeve and anchorage details.
 
-\subsection{The tubes in glass fiber reinforced polymer}
+\subsection{The tubes in glass fiber reinforced polymer}\label{sec:gfrp}
 % -------------------------------------------------------
+Glass fiber reinforced polymer (GFRP) tubes are at the heart of the presented technology. They can favorably replace wood where both resistance and bending ability of the material is sought \cite{Douthe2010}. 
 
+The tubes are made by pultrusion, \enquote{a continuous molding process whereby reinforcing fibers are saturated with a liquid polymer resin and then carefully formed and pulled through a heated die to form a part. Pultrusion results in straight constant cross section parts of virtually any shippable length}.\footnote{Video explaining the pultrusion process~: \url{https://www.youtube.com/watch?v=4MoHNZB5b_Y}}
+
+This process is very economic and its standardization guarantees very stable material and mechanical properties. It frees designers from the problem of joining wood pieces with finger joints to obtain long and continuous members and of wood durability. The technical properties of the tube employed for this project are given in \cref{tab:tube}.
+
+Although these data were provided by the manufacturer at the time of the project, a test campaign was done to verify the flexural resistance of the tubes taking into account the influence of the swivel couplers clamped on the tubes.
+
+ The characterization of this material is presented in detail in this paper \cite{Kotelnikova2012}.
+\begin{table}[ht]
+\label{tab:2}
+\centering
+	\ra{1.1}
+ 	\begin{tabular}{@{}l l r @{}}
+	\toprule
+	Item 					& Standard	 	& Value \\
+	\midrule
+	External diameter 				&				& \SI{41.7}{\mm} \\
+	Internal diameter 				& 				& \SI{34.7}{\mm} \\
+	Wall thickness					& 				& \SI{3.5}{\mm} \\
+	Section area					& 				& \SI{4.20e-2}{m^2} \\
+	Section moment of inertia			&				& \SI{7.7259e-4}{m^4} \\
+	Torsion constant				&				& \SI{15.4518e-4}{m^4} \\
+	\midrule
+	Shipping length 				& 				& \SI{12.0}{\m} \\
+	Glass content by weight 			& ISO 1172		& \SI{60}{\percent}\\
+	Specic weight					& ASTM D792		& \SI{1.75}{\kg/m^3}\\
+	Linear weight					& 				& \SI{0.735}{\kg/lm}\\
+	Coefficient of thermal expansion	& ASTM D696		& \SI{11e-6}{K^{-1}}\\
+	\midrule
+	Tensile strength					& ASTM D638		& \SI{400}{MPa}\\
+	Tensile modulus				& ASTM D638		& \SI{26}{GPa}\\
+	Flexural strength				& ASTM D790		& \SI{400}{MPa}\\
+	Flexural modulus				& full bending		& \SI{25}{GPa}\\
+	Compressive strength			& ASTM D695		& \SI{220}{MPa}\\
+	Compressive modulus			& ASTM D695		& \SI{20}{GPa}\\
+	\bottomrule
+	\end{tabular}
+	\caption{Technical properties of the tube.}
+	\label{tab:tube}
+\end{table}
 
 \subsection{The swivel coupler}
 % -------------------------------------------------------
-Tubes are connected together with scaffold swivel couplers. Each connection is composed of two collars (\O\;\SI{42}{\mm} and \SI{38}{\mm} wide) linked by a steel axis (see \cref{fig:swivel_dwg}). Thus the collars can freely rotate around the axis of the connection. This degree of freedom is responsible for the lack of in-plane shear stiffness of the primary grid and this is precisely this mechanism that allows the flat grid to deform into a free form surface.
+Tubes are connected together with scaffold swivel couplers. Each connection is composed of two collars (\O\;\SI{42}{\mm} and \SI{38}{\mm} wide) linked by a steel axis (see \cref{fig:swivel_dwg}). Thus the collars can freely rotate around the axis of the connection. This degree of freedom is responsible for the lack of in-plane shear stiffness of the primary grid and this is precisely this mechanism that allows the flat grid to deform into a free form surface. Each collar is itself composed of two hemicylindrical parts so that it can be opened to easily engage a tube. A M12 nut and a swivel T-bolt allow to lock the tube in the collar using friction. Collars are positioned over a \SI{1.5}{\mm} thick epdm ribbon wrapped around the tubes (see \cref{fig:swivel_dwg}). Once clamped in the connection, the tubes are spaced by a \SI{68}{\mm} distance from axis to axis. Although the mechanical consequences of this eccentricity could be neglected to a first-order approximation, this is not the case for the geometric consequences it induces as explained in \cref{sec:asbuilt}.
 
-Each collar is itself composed of two hemicylindrical parts so that it can be opened to easily engage a tube. A M12 nut and a swivel T-bolt allow to lock the tube in the collar using friction. Collars are positioned over a \SI{1.5}{\mm} thick epdm ribbon wrapped around the tubes (see \cref{fig:swivel_dwg}).
-
-Once clamped in the connection, the tubes are spaced by a \SI{68}{\mm} distance from axis to axis. Although the mechanical consequences of this eccentricity could be neglected to a first-order approximation, this is not the case for the geometric consequences it induces as explained in \cref{sec:asbuilt}.
-
-\subsubsection{The interface layer}
-This coupler is made to assemble two scaffold steel tubes together. Workers should tight strongly the collars of the coupler to ensure that the steel tubes won't slide in their collar. Here, it is clearly impossible to do that. Indeed the GFRP tube is to thin (only \SI{3.5}{\mm} thick) and tightening the collars to the maximum would damage it or even make it collapse.
-
-However, preventing the connections to slide along the tubes is critical to maintain the in-plane shear degree of freedom of the grid. If connections would slide, the grid would probably not deploy in space as intended. The grid kinematic would be blocked at some points, developing high stresses that would lead to breakages.
-
-To maintain a sufficient level of sliding resistance while preserving the material integrity it was decided to introduce an interface layer to~:
+\subsubsection{Interface layer}
+This coupler is made to assemble two scaffold steel tubes together. Workers should tight strongly the collars of the coupler to ensure that the steel tubes won't slide in their collar. Here, it is clearly impossible to do that. Indeed the GFRP tube is to thin (only \SI{3.5}{\mm} thick) and tightening the collars to the maximum would damage it or even make it collapse. However, preventing the connections to slide along the tubes is critical to maintain the in-plane shear degree of freedom of the grid. If connections would slide, the grid would probably not deploy in space as intended. The grid kinematic would be blocked at some points, developing high stresses that would lead to breakages. To maintain a sufficient level of sliding resistance while preserving the material integrity it was decided to introduce an interface layer to~:
 \begin{itemize}
 \item increase the poor friction coefficient between the steel collar and the GFRP tube ;
 \item improve the distribution of stresses generated by the transverse compression of the collar over the tube, thus allowing a stronger clamping of the collar.
 \end{itemize}
 
-Several materials were tested in different thickness. Somme of the results are presented in \cref{plot:layer_benchmark}. A \SI{1.5}{\mm} thick EPDM ribbon was found to be suitable for the design requirements of the project. This layer improves significantly the sliding resistance from about \SI{300}{\newton} to about \SI{1200}{\newton}.
+Several materials were tested in different thickness. Some of the results are presented in \cref{plot:layer_benchmark}. A \SI{1.5}{\mm} thick EPDM ribbon was found to be suitable for the design requirements of the project. This layer improves significantly the sliding resistance from about \SI{300}{\newton} to about \SI{1200}{\newton}. Once the interface layer had been chosen, further tests were conducted to determine the appropriate clamping for the connections. The aim was to maximize the clamping to get the best sliding resistance (see \cref{plot:tightening}) while preserving the  integrity of the tubes. It was found that a tightening torque between \SI{15}{Nm} to \SI{20}{Nm} was the optimal solution \cite{Tayeb2015a}.
 
-The ribbons were ordered with a double sided tape (DST) face to facilitate their placement on the tubes. The influence of the temperature regarding the presence of the adhesive were investigated. The results show that after \SI{40}{\celsius} the scotch creeps and a loss of resistance occurs. A recent thermal study has demonstrated that with natural ventilation only, the temperature inside the structure could rise up to \SI{70}{\celsius}.\footnote{This study was done in jun 2017 by the design companies T/E/S/S and CHOULET for the reconfiguration project of the cathedral.}
+Finally, the ribbons were ordered with a double sided tape (DST) face to facilitate their placement on the tubes. The influence of the temperature regarding the presence of the adhesive has been investigated. The results show that after \SI{40}{\celsius} the scotch creeps and a loss of resistance occurs (see \cref{plot:epdm_temperature}). A recent thermal study of the structure has demonstrated that with no cooling system the temperature inside the building could rise up to \SI{70}{\celsius} (see \cref{sec:temperature,plot:T_3,plot:T_4}).
 
 
 
 \subsubsection{Benefits and drawbacks}
-This connection has the advantage to be available almost every where, to be really cheap and almost indestructible compare to the GFRP members. However, there are some drawbacks as it is not tailor-made for the purpose of elastic gridshells in composite materials :
-\begin{itemize}
-\item Firstly, the weight of this part is about \SI{1}{\kg}, which is very heavy compare to the lightness of the system. In this project, the weight of the swivel couplers represent one third of the overall weight of the structure. This could easily be reduced with a dedicated design.
-%\item Secondly, this part is made for assembling scaffolds where workers should tight strongly the collars of the coupler to ensure that the steel tubes won't slide in their collar. Here this is clearly not possible. Indeed the GFRP tube is to thin (only \SI{3.5}{\mm} thick) and tightening the collars to the maximum would damage it.
-\end{itemize}
+This connection has the advantage to be available almost every where, to be really cheap and indestructible compare to the GFRP members. However, there are some drawbacks as it is not tailor-made for this application :
+\begin{enumerate}
+\item Firstly, the weight of this part is \SI{1.16}{\kg}, which is very heavy compare to the lightness of the system. In this project, the weight of the swivel couplers represents one third of the overall weight of the structure. This could easily be reduced with a dedicated design.
+\item Secondly, the actual design is not adapted to resist sliding. This is critical as explained previously. This problem occurred locally during the lifting of the grid and it was a pain to finish the deployment of the structure (see \cref{sec:rex}).
+\item  Thirdly, although the clamping of the collars enhance the resistance to sliding of the couplers, they also activate the ability to transfer some torsion to the tubes. Unfortunately, the tubes are very weak regarding this type of sollicitation (see \cref{tab:tube}). A better design would propose a kinematics that allow the rotation of each collar around the axis of the connection and the axis of the tube.
+\item  Fourthly, as the number of connections is quite huge, the clamping process should be at the heart of the design. The later has to guarantee that the workers will not damage unintentionally the structural members. If clamping would be found to be the way to go -- which indeed might be an relevant option -- the structural elements will have to be stronger to resist both clamping and torsion.
+\end{enumerate}
+
+Furthermore, other design criterion should be taken into account such as the fact that the connection must not damage the membrane. This was resolved in the project thanks to plastic caps (see \cref{fig:sleeve_dwg}). It is worth to mentionne that the problematic of the connection should be treated in symbiosis with the difficult question of the bracing and the covering as it interacts with all the key parts of the system : grid, bracing and membrane. Some propositions to this complex problem were designed and tested during this thesis and are presented in \cref{sec:booby,sec:jpofav}. 
 
 \begin{figure}[p]
 	\begin{fullpage}
@@ -247,7 +289,8 @@ This connection has the advantage to be available almost every where, to be real
 \centering
 \begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/1_layer_benchmark/build.pdf}
-	\caption{Influence of the interface layer on the sliding resistance (clamping torque is \SI{20}{\newton\meter}.}
+	\caption{Influence of the interface layer on the sliding resistance (\SI{5}{Nm}).}
+	Results from \cite{Tayeb2015a}.
 	\label{plot:layer_benchmark}
 \end{fullpage}
 \end{figure}
@@ -257,6 +300,7 @@ This connection has the advantage to be available almost every where, to be real
 \begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/3_tightening/build.pdf}
 	\caption{Influence of the tightening on the sliding resistance.}
+	Results from \cite{Tayeb2015a}.
 	\label{plot:tightening}
 \end{fullpage}
 \end{figure}
@@ -266,6 +310,7 @@ This connection has the advantage to be available almost every where, to be real
 \begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/2_epdm_temperature/build.pdf}
 	\caption{Influence of the temperature on the sliding for a \SI{1.5}{\mm} EPDM layer.}
+	Results from \cite{Tayeb2015a}.
 	\label{plot:epdm_temperature}
 \end{fullpage}
 \end{figure}
@@ -275,11 +320,48 @@ This connection has the advantage to be available almost every where, to be real
 \subsection{The sleeve system}
 %------------------------------------------
 
+\subsection{The membrane}
+%------------------------------------------
+
+The membrane is nothing but a tailor-made one-piece clothing manufactured to dress up the structure. The membrane is prefabricated based on the 3D model of the shape computed during the formfinding process (see \cref{sec:formfinding}) and not on some on-site geometric survey.
+
+\begin{table}[h]
+\label{tab:2}
+\centering
+	\ra{1.1}
+ 	\begin{tabular}{@{}l l r @{}}
+	\toprule
+	Item 							& Standard 				& Précontraint 702 Opaque Alu  \\
+	\midrule
+	Yarn 							& 						& 1100 dtex PES HT \\
+	Weight 						& EN ISO 2286-2			& \SI{830}{g/m^2} \\
+	Width 						& 						& \SI{267}{cm} \\
+	Standard jumbo roll				& 						& \SI{50}{lm} or \SI{300}{lm}  \\
+	Finish						& 						& 2-face acrylic varnish \\
+	\midrule
+	Tensile strength (warp/weft)		& EN ISO  1421			& \SI{280/280}{daN/ \SI{5}{\cm}} \\
+	Tear strength (warp/weft)			& DIN 53.363				& \SI{30/28}{daN} \\
+	Elongation under load (warp/weft)	& NF EN 15619				& < \SI{1}{\percent} / < \SI{1}{\percent} \\
+	Adhesion						& EN ISO  2411			& \SI{10}{daN/ \SI{5}{\cm}} \\
+	Solar transmission				& NFP 38511				& \SI{13.5}{\percent}  \\
+	\midrule
+	Flame retardancy				& NFP 92-507 				& M2 \\
+								& DIN 4102-1 				& B1 \\
+	Euroclass						& EN 13501-1 				& B-s2, d0 \\
+	\midrule
+	Cold resistance					& IS0 4675 				& \SI{-30}{\celsius} \\
+	Heat resistance					& DIN 4102-1 				& \SI{+70}{\celsius} \\
+	\bottomrule
+	\end{tabular}
+	\caption{Technical properties of the membrane.}
+	\label{tab:membrane}
+\end{table}
+
 \subsection{Concrete footing}
 %------------------------------------------
 
 
-\section{Design Process}
+\section{Structural design}
 %=================
 
 \subsection{Overall design process}
@@ -383,6 +465,7 @@ For five tests, the factor $k_{n,5\%}$ is 1.80 , assuming a normal distribution.
 %\begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/4_gfrp_tube/build.pdf}
 	\caption{Flexural tests of the GFRP tubes.}
+	Results from \cite{Tayeb2015a}.
 	\label{plot:gfrp_tubes}
 %\end{fullpage}
 \end{figure}
@@ -406,28 +489,36 @@ The partial coefficients of material resistance used in the project are calculat
 	\caption{Short-term and long-term values for material resistance. $\gamma$ is the partial coefficient for safety factor. $\sigma_{d}$ is the flexural design strength.}
 \end{table}
 
-Note that designers should take care about long-term effects in permanently loaded pultruded composite materials subjected to creeping and relaxation \citep{Kotelnikova-Weiler2012}. Here, it is reflected in a high partial coefficient for long-term effects.
+Note that designers should take care about long-term effects in permanently loaded pultruded composite materials subjected to creeping and relaxation \citep{Kotelnikova2012}. Here, it is reflected in a high partial coefficient for long-term effects.
 
-\clearpage
-\section{Thermal behavior}
+\section{Hygrothermal behavior}
 %------------------------------------------
-
-During the first two years and a half of its service life, the building has shown that the thermal comfort was far from ideal as the membrane has very poor thermal properties~:
+\subsection{Temperature}\label{sec:temperature}
+During the first two years and a half of its service life, the building has shown that the thermal comfort was far from ideal as the membrane has very poor thermal properties (see \cref{tab:membrane})~:
 \begin{itemize}
-\item During winter, the confort is ensured during mass by a forced-air heating system positioned on the equipments slab, few meters away from the main structure. This solution is adapted to infrequent occupations of the building. In that case, the energetic cost remains limited even if the solution is far from optimal.
-\item During summer, the temperature raises very fast when the sun shines. Masses are scheduled earlier. The forced-air system is used to ventilate the interior volume. But the comfort level is rapidly insufficient as the interior temperature quickly exceeds \SI{30}{\celsius}. The discomfort is amplified as the membrane gets very hot and radiates toward the inside.
+\item During winter, the confort is ensured during mass by a forced-air heating system positioned on the equipments slab, few meters away from the main structure. This solution is adapted to infrequent occupations of the building. In that case, the energetic cost remains limited even if the solution is far from optimal because of the lack of insulation.
+\item During summer, the temperature raises very fast when the sun shines. The forced-air system is used to ventilate the interior volume. But the comfort level is rapidly insufficient as the interior temperature quickly exceeds \SI{30}{\celsius}. The discomfort is amplified as the membrane gets very hot and radiates toward the inside, increasing the feeling of warm. Consequently, there was no choice but to scheduled the mass earlier at this period of the year. Cooling was not possible for economic reasons as the building was used only few hours a week.
 \end{itemize}
 
-At the time of writing, the building is being reconfigured and so its purpose. A better thermal comfort is now required and solutions have to be found. Thus, a study on the thermal behavior of the structure has been done. This study confirm what the experience has shown : the temperature can reach \SI{70}{\celsius} if not ventilated at all.  A serious mechanical ventilation can lower this maximum temperature 
+At the time of writing, the building is being reconfigured and so its purpose is changing. A better thermal comfort is now required and solutions have to be found. Thus, a study on the thermal behavior of the structure has been done.\footnote{This study was done in June 2017 by the design companies T/E/S/S and CHOULET for the reconfiguration project of the temporary cathedral.} The main results are gathered in this thesis. \cref{plot:T_1} presents the monthly exterior temperatures observed at the site location from 8:00 AM to 7:00 PM, which corresponds to the new intended opening hours of the building. Note that the maximum value is given over one hour, that is the observed temperature exceeds this value during a one-hour-wide window in the day. The solar radiation is also given in \cref{plot:T_2}. Two scenarios are studied~:
+\begin{enumerate}
+\item The structure is completely closed. No ventilation is put in place. The interior temperature can reach \SI{70}{\celsius} (see \cref{plot:T_3}).
+\item The structure is ventilated but no cooling system is put in place. The maximum interior temperature is lowered significantly but it can still reach \SI{50}{\celsius} (see \cref{plot:T_4}).
+\end{enumerate}
+
+This study confirms what the experience has shown : the temperature inside the building can be very high. Above \SI{30}{\celsius} this is problematic for the comfort of the people. Above \SI{50}{\celsius} and up to \SI{70}{\celsius} it becomes problematic for the building itself. Indeed, this level of temperature is closed to the heat resistance of the membrane (see \cref{tab:membrane}) ; the interface layer faces a serious decrease of its capacity to resist to sliding (\cref{plot:epdm_temperature}) ; the creeping kinetics of GFRP tubes is speed up (\cref{sec:gfrp}).
+
+\subsection{Moisture}
+Condensation was also noticed in winter and shoulder season. Sometimes, droplets of water could fall abundantly and thus the wooden furnitures had to be protected. This phenomenon was particularly intense the first months because the concrete slab had not yet fully dry-out. To protect the structure and the furnitures, it was decided to maintain the inside temperature above \SI{10}{\celsius} at all times.
 
 \begin{figure}[p]
 	\captionsetup[subfloat]{captionskip=10pt}
      	\centering
 	\begin{leftfullpage}	
-		\subfloat[][Temperature.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Text.pdf}\label{fig:T_1}} \\
-		\subfloat[][Solar radiation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Rad.pdf}\label{fig:T_2}} \\
+		\subfloat[][Temperature.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Text.pdf}\label{plot:T_1}} \\
+		\subfloat[][Solar radiation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Rad.pdf}\label{plot:T_2}} \\
 		\vspace{10pt}
-		\caption{Monthly temperature and solar radiation at the project location from 8:00 to 19:00.}
+		\caption{Weather data at site location during opening hours (8:00 AM to 7:00 PM).}
 		\label{fig:thermal_ext}    
 	\end{leftfullpage}
 \end{figure}
@@ -435,17 +526,17 @@ At the time of writing, the building is being reconfigured and so its purpose. A
 	\captionsetup[subfloat]{captionskip=10pt}
      	\centering
 	\begin{fullpage}	
-		\subfloat[][Without ventilation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Tint_noV.pdf}\label{fig:T_3}} \\
-		\subfloat[][With ventilation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Tint_V.pdf}\label{fig:T_4}} \\
+		\subfloat[][Without ventilation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Tint_noV.pdf}\label{plot:T_3}} \\
+		\subfloat[][With ventilation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Tint_V.pdf}\label{plot:T_4}} \\
 		\vspace{10pt}
-		\caption{Monthly interior temperature from 8:00 to 19:00.}
+		\caption{Temperature inside the building during opening hours (8:00 AM to 7:00 PM).}
 		\label{fig:thermal_int}    
 	\end{fullpage}
 \end{figure}
 
 
 %\newpage \phantom{abc}
-\clearpage
+%\clearpage
 
 \section{Cost analysis}
 %------------------------------------------
