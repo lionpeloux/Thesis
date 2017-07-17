@@ -211,36 +211,86 @@ This step appears as the moment of truth~: if the membrane perfectly fits the gr
 \subsection{Overall design process}
 %------------------------------------------
 
-The goal of the design process is to identify a gridshell structure that works and respects as faithfully as possible the architectural project – a shape and a program. It represents “the path from shape to structure”. Its progress, sequential and iterative, revolves around three major stages: shape, mesh and structure. It is not trivial to go through this complex process. Indeed, for each step, the method, the tool, the criteria, that offers both a sufficient explorative richness to find out enough candidate solutions, and the means to evaluate and compare the suitability of those solutions, have to be found.
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{image8}
-\caption{Evaluating the mechanical potential of shapes regarding principal curvatures}
-\label{fig:7}
-\end{figure}
+The goal of the design process was to identify a gridshell structure that works and respects as faithfully as possible the architectural project with respect to the shape and program. The design of the gridshell represents \textquote{the path from shape to structure}. Its progress, sequential and iterative, revolves around three major stages~: shape, mesh and structure. Developing this structural design was a complex process. Indeed, for each step, the method, the tool and the criteria that offer both a sufficient explorative richness in order to find potential candidate solutions, and the means to evaluate and compare the suitability of those solutions, had to be found. In the next part of this section, the studied options and the selected evaluation criteria for each previously mentioned stage are presented.
 
 \subsection{3D modelling of the intended shape}
 %------------------------------------------
-The first step of the process consists in building a precise geometric model from the sketch of the architect and to evaluate its mechanical potential (\autoref{fig:7}). At this stage, the goal is to estimate the probability a given shape would lead to the generation of a structurally feasible gridshell.
+The first step of the process consisted in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal was to estimate quickly the probability a given shape would lead to the generation of a structurally feasible gridshell.
 
-Stresses in the grid are mainly due to the bending of the profiles. They derive directly from their geometric curvature. Thus, the principal curvatures of the surface – because they give a qualitative measurement of the local curvature of any curve drawn on a surface – are relevant indicators to evaluate the stress rate of a grid laying on it. Particularly, one should ensure the following condition is satisfied everywhere, where $r$ is the pipe’s outer radius, $R_{min}$ is the minimum principal radius, E is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance :
+Stresses in the grid are mainly due to the bending of the tubes. Therefore, they can be derived directly from the measurement of the geometric curvature of the tubes. Because the principal curvatures of the surface give a qualitative measurement of the local curvature of any curve drawn on a surface, they are relevant indicators to evaluate the stress rate of laying a grid on the said surface.\footnote{Indeed, any normal section of the surface will have its curvature bounded by the principal curvatures of the surface. This seems reasonable to seek grids that fulfill this criterion as the structural elements would probably not   bear large variations of curvatures in the plane of the surface.} Particularly, the following condition had to be satisfied everywhere~: 
 \begin{equation}
 	\mathrm{E} = \frac{r}{R_{min}} < \frac{\sigma_{k,flex}}{\gamma_{lt}} 
+	\label{eq:crit_1}
 \end{equation}
+where, $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance. 
 
-Ideally, the shape is controlled by few key parameters. Thus, it can be adapted and optimized through an iterative process, towards this criterion.
+Ideally, the shape is controlled by few key parameters. Thus, it can be adapted and optimized through an iterative process, towards the above criterion \cref{eq:crit_1}.
+
+\begin{figure}[h]
+\centering
+\begin{fullpage}
+\includegraphics[width=\textwidth]{image8}
+\caption{Evaluating the mechanical potential of shapes regarding principal curvatures}
+\label{fig:shape_bench}
+\end{fullpage}
+\end{figure}
 
 \subsection{Mesh from the compass method}
 %------------------------------------------
-During the second step, the candidate surface is meshed and the mechanical potential of the resulting grid is evaluated. At this stage, we try to estimate the probability a given mesh could lead to the generation of a viable gridshell structure. Simultaneously, meshes are compared according to their architectural relevance.
+During the second step, the candidate surface was meshed and the mechanical potential of the resulting grid was evaluated. At this stage, the probability of a given mesh leading to the generation of a viable gridshell structure was estimated. Simultaneously, meshes were compared according to their architectural relevance.
 
-This time, the geometric curvature of the polylines drawn on the surface is the criterion to characterize the mechanical potential of the grid. In particular, one should ensure the following condition is satisfied everywhere, where $R_{spline}$ is the spline’s local curvature radius :
+In this step, the geometric curvature of the polylines drawn on the surface was the criterion to characterize the mechanical potential of the grid. Unlike the previous step, this criterion takes into account the real curvature of the studied mesh and not the minimum principal curvature. However, note that it does not incorporates any structural behavior yet. In particular, it had to be ensured that the following condition was satisfied everywhere~:
 \begin{equation}
-\mathrm{E} =  \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
+	\mathrm{E} =  \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
+	\label{eq:crit_2}
 \end{equation}
+where $R_{spline}$ is the spline’s local curvature radius.
 
-The mesh is obtained by the compass method, described in \citep{Otto1974}, which develops a regularly spaced grid on a surface from two secant directrix. For a given shape there are an infinite number of meshes. The aim is to identify at least one grid, suitable towards architectural and structural criteria. The laboratory tried various numerical methods to generate such grids \citep{Bouhaya2009}. Here, a specific software \citep{DuPeloux2011}, developed for rhino \& grasshopper, allows generating this kind of mesh on any NURBS surface.
+The mesh was obtained by the compass method, which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix} \cite{Otto1974}. For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The aim was to identify at least one grid, which satisfies both the architectural and the structural requirements. The laboratory Navier tested various numerical methods to generate such grids \citep{Bouhaya2009}. Here, a specific software developed for \emph{Rhinoceros} \& \emph{Grasshopper} \citep{DuPeloux2011}, allowed generating this kind of mesh on any non-uniform rational B-spline  surface (NURBS). It performed the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid. The tool also generated automatically a text file, which could be imported into a structural analysis software, containing all the required information to perform the form-finding of the structure. An add-on feature facilitated loads application of various complexities (snow, wind, etc.), which was otherwise difficult for freeform structures.
 
+\begin{figure}[p]
+	%
+     	\centering
+	\begin{fullpage}	
+		\subfloat[][Target shape]{\includegraphics[width=0.48\textwidth]{compass_1.png}\label{fig:compass_1}}
+		\hspace*{\fill}
+		\subfloat[][Domain and trimming surfaces]{\includegraphics[width=0.48\textwidth]{compass_2.png}\label{fig:compass_2}} \\
+		%
+		\subfloat[][Secant directrices]{\includegraphics[width=0.48\textwidth]{compass_3.png}\label{fig:compass_3}}
+		\hspace*{\fill}
+		\subfloat[][Resulting mesh]{\includegraphics[width=0.48\textwidth]{compass_4.png}\label{fig:compass_4}} \\
+		%
+		\subfloat[][Trimmed mesh]{\includegraphics[width=0.48\textwidth]{compass_5.png}\label{fig:compass_5}}
+		\hspace*{\fill}
+		\subfloat[][Final grid]{\includegraphics[width=0.48\textwidth]{compass_6.png}\label{fig:compass_6}} \\
+		%
+		\vspace{0.5cm}
+		\caption{The compass method step by step.}
+		\label{fig:erection}    
+	\end{fullpage}
+\end{figure}
+
+\begin{figure}[p]
+	%
+     	\centering
+	\begin{fullpage}	
+%		\includegraphics[width=0.7\textwidth]{compass_method.png}
+%		\caption{The compass method.}
+%		\label{fig:compass_method}
+		%
+		\subfloat[][First set of directrices]{\includegraphics[width=0.48\textwidth]{mesh_s1.pdf}\label{fig:mesh_s1}}
+		\hspace*{\fill}
+		\subfloat[][First grid]{\includegraphics[width=0.48\textwidth]{mesh_g1.pdf}\label{fig:mesh_g1}} \\
+		%
+		\subfloat[][First set of directrices]{\includegraphics[width=0.48\textwidth]{mesh_s2.pdf}\label{fig:mesh_s2}}
+		\hspace*{\fill}
+		\subfloat[][Second grid]{\includegraphics[width=0.48\textwidth]{mesh_g2.pdf}\label{fig:mesh_g2}} \\
+		%
+		\vspace{1cm}
+		\caption{Each set of directrices leads to a different grid.}
+		\label{fig:grid_diff}    
+	\end{fullpage}
+\end{figure}
 
 \subsection{Formfinding and bending prestress}
 %------------------------------------------
@@ -349,7 +399,8 @@ The technical properties of the tube employed for this project are given in \cre
 Beyond the technical difficulties related to both design and structural analysis of the shell, the regulatory framework was a vital issue for the success of the project. As it was the first time a structure of this kind was going to host a large number of people for over two years, the question of its reliability over time was a major issue. In order to be built, the gridshell had to comply with existing standards, which do not take into account such an innovative edifice, all in composite material. The strategy adopted to bypass this obstacle is presented herafter.
 
 \subsubsection{First level~: administrative classification of the building}
-The first level, administrative, consisted of obtaining from the French authorities an appropriate classification for the building, taking intoconsideration the project’s real-time requirement~: a light-weight structure with a short lifespan. As expected, the structure was classified as a \textquote{building open to the public} (EPR in French) from the category \textquote{big tops and tents} (CTS in french) \cite{SiteSecurite}. In this classification, construction procedures and regulations are adapted to the short lifespan of buildings.
+The first level, administrative, consisted of obtaining from the French authorities an appropriate classification for the building, taking into
+consideration the project’s real-time requirement~: a light-weight structure with a short lifespan. As expected, the structure was classified as a \textquote{building open to the public} (EPR in French) from the category \textquote{big tops and tents} (CTS in french) \cite{SiteSecurite}. In this classification, construction procedures and regulations are adapted to the short lifespan of buildings.
 
 \subsubsection{Second level~: compliance with existing standards}
 The second level, normative, consisted of ensuring that most of the existing regulatory framework justified the compliance of a structure that would not, at first sight, be considered by standards that do not include composite materials.
@@ -358,9 +409,12 @@ As far as possible, the design was made in compliance with the Eurocode, where t
 
 \subsection{Flexural strength of the tubes}\label{sec:flex}
 %------------------------------------------
-The characteristic flexural strength ($\sigma_{k,flex}$) of the GFRP tube was used to verify if the structure complied with the Eurocode. This parameter had a critical impact on the structure’s reliability because in this particular application stresses in the tubes are mainly due to the bending. Thus, it was important to confirm the manufacturer’s permitted value through testing.Three-point flexural tests were carried out with and without connections (see \cref{plot:gfrp_tubes}) to determine the characteristic strength according to the Eurocode protocol (Annex D)~:\begin{equation}
+The characteristic flexural strength ($\sigma_{k,flex}$) of the GFRP tube was used to verify if the structure complied with the Eurocode. This parameter had a critical impact on the structure’s reliability because in this particular application stresses in the tubes are mainly due to the bending. Thus, it was important to confirm the manufacturer’s permitted value through testing.
+Three-point flexural tests were carried out with and without connections (see \cref{plot:gfrp_tubes}) to determine the characteristic strength according to the Eurocode protocol (Annex D)~:
+\begin{equation}
 \sigma_{k,flex}=\overline{\sigma}(1-k_n\sigma_x)
-\end{equation}For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. It has been proved in \cite{Tayeb2015a} that the connections caused more scattering in the results. Finally, the manufacturer allowed value of \SI{400}{MPa} was confirmed and retained for further calculations.
+\end{equation}
+For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. It has been proved in \cite{Tayeb2015a} that the connections caused more scattering in the results. Finally, the manufacturer allowed value of \SI{400}{MPa} was confirmed and retained for further calculations.
 \begin{table}[h]
 	\centering
 	\ra{1.1}
@@ -412,7 +466,8 @@ The characteristic flexural strength ($\sigma_{k,flex}$) of the GFRP tube was us
 
 \subsection{Partial safety factors}\label{sec:safety}
 %------------------------------------------
-The partial coefficients of material resistance (see \cref{tab:gamma}) used in the project were calculated according to the Eurocomp. The short-term coefficient proposed in Eurocomp ($\gamma_{st} = 1.3$) was increased to consider the critical stage of erection, where the deformations could not be controlled accurately.When dealing with long-term effects in permanently loaded, pultruded composite materials subjected to creeping and relaxation designers should be careful  \cite{Kotelnikova2012,Bank2006}. In this project, this was reflected in the high partial coefficient for long-term effects.
+The partial coefficients of material resistance (see \cref{tab:gamma}) used in the project were calculated according to the Eurocomp. The short-term coefficient proposed in Eurocomp ($\gamma_{st} = 1.3$) was increased to consider the critical stage of erection, where the deformations could not be controlled accurately.
+When dealing with long-term effects in permanently loaded, pultruded composite materials subjected to creeping and relaxation designers should be careful  \cite{Kotelnikova2012,Bank2006}. In this project, this was reflected in the high partial coefficient for long-term effects.
 
 \begin{table}[h]
 \centering
