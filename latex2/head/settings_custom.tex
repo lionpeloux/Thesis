@@ -32,6 +32,7 @@
 \usepackage{csvsimple, booktabs, longtable} % pour les tables CSV
 \usepackage{tabularx}
 \usepackage{float}
+\usepackage[font=small,labelfont=bf]{caption}
 \usepackage{csquotes}
 \usepackage{epigraph} % incompatible avec nextpage
 \usepackage{dpfloat} % for double page float figures aand tables side by side
@@ -51,6 +52,10 @@
 \renewcommand{\sectionautorefname}{\S}
 \renewcommand{\subsectionautorefname}{\S}
 \renewcommand{\subsubsectionautorefname}{\S}
+
+\captionsetup[table]{skip=10pt}
+\captionsetup[figure]{skip=10pt}
+\captionsetup[subfloat]{captionskip=10 pt}
 
 % cross referencing with cref
 % http://tex.stackexchange.com/questions/119214/cross-referencing-equations-figures-and-chapters-sections-etc

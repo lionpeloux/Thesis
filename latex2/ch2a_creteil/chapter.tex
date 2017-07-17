@@ -3,19 +3,27 @@
 \section{Introduction}
 %===================
 
-The Ephemeral Cathedral of Créteil, France, is an elastic gridshell structure made of composite materials. Built in 2013, this 350~m\textsuperscript{2} religious edifice was initially a temporary church meant to gather the parishioners during the two year (2013~-~2015) renovation of their permanent cathedral (see \cref{fig:situation_map}). At the time of writing, this building is still in activity and has been erected for almost five years. Although this structure is no more a church it has been converted to a space for community activities and is now the property of the city of Créteil.
+The Ephemeral Cathedral of Créteil, France, is an elastic gridshell structure made of composite materials \cite{DuPeloux2016}. Built in 2013, this \SI{350}{m^2} religious edifice was initially a temporary church meant to gather the parishioners during the two years renovation (2013~-~2015) of their permanent cathedral (see \cref{fig:situation_map}). At the time of writing, this building is still in activity and has been erected for almost five years. Although this structure is no more a church it has entered in a reconversion process to become a space for community activities and is now the property of the city of Créteil, France.
 
-This large-scale prototype represents a first in the building industry which still shows excessive apprehension for the use of non-traditional materials such as composites, especially when it comes to structural applications. This is emphasized by the fact that only pre-norms or professional recommendations exists for composite materials, which is quite insufficient when one has to deal with insurers and legal technical controls.
-
+\subsection{Overview}
+This large-scale prototype represents a first in the building industry which still shows excessive apprehension for the use of non-traditional materials such as composites, especially when it comes to structural applications. This is emphasized by the fact that only pre-norms or professional recommendations exist for composite materials, which is quite insufficient when one has to deal with insurers and legal technical controls.
 Although this structure is not the first elastic gridshell ever built in \emph{Glass Fiber Reinforced Polymer} (GFRP) composite material, it should be regarded as the first true building using this technology. Indeed, this prototype -- which can legally accommodate up to 500 people -- complies with all the required performances : structural stiffness, fire safety, waterproofness, lightning, thermal comfort, etc. To our knowledge, this building is still the only one of this kind ever built.
 
 It is worth to mentionne that this project arises thanks to a long-term collaboration between {T/E/S/S atelier d'ingénierie}\footnote{A structural design firm based in Paris, France : \url{http://tess.fr}} and the laboratory Navier\footnote{Architected Materials and Structures (AMS) research team, specializes in the field of mechanics of materials and structures : \url{http://navier.enpc.fr/Materiaux-et-Structures?lang=en}} and marks the accomplishment of a ten years research project in this field.\footnote{Note that I developed this project in 2012 while I was a structural engineer at T/E/S/S, using the knowledge I had previously gained on the gridshell project for the Solidays music festival in 2011 while I was a research engineer at Navier. I started this thesis in octobre 2014, 18 months after the opening of the temporary cathedral to pursue my research on this topic started in may 2010.} More over, this challenge was both technical and human as the structure was built by the parishioners them selfs.
 
-In this chapter, we present the main aspects of the design and construction of this structure. This project was at the heart of the motivations of this thesis as it acted as a proof of feasibility and as a validation of the design tools and methods developed until then ; and the gained experience has highlighted further research directions that are presented in this manuscript.
+\subsection{Goals and contributions}
+
+This project was at the heart of the motivations of this thesis as it acted as a proof of feasibility and as a validation of the design tools and methods developed until then. The gained experience has highlighted further research directions that are presented in this manuscript.
+
+In this chapter, we present the key aspects of the design and construction of this building. The main contribution of this work is to exhibit a method to design and build gridshells in a shape-driven design process. In such a process, architecture plays its full role as it is less dependent on purely structural considerations. Moreover, a building is much more than a shelter and has to satisfy serious requirements. To fill this gap, a meticulous attention was brought to the development of construction details. These technical developments lead to numerous testings. This chapter focus on this fundamental aspect as it is also a key contribution. Finally, we point out and analyze our experience, and we draw up some recommendations for further developments.
+
+\subsection{Related work}
+
+A thorough review is given in \cref{sec:review}. 
+
 
 \begin{figure}[p]
 	\centering
-	\captionsetup[subfloat]{captionskip=10pt}
 	\begin{fullpage}
 		\includegraphics[width=1\textwidth]{situation_map}
 		\caption{Situation map. The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.}\label{fig:situation_map}    
@@ -38,9 +46,9 @@ The origin of this building form was driven by two objectives, that is, to provi
 Formal explorations were undertaken using modeling clay. The final form is based loosely on two adjacent semi spherical volumes of different size, which are merged into one complex form. Externally the fear of the design team was that the totally convex blob form could look intimidating. It was therefore decided that the two spherical virtual forms, which would be joined to make the final form, would be arranged not in a symmetrical axial manner, but in an asymmetrical curved composition. The resulting form seen in plan is convex on one side and concave on the other. The concave form in plan allows for double curvature to be introduced into what would be otherwise a simpler blob and gives sensuality and visual interest to the building.
 
 \begin{figure}[p]
-	\captionsetup[subfloat]{captionskip=10pt}
+	%
      	\centering
-	\begin{fullpage}	
+	\begin{leftfullpage}	
 		\includegraphics[width=0.80\textwidth]{gs_ext.jpg}
 		\caption{Exterior view. The connections mark the fabric suggesting the interior grid structure. This texture enriches the perception of the building viewed from the outside and creates effects with the light reflections -- \textcopyright~L. du Peloux for T/E/S/S.}
 		\label{fig:gs_ext}
@@ -48,6 +56,33 @@ Formal explorations were undertaken using modeling clay. The final form is based
 		\includegraphics[width=0.80\textwidth]{gs_int.jpg}\label{fig:gs_int}
 		\caption{Interior view. The grid pattern highlights the lightness of the structure and gives its tempo to the internal space. Lines converge to the altar, the heart of the liturgical area where the mass is offered on -- \textcopyright~C. Moissinac for T/E/S/S.}
 		\vspace{20pt}
+	\end{leftfullpage}
+\end{figure}
+
+\begin{figure}[p]
+     	\centering
+	\begin{fullpage}	
+		%
+		\subfloat[][Exterior]{\includegraphics[width=0.48\textwidth]{door_ext.jpg}\label{fig:door_ext}}
+		\hspace*{\fill}
+		\subfloat[][Interior]{\includegraphics[width=0.48\textwidth]{door_int.jpg}\label{fig:door_int}}
+		\vspace{10pt}
+		\caption{Entrance. Two steel doors allow the entrance inside the building.}
+		\label{fig:door}
+		%    
+     		\vspace{1cm}
+		%
+		\subfloat[][Swivel coupler]{\includegraphics[width=0.48\textwidth]{swivel.jpg}\label{fig:swivel}}
+		\hspace*{\fill}
+		\subfloat[][Sleeve system]{\includegraphics[width=0.48\textwidth]{sleeve.jpg}\label{fig:sleeve}} \\
+		%
+		\subfloat[][Ground anchorage]{\includegraphics[width=0.48\textwidth]{anchorage.jpg}\label{fig:anchorage}}
+		\hspace*{\fill}
+		\subfloat[][Lacing rod]{\includegraphics[width=0.48\textwidth]{edge.jpg}\label{fig:edge}} \\
+		%
+		\vspace{10pt}
+		\caption{Standard elements that composed the structural system.}
+		\label{fig:parts}    
 	\end{fullpage}
 \end{figure}
 
@@ -70,40 +105,51 @@ The structure is anchored to a concrete strip footing with a special anchorage s
 A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers the structure. The transparent portion of the structure allows daylight inside the gridshell. The fabric is stretched on the peripheral edge of a dedicated beam with a double-lacing system (halyard and strap, see \cref{fig:edge}). At the ground level, the lacing edge of the beam is made of a bent, composite rod nailed to the concrete slab. At the grid–door junction, a steel arch is welded to the doorframe (see \cref{fig:door_ext}).
 
 The PVC fabric is waterproof and, since it is a continuous membrane, has no joints except at the perimeter. At the perimeter, a continuous strip of membrane is prefixed to the internal surface of the membrane and fixed to the ground slab. At the doors, a flexible strip of the membrane is riveted to the doorframe.
-
-
-\begin{figure}[p]
-	\captionsetup[subfloat]{captionskip=10pt}
-     	\centering
-	\begin{fullpage}	
-		%
-		\subfloat[][Exterior.]{\includegraphics[width=0.48\textwidth]{door_ext.jpg}\label{fig:door_ext}}
-		\hspace*{\fill}
-		\subfloat[][Interior.]{\includegraphics[width=0.48\textwidth]{door_int.jpg}\label{fig:door_int}}
-		\vspace{10pt}
-		\caption{Entrance. Two steel doors allow the entrance inside the building.}
-		\label{fig:door}
-		%    
-     		\vspace{1cm}
-		%
-		\subfloat[][Swivel coupler.]{\includegraphics[width=0.48\textwidth]{swivel.jpg}\label{fig:swivel}}
-		\hspace*{\fill}
-		\subfloat[][Sleeve system.]{\includegraphics[width=0.48\textwidth]{sleeve.jpg}\label{fig:sleeve}} \\
-		%
-		\subfloat[][Ground anchorage.]{\includegraphics[width=0.48\textwidth]{anchorage.jpg}\label{fig:anchorage}}
-		\hspace*{\fill}
-		\subfloat[][Lacing rod.]{\includegraphics[width=0.48\textwidth]{edge.jpg}\label{fig:edge}} \\
-		%
-		\vspace{10pt}
-		\caption{Standard elements that composed the structural system.}
-		\label{fig:parts}    
-	\end{fullpage}
+\vspace{2cm}
+\begin{figure}[h]
+\centering
+\ra{1.1}
+%\begin{fullpage}
+ 	\begin{tabular}{@{}lllrr@{}}
+	\toprule
+ 	Category	 	& Item 						& Unit 		& Quantity\\ 
+	\midrule
+	Public  		& seating  					& p					& 360 \\
+      				& standing 					& p					& 500 \\
+	\midrule
+%	\addlinespace[0.5cm]
+	Dimensions   	&  length						& m 					& 29	\\
+	   			&  width 						& m					& 17	\\   			
+				&  height 						& m					& 7	\\
+				& contour 	 					& lm					& 75\\
+				& area						& m\textsuperscript{2}	& 350\\
+				&  volume						& m\textsuperscript{3}	& 1600 \\
+	\midrule
+%	\addlinespace[0.5cm]
+	Gridshell   	&  tubes (x176)					& lm					& 1775 \\
+	   			&  connections					& 					& 1130 \\   			
+				&  sleeves						& 					& 125 \\
+				& anchorages 					& 					& 127 \\
+				& \quad \emph{ground (single)} 	& 					& 77 \\
+				& \quad \emph{ground (double)} 	& 					& 16 \\
+				& \quad \emph{door (single)} 		& 					& 18 \\
+				& weight  						& kg/m\textsuperscript{2} 	& 5 \\
+	\midrule
+%	\addlinespace[0.5cm]
+	Fabric   		& opaque						& m\textsuperscript{2}	 & 530 \\
+	   			& transparent					& m\textsuperscript{2}	& 12 \\ 
+				& lacing rod					& lm 				 	& 67 \\  			
+				& weight						& kg/m\textsuperscript{2}	& 1 \\
+	\bottomrule
+ 	\end{tabular}
+\caption{Key numbers.}
+%\end{fullpage}
 \end{figure}
 
 \begin{figure}[p]
 	\captionsetup[subfloat]{captionskip=20pt}
      	\centering
-	\begin{leftfullpage}	
+	\begin{fullpage}	
 		\includegraphics[width=\textwidth]{section_view}
 		\caption{Transversal section of the building. Observe how the grid gets denser at the choir. Two doors give access to the building. The height at the pinnacle is about 7~m.}
 		\label{fig:sec}
@@ -113,47 +159,10 @@ The PVC fabric is waterproof and, since it is a continuous membrane, has no join
 		\includegraphics[width=\textwidth]{plan_view}
 		\caption{Top view of the building. The interior space is composed of a choir (1), a place of assembly (2) and a narthex (3). The main entrance overlook the parvis (4). The shell spans about 29~m in the longitudinal direction and about 17~m in the transversal direction. The covered area is about 350~m\textsuperscript{2}. The space can accommodate 360 seating people or 500 standing people.}
 		\label{fig:plan_view}	
-	\end{leftfullpage}
+	\end{fullpage}
 \end{figure}
-\begin{figure}[p]
-\centering
-\ra{1.1}
-\begin{fullpage}
- 	\begin{tabular}{@{}lllrr@{}}
-	\toprule
- 	Category	 	& Item 						& Unit 		& Quantity\\ 
-	\midrule
-	Public  		& seating  					& p					& 360 \\
-      				& standing 					& p					& 500 \\
-	\midrule
-	\addlinespace[0.5cm]
-	Dimensions   	&  length						& m 					& 29	\\
-	   			&  width 						& m					& 17	\\   			
-				&  height 						& m					& 7	\\
-				& contour 	 					& ml					& 75\\
-				& area						& m\textsuperscript{2}	& 350\\
-				&  volume						& m\textsuperscript{3}	& 1600 \\
-	\midrule
-	\addlinespace[0.5cm]
-	Gridshell   	&  tubes (x176)					& ml					& 1775 \\
-	   			&  connections					& 					& 1130 \\   			
-				&  sleeves						& 					& 125 \\
-				& anchorages 					& 					& 127 \\
-				& \quad \emph{ground (single)} 	& 					& 77 \\
-				& \quad \emph{ground (double)} 	& 					& 16 \\
-				& \quad \emph{door (single)} 		& 					& 18 \\
-				& weight  						& kg/m\textsuperscript{2} 	& 5 \\
-	\midrule
-	\addlinespace[0.5cm]
-	Fabric   		&  opaque						& m\textsuperscript{2}	 & 530 \\
-	   			&  transparent					& m\textsuperscript{2}	& 12 \\ 
-				&  lacing rod					& ml 				 	& 67 \\  			
-				& weight						& kg/m\textsuperscript{2}	& 1 \\
-	\bottomrule
- 	\end{tabular}
-\caption{Key numbers.}
-\end{fullpage}
-\end{figure}
+
+\clearpage
 
 
 \section{Construction process}
@@ -169,20 +178,20 @@ The next stage consisted in lifting the grid simultaneously with two mobile cran
 Once the primary grid was deformed into the final shape, it was braced by a third direction of tubes called the \emph{triangulation}. The triangulation tubes split the quadrangular mesh of the primary grid into triangles (see \cref{fig:cp_5}). This work was tedious as it required working at height in aerial buckets. Tubes were hand-conveyed in the structure and attached to the tubes of the second layer with an additional swivel coupler. Each node of the structure would then be composed of two connections (see \cref{fig:swivel_dwg}). Once triangulated the structure behaves like a shell and its stiffness increases largely.
 
 \begin{figure}[p]
-	\captionsetup[subfloat]{captionskip=10pt}
+	%
      	\centering
 	\begin{fullpage}	
-		\subfloat[][Flat grid.]{\includegraphics[width=0.48\textwidth]{cp_1.jpg}\label{fig:cp_1}}
+		\subfloat[][Flat grid]{\includegraphics[width=0.48\textwidth]{cp_1.jpg}\label{fig:cp_1}}
 		\hspace*{\fill}
-		\subfloat[][Erection.]{\includegraphics[width=0.48\textwidth]{cp_2.jpg}\label{fig:cp_2}} \\
+		\subfloat[][Erection]{\includegraphics[width=0.48\textwidth]{cp_2.jpg}\label{fig:cp_2}} \\
 		%
-		\subfloat[][The grid is anchored.]{\includegraphics[width=0.48\textwidth]{cp_3.jpg}\label{fig:cp_3}}
+		\subfloat[][The grid is anchored]{\includegraphics[width=0.48\textwidth]{cp_3.jpg}\label{fig:cp_3}}
 		\hspace*{\fill}
-		\subfloat[][Deformed grid.]{\includegraphics[width=0.48\textwidth]{cp_4.jpg}\label{fig:cp_4}} \\
+		\subfloat[][Deformed grid]{\includegraphics[width=0.48\textwidth]{cp_4.jpg}\label{fig:cp_4}} \\
 		%
-		\subfloat[][Grid is braced.]{\includegraphics[width=0.48\textwidth]{cp_5.jpg}\label{fig:cp_5}}
+		\subfloat[][Grid is braced]{\includegraphics[width=0.48\textwidth]{cp_5.jpg}\label{fig:cp_5}}
 		\hspace*{\fill}
-		\subfloat[][Membrane.]{\includegraphics[width=0.48\textwidth]{cp_6.jpg}\label{fig:cp_6}} \\
+		\subfloat[][Membrane]{\includegraphics[width=0.48\textwidth]{cp_6.jpg}\label{fig:cp_6}} \\
 		%
 		\vspace{10pt}
 		\caption{Construction process of the gridshell.}
@@ -195,172 +204,7 @@ Finally, the structure is covered with a PVC coated fabric. The membrane comes r
 
 This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis were successfully conducted with the required accuracy (see \cref{sec:formfinding}).
 
-\section{Construction details}
-% ====================
-In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (\autoref{fig:8}a); the steel sleeve for connecting several composite tubes to make long members from initially short piece of tubes (\autoref{fig:8}b); ground anchorages for fixing the structure to the concrete slab (\autoref{fig:8}c) and the lacing edge beam of the fabric (\autoref{fig:8}d).
-Note that the tricky issue of connecting steel and composite parts is solved in a similar way through sleeve and anchorage details.
-
-\subsection{The tubes in glass fiber reinforced polymer}\label{sec:gfrp}
-% -------------------------------------------------------
-Glass fiber reinforced polymer (GFRP) tubes are at the heart of the presented technology. They can favorably replace wood where both resistance and bending ability of the material is sought \cite{Douthe2010}. 
-
-The tubes are made by pultrusion, \enquote{a continuous molding process whereby reinforcing fibers are saturated with a liquid polymer resin and then carefully formed and pulled through a heated die to form a part. Pultrusion results in straight constant cross section parts of virtually any shippable length}.\footnote{Video explaining the pultrusion process~: \url{https://www.youtube.com/watch?v=4MoHNZB5b_Y}}
-
-This process is very economic and its standardization guarantees very stable material and mechanical properties. It frees designers from the problem of joining wood pieces with finger joints to obtain long and continuous members and of wood durability. The technical properties of the tube employed for this project are given in \cref{tab:tube}.
-
-Although these data were provided by the manufacturer at the time of the project, a test campaign was done to verify the flexural resistance of the tubes taking into account the influence of the swivel couplers clamped on the tubes.
-
- The characterization of this material is presented in detail in this paper \cite{Kotelnikova2012}.
-\begin{table}[ht]
-\label{tab:2}
-\centering
-	\ra{1.1}
- 	\begin{tabular}{@{}l l r @{}}
-	\toprule
-	Item 					& Standard	 	& Value \\
-	\midrule
-	External diameter 				&				& \SI{41.7}{\mm} \\
-	Internal diameter 				& 				& \SI{34.7}{\mm} \\
-	Wall thickness					& 				& \SI{3.5}{\mm} \\
-	Section area					& 				& \SI{4.20e-2}{m^2} \\
-	Section moment of inertia			&				& \SI{7.7259e-4}{m^4} \\
-	Torsion constant				&				& \SI{15.4518e-4}{m^4} \\
-	\midrule
-	Shipping length 				& 				& \SI{12.0}{\m} \\
-	Glass content by weight 			& ISO 1172		& \SI{60}{\percent}\\
-	Specic weight					& ASTM D792		& \SI{1.75}{\kg/m^3}\\
-	Linear weight					& 				& \SI{0.735}{\kg/lm}\\
-	Coefficient of thermal expansion	& ASTM D696		& \SI{11e-6}{K^{-1}}\\
-	\midrule
-	Tensile strength					& ASTM D638		& \SI{400}{MPa}\\
-	Tensile modulus				& ASTM D638		& \SI{26}{GPa}\\
-	Flexural strength				& ASTM D790		& \SI{400}{MPa}\\
-	Flexural modulus				& full bending		& \SI{25}{GPa}\\
-	Compressive strength			& ASTM D695		& \SI{220}{MPa}\\
-	Compressive modulus			& ASTM D695		& \SI{20}{GPa}\\
-	\bottomrule
-	\end{tabular}
-	\caption{Technical properties of the tube.}
-	\label{tab:tube}
-\end{table}
-
-\subsection{The swivel coupler}
-% -------------------------------------------------------
-Tubes are connected together with scaffold swivel couplers. Each connection is composed of two collars (\O\;\SI{42}{\mm} and \SI{38}{\mm} wide) linked by a steel axis (see \cref{fig:swivel_dwg}). Thus the collars can freely rotate around the axis of the connection. This degree of freedom is responsible for the lack of in-plane shear stiffness of the primary grid and this is precisely this mechanism that allows the flat grid to deform into a free form surface. Each collar is itself composed of two hemicylindrical parts so that it can be opened to easily engage a tube. A M12 nut and a swivel T-bolt allow to lock the tube in the collar using friction. Collars are positioned over a \SI{1.5}{\mm} thick epdm ribbon wrapped around the tubes (see \cref{fig:swivel_dwg}). Once clamped in the connection, the tubes are spaced by a \SI{68}{\mm} distance from axis to axis. Although the mechanical consequences of this eccentricity could be neglected to a first-order approximation, this is not the case for the geometric consequences it induces as explained in \cref{sec:asbuilt}.
-
-\subsubsection{Interface layer}
-This coupler is made to assemble two scaffold steel tubes together. Workers should tight strongly the collars of the coupler to ensure that the steel tubes won't slide in their collar. Here, it is clearly impossible to do that. Indeed the GFRP tube is to thin (only \SI{3.5}{\mm} thick) and tightening the collars to the maximum would damage it or even make it collapse. However, preventing the connections to slide along the tubes is critical to maintain the in-plane shear degree of freedom of the grid. If connections would slide, the grid would probably not deploy in space as intended. The grid kinematic would be blocked at some points, developing high stresses that would lead to breakages. To maintain a sufficient level of sliding resistance while preserving the material integrity it was decided to introduce an interface layer to~:
-\begin{itemize}
-\item increase the poor friction coefficient between the steel collar and the GFRP tube ;
-\item improve the distribution of stresses generated by the transverse compression of the collar over the tube, thus allowing a stronger clamping of the collar.
-\end{itemize}
-
-Several materials were tested in different thickness. Some of the results are presented in \cref{plot:layer_benchmark}. A \SI{1.5}{\mm} thick EPDM ribbon was found to be suitable for the design requirements of the project. This layer improves significantly the sliding resistance from about \SI{300}{\newton} to about \SI{1200}{\newton}. Once the interface layer had been chosen, further tests were conducted to determine the appropriate clamping for the connections. The aim was to maximize the clamping to get the best sliding resistance (see \cref{plot:tightening}) while preserving the  integrity of the tubes. It was found that a tightening torque between \SI{15}{Nm} to \SI{20}{Nm} was the optimal solution \cite{Tayeb2015a}.
-
-Finally, the ribbons were ordered with a double sided tape (DST) face to facilitate their placement on the tubes. The influence of the temperature regarding the presence of the adhesive has been investigated. The results show that after \SI{40}{\celsius} the scotch creeps and a loss of resistance occurs (see \cref{plot:epdm_temperature}). A recent thermal study of the structure has demonstrated that with no cooling system the temperature inside the building could rise up to \SI{70}{\celsius} (see \cref{sec:temperature,plot:T_3,plot:T_4}).
-
-
-
-\subsubsection{Benefits and drawbacks}
-This connection has the advantage to be available almost every where, to be really cheap and indestructible compare to the GFRP members. However, there are some drawbacks as it is not tailor-made for this application :
-\begin{enumerate}
-\item Firstly, the weight of this part is \SI{1.16}{\kg}, which is very heavy compare to the lightness of the system. In this project, the weight of the swivel couplers represents one third of the overall weight of the structure. This could easily be reduced with a dedicated design.
-\item Secondly, the actual design is not adapted to resist sliding. This is critical as explained previously. This problem occurred locally during the lifting of the grid and it was a pain to finish the deployment of the structure (see \cref{sec:rex}).
-\item  Thirdly, although the clamping of the collars enhance the resistance to sliding of the couplers, they also activate the ability to transfer some torsion to the tubes. Unfortunately, the tubes are very weak regarding this type of sollicitation (see \cref{tab:tube}). A better design would propose a kinematics that allow the rotation of each collar around the axis of the connection and the axis of the tube.
-\item  Fourthly, as the number of connections is quite huge, the clamping process should be at the heart of the design. The later has to guarantee that the workers will not damage unintentionally the structural members. If clamping would be found to be the way to go -- which indeed might be an relevant option -- the structural elements will have to be stronger to resist both clamping and torsion.
-\end{enumerate}
-
-Furthermore, other design criterion should be taken into account such as the fact that the connection must not damage the membrane. This was resolved in the project thanks to plastic caps (see \cref{fig:sleeve_dwg}). It is worth to mentionne that the problematic of the connection should be treated in symbiosis with the difficult question of the bracing and the covering as it interacts with all the key parts of the system : grid, bracing and membrane. Some propositions to this complex problem were designed and tested during this thesis and are presented in \cref{sec:booby,sec:jpofav}. 
-
-\begin{figure}[p]
-	\begin{fullpage}
-	\includegraphics[width=1\textwidth]{swivel.pdf}
-	\caption{Technical drawing of the swivel coupler. GFRP tubes (1, 2, 3). Swivel couplers (5, 8). EPDM layer (6). M12 swivel T-bolt (7). M12 nut (4) and plastic cap (9).}
-	\label{fig:swivel_dwg}
-	\vspace{1cm}
-	\includegraphics[width=1\textwidth]{sleeve.pdf}
-	\caption{Technical drawing of the sleeve system.}
-	\label{fig:sleeve_dwg}
-	\end{fullpage}
-\end{figure}
-
-
-\begin{figure}[p]
-\centering
-\begin{fullpage}
-	\includegraphics[]{ch2a_creteil/plot/1_layer_benchmark/build.pdf}
-	\caption{Influence of the interface layer on the sliding resistance (\SI{5}{Nm}).}
-	Results from \cite{Tayeb2015a}.
-	\label{plot:layer_benchmark}
-\end{fullpage}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\begin{fullpage}
-	\includegraphics[]{ch2a_creteil/plot/3_tightening/build.pdf}
-	\caption{Influence of the tightening on the sliding resistance.}
-	Results from \cite{Tayeb2015a}.
-	\label{plot:tightening}
-\end{fullpage}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\begin{fullpage}
-	\includegraphics[]{ch2a_creteil/plot/2_epdm_temperature/build.pdf}
-	\caption{Influence of the temperature on the sliding for a \SI{1.5}{\mm} EPDM layer.}
-	Results from \cite{Tayeb2015a}.
-	\label{plot:epdm_temperature}
-\end{fullpage}
-\end{figure}
-
-
-
-\subsection{The sleeve system}
-%------------------------------------------
-
-\subsection{The membrane}
-%------------------------------------------
-
-The membrane is nothing but a tailor-made one-piece clothing manufactured to dress up the structure. The membrane is prefabricated based on the 3D model of the shape computed during the formfinding process (see \cref{sec:formfinding}) and not on some on-site geometric survey.
-
-\begin{table}[h]
-\label{tab:2}
-\centering
-	\ra{1.1}
- 	\begin{tabular}{@{}l l r @{}}
-	\toprule
-	Item 							& Standard 				& Précontraint 702 Opaque Alu  \\
-	\midrule
-	Yarn 							& 						& 1100 dtex PES HT \\
-	Weight 						& EN ISO 2286-2			& \SI{830}{g/m^2} \\
-	Width 						& 						& \SI{267}{cm} \\
-	Standard jumbo roll				& 						& \SI{50}{lm} or \SI{300}{lm}  \\
-	Finish						& 						& 2-face acrylic varnish \\
-	\midrule
-	Tensile strength (warp/weft)		& EN ISO  1421			& \SI{280/280}{daN/ \SI{5}{\cm}} \\
-	Tear strength (warp/weft)			& DIN 53.363				& \SI{30/28}{daN} \\
-	Elongation under load (warp/weft)	& NF EN 15619				& < \SI{1}{\percent} / < \SI{1}{\percent} \\
-	Adhesion						& EN ISO  2411			& \SI{10}{daN/ \SI{5}{\cm}} \\
-	Solar transmission				& NFP 38511				& \SI{13.5}{\percent}  \\
-	\midrule
-	Flame retardancy				& NFP 92-507 				& M2 \\
-								& DIN 4102-1 				& B1 \\
-	Euroclass						& EN 13501-1 				& B-s2, d0 \\
-	\midrule
-	Cold resistance					& IS0 4675 				& \SI{-30}{\celsius} \\
-	Heat resistance					& DIN 4102-1 				& \SI{+70}{\celsius} \\
-	\bottomrule
-	\end{tabular}
-	\caption{Technical properties of the membrane.}
-	\label{tab:membrane}
-\end{table}
-
-\subsection{Concrete footing}
-%------------------------------------------
-
-
+\clearpage
 \section{Structural design}
 %=================
 
@@ -368,7 +212,7 @@ The membrane is nothing but a tailor-made one-piece clothing manufactured to dre
 %------------------------------------------
 
 The goal of the design process is to identify a gridshell structure that works and respects as faithfully as possible the architectural project – a shape and a program. It represents “the path from shape to structure”. Its progress, sequential and iterative, revolves around three major stages: shape, mesh and structure. It is not trivial to go through this complex process. Indeed, for each step, the method, the tool, the criteria, that offers both a sufficient explorative richness to find out enough candidate solutions, and the means to evaluate and compare the suitability of those solutions, have to be found.
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{image8}
 \caption{Evaluating the mechanical potential of shapes regarding principal curvatures}
@@ -412,6 +256,13 @@ The calculations, performed numerically thanks to a dynamic relaxation algorithm
 Two analysis models are built during this process to study the structure with or without bracing tubes.
 Note that the algorithm has been improved to take account for the eccentricity due to connections \citep{Douthe2006}.
 
+\begin{figure}[t]
+	\centering
+		\includegraphics[width=\textwidth]{image13}
+	\caption{Section on the footer}
+	\label{fig:9}
+\end{figure}
+
 \subsection{As-built geometry}\label{sec:asbuilt}
  %-------------------------------------
 Indeed, the eccentricity remains small compared with the span of the shell, but it is not negligible compared with the mesh size ($e = \SI{68}{\mm} $; l =17 m; w = 1 m). Thus, the pipe lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assessed that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding was performed only with those two layers. Connection axes had to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by e/2, the green by e/2 and the blue by 3e/2 along the normal.
@@ -421,61 +272,149 @@ Indeed, the eccentricity remains small compared with the span of the shell, but 
 A full structural analysis is performed on the gridshell, using the two mechanical models created previously during the formfinding stage.
 The non-braced model is used to check the grid’s behavior during the construction stages. In particular, it must be verified that the primary grid - the one with no triangulation tubes - has no risk of buckling, both for obvious safety reasons and to ensure the accuracy of the final geometry. Indeed, the more the form is likely to buckle, the more it can be triangulated in a buckled geometry different to the targeted geometry. The model with the triangulated grid is used to confirm the gridshell complies with all the structural requirements during its lifetime. Its behavior under standard loadings is evaluated.
 
-
-
-
-\section{Codes for composite materials}
+\newpage \phantom{abc}
+\clearpage
+\section{Designing with GFRP materials}
 %------------------------------------------
+This section focuses on the GFRP tubes employed for the structure. We present how we managed to deal with this composite material in the eyes of the existing regulatory framework although there is no applicable norms for composite materials (see \cref{sec:codes}). Beyond the administrative strategy, we present how their flexural strength was evaluated (see \cref{sec:flex}) and how the corresponding partial safety factors were detremined (see \cref{sec:safety}).
 
-Beyond the technical difficulties related to both design and structural analysis of the shell, the regulatory framework was a vital issue for the success of the project. Because it was the first time a structure of this kind would host regularly a large number of people in a long-term period, the question of its reliability over time was a major issue. To be built the gridshell had to comply with existing standards, which do not take into account such an innovative edifice, all in composite material. The strategy adopted to bypass this obstacle consisted in making the most of the existing regulatory framework to justify the compliance of a structure that would not, at first sight, be taken into account by standards that does not include composite materials.
-As far as possible, the design was led in compliance with the Eurocodes, where the structural design is made according to limit states under normalized loadings (self-weight, snow, wind, etc.). Despite the Eurocodes do not directly take into account composite materials, they propose some probabilistic methods to introduce new materials (Annexe D). As far as possible, the mechanical properties of the GFRP pipe were determined by tests in conformance with these methods. Otherwise, values where taken according to the Eurocomp \citep{Clarke2003}.  In some cases, as the sleeve, the design of the construction details has also benefited from this approach.
-
-\begin{figure}[t]
-	\centering
-		\includegraphics[width=\textwidth]{image13}
-	\caption{Section on the footer}
-	\label{fig:9}
-\end{figure}
-
-\subsection{Flexural strength of the tubes}
-%------------------------------------------
-The characteristic flexural strength ($\sigma_{k,flex}$) of the GFRP tube has a critical impact on the structure’s reliability because in this particular application stresses in the tubes are mainly due to bending. Thus, it was important to confirm the manufacturer’s value by assays. 
-Three-point flexural tests were led with and without connexions (tightening torque set to 20Nm) to determine the characteristic strength according to the protocol of the Eurocode (Annex D) :
-\begin{equation}
-\sigma_{k,flex}=\overline{\sigma}(1-k_n\sigma_x)
-\end{equation}
-
-For five tests, the factor $k_{n,5\%}$ is 1.80 , assuming a normal distribution. One can note that the connections scatter the results more (Table 1). Finally, the manufacturer value of \SI{400}{\mega\pascal} (ASTM D790) was confirmed and retained for further calculations.
-\begin{table}[h]
+\subsection{Properties of the tubes}\label{sec:gfrp}
+% -------------------------------------------------------
+The technical properties of the tube employed for this project are given in \cref{tab:tube}. Although these data were provided by the manufacturer at the time of the project, a test campaign was done to verify the flexural resistance of the tubes taking into account the influence of the swivel couplers clamped on the tubes (see \cref{sec:flex}).
+%The characterization of this material is presented in detail in this paper \cite{Kotelnikova2012}.
+\begin{table}[p]
+\begin{fullpage}
 \centering
+	\ra{1.1}
+ 	\begin{tabular}{@{}l l r @{}}
+	\toprule
+	Item 							& Standard	 	& Polyester Mat-Roving-Mat \\
+	\midrule
+	External diameter 				&				& \SI{41.7}{\mm} \\
+	Internal diameter 				& 				& \SI{34.7}{\mm} \\
+	Wall thickness					& 				& \SI{3.5}{\mm} \\
+	Section area					& 				& \SI{4.20e-2}{m^2} \\
+	Section moment of inertia			&				& \SI{7.7259e-4}{m^4} \\
+	Torsion constant				&				& \SI{15.4518e-4}{m^4} \\
+	\midrule
+	Shipping length 				& 				& \SI{12.0}{\m} \\
+	Glass content by weight 			& ISO 1172		& \SI{60}{\percent}\\
+	Specic weight					& ASTM D792		& \SI{1.75}{\kg/m^3}\\
+	Linear weight					& 				& \SI{0.735}{\kg/lm}\\
+	Coefficient of thermal expansion	& ASTM D696		& \SI{11e-6}{K^{-1}}\\
+	\midrule
+	Tensile strength					& ASTM D638		& \SI{400}{MPa}\\
+	Tensile modulus				& ASTM D638		& \SI{26}{GPa}\\
+	Flexural strength				& ASTM D790		& \SI{400}{MPa}\\
+	Flexural modulus				& full bending		& \SI{25}{GPa}\\
+	Compressive strength			& ASTM D695		& \SI{220}{MPa}\\
+	Compressive modulus			& ASTM D695		& \SI{20}{GPa}\\
+	\bottomrule
+	\end{tabular}
+	\caption{Technical properties of the tube.}
+	\label{tab:tube}
+	%
+	\vspace{1.25cm}
+	%
+ 	\begin{tabular}{@{}l l r @{}}
+	\toprule
+	Item 							& Standard 				& Précontraint 702 Opaque Alu  \\
+	\midrule
+	Yarn 							& 						& 1100 dtex PES HT \\
+	Weight 						& EN ISO 2286-2			& \SI{830}{g/m^2} \\
+	Width 						& 						& \SI{267}{cm} \\
+	Standard jumbo roll				& 						& \SI{50}{lm} or \SI{300}{lm}  \\
+	Finish						& 						& 2-face acrylic varnish \\
+	\midrule
+	Tensile strength (warp/weft)		& EN ISO  1421			& \SI{280/280}{daN/ \SI{5}{\cm}} \\
+	Tear strength (warp/weft)			& DIN 53.363				& \SI{30/28}{daN} \\
+	Elongation under load (warp/weft)	& NF EN 15619				& < \SI{1}{\percent} / < \SI{1}{\percent} \\
+	Adhesion						& EN ISO  2411			& \SI{10}{daN/ \SI{5}{\cm}} \\
+	Solar transmission				& NFP 38511				& \SI{13.5}{\percent}  \\
+	\midrule
+	Flame retardancy				& NFP 92-507 				& M2 \\
+								& DIN 4102-1 				& B1 \\
+	Euroclass						& EN 13501-1 				& B-s2, d0 \\
+	\midrule
+	Cold resistance					& IS0 4675 				& \SI{-30}{\celsius} \\
+	Heat resistance					& DIN 4102-1 				& \SI{+70}{\celsius} \\
+	\bottomrule
+	\end{tabular}
+	\caption{Technical properties of the membrane.}
+	\label{tab:membrane}
+\end{fullpage}
+\end{table}
+
+\subsection{Codes for composite materials}\label{sec:codes}
+Beyond the technical difficulties related to both design and structural analysis of the shell, the regulatory framework was a vital issue for the success of the project. As it was the first time a structure of this kind was going to host a large number of people for over two years, the question of its reliability over time was a major issue. In order to be built, the gridshell had to comply with existing standards, which do not take into account such an innovative edifice, all in composite material. The strategy adopted to bypass this obstacle is presented herafter.
+
+\subsubsection{First level~: administrative classification of the building}
+The first level, administrative, consisted of obtaining from the French authorities an appropriate classification for the building, taking intoconsideration the project’s real-time requirement~: a light-weight structure with a short lifespan. As expected, the structure was classified as a \textquote{building open to the public} (EPR in French) from the category \textquote{big tops and tents} (CTS in french) \cite{SiteSecurite}. In this classification, construction procedures and regulations are adapted to the short lifespan of buildings.
+
+\subsubsection{Second level~: compliance with existing standards}
+The second level, normative, consisted of ensuring that most of the existing regulatory framework justified the compliance of a structure that would not, at first sight, be considered by standards that do not include composite materials.
+
+As far as possible, the design was made in compliance with the Eurocode, where the structural design is done according to the limit states under normalized loadings (self-weight, snow, wind, etc.). Although, the Eurocodes do not directly take into account composite materials, they propose some probabilistic methods to introduce new materials (EN1990, Annexe D). The mechanical properties of the GFRP pipe were determined as far as possible by tests in conformance with these methods. Alternatively, values were taken according from the Eurocomp \cite{Clarke2003}.\footnote{The Eurocomp is a kind of pre-standard intended for the structural design of buildings and civil engineering works using GFRP composites, consistent with the Eurocode approach. It is considered as the reference design code for GFRP materials.} In some cases, such as for the sleeve, the construction design also benefited from this approach.
+
+\subsection{Flexural strength of the tubes}\label{sec:flex}
+%------------------------------------------
+The characteristic flexural strength ($\sigma_{k,flex}$) of the GFRP tube was used to verify if the structure complied with the Eurocode. This parameter had a critical impact on the structure’s reliability because in this particular application stresses in the tubes are mainly due to the bending. Thus, it was important to confirm the manufacturer’s permitted value through testing.Three-point flexural tests were carried out with and without connections (see \cref{plot:gfrp_tubes}) to determine the characteristic strength according to the Eurocode protocol (Annex D)~:\begin{equation}
+\sigma_{k,flex}=\overline{\sigma}(1-k_n\sigma_x)
+\end{equation}For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. It has been proved in \cite{Tayeb2015a} that the connections caused more scattering in the results. Finally, the manufacturer allowed value of \SI{400}{MPa} was confirmed and retained for further calculations.
+\begin{table}[h]
+	\centering
 	\ra{1.1}
  	\begin{tabular}{@{}l r r r r r r @{}}
 	\toprule
-	Connection & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & $\sigma_{k}$ \\
+	Connection & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & \tablebf{$\sigma_{k}$} \\
 	\midrule
-	Without & 456 & 441 & 445 & 460 & 477 & 430 \\
-	With (20\,Nm) & 444 & 478 & 434 & 479 & 427 & 408 \\
+	Without & 456 & 441 & 445 & 460 & 477 & \tablebf{430} \\
+	With (20\,Nm) & 444 & 478 & 434 & 479 & 427 & \tablebf{408} \\
 	\bottomrule
-	\end{tabular}\label{tab:sigma}
-	\caption{Three-point flexural resistance of the GFRP tubes (\SI{}{\mega\pascal}).}
+	\end{tabular}
+	\captionof{table}{Three-point flexural tests of the GFRP tubes (\SI{}{\mega\pascal}).}
+	\label{tab:sigma}
 \end{table}
 
-\begin{figure}[t]
+\begin{figure}[p]
 \centering
-%\begin{fullpage}
+\begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/4_gfrp_tube/build.pdf}
-	\caption{Flexural tests of the GFRP tubes.}
-	Results from \cite{Tayeb2015a}.
+	\caption{Flexural tests of the GFRP tubes. Results from \cite{Tayeb2015a}.}
 	\label{plot:gfrp_tubes}
-%\end{fullpage}
+	%
+	\vspace{1.5cm}
+	%
+%	\ra{1.1}
+% 	\begin{tabular}{@{}l r r r r r r @{}}
+%	\toprule
+%	Connection & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & \tablebf{$\sigma_{k}$} \\
+%	\midrule
+%	Without & 456 & 441 & 445 & 460 & 477 & \tablebf{430} \\
+%	With (20\,Nm) & 444 & 478 & 434 & 479 & 427 & \tablebf{408} \\
+%	\bottomrule
+%	\end{tabular}\label{tab:sigma}
+%	\captionof{table}{Three-point flexural tests of the GFRP tubes (\SI{}{\mega\pascal}).}
+	%
+%	\vspace{1.5cm}
+%	%
+%	 \begin{tabular}{@{}l r r @{}}
+%	\toprule
+%	Time scale 	& $\gamma$		& $\sigma_{d}$\\
+%	\midrule
+%	Short-term 	& $ 2.0$ 			& 200 \\
+%	Long-term 	& $ 3.0$ 			& 133 \\
+%	\bottomrule
+%	\end{tabular}\label{tab:gamma}
+%	\captionof{table}{Short-term and long-term values for material resistance in MPa. $\gamma$ is the partial coefficient for safety factor. $\sigma_{d}$ is the flexural design strength.}
+\end{fullpage}
 \end{figure}
 
-\subsection{Partial safety factors}
+\subsection{Partial safety factors}\label{sec:safety}
 %------------------------------------------
-The partial coefficients of material resistance used in the project are calculated according to the Eurocomp (Table 2). The short-term coefficient proposed in the Eurocomp ($\gamma_{st} = 1.3$) was raised to consider the critical stage of erection, where the deformations are not controlled accurately. 
+The partial coefficients of material resistance (see \cref{tab:gamma}) used in the project were calculated according to the Eurocomp. The short-term coefficient proposed in Eurocomp ($\gamma_{st} = 1.3$) was increased to consider the critical stage of erection, where the deformations could not be controlled accurately.When dealing with long-term effects in permanently loaded, pultruded composite materials subjected to creeping and relaxation designers should be careful  \cite{Kotelnikova2012,Bank2006}. In this project, this was reflected in the high partial coefficient for long-term effects.
 
 \begin{table}[h]
-\label{tab:2}
 \centering
 	\ra{1.1}
  	\begin{tabular}{@{}l r r @{}}
@@ -485,12 +424,195 @@ The partial coefficients of material resistance used in the project are calculat
 	Short-term 	& $ 2.0$ 			& 200 \\
 	Long-term 	& $ 3.0$ 			& 133 \\
 	\bottomrule
-	\end{tabular}\label{tab:gamma}
+	\end{tabular}
 	\caption{Short-term and long-term values for material resistance. $\gamma$ is the partial coefficient for safety factor. $\sigma_{d}$ is the flexural design strength.}
+	\label{tab:gamma}
 \end{table}
 
-Note that designers should take care about long-term effects in permanently loaded pultruded composite materials subjected to creeping and relaxation \citep{Kotelnikova2012}. Here, it is reflected in a high partial coefficient for long-term effects.
 
+
+
+\section{Construction details}
+% ====================
+In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (see \cref{fig:swivel}) ; the steel sleeve for connecting several composite tubes to obtain long members from initially short pieces of tubes (see \cref{fig:sleeve}) ; the ground anchorages for fixing the structure to the concrete slab (see \cref{fig:anchorage}) and the lacing edge beam of the fabric (see \autoref{fig:edge}). The challenging issue of connecting the steel and composite parts was solved similarly sleeve and anchorage details.
+
+\subsection{The swivel coupler}
+% -------------------------------------------------------
+Tubes are connected together with scaffold swivel couplers (see \cref{fig:swivel}). Each connection is composed of two collars (\O\;\SI{42}{\mm} and \SI{38}{\mm} wide) linked by a steel axis (see \cref{fig:swivel_dwg}). Thus the collars can freely rotate around the axis of the connection. This degree of freedom is responsible for the lack of in-plane shear stiffness of the primary grid and this is precisely this mechanism that allows the flat grid to deform into a free form surface. Each collar is itself composed of two hemicylindrical parts so that it can be opened to easily engage a tube. A M12 nut and a swivel T-bolt allow to lock the tube in the collar using friction. Collars are positioned over a \SI{1.5}{\mm} thick epdm ribbon wrapped around the tubes (see \cref{fig:swivel_dwg}). Once clamped in the connection, the tubes are spaced by a \SI{68}{\mm} distance from axis to axis. Although the mechanical consequences of this eccentricity could be neglected to a first-order approximation, this is not the case for the geometric consequences it induces as explained in \cref{sec:asbuilt}.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.8\textwidth]{swivel.pdf}
+	\caption{Technical drawing of the swivel coupler. GFRP tubes (1, 2, 3). Swivel couplers (5, 8). EPDM layer (6). M12 swivel T-bolt (7). M12 nut (4) and plastic cap (9).}
+	\label{fig:swivel_dwg}
+\end{figure}
+
+\subsubsection{Interface layer}
+This coupler is made to assemble two scaffold steel tubes together. Workers should tight strongly the collars of the coupler to ensure that the steel tubes won't slide in their collar. Here, it is clearly impossible to do that. Indeed the GFRP tube is to thin (only \SI{3.5}{\mm} thick) and tightening the collars to the maximum would damage it or even make it collapse. However, preventing the connections to slide along the tubes is critical to maintain the in-plane shear degree of freedom of the grid. If connections would slide, the grid would probably not deploy in space as intended. The grid kinematic would be blocked at some points, developing high stresses that would lead to breakages. To maintain a sufficient level of sliding resistance while preserving the material integrity it was decided to introduce an interface layer to~:
+\begin{itemize}
+\item increase the poor friction coefficient between the steel collar and the GFRP tube ;
+\item improve the distribution of stresses generated by the transverse compression of the collar over the tube, thus allowing a stronger clamping of the collar.
+\end{itemize}
+
+Several materials were tested in different thickness. Some of the results are presented in \cref{plot:layer_benchmark}. A \SI{1.5}{\mm} thick EPDM ribbon was found to be suitable for the design requirements of the project. This layer improves significantly the sliding resistance from about \SI{300}{\newton} to about \SI{1200}{\newton}. Once the interface layer had been chosen, further tests were conducted to determine the appropriate clamping for the connections. The aim was to maximize the clamping to get the best sliding resistance (see \cref{plot:tightening}) while preserving the  integrity of the tubes. It was found that a tightening torque between \SI{15}{Nm} to \SI{20}{Nm} was the optimal solution \cite{Tayeb2015a}.
+
+Finally, the ribbons were ordered with a double sided tape (DST) face to facilitate their placement on the tubes. The influence of the temperature regarding the presence of the adhesive has been investigated. The results show that after \SI{40}{\celsius} the scotch creeps and a loss of resistance occurs (see \cref{plot:epdm_temperature}). A recent thermal study of the structure has demonstrated that with no cooling system the temperature inside the building could rise up to \SI{70}{\celsius} (see \cref{sec:temperature,plot:T_3,plot:T_4}).
+
+
+
+\subsubsection{Benefits and drawbacks}
+This connection has the advantage to be available almost every where, to be really cheap and indestructible compare to the GFRP members. However, there are some drawbacks as it is not tailor-made for this application :
+\begin{itemize}
+\item The weight of this part is \SI{1.16}{\kg}, which is very heavy compare to the lightness of the system. In this project, the weight of the swivel couplers represents one third of the overall weight of the structure. This could easily be reduced with a dedicated design.
+\item The actual design is not adapted to resist sliding. This is critical as explained previously. This problem occurred locally during the lifting of the grid and it was a pain to finish the deployment of the structure (see \cref{sec:rex}).
+\item  Although the clamping of the collars enhance the resistance to sliding of the couplers, they also activate the ability to transfer some torsion to the tubes. Unfortunately, the tubes are very weak regarding this type of sollicitation (see \cref{tab:tube}). A better design would propose a kinematics that allow the rotation of each collar around the axis of the connection and the axis of the tube.
+\item  As the number of connections is quite huge, the clamping process should be at the heart of the design. The later has to guarantee that the workers will not damage unintentionally the structural members. If clamping would be found to be the way to go -- which indeed might be an relevant option -- the structural elements will have to be stronger to resist both clamping and torsion.
+\end{itemize}
+
+Furthermore, other design criterion should be taken into account such as the fact that the connection must not damage the membrane. This was resolved in the project thanks to plastic caps (see \cref{fig:sleeve_dwg}). It is worth to mentionne that the problematic of the connection should be treated in symbiosis with the difficult question of the bracing and the covering as it interacts with all the key parts of the system : grid, bracing and membrane. Some propositions to this complex problem were designed and tested during this thesis and are presented in \cref{sec:booby,sec:jpofav}. A noticeable design attempt was proposed in the roof of Chiddingstone's orangery \cref{sec:}.
+
+
+
+
+\begin{figure}[p]
+\centering
+\begin{fullpage}
+	\includegraphics[]{ch2a_creteil/plot/1_layer_benchmark/build.pdf}
+	\caption{Influence of the interface layer on the sliding resistance (\SI{5}{Nm}).}
+	Results from \cite{Tayeb2015a}.
+	\label{plot:layer_benchmark}
+\end{fullpage}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\begin{fullpage}
+	\includegraphics[]{ch2a_creteil/plot/3_tightening/build.pdf}
+	\caption{Influence of the tightening on the sliding resistance for a \SI{1.5}{\mm} EPDM layer.}
+	Results from \cite{Tayeb2015a}.
+	\label{plot:tightening}
+\end{fullpage}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\begin{fullpage}
+	\includegraphics[]{ch2a_creteil/plot/2_epdm_temperature/build.pdf}
+	\caption{Influence of the temperature on the sliding resistance for a \SI{1.5}{\mm} EPDM layer.}
+	Results from \cite{Tayeb2015a}.
+	\label{plot:epdm_temperature}
+\end{fullpage}
+\end{figure}
+
+
+\clearpage
+\subsection{The sleeve system}
+%------------------------------------------
+
+Sleeves are major components in the structural system. The presented design is an important innovation compared with the composite gridshells built previously, where members were simply interrupted or overlapped (see \cref{fig:sleeve_a}). By establishing mechanical and architectural continuities between tubes, the sleeve brought the real behavior of the shell closer to its theoretical behavior (see \cref{fig:sleeve_b}).
+
+The sleeve is a steel system that provides mechanical continuity between two adjacent composite tubes for both tension and bending. It is made of three parts~: two connectors linked by a threaded rod (see \cref{fig:sleeve_dwg}). Each connector is a 48.3 × \SI{2.9}{mm} steel tube, slightly larger than the composite tubes it connects, with a welded M20 nut at one end. The connector is pinned to the composite tube with three 10 mm bolts. Some structural adhesive was also employed to fill the gaps and to guarantee good rigidity of the assembly. However, the sleeve is designed to ignore the contribution of the adhesive to the mechanical strength of the system. A M20 threaded rod links the two connectors. It allows tension forces and bending moments to pass from one tube to the other. It does not transfer any torsion.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[]{sleeve.pdf}
+	\caption{Technical drawing of the sleeve system.}
+	\label{fig:sleeve_dwg}
+\end{figure}
+
+\subsubsection{Mechanical behaviour}
+Tension forces are transferred from the composite tube to the connector through shear in the pins. Owing to a lower bearing resistance in the composite than in the steel, each of the three pins could be gradually loaded. When loading the system, initially, only one of the three pins is in contact with both the steel tube and the composite tube, because of inevitable minor manufacturing gaps. When the axial load is increased, this pin started to “eat” into the composite tube until the second pin also comes in contact. Thus, the axial load is transferred equally between the two pins. This scheme could work for more until another failure mode occurs.
+For this mode of composite failure, which prevailed in this case, the total bearing capacity of the assembly was thus three times the capacity of a single pin. This total bearing capacity can be calculated from the compressive strength, the composite thickness and the pin diameter~:
+\begin{equation}
+	F = 3 \times f_{u,c}\cdot d \cdot t = \SI{3150}{daN}
+\end{equation}
+In the next section, tests carried out at the Navier laboratory to confirm the predicted value are presented.
+Bending moments were transferred through the threaded rod of the sleeve. This part was designed to reach the two following qualitative criterions simultaneously~:
+\begin{itemize}
+\item
+Firstly, the bending stiffness of the rod should be roughly equivalent to the composite bending stiffness to preserve the curvature’s continuity along the system. This continuity was of prime importance from an architectural point of view.
+\begin{equation}
+	\frac{EI_{rod}}{EI_{gfrp}} \simeq 1
+	\label{eq:r1}
+\end{equation}
+\item
+Secondly, the steel quality of the rod should be adjusted such that plastification begins when the composite tube tends to approach its maximum design stress (a third of the yield stress). Thus the rod acted as a \textquote{fuse}~: if the curvature of the system reaches the maximum allowed curvature, the steel rod starts to plastify. The plastic hinge accumulates the rotation thus preventing the curvature to increase in the composite tubes.
+\begin{equation}
+	\frac{M^{elastic\,max}_{rod}}{M^{\sigma = \SI{133}{MPa}}_{gfrp}} \simeq 1
+	\label{eq:r2}
+\end{equation}
+\end{itemize}
+In this project, the numerical values for the ratios in \cref{eq:r1,eq:r2} were 0.79 and 0.96 respectively.
+
+\begin{figure}[p]
+	\centering
+	\begin{fullpage}
+	\subfloat[][Solidays 2011]{\includegraphics[width=0.48\textwidth]{sleeve3.jpg}\label{fig:sleeve_a}}	
+	\hspace*{\fill}
+	\subfloat[][Créteil 2013]{\includegraphics[width=0.48\textwidth]{sleeve2.jpg}\label{fig:sleeve_b}}\\
+	\subfloat[][Continuity of curvature]{\includegraphics[width=0.48\textwidth]{sleeve5.jpg}\label{fig:sleeve_c}}	
+	\hspace*{\fill}
+	\subfloat[][Plastification threshold]{\includegraphics[width=0.48\textwidth]{sleeve4.jpg}\label{fig:sleeve_d}}\\
+	\caption{Different designs for the sleeve system.}
+	\label{fig:sleeve_bench}
+	%
+	\vspace{0.75cm}
+	%
+	\subfloat[][Tearing failure]{\includegraphics[width=0.48\textwidth]{pin.jpg}\label{fig:sleeve_a}}	
+	\hspace*{\fill}
+	 \subfloat[][Contact compression failure]{\includegraphics[width=0.48\textwidth]{pin2.jpg}\label{fig:sleeve_b}}\\
+	\caption{Typical failure modes when testing the sleeve system in traction.}
+	\label{fig:sleeve_bench}
+	\end{fullpage}
+\end{figure}
+
+\begin{figure}[p]
+	%
+     	\centering
+	\begin{fullpage}	
+		\subfloat[][Geometry]{\includegraphics[]{breaking_1}\label{fig:breaking_1}}
+		\subfloat[][Fibres]{\includegraphics[]{breaking_2}\label{fig:breaking_2}}
+		\subfloat[][Cleavage]{\includegraphics[]{breaking_3}\label{fig:breaking_3}} \\
+		%
+		\subfloat[][Tearing]{\includegraphics[]{breaking_4}\label{fig:breaking_4}}
+		\subfloat[][Inclined compression]{\includegraphics[]{breaking_5}\label{fig:breaking_5}}
+		\subfloat[][Contact compression]{\includegraphics[]{breaking_6}\label{fig:breaking_6}}
+		%
+		\vspace{10pt}
+		\caption{Typical failure modes of a bolt in a pultruded element (\SI{0}{\degree}).}
+		\label{fig:breaking}    
+	\end{fullpage}
+\end{figure}
+
+%
+%Mrode elastic max
+%/ Mpipe
+%σ = 133 MPa
+%≈ 1 (6)
+%In this project, the numerical values for the ratios (5) and (6) were 0.79 and 0.96, respectively.
+%Test: Load-Bearing Capacity of the Pinned Connection
+%Figure 16 shows the tensile test of a three-pin connection between a connector and the corresponding
+%Fig. 15: Local bearing failure due to pin pressure
+%40 kN 35 kN 30 kN 25 kN 20 kN 15 kN 10 kN
+%5 kN 0 kN
+%0 mm
+%5 mm
+%10 mm
+%15 mm
+%20 mm
+%                composite tube. The graph reflects the elastic behaviour of the com- posite tube up to 35 kN, with slight deviations corresponding to the rear- rangement of the pins. The compres- sive stress applied by each pin to the composite tube exceeded its compres- sive strength. Progressively, the pins were pulled through the tube under a residual force that tended to stabilize at around 20 kN.
+
+
+
+\subsection{The membrane}
+%------------------------------------------
+
+The membrane is nothing but a tailor-made one-piece clothing manufactured to dress up the structure. It was prefabricated based on the 3D model of the shape computed during the formfinding process (see \cref{sec:formfinding}) and not on some on-site geometric survey. The technical properties of the PVC coated fabric can be found in \cref{tab:membrane}.
+
+\subsection{Foundations}
+%------------------------------------------
+
+\clearpage
 \section{Hygrothermal behavior}
 %------------------------------------------
 \subsection{Temperature}\label{sec:temperature}
@@ -512,7 +634,7 @@ This study confirms what the experience has shown : the temperature inside the b
 Condensation was also noticed in winter and shoulder season. Sometimes, droplets of water could fall abundantly and thus the wooden furnitures had to be protected. This phenomenon was particularly intense the first months because the concrete slab had not yet fully dry-out. To protect the structure and the furnitures, it was decided to maintain the inside temperature above \SI{10}{\celsius} at all times.
 
 \begin{figure}[p]
-	\captionsetup[subfloat]{captionskip=10pt}
+	%
      	\centering
 	\begin{leftfullpage}	
 		\subfloat[][Temperature.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Text.pdf}\label{plot:T_1}} \\
@@ -523,7 +645,7 @@ Condensation was also noticed in winter and shoulder season. Sometimes, droplets
 	\end{leftfullpage}
 \end{figure}
 \begin{figure}[p]
-	\captionsetup[subfloat]{captionskip=10pt}
+	%
      	\centering
 	\begin{fullpage}	
 		\subfloat[][Without ventilation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Tint_noV.pdf}\label{plot:T_3}} \\
@@ -535,9 +657,9 @@ Condensation was also noticed in winter and shoulder season. Sometimes, droplets
 \end{figure}
 
 
-%\newpage \phantom{abc}
 %\clearpage
 
+\clearpage
 \section{Cost analysis}
 %------------------------------------------
 \subsection{Overall cost for the client}
@@ -778,7 +900,7 @@ This project demonstrates that gridshells in composite material are suitable for
 
 At the moment, further developments are conducted by the laboratory to take account for torsional effects and non axisymmetric sections in such structures, as it is studied in \citep{Barnes2013}.
 
-\subsection{Acknowledgements}
+\section{Acknowledgements}
 % ------------------------------------------
 The authors would like to thank the Catholic Church of Créteil for their trust and their courage, which permitted to get into this ambitious and successful project. They also want to greet the engineers from T/E/S/S, which have developed this challenging project during 18th months. They also thank the firm Viry for the supervision of construction works, including the delicate erection stage.
 
