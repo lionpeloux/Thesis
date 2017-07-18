@@ -26,10 +26,10 @@ A thorough review is given in \cref{sec:review}.
 	\centering
 	\begin{fullpage}
 		\includegraphics[width=1\textwidth]{situation_map}
-		\caption{Situation map. The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.}\label{fig:situation_map}    
+		\caption[Situation map]{Situation map. The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.}\label{fig:situation_map}    
 		\vspace{1.5cm}
 		\includegraphics[width=0.7\textwidth]{form}
-		\caption{Architectural sketch. Major and minor volumes are agglomerated into one volume. Here, the morphological register allowed by elastic gridshells appears to be relevant.}\label{fig:form}    
+		\caption[Architectural sketch]{Architectural sketch. Major and minor volumes are agglomerated into one volume. Here, the morphological register allowed by elastic gridshells appears to be relevant.}\label{fig:form}    
 	\end{fullpage} 
 \end{figure}
 
@@ -50,11 +50,11 @@ Formal explorations were undertaken using modeling clay. The final form is based
      	\centering
 	\begin{leftfullpage}	
 		\includegraphics[width=0.80\textwidth]{gs_ext.jpg}
-		\caption{Exterior view. The connections mark the fabric suggesting the interior grid structure. This texture enriches the perception of the building viewed from the outside and creates effects with the light reflections -- \textcopyright~L. du Peloux for T/E/S/S.}
+		\caption[Exterior view]{Exterior view. The connections mark the fabric suggesting the interior grid structure. This texture enriches the perception of the building viewed from the outside and creates effects with the light reflections -- \textcopyright~L. du Peloux for T/E/S/S.}
 		\label{fig:gs_ext}
 		\vspace{1cm}
 		\includegraphics[width=0.80\textwidth]{gs_int.jpg}\label{fig:gs_int}
-		\caption{Interior view. The grid pattern highlights the lightness of the structure and gives its tempo to the internal space. Lines converge to the altar, the heart of the liturgical area where the mass is offered on -- \textcopyright~C. Moissinac for T/E/S/S.}
+		\caption[Interior view]{Interior view. The grid pattern highlights the lightness of the structure and gives its tempo to the internal space. Lines converge to the altar, the heart of the liturgical area where the mass is offered on -- \textcopyright~C. Moissinac for T/E/S/S.}
 		\vspace{20pt}
 	\end{leftfullpage}
 \end{figure}
@@ -67,7 +67,7 @@ Formal explorations were undertaken using modeling clay. The final form is based
 		\hspace*{\fill}
 		\subfloat[][Interior]{\includegraphics[width=0.48\textwidth]{door_int.jpg}\label{fig:door_int}}
 		\vspace{10pt}
-		\caption{Entrance. Two steel doors allow the entrance inside the building.}
+		\caption[Entrance]{Entrance. Two steel doors allow the entrance inside the building.}
 		\label{fig:door}
 		%    
      		\vspace{1cm}
@@ -81,7 +81,7 @@ Formal explorations were undertaken using modeling clay. The final form is based
 		\subfloat[][Lacing rod]{\includegraphics[width=0.48\textwidth]{edge.jpg}\label{fig:edge}} \\
 		%
 		\vspace{10pt}
-		\caption{Standard elements that composed the structural system.}
+		\caption[Key elements of the structural system]{Key elements of the structural system.}
 		\label{fig:parts}    
 	\end{fullpage}
 \end{figure}
@@ -106,7 +106,7 @@ A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers
 
 The PVC fabric is waterproof and, since it is a continuous membrane, has no joints except at the perimeter. At the perimeter, a continuous strip of membrane is prefixed to the internal surface of the membrane and fixed to the ground slab. At the doors, a flexible strip of the membrane is riveted to the doorframe.
 \vspace{2cm}
-\begin{figure}[h]
+\begin{table}[h]
 \centering
 \ra{1.1}
 %\begin{fullpage}
@@ -142,22 +142,22 @@ The PVC fabric is waterproof and, since it is a continuous membrane, has no join
 				& weight						& kg/m\textsuperscript{2}	& 1 \\
 	\bottomrule
  	\end{tabular}
-\caption{Key numbers.}
+\captionof{table}[Key numbers]{Key numbers.}
 %\end{fullpage}
-\end{figure}
+\end{table}
 
 \begin{figure}[p]
 	\captionsetup[subfloat]{captionskip=20pt}
      	\centering
 	\begin{fullpage}	
 		\includegraphics[width=\textwidth]{section_view}
-		\caption{Transversal section of the building. Observe how the grid gets denser at the choir. Two doors give access to the building. The height at the pinnacle is about 7~m.}
+		\caption[Transversal section of the building]{Transversal section of the building. Observe how the grid gets denser at the choir. Two doors give access to the building. The height at the pinnacle is about 7~m.}
 		\label{fig:sec}
 		%
 		\vspace{1.5cm}
 		%
 		\includegraphics[width=\textwidth]{plan_view}
-		\caption{Top view of the building. The interior space is composed of a choir (1), a place of assembly (2) and a narthex (3). The main entrance overlook the parvis (4). The shell spans about 29~m in the longitudinal direction and about 17~m in the transversal direction. The covered area is about 350~m\textsuperscript{2}. The space can accommodate 360 seating people or 500 standing people.}
+		\caption[Top view of the building]{Top view of the building. The interior space is composed of a choir (1), a place of assembly (2) and a narthex (3). The main entrance overlook the parvis (4). The shell spans about 29~m in the longitudinal direction and about 17~m in the transversal direction. The covered area is about 350~m\textsuperscript{2}. The space can accommodate 360 seating people or 500 standing people.}
 		\label{fig:plan_view}	
 	\end{fullpage}
 \end{figure}
@@ -204,54 +204,80 @@ Finally, the structure is covered with a PVC coated fabric. The membrane comes r
 
 This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis were successfully conducted with the required accuracy (see \cref{sec:formfinding}).
 
-\clearpage
+%\clearpage
 \section{Structural design}
 %=================
+
+In this section, we exhibit a methodology to design a gridshell with a shape-centered approach. This is one of the key originality of this work and it was first implemented for the Solidays gridshell in 2011. The idea is to identify a grid and a set of supports that once the grid is bended and anchored to its foundations has a geometry as close as possible to the target shape designed by the architect.
+
+Solving this inverse problem is quite a challenge. It requires a lot of back-and-forth between architects and engineers about the definition of the shape. To build a suitable solution the designers need agile tools to get deep insights quickly and adapt their design iteratively until convergence is reached. Unfortunately, existing structural analysis softwares are more validation tools than agile design tools. Although they are necessary to fully validate the feasibility of a given structure, they are quite limited to explore the space of solutions.
+
+The presented methodology tackles this issue by providing appropriate design criteria to the designer. These criteria can be implemented in real-time softwares, thus approaching the agility of the physical models employed in the past \cite{Addis2013}.
 
 \subsection{Overall design process}
 %------------------------------------------
 
-The goal of the design process was to identify a gridshell structure that works and respects as faithfully as possible the architectural project with respect to the shape and program. The design of the gridshell represents \textquote{the path from shape to structure}. Its progress, sequential and iterative, revolves around three major stages~: shape, mesh and structure. Developing this structural design was a complex process. Indeed, for each step, the method, the tool and the criteria that offer both a sufficient explorative richness in order to find potential candidate solutions, and the means to evaluate and compare the suitability of those solutions, had to be found. In the next part of this section, the studied options and the selected evaluation criteria for each previously mentioned stage are presented.
+The goal of the design process is to identify a gridshell structure that works and respects as faithfully as possible the architectural project with respect to the shape and program. The design of the gridshell represents \textquote{the path from shape to structure}. Its progress is iterative and revolves around three major stages~: 
+\begin{itemize}
+\item shape : modeling a shape from the architectural brief
+\item mesh : meshing the shape to obtain the geometry of the grid
+\item structure : analyze the structural efficiency of the grid
+\end{itemize}
+Developing this structural design was a complex process. Indeed, for each step, the method, the tool and the criteria that offer both a sufficient explorative richness in order to find potential candidate solutions, and the means to evaluate and compare the suitability of those solutions, had to be found. In the next part of this section, the studied options and the selected evaluation criteria for each previously mentioned stage are presented.
 
 \subsection{3D modelling of the intended shape}
 %------------------------------------------
-The first step of the process consisted in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal was to estimate quickly the probability a given shape would lead to the generation of a structurally feasible gridshell.
+The first step of the process consist in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal is to estimate quickly the probability a given shape would lead to the generation of a structurally feasible gridshell.
 
-Stresses in the grid are mainly due to the bending of the tubes. Therefore, they can be derived directly from the measurement of the geometric curvature of the tubes. Because the principal curvatures of the surface give a qualitative measurement of the local curvature of any curve drawn on a surface, they are relevant indicators to evaluate the stress rate of laying a grid on the said surface.\footnote{Indeed, any normal section of the surface will have its curvature bounded by the principal curvatures of the surface. This seems reasonable to seek grids that fulfill this criterion as the structural elements would probably not   bear large variations of curvatures in the plane of the surface.} Particularly, the following condition had to be satisfied everywhere~: 
+Stresses in the grid are mainly due to the bending of the tubes. Therefore, they can be derived directly from the measurement of the geometric curvature of the tubes. Because the principal curvatures of the surface give a quantitative measurement of the local curvature of any curve drawn on a surface, they are relevant indicators to evaluate the stress rate of laying a grid on the said surface.\footnote{Indeed, any normal section of the surface will have its curvature bounded by the principal curvatures of the surface. Therefor, this seems reasonable to seek grids that fulfill this criterion as the structural elements would probably not resist too large variations of curvatures in the plane of the surface.} Particularly, the following condition has to be satisfied everywhere~: 
 \begin{equation}
-	\mathrm{E} = \frac{r}{R_{min}} < \frac{\sigma_{k,flex}}{\gamma_{lt}} 
+	\mathrm{E} \cdot \frac{r}{R_{min}} < \frac{\sigma_{k,flex}}{\gamma_{lt}} 
 	\label{eq:crit_1}
 \end{equation}
-where, $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance. 
+where, $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance (see \cref{sec:safety}). 
 
-Ideally, the shape is controlled by few key parameters. Thus, it can be adapted and optimized through an iterative process, towards the above criterion \cref{eq:crit_1}.
+Ideally, the shape is controlled by few key parameters. Thus, it is easier to adapt and optimize the shape through an iterative process towards the above criterion \cref{eq:crit_1}.
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
-\begin{fullpage}
+%\begin{fullpage}
 \includegraphics[width=\textwidth]{image8}
-\caption{Evaluating the mechanical potential of shapes regarding principal curvatures}
+\caption[Benchmarking shapes regarding their curvature]{Benchmarking shapes regarding their minimum principal curvature.}
 \label{fig:shape_bench}
-\end{fullpage}
+%\end{fullpage}
 \end{figure}
 
-\subsection{Mesh from the compass method}
+\subsection{Meshing the surface}
 %------------------------------------------
-During the second step, the candidate surface was meshed and the mechanical potential of the resulting grid was evaluated. At this stage, the probability of a given mesh leading to the generation of a viable gridshell structure was estimated. Simultaneously, meshes were compared according to their architectural relevance.
+During the second step, the candidate surface is meshed and the mechanical potential of the resulting grid is evaluated. At this stage, the probability of a given mesh leading to the generation of a viable gridshell structure is estimated. Simultaneously, meshes are compared according to their architectural relevance.
 
-In this step, the geometric curvature of the polylines drawn on the surface was the criterion to characterize the mechanical potential of the grid. Unlike the previous step, this criterion takes into account the real curvature of the studied mesh and not the minimum principal curvature. However, note that it does not incorporates any structural behavior yet. In particular, it had to be ensured that the following condition was satisfied everywhere~:
+In this step, the geometric curvature of the polylines drawn on the surface is an appropriate criterion to characterize the mechanical potential of the grid. Unlike the previous step, this criterion takes into account the curvature of the studied mesh and not the minimum principal curvature. In particular, it has to be ensured that the following condition is satisfied everywhere~:
 \begin{equation}
-	\mathrm{E} =  \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
+	\mathrm{E} \cdot   \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
 	\label{eq:crit_2}
 \end{equation}
-where $R_{spline}$ is the spline’s local curvature radius.
+where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see \cref{sec:compass}), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. This method, proposed by \cite{Otto1974}, was first implemented for the Solidays gridshell in 2011. The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec:swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The aim is to identify at least one grid which satisfies both the architectural and the structural requirements. 
 
-The mesh was obtained by the compass method, which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix} \cite{Otto1974}. For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The aim was to identify at least one grid, which satisfies both the architectural and the structural requirements. The laboratory Navier tested various numerical methods to generate such grids \citep{Bouhaya2009}. Here, a specific software developed for \emph{Rhinoceros} \& \emph{Grasshopper} \citep{DuPeloux2011}, allowed generating this kind of mesh on any non-uniform rational B-spline  surface (NURBS). It performed the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid. The tool also generated automatically a text file, which could be imported into a structural analysis software, containing all the required information to perform the form-finding of the structure. An add-on feature facilitated loads application of various complexities (snow, wind, etc.), which was otherwise difficult for freeform structures.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{compass_method.png}
+	\caption[How the compass method works]{How the compass method works.}
+	\label{fig:compass_method}
+	%
+%	\includegraphics[width=1\textwidth]{canevas.png}
+%	\caption[Grasshopper canevas]{Meshing software as a plugin for \emph{Grasshopper}.}
+%	\label{fig:canevas}
+\end{figure}
+
+\subsubsection{Compass method}\label{sec:compass}
+This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quarters. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.\footnote{The method is easily extended to mesh with non uniform pitch.}
+
+The compass method does not allow to spread the mesh everywhere on a given surface because it stops when a directrix reaches the boundary of the surface. Only a portion of the surface can be meshed and the covered area varies according to the chosen set of directrices. To overcome this difficulty, we consider the gridshell surface (see \cref{fig:compass_1}) as a part of a larger domain surface (see \cref{fig:compass_3}). Trimmed by a plane, this domain surface should give back the intended shape to build (see \cref{fig:compass_2}). Therefor, it is possible to mesh the domain surface and to retrieve a Chebyshev net that cover completely the initial surface (see \cref{fig:compass_6}).
 
 \begin{figure}[p]
 	%
      	\centering
-	\begin{fullpage}	
+	\begin{leftfullpage}	
 		\subfloat[][Target shape]{\includegraphics[width=0.48\textwidth]{compass_1.png}\label{fig:compass_1}}
 		\hspace*{\fill}
 		\subfloat[][Domain and trimming surfaces]{\includegraphics[width=0.48\textwidth]{compass_2.png}\label{fig:compass_2}} \\
@@ -265,11 +291,10 @@ The mesh was obtained by the compass method, which develops a regularly spaced g
 		\subfloat[][Final grid]{\includegraphics[width=0.48\textwidth]{compass_6.png}\label{fig:compass_6}} \\
 		%
 		\vspace{0.5cm}
-		\caption{The compass method step by step.}
-		\label{fig:erection}    
-	\end{fullpage}
+		\caption[The compass method step by step]{The compass method step by step.}
+		\label{fig:stepbystep}    
+	\end{leftfullpage}
 \end{figure}
-
 \begin{figure}[p]
 	%
      	\centering
@@ -292,26 +317,44 @@ The mesh was obtained by the compass method, which develops a regularly spaced g
 	\end{fullpage}
 \end{figure}
 
+
+\subsubsection{Software}
+Here, a specific software developed for \emph{Rhinoceros} \& \emph{Grasshopper} allows generating this kind of mesh on any non-uniform rational B-spline surface (NURBS) \citep{DuPeloux2011}. It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to perform the formfinding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult for freeform structures.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{canevas.png}
+	\caption{Meshing software as a plugin for \emph{Grasshopper}.}
+	\label{fig:canevas}
+\end{figure}
+
 \subsection{Formfinding and bending prestress}
 %------------------------------------------
-From now on, the initial form has been optimized and promising meshes for the materialization of the future gridshell have been identified. However, they do not take account of any true mechanical reality, because only geometric rules have led to their generation. The formfinding step consists precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses.
-The calculations, performed numerically thanks to a dynamic relaxation algorithm with kinetic damping \citep{Barnes1975}, is composed of the following steps:
+In the previous steps, the initial form was optimized and promising meshes for the materialization of the future gridshell were identified. However, the produced meshes do not take into account any of the mechanical reality, because only geometrical rules were used in their generation. The formfinding step consisted precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses. The calculation is performed numerically thanks to a dynamic relaxation algorithm with kinetic damping \cite{Barnes1975} and comprise the following steps:
 \begin{enumerate}
-\item The grid is bent by a set of applied displacements from rest to compass position
-\item The grid is then relaxed through its mechanical equilibrium
-\item Bending stresses of the triangulation are calculated relative to the relaxed geometry
-\item Geometry and bending stresses of the triangulation are reinjected in the model
+\item The grid is bent by a set of applied displacements from its resting position to the compass position.
+\item The grid is then relaxed until it falls in its mechanical equilibrium.
+\item Bending stresses of the triangulation are calculated relative to the geometry of the equilibrium.
+\item Geometry and bending stresses of the triangulation are re-injected into the model in step 2.
 \end{enumerate}
 
-Two analysis models are built during this process to study the structure with or without bracing tubes.
-Note that the algorithm has been improved to take account for the eccentricity due to connections \citep{Douthe2006}.
+The computations were realized with the formfinding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such the one developed by \citet{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task. This confirm what is remarked 
 
-\begin{figure}[t]
-	\centering
-		\includegraphics[width=\textwidth]{image13}
-	\caption{Section on the footer}
-	\label{fig:9}
-\end{figure}
+\citeauthor{Barnes1975}
+
+that because that this model what is pointed out in: The convergence was eased by computing the triangulation separately as explained previously.
+
+However, Adriaenssens and Barnes mention in refer- ence [5] that the coupling between translational and rotational DoFs can cause conditioning problems in explicit methods. In
+
+To ease the convergence the triangulation 
+
+This pointed out the necessity for a ligthweigth integrated design tool
+
+based on a 6-DOF The model is build programmatically 
+
+Two analysis models are built during this process to study the structure with or without bracing tubes.
+
+
+Note that the algorithm has been improved to take account for the eccentricity due to connections by \citep{Douthe2006}.
 
 \subsection{As-built geometry}\label{sec:asbuilt}
  %-------------------------------------
@@ -322,7 +365,7 @@ Indeed, the eccentricity remains small compared with the span of the shell, but 
 A full structural analysis is performed on the gridshell, using the two mechanical models created previously during the formfinding stage.
 The non-braced model is used to check the grid’s behavior during the construction stages. In particular, it must be verified that the primary grid - the one with no triangulation tubes - has no risk of buckling, both for obvious safety reasons and to ensure the accuracy of the final geometry. Indeed, the more the form is likely to buckle, the more it can be triangulated in a buckled geometry different to the targeted geometry. The model with the triangulated grid is used to confirm the gridshell complies with all the structural requirements during its lifetime. Its behavior under standard loadings is evaluated.
 
-\newpage \phantom{abc}
+%\newpage \phantom{abc}
 \clearpage
 \section{Designing with GFRP materials}
 %------------------------------------------
@@ -415,6 +458,7 @@ Three-point flexural tests were carried out with and without connections (see \c
 \sigma_{k,flex}=\overline{\sigma}(1-k_n\sigma_x)
 \end{equation}
 For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. It has been proved in \cite{Tayeb2015a} that the connections caused more scattering in the results. Finally, the manufacturer allowed value of \SI{400}{MPa} was confirmed and retained for further calculations.
+\bigskip
 \begin{table}[h]
 	\centering
 	\ra{1.1}
@@ -426,7 +470,7 @@ For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. I
 	With (20\,Nm) & 444 & 478 & 434 & 479 & 427 & \tablebf{408} \\
 	\bottomrule
 	\end{tabular}
-	\captionof{table}{Three-point flexural tests of the GFRP tubes (\SI{}{\mega\pascal}).}
+	\captionof{table}[Flexural tests of the GFRP tubes]{Flexural tests of the GFRP tubes (\SI{}{\mega\pascal}).}
 	\label{tab:sigma}
 \end{table}
 
@@ -434,7 +478,7 @@ For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. I
 \centering
 \begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/4_gfrp_tube/build.pdf}
-	\caption{Flexural tests of the GFRP tubes. Results from \cite{Tayeb2015a}.}
+	\caption[Flexural test of the GFRP tubes]{Flexural test of the GFRP tubes. Results from \cite{Tayeb2015a}.}
 	\label{plot:gfrp_tubes}
 	%
 	\vspace{1.5cm}
@@ -468,7 +512,7 @@ For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. I
 %------------------------------------------
 The partial coefficients of material resistance (see \cref{tab:gamma}) used in the project were calculated according to the Eurocomp. The short-term coefficient proposed in Eurocomp ($\gamma_{st} = 1.3$) was increased to consider the critical stage of erection, where the deformations could not be controlled accurately.
 When dealing with long-term effects in permanently loaded, pultruded composite materials subjected to creeping and relaxation designers should be careful  \cite{Kotelnikova2012,Bank2006}. In this project, this was reflected in the high partial coefficient for long-term effects.
-
+\bigskip
 \begin{table}[h]
 \centering
 	\ra{1.1}
@@ -480,7 +524,7 @@ When dealing with long-term effects in permanently loaded, pultruded composite m
 	Long-term 	& $ 3.0$ 			& 133 \\
 	\bottomrule
 	\end{tabular}
-	\caption{Short-term and long-term values for material resistance. $\gamma$ is the partial coefficient for safety factor. $\sigma_{d}$ is the flexural design strength.}
+	\caption[Short-term and long-term values for material resistance]{Short-term and long-term values for material resistance. $\gamma$ is the partial coefficient for safety factor. $\sigma_{d}$ is the flexural design strength.}
 	\label{tab:gamma}
 \end{table}
 
@@ -491,14 +535,14 @@ When dealing with long-term effects in permanently loaded, pultruded composite m
 % ====================
 In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (see \cref{fig:swivel}) ; the steel sleeve for connecting several composite tubes to obtain long members from initially short pieces of tubes (see \cref{fig:sleeve}) ; the ground anchorages for fixing the structure to the concrete slab (see \cref{fig:anchorage}) and the lacing edge beam of the fabric (see \autoref{fig:edge}). The challenging issue of connecting the steel and composite parts was solved similarly sleeve and anchorage details.
 
-\subsection{The swivel coupler}
+\subsection{The swivel coupler}\label{sec:swivel}
 % -------------------------------------------------------
 Tubes are connected together with scaffold swivel couplers (see \cref{fig:swivel}). Each connection is composed of two collars (\O\;\SI{42}{\mm} and \SI{38}{\mm} wide) linked by a steel axis (see \cref{fig:swivel_dwg}). Thus the collars can freely rotate around the axis of the connection. This degree of freedom is responsible for the lack of in-plane shear stiffness of the primary grid and this is precisely this mechanism that allows the flat grid to deform into a free form surface. Each collar is itself composed of two hemicylindrical parts so that it can be opened to easily engage a tube. A M12 nut and a swivel T-bolt allow to lock the tube in the collar using friction. Collars are positioned over a \SI{1.5}{\mm} thick epdm ribbon wrapped around the tubes (see \cref{fig:swivel_dwg}). Once clamped in the connection, the tubes are spaced by a \SI{68}{\mm} distance from axis to axis. Although the mechanical consequences of this eccentricity could be neglected to a first-order approximation, this is not the case for the geometric consequences it induces as explained in \cref{sec:asbuilt}.
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.8\textwidth]{swivel.pdf}
-	\caption{Technical drawing of the swivel coupler. GFRP tubes (1, 2, 3). Swivel couplers (5, 8). EPDM layer (6). M12 swivel T-bolt (7). M12 nut (4) and plastic cap (9).}
+	\caption[Technical drawing of the swivel coupler]{Technical drawing of the swivel coupler. GFRP tubes (1, 2, 3). Swivel couplers (5, 8). EPDM layer (6). M12 swivel T-bolt (7). M12 nut (4) and plastic cap (9).}
 	\label{fig:swivel_dwg}
 \end{figure}
 
@@ -533,8 +577,7 @@ Furthermore, other design criterion should be taken into account such as the fac
 \centering
 \begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/1_layer_benchmark/build.pdf}
-	\caption{Influence of the interface layer on the sliding resistance (\SI{5}{Nm}).}
-	Results from \cite{Tayeb2015a}.
+	\caption[Influence of the interface layer on the sliding resistance]{Influence of the interface layer on the sliding resistance (\SI{5}{Nm}). Results from \cite{Tayeb2015a}.}
 	\label{plot:layer_benchmark}
 \end{fullpage}
 \end{figure}
@@ -543,8 +586,7 @@ Furthermore, other design criterion should be taken into account such as the fac
 \centering
 \begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/3_tightening/build.pdf}
-	\caption{Influence of the tightening on the sliding resistance for a \SI{1.5}{\mm} EPDM layer.}
-	Results from \cite{Tayeb2015a}.
+	\caption[Influence of the tightening on the sliding resistance]{Influence of the tightening on the sliding resistance for a \SI{1.5}{\mm} EPDM layer. Results from \cite{Tayeb2015a}.}
 	\label{plot:tightening}
 \end{fullpage}
 \end{figure}
@@ -553,8 +595,7 @@ Furthermore, other design criterion should be taken into account such as the fac
 \centering
 \begin{fullpage}
 	\includegraphics[]{ch2a_creteil/plot/2_epdm_temperature/build.pdf}
-	\caption{Influence of the temperature on the sliding resistance for a \SI{1.5}{\mm} EPDM layer.}
-	Results from \cite{Tayeb2015a}.
+	\caption[Influence of the temperature on the sliding resistance]{Influence of the temperature on the sliding resistance for a \SI{1.5}{\mm} EPDM layer. Results from \cite{Tayeb2015a}.}
 	\label{plot:epdm_temperature}
 \end{fullpage}
 \end{figure}
@@ -564,7 +605,7 @@ Furthermore, other design criterion should be taken into account such as the fac
 \subsection{The sleeve system}
 %------------------------------------------
 
-Sleeves are major components in the structural system. The presented design is an important innovation compared with the composite gridshells built previously, where members were simply interrupted or overlapped (see \cref{fig:sleeve_a}). By establishing mechanical and architectural continuities between tubes, the sleeve brought the real behavior of the shell closer to its theoretical behavior (see \cref{fig:sleeve_b}).
+Sleeves are major components in the structural system. The presented design is an important innovation compared with the composite gridshells built previously, where members were simply interrupted or overlapped (see \cref{fig:sleeve_a}). By establishing mechanical and architectural continuities between tubes, the new sleeve system brought the real behavior of the shell closer to its theoretical behavior (see \cref{fig:sleeve_b}).
 
 The sleeve is a steel system that provides mechanical continuity between two adjacent composite tubes for both tension and bending. It is made of three parts~: two connectors linked by a threaded rod (see \cref{fig:sleeve_dwg}). Each connector is a 48.3 × \SI{2.9}{mm} steel tube, slightly larger than the composite tubes it connects, with a welded M20 nut at one end. The connector is pinned to the composite tube with three 10 mm bolts. Some structural adhesive was also employed to fill the gaps and to guarantee good rigidity of the assembly. However, the sleeve is designed to ignore the contribution of the adhesive to the mechanical strength of the system. A M20 threaded rod links the two connectors. It allows tension forces and bending moments to pass from one tube to the other. It does not transfer any torsion.
 
@@ -585,19 +626,24 @@ In the next section, tests carried out at the Navier laboratory to confirm the p
 Bending moments were transferred through the threaded rod of the sleeve. This part was designed to reach the two following qualitative criterions simultaneously~:
 \begin{itemize}
 \item
-Firstly, the bending stiffness of the rod should be roughly equivalent to the composite bending stiffness to preserve the curvature’s continuity along the system. This continuity was of prime importance from an architectural point of view.
+Firstly, the bending stiffness of the rod should be roughly equivalent to the composite bending stiffness to preserve the curvature’s continuity along the system  (see \cref{fig:sleeve_c}). This continuity was of prime importance from an architectural point of view.
 \begin{equation}
 	\frac{EI_{rod}}{EI_{gfrp}} \simeq 1
 	\label{eq:r1}
 \end{equation}
 \item
-Secondly, the steel quality of the rod should be adjusted such that plastification begins when the composite tube tends to approach its maximum design stress (a third of the yield stress). Thus the rod acted as a \textquote{fuse}~: if the curvature of the system reaches the maximum allowed curvature, the steel rod starts to plastify. The plastic hinge accumulates the rotation thus preventing the curvature to increase in the composite tubes.
+Secondly, the steel quality of the rod should be adjusted such that plastification begins when the composite tube tends to approach its maximum design stress (a third of the yield stress). Thus the rod acted as a \textquote{fuse}~: if the curvature of the system reaches the maximum allowed curvature, the steel rod starts their plastification. The plastic hinge accumulates the rotation thus preventing the curvature to increase in the composite tubes (see \cref{fig:sleeve_d}).
 \begin{equation}
-	\frac{M^{elastic\,max}_{rod}}{M^{\sigma = \SI{133}{MPa}}_{gfrp}} \simeq 1
+	\frac{\raisebox{0.2ex}M^{elastic\,max}_{rod}}{\raisebox{-0.2ex}M^{\sigma = \SI{133}{MPa}}_{gfrp}} \simeq 1
 	\label{eq:r2}
 \end{equation}
 \end{itemize}
 In this project, the numerical values for the ratios in \cref{eq:r1,eq:r2} were 0.79 and 0.96 respectively.
+
+\subsubsection{Testing the load-bearing capacity of the pinned connection}
+\cref{plot:pintest} shows the tensile test of a three-pin connection between a connector and the corresponding composite tube. The graph reflects the elastic behavior of the composite tube up to \SI{35}{kN}, with slight deviations corresponding to the rearrangement of the pins. The compressive stress applied by each pin to the composite tube exceeds its compressive strength. Progressively, the pins are pulled through the tube under a residual force that tends to stabilize at around \SI{20}{kN}.
+
+The theoretical failure modes of a bolt in a pultruded profile are given in \cite{Fiberline2003} and are illustrated in \cref{fig:breaking}. For the present design of the sleeve system, the observed failure modes were tearing (see \cref{fig:sleeve_e}) and contact compression (see \cref{fig:sleeve_f}). Note that this last failure mode is necessary to cumulate the load bearing capacity of each pin.
 
 \begin{figure}[p]
 	\centering
@@ -608,17 +654,26 @@ In this project, the numerical values for the ratios in \cref{eq:r1,eq:r2} were 
 	\subfloat[][Continuity of curvature]{\includegraphics[width=0.48\textwidth]{sleeve5.jpg}\label{fig:sleeve_c}}	
 	\hspace*{\fill}
 	\subfloat[][Plastification threshold]{\includegraphics[width=0.48\textwidth]{sleeve4.jpg}\label{fig:sleeve_d}}\\
-	\caption{Different designs for the sleeve system.}
+	\caption[Design and behavior of the the sleeve system]{Design and behavior of the the sleeve system.}
 	\label{fig:sleeve_bench}
 	%
 	\vspace{0.75cm}
 	%
-	\subfloat[][Tearing failure]{\includegraphics[width=0.48\textwidth]{pin.jpg}\label{fig:sleeve_a}}	
+	\subfloat[][Tearing]{\includegraphics[width=0.48\textwidth]{pin.jpg}\label{fig:sleeve_e}}	
 	\hspace*{\fill}
-	 \subfloat[][Contact compression failure]{\includegraphics[width=0.48\textwidth]{pin2.jpg}\label{fig:sleeve_b}}\\
-	\caption{Typical failure modes when testing the sleeve system in traction.}
-	\label{fig:sleeve_bench}
+	 \subfloat[][Contact compression]{\includegraphics[width=0.48\textwidth]{pin2.jpg}\label{fig:sleeve_f}}\\
+	\caption[Typical failure modes when testing the sleeve system in traction]{Typical failure modes when testing the sleeve system in traction.}
+	\label{fig:sleeve_failure}
 	\end{fullpage}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\begin{fullpage}
+	\includegraphics[]{ch2a_creteil/plot/6_pin/build.pdf}
+	\caption[Tensile test of the pinned connection]{Tensile test of the pinned connection. Results from \cite{Tayeb2015a}.}
+	\label{plot:pintest}
+\end{fullpage}
 \end{figure}
 
 \begin{figure}[p]
@@ -634,7 +689,7 @@ In this project, the numerical values for the ratios in \cref{eq:r1,eq:r2} were 
 		\subfloat[][Contact compression]{\includegraphics[]{breaking_6}\label{fig:breaking_6}}
 		%
 		\vspace{10pt}
-		\caption{Typical failure modes of a bolt in a pultruded element (\SI{0}{\degree}).}
+		\caption[Typical failure modes of a bolt in a pultruded element ]{Typical failure modes of a bolt in a pultruded element (\SI{0}{\degree}).}
 		\label{fig:breaking}    
 	\end{fullpage}
 \end{figure}
@@ -667,7 +722,6 @@ The membrane is nothing but a tailor-made one-piece clothing manufactured to dre
 \subsection{Foundations}
 %------------------------------------------
 
-\clearpage
 \section{Hygrothermal behavior}
 %------------------------------------------
 \subsection{Temperature}\label{sec:temperature}
@@ -695,7 +749,7 @@ Condensation was also noticed in winter and shoulder season. Sometimes, droplets
 		\subfloat[][Temperature.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Text.pdf}\label{plot:T_1}} \\
 		\subfloat[][Solar radiation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Rad.pdf}\label{plot:T_2}} \\
 		\vspace{10pt}
-		\caption{Weather data at site location during opening hours (8:00 AM to 7:00 PM).}
+		\caption[Weather data at site location during opening hours]{Weather data at site location during opening hours (8:00 AM to 7:00 PM).}
 		\label{fig:thermal_ext}    
 	\end{leftfullpage}
 \end{figure}
@@ -706,7 +760,7 @@ Condensation was also noticed in winter and shoulder season. Sometimes, droplets
 		\subfloat[][Without ventilation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Tint_noV.pdf}\label{plot:T_3}} \\
 		\subfloat[][With ventilation.]{\includegraphics[]{ch2a_creteil/plot/5_thermal/build_Tint_V.pdf}\label{plot:T_4}} \\
 		\vspace{10pt}
-		\caption{Temperature inside the building during opening hours (8:00 AM to 7:00 PM).}
+		\caption[Temperature inside the building during opening hours]{Temperature inside the building during opening hours (8:00 AM to 7:00 PM).}
 		\label{fig:thermal_int}    
 	\end{fullpage}
 \end{figure}
@@ -730,13 +784,13 @@ The project was favorably accepted by the client based on the estimation that th
 \begin{fullpage}
 \centering
 	\includegraphics[]{budget}\vspace{10pt}
-	\caption{Cost allocation for the whole project. This is the estimated overall final cost charged to the client. Prices are given excluding taxes (V.A.T).}
+	\caption[Cost allocation for the whole project]{Cost allocation for the whole project. This is the estimated overall final cost charged to the client. Prices are given excluding taxes (V.A.T).}
 	\label{fig:budget}
 	%
 	\vspace{2cm}
 	%
 	\includegraphics[]{building}\vspace{10pt}
-	\caption{Cost allocation per square meter of covered area. The cost of design is not included as it would not be representative. Prices are given excluding taxes (V.A.T).}
+	\caption[Cost allocation per square meter of covered area]{Cost allocation per square meter of covered area. The cost of design is not included as it would not be representative. Prices are given excluding taxes (V.A.T).}
 	\label{fig:building}
 	\end{fullpage}
 \end{figure}
@@ -766,7 +820,7 @@ Bracing is yet another costly stage as it accounts for almost 30~\% of the man-h
 \centering
 \begin{leftfullpage}
 	\includegraphics[]{manhours}\vspace{10pt}
-	\caption{Allocation of the man-hours spent by the volunteers on the fabrication of the gridshell. A 15\% increase is considered to take into account coordination and supervision of the individual tasks. See \cref{tab:manhours} for detailed data.}
+	\caption[Allocation of the man-hours spent by the volunteers]{Allocation of the man-hours spent by the volunteers on the fabrication of the gridshell. A 15\% increase is considered to take into account coordination and supervision of the individual tasks. See \cref{tab:manhours} for detailed data.}
 	\label{fig:manhours}
 \end{leftfullpage}
 \end{figure}
@@ -827,7 +881,7 @@ Bracing is yet another costly stage as it accounts for almost 30~\% of the man-h
 	\bottomrule
  	\end{tabularx}
 	\vspace{10pt}
-	\caption{Man-hours spent by the volunteers on the fabrication of the gridshell. A 15\% increase is considered to take into account coordination and supervision of the individual tasks. See \cref{fig:manhours} for a graphical representation of these data.}
+	\caption[Man-hours spent by the volunteers on the fabrication]{Man-hours spent by the volunteers on the fabrication of the gridshell. A 15\% increase is considered to take into account coordination and supervision of the individual tasks. See \cref{fig:manhours} for a graphical representation of these data.}
 	\label{tab:manhours}
 \end{fullpage}
 \end{table}
@@ -836,7 +890,7 @@ Bracing is yet another costly stage as it accounts for almost 30~\% of the man-h
 \centering
 \begin{leftfullpage}
 	\includegraphics[]{masonry}\vspace{10pt}
-	\caption{Cost allocation for masonry works. Prices are given excluding taxes (V.A.T). Only costs associated to the structure are reported here ; for instance the works for the equipment slab and the pathways are omitted. See \cref{tab:masonry} for detailed data.}
+	\caption[Cost allocation for masonry works]{Cost allocation for masonry works. Prices are given excluding taxes (V.A.T). Only costs associated to the structure are reported here ; for instance the works for the equipment slab and the pathways are omitted. See \cref{tab:masonry} for detailed data.}
 	\label{fig:masonry}
 \end{leftfullpage}
 \end{figure}
@@ -875,7 +929,7 @@ Bracing is yet another costly stage as it accounts for almost 30~\% of the man-h
 	\bottomrule
  	\end{tabularx}
 	\vspace{10pt}
-	\caption{Cost details for masonry works. Prices are given excluding taxes (V.A.T). Only costs associated to the structure are reported here ; for instance the works for the equipment slab and the pathways are omitted. See \cref{fig:masonry} for a graphical representation of these data.}
+	\caption[Cost details for masonry works]{Cost details for masonry works. Prices are given excluding taxes (V.A.T). Only costs associated to the structure are reported here ; for instance the works for the equipment slab and the pathways are omitted. See \cref{fig:masonry} for a graphical representation of these data.}
 	\label{tab:masonry}
 \end{fullpage}
 \end{table}
@@ -885,7 +939,7 @@ Bracing is yet another costly stage as it accounts for almost 30~\% of the man-h
 \centering
 \begin{leftfullpage}
 	\includegraphics[]{superstructure}\vspace{10pt}
-	\caption{Cost allocation for the superstructure. On-site works are isolated to identify pure manufacturing costs of the gridshell, the envelope and the doors. To this end, the cost of the man-hours provided by the volunteers to prefabricate the grid has been assessed and allocated. See \cref{tab:superstructure} for detailed data.}
+	\caption[Cost allocation for the superstructure]{Cost allocation for the superstructure. On-site works are isolated to identify pure manufacturing costs of the gridshell, the envelope and the doors. To this end, the cost of the man-hours provided by the volunteers to prefabricate the grid has been assessed and allocated. See \cref{tab:superstructure} for detailed data.}
 	\label{fig:superstructure}
 \end{leftfullpage}
 \end{figure}
@@ -939,7 +993,7 @@ Bracing is yet another costly stage as it accounts for almost 30~\% of the man-h
 	\bottomrule
  	\end{tabularx}
 	\vspace{10pt}
-	\caption{Cost details for the superstructure. On-site works are isolated to identify pure manufacturing costs of the gridshell, the envelope and the doors. To this end, the cost of the man-hours provided by the volunteers to prefabricate the grid has been assessed and allocated. Prices are given excluding transport costs and excluding taxes (V.A.T ). Spare quantities are included. See \cref{fig:superstructure} for a graphical representation of these data.}
+	\caption[Cost details for the superstructure]{Cost details for the superstructure. On-site works are isolated to identify pure manufacturing costs of the gridshell, the envelope and the doors. To this end, the cost of the man-hours provided by the volunteers to prefabricate the grid has been assessed and allocated. Prices are given excluding transport costs and excluding taxes (V.A.T ). Spare quantities are included. See \cref{fig:superstructure} for a graphical representation of these data.}
 	\label{tab:superstructure}
 \end{fullpage}
 \end{table}
@@ -961,4 +1015,8 @@ The authors would like to thank the Catholic Church of Créteil for their trust 
 
 \clearpage
 \bibliographystyle{alpha}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{abbrvnat}
 \bibliography{../library}
+
+

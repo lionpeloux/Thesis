@@ -13,7 +13,7 @@
 
 % LDP Packages
 %--------------------------------------
-\usepackage{natbib}
+
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -56,6 +56,7 @@
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[subfloat]{captionskip=10 pt}
+%\captionsetup{width=0.8\textwidth}
 
 % cross referencing with cref
 % http://tex.stackexchange.com/questions/119214/cross-referencing-equations-figures-and-chapters-sections-etc
@@ -71,6 +72,8 @@
 
 % use [sectionbib] option so bibliography appears like a not numbered section at the end of each chapter
 \usepackage[sectionbib]{chapterbib}
+\usepackage{natbib}
+%\usepackage[style=alphabetic,natbib=true]{biblatex}
 
 % STYLES
 \input{head/settings_styles.tex}
