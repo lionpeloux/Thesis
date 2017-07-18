@@ -71,9 +71,16 @@
 \Crefname{figure}{Eq.}{Eq.}
 
 % use [sectionbib] option so bibliography appears like a not numbered section at the end of each chapter
-\usepackage[sectionbib]{chapterbib}
-\usepackage{natbib}
-%\usepackage[style=alphabetic,natbib=true]{biblatex}
+%\usepackage[sectionbib]{chapterbib}
+%\usepackage{natbib}
+
+\usepackage[
+backend=biber, 
+style=alphabetic, citestyle=alphabetic, 
+doi=false, isbn=false, url=false,
+maxcitenames=1
+]{biblatex} 
+\addbibresource{library.bib}
 
 % STYLES
 \input{head/settings_styles.tex}

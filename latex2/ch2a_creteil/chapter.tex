@@ -319,7 +319,7 @@ The compass method does not allow to spread the mesh everywhere on a given surfa
 
 
 \subsubsection{Software}
-Here, a specific software developed for \emph{Rhinoceros} \& \emph{Grasshopper} allows generating this kind of mesh on any non-uniform rational B-spline surface (NURBS) \citep{DuPeloux2011}. It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to perform the formfinding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult for freeform structures.
+Here, a specific software developed for \emph{Rhinoceros} \& \emph{Grasshopper} allows generating this kind of mesh on any non-uniform rational B-spline surface (NURBS) \cite{DuPeloux2011}. It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to perform the formfinding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult for freeform structures.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{canevas.png}
@@ -337,7 +337,7 @@ In the previous steps, the initial form was optimized and promising meshes for t
 \item Geometry and bending stresses of the triangulation are re-injected into the model in step 2.
 \end{enumerate}
 
-The computations were realized with the formfinding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such the one developed by \citet{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task. This confirm what is remarked 
+The computations were realized with the formfinding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such the one developed by \cite{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task. This confirm what is remarked 
 
 \citeauthor{Barnes1975}
 
@@ -354,7 +354,7 @@ based on a 6-DOF The model is build programmatically
 Two analysis models are built during this process to study the structure with or without bracing tubes.
 
 
-Note that the algorithm has been improved to take account for the eccentricity due to connections by \citep{Douthe2006}.
+Note that the algorithm has been improved to take account for the eccentricity due to connections by \cite{Douthe2006}.
 
 \subsection{As-built geometry}\label{sec:asbuilt}
  %-------------------------------------
@@ -1007,16 +1007,15 @@ Architecturally, the structure offers a very interesting space where the textual
 
 This project demonstrates that gridshells in composite material are suitable for constructing freeform buildings. However, the long-term behavior of these materials needs to be better characterized to extend their lifespan.
 
-At the moment, further developments are conducted by the laboratory to take account for torsional effects and non axisymmetric sections in such structures, as it is studied in \citep{Barnes2013}.
+At the moment, further developments are conducted by the laboratory to take account for torsional effects and non axisymmetric sections in such structures, as it is studied in \cite{Barnes2013}.
 
 \section{Acknowledgements}
 % ------------------------------------------
 The authors would like to thank the Catholic Church of Créteil for their trust and their courage, which permitted to get into this ambitious and successful project. They also want to greet the engineers from T/E/S/S, which have developed this challenging project during 18th months. They also thank the firm Viry for the supervision of construction works, including the delicate erection stage.
 
-\clearpage
-\bibliographystyle{alpha}
+%\bibliographystyle{alpha}
 %\bibliographystyle{plainnat}
 %\bibliographystyle{abbrvnat}
-\bibliography{../library}
+%\bibliography{../library}
 
 
