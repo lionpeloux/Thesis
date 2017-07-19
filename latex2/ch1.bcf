@@ -91,11 +91,11 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxbibnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>100</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxcitenames</bcf:key>
-      <bcf:value>1</bcf:value>
+      <bcf:value>2</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxitems</bcf:key>
@@ -2150,26 +2150,27 @@
     <bcf:citekey order="3">Bouhaya2009</bcf:citekey>
     <bcf:citekey order="4">Bouhaya2009</bcf:citekey>
     <bcf:citekey order="5">Bouhaya2009</bcf:citekey>
-    <bcf:citekey order="6">Happold1975</bcf:citekey>
-    <bcf:citekey order="7">Douthe2010</bcf:citekey>
-    <bcf:citekey order="8">McQuaid2006</bcf:citekey>
-    <bcf:citekey order="9">Harris2003</bcf:citekey>
-    <bcf:citekey order="10">Harris2008</bcf:citekey>
-    <bcf:citekey order="11">Liddell2015</bcf:citekey>
-    <bcf:citekey order="12">Happold1975</bcf:citekey>
-    <bcf:citekey order="12">Otto1976</bcf:citekey>
-    <bcf:citekey order="13">McQuaid2006</bcf:citekey>
-    <bcf:citekey order="14">Harris2003</bcf:citekey>
-    <bcf:citekey order="15">Harris2008</bcf:citekey>
-    <bcf:citekey order="16">Douthe2007</bcf:citekey>
-    <bcf:citekey order="17">Baverel2012</bcf:citekey>
-    <bcf:citekey order="18">Addis2013</bcf:citekey>
-    <bcf:citekey order="19">Nicholas2013</bcf:citekey>
-    <bcf:citekey order="20">Pishwanton2003</bcf:citekey>
-    <bcf:citekey order="21">Bouhaya2009</bcf:citekey>
-    <bcf:citekey order="22">Masson2017</bcf:citekey>
-    <bcf:citekey order="23">Douthe2010</bcf:citekey>
+    <bcf:citekey order="6">ALCIMED2012</bcf:citekey>
+    <bcf:citekey order="7">Happold1975</bcf:citekey>
+    <bcf:citekey order="8">Douthe2010</bcf:citekey>
+    <bcf:citekey order="9">McQuaid2006</bcf:citekey>
+    <bcf:citekey order="10">Harris2003</bcf:citekey>
+    <bcf:citekey order="11">Harris2008</bcf:citekey>
+    <bcf:citekey order="12">Liddell2015</bcf:citekey>
+    <bcf:citekey order="13">Happold1975</bcf:citekey>
+    <bcf:citekey order="13">Otto1976</bcf:citekey>
+    <bcf:citekey order="14">McQuaid2006</bcf:citekey>
+    <bcf:citekey order="15">Harris2003</bcf:citekey>
+    <bcf:citekey order="16">Harris2008</bcf:citekey>
+    <bcf:citekey order="17">Douthe2007</bcf:citekey>
+    <bcf:citekey order="18">Baverel2012</bcf:citekey>
+    <bcf:citekey order="19">Addis2013</bcf:citekey>
+    <bcf:citekey order="20">Nicholas2013</bcf:citekey>
+    <bcf:citekey order="21">Pishwanton2003</bcf:citekey>
+    <bcf:citekey order="22">Bouhaya2009</bcf:citekey>
+    <bcf:citekey order="23">Masson2017</bcf:citekey>
     <bcf:citekey order="24">Douthe2010</bcf:citekey>
+    <bcf:citekey order="25">Douthe2010</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

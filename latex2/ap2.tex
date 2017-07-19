@@ -1,42 +1,43 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%		My Thesis
-%
-%		EDOC Template
-%		2011
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
 
+% ===========================
+% COMPILER DIRECTIVES
+% ===========================
+% !TEX encoding = UTF-8 Unicode
+% !BIB TS-program = biber
+% !BIB program = biber
+
+% ===========================
+% PREAMBLE
+% ===========================
 \input{head/settings_epfl_template.tex}
-\input{head/settings_custom.tex}  % place your custom packages, etc... in this file!
-\bibliographystyle{alpha}
+\input{head/settings_custom.tex} 
+\graphicspath{{./ap2_interpolation/img/}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% HEAD: Book-Begin
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\graphicspath{{./ch4_energy/img/}{./ch3_geometry/img/}}
-
+% ===========================
+% DOCUMENT
+% ===========================
 \begin{document}
 
+% FRONTMATTER
 \frontmatter
 \input{head/titlepage.tex}
 \setcounter{page}{0}
-
-\setcounter{tocdepth}{2}
 \tableofcontents
+\listoffigures
+\listoftables
 
 % space before each new paragraph according to the template guidelines.
-%(needs to be after titlepage and frontmatter to keep the table of contents lists short)
+% needs to be after titlepage and frontmatter to keep the table of contents lists short
 \setlength{\parskip}{1em}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% MAIN: The chapters of the thesis
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MAIN MATTER
 \mainmatter
-
-%\part{Appendix}
- \include{ap2_interpolation/appendix}
-
-\backmatter
+\appendix
+\setcounter{chapter}{1}
+\include{ap2_interpolation/appendix}
+\printbibliography
 
 \end{document}

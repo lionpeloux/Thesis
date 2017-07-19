@@ -1,69 +1,64 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%		My Thesis
-%
-%		EDOC Template
-%		2011
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
 
+% ===========================
+% COMPILER DIRECTIVES
+% ===========================
+% !TEX encoding = UTF-8 Unicode
+% !BIB TS-program = biber
+% !BIB program = biber
+
+% ===========================
+% PREAMBLE
+% ===========================
 \input{head/settings_epfl_template.tex}
-\input{head/settings_custom.tex}  % place your custom packages, etc... in this file!
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% HEAD: Book-Begin
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{head/settings_custom.tex} 
 \graphicspath{{./ch5_kirchhoff/img/}{./ch4_energy/img/}{./ch3_geometry/img/}{./ch2a_creteil/img/}{./ch1_gridshell/img/}}
 
-% uncomment to export all equations in one single pdf file.
-%\usepackage[active,tightpage,displaymath]{preview}
-%\makeatletter\renewcommand\tagform@[1]{}\makeatother
-\frenchspacing
-\raggedbottom
-
+% ===========================
+% DOCUMENT
+% ===========================
 \begin{document}
 
+% FRONTMATTER
 \frontmatter
 \input{head/titlepage.tex}
-%\setcounter{page}{0}
 %\include{_dedication}
 %\include{_acknowledgements}
 %\include{_preface}
 %\include{_abstracts}
-
 \setcounter{tocdepth}{2}
 \tableofcontents
-
-% index of notation
+\listoffigures
+\listoftables
 \include{_notations}
 
 % space before each new paragraph according to the template guidelines.
-%(needs to be after titlepage and frontmatter to keep the table of contents lists short)
+% needs to be after titlepage and frontmatter to keep the table of contents lists short
 \setlength{\parskip}{1em}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% MAIN: The chapters of the thesis
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MAIN MATTER
 \mainmatter
 
 \part{Elastic gridshells}
-\include{ch1_gridshell/chapter}
-\include{ch2a_creteil/chapter}
-\include{ch2b_experimenting/chapter}
+	\include{ch1_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch2a_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch2b_experimenting/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 \part{Rich Kirchhoff beam model}
-\include{ch3_geometry/chapter}
-\include{ch4_energy/chapter}
-\include{ch5_kirchhoff/chapter}
-%\include{ch6_model/chapter}
+	\include{ch3_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch4_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch5_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	%\include{ch6_model/chapter}
 
-\part{Appendix}
+\part{Appendix}	
 %\appendixpage
 %\addappheadtotoc
-\appendix
-\include{ap1_variational/appendix}
-\include{ap2_interpolation/appendix}
+	\appendix
+	\include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
-\backmatter
+\printbibliography[heading=bibintoc]
 
 \end{document}

@@ -1,18 +1,7 @@
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%		Thesis Settings
-%		Custom settings
-%
-%		2011
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
 
-%
-%   Use this file for your own custom packages, command-definitions, etc...
-%
-
-% LDP Packages
-%--------------------------------------
 
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -42,49 +31,70 @@
 %\usepackage{fnpct} % for multiple footnotes
 % \usepackage{etoc}
 
-\usepackage{booktabs} % nice array
-\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 
-\usepgfplotslibrary{fillbetween}
-\usetikzlibrary{patterns}
+% deactivate flushbottom
+\frenchspacing
+\raggedbottom
 
- % cross referencing \autoref
-\renewcommand{\sectionautorefname}{\S}
-\renewcommand{\subsectionautorefname}{\S}
-\renewcommand{\subsubsectionautorefname}{\S}
+% BIBLATEX
+% ===========================
+\usepackage[
+backend=biber, 
+natbib=true, % provide alias to natbib command
+style=alphabetic, citestyle=alphabetic, 
+doi=false, isbn=false, url=false,
+maxcitenames=2, maxbibnames=100,
+firstinits=true,
+refsegment=chapter, defernumbers=true,
+]{biblatex} 
+\addbibresource{library.bib}
+\defbibheading{subbibliography}[\refname]{\section{#1}}
 
+% STYLES
+% ===========================
+\input{head/settings_styles.tex}
+\input{head/settings_functions.tex}
+
+% TOC
+% ===========================
+\setcounter{tocdepth}{2}
+\usepackage[]{tocbibind}
+
+% LIST OF FIGURES
+% ===========================
+
+% LIST OF TABLES
+% ===========================
+
+% CAPTION
+% ===========================
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[subfloat]{captionskip=10 pt}
-%\captionsetup{width=0.8\textwidth}
+\captionsetup{width=1.0\textwidth}
 
-% cross referencing with cref
-% http://tex.stackexchange.com/questions/119214/cross-referencing-equations-figures-and-chapters-sections-etc
+% CREF
+% ===========================
 \crefformat{section}{§#2#1#3}
-%\crefname{section}{§}{§§}
-%\Crefname{section}{§}{§§}
-
+\crefname{table}{tab.}{tables}
+\Crefname{table}{Table}{Tables}
 \crefname{figure}{fig.}{figures}
 \Crefname{figure}{Figure}{Figures}
-
 \crefname{equation}{eq.}{eq.}
 \Crefname{figure}{Eq.}{Eq.}
 
-% use [sectionbib] option so bibliography appears like a not numbered section at the end of each chapter
-%\usepackage[sectionbib]{chapterbib}
-%\usepackage{natbib}
+% PLOTS
+% ===========================
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+\pgfplotsset{width=10cm, compat=1.14}
+\pgfplotsset{grid style = { line cap = round, Tgray, line width = 0.25pt}}
 
-\usepackage[
-backend=biber, 
-style=alphabetic, citestyle=alphabetic, 
-doi=false, isbn=false, url=false,
-maxcitenames=1
-]{biblatex} 
-\addbibresource{library.bib}
-
-% STYLES
-\input{head/settings_styles.tex}
-\input{head/settings_functions.tex}
+% TABLE
+% ===========================
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\newcommand{\tablebf}{\fontseries{b}\selectfont} % bold font that does not get wider to keep bold numbers aligned
 
 
 % LDP Theorem
@@ -115,24 +125,14 @@ maxcitenames=1
 \theoremstyle{mystyleB}
 \newtheorem*{myproof}{Preuve}
 
-% LDP PfgPlots definition
-%--------------------------------------
-\pgfplotsset{width=10cm, compat=1.14}
-%\pgfplotsset{every axis plot post/.append  style={line width = 2pt}}
-\pgfplotsset{grid style = {
-%    dash pattern = on 0.05mm off 1mm,
-    line cap = round,
-    Tgray,
-    line width = 0.25pt}
-}
 
 
 
 % LDP Custom functions
 %--------------------------------------
 
-% bold font that does not get wider to keep numbers aligned in a table
-\newcommand{\tablebf}{\fontseries{b}\selectfont}
+
+
 
 % typo
 \newcommand{\guil}[1]{\og#1\fg{}}

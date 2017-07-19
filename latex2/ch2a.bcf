@@ -91,11 +91,11 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxbibnames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>100</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxcitenames</bcf:key>
-      <bcf:value>3</bcf:value>
+      <bcf:value>2</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>maxitems</bcf:key>
@@ -2153,27 +2153,29 @@
     <bcf:citekey order="6">Barnes1975</bcf:citekey>
     <bcf:citekey order="7">Adriaenssens2000</bcf:citekey>
     <bcf:citekey order="8">Barnes1975</bcf:citekey>
-    <bcf:citekey order="9">Douthe2006</bcf:citekey>
-    <bcf:citekey order="10">SiteSecurite</bcf:citekey>
-    <bcf:citekey order="11">Clarke2003</bcf:citekey>
-    <bcf:citekey order="12">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="13">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="9">Barnes1975</bcf:citekey>
+    <bcf:citekey order="10">Barnes1975</bcf:citekey>
+    <bcf:citekey order="11">Douthe2006</bcf:citekey>
+    <bcf:citekey order="12">SiteSecurite</bcf:citekey>
+    <bcf:citekey order="13">Clarke2003</bcf:citekey>
     <bcf:citekey order="14">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="15">Kotelnikova2012</bcf:citekey>
-    <bcf:citekey order="15">Bank2006</bcf:citekey>
+    <bcf:citekey order="15">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="16">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="17">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="17">Kotelnikova2012</bcf:citekey>
+    <bcf:citekey order="17">Bank2006</bcf:citekey>
     <bcf:citekey order="18">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="19">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="20">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="21">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="22">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="23">Fiberline2003</bcf:citekey>
+    <bcf:citekey order="23">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="24">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="25">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="26">Douthe2010</bcf:citekey>
-    <bcf:citekey order="26">Baverel2012</bcf:citekey>
-    <bcf:citekey order="27">Barnes2013</bcf:citekey>
+    <bcf:citekey order="25">Fiberline2003</bcf:citekey>
+    <bcf:citekey order="26">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="27">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="28">Douthe2010</bcf:citekey>
+    <bcf:citekey order="28">Baverel2012</bcf:citekey>
+    <bcf:citekey order="29">Barnes2013</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

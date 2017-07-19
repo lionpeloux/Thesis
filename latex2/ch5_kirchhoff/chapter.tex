@@ -1,3 +1,7 @@
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
+
 \chapter{Elastic rod~: equilibrium approach}
 \label{sec:ch_kirchhoff}
 
@@ -122,7 +126,7 @@ This paragraph gives a very brief overview of the \emph{special Cosserat theory 
   	\begin{leftfullpage}
 		\centering
      		\includegraphics{cosserat_motion_longi.pdf}
-		\caption{Description of the motion for a Cosserat rod. This is a typical longitudinal section of a rectangular beam deformed from a reference configuration (bottom) to an actual configuration (top) at time $t$. Cross-sections are defined in the reference configuration to be planar surfaces perpendicular to the beam axis ($\rconf{\mathcal{S}}$). A material point $\rconf{\vect{p}} \in \rconf{\mathcal{S}}(s)$ is located relatively to the cross-section centroid ($\rconf{\vect{x}}(s)$) thanks to its material coordinates ($X_1$, $X_2$, $s$). During the motion, this material point reaches a new position $\vect{p} \in \mathcal{S}(s)$. The deformed cross-section ${\mathcal{S}}(s)$ is no more planar. The material frame is no more aligned with the beam axis ($\vect{d}_3$ and $\vect{t}$ are not parallel any more). The actual position is measured from the centroid of the deformed cross-section ($\vect{x}(s)$) plus an in-plane component ($X_{\alpha}\vect{d}_{\alpha}$) and a deformation vector ($\vect{u}$). If the cross-sections deform in a rigid-body manner, then $\vect{u}$ is null everywhere.}
+		\caption[Description of the motion for a Cosserat rod : longitudinal section]{Description of the motion for a Cosserat rod. This is a typical longitudinal section of a rectangular beam deformed from a reference configuration (bottom) to an actual configuration (top) at time $t$. Cross-sections are defined in the reference configuration to be planar surfaces perpendicular to the beam axis ($\rconf{\mathcal{S}}$). A material point $\rconf{\vect{p}} \in \rconf{\mathcal{S}}(s)$ is located relatively to the cross-section centroid ($\rconf{\vect{x}}(s)$) thanks to its material coordinates ($X_1$, $X_2$, $s$). During the motion, this material point reaches a new position $\vect{p} \in \mathcal{S}(s)$. The deformed cross-section ${\mathcal{S}}(s)$ is no more planar. The material frame is no more aligned with the beam axis ($\vect{d}_3$ and $\vect{t}$ are not parallel any more). The actual position is measured from the centroid of the deformed cross-section ($\vect{x}(s)$) plus an in-plane component ($X_{\alpha}\vect{d}_{\alpha}$) and a deformation vector ($\vect{u}$). If the cross-sections deform in a rigid-body manner, then $\vect{u}$ is null everywhere.}
 		\label{fig:cosserat_1}
 	 \end{leftfullpage}
 \end{figure}
@@ -138,7 +142,7 @@ This paragraph gives a very brief overview of the \emph{special Cosserat theory 
 		\hspace{2.5cm}
 		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s+ds)$.]{\includegraphics{cosserat_motion_trans_ref_b.pdf}\label{fig:cosserat_2d}}
 		\vspace{20pt}
-		\caption{Description of the motion for a Cosserat rod. These are the transverse sections from \cref{fig:cosserat_1} (however note that \cref{fig:cosserat_1} is drawn with $\varkappa_2 < 0$ while $\varkappa_2 > 0$ in \cref{fig:cosserat_2}). The section curve is drawn in a dashed blue fashion. Remark how the deformed material point is located through $\vect{x}$ and $\vect{r} = X_{\alpha}\vect{d}_{\alpha} + u_{k}\vect{d}_{k}$. Cross-sections are rotating around $\vect{d}_3$ at speed $\varkappa_3$. The beam is subjected to flexion ($\varkappa_1 > 0$, $\varkappa_2 > 0$), torsion ($\varkappa_3 > 0$) and extension ($\epsilon > 0$). Fibers that are compressed -- both directly by axial compression or indirectly by flexion -- are subjected to transverse expansion due to the Poisson effect (see up-right of \cref{fig:cosserat_2a,fig:cosserat_2b}). Reciprocally, fibers in tension -- both directly by axial tension or indirectly by flexion -- are subjected to transverse contraction (see bottom-left of \cref{fig:cosserat_2a,fig:cosserat_2b}).}
+		\caption[Description of the motion for a Cosserat rod : transverse section]{Description of the motion for a Cosserat rod. These are the transverse sections from \cref{fig:cosserat_1} (however note that \cref{fig:cosserat_1} is drawn with $\varkappa_2 < 0$ while $\varkappa_2 > 0$ in \cref{fig:cosserat_2}). The section curve is drawn in a dashed blue fashion. Remark how the deformed material point is located through $\vect{x}$ and $\vect{r} = X_{\alpha}\vect{d}_{\alpha} + u_{k}\vect{d}_{k}$. Cross-sections are rotating around $\vect{d}_3$ at speed $\varkappa_3$. The beam is subjected to flexion ($\varkappa_1 > 0$, $\varkappa_2 > 0$), torsion ($\varkappa_3 > 0$) and extension ($\epsilon > 0$). Fibers that are compressed -- both directly by axial compression or indirectly by flexion -- are subjected to transverse expansion due to the Poisson effect (see up-right of \cref{fig:cosserat_2a,fig:cosserat_2b}). Reciprocally, fibers in tension -- both directly by axial tension or indirectly by flexion -- are subjected to transverse contraction (see bottom-left of \cref{fig:cosserat_2a,fig:cosserat_2b}).}
 		\label{fig:cosserat_2}    
 	\end{fullpage}
 \end{figure}
@@ -325,7 +329,7 @@ The reader is invited to refer to~\cite{Antman2005} to get a deeper understandin
 	\end{tabularx}
 	\label{tab:count}
 	\vspace{10pt}
-	\caption{Summary of the notations employed throughout this section.}
+	\caption[Summary of the notations]{Summary of the notations employed throughout this section.}
 \end{fullpage}
 \end{table}
 
@@ -812,7 +816,7 @@ A worthwhile presentation of the theory of elasticity in the specific context of
 	\begin{fullpage}
 	\centering
 	\includegraphics[]{kirchhoff_cross_section_deformation.pdf}
-	\caption{Typical deformation modes of cross-sections in Kirchhoff's theory. Flexion around $\vect{d}_1$ (resp. $\vect{d}_2$) is measured through the material curvature $\varkappa_1$ (resp. $\varkappa_2$) ; torsion around $\vect{d}_3$ is measured through the material twist $\varkappa_3$ ; and $\epsilon$ measures the axial extension. Remark that cross-sections are subjected to both in-plane deformations ($\varkappa_1$, $\varkappa_2$, $\epsilon$) and out-of-plane deformations ($\varkappa_3$).}
+	\caption[Typical deformation modes of cross-sections in Kirchhoff's theory]{Typical deformation modes of cross-sections in Kirchhoff's theory. Flexion around $\vect{d}_1$ (resp. $\vect{d}_2$) is measured through the material curvature $\varkappa_1$ (resp. $\varkappa_2$) ; torsion around $\vect{d}_3$ is measured through the material twist $\varkappa_3$ ; and $\epsilon$ measures the axial extension. Remark that cross-sections are subjected to both in-plane deformations ($\varkappa_1$, $\varkappa_2$, $\epsilon$) and out-of-plane deformations ($\varkappa_3$).}
 	\label{fig:section_defo}
 	\end{fullpage}
 \end{figure}
@@ -1777,10 +1781,3 @@ Sections are subject to the following rotational moment around the centerline~:
 	\end{aligned}
 \end{equation}
 
-\clearpage
-
-
-
-\clearpage
-\bibliographystyle{alpha}
-\bibliography{../library}
