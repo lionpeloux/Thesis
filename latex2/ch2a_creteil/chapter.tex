@@ -17,7 +17,7 @@ It is worth to mentionne that this project arises thanks to a long-term collabor
 
 \subsection{Goals and contributions}
 
-This project was at the heart of the motivations of this thesis as it acted as a proof of feasibility and as a validation of the design tools and methods developed until then. The gained experience has highlighted further research directions that are presented in this manuscript.
+This project was at the heart of the motivations for this thesis as it acted as a proof of feasibility and as a validation of the design tools and methods developed until then. The gained experience has highlighted further research directions that are presented in this manuscript.
 
 In this chapter, we present the key aspects of the design and construction of this building. The main contribution of this work is to exhibit a method to design and build gridshells in a shape-driven design process. In such a process, architecture plays its full role as it is less dependent on purely structural considerations. Moreover, a building is much more than a shelter and has to satisfy serious requirements. To fill this gap, a meticulous attention was brought to the development of construction details. These technical developments lead to numerous testings. This chapter focus on this fundamental aspect as it is also a key contribution. Finally, we point out and analyze our experience, and we draw up some recommendations for further developments.
 
@@ -231,7 +231,7 @@ Developing this structural design was a complex process. Indeed, for each step, 
 
 \subsection{3D modelling of the intended shape}
 %------------------------------------------
-The first step of the process consist in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal is to estimate quickly the probability a given shape would lead to the generation of a structurally feasible gridshell.
+The first step of the process consists in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal is to estimate quickly the probability a given shape would lead to the generation of a structurally feasible gridshell.
 
 Stresses in the grid are mainly due to the bending of the tubes. Therefore, they can be derived directly from the measurement of the geometric curvature of the tubes. Because the principal curvatures of the surface give a quantitative measurement of the local curvature of any curve drawn on a surface, they are relevant indicators to evaluate the stress rate of laying a grid on the said surface.\footnote{Indeed, any normal section of the surface will have its curvature bounded by the principal curvatures of the surface. Therefor, this seems reasonable to seek grids that fulfill this criterion as the structural elements would probably not resist too large variations of curvatures in the plane of the surface.} Particularly, the following condition has to be satisfied everywhere~: 
 \begin{equation}
@@ -245,7 +245,7 @@ Ideally, the shape is controlled by few key parameters. Thus, it is easier to ad
 \begin{figure}[t]
 \centering
 %\begin{fullpage}
-\includegraphics[width=\textwidth]{image8}
+\includegraphics[width=\textwidth]{curvature_analysis}
 \caption[Benchmarking shapes regarding their curvature]{Benchmarking shapes regarding their minimum principal curvature.}
 \label{fig:shape_bench}
 %\end{fullpage}
@@ -260,7 +260,7 @@ In this step, the geometric curvature of the polylines drawn on the surface is a
 	\mathrm{E} \cdot   \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
 	\label{eq:crit_2}
 \end{equation}
-where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see \cref{sec:compass}), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. This method, proposed by \cite{Otto1974}, was first implemented for the Solidays gridshell in 2011. The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec:swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The aim is to identify at least one grid which satisfies both the architectural and the structural requirements. 
+where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see \cref{sec:compass}), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. This method, proposed by \citet{Otto1974}, was first implemented for the Solidays gridshell in 2011. The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec:swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The aim is to identify at least one grid which satisfies both the architectural and the structural requirements. 
 
 \begin{figure}[h]
 	\centering
@@ -274,25 +274,27 @@ where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtaine
 \end{figure}
 
 \subsubsection{Compass method}\label{sec:compass}
-This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quarters. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.\footnote{The method is easily extended to mesh with non uniform pitch.}
+This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quarters. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.
 
-The compass method does not allow to spread the mesh everywhere on a given surface because it stops when a directrix reaches the boundary of the surface. Only a portion of the surface can be meshed and the covered area varies according to the chosen set of directrices. To overcome this difficulty, we consider the gridshell surface (see \cref{fig:compass_1}) as a part of a larger domain surface (see \cref{fig:compass_3}). Trimmed by a plane, this domain surface should give back the intended shape to build (see \cref{fig:compass_2}). Therefor, it is possible to mesh the domain surface and to retrieve a Chebyshev net that cover completely the initial surface (see \cref{fig:compass_6}).
+The compass method does not allow to spread the mesh everywhere on a given surface because it stops when a directrix reaches the boundary of the surface. Only a portion of the surface can be meshed and the covered area varies according to the chosen set of directrices. To overcome this difficulty, we consider the gridshell surface (see \cref{fig:compass_a}) as a part of a larger domain surface (see \cref{fig:compass_c}). Trimmed by a plane, this domain surface should give back the intended shape to build (see \cref{fig:compass_b}). Therefor, it is possible to mesh the domain surface (see \cref{fig:compass_d}) and to retrieve a Chebyshev net that cover completely the initial surface (see \cref{fig:compass_f}).
+
+The method is easily extended to meshes with variable pitch. This idea was explored to find optimal grids with genetic algorithm by \citet{Bouhaya2014}. It is worth to mention an attempt to extend this method for multilayer Chebyshev grids by \citet{Lefevre2015}.
 
 \begin{figure}[p]
 	%
      	\centering
 	\begin{leftfullpage}	
-		\subfloat[][Target shape]{\includegraphics[width=0.48\textwidth]{compass_1.png}\label{fig:compass_1}}
+		\subfloat[][Target shape]{\includegraphics[width=0.48\textwidth]{compass_1.png}\label{fig:compass_a}}
 		\hspace*{\fill}
-		\subfloat[][Domain and trimming surfaces]{\includegraphics[width=0.48\textwidth]{compass_2.png}\label{fig:compass_2}} \\
+		\subfloat[][Domain and trimming surfaces]{\includegraphics[width=0.48\textwidth]{compass_2.png}\label{fig:compass_b}} \\
 		%
-		\subfloat[][Secant directrices]{\includegraphics[width=0.48\textwidth]{compass_3.png}\label{fig:compass_3}}
+		\subfloat[][Secant directrices]{\includegraphics[width=0.48\textwidth]{compass_3.png}\label{fig:compass_c}}
 		\hspace*{\fill}
-		\subfloat[][Resulting mesh]{\includegraphics[width=0.48\textwidth]{compass_4.png}\label{fig:compass_4}} \\
+		\subfloat[][Resulting mesh]{\includegraphics[width=0.48\textwidth]{compass_4.png}\label{fig:compass_d}} \\
 		%
-		\subfloat[][Trimmed mesh]{\includegraphics[width=0.48\textwidth]{compass_5.png}\label{fig:compass_5}}
+		\subfloat[][Trimmed mesh]{\includegraphics[width=0.48\textwidth]{compass_5.png}\label{fig:compass_e}}
 		\hspace*{\fill}
-		\subfloat[][Final grid]{\includegraphics[width=0.48\textwidth]{compass_6.png}\label{fig:compass_6}} \\
+		\subfloat[][Final grid]{\includegraphics[width=0.48\textwidth]{compass_6.png}\label{fig:compass_f}} \\
 		%
 		\vspace{0.5cm}
 		\caption[The compass method step by step]{The compass method step by step.}
@@ -322,8 +324,8 @@ The compass method does not allow to spread the mesh everywhere on a given surfa
 \end{figure}
 
 
-\subsubsection{Software}
-Here, a specific software developed for \emph{Rhinoceros} \& \emph{Grasshopper} allows generating this kind of mesh on any non-uniform rational B-spline surface (NURBS) \cite{DuPeloux2011}. It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to perform the formfinding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult for freeform structures.
+\subsubsection{Numerical tool}
+Here, a specific software developed by \citet{DuPeloux2011} for \rhino{} and \grasshopper{} allows generating this kind of mesh on any non-uniform rational B-spline surface (NURBS). It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to build programmatically the analysis model and then perform the formfinding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult in conventional analysis softwares for freeform structures. However, the tool does not provide any computation facilities itself and this is exactly the goal of the second part of this thesis.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{canevas.png}
@@ -333,7 +335,7 @@ Here, a specific software developed for \emph{Rhinoceros} \& \emph{Grasshopper} 
 
 \subsection{Formfinding and bending prestress}
 %------------------------------------------
-In the previous steps, the initial form was optimized and promising meshes for the materialization of the future gridshell were identified. However, the produced meshes do not take into account any of the mechanical reality, because only geometrical rules were used in their generation. The formfinding step consisted precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses. The calculation is performed numerically thanks to a dynamic relaxation algorithm with kinetic damping \cite{Barnes1975} and comprise the following steps:
+In the previous steps, the initial form was optimized and promising meshes for the materialization of the future gridshell were identified. However, the produced meshes do not take into account any of the mechanical reality, because only geometrical rules were used in their generation. The formfinding step consists precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses. The calculation is performed numerically thanks to a dynamic relaxation algorithm with kinetic damping and comprise the following steps~:
 \begin{enumerate}
 \item The grid is bent by a set of applied displacements from its resting position to the compass position.
 \item The grid is then relaxed until it falls in its mechanical equilibrium.
@@ -341,33 +343,50 @@ In the previous steps, the initial form was optimized and promising meshes for t
 \item Geometry and bending stresses of the triangulation are re-injected into the model in step 2.
 \end{enumerate}
 
-The computations were realized with the formfinding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such the one developed by \cite{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task. This confirm what is remarked 
+Two analysis models were built during this process to study the structure with and without bracing tubes.
 
-\citeauthor{Barnes1975}
-\citet{Barnes1975}
+The computations were realized with the formfinding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such as the one introduced in \citeyear{Adriaenssens2000} by \citet{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task, highlighting the necessity of a dedicated formfinding tool with a higher level of interactivity. This issue that the coupling between rotational and translational degrees of freedom could cause ill-conditioning problems was already noticed by \citet{Adriaenssens2001}. In the same paper, they proposed a 3-DOF element valid for torsion-free cases. Simpler and faster, it is also a lot more stable. This element was reused and extended lat1er for the formfinding of elastic gridshells in composite materials with complex connections by \citet{Douthe2007}.
 
-that because that this model what is pointed out in: The convergence was eased by computing the triangulation separately as explained previously.
+To tackle numeric instabilities the model had to be simplified~: 
+\begin{itemize}
+\item Connections between elements were modeled as rotation-free joints, enforcing only position constrains with out taking into account the eccentricity between the tubes. This becomes a problem when it comes to evaluating the stability of the gridshell as eccentricity can plays a major role \cite{Lefevre2015}. This is also problematic when determining the production length of the tubes and the position of the anchorages (see \cref{sec:asbuilt}). 
+\item The triangulation could not be embedded from the start in the model and had to be treated separately and re-injected later on.
+\end{itemize}
 
-However, Adriaenssens and Barnes mention in refer- ence [5] that the coupling between translational and rotational DoFs can cause conditioning problems in explicit methods. In
+%\begin{figure}[p]
+%	\centering
+%	\includegraphics[width=1\textwidth]{gsa.png}
+%	\caption[Permanent bending stresses in the structure under selfweight]{Permanent bending stresses in the structure under selfweight (red tubes : \SI{130}{MPa}).}
+%	\label{fig:gsa}
+%\end{figure}
 
-To ease the convergence the triangulation 
+The formfinding process should not be regarded as a pure computational stage were only the equilibrium shape has to be found while all other design parameters are fixed. Indeed, as the goal is to find a suitable geometry with the most relaxed permanent bending stresses in the structure, this process could itself be employed to explore optimal geometries that will lead to more relaxed static equilibriums. In the present project the supports were allowed to move slightly around their target position by the mean of spring supports with orthotropic stiffness. This allowed to decrease the overall level of permanent bending stress in the tubes while granting very minor changes in the geometry.
 
-This pointed out the necessity for a ligthweigth integrated design tool
-
-based on a 6-DOF The model is build programmatically 
-
-Two analysis models are built during this process to study the structure with or without bracing tubes.
-
-
-Note that the algorithm has been improved to take account for the eccentricity due to connections by \cite{Douthe2006}.
+Finally the process converges when the shape and the pattern drawn by the mesh are suitable for the architect while the permanent bending stresses are acceptable for the tubes (see \cref{sec:safety}). The end results for this stage are presented in \cref{fig:gsa}. Note the smoothness of the mesh and the convergence of the tubes near the altar. Bending stresses are well distributed and inferior to the maximum design stress allowed (\SI{133}{MPa} in that case). Only few tubes are heavy loaded, in the areas where the curvature is the highest.
 
 \subsection{As-built geometry}\label{sec:asbuilt}
  %-------------------------------------
-Indeed, the eccentricity remains small compared with the span of the shell, but it is not negligible compared with the mesh size ($e = \SI{68}{\mm} $; l =17 m; w = 1 m). Thus, the pipe lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assessed that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding was performed only with those two layers. Connection axes had to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by e/2, the green by e/2 and the blue by 3e/2 along the normal.
-
+Although, the eccentricity ($e = \SI{136}{\mm}$) remains small compared with the span of the shell ($l =\SI{17}{m}$), it is not negligible compared with the mesh size ($w = \SI{1.0}{m}$). Thus, the tube lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assesses that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding is performed only with those two layers. Connection axes has to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by $-e/2$, the green by $+e/2$ and the blue by $+e/2$ along the surface normal.
+\begin{figure}[p]
+     	\centering
+	\begin{fullpage}
+		\includegraphics[width=1\textwidth]{gsa.png}
+		\caption[Permanent bending stresses in the structure under self-weight]{Permanent bending stresses in the structure under self-weight (red tubes : \SI{130}{MPa}).}
+		\label{fig:gsa}
+		%
+		\vspace{1.5cm}
+		%
+		\subfloat[][Wire frame]{\includegraphics[width=0.48\textwidth]{eccentricity_1.png}\label{fig:eccentricity_a}}
+		\hspace*{\fill}
+		\subfloat[][Full 3D]{\includegraphics[width=0.48\textwidth]{eccentricity_2.png}\label{fig:eccentricity_b}}
+		\vspace{0.5cm}
+		\caption[Reconstruction of the full 3D geometry]{Reconstruction of the full 3D geometry.}
+		\label{fig:eccentricity}    
+	\end{fullpage}
+\end{figure}
 \subsection{Structural analysis}
 %------------------------------------------
-A full structural analysis is performed on the gridshell, using the two mechanical models created previously during the formfinding stage.
+A full structural analysis is finally performed on the gridshell, using the two mechanical models created previously during the formfinding stage.
 The non-braced model is used to check the grid’s behavior during the construction stages. In particular, it must be verified that the primary grid - the one with no triangulation tubes - has no risk of buckling, both for obvious safety reasons and to ensure the accuracy of the final geometry. Indeed, the more the form is likely to buckle, the more it can be triangulated in a buckled geometry different to the targeted geometry. The model with the triangulated grid is used to confirm the gridshell complies with all the structural requirements during its lifetime. Its behavior under standard loadings is evaluated.
 
 %\newpage \phantom{abc}
@@ -718,15 +737,31 @@ The theoretical failure modes of a bolt in a pultruded profile are given in \cit
 %                composite tube. The graph reflects the elastic behaviour of the com- posite tube up to 35 kN, with slight deviations corresponding to the rear- rangement of the pins. The compres- sive stress applied by each pin to the composite tube exceeded its compres- sive strength. Progressively, the pins were pulled through the tube under a residual force that tended to stabilize at around 20 kN.
 
 
+\clearpage
+\subsection{Foundations}
+%------------------------------------------
+The detail of the footing was of major interest because it concentrated lots of technical difficulties and also had a strong visual impact (see \cref{fig:anchorage_dwg}).
+
+In the detail, the gridshell is fixed to the concrete strip thanks to the steel anchorages (6-15). Only the first tow layers of tubes are fixed to the ground or doors (4, 3). The anchorage is made of two parts~: a steel connector (7) is pinned (6) to the composite tube (4) and equipped with a rotating steel clevis (9) ; a steel plate (15) is pinned to the concrete strip footing (26) and mounted with a vertical rotating steel clevis (11). The gridshell is connected to the ground by pinning the two parts of the anchorage. The three axis of rotations of the anchorage system -- one for each clevis axis and one for the axis of the commun pin -- allow to accommodate any orientations of the tube. More over, the rotation of the clevis is ensured by simple bolts (9,12) and nuts (8,13) that allow some adjustments in length. The system provides a quick and easy fixing of the gridshell capable of all the necessary adjustments required in real mounting conditions.
+
+The membrane (1) is laced (17) to a composite rod (19). This rod is bent and clamped every \SI{800}{mm} in a fixed scaffold collar (20) anchored in the concrete strip footing thanks to a steel part (21). This is a clever way to get a nice curved lacing rod at the bottom of the structure. The membrane strip (18) that ensures waterproofness is deported backward so the lacing remains visible. This has a strong and elegant visible impact. This detail runs all around the structure and is reproduced around the doors. This element is subject to heavy shear forces from the tension of the lacing (around \SI{150}{daN/lm}) and this is why we chose a rod instead of a tube with a hollow section.
+
+Thanks to the membrane strip and to a small step in the concrete slab (22) the water is evacuated into the drain, a simple trench full of gravels with two perforated flexible plastic pipes at the bottom.
+
+\begin{figure}[!b]
+	\centering
+	\begin{fullpage}
+	\includegraphics[width=\textwidth]{anchorage.pdf}
+	\caption{Technical drawing of the footing.}
+	\label{fig:anchorage_dwg}
+	\end{fullpage}
+\end{figure}
 
 \subsection{The membrane}
 %------------------------------------------
-
 The membrane is nothing but a tailor-made one-piece clothing manufactured to dress up the structure. It was prefabricated based on the 3D model of the shape computed during the formfinding process (see \cref{sec:formfinding}) and not on some on-site geometric survey. The technical properties of the PVC coated fabric can be found in \cref{tab:membrane}.
 
-\subsection{Foundations}
-%------------------------------------------
-
+\clearpage
 \section{Hygrothermal behavior}
 %------------------------------------------
 \subsection{Temperature}\label{sec:temperature}
@@ -770,8 +805,6 @@ Condensation was also noticed in winter and shoulder season. Sometimes, droplets
 	\end{fullpage}
 \end{figure}
 
-
-%\clearpage
 
 \clearpage
 \section{Cost analysis}
@@ -944,7 +977,7 @@ Bracing is yet another costly stage as it accounts for almost 30~\% of the man-h
 \centering
 \begin{leftfullpage}
 	\includegraphics[]{superstructure}\vspace{10pt}
-	\caption[Cost allocation for the superstructure]{Cost allocation for the superstructure. On-site works are isolated to identify pure manufacturing costs of the gridshell, the envelope and the doors. To this end, the cost of the man-hours provided by the volunteers to prefabricate the grid has been assessed and allocated. See \cref{tab:superstructure} for detailed data.}
+	\caption[Cost allocation for the superstructure]{Cost allocation for the superstructure. On-site works are isolated to identify pure manufacturing costs. To this end, the cost of the man-hours provided by the volunteers to prefabricate the grid has been assessed and allocated. See \cref{tab:superstructure} for detailed data.}
 	\label{fig:superstructure}
 \end{leftfullpage}
 \end{figure}
@@ -1016,11 +1049,7 @@ At the moment, further developments are conducted by the laboratory to take acco
 
 \section{Acknowledgements}
 % ------------------------------------------
-The authors would like to thank the Catholic Church of Créteil for their trust and their courage, which permitted to get into this ambitious and successful project. They also want to greet the engineers from T/E/S/S, which have developed this challenging project during 18th months. They also thank the firm Viry for the supervision of construction works, including the delicate erection stage.
+First of all, the authors would like to thank the Catholic Church of Créteil for their trust and their courage, which led to the initiation and successful completion of this ambitious project. Secondly, the authors would like to acknowledge the engineers from T/E/S/S, who had developed this challenging project over 18 months. They have carried out valuable work and permitted research to become a reality through this innovative edifice. Further thanks goes to Viry for the supervision of the construction works, including the delicate erection stage. Thirdly, the authors would like to thank warmly all the people involved in the construction process: the numerous parish volunteers, the technicians and researchers from the Navier laboratory and the engineers from T/E/S/S and Viry firms. Beyond the technical aspect, their enthusiasm made this project a powerful human experience. Fourth, the authors would like to thank the local firms for their work: BATEM (concrete), Eloi (steel), Esmery Caron (fabric), Solutions Composites (composite material), Axmann (connections) and ENSG. 
 
-%\bibliographystyle{alpha}
-%\bibliographystyle{plainnat}
-%\bibliographystyle{abbrvnat}
-%\bibliography{../library}
 
 

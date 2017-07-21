@@ -159,7 +159,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>useprefix</bcf:key>
-      <bcf:value>0</bcf:value>
+      <bcf:value>1</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>useafterword</bcf:key>
@@ -2149,33 +2149,41 @@
     <bcf:citekey order="2">Baverel2012</bcf:citekey>
     <bcf:citekey order="3">Addis2013</bcf:citekey>
     <bcf:citekey order="4">Otto1974</bcf:citekey>
-    <bcf:citekey order="5">DuPeloux2011</bcf:citekey>
-    <bcf:citekey order="6">Barnes1975</bcf:citekey>
-    <bcf:citekey order="7">Adriaenssens2000</bcf:citekey>
-    <bcf:citekey order="8">Barnes1975</bcf:citekey>
-    <bcf:citekey order="9">Barnes1975</bcf:citekey>
-    <bcf:citekey order="10">Barnes1975</bcf:citekey>
-    <bcf:citekey order="11">Douthe2006</bcf:citekey>
-    <bcf:citekey order="12">SiteSecurite</bcf:citekey>
-    <bcf:citekey order="13">Clarke2003</bcf:citekey>
-    <bcf:citekey order="14">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="15">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="16">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="17">Kotelnikova2012</bcf:citekey>
-    <bcf:citekey order="17">Bank2006</bcf:citekey>
-    <bcf:citekey order="18">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="19">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="20">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="21">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="5">Otto1974</bcf:citekey>
+    <bcf:citekey order="6">Bouhaya2014</bcf:citekey>
+    <bcf:citekey order="7">Bouhaya2014</bcf:citekey>
+    <bcf:citekey order="8">Lefevre2015</bcf:citekey>
+    <bcf:citekey order="9">Lefevre2015</bcf:citekey>
+    <bcf:citekey order="10">DuPeloux2011</bcf:citekey>
+    <bcf:citekey order="11">DuPeloux2011</bcf:citekey>
+    <bcf:citekey order="12">Adriaenssens2000</bcf:citekey>
+    <bcf:citekey order="13">Adriaenssens2000</bcf:citekey>
+    <bcf:citekey order="14">Adriaenssens2000</bcf:citekey>
+    <bcf:citekey order="15">Adriaenssens2001</bcf:citekey>
+    <bcf:citekey order="16">Adriaenssens2001</bcf:citekey>
+    <bcf:citekey order="17">Douthe2007</bcf:citekey>
+    <bcf:citekey order="18">Douthe2007</bcf:citekey>
+    <bcf:citekey order="19">Lefevre2015</bcf:citekey>
+    <bcf:citekey order="20">SiteSecurite</bcf:citekey>
+    <bcf:citekey order="21">Clarke2003</bcf:citekey>
     <bcf:citekey order="22">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="23">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="24">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="25">Fiberline2003</bcf:citekey>
+    <bcf:citekey order="25">Kotelnikova2012</bcf:citekey>
+    <bcf:citekey order="25">Bank2006</bcf:citekey>
     <bcf:citekey order="26">Tayeb2015a</bcf:citekey>
     <bcf:citekey order="27">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="28">Douthe2010</bcf:citekey>
-    <bcf:citekey order="28">Baverel2012</bcf:citekey>
-    <bcf:citekey order="29">Barnes2013</bcf:citekey>
+    <bcf:citekey order="28">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="29">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="30">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="31">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="32">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="33">Fiberline2003</bcf:citekey>
+    <bcf:citekey order="34">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="35">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="36">Douthe2010</bcf:citekey>
+    <bcf:citekey order="36">Baverel2012</bcf:citekey>
+    <bcf:citekey order="37">Barnes2013</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

@@ -46,9 +46,11 @@ doi=false, isbn=false, url=false,
 maxcitenames=2, maxbibnames=100,
 firstinits=true,
 refsegment=chapter, defernumbers=true,
+useprefix=true, % use von as part of the family name (du peloux)
 ]{biblatex} 
 \addbibresource{library.bib}
 \defbibheading{subbibliography}[\refname]{\section{#1}}
+\renewcommand*{\multicitedelim}{\addcomma\space}
 
 % STYLES
 % ===========================
@@ -71,7 +73,6 @@ refsegment=chapter, defernumbers=true,
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[subfloat]{captionskip=10 pt}
-\captionsetup{width=1.0\textwidth}
 
 % CREF
 % ===========================
@@ -96,6 +97,10 @@ refsegment=chapter, defernumbers=true,
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \newcommand{\tablebf}{\fontseries{b}\selectfont} % bold font that does not get wider to keep bold numbers aligned
 
+% ACRONYM
+% ===========================
+\newcommand{\rhino}{\emph{Rhinoceros}}
+\newcommand{\grasshopper}{\emph{Grasshopper}}
 
 % LDP Theorem
 %--------------------------------------
