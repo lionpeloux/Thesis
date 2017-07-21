@@ -14,7 +14,7 @@
 % ===========================
 \input{head/settings_epfl_template.tex}
 \input{head/settings_custom.tex} 
-\graphicspath{{./ch5_kirchhoff/img/}{./ch4_energy/img/}{./ch3_geometry/img/}{./ch2a_creteil/img/}{./ch1_gridshell/img/}}
+\graphicspath{{./ch6_numeric/img/}{./ch5_kirchhoff/img/}{./ch4_energy/img/}{./ch3_geometry/img/}{./ch2_creteil/img/}{./ch1_gridshell/img/}}
 
 % ===========================
 % DOCUMENT
@@ -24,10 +24,10 @@
 % FRONTMATTER
 \frontmatter
 \input{head/titlepage.tex}
-%\include{_dedication}
-%\include{_acknowledgements}
-%\include{_preface}
-%\include{_abstracts}
+\include{_dedication}
+\include{_acknowledgements}
+\include{_preface}
+\include{_abstracts}
 \setcounter{tocdepth}{2}
 \tableofcontents
 \listoffigures
@@ -43,13 +43,13 @@
 
 \part{Elastic gridshells}
 	\include{ch1_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ch2a_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ch2b_experimenting/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch2_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 \part{Rich Kirchhoff beam model}
 	\include{ch3_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	\include{ch4_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	\include{ch5_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch6_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	%\include{ch6_model/chapter}
 
 \part{Appendix}	

@@ -159,7 +159,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>useprefix</bcf:key>
-      <bcf:value>0</bcf:value>
+      <bcf:value>1</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>useafterword</bcf:key>
@@ -2248,9 +2248,6 @@
     <bcf:citekey order="92">Reissner1973</bcf:citekey>
     <bcf:citekey order="93">Audoly2010</bcf:citekey>
     <bcf:citekey order="94">Reissner1973</bcf:citekey>
-    <bcf:citekey order="95">Barnes1999</bcf:citekey>
-    <bcf:citekey order="95">Adriaenssens1999</bcf:citekey>
-    <bcf:citekey order="95">Douthe2006</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

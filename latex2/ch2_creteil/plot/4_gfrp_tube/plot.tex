@@ -1,0 +1,69 @@
+% INVOKE \pgfplotstableread{data.txt}\Table
+% with the rigth path for data.txt before input
+\begin{tikzpicture}[TikzStyle]
+	\PlotStyle{100}{80}{0}{200}{0}{8}
+	\begin{axis}[
+		xtick={0, 50, 100, 150, 200},
+    		xticklabels={$0$, $50$, $100$,  $150$, $200$},
+		xlabel={Displacement (mm)},
+		ylabel={Force in (kN)},
+		ytick={0, 2, 4, 6, 8},
+		yticklabels={0, 2, 4, 6, 8},
+		legend cell align=left,
+		legend columns=3,
+		legend style={at={(0.5,1.1)},anchor=south, font=\small, row sep=2pt, column sep=5pt, overlay},
+		% use overlay to exclude legend from boundingbox
+		]
+			% Sangle			
+			\addplot[gray8, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{1}] {\Table};
+			\addlegendentry{Strap}
+%			
+			\addplot[forget plot, gray8, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\Table};
+			
+			\addplot[forget plot, gray8, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\Table};
+			
+			\addplot[forget plot, gray8, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\Table};
+			
+			\addplot[forget plot, gray8, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{5}] {\Table};
+
+%			% 5Nm			
+			\addplot[gray4, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\Table};
+			\addlegendentry{5\,Nm}
+%			
+			\addplot[forget plot, gray4, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{7}] {\Table};
+			
+			\addplot[forget plot, gray4, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{8}] {\Table};
+			
+			\addplot[forget plot, gray4, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{9}] {\Table};
+%			
+			\addplot[forget plot, gray4, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{10}] {\Table};
+
+%			% 20Nm						
+			\addplot[Tblue, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{11}] {\Table};
+			\addlegendentry{20\,Nm}
+%			
+			\addplot[forget plot, Tblue, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{12}] {\Table};
+			
+			\addplot[forget plot, Tblue, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{13}] {\Table};
+			
+			\addplot[forget plot, Tblue, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{14}] {\Table};
+%			
+			\addplot[forget plot, Tblue, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{15}] {\Table};
+			
+	\end{axis}
+\end{tikzpicture}

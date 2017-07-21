@@ -1,0 +1,10 @@
+%\documentclass[12pt]{article}
+\documentclass[tikz,border={2cm 0.5cm 2cm 3cm}]{standalone} % left bottom right top
+\usepackage{tikz, pgfplots,pgfplotstable}
+\usepackage[]{SIunits}
+\input{../../../head/settings_styles.tex}
+\begin{document}
+\pgfplotstableread{data.txt}\Table
+\input{plot.tex}
+\end{document}
+
