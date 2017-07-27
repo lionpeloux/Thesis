@@ -12,6 +12,7 @@
 \usepackage{lipsum}
 %\usepackage{MnSymbol} %=> conflict with \varkappa from amssymb
 %\usepackage{minted}
+\usepackage{pdflscape}
 \usepackage{tikz}
 \usetikzlibrary{external}
 %\tikzexternalize[prefix=tikz/]
@@ -19,9 +20,8 @@
 \usepackage{siunitx}
 \usepackage[nameinlink, noabbrev]{cleveref} % attention a loader apres hypperef (use nameinlink or noabbrev options)
 \usepackage{csvsimple, booktabs, longtable} % pour les tables CSV
-\usepackage{tabularx}
+
 \usepackage{float}
-\usepackage[font=small,labelfont=bf]{caption}
 \usepackage{csquotes}
 \usepackage{epigraph} % incompatible avec nextpage
 \usepackage{dpfloat} % for double page float figures aand tables side by side
@@ -35,6 +35,9 @@
 % deactivate flushbottom
 \frenchspacing
 \raggedbottom
+
+
+
 
 % BIBLATEX
 % ===========================
@@ -72,6 +75,7 @@ useprefix=true, % use von as part of the family name (du peloux)
 
 % CAPTION
 % ===========================
+\usepackage[font=small,labelfont=bf]{caption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[subfloat]{captionskip=10 pt}
@@ -95,6 +99,10 @@ useprefix=true, % use von as part of the family name (du peloux)
 
 % TABLE
 % ===========================
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash}X}
+
 \usepackage{booktabs}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \newcommand{\tablebf}{\fontseries{b}\selectfont} % bold font that does not get wider to keep bold numbers aligned

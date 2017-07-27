@@ -2160,3 +2160,55 @@
     <bcf:citekey order="20">SiteSecurite</bcf:citekey>
     <bcf:citekey order="21">Clarke2003</bcf:citekey>
     <bcf:citekey order="22">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="23">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="24">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="25">Kotelnikova2012</bcf:citekey>
+    <bcf:citekey order="25">Bank2006</bcf:citekey>
+    <bcf:citekey order="26">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="27">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="28">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="29">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="30">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="31">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="32">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="33">Fiberline2003</bcf:citekey>
+    <bcf:citekey order="34">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="35">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="36">Douthe2010</bcf:citekey>
+    <bcf:citekey order="36">Baverel2012</bcf:citekey>
+    <bcf:citekey order="37">Barnes2013</bcf:citekey>
+  </bcf:section>
+  <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
+  <bcf:sorting>
+    <bcf:sort order="1">
+      <bcf:sortitem order="1">presort</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="2">
+      <bcf:sortitem order="1">labelalpha</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="3" final="1">
+      <bcf:sortitem order="1">sortkey</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="4">
+      <bcf:sortitem order="1">sortname</bcf:sortitem>
+      <bcf:sortitem order="2">author</bcf:sortitem>
+      <bcf:sortitem order="3">editor</bcf:sortitem>
+      <bcf:sortitem order="4">translator</bcf:sortitem>
+      <bcf:sortitem order="5">sorttitle</bcf:sortitem>
+      <bcf:sortitem order="6">title</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="5">
+      <bcf:sortitem order="1">sortyear</bcf:sortitem>
+      <bcf:sortitem order="2">year</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="6">
+      <bcf:sortitem order="1">sorttitle</bcf:sortitem>
+      <bcf:sortitem order="2">title</bcf:sortitem>
+    </bcf:sort>
+    <bcf:sort order="7">
+      <bcf:sortitem order="1">volume</bcf:sortitem>
+      <bcf:sortitem order="2">0</bcf:sortitem>
+    </bcf:sort>
+  </bcf:sorting>
+  </bcf:sortlist>
+</bcf:controlfile>

@@ -1,0 +1,764 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<p><br />
+</p>
+<p><span>cc</span> &amp;</p>
+<h1 id="sec:ch_kirchhoff">Elastic rod : equilibrium approach</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Ici on explique que l’approche par les équations d’équilibre est beaucoup plus directe que l’approche énergétique.</p>
+<h3 id="goals-and-contribution">Goals and contribution</h3>
+<p>Dans ce chapitre, après un bref rappel sur le cadre mathématique d’étude des courbes paramétrique de l’espace, on présente les notions de courbures et de torsion géométrique associées au repère de fraient. On montre ensuite le cas plus général d’un repère mobile quelconque attaché à une courbe gamma. On définit enfin la particularité d’un repère mobile adapté à un courbe, et on présente, en sus du repère de Frenet, une approche différente pour accrocher des repères le long d’une courbe (Bishop / RMF / Zéro-twisting frame)</p>
+<p>Ici il faudrait préciser la terminologie des auteurs / équations / hypothèses : Euler-Bernoulli, Navier-Bernoulli, Kirchhoff, Love, Clebesh, Cosserat, Vlassov</p>
+<h3 id="related-work">Related work</h3>
+<p>On peu s’instruire dans la publi de Dill <span class="citation"></span>. Regarder en particulier le premier chapitre de l’HDR de Neukirch <span class="citation"></span>. Regarder également la chronologie des modèles proposée dans la thèse de Theetten <span class="citation"></span>. Pourquoi pas proposer une frise chronologique + un tableau de synthèse des hyptohèses.</p>
+<p><span class="citation"></span> <span class="citation"></span> <span class="citation"></span> <span class="citation"></span> <span class="citation"></span> <span class="citation"></span> <span class="citation"></span></p>
+<p><span class="citation"></span> : p69 - <span class="citation"></span> : p16</p>
+<p>Dans les tentatives dans notre domaine, citer :</p>
+<p>Kirchhoff : <span class="citation"></span><br />
+Clebsch : <span class="citation"></span><br />
+Love : <span class="citation"></span><br />
+Timoshenko : <span class="citation"></span></p>
+<p>Départ : <span class="citation"></span> : already includes a rotational DOF !! <span class="citation"></span> <span class="citation"></span> : revue intéressante de la DR.</p>
+<p>3 pts classique : <span class="citation"></span> <span class="citation"></span></p>
+<p>2 x 3pts : <span class="citation"></span></p>
+<p>6 Dofs : <span class="citation"></span></p>
+<p>4Dofs : <span class="citation"></span> <span class="citation"></span></p>
+<p>Dans le champ de l’animation avec élément finis <span class="citation"></span> <span class="citation"></span></p>
+<p>Pour des cas test : <span class="citation"></span> <span class="citation"></span></p>
+<p>Pour la cinématique, superposition d’un mouvement rigide et d’un warping de la section : <span class="citation"></span> dans l’extension de <span class="citation"></span></p>
+<h3 id="overview">Overview</h3>
+<p>Résumé du chapitre</p>
+<p><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>Extension to the case of thin-walled sections by <span class="citation"></span> in the case of ribbons. From the Vlasov</p>
+<h2 id="introduction-to-the-special-cosserat-theory-of-rods">Introduction to the special Cosserat theory of rods</h2>
+<p>This paragraph gives a very brief overview of the <em>special Cosserat theory of rods</em>, as presented in <span class="citation"></span>, that accounts for bending, torsion, extension and shear behaviors of slender beams.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> This theory – which is a <em>director theory</em> of rods – was first introduced by <span class="citation"></span>. It gives a larger scope to the basements of the present work – which relies on the <em>Kirchhoff theory of rods</em> – as the last is a special case of this larger theoretical framework. Thus, what is presented in this paragraph could be considered as a reasonable starting point to extend the present work, for instance to take account for shear or large extension, which might be relevant for some engineering problems or form-finding processes.</p>
+<p>It has been largely employed in various fields <span class="citation"></span>.</p>
+<div class="figure">
+<embed src="cosserat_motion_longi.pdf" />
+<p class="caption">Description of the motion for a Cosserat rod. This is a typical longitudinal section of a rectangular beam deformed from a reference configuration (bottom) to an actual configuration (top) at time <span class="math inline"><em>t</em></span>. Cross-sections are defined in the reference configuration to be planar surfaces perpendicular to the beam axis (<span class="math inline">${\barr{\mathcal{S}}}$</span>). A material point <span class="math inline">${\barr{{\boldsymbol{p}}}} \in {\barr{\mathcal{S}}}(s)$</span> is located relatively to the cross-section centroid (<span class="math inline">${\barr{{\boldsymbol{x}}}}(s)$</span>) thanks to its material coordinates (<span class="math inline"><em>X</em><sub>1</sub></span>, <span class="math inline"><em>X</em><sub>2</sub></span>, <span class="math inline"><em>s</em></span>). During the motion, this material point reaches a new position <span class="math inline"><strong>p</strong> ∈ 𝒮(<em>s</em>)</span>. The deformed cross-section <span class="math inline">𝒮(<em>s</em>)</span> is no more planar. The material frame is no more aligned with the beam axis (<span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><strong>t</strong></span> are not parallel any more). The actual position is measured from the centroid of the deformed cross-section (<span class="math inline"><strong>x</strong>(<em>s</em>)</span>) plus an in-plane component (<span class="math inline"><em>X</em><sub><em>α</em></sub><strong>d</strong><sub><em>α</em></sub></span>) and a deformation vector (<span class="math inline"><strong>u</strong></span>). If the cross-sections deform in a rigid-body manner, then <span class="math inline"><strong>u</strong></span> is null everywhere.<span data-label="fig:cosserat_1"></span></p>
+</div>
+<p><br />
+</p>
+<h3 id="sec:cosserat_motion">Description of the motion</h3>
+<p>The special Cosserat theory of rods consider dynamics of rods. It relies on a precise geometric description (see [fig:cosserat_1]) of rods build upon three vector-valued functions that are time dependent :</p>
+<ul>
+<li><p><span class="math inline"><strong>x</strong></span>, a position vector describing the geometry in space of a specific <em>fiber</em> called the rod <em>axis</em> or <em>centerline</em>. This function describes the rod in its longitudinal dimension. This dimension is of prime importance in the case of slender bodies such as rods as what is intend is to build a reduced theory, namely a 1-dimensional theory. This curve will often be understood as the curve passing through the cross-section centroids along the rod, although this is not mandatory in the theory.</p></li>
+<li><p><span class="math inline"><strong>d</strong><sub>1</sub></span>, <span class="math inline"><strong>d</strong><sub>2</sub></span>, two unit vector fields describing the lateral spatiality of the rod and called material <em>directors</em>. These vectors will often be understood as the principal axis of the cross-section, although this is not mandatory in the theory.</p></li>
+</ul>
+<p>Modeling the geometry of the rod in any configuration is not sufficient to build a mechanical model. Indeed, one must know a <em>reference</em> state for the solid as strains measure relative change in geometry and stresses are related to strains through the constitutive relation of the rod material. Thus, the special Cosserat theory of rods consider two configurations :</p>
+<ul>
+<li><p>The <em>actual</em> configuration, that is the configuration of the rod at time <span class="math inline"><em>t</em></span> during the motion.</p></li>
+<li><p>The <em>reference</em> configuration, that is the configuration of the rod in a specific state where its geometry (possibly curved and twisted) is known and its mechanical state (strains, stresses) under possible loads (dead weight, temperature, wind, snow , prestress, …) and possible boundary conditions is known. In practice, this configuration will often be chosen as a <em>stress-free</em> configuration when the beam is not subject to any loads nor restrains of any kind, although this is not mandatory in the theory.</p></li>
+</ul>
+<p>Thus, the equations governing the motion of a <em>special Cosserat rod</em> will be based on the description of a fully known reference configuration and the description of the actual or deformed configuration of the rod at time <span class="math inline"><em>t</em></span> during its motion (see [fig:cosserat_1]). Usually, what is intended is to predict the motion of a particular rod given its reference configuration, material properties, boundary conditions, and loading. In this thesis, the equations of the motion will be integrated to converged as fast as possible to the quasi-static response of the system, as this work only deals with statics of structures. However, it is still possible to use a more convenient and accurate time integrator to compute the motion, if one wants to study the (true) dynamic of a rod and go beyond the knowledge of its static equilibrium.</p>
+<p>Hereafter, when ambiguity is possible, symbols referring to the reference configuration will be marked with an overline while symbols referring to the actual configuration will be marked with a subscript in the variable <span class="math inline"><em>t</em></span>. Generally, scalar quantities are marked with the subscript <span class="math inline"><em>t</em></span> and vector quantities with an overline in order to avoid double subscripts when one will refer to vector components.</p>
+<h4 id="actual-configuration">Actual configuration</h4>
+<p>At time <span class="math inline"><em>t</em></span>, the <em>actual</em> or <em>deformed</em> configuration of the rod <span class="math inline">{<strong>x</strong>, <strong>d</strong><sub>1</sub>, <strong>d</strong><sub>2</sub>}</span> is described by its <em>centerline</em> <span class="math inline"><em>γ</em><sub><em>t</em></sub> ∈ 𝒞<sup>1</sup>([0, <em>L</em>]×ℝ<sup>3</sup>)</span>, a regular space curve : <br /><span class="math display">$${\begin{array}{lrcl}
+\gamma_t(t, \cdot): &amp; [0,{L}] &amp; \longrightarrow &amp; \mathbb{R}^3 \\
+    &amp; {s} &amp; \longmapsto &amp; {\boldsymbol{x}}(t,{s}) \end{array}}$$</span><br /> and two perpendicular unit vector fields : <a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> <br /><span class="math display">$${\begin{array}{lrcl}
+({\boldsymbol{d}}_1,{\boldsymbol{d}}_2)(t, \cdot): &amp; [0,{L}] &amp; \longrightarrow &amp; \mathbb{R}^3 \times \mathbb{R}^3 \\
+    &amp; {s} &amp; \longmapsto &amp; ({\boldsymbol{d}}_1(t,{s}), {\boldsymbol{d}}_2(t,{s})) \; / \; 
+	{\boldsymbol{d}}_1(t,{s}) \cdot {\boldsymbol{d}}_2(t,{s}) = 0
+	 \end{array}}$$</span><br /> In addition, we define a third unit vector field as : <br /><span class="math display"><strong>d</strong><sub>3</sub> = <strong>d</strong><sub>1</sub> × <strong>d</strong><sub>2</sub></span><br /> Thus, the centerline is framed with the orthonormal moving frame <span class="math inline">{<strong>d</strong><sub>1</sub>, <strong>d</strong><sub>2</sub>, <strong>d</strong><sub>3</sub>}</span>. The unit vectors <span class="math inline"><strong>d</strong><sub><em>i</em></sub>(<em>t</em>, <em>s</em>)</span> are called <em>material directors</em>.</p>
+<p>Note that the centerline is parametrized by <span class="math inline"><em>s</em></span> chosen to be the arc length parameter of the <em>reference</em> configuration. It may not coincide with the arc length parameter of the <em>actual</em> configuration denoted by <span class="math inline"><em>s</em><sub><em>t</em></sub> = <em>Ψ</em>(<em>t</em>, <em>s</em>)=<em>Ψ</em><sub><em>t</em></sub>(<em>s</em>)</span> as the rod may suffer elongation. <span class="math inline"><em>L</em></span> denotes the length of the centerline in the reference configuration. The actual length of <span class="math inline"><em>γ</em><sub><em>t</em></sub></span> is denoted by <span class="math inline"><em>L</em><sub><em>t</em></sub></span> so that <span class="math inline"><em>s</em><sub><em>t</em></sub> ∈ [0, <em>L</em><sub><em>t</em></sub>]</span>.</p>
+<p>Finally, a material point <span class="math inline"><strong>p</strong></span> of the body is located relatively to the centerline with the help of the local position vector <span class="math inline"><strong>r</strong></span> such that (see [fig:cosserat_2a,fig:cosserat_2b]) : <br /><span class="math display">$${\boldsymbol{p}}({\barr{{\boldsymbol{r}}}},t) = {\boldsymbol{x}}(s,t) + {\boldsymbol{r}} \bigl( {\boldsymbol{x}}(s,t), {\boldsymbol{d}}_1(s,t) , {\boldsymbol{d}}_2(s,t), {\barr{{\boldsymbol{r}}}}, t \bigr)$$</span><br /> Note that in the above expression a material point is uniquely identified – in a very generic manner – by its local position in the reference configuration (<span class="math inline">${\barr{{\boldsymbol{r}}}} = {\barr{{\boldsymbol{p}}}} - {\barr{{\boldsymbol{x}}}}$</span>).</p>
+<h4 id="reference-configuration">Reference configuration</h4>
+<p>We now identify a <em>reference</em> configuration of the rod <span class="math inline">$\{{\barr{{\boldsymbol{x}}}}, {\barr{{\boldsymbol{d}}_1}}, {\barr{{\boldsymbol{d}}_2}}\}$</span> with centerline <span class="math inline">${\barr{\gamma}} \in \mathcal{C}^1([0,{L}]\times \mathbb{R}^3)$</span>, a regular space curve. This time, <span class="math inline"><em>s</em></span> is the arc length parameter of <span class="math inline">${\barr{\gamma}}$</span>, which leads to the important relation between <span class="math inline">${\barr{{\boldsymbol{x}}}}$</span> and the unit tangent vector <span class="math inline">${\barr{{\boldsymbol{t}}}}$</span> of <span class="math inline">${\barr{\gamma}}$</span>  : <br /><span class="math display">$$\frac{d {\barr{{\boldsymbol{x}}}}}{ds} = {\barr{{\boldsymbol{t}}}} \quad,\quad \norm{{\barr{{\boldsymbol{t}}}}} = 1$$</span><br /> In this configuration, we define a cross-section <span class="math inline">𝒮(<em>s</em>)</span> as the set of material points lying in a plane perpendicular to <span class="math inline">${\barr{\gamma}}$</span> at position <span class="math inline">${\barr{{\boldsymbol{x}}}}(s)$</span>. By definition, it is a planar surface in the reference configuration. However, there is no evidence that this surface will remain planar in any other configuration. Moreover, and only for this configuration, it makes sens to choose the centerline as the curve passing through the cross-section centroids.</p>
+<p>Finally, we call <em>material coordinates</em> of point <span class="math inline">${\barr{{\boldsymbol{p}}}} \in \mathcal{S}(s)$</span> the triple <span class="math inline">(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, <em>s</em> = <em>X</em><sub>3</sub>)</span> such that (see [fig:cosserat_2c,fig:cosserat_2d]) :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;{\barr{{\boldsymbol{p}}}}({\barr{{\boldsymbol{r}}}}) = {\barr{{\boldsymbol{x}}}}(s) + {\barr{{\boldsymbol{r}}}} \bigl({\barr{ {\boldsymbol{x}}}}(s), {\barr{{\boldsymbol{d}}_1}}(s) , {\barr{{\boldsymbol{d}}_2}}(s), X_1, X_2 \bigr) 
+		\\
+		 &amp;{\barr{{\boldsymbol{r}}}}(X_1, X_2, s) =  X_1 {\barr{{\boldsymbol{d}}_1}} (s) + X_2 {\barr{{\boldsymbol{d}}_2}}(s)
+	\end{aligned}$$</span><br /></p>
+<p>We also identify a <em>fiber</em> as the set of material points that share the same cross-section coordinates (<span class="math inline"><em>X</em><sub>1</sub></span>, <span class="math inline"><em>X</em><sub>2</sub></span>) all along the rod in the reference configuration.</p>
+<h3 id="time-evolution">Time evolution</h3>
+<p>The evolution in time of the rod is simply given by the velocity of its centerline (<span class="math inline">$\dot{{\boldsymbol{x}}}$</span>) and the angular velocity or <em>spin vector</em> (<span class="math inline"><strong>ω</strong></span>) of its material directors :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;\frac{\partial {\boldsymbol{x}}}{\partial t} (s,t)  = \dot{{\boldsymbol{x}}}  \label{eq:velocity_a}
+		\\[0.5em]
+		&amp;\frac{\partial {\boldsymbol{d}}_k}{\partial t} (s,t)  = \dot{{\boldsymbol{d}}_k} = {\boldsymbol{\omega}}(s,t) \times {\boldsymbol{d}}_k(s,t) \label{eq:velocity_b}
+	\end{aligned}$$</span><br /></p>
+<p>From now on, the derivative with respect to time is denoted with an overdot symbol.</p>
+<h3 id="strains">Strains</h3>
+<p>Strains are described with the help of the strains vectors <span class="math inline"><strong>η</strong></span> and <span class="math inline"><strong>𝜘</strong></span> – respectively the force strains vector and moment strains vector <span class="citation"></span> :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;\frac{\partial {\boldsymbol{x}}}{\partial s} (s,t)  =  {\boldsymbol{x}}'  = {\boldsymbol{\eta}}(s,t) \label{eq:strains_a}
+		\\[0.5em]
+		&amp;\frac{\partial {\boldsymbol{d}}_k}{\partial s} (s,t)  = {\boldsymbol{d}}'_k = {\boldsymbol{\varkappa}}(s,t) \times {\boldsymbol{d}}_k(s,t)  \label{eq:strains_b}
+	\end{aligned}$$</span><br /></p>
+<p>where the derivative with respect to <span class="math inline"><em>s</em></span> is denoted with a prime symbol.<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a> The components of <span class="math inline"><strong>η</strong> = <em>η</em><sub><em>k</em></sub><strong>d</strong><sub><em>k</em></sub></span> and <span class="math inline"><strong>𝜘</strong> = 𝜘<sub><em>k</em></sub><strong>d</strong><sub><em>k</em></sub></span> expressed in the material frame basis <span class="math inline">{<strong>d</strong><sub>1</sub>, <strong>d</strong><sub>2</sub>, <strong>d</strong><sub>3</sub>}</span> can be interpreted as the classical engineering strains that lead to the engineering stresses.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a><sup>,</sup><a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> In particular <span class="math inline"><em>η</em><sub>1</sub> = <strong>x</strong>′⋅(<strong>d</strong><sub>1</sub> × <strong>d</strong><sub>2</sub>)</span> characterizes the change in volume of the body while <span class="math inline"><em>η</em><sub>2</sub></span> and <span class="math inline"><em>η</em><sub>3</sub></span> characterize the shear deformations ; <span class="math inline">𝜘<sub>3</sub></span> is the material twist of the rod while <span class="math inline">𝜘<sub>1</sub></span> and <span class="math inline">𝜘<sub>2</sub></span> are the material curvatures of the rod.<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a></p>
+<p>Observe the symmetry of [eq:velocity_a,eq:velocity_b] and [eq:strains_a,eq:strains_b] regarding the parameters <span class="math inline"><em>s</em></span> and <span class="math inline"><em>t</em></span> :</p>
+<ul>
+<li><p>(<span class="math inline">$\dot{{\boldsymbol{x}}}$</span>, <span class="math inline"><strong>ω</strong></span>) governs the time evolution of the material frame.</p></li>
+<li><p>(<span class="math inline"><strong>x</strong>′</span>, <span class="math inline"><strong>𝜘</strong></span>) governs the spatial evolution of the material frame along the centerline.</p></li>
+</ul>
+<h3 id="parametrization-of-the-centerline">Parametrization of the centerline</h3>
+<p>Recall that because the centerline of the reference configuration is parametrized by arc length, the unit tangent vector in this configuration is given by : <br /><span class="math display">$${\barr{{\boldsymbol{t}}}}(s) = \frac{d {\barr{{\boldsymbol{x}}}}}{d s} ({\barr{s}}) = {\barr{{\boldsymbol{x}}}}'(s)
+	\quad , \quad
+	\norm{{\barr{{\boldsymbol{x}}}}'} = 1$$</span><br /> In the deformed configuration, the centerline is still parametrized by <span class="math inline"><em>s</em></span> which is no more an arc length parameter because the centerline has suffered stretch. Thus, the unit tangent vector in this configuration is given by : <a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> <br /><span class="math display">$${\boldsymbol{t}}(s,t) = \frac{{{\boldsymbol{x}}}'(s,t)}{\norm{{{\boldsymbol{x}}}'(s,t)}}
+	\quad , \quad
+	\norm{{\boldsymbol{x}}'} = \norm{{\boldsymbol{\eta}}'} \neq 1$$</span><br /> We introduce <span class="math inline"><em>ϵ</em></span>, the extension of the rod which characterizes the local change in length of the rod centerline, defined as : <br /><span class="math display">$$\norm{{\boldsymbol{\eta}}'(s,t)} = \frac{\partial s_t}{\partial s}(s,t) = \Psi'(s,t) = 1 + \epsilon(s,t)$$</span><br /></p>
+<h4 id="inextensibility">Inextensibility</h4>
+<p>The rod is said to be inextensible if <span class="math inline"><em>ϵ</em> = 0</span> everywhere and at all time. In this case, <span class="math inline"><em>s</em></span> is a valid arc length parameter for the centerline in every configurations. Later, we will restrict to the case of rods subjected to small extension, that is <span class="math inline"><em>ϵ</em>(<em>t</em>, <em>s</em>)≪1</span>.</p>
+<h4 id="reparametrization">Reparametrization</h4>
+<p>Although either <span class="math inline"><em>s</em></span> and <span class="math inline"><em>s</em><sub><em>t</em></sub></span> can be chosen as the third material coordinate to describe a rod, the definition of the material strains are given with respect to <span class="math inline"><em>s</em></span> and not <span class="math inline"><em>s</em><sub><em>t</em></sub></span>. This is a matter of concern as the constitutive relations – classically of the form <span class="math inline"><em>M</em> = <em>E</em><em>I</em><em>κ</em></span>, <span class="math inline"><em>N</em> = <em>E</em><em>S</em><em>ϵ</em></span>, <span class="math inline"><em>Q</em> = <em>G</em><em>J</em><em>τ</em></span> – relies upon material strains. Thus, in theses equations, what takes place is a derivation with respect to <span class="math inline"><em>s</em></span> and not to <span class="math inline"><em>s</em><sub><em>t</em></sub></span>, which matters if the rod is not required to be inextensible.</p>
+<h3 id="to-go-further">To go further</h3>
+<p>The reader is invited to refer to <span class="citation"></span> to get a deeper understanding of the <em>Cosserat theory for rods</em>, in particular to see how the governing equations are derived. Here, only the geometric description of a Cosserat rod has been presented in a very generic but still concise manner. This description will be used in the next sections in the narrower scope of the (first order) <em>Kirchhoff theory for rods</em> but could be usefully employed for richer theories.</p>
+<p><span>0.75</span><span>@ X c c @</span> &amp; reference configuration &amp; actual configuration<br />
+arc length &amp; <span class="math inline"><em>s</em> = <em>Ψ</em><sub><em>t</em></sub><sup>−1</sup>(<em>s</em><sub><em>t</em></sub>)</span> &amp; <span class="math inline"><em>s</em><sub><em>t</em></sub> = <em>Ψ</em><sub><em>t</em></sub>(<em>s</em>)</span><br />
+length &amp; <span class="math inline"><em>L</em></span> &amp; <span class="math inline"><em>L</em><sub><em>t</em></sub></span><br />
+centerline &amp; <span class="math inline">${\barr{\gamma}}$</span> &amp; <span class="math inline"><em>γ</em><sub><em>t</em></sub></span><br />
+position vector &amp; <span class="math inline">${\barr{{\boldsymbol{x}}}}$</span> &amp; <span class="math inline"><strong>x</strong></span><br />
+material frame &amp; <span class="math inline">$\{{\barr{{\boldsymbol{d}}_1}},{\barr{{\boldsymbol{d}}_2}},{\barr{{\boldsymbol{d}}_3}}\}$</span> &amp; <span class="math inline">{<strong>d</strong><sub>1</sub>, <strong>d</strong><sub>2</sub>, <strong>d</strong><sub>3</sub>}</span><br />
+material coordinates &amp; <span class="math inline">(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, <em>s</em>)</span> &amp; <span class="math inline">(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, <em>s</em>)</span><br />
+force strains &amp; <span class="math inline">${\barr{{\boldsymbol{\eta}}}}$</span> &amp; <span class="math inline"><strong>η</strong></span><br />
+moment strains &amp; <span class="math inline">${\barr{{\boldsymbol{\varkappa}}}}$</span> &amp; <span class="math inline"><strong>𝜘</strong></span><br />
+spin vector &amp; <span class="math inline">${\barr{{\boldsymbol{\omega}}}}$</span> &amp; <span class="math inline"><strong>ω</strong></span><br />
+axial extension &amp; <span class="math inline">$ {\barr{\epsilon}} = 0$</span> &amp; <span class="math inline">$\norm{\eta} = \Psi'_t(s) = 1 + \epsilon$</span><br />
+arc length derivative &amp; <span class="math inline">$ \frac{\partial}{\partial s} \cdot = (\cdot)'	$</span> &amp; <span class="math inline">$\frac{\partial}{\partial s_t} \cdot = (1 + \epsilon)^{-1} (\cdot)'$</span><br />
+time derivative &amp; <span class="math inline">$ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$</span> &amp; <span class="math inline">$ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$</span><br />
+</p>
+<p>[tab:count]</p>
+<h2 id="kirchhoff-theory-of-rods">Kirchhoff theory of rods</h2>
+<p>The theory for the finite displacement of thin rods has been developed by Kirchhoff, Clebsch and Love.</p>
+<p>force and moment strains (Reissnner) : <span class="math inline">𝜘</span> S’inspirer de l’intro de Reissner 1973</p>
+<p>In this section we follow <span class="citation"></span> to introduce <em>Kirchhoff’s theory of rods</em>, where Dill .</p>
+<p>Dans un même genre, le papier de Reissner (1973) vaut le détour <span class="citation"></span></p>
+<p>We assume that material and section properties are slowly varying along the centerline. Note that symbols referring to this configuration will carry an overbar.</p>
+<p>référence importante pour la rod <span class="citation"></span> , <span class="citation"></span>. modeling of DNA molecules, pipes or hosing, plant, hair, surgery,</p>
+<p><a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> <a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a> <a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a> A thorough order-of-magnitude analysis is exposed in <span class="citation"></span> <a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a> <a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a></p>
+<p>Pour la rod extensible : <span class="citation"></span></p>
+<p>ces équations sont valables à l’ordre 2 en <span class="math inline"><em>α</em></span> <span class="citation"></span> où :</p>
+<p>Kirchhoff’s theory is a first order theory regarding the parameter <span class="math inline"><em>α</em></span>, valid when <span class="math inline"><em>α</em></span> is small. This means that terms of order <span class="math inline"><em>O</em>(<em>α</em><sup>2</sup>)</span> will be considered negligible  : <br /><span class="math display">$$\alpha = \sup_{s \in [0,L]} \{ h/L, h \norm{{\boldsymbol{\omega}}}, h\norm{{\barr{{\boldsymbol{\omega}}}}}, \epsilon \}$$</span><br /></p>
+<p>The model is valid for uniform torsion. No restrained warping. For more and warping, see : The correction for shear in Kirchhoff’s theory, introduce by Timoshenko in <span class="citation"></span> The <em>Timoshenko theory of beams</em> : <span class="citation"></span> Include non uniform torsion</p>
+<p>Linear theory for non uniform torsion <span class="citation"></span> Formula for shear center <span class="citation"></span> A geometrically exact Kirchhoff beam model including torsion warping : <span class="citation"></span></p>
+<p>Pioneer works on non lieanr dynamics of rods <span class="citation"></span> More recent works : <span class="citation"></span></p>
+<p>For an historical review : <span class="citation"></span> Short review of the history of 1D beam models :<span class="citation"></span></p>
+<p>See <span class="citation"></span> for an extension of Kirchhoff’s theory, as mentioned also in <span class="citation"></span></p>
+<p>going further with non uniform torsion <span class="citation"></span></p>
+<h4 id="hypothesis">Hypothesis</h4>
+<ul>
+<li><p>the rod is slender</p></li>
+<li><p>cross-section deformations remain small, although rotations may be large</p></li>
+<li><p>cross-section shear-center and centroid are at the same location</p></li>
+<li><p>material and cross-section properties vary slowly along the rod</p></li>
+</ul>
+<h3 id="description-of-the-motion">Description of the motion</h3>
+<p>To describe the motion of a Kirchhoff rod, we use the framework presented in [sec:cosserat_motion] for Cosserat rods.<a href="#fn16" class="footnoteRef" id="fnref16"><sup>16</sup></a> However, we restrict its scope by requiring that transverse shear strains are negligible quantities, which is one of the fundamental assumptions made by Kirchhoff in his theory :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{3}
+		&amp;\eta_1 &amp;&amp;\simeq 0
+		\\
+		&amp;\eta_2 &amp;&amp;\simeq 0
+	\end{aligned}$$</span><br /></p>
+<p>As a consequence, the material frame remains adapted to the centerline. The rod is not supposed to be strictly inextensible. However, as strains are assumed to be small, the axial strain is supposed to be small itself (<span class="math inline"><em>ϵ</em> ≪ 1</span>), which translates to :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{3}
+		&amp;\eta_3(s,t) = 1+ \epsilon(s,t)
+		\\
+		&amp;{\boldsymbol{d}}_3(s,t) = {\boldsymbol{t}}(s,t)
+		\\
+		&amp;{\boldsymbol{x}}'(s,t) = (1+\epsilon) {\boldsymbol{t}}(s,t)
+	\end{aligned}$$</span><br /></p>
+<h4 id="stress-free-configuration">Stress-free configuration</h4>
+<p>We now consider a <em>stress-free</em> configuration of the rod as the <em>reference</em> configuration.<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a> The rod is described by its centerline <span class="math inline">${\barr{\gamma}}$</span> and its material frame <span class="math inline">$\{{\barr{{\boldsymbol{d}}_1}}, {\barr{{\boldsymbol{d}}_2}}, {\barr{{\boldsymbol{d}}_3}}\}$</span>. Again, a planar cross-section is defined as the set of material points lying in the plane perpendicular to <span class="math inline">${\barr{\gamma}}$</span> and passing through <span class="math inline">${\barr{{\boldsymbol{x}}}}(s)$</span>. The material directors <span class="math inline">${\barr{{\boldsymbol{d}}_1}}$</span> and <span class="math inline">${\barr{{\boldsymbol{d}}_2}}$</span> are now chosen to be aligned with the principal axes of inertia of the cross-section.<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a> Thus, <span class="math inline">${\barr{{\boldsymbol{d}}_3}} = {\barr{{\boldsymbol{d}}_1}} \times  {\barr{{\boldsymbol{d}}_2}}$</span> is normal to the plane of the cross-section and adapted to the centerline (<span class="math inline">$ {\barr{{\boldsymbol{d}}_3}} =  {\barr{{\boldsymbol{t}}}}$</span>). Moreover, the centerline is chosen to be the curve passing through the cross-section centroids and is required to be at least a regular space curve, which means that its tangent is continuously defined.</p>
+<p>For a sufficiently slender rod, the position of material point <span class="math inline">${\barr{{\boldsymbol{p}}}}$</span> that belongs to cross-section <span class="math inline">𝒮(<em>s</em>)</span> (see [fig:cosserat_1,fig:cosserat_2a,fig:cosserat_2b]) is expressed through its material coordinates <span class="math inline">(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, <em>s</em>)</span> as : <a href="#fn19" class="footnoteRef" id="fnref19"><sup>19</sup></a></p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;{\barr{{\boldsymbol{p}}}}(X_1, X_2, s) &amp;&amp;= {\barr{{\boldsymbol{x}}}}({s}) + {\barr{{\boldsymbol{r}}}}(X_1, X_2, s)
+		\\
+		 &amp;{\barr{{\boldsymbol{r}}}}(X_1, X_2, s) &amp;&amp;=  X_1 {\barr{{\boldsymbol{d}}_1}}(s) + X_2{\barr{{\boldsymbol{d}}_2}} (s)
+	\end{aligned}$$</span><br /></p>
+<p>Consequently, for each <span class="math inline"><em>s</em></span> in the reference configuration, <span class="math inline">(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>)</span> is a cartesian coordinate system for the plane <span class="math inline">𝒮(<em>s</em>)</span>. In this system the local coordinates of the cross-section centroid are <span class="math inline">(0, 0)</span>.</p>
+<p>Finally, the cross-section is assumed to be bounded and the planar boundary curve is defined by the implicit equation : <span class="math inline"><em>f</em><sub><em>s</em></sub>(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>)=0</span>. It is also required that the shear center and the centroid of the cross-section are at the same location, otherwise one would require a more complex kinematic description of the rod.<a href="#fn20" class="footnoteRef" id="fnref20"><sup>20</sup></a></p>
+<h4 id="deformed-configuration">Deformed configuration</h4>
+<p>We now examine the motion of a Krichhoff rod and we call <em>deformed</em> configuration its actual configuration at time <span class="math inline"><em>t</em></span>. In this configuration the rod undergoes internal stresses under body loads, external loads and constrains.</p>
+<p>The deformed configuration of the rod at time <span class="math inline"><em>t</em></span> is described by its centerline <span class="math inline"><em>γ</em><sub><em>t</em></sub></span>, its material frame <span class="math inline">{<strong>d</strong><sub>1</sub>, <strong>d</strong><sub>2</sub>, <strong>d</strong><sub>3</sub>}</span> and a local displacement field <span class="math inline"><strong>u</strong></span>. The centerline of the rod is deformed into the space curve <span class="math inline"><em>γ</em><sub><em>t</em></sub></span> with position vector <span class="math inline"><strong>x</strong></span> : <br /><span class="math display">$${\begin{array}{lrcl}
+\gamma_t: &amp; [0,{L}] &amp; \longrightarrow &amp; \mathbb{R}^3 \\
+    &amp; s &amp; \longmapsto &amp; {\boldsymbol{x}}(s,t) \end{array}}$$</span><br /> A material point <span class="math inline">${\barr{{\boldsymbol{p}}}}$</span> in the <em>reference</em> configuration is transported to position <span class="math inline"><strong>p</strong></span> in the <em>actual</em> configuration so that (see [fig:cosserat_1,fig:cosserat_2c,fig:cosserat_2d]) :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;{\boldsymbol{p}}(X_1, X_2, s, t) &amp;&amp;= {\boldsymbol{x}}(s,t) + {\boldsymbol{r}}(X_1, X_2, s, t)
+		\\
+		&amp;{\boldsymbol{r}}(X_1, X_2, s, t) &amp;&amp;=  X_1 {\boldsymbol{d}}_1 (s,t) + X_2 {\boldsymbol{d}}_2 (s,t) + {\boldsymbol{u}}(X_1, X_2, s, t)
+		\\
+		&amp;{\boldsymbol{u}}(X_1, X_2, s, t) &amp;&amp;=  u_k(X_1,X_2, s, t) {\boldsymbol{d}}_k (s, t)
+	\end{aligned}$$</span><br /></p>
+<p>Although the cross-section <span class="math inline">𝒮(<em>s</em>)</span> is a planar surface in the reference configuration, it deforms to a non-planar surface in the actual configuration since <span class="math inline"><strong>u</strong> ≠ <strong>0</strong></span>.<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a> The components <span class="math inline">(<em>u</em><sub>1</sub>, <em>u</em><sub>2</sub>, <em>u</em><sub>3</sub>)<sup><em>T</em></sup></span> of the local displacement field expressed in the material frame basis are required to be small in Kirchhoff’s theory of rods.<a href="#fn22" class="footnoteRef" id="fnref22"><sup>22</sup></a> In practice, as explained by <span class="citation"></span> this means that the considered motions must satisfy : <br /><span class="math display">$$\frac{u_k}{h} = O(\alpha)
+	\quad , \quad
+	\frac{\partial u_k}{\partial X_1} = O(\alpha)
+	\quad , \quad
+	\frac{\partial u_k}{\partial X_2} = O(\alpha)
+	\quad , \quad
+	\frac{\partial u_k}{\partial s} = O(\alpha^2)$$</span><br /> In this theory, the material frame in the reference configuration deforms in a rigid-body manner so that it remains orthonormal and aligned to the principal axes of the cross-section – within an error <span class="math inline"><em>O</em>(<em>α</em><sup>2</sup>)</span>.<a href="#fn23" class="footnoteRef" id="fnref23"><sup>23</sup></a> Remark that this is different than assuming that cross-sections deform in a rigid-body manner, which is known as the <em>Euler-Bernoulli</em> hypothesis and is equivalent to the special case <span class="math inline"><strong>u</strong> = <strong>0</strong></span>.</p>
+<h3 id="reparametrization-1">Reparametrization</h3>
+<p>This subsection highlights the role played by the change in length of the rod during its motion. It was found that this aspect is often treated partially or with confusion in the literature, although it is of prime importance to understand correctly the influence of axial stretch in the computation of moment strains. Indeed, for an inextensible rod, the notions of geometric curvature and (flexural) material curvatures are somehow the same notions. But this is not the case for extensible rods as explained in [sec:kirchhoff_strains].</p>
+<p>The rod is parametrized by <span class="math inline"><em>s</em></span>, the arc length parameter of the <em>reference</em> configuration, as the constitutive laws will be expressed relatively to this configuration. But recall once again that <span class="math inline"><em>s</em></span> is no more the arc length parameter of the <em>deformed</em> centerline as the rod may have suffer axial extension.<a href="#fn24" class="footnoteRef" id="fnref24"><sup>24</sup></a> Kirchhoff’s theory assumes that the material frame remains adapted to the centerline during deformation, or equivalently that transverse shear strains are neglected.<a href="#fn25" class="footnoteRef" id="fnref25"><sup>25</sup></a> The extension of the centerline is characterized by <span class="math inline"><em>ϵ</em></span> defined such that :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;{\barr{{\boldsymbol{x}}}}' = {\barr{{\boldsymbol{d}}_3}}
+		\\
+		&amp;{\boldsymbol{x}}' = (1 + \epsilon) {\boldsymbol{d}}_3
+	\end{aligned}$$</span><br /></p>
+<p>However, one can parametrized the deformed centerline by its own arc length parameter, denoted <span class="math inline"><em>s</em><sub><em>t</em></sub></span>. Let’s call <span class="math inline"><em>L</em><sub><em>t</em></sub></span> the length of the deformed centerline and <span class="math inline"><em>Ψ</em><sub><em>t</em></sub></span> the <span class="math inline">𝒞<sup>1</sup></span> diffeomorphism that maps <span class="math inline"><em>s</em></span> onto <span class="math inline"><em>s</em><sub><em>t</em></sub></span> (<span class="math inline"><em>s</em><sub><em>t</em></sub> = <em>Ψ</em><sub><em>t</em></sub>(<em>s</em>)⇔<em>s</em> = <em>Ψ</em><sub><em>t</em></sub><sup>−1</sup>(<em>s</em><sub><em>t</em></sub>)</span>). Thus, the centerline is equivalently described by : <br /><span class="math display">$${\begin{array}{lrcl}
+\gamma_t: &amp; [0,{L_t}] &amp; \longrightarrow &amp; \mathbb{R}^3 \\
+    &amp; s_t &amp; \longmapsto &amp; {\boldsymbol{x}}(s_t) \end{array}}$$</span><br /> Because <span class="math inline"><em>s</em><sub><em>t</em></sub></span> is the arc length parameter of <span class="math inline"><em>γ</em><sub><em>t</em></sub></span> the following relations hold :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;\frac{\partial {\boldsymbol{x}}}{\partial s_t} &amp;&amp;= {\boldsymbol{d}}_3
+		\\[0.5em]
+		&amp;\frac{\partial s_t}{\partial s} &amp;&amp;= \eta_3 = 1+ \epsilon
+	\end{aligned}$$</span><br /></p>
+<p>Consequently, one can deduced that the derivation with respect to <span class="math inline"><em>s</em></span> is proportional to the derivation with respect to <span class="math inline"><em>s</em><sub><em>t</em></sub></span> by a factor <span class="math inline">1 + <em>ϵ</em></span>. This factor has to be taken into account when computing the material curvatures, which are no more equivalents to their geometric counterparts in the deformed configuration. This is detailed in the next section dedicated to the strains vectors.</p>
+<h3 id="sec:kirchhoff_strains">Strains</h3>
+<p>This section, introduces the material force and moment strains vectors of a Kirchhoff rod. It shows how they are related – yet distinct if <span class="math inline"><em>ϵ</em> ≠ 0</span> – to the geometric curvature of the centerline.</p>
+<h4 id="reference-configuration-1">Reference configuration</h4>
+<p>Since the material frame is orthonormal and adapted to the centerline, its evolution along the undeformed centerline is described thanks to the <em>reference material curvature vector</em> <span class="math inline">${\barr{{\boldsymbol{\varkappa}}}}$</span> defined as : <br /><span class="math display">$${\barr{{\boldsymbol{d}}_i}}' = {\barr{{\boldsymbol{\varkappa}}}}  \times {\barr{{\boldsymbol{d}}_i}}$$</span><br /> In the reference configuration, because <span class="math inline"><em>s</em></span> is the centerline’s arc length parameter, the strains vector components expressed in the material frame basis take the form : <a href="#fn26" class="footnoteRef" id="fnref26"><sup>26</sup></a></p>
+<p><br /><span class="math display">$$\begin{aligned}
+{4}
+		&amp;{\barr{\varkappa}}_1 &amp;&amp;={\barr{ {\boldsymbol{d}}_3}}'  \cdot {\barr{{\boldsymbol{d}}_2}} &amp;&amp;= {\barr{k}}_1 &amp;&amp;= {\barr{{\boldsymbol{\kappa b}}}} \cdot {\barr{{\boldsymbol{d}}_1}}
+		\\
+		&amp;{\barr{\varkappa}}_2 &amp;&amp;= {\barr{{\boldsymbol{d}}_1}}'  \cdot {\barr{{\boldsymbol{d}}_3}} &amp;&amp;= {\barr{k}}_2 &amp;&amp;= {\barr{{\boldsymbol{\kappa b}}}} \cdot {\barr{{\boldsymbol{d}}_2}}
+		\\
+		&amp;{\barr{\varkappa}}_3 &amp;&amp;=  {\barr{{\boldsymbol{d}}_1}}'  \cdot {\barr{{\boldsymbol{d}}_2}} &amp;&amp;= {\barr{\tau}} &amp;&amp;= {\barr{{\boldsymbol{d}}_1}}'  \cdot {\barr{{\boldsymbol{d}}_2}}
+	\end{aligned}$$</span><br /></p>
+<p>where <span class="math inline">${\barr{{\boldsymbol{\kappa b}}}}$</span> (see [eq:kb]) is the curvature binormal vector of <span class="math inline">${\barr{\gamma}}$</span>  : <br /><span class="math display">$${\barr{{\boldsymbol{\kappa b}}}} =  {\barr{{\boldsymbol{t}}}} \times  \frac{\partial {\barr{{\boldsymbol{t}}}}}{\partial s} = {\barr{{\boldsymbol{t}}}} \times {\barr{{\boldsymbol{t}}}}'$$</span><br /> <span class="math inline">${\barr{\varkappa}}_1$</span> and <span class="math inline">${\barr{\varkappa}}_2$</span> are called the reference <em>material</em> curvatures. <span class="math inline">${\barr{\varkappa}}_3$</span> is called the reference <em>material</em> twist. In this configuration, <span class="math inline">${\barr{\varkappa}}_1$</span> and <span class="math inline">${\barr{\varkappa}}_2$</span> are simply computed as the projection of the curvature binormal vector along <span class="math inline">${\barr{{\boldsymbol{d}}_1}}$</span> and <span class="math inline">${\barr{{\boldsymbol{d}}_2}}$</span>.</p>
+<p>Note the important distinction between the reference material twist (<span class="math inline">${\barr{\tau}}$</span>) and the torsion of Frenet (<span class="math inline"><em>τ</em><sub><em>f</em></sub></span>) of the centerline, as defined in [sec:ff].</p>
+<h4 id="deformed-configuration-1">Deformed configuration</h4>
+<p>Since the material frame is orthonormal and adapted to the centerline, it’s evolution along the <em>deformed</em> centerline is described thanks to the <em>actual strains vector</em> <span class="math inline"><strong>𝜘</strong></span> defined as : <br /><span class="math display">$$\frac{\partial {\boldsymbol{d}}_k}{\partial s} =  {\boldsymbol{d}}'_k = {{\boldsymbol{\varkappa}}}  \times {\boldsymbol{d}}_k$$</span><br /> Note that the strains vector is defined relatively to the arc length <span class="math inline"><em>s</em></span> of the <em>reference</em> configuration and not the arc length <span class="math inline"><em>s</em><sub><em>t</em></sub></span> of the <em>actual</em> configuration. Thus the strains vector components expressed in the material frame basis are given by :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{3}
+		&amp;{\varkappa}_1 &amp;&amp;= {\boldsymbol{d}}'_3  \cdot {\boldsymbol{d}}_2 &amp;&amp;= (1+\epsilon) {k_1} = (1+\epsilon)\, {\boldsymbol{\kappa b}} \cdot {\boldsymbol{d}}_1
+		\\[0.5em]
+		&amp;{\varkappa}_2 &amp;&amp;= {\boldsymbol{d}}'_1  \cdot {\boldsymbol{d}}_3 &amp;&amp;= (1+\epsilon) {k_2} = (1+\epsilon)\, {\boldsymbol{\kappa b}} \cdot {\boldsymbol{d}}_2
+		\\[0.5em]
+		&amp;{\varkappa}_3 &amp;&amp;=  {\boldsymbol{d}}'_1  \cdot {\boldsymbol{d}}_2 &amp;&amp;= (1+\epsilon) {\tau} = (1+\epsilon)\, \frac{\partial {\boldsymbol{d}}_1}{\partial s_t}  \cdot {\boldsymbol{d}}_2
+	\end{aligned}$$</span><br /></p>
+<p>where <span class="math inline"><strong>κ</strong><strong>b</strong></span> (see [eq:kb]) is the curvature binormal vector of <span class="math inline"><em>γ</em><sub><em>t</em></sub></span> given by : <br /><span class="math display">$${\boldsymbol{\kappa b}} =  {\boldsymbol{t}} \times  \frac{\partial {\boldsymbol{t}}}{\partial s_t} = (1+\epsilon)\, {\boldsymbol{t}} \times {\boldsymbol{t}}'$$</span><br /> <span class="math inline">𝜘<sub>1</sub></span> and <span class="math inline">𝜘<sub>2</sub></span> are called the <em>material</em> curvatures. <span class="math inline">𝜘<sub>3</sub></span> is called the <em>material</em> twist. Note this time the dependence of the material strains components <span class="math inline">(𝜘<sub>1</sub>, 𝜘<sub>2</sub>, 𝜘<sub>3</sub>)<sup><em>T</em></sup></span> regarding the extension of the rod. These are the strains employed in the classical constitutive laws that lead to the determination of the internal axial force (<span class="math inline"><em>N</em> = <em>E</em><em>S</em><em>ϵ</em></span>), internal bending moments (<span class="math inline">$M_1 = EI_1(\varkappa_1-{\barr{\varkappa}}_1)$</span>, <span class="math inline">$M_2 = EI_2(\varkappa_2-{\barr{\varkappa}}_2)$</span>) and internal twisting moment (<span class="math inline">$Q = GJ((\varkappa_3-{\barr{\varkappa}}_3)$</span>).</p>
+<p>Often in the literature the flexural material curvatures are computed as the projection of the curvature binormal vector onto the first two material axes. Here it is demonstrated that this is not exact as it omits the contribution of the rod extension, although it could be a reasonable approximation when <span class="math inline"><em>ϵ</em> ≪ 1</span>.</p>
+<h3 id="balance-of-momentum">Balance of momentum</h3>
+<div class="figure">
+<embed src="kirchhoff_law.pdf" />
+<p class="caption">Internal forces (<span class="math inline"><strong>F</strong></span>) and moments (<span class="math inline"><strong>M</strong></span>) acting on an infinitesimal beam slice of length <span class="math inline"><em>d</em><em>s</em></span>. The beam is also subject to distributed external forces (<span class="math inline"><strong>f</strong></span>) and moments (<span class="math inline"><strong>m</strong></span>).</p>
+</div>
+<p>By convention, internal forces and moments are forces and moments applied by the right part to the left part of the beam. [fig:5_0]</p>
+<p>Let <span class="math inline">𝒫</span> be the first <em>Piola-Kirchhoff</em> stress tensor. <span class="math inline">𝒫</span> expresses how contact forces are acting in a <em>deformed</em> body, referring to its (known) <em>reference</em> configuration. Let <span class="math inline"><strong>d</strong><strong>S</strong> = <strong>n</strong><em>d</em><em>S</em></span> be an elementary oriented surface of the rod in the <em>reference</em> configuration, of centroid <span class="math inline"><strong>p</strong>(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, <em>s</em>, <em>t</em>)∈𝒮(<em>s</em>)</span>.<a href="#fn27" class="footnoteRef" id="fnref27"><sup>27</sup></a> The contact forces exerted on <span class="math inline"><strong>d</strong><strong>S</strong></span> are given by :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;{\boldsymbol{dF}}(X_1,X_2,s,t) &amp;&amp;=  {\boldsymbol{\sigma_n}}(X_1,X_2,s,t) \,dS 
+		\\
+		&amp;{\boldsymbol{\sigma_n}}(X_1,X_2,s,t) &amp;&amp;= {\boldsymbol{\mathcal{P}}}(X_1,X_2,s,t) \cdot {\boldsymbol{n}} \label{eq:piola}
+	\end{aligned}$$</span><br /></p>
+<p>The <em>Piola stress vector</em> (<span class="math inline"><strong>σ</strong><sub><strong>n</strong></sub></span>) introduced in [eq:piola] expresses the contact forces exerted on the body per unit area of the <em>reference</em> configuration.<a href="#fn28" class="footnoteRef" id="fnref28"><sup>28</sup></a></p>
+<p>The generic laws for the balance of linear and angular momentums are obtained by summation over the reference configuration, where <span class="math inline"><strong>b</strong></span> are the body forces per unit volume of the <em>reference</em> configuration :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;\iiint_{\mathcal{V}} \rho \ddot{{\boldsymbol{p}}} \;dV 
+		&amp;&amp;= \iint_{\partial\mathcal{V}} {\boldsymbol{\sigma_n}} \;dS 
+		+ \iiint_{\mathcal{V}} \rho {\boldsymbol{b}} \;dV
+		\label{eq:linearbalance}
+		\\[0.5em]
+		&amp;\iiint_{\mathcal{V}} \rho ({\boldsymbol{p}} \times \ddot{{\boldsymbol{p}}}) \;dV  
+		&amp;&amp;=  \iint_{\partial\mathcal{V}} {\boldsymbol{p}} \times {\boldsymbol{\sigma_n}} \;dS 
+		+ \iiint_{\mathcal{V}} \rho ({\boldsymbol{p}} \times {\boldsymbol{b}}) \;dV
+		\label{eq:angularbalance}
+	\end{aligned}$$</span><br /></p>
+<p>Here, and subsequently, <span class="math inline">𝒱</span> denotes the volume of a slice of the rod in the <em>reference</em> configuration, encompassed between two cross-sections (<span class="math inline">𝒮<sub>1</sub> = 𝒮(<em>s</em><sub>1</sub>)</span>, <span class="math inline">𝒮<sub>2</sub> = 𝒮(<em>s</em><sub>2</sub>)</span>, <span class="math inline"><em>s</em><sub>1</sub> &lt; <em>s</em><sub>2</sub></span>). We also denote <span class="math inline">ℒ<sub>12</sub></span> the lateral surface of the rod in the <em>reference</em> configuration so that the exterior surface of the volume is : <span class="math inline">∂𝒱 = 𝒮<sub>1</sub>⋃ℒ<sub>12</sub>⋃𝒮<sub>2</sub></span>.</p>
+<p>The cross-section <span class="math inline">𝒮(<em>s</em>)</span> splits the rod in two parts. Hereafter, the upstream part of the rod over <span class="math inline">[<em>s</em>, <em>L</em>]</span> will be called the . Reciprocally, the downstream part of the rod over <span class="math inline">[0, <em>s</em>]</span> will be called the .</p>
+<h4 id="internal-forces-and-moments">Internal forces and moments</h4>
+<p>At the cross-section <span class="math inline">𝒮(<em>s</em>)</span>, the contact forces applied by the right part onto the left part of the rod yield the following resultant force <span class="math inline"><strong>F</strong></span> and resultant moment <span class="math inline"><strong>M</strong></span> about the centroid point <span class="math inline"><strong>x</strong>(<em>s</em>, <em>t</em>)</span> :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;{\boldsymbol{F}}(s, t) &amp;&amp;= \iint_{\mathcal{S}(s)} {\boldsymbol{\sigma_n}}(X_1, X_2, s, t) \;dX_1 dX_2 \label{eq:F}
+		\\[0.5em]
+		&amp;{\boldsymbol{M}}(s, t) &amp;&amp;= \iint_{\mathcal{S}(s)} {\boldsymbol{r}}(X_1,X_2,s,t) \times {\boldsymbol{\sigma_n}}(X_1, X_2, s, t) \;dX_1 dX_2 \label{eq:M}
+	\end{aligned}$$</span><br /></p>
+<p><span class="math inline"><strong>F</strong></span> and <span class="math inline"><strong>M</strong></span> are commonly known as the <em>internal forces</em> and the <em>internal moments</em> of the rod.</p>
+<h4 id="external-forces-and-moments">External forces and moments</h4>
+<p>We assume that the resultant of the contact forces on <span class="math inline">ℒ<sub>12</sub></span> and the body forces on <span class="math inline">𝒱</span> reduce to the following forms :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{5}
+		&amp;\iint_{\mathcal{L}_{12}} {\boldsymbol{\sigma_n}} \;dS 
+		&amp;&amp;+ \iiint_{\mathcal{V}} \rho {\boldsymbol{b}} \;dV
+		&amp;&amp;= \int_{s_1}^{s_2} {\boldsymbol{f}}_s  + (1+\epsilon) {\boldsymbol{f}}_{s_t} \;ds
+		\label{eq:f}
+		\\[0.5em]
+		&amp;\iint_{\mathcal{L}_{12}} {\boldsymbol{p}} \times {\boldsymbol{\sigma_n}} \;dS 
+		&amp;&amp;+ \iiint_{\mathcal{V}} \rho ({\boldsymbol{p}} \times {\boldsymbol{b}}) \;dV
+		&amp;&amp;= \int_{s_1}^{s_2} {\boldsymbol{m}}_{s}  + (1+\epsilon) {\boldsymbol{m}}_{s_t}  \nonumber
+		\\ &amp; &amp;&amp; &amp;&amp;\quad + {\boldsymbol{x}} \times \big({\boldsymbol{f}}_{s}  + (1+\epsilon) {\boldsymbol{f}}_{s_t} \big) \;ds
+		\label{eq:m}
+	\end{aligned}$$</span><br /></p>
+<p>where <span class="math inline"><strong>f</strong><sub><em>s</em></sub></span> (resp. <span class="math inline"><strong>f</strong><sub><em>s</em><em>t</em></sub></span>) is the distributed resultant force per unit length of the reference (resp. deformed) configuration ; and <span class="math inline"><strong>m</strong><sub><em>s</em></sub></span> (resp. <span class="math inline"><strong>m</strong><sub><em>s</em><sub><em>t</em></sub></sub></span>) is the distributed resultant moment per unit length of the reference (resp. deformed) configuration. For instance, these distributed forces and moments include external and body loads such as weight, snow, wind, …<a href="#fn29" class="footnoteRef" id="fnref29"><sup>29</sup></a></p>
+<p>Note that Kirchhoff’s theory require that the stress components on the sides of the rod are small <span class="citation"></span> – that is <span class="math inline"><strong>σ</strong><sub><strong>n</strong></sub> ⋅ <strong>n</strong> = <em>O</em>(<em>α</em><sup>2</sup>)</span> over <span class="math inline">ℒ<sub>12</sub></span>. Thus, the first two terms in the above expression will be neglected :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;\iint_{\mathcal{L}_{12}} {\boldsymbol{\sigma_n}} \;dS \simeq 0
+		\\[0.5em]
+		&amp;\iint_{\mathcal{L}_{12}} {\boldsymbol{p}} \times {\boldsymbol{\sigma_n}} \;dS \simeq 0
+	\end{aligned}$$</span><br /></p>
+<p>Although the continuous model does not account formally for punctual loads,<a href="#fn30" class="footnoteRef" id="fnref30"><sup>30</sup></a> they will be introduced seamlessly in the discrete model as the dynamical equations for the motion of the rod will translate into rigid body equations for the discrete segments composing the rod.</p>
+<h4 id="inertial-forces">Inertial forces</h4>
+<p>The inertial forces for a volume of the rod encompassed between cross-sections <span class="math inline">𝒮<sub>1</sub></span> and <span class="math inline">𝒮<sub>2</sub></span> are obtained by summation as :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;\iiint_{\mathcal{V}} {\rho} \ddot{{\boldsymbol{p}}} \;dV = \iiint_{\mathcal{V}_t} {\rho_t} \ddot{{\boldsymbol{p}}} \;dV_t \label{eq:inertial_a}
+		\\[0.5em]
+		&amp;\iiint_{\mathcal{V}} \rho ({\boldsymbol{p}} \times \ddot{{\boldsymbol{p}}}) \;dV= \iiint_{\mathcal{V}_t} {\rho_t} ({\boldsymbol{p}} \times  \ddot{{\boldsymbol{p}}}) \;dV_t \label{eq:inertial_b}
+	\end{aligned}$$</span><br /></p>
+<p>Here, <span class="math inline"><em>ρ</em></span> (resp. <span class="math inline"><em>ρ</em><sub><em>t</em></sub></span>) is the mass density of the rod in the reference (resp. deformed) configuration. Expressions are given in both coordinate systems.<a href="#fn31" class="footnoteRef" id="fnref31"><sup>31</sup></a></p>
+<p>In the context of Kirchhoff’s approximation, the local deformations of the cross-sections can be neglected in the computation of the inertial forces <span class="citation"></span>. This yields :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;{\boldsymbol{p}} &amp;&amp;\simeq {\boldsymbol{x}} + X_1{\boldsymbol{d}}_1 + X_2{\boldsymbol{d}}_2
+		\\
+		&amp;\dot{{\boldsymbol{p}}} &amp;&amp;= \dot{{\boldsymbol{x}}} + {\boldsymbol{\omega}} \times (X_1{\boldsymbol{d}}_1 + X_2{\boldsymbol{d}}_2)
+		\\
+		&amp;\ddot{{\boldsymbol{p}}} &amp;&amp;= \ddot{{\boldsymbol{x}}} + \dot{{\boldsymbol{\omega}}} \times (X_1{\boldsymbol{d}}_1 + X_2{\boldsymbol{d}}_2) + {\boldsymbol{\omega}} \times ( {\boldsymbol{\omega}} \times (X_1{\boldsymbol{d}}_1 + X_2{\boldsymbol{d}}_2))
+	\end{aligned}$$</span><br /></p>
+<p>Since <span class="math inline"><em>X</em><sub>1</sub></span> and <span class="math inline"><em>X</em><sub>2</sub></span> are the coordinates with respect to the centroid (<span class="math inline"><strong>x</strong></span>) and the principal axes of the cross-section (<span class="math inline"><strong>d</strong><sub>1</sub></span>, <span class="math inline"><strong>d</strong><sub>2</sub></span>), the cross-section area (<span class="math inline"><em>S</em></span>) and principal moments of inertia (<span class="math inline"><em>I</em><sub>1</sub></span>, <span class="math inline"><em>I</em><sub>2</sub></span>) are given by : <a href="#fn32" class="footnoteRef" id="fnref32"><sup>32</sup></a><sup>,</sup><a href="#fn33" class="footnoteRef" id="fnref33"><sup>33</sup></a></p>
+<p>[eq:sectionprop] <br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;0  		&amp;&amp;= \iint_{\mathcal{S}(s)} \left(X_1 X_2\right) \;dX_1 dX_2 \label{eq:diag}
+		\\
+		&amp;S 		&amp;&amp;= \iint_{\mathcal{S}(s)} dX_1 dX_2
+		\\
+		&amp;I_1 		&amp;&amp;= \iint_{\mathcal{S}(s)} {X_2}^2 \;dX_1 dX_2
+		\\
+		&amp;I_2 		&amp;&amp;= \iint_{\mathcal{S}(s)} {X_1}^2 \;dX_1 dX_2
+	\end{aligned}$$</span><br /></p>
+<p>More over, for a given cross-section the definition of the centroid yields :</p>
+<p>[eq:centroid] <br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;{\boldsymbol{0}}  &amp;&amp;= \iint_{\mathcal{S}(s)} \left(X_1{\boldsymbol{d}}_1 + X_2{\boldsymbol{d}}_2\right) \;dX_1 dX_2 \label{eq:centroid_a}
+		\\
+		&amp;0 		&amp;&amp;= \iint_{\mathcal{S}(s)} {X_1} \;dX_1 dX_2 \label{eq:centroid_b}
+		\\
+		&amp;0 		&amp;&amp;= \iint_{\mathcal{S}(s)} {X_2} \;dX_1 dX_2 \label{eq:centroid_c}
+	\end{aligned}$$</span><br /></p>
+<p>For a thin slice of the rod (<span class="math inline"><em>δ</em>𝒱</span>) between cross-sections <span class="math inline">𝒮(<em>s</em>)</span> and <span class="math inline">𝒮(<em>s</em> + <em>d</em><em>s</em>)</span>, [eq:inertial_a,eq:inertial_b] yield respectively : <a href="#fn34" class="footnoteRef" id="fnref34"><sup>34</sup></a></p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;\iiint_{\delta\mathcal{V}} {\rho} \ddot{{\boldsymbol{p}}} \;dV= ({\rho}S \ddot{{\boldsymbol{x}}})ds
+		\\[0.5em]
+		&amp;\iiint_{\delta\mathcal{V}} \rho ({\boldsymbol{p}} \times \ddot{{\boldsymbol{p}}}) \;dV= \left({\rho}S \ddot{{\boldsymbol{x}}} + {\rho} \iint_{\mathcal{S}(s)} {\boldsymbol{r}} \times \ddot{{\boldsymbol{r}}} \; dX_1 dX_2 \right)ds
+	\end{aligned}$$</span><br /></p>
+<p>Finally, remark that : <br /><span class="math display">$${\boldsymbol{r}} \times \ddot{{\boldsymbol{r}}}
+	= (X_1)^2 {\boldsymbol{d}}_1 \times \ddot{{\boldsymbol{d}}_1} 
+	+ (X_2)^2 {\boldsymbol{d}}_2 \times \ddot{{\boldsymbol{d}}_2} 
+	+ X_1 X_2 ({\boldsymbol{d}}_1 \times \ddot{{\boldsymbol{d}}_2} 
+	+ {\boldsymbol{d}}_2 \times \ddot{{\boldsymbol{d}}_1})$$</span><br /> Thus, reminding [eq:sectionprop,eq:centroid], one can conclude that the inertial forces reduce to :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+		&amp;\iiint_{\delta\mathcal{V}} {\rho} \ddot{{\boldsymbol{x}}} \;dV= ({\rho}S \ddot{{\boldsymbol{x}}})ds \label{eq:linearinertia}
+		\\[0.5em]
+		&amp;\iiint_{\delta\mathcal{V}} \rho ({\boldsymbol{p}} \times \ddot{{\boldsymbol{p}}}) \;dV = ({\rho}S \ddot{{\boldsymbol{x}}} + \rho I_1 {\boldsymbol{d}}_1 \times \ddot{{\boldsymbol{d}}_1} + \rho I_2 {\boldsymbol{d}}_2 \times \ddot{{\boldsymbol{d}}_2}) ds \label{eq:angularinertia}
+	\end{aligned}$$</span><br /></p>
+<h4 id="balance-of-linear-momentum">Balance of linear momentum</h4>
+<p>For a thin slice of the rod (<span class="math inline"><em>δ</em>𝒱</span>) between cross-sections <span class="math inline">𝒮(<em>s</em>)</span> and <span class="math inline">𝒮(<em>s</em> + <em>d</em><em>s</em>)</span>, using [eq:F,eq:f], the balance of linear momentum referring to the <em>reference</em> configuration expressed in [eq:linearbalance] yields : <br /><span class="math display">$$\begin{aligned}
+		\iiint_{\delta\mathcal{V}} \rho \ddot{{\boldsymbol{p}}} \;dV 
+		&amp;= \iint_{\partial\mathcal{V}} {\boldsymbol{\sigma_n}} \;dS 
+		+ \iiint_{\delta\mathcal{V}} \rho {\boldsymbol{b}} \;dV
+		\\[0.5em]
+		&amp;= \iint_{\mathcal{S}(s)} {\boldsymbol{\sigma_n}} \;dS 
+		+ \iint_{\mathcal{S}(s+ds)} {\boldsymbol{\sigma_n}} \;dS
+		+ \left( \iint_{\delta\mathcal{L}} {\boldsymbol{\sigma_n}} \;dS
+		+ \iiint_{\delta\mathcal{V}} \rho {\boldsymbol{b}} \;dV \right)
+		\\[0.5em]
+		&amp;= -{\boldsymbol{F}}(s) + {\boldsymbol{F}}(s+ds) + \big({\boldsymbol{f}}_{s} (s) + (1+\epsilon) {\boldsymbol{f}}_{s_t}(s) \big) ds
+		\\[0.5em]
+		&amp;= \left( \frac{\partial {\boldsymbol{F}}}{\partial s} + {\boldsymbol{f}}_{s}  + (1+\epsilon) {\boldsymbol{f}}_{s_t} \right)(s) ds
+	\end{aligned}$$</span><br /> Thus, using [eq:linearinertia], the equation for the balance of linear momentum reduce to either equations :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\frac{\partial {\boldsymbol{F}}}{\partial s} + {\boldsymbol{f}}_{s}  + (1+\epsilon){\boldsymbol{f}}_{s_t} &amp;= \rho S \ddot{{\boldsymbol{x}}}
+	\label{eq:linearmotion}
+	\\[0.5em]
+	(1+\epsilon)\frac{\partial {\boldsymbol{F}}}{\partial s_t} + {\boldsymbol{f}}_{s}  + (1+\epsilon){\boldsymbol{f}}_{s_t} &amp;= \rho S \ddot{{\boldsymbol{x}}}
+	\end{aligned}$$</span><br /></p>
+<h4 id="balance-of-angular-momentum">Balance of angular momentum</h4>
+<p>Similarly, for a thin slice of the rod (<span class="math inline"><em>δ</em>𝒱</span>) between cross-sections <span class="math inline">𝒮(<em>s</em>)</span> and <span class="math inline">𝒮(<em>s</em> + <em>d</em><em>s</em>)</span>, using [eq:F,eq:M] yields : <br /><span class="math display">$$\begin{aligned}
+		\iint_{\mathcal{S}(s) \bigcup \mathcal{S}(s+ds)} {\boldsymbol{p}} \times {\boldsymbol{\sigma_n}} \;dS
+		&amp;= \iint_{\mathcal{S}(s) \bigcup \mathcal{S}(s+ds)} ({\boldsymbol{x}} + {\boldsymbol{r}}) \times {\boldsymbol{\sigma_n}} \;dS
+		\\[0.5em]
+		&amp;= -({\boldsymbol{x}}\times{\boldsymbol{F}})(s) + ({\boldsymbol{x}}\times{\boldsymbol{F}})(s+ds) - {\boldsymbol{M}}(s) + {\boldsymbol{M}}(s+ds)
+		\\[0.5em]
+		&amp;=  \frac{\partial}{\partial s} \big( {\boldsymbol{M}} + {\boldsymbol{x}}\times{\boldsymbol{F}} \big)(s) ds
+	\end{aligned}$$</span><br /> Using [eq:m] the balance of linear momentum referring to the <em>reference</em> configuration expressed in [eq:angularbalance] yields :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{5}
+		\label{eq:angularbalance2}
+		&amp;\iiint_{\delta\mathcal{V}} \rho ({\boldsymbol{p}} \times \ddot{{\boldsymbol{p}}}) \;dV  
+		&amp;&amp;=  \iint_{\partial\delta\mathcal{V}} {\boldsymbol{p}} \times {\boldsymbol{\sigma_n}} \;dS 
+		+ \iiint_{\delta\mathcal{V}} \rho ({\boldsymbol{p}} \times {\boldsymbol{b}}) \;dV
+		\\[0.5em]
+		&amp; &amp;&amp;= \frac{\partial}{\partial s} \big( {\boldsymbol{M}} + {\boldsymbol{x}}\times{\boldsymbol{F}} \big)(s) ds 
+		+ {\boldsymbol{m}}_{s}  + (1+\epsilon){\boldsymbol{m}}_{s_t}  \\
+		&amp; &amp;&amp;\quad + {\boldsymbol{x}} \times \big({\boldsymbol{f}}_{s}  + (1+\epsilon){\boldsymbol{f}}_{s_t} \big) \;ds 
+	\end{aligned}$$</span><br /></p>
+<p>Finally, combining [eq:angularbalance2] with [eq:linearmotion,eq:angularinertia], the equation for the balance of angular momentum reduce to either equations : <a href="#fn35" class="footnoteRef" id="fnref35"><sup>35</sup></a></p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\frac{\partial {\boldsymbol{M}}}{\partial s} 
+	+ \frac{\partial {\boldsymbol{x}}}{\partial s} \times {\boldsymbol{F}}
+	+ {\boldsymbol{m}}_{s}  + (1+\epsilon){\boldsymbol{m}}_{s_t}  
+	&amp;= \rho I_1 {\boldsymbol{d}}_1 \times \ddot{{\boldsymbol{d}}_1} + \rho I_2 {\boldsymbol{d}}_2 \times \ddot{{\boldsymbol{d}}_2}
+	\\[0.5em]
+	(1+\epsilon)\Bigl(\frac{\partial {\boldsymbol{M}}}{\partial s_t} 
+	+ \frac{\partial {\boldsymbol{x}}}{\partial s_t} \times {\boldsymbol{F}}
+	+ (1+\epsilon)^{-1}{\boldsymbol{m}}_{s}  +  {\boldsymbol{m}}_{s_t} \Bigr)
+	&amp;= \rho I_1 {\boldsymbol{d}}_1 \times \ddot{{\boldsymbol{d}}_1} + \rho I_2 {\boldsymbol{d}}_2 \times \ddot{{\boldsymbol{d}}_2}
+	\end{aligned}$$</span><br /></p>
+<h3 id="equations-of-motion">Equations of motion</h3>
+<p>With some scaling arguments <span class="citation"></span> shows that terms in <span class="math inline"><em>ω</em><sub>1</sub></span> and <span class="math inline"><em>ω</em><sub>2</sub></span> should be negligible in the inertial forces of the rod given in [eq:angularinertia], which yields to : <a href="#fn36" class="footnoteRef" id="fnref36"><sup>36</sup></a><sup>,</sup><a href="#fn37" class="footnoteRef" id="fnref37"><sup>37</sup></a></p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\rho I_1 (\dot{\omega}_1 + \omega_2 \omega_3) &amp;\simeq 0
+	\\
+	\rho I_2 (\dot{\omega}_2 - \omega_1 \omega_3) &amp;\simeq 0
+	\\
+	\rho (I_1 + I_2)\dot{\omega}_3 +\rho(I_2 - I_1)\omega_1 \omega_2 &amp;\simeq \rho (I_1 + I_2)\dot{\omega}_3
+	\end{aligned}$$</span><br /></p>
+<p>For our application – a beam model for quasi-static analysis of gridshell structures – this approximation is clearly sufficient as what matters is the quasi-static response of the structural system and there is no need for a too accurate modeling of the transient phase. More over, the quasi-static response will be determined through a fictitious dynamic process appropriately damped to speed up the convergence to the steady state, and so there is no reason that the transient phase has any real physical meaning. This means that its is enough to keep only the twisting dynamic of the rod around its centerline.</p>
+<p>Thus, the final dynamical equations for the motion of the rod to be retained are :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\frac{\partial {\boldsymbol{F}}}{\partial s} + {\boldsymbol{f}}_{s}  + (1+\epsilon) {\boldsymbol{f}}_{s_t} 
+	&amp;= \rho S \ddot{{\boldsymbol{x}}}
+	\\[0.5em]
+	\frac{\partial {\boldsymbol{M}}}{\partial s} 
+	+ \frac{\partial {\boldsymbol{x}}}{\partial s} \times {\boldsymbol{F}}
+	+ {\boldsymbol{m}}_{s}  + (1+\epsilon) {\boldsymbol{m}}_{s_t}  
+	&amp;\simeq \rho (I_1 + I_2)\dot{\omega}_3 {\boldsymbol{d}}_3
+	\end{aligned}$$</span><br /></p>
+<h3 id="hookean-elasticity">Hookean elasticity</h3>
+<p>From now on we consider that the rod material is isotropic and linear elastic.<a href="#fn38" class="footnoteRef" id="fnref38"><sup>38</sup></a> This is the framework of the so called <em>Hookean Elasticity</em>. This assumption allows the determination of the local displacement field (<span class="math inline"><strong>u</strong></span>), the strain tensor (<span class="math inline">ℰ</span>), the stress tensor (<span class="math inline">𝒮</span>) and the constitutive equations that link the axial force (<span class="math inline"><strong>F</strong><sub>3</sub></span>), the bending moments (<span class="math inline"><strong>M</strong><sub>1</sub></span>, <span class="math inline"><strong>M</strong><sub>2</sub></span>) and the twisting moment (<span class="math inline"><strong>M</strong><sub>3</sub></span>) to the strains (<span class="math inline"><em>ϵ</em></span>, <span class="math inline"><strong>𝜘</strong></span>, <span class="math inline">${\barr{{\boldsymbol{\varkappa}}}}$</span>).</p>
+<p>Such a material is characterized by a linear relation between the strain and stress tensors that takes the form : <a href="#fn39" class="footnoteRef" id="fnref39"><sup>39</sup></a> <br /><span class="math display">𝒮 = 2<em>μ</em>ℰ + <em>λ</em><em>T</em><em>r</em>(ℰ)ℐ</span><br /> where <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span> are known as the elastic coefficients of Lamé. This coefficients are related to the elastic (<span class="math inline"><em>E</em></span>) and shear (<span class="math inline"><em>G</em></span>) modulus and to the Poisson ratio (<span class="math inline"><em>ν</em></span>) :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\mu &amp;= \frac{E}{2(1+\nu)} = G
+	\\[0.5em]
+	\lambda &amp;= \frac{2\mu\nu}{1-2\nu}
+	\end{aligned}$$</span><br /></p>
+<p>A worthwhile presentation of the theory of elasticity in the specific context of elastic rods can be found in <span class="citation"></span>.</p>
+<h3 id="deformation-of-cross-sections">Deformation of cross-sections</h3>
+<div class="figure">
+<embed src="kirchhoff_cross_section_deformation.pdf" />
+<p class="caption">Typical deformation modes of cross-sections in Kirchhoff’s theory. Flexion around <span class="math inline"><strong>d</strong><sub>1</sub></span> (resp. <span class="math inline"><strong>d</strong><sub>2</sub></span>) is measured through the material curvature <span class="math inline">𝜘<sub>1</sub></span> (resp. <span class="math inline">𝜘<sub>2</sub></span>) ; torsion around <span class="math inline"><strong>d</strong><sub>3</sub></span> is measured through the material twist <span class="math inline">𝜘<sub>3</sub></span> ; and <span class="math inline"><em>ϵ</em></span> measures the axial extension. Remark that cross-sections are subjected to both in-plane deformations (<span class="math inline">𝜘<sub>1</sub></span>, <span class="math inline">𝜘<sub>2</sub></span>, <span class="math inline"><em>ϵ</em></span>) and out-of-plane deformations (<span class="math inline">𝜘<sub>3</sub></span>).<span data-label="fig:section_defo"></span></p>
+</div>
+<p>In this paragraph, we simply recall the canonical form of the local displacement field (<span class="math inline"><strong>u</strong></span>) for the cross-section <span class="math inline">𝒮(<em>s</em>)</span> in the context of Kirchhoff’s approximation : <a href="#fn40" class="footnoteRef" id="fnref40"><sup>40</sup></a></p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	u_1 &amp;=
+	-\nu \epsilon X_1 
+	- \nu(\varkappa_1 - {\barr{\varkappa}}_1) X_1 X_2
+	+ \tfrac{1}{2}\nu(\varkappa_2 - {\barr{\varkappa}}_2)({X_1}^2 - {X_2}^2)
+	\\[0.5em]
+	u_2 &amp;= 
+	-\nu \epsilon X_2 
+	+ \nu(\varkappa_2 - {\barr{\varkappa}}_2) X_1 X_2
+	+ \tfrac{1}{2}\nu(\varkappa_1 - {\barr{\varkappa}}_1)({X_1}^2 - {X_2}^2)
+	\\[0.5em]
+	u_3 &amp;= (\varkappa_3 - {\barr{\varkappa}}_3)\varphi_s(X_1,X_2)
+	\end{aligned}$$</span><br /></p>
+<p>where <span class="math inline"><em>φ</em><sub><em>s</em></sub></span> is the warping function (in torsion) of <span class="math inline">𝒮(<em>s</em>)</span>, determined by the following differential equation and the boundary condition over the contour of the cross-section : <a href="#fn41" class="footnoteRef" id="fnref41"><sup>41</sup></a></p>
+<p><br /><span class="math display">$$\begin{aligned}
+{5}
+	0 &amp;= \frac{\partial^2 \varphi_s}{\partial {X_1}^2} + \frac{\partial^2 \varphi_s}{\partial {X_2}^2}
+	&amp;&amp;  \quad, \quad \forall (X_1,X_2)\in\mathcal{S}(s)
+	\\[0.5em]
+	0 &amp;= \frac{\partial f_s}{\partial {X_1}}\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right) 
+	+ \frac{\partial f_s}{\partial {X_2}}\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right)
+	&amp;&amp; \quad, \quad f_s(X_1,X_2) = 0
+	\end{aligned}$$</span><br /></p>
+<p>These equations have known analytical solutions for classical shapes such as circles, ellipses, squares or rectangles. For other shapes, when it is not easy to find analytical solutions, the membrane analogy introduced by Prandtl <span class="citation"></span> can be employed.<a href="#fn42" class="footnoteRef" id="fnref42"><sup>42</sup></a></p>
+<h3 id="strain-tensor">Strain tensor</h3>
+<p>In this paragraph, we simply recall the canonical form of the strain tensor (<span class="math inline">ℰ</span>) for the cross-section <span class="math inline">𝒮(<em>s</em>)</span> in the context of Kirchhoff’s approximation :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\epsilon_{33} &amp;= \epsilon + (\varkappa_1 - {\barr{\varkappa}}_1) X_2 - (\varkappa_2 - {\barr{\varkappa}}_2) X_1 \label{eq:strain_a}
+	\\
+	\epsilon_{11} &amp;=  \epsilon_{22} = -\nu \epsilon_{33}	\label{eq:strain_b}
+	\\
+	\epsilon_{12} &amp;= 0 \label{eq:strain_c}
+	\\
+	\epsilon_{31} &amp;= \tfrac{1}{2}(\varkappa_3 - {\barr{\varkappa}}_3)\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right) \label{eq:strain_d}
+	\\
+	\epsilon_{32} &amp;= \tfrac{1}{2}(\varkappa_3 - {\barr{\varkappa}}_3)\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right) \label{eq:strain_e}
+	\end{aligned}$$</span><br /></p>
+<h3 id="stress-tensor">Stress tensor</h3>
+<p>In this paragraph, we simply recall the canonical form of the strain tensor (<span class="math inline">ℰ</span>) for the cross-section <span class="math inline">𝒮(<em>s</em>)</span> in the context of Kirchhoff’s approximation :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\sigma_{33} &amp;= E \epsilon_{33} \label{eq:stress_a}
+	\\
+	\sigma_{11} &amp;=  \sigma_{22} = \sigma_{12} = 0 \label{eq:stress_b}
+	\\
+	\sigma_{31} &amp;= 2G \epsilon_{31}	\label{eq:stress_c}
+	\\
+	\sigma_{32} &amp;= 2G \epsilon_{32}	\label{eq:stress_d}
+	\end{aligned}$$</span><br /></p>
+<p>Thus, the Piola stress vector defined in [eq:piola] becomes : <br /><span class="math display"><strong>σ</strong><sub><strong>n</strong></sub> = <em>σ</em><sub>31</sub><strong>d</strong><sub>1</sub> + <em>σ</em><sub>32</sub><strong>d</strong><sub>2</sub> + <em>σ</em><sub>33</sub><strong>d</strong><sub>3</sub></span><br /></p>
+<h3 id="constitutive-equations-for-internal-forces-and-moments">Constitutive equations for internal forces and moments</h3>
+<p>In Kirchhoff’s theory, constitutive equations for internal forces and moments should not be considered as assumptions. Indeed, as shown hereafter, they are somehow consequences of the assumptions made on the motion – that is the rod remains close to a motion where cross-sections remain planar, undistorted and perpendicular to the centerline – and on the material – the Hookean elasticity – of the rod.</p>
+<p>From [eq:F,eq:piola2,eq:stress_a,eq:strain_a] we deduce the constitutive equation for the axial component of the internal forces : <a href="#fn43" class="footnoteRef" id="fnref43"><sup>43</sup></a> <br /><span class="math display">$$	\begin{aligned}
+		F_3 &amp;= \iint_{\mathcal{S}(s)} {\boldsymbol{\sigma_n}}(X_1, X_2, s, t) \cdot {\boldsymbol{d}}_3 \;dX_1 dX_2 
+		\\[0.5em]
+		&amp;= ES\epsilon 
+		- (\varkappa_2 - {\barr{\varkappa}}_2) \iint_{\mathcal{S}(s)} {X_1} \;dX_1 dX_2
+		+ (\varkappa_1 - {\barr{\varkappa}}_1) \iint_{\mathcal{S}(s)} {X_2} \;dX_1 dX_2
+		\\[0.5em]
+		&amp;= ES\epsilon
+	\end{aligned}$$</span><br /> From [eq:M,eq:piola2,eq:stress_c,eq:stress_d,eq:strain_e,eq:strain_d] we deduce the constitutive equation for the axial component of the internal moments : <br /><span class="math display">$$	\begin{aligned}
+		M_3 &amp;= \iint_{\mathcal{S}(s)} ({\boldsymbol{r}} \times {\boldsymbol{\sigma_n}}(X_1, X_2, s, t)) \cdot {\boldsymbol{d}}_3 \;dX_1 dX_2
+		\\[0.5em]
+		&amp;= \iint_{\mathcal{S}(s)} -X_2\sigma_{31} + X_1\sigma_{32}  \;dX_1 dX_2 
+		\\[0.5em]
+		&amp;= G (\varkappa_3 - {\barr{\varkappa}}_3) 
+		\iint_{\mathcal{S}(s)} X_1 \left( \frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right ) - X_2 \left( \frac{\partial \varphi_s}{\partial {X_1}}  - X_2 \right )
+		 \;dX_1 dX_2 
+	\end{aligned}$$</span><br /> From [eq:M,eq:piola2,eq:stress_a,eq:strain_a] we deduce the constitutive equation for the first component of the internal moments : <br /><span class="math display">$$	\begin{aligned}
+		M_1 &amp;= \iint_{\mathcal{S}(s)} ({\boldsymbol{r}} \times {\boldsymbol{\sigma_n}}(X_1, X_2, s, t)) \cdot {\boldsymbol{d}}_1 \;dX_1 dX_2
+		\\[0.5em]
+		&amp;= \iint_{\mathcal{S}(s)} X_2\sigma_{33} \;dX_1 dX_2 
+		\\[0.5em]
+		&amp;= E (\varkappa_1 - {\barr{\varkappa}}_1) \iint_{\mathcal{S}(s)} {X_2}^2  \;dX_1 dX_2 
+	\end{aligned}$$</span><br /> From [eq:M,eq:piola2,eq:stress_a,eq:strain_a] we deduce the constitutive equation for the second component of the internal moments : <br /><span class="math display">$$	\begin{aligned}
+		M_2 &amp;= \iint_{\mathcal{S}(s)} ({\boldsymbol{r}} \times {\boldsymbol{\sigma_n}}(X_1, X_2, s, t)) \cdot {\boldsymbol{d}}_2 \;dX_1 dX_2
+		\\[0.5em]
+		&amp;= \iint_{\mathcal{S}(s)} - X_1\sigma_{33} \;dX_1 dX_2 
+		\\[0.5em]
+		&amp;= E (\varkappa_2 - {\barr{\varkappa}}_2) \iint_{\mathcal{S}(s)} {X_1}^2  \;dX_1 dX_2 
+	\end{aligned}$$</span><br /></p>
+<h3 id="summary-of-the-theory">Summary of the theory</h3>
+<p>Let’s summarize the assumptions and results of Kirchhoff’s theory of rods on which our discret beam model will be based on.</p>
+<p>In the reference configuration the rod is described by its reference strains : <br /><span class="math display">$${\barr{{\boldsymbol{d}}_i}}'= {\barr{{\boldsymbol{\varkappa}}}}  \times {\barr{{\boldsymbol{d}}_i}}$$</span><br /> In the actual configuration the rod is described by its strains and spin vector :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	{\boldsymbol{x}}' &amp;= (1+\epsilon){\boldsymbol{t}}
+	\\
+	{\boldsymbol{d}}'_i&amp;= {{\boldsymbol{\varkappa}}}  \times {\boldsymbol{d}}_i
+	\\
+	\dot{{\boldsymbol{d}}_i}&amp;= {{\boldsymbol{\omega}}}  \times {\boldsymbol{d}}_i
+	\end{aligned}$$</span><br /></p>
+<p>The rod is subjected to internal forces and moments :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	{\boldsymbol{F}} &amp;= F_1{\boldsymbol{d}}_1 + F_2{\boldsymbol{d}}_2 + F_3{\boldsymbol{d}}_3
+	\\
+	{\boldsymbol{M}} &amp;= M_1{\boldsymbol{d}}_1 + M_2{\boldsymbol{d}}_2 + M_3{\boldsymbol{d}}_3
+	\end{aligned}$$</span><br /></p>
+<p>The rod is subjected to external and body loads described as distributed forces and moments acting on the centerline – either given per unit length of the reference configuration (<span class="math inline"><strong>f</strong><sub><em>s</em></sub></span>, <span class="math inline"><strong>m</strong><sub><em>s</em></sub></span>) or per unit length of the actual configuration (<span class="math inline"><strong>f</strong><sub><em>s</em><sub><em>t</em></sub></sub></span>, <span class="math inline"><strong>m</strong><sub><em>s</em><sub><em>t</em></sub></sub></span>) – and given in the condensed form :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	{\boldsymbol{f}} &amp;= {\boldsymbol{f}}_{s}  + (1+\epsilon){\boldsymbol{f}}_{s_t} = f_1{\boldsymbol{d}}_1 + f_2{\boldsymbol{d}}_2 + f_3{\boldsymbol{d}}_3
+	\\
+	{\boldsymbol{m}} &amp;= {\boldsymbol{m}}_{s}  + (1+\epsilon){\boldsymbol{m}}_{s_t}  = m_1{\boldsymbol{d}}_1 + m_2{\boldsymbol{d}}_2 + m_3{\boldsymbol{d}}_3
+	\end{aligned}$$</span><br /></p>
+<p>The internal axial force, the internal bending moments and the internal twisting moment are computed with the following constitutive equations :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	F_3 &amp;= ES\epsilon \label{eq:constitutive_a}
+	\\
+	M_1 &amp;= EI_1(\varkappa_1 - {\barr{\varkappa}}_1) \label{eq:constitutive_b}
+	\\
+	M_2 &amp;= EI_2(\varkappa_2 - {\barr{\varkappa}}_2) \label{eq:constitutive_c}
+	\\
+	M_3 &amp;= GJ(\varkappa_3 - {\barr{\varkappa}}_3) \label{eq:constitutive_d}
+	\end{aligned}$$</span><br /></p>
+<p>where <span class="math inline"><em>S</em></span>, <span class="math inline"><em>I</em><sub>1</sub></span>, <span class="math inline"><em>I</em><sub>2</sub></span>, <span class="math inline"><em>J</em></span> are respectively the area, the second moments of inertia and the torsional stiffness of the cross-section :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+	&amp;S 	&amp;&amp;= \iint_{\mathcal{S}(s)} dX_1 dX_2
+	\\
+	&amp;I_1	&amp;&amp;= \iint_{\mathcal{S}(s)} {X_2}^2 \;dX_1 dX_2
+	\\
+	&amp;I_2	&amp;&amp;= \iint_{\mathcal{S}(s)} {X_1}^2 \;dX_1 dX_2
+	\\
+	&amp;J 	&amp;&amp;= \iint_{\mathcal{S}(s)} X_1 \left( \frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right ) - X_2 \left( \frac{\partial \varphi_s}{\partial {X_1}}  - X_2 \right )
+			\;dX_1 dX_2 
+	\end{aligned}$$</span><br /></p>
+<p>and <span class="math inline"><em>φ</em><sub><em>s</em></sub></span> is the warping fonction of the cross-section that satisfies the differential system :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{2}
+	0 &amp;= \frac{\partial^2 \varphi_s}{\partial {X_1}^2} + \frac{\partial^2 \varphi_s}{\partial {X_2}^2}
+	&amp;&amp;\quad,\quad \forall (X_1,X_2)\in\mathcal{S}(s)
+	\\[0.5em]
+	0 &amp;= \frac{\partial f_s}{\partial {X_1}}\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right) 
+	+ \frac{\partial f_s}{\partial {X_2}}\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right)
+	&amp;&amp;\quad,\quad f_s(X_1,X_2) = 0
+	\end{aligned}$$</span><br /></p>
+<p>The dynamical equations for the motion of the rod are :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\frac{\partial {\boldsymbol{F}}}{\partial s} + {\boldsymbol{f}} 
+	&amp;= \rho S \ddot{{\boldsymbol{x}}}
+	\\[0.5em]
+	\frac{\partial {\boldsymbol{M}}}{\partial s} 
+	+ \frac{\partial {\boldsymbol{x}}}{\partial s} \times {\boldsymbol{F}}
+	+ {\boldsymbol{m}} 
+	&amp;= \rho I_1 {\boldsymbol{d}}_1 \times \ddot{{\boldsymbol{d}}_1} + \rho I_2 {\boldsymbol{d}}_2 \times \ddot{{\boldsymbol{d}}_2}
+	\end{aligned}$$</span><br /></p>
+<p>Neglecting the rotational dynamics around <span class="math inline"><strong>d</strong><sub>1</sub></span> and <span class="math inline"><strong>d</strong><sub>2</sub></span> the components of the above equations are written :</p>
+<p>[eq:motion] <br /><span class="math display">$$\begin{aligned}
+{1}
+	F'_1 + \varkappa_2 F_3 - \varkappa_3 F_2 + f_1 &amp;= \rho S \ddot{x}_1  \label{eq:motion_1}
+	\\
+	F'_2 + \varkappa_3 F_1 - \varkappa_1 F_3 + f_2 &amp;= \rho S \ddot{x}_2 \label{eq:motion_2}
+	\\
+	F'_3 + \varkappa_1 F_2 - \varkappa_2 F_1 + f_3 &amp;= \rho S \ddot{x}_3 \label{eq:motion_3}
+	\\
+	M'_1 + \varkappa_2 M_3 - \varkappa_3 M_2 - (1+\epsilon)F_2  + m_1 &amp; \simeq 0 \label{eq:motion_4}
+	\\
+	M'_2 + \varkappa_3 M_1 - \varkappa_1 M_3 + (1+\epsilon)F_1 + m_2 &amp; \simeq 0 \label{eq:motion_5}
+	\\
+	M'_3 + \varkappa_1 M_2 - \varkappa_2 M_1 + m_3 &amp; \simeq \rho (I_1 + I_2)\dot{\omega}_3 \label{eq:motion_6}
+	\end{aligned}$$</span><br /></p>
+<p>The local displacements of the cross-sections are given by :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	u_1 &amp;=
+	-\nu \epsilon X_1 
+	- \nu(\varkappa_1 - {\barr{\varkappa}}_1) X_1 X_2
+	+ \tfrac{1}{2}\nu(\varkappa_2 - {\barr{\varkappa}}_2)({X_1}^2 - {X_2}^2)
+	\\[0.5em]
+	u_2 &amp;= 
+	-\nu \epsilon X_2 
+	+ \nu(\varkappa_2 - {\barr{\varkappa}}_2) X_1 X_2
+	+ \tfrac{1}{2}\nu(\varkappa_1 - {\barr{\varkappa}}_1)({X_1}^2 - {X_2}^2)
+	\\[0.5em]
+	u_3 &amp;= (\varkappa_3 - {\barr{\varkappa}}_3)\varphi_s(X_1,X_2)
+	\end{aligned}$$</span><br /></p>
+<p>The non-zero components of the strain tensor are given by :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\epsilon_{33} &amp;= \epsilon + (\varkappa_1 - {\barr{\varkappa}}_1) X_2 - (\varkappa_2 - {\barr{\varkappa}}_2) X_1
+	\\
+	\epsilon_{31} &amp;= \tfrac{1}{2}(\varkappa_3 - {\barr{\varkappa}}_3)\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right)
+	\\
+	\epsilon_{32} &amp;= \tfrac{1}{2}(\varkappa_3 - {\barr{\varkappa}}_3)\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right)
+	\\
+	\epsilon_{11} &amp;=  \epsilon_{22} = -\nu \epsilon_{33}
+	\end{aligned}$$</span><br /></p>
+<p>The non-zero components of the stress tensor are given by :</p>
+<p><br /><span class="math display">$$\begin{aligned}
+{1}
+	\sigma_{33} &amp;= E \epsilon_{33} 
+	\\
+	\sigma_{31} &amp;= 2G \epsilon_{31}
+	\\
+	\sigma_{32} &amp;= 2G \epsilon_{32}
+	\end{aligned}$$</span><br /></p>
+<h3 id="comments">Comments</h3>
+<ul>
+<li><p>The internal shear forces are reacting parameters and are given by the balance equations. Transverse shear deformations and stresses are not given by the present theory.</p></li>
+<li><p>There is a noticeable symmetry in the equations between the roles played by <span class="math inline"><em>F</em><sub>1</sub></span>, <span class="math inline"><em>F</em><sub>2</sub></span> and <span class="math inline"><em>M</em><sub>1</sub></span>, <span class="math inline"><em>M</em><sub>2</sub></span> and by the roles played by <span class="math inline"><em>F</em><sub>2</sub></span> and <span class="math inline"><em>M</em><sub>3</sub></span>.</p></li>
+<li><p>Warping is supposed to happen freely.</p></li>
+<li><p>Going further with torsion : donner des citations</p></li>
+<li><p>Going further with shear and extension : <span class="citation"></span></p></li>
+</ul>
+<h2 id="geometric-interpretation-of-kirchhoffs-equations">Geometric interpretation of Kirchhoff’s equations</h2>
+<p>The previous equations for the motion of the rod (see [eq:motion_1,eq:motion_2,eq:motion_3,eq:motion_4,eq:motion_5,eq:motion_6]) have been established expressing the fundamental principles of balance of linear and angular momentums. An alternative approach, leading to the same results, consists in differentiating the elastic energy of a given configuration of the rod – assumed to be stationary – with respect to the degrees of freedom of the mechanical system (principle of virtual work).<a href="#fn44" class="footnoteRef" id="fnref44"><sup>44</sup></a> However, the approach through equilibrium seems easier to understood as it is (almost) just a matter of balance between forces and moments on infinitesimal slices of the rods (see [fig:slice]). This is of obvious pedagogical interest as it allows to understand how the geometry of the rod influence the distribution of the elastic energy between extension, flexion and torsion. To emphasis this, we provide the proper drawings (see [fig:kb,fig:d1,fig:d2]) and computations for the contribution of internal forces and moments to the balance of linear and angular momentums. This is what we call the of Kirchhoff’s equations.</p>
+<div class="figure">
+<embed src="kirchhoff_geometry.pdf" />
+<p class="caption">Flexion and torsion of an elementary slice of a Kirchhoff rod of length <span class="math inline"><em>d</em><em>s</em></span>. Projections of the deformations are given in the material planes defined by <span class="math inline"><strong>d</strong><sub>1</sub></span>, <span class="math inline"><strong>d</strong><sub>2</sub></span>, <span class="math inline"><strong>d</strong><sub>3</sub></span>.<span data-label="fig:slice"></span></p>
+</div>
+<p><br />
+</p>
+<h4 id="contributions-to-the-balance-of-forces">Contributions to the balance of forces</h4>
+<p><span class="math inline"><strong>N</strong>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> by the rotation of angle <span class="math inline"><em>κ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>κ</strong><strong>b</strong></span> ([fig:kb_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>N</em>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>κ</em><em>d</em><em>s</em>)−<em>N</em>(<em>s</em>)=<em>N</em>′(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<h4 id="contributions-to-the-balance-of-moments">Contributions to the balance of moments</h4>
+<p><span class="math inline"><strong>Q</strong>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> by the rotation of angle <span class="math inline"><em>κ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>κ</strong><strong>b</strong></span> ([fig:kb_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>Q</em>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>κ</em><em>d</em><em>s</em>)−<em>Q</em>(<em>s</em>)=<em>Q</em>′(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><br />
+</p>
+<h4 id="contributions-to-the-balance-of-forces-1">Contributions to the balance of forces</h4>
+<p><span class="math inline"><strong>T</strong><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d1_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>T</em><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)sin(<em>τ</em><em>d</em><em>s</em>)cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)= − <em>τ</em><em>T</em><sub>2</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>T</strong><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> ([fig:d1_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>T</em><sub>2</sub>(<em>s</em>)+<em>T</em><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)cos(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)=<em>T</em>′<sub>2</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>T</strong><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> ([fig:d1_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>T</em><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)sin(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)=<em>κ</em><sub>1</sub><em>T</em><sub>2</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>N</strong>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> and <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> ([fig:d1_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>N</em>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)sin(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)= − <em>κ</em><sub>1</sub><em>N</em>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<h4 id="contributions-to-the-balance-of-moments-1">Contributions to the balance of moments</h4>
+<p><span class="math inline"><strong>T</strong><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from the plane normal to <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> by a rotation of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> ([fig:d1_b]). It produces a moment around <span class="math inline"><strong>d</strong><sub>1</sub></span> with the lever arm <span class="math inline"><em>b</em> = cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)<em>d</em><em>s</em></span>. Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>T</em><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)(cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)<em>d</em><em>s</em>)= − <em>T</em><sub>2</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>M</strong><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d1_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>M</em><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)sin(<em>τ</em><em>d</em><em>s</em>)cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)= − <em>τ</em><em>M</em><sub>2</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>M</strong><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> ([fig:d1_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>M</em><sub>2</sub>(<em>s</em>)+<em>M</em><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)cos(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)=<em>M</em>′<sub>2</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>M</strong><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> ([fig:d1_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>M</em><sub>2</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)sin(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)=<em>κ</em><sub>1</sub><em>M</em><sub>2</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>Q</strong>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> and <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> ([fig:d1_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>Q</em>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)sin(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)= − <em>κ</em><sub>1</sub><em>Q</em>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><br />
+</p>
+<h4 id="contributions-to-the-balance-of-forces-2">Contributions to the balance of forces</h4>
+<p><span class="math inline"><strong>T</strong><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d2_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>T</em><sub>1</sub>(<em>s</em>)+<em>T</em><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)=<em>T</em>′<sub>1</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>T</strong><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> ([fig:d2_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>T</em><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)sin(<em>τ</em><em>d</em><em>s</em>)cos(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)=<em>τ</em><em>T</em><sub>1</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>T</strong><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d2_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>T</em><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)sin(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)= − <em>κ</em><sub>2</sub><em>T</em><sub>1</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>N</strong>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d2_b]). Thus, its contribution to the balance of forces onto <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>N</em>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)sin(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)=<em>κ</em><sub>2</sub><em>N</em>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<h4 id="contributions-to-the-balance-of-moments-2">Contributions to the balance of moments</h4>
+<p><span class="math inline"><strong>T</strong><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from the plane normal to <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> by the angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> along <span class="math inline"><em>d</em><em>s</em></span> ([fig:d2_b]). It produces a moment around <span class="math inline"><strong>d</strong><sub>2</sub></span> with the lever arm <span class="math inline"><em>b</em> = cos(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)<em>d</em><em>s</em></span>. Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>T</em><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)(cos(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)<em>d</em><em>s</em>)=<em>T</em><sub>1</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>M</strong><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d2_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>M</em><sub>1</sub>(<em>s</em>)+<em>M</em><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)=<em>M</em>′<sub>1</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>M</strong><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d2_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>2</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>M</em><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)sin(<em>τ</em><em>d</em><em>s</em>)cos(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)=<em>τ</em><em>M</em><sub>1</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>M</strong><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>τ</em><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d2_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> is : <br /><span class="math display">−<em>M</em><sub>1</sub>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>τ</em><em>d</em><em>s</em>)sin(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)= − <em>κ</em><sub>2</sub><em>M</em><sub>1</sub>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<p><span class="math inline"><strong>Q</strong>(<em>s</em> + <em>d</em><em>s</em>)</span> is deflected from <span class="math inline"><strong>d</strong><sub>3</sub>(<em>s</em>)</span> by the combined rotations of angle <span class="math inline"><em>κ</em><sub>1</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>1</sub></span> and <span class="math inline"><em>κ</em><sub>2</sub><em>d</em><em>s</em></span> around <span class="math inline"><strong>d</strong><sub>2</sub></span> ([fig:d2_c]). Thus, its contribution to the balance of moments onto <span class="math inline"><strong>d</strong><sub>1</sub>(<em>s</em>)</span> is : <br /><span class="math display"><em>Q</em>(<em>s</em> + <em>d</em><em>s</em>)cos(<em>κ</em><sub>1</sub><em>d</em><em>s</em>)sin(<em>κ</em><sub>2</sub><em>d</em><em>s</em>)=<em>κ</em><sub>2</sub><em>Q</em>(<em>s</em>)<em>d</em><em>s</em> + <em>o</em>(<em>d</em><em>s</em>)</span><br /></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Remind that the beam is subject to a distributed external force <span class="math inline"><strong>f</strong><sub><em>e</em><em>x</em><em>t</em></sub></span> and a distributed external moment <span class="math inline"><strong>m</strong><sub><em>e</em><em>x</em><em>t</em></sub></span>.</p>
+<p>We neglect rotational inertial effects on <span class="math inline"><strong>d</strong><sub>1</sub></span> et <span class="math inline"><strong>d</strong><sub>2</sub></span> in and which leads to the following shear force : <br /><span class="math display"><strong>F</strong><sup>⊥</sup>(<em>s</em>)=<strong>d</strong><sub>3</sub> × (<strong>M</strong>′+<strong>𝜘</strong> × <strong>M</strong> + <strong>m</strong><sub><em>e</em><em>x</em><em>t</em></sub>)</span><br /> <br /><span class="math display"><strong>F</strong><sup>∥</sup>(<em>s</em>)=<em>N</em><strong>d</strong><sub>3</sub></span><br /> <span>We may neglect as well the last term (<span class="math inline"><em>τ</em><strong>M</strong></span>) and get back to the shear force obtained by the variational approach.</span> The total internal force acting on the beam is hence given by : <br /><span class="math display"><strong>F</strong>(<em>s</em>)=<strong>N</strong>(<em>s</em>)+<strong>T</strong>(<em>s</em>)</span><br /> Sections are subject to the following rotational moment around the centerline : <br /><span class="math display">$$\begin{aligned}
+	{\boldsymbol{\Gamma}}(s) = Q' + {\boldsymbol{d}}_3 \cdot ( \kappa{\boldsymbol{b}} \times {\boldsymbol{\mathit{M}}} + {\boldsymbol{m}}_{ext})
+	\end{aligned}$$</span><br /></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>For a shearable rod, the condition that <span class="math inline"><strong>d</strong><sub>3</sub></span> and <span class="math inline"><strong>t</strong></span> coincide is relaxed.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>in the directions of the principal axes of inertia of its cross-section<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>The parameter <span class="math inline">${\barr{s}}$</span>, usually chosen as the arc length parameter for the undeformed rod, is no longer the arc length parameter for the deformed rod, since there are deformations of shear and extension. The current arc length of the deformed rod is a function of <span class="math inline">${\barr{s}}$</span>, which is often denoted by <span class="math inline">$s({\barr{s}})$</span>.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"></li>
+<li id="fn5"><p>Requiring that <span class="math inline"><strong>d</strong><sub>1</sub> ⊥ <strong>d</strong><sub>2</sub></span> implies that the description of the motion is conveninent only for small in-plane stretching and shearing of the cross-section. This constrain can be relaxed to lead to an even more general theory, called the <em>2-director Cosserat theory</em>.<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>For an extensible rod, the derivative with respect to <span class="math inline"><em>s</em></span> and <span class="math inline"><em>s</em><sub><em>t</em></sub></span> are not equivalent. The prime notation stands only for the derivation with respect to <span class="math inline"><em>s</em></span>, the arc length parameter of the rod in the reference configuration.<a href="#fnref6">↩</a></p></li>
+<li id="fn7"><p>For a complete interpretation, see <span class="citation"></span> or <span class="citation"></span>.<a href="#fnref7">↩</a></p></li>
+<li id="fn8"><p>Einstein’s notation is employed here. For instance : <span class="math inline"><strong>η</strong> = <em>η</em><sub><em>k</em></sub><strong>d</strong><sub><em>k</em></sub> = <em>η</em><sub>1</sub><strong>d</strong><sub>1</sub> + <em>η</em><sub>2</sub><strong>d</strong><sub>2</sub> + <em>η</em><sub>3</sub><strong>d</strong><sub>3</sub></span>.<a href="#fnref8">↩</a></p></li>
+<li id="fn9"><p>Here, the term is necessary as the material curvatures don’t coincide with the geometric curvatures, although they are related one to each other. Precisely, the distinction originates in the fact that <span class="math inline"><em>s</em></span> is not a unit-speed parametrization of the centerline in the actual configuration.<a href="#fnref9">↩</a></p></li>
+<li id="fn10"><p>However, because <span class="math inline"><em>s</em><sub><em>t</em></sub></span> is an arc length parameter of <span class="math inline"><em>γ</em><sub><em>t</em></sub></span> : <span class="math inline">${\boldsymbol{t}}(s,t) = \frac{\partial {\boldsymbol{x}}}{\partial s_t}(s,t)$</span>.<a href="#fnref10">↩</a></p></li>
+<li id="fn11"></li>
+<li id="fn12"></li>
+<li id="fn13"></li>
+<li id="fn14"></li>
+<li id="fn15"></li>
+<li id="fn16"><p>We use the notation employed by Antman in his <em>special Cosserat theory of rods</em> : . However, somme specific assumptions will be made over the directors in the context of Kirchhoff’s theory.<a href="#fnref16">↩</a></p></li>
+<li id="fn17"><p>See <span class="citation"></span> for precisions when such a configuration may not exist.<a href="#fnref17">↩</a></p></li>
+<li id="fn18"><p>In case of an axisymmetric section, any pair of perpendicular unit vectors lying in the cross-section plane will be valid.<a href="#fnref18">↩</a></p></li>
+<li id="fn19"><p>The lateral dimension of the rod must be smaller than its radius of curvature. Otherwise, this description would lead to self intersecting cross-sections.<a href="#fnref19">↩</a></p></li>
+<li id="fn20"><p>Some details are given in the conclusion.<a href="#fnref20">↩</a></p></li>
+<li id="fn21"><p><span class="math inline">𝒮(<em>s</em>)</span> refers to the same set of material points in any configurations. Sometimes a distinction is made between <span class="math inline">${\barr{\mathcal{S}}}(s)$</span> and <span class="math inline">𝒮(<em>s</em>)</span> to highlight that the planarity of cross-sections is lost during the motion.<a href="#fnref21">↩</a></p></li>
+<li id="fn22"><p>Note that this hypothesis is the one made by Kirchhoff and does not correspond to the well-known <em>Euler-Bernoulli</em> or <em>Navier-Bernoulli</em> assumption where the sections remain planar, undeformed and normal to the centerline during the rod deformation. In particular, torsion is responsible for the warping of cross-sections – that is cross-sections don’t remain planar during the motion – and leads to a distinct value of the twist modulus. This is clearly stipulated in <span class="citation"></span> but is often treated with confusion in the literature.<a href="#fnref22">↩</a></p></li>
+<li id="fn23"><p>.<a href="#fnref23">↩</a></p></li>
+<li id="fn24"><p>In Kirchhoff’s theory, rods are not supposed to be strictly inextensible but extension has to remain small. Thus, the internal axial force is given by a constitutive law and not considered as a geometric constrained. However, some authors have remarked that it might be convenient and reasonable to solve the equations of motion considering the geometric contraint <span class="math inline"><em>ϵ</em> = 0</span>. See <span class="citation"></span> for a detailed discussion of the subject.<a href="#fnref24">↩</a></p></li>
+<li id="fn25"><p>This is also known as the  assumption. Indeed, if <span class="math inline">$\frac{\partial {\boldsymbol{x}}}{\partial s} = \eta_k {\boldsymbol{d}}_k = (1 + \epsilon){\boldsymbol{d}}_3 \Leftrightarrow \eta_1 = \eta_2 = 0$</span>.<a href="#fnref25">↩</a></p></li>
+<li id="fn26"><p>Recall the following result for an adapted frame : [eq:amf_kb].<a href="#fnref26">↩</a></p></li>
+<li id="fn27"><p><span class="math inline"><em>d</em><em>S</em></span> is the area and <span class="math inline"><strong>n</strong></span> is the unit normal of the elementary oriented surface <span class="math inline"><strong>d</strong><strong>S</strong></span>.<a href="#fnref27">↩</a></p></li>
+<li id="fn28"><p>For a detailed introduction to the Piola-Kirchhoff stress tensor, refer to <span class="citation"></span>.<a href="#fnref28">↩</a></p></li>
+<li id="fn29"><p>At this stage, although this is uncommon in the literature, it has been found convenient to mark the distinction between loads referring to the reference configuration and loads referring to the actual configuration. Indeed, various distributed loads depend on the actual length of an element such as pressure and wind loads. On the other hand, some loads are independent of the extension of the rod, such as its weight.<a href="#fnref29">↩</a></p></li>
+<li id="fn30"><p>This is possible but would require more math. However, local effects of such loads would not be properly modeled in the theory of Kirchhoff (Saint-Venant’s Principle).<a href="#fnref30">↩</a></p></li>
+<li id="fn31"><p>In <span class="citation"></span> the change in volume and the conservation of mass is expressed through the determinants of the metric tensors of the reference and deformed configurations. Recall that this determinant is the square of the volume of the elementary cell defined by <span class="math inline">$\frac{\partial {\barr{{\boldsymbol{p}}}}}{\partial s}$</span>, <span class="math inline">$\frac{\partial {\barr{{\boldsymbol{p}}}}}{\partial X_1}$</span>, <span class="math inline">$\frac{\partial{\barr{{\boldsymbol{p}}}}}{\partial X_2}$</span> in the reference configuration, which is convected to the elementary cell defined by <span class="math inline">$\frac{\partial {\boldsymbol{p}}}{\partial s}$</span>, <span class="math inline">$\frac{\partial {\boldsymbol{p}}}{\partial X_1}$</span>, <span class="math inline">$\frac{\partial {\boldsymbol{p}}}{\partial X_2}$</span> in the reference configuration.<a href="#fnref31">↩</a></p></li>
+<li id="fn32"><p>This is exact in the reference configuration but only approximately true in the deformed configuration as the theory consider only small deformations of cross-sections.<a href="#fnref32">↩</a></p></li>
+<li id="fn33"><p>[eq:centroid_a] is nothing but the definition of the centroid position. [eq:diag] holds because the tensor of inertia of the cross-section is diagonal in the basis <span class="math inline">{<strong>d</strong><sub>1</sub>, <strong>d</strong><sub>2</sub>, <strong>d</strong><sub>3</sub>}</span> and thus <span class="math inline"><em>I</em><sub>12</sub> = <em>I</em><sub>21</sub> = 0</span>.<a href="#fnref33">↩</a></p></li>
+<li id="fn34"><p>Indeed, since <span class="math inline">∬<sub>𝒮(<em>s</em>)</sub><strong>r</strong> <em>d</em><em>X</em><sub>1</sub><em>d</em><em>X</em><sub>2</sub> = <strong>0</strong></span> from [eq:centroid_a] we have <span class="math inline">$\iint_{\mathcal{S}(s)} \ddot{{\boldsymbol{r}}} \;dX_1 dX_2 =  \iint_{\mathcal{S}(s)} \dot{{\boldsymbol{\omega}}} \times {\boldsymbol{r}} + {\boldsymbol{\omega}} \times ( {\boldsymbol{\omega}} \times {\boldsymbol{r}}) \; dX_1 dX_2 = {\boldsymbol{0}}$</span> and <span class="math inline">$\iint_{\mathcal{S}(s)} {\boldsymbol{r}} \times \ddot{{\boldsymbol{x}}} \; dX_1 dX_2 = {\boldsymbol{0}}$</span> as <span class="math inline"><strong>ω</strong></span> and <span class="math inline"><strong>x</strong></span> are independent of <span class="math inline"><em>X</em><sub>1</sub></span> and <span class="math inline"><em>X</em><sub>2</sub></span>.<a href="#fnref34">↩</a></p></li>
+<li id="fn35"><p>Note the simplification of the term <span class="math inline">$\rho S \ddot{{\boldsymbol{x}}}$</span>. Alternatively, the balance equations could be written for the slice considered as a rigid body. In the barycentric frame of the slice : <span class="math inline">$\frac{d}{dt}(dI_G) = {\boldsymbol{M}}(s+ds)-{\boldsymbol{M}}(s) + {\boldsymbol{m}}(s)ds + (\tfrac{1}{2}ds{\boldsymbol{x}}')\times {\boldsymbol{F}}(s+ds) + (-\tfrac{1}{2}ds{\boldsymbol{x}}')\times -{\boldsymbol{F}}(s) = \left(\frac{\partial {\boldsymbol{M}}}{\partial s}(s)+{\boldsymbol{m}}(s) + {\boldsymbol{x}}'\times {\boldsymbol{F}}(s)\right)ds$</span> with <span class="math inline"><em>d</em><em>I</em><sub><em>G</em></sub> ≃ <em>ρ</em><em>d</em><em>s</em>(<em>I</em><sub>1</sub><strong>d</strong><sub>1</sub> + <em>I</em><sub>2</sub><strong>d</strong><sub>2</sub> + (<em>I</em><sub>1</sub> + <em>I</em><sub>2</sub>)<strong>d</strong><sub>3</sub>)</span>.<a href="#fnref35">↩</a></p></li>
+<li id="fn36"><p>.<a href="#fnref36">↩</a></p></li>
+<li id="fn37"><p>This assumption is made in numerous publications but often with ambiguous or no justifications, as of instance : .<a href="#fnref37">↩</a></p></li>
+<li id="fn38"><p>This is true at first order for small strains anyway.<a href="#fnref38">↩</a></p></li>
+<li id="fn39"><p>Using Einstein notation this expression yields : <span class="math inline"><em>σ</em><sub><em>i</em><em>j</em></sub> = <em>λ</em><em>ϵ</em><sub><em>k</em><em>k</em></sub><em>δ</em><sub><em>i</em><em>j</em></sub> + 2<em>μ</em><em>ϵ</em><sub><em>i</em><em>j</em></sub></span>.<a href="#fnref39">↩</a></p></li>
+<li id="fn40"><p>Remark that the local displacement field results from the superposition of the three displacement fields obtained for pure and uniform extension, flexion and twist. For a detailed analysis of pure and uniform flexion and twist of rods; refer to <span class="citation"></span>.<a href="#fnref40">↩</a></p></li>
+<li id="fn41"><p><span class="math inline"><strong>n</strong> = (∂<em>f</em><sub><em>s</em></sub>/∂<em>X</em><sub>1</sub>, ∂<em>f</em><sub><em>s</em></sub>/∂<em>X</em><sub>1</sub>)<sup><em>T</em></sup></span> is the unit normal vector to the boundary curve of <span class="math inline">𝒮(<em>s</em>)</span> defined implicitly by the equation <span class="math inline"><em>f</em><sub><em>s</em></sub>(<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>)=0</span>.<a href="#fnref41">↩</a></p></li>
+<li id="fn42"><p>Recent advances <span class="citation"></span> in the formfinding of soap films with the force density method might be of practical use to evaluate the warping function.<a href="#fnref42">↩</a></p></li>
+<li id="fn43"><p>Also recall from [eq:centroid] that <span class="math inline">∬<sub>𝒮(<em>s</em>)</sub><em>X</em><sub>1</sub> <em>d</em><em>X</em><sub>1</sub><em>d</em><em>X</em><sub>2</sub> = 0</span> and <span class="math inline">∬<sub>𝒮(<em>s</em>)</sub><em>X</em><sub>2</sub> <em>d</em><em>X</em><sub>1</sub><em>d</em><em>X</em><sub>2</sub> = 0</span>.<a href="#fnref43">↩</a></p></li>
+<li id="fn44"><p>This is the approach employed in the theory presented in [sec:ch_energy] and is also the one developed in <span class="citation"></span> for strictly inextensible rods. It was yet employed in 1973 by Reissner in <span class="citation"></span>.<a href="#fnref44">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>
