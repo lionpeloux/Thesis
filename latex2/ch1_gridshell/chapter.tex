@@ -52,8 +52,9 @@ Ces projets restent dans le ligne historiuque dessinée à Mannheim par F. Otto 
 \subsubsection{Des pistes ouvertes}
 
 Les méthodes numériques de Day, Barnes, Adriaenssen, Douthe, Lefevre, Tayeb
+3/6/4 DOF, prise en compte de la torsion.
 
-Le formfinding vs. grid finding (COmpas Lionel, Compas Baptise, GFFT, Compas Yannick singularité)
+Le formfinding vs. grid finding (COmpas Lionel, Compas Baptise, GFFT, Compas Yannick singularité, Lina)
 
 Les matériaux composites
 
@@ -65,6 +66,11 @@ La robotisation de la production (ENPC)
 
 Une reflexion sur l'enveloppe (booby ENPC).
 
+Flambement (Malek, Mesnil, Lefevre)
+
+Optimisation des sections
+
+Description analytique de la forme (C. Williams)
 
 
 
@@ -120,7 +126,37 @@ Une reflexion sur l'enveloppe (booby ENPC).
  	\begin{tabular}{@{}llll  lllllr@{}}
 	\toprule
 %    &         & 	          & Type & City & Country & Architecte & Engineer & Page & Citation \\
-N & Year & Nickname & Type & City & Country & Architecte & Engineer & Page & Citation\\1 & 1962 & Experimental structure  & Workshop & Berkeley & USA & Students & F. Otto & p.~270 & \cite{IL10}\\2 & 1962 & Exhibition pavilion & Pavilion & Essen & Germany & F. Otto & F. Otto & p.~272 & \cite{IL10}\\3 & 1967 & German Pavilion & Pavilion & Montreal & Canada & F. Otto & Lehonardt & p.~274 & \cite{IL10}\\4 & 1973 & Seibu & Experiment & Tokyo & Japan & IL & IL & p.~245 & \cite{IL13}\\5 & 1974 & Basket shell & Experiment & Amehabad & India & G. Sarabhai & IL & p.~304 & \cite{IL10}\\6 & 1974 & Experimental structure  & Experiment & London & England & Students & Arup + IL & p.~306 & \cite{IL10}\\7 & 1975 & Mannheim Multihalle & Building & Mannheim & Germany & C. Mutshler & Arup + IL & p.~308 & \cite{IL10}\\8 & 1973 & Ferrocement gridshell & Building & Ahmedabad & India & G. Sarabhai & G. Ramaswamy + IL & p.~248 & \cite{IL13}\\9 & 1976 & AA Bamboo Latice Shell & Workshop & London & England & Students & J. Park + B. Oleiko & p.~255 & \cite{IL13}\\10 & 1976 & Test structure of a gridshell & Experiment & Stuttgart & Germany & Students & J. Hennicke & p.~298 & \cite{IL10}\\11 & 1977 & Small Pavilion & Workshop & Mexico City & Mexico & Students & J. Hennicke & p.~258 & \cite{IL13}\\11 & 1977 & Small Greenhouse & Workshop & Zitacuaro & Mexico & Students & F. Montero & p.~260 & \cite{IL13}\\12 & 1977 & Experimental structure & Workshop & Mexico City & Mexico & Students & F. Montero & p.~270 & \cite{IL13}\\13 & 1977 & Experimental structure & Workshop & Mexico City & Mexico & Students & F. Montero & p.~270 & \cite{IL13}\\14 & 1995 & Westminster Lodge & Building & Dorset & England & E. Cullinan & F. Otto + Happold & p.~90 & \cite{Burton2010}\\15 & 1998 & Earth Center & Building & Doncaster & England & Grant & Happold &  & \\16 & 2000 & Japan Pavilion & Pavilion & Hannover & Germany & S. Ban + F. Otto & Happold &  & \cite{Ban2006}\\17 & 2002 & Downland & Building & Downland & England & E. Cullinan & Happold + C. William &  & \cite{Harris2003}\\18 & 2003 & Life Science Centre Trust & Building & Pishwanton & England &  &  &  & \\19 & 2006 & Savill & Building & Savill & England & G. Howells & Happold + C. William &  & \cite{Harris2008}\\20 & 2007 & Chiddingstone Orangery & Roofing & Kent & England & P. Hulbert & Happold &  & \\21 & 2007 & ENPC & Experiment & Noisy-Champs & France & Navier & Navier &  & \cite{Douthe2006}\\22 & 2011 & Solidays & Pavilion & Paris & France & ENPC & Navier + T/E/S/S &  & \cite{Baverel2012}\\23 & 2012 & Toledo & Workshop & Naples & Italy & gridshell.it & B. D'Amico &  & \cite{DAmico2014}\\24 & 2013 & Créteil & Building & Créteil & France & T/E/S/S & T/E/S/S + Navier &  & \cite{DuPeloux2016}\\25 & 2014 & Toledo 2.0 & Workshop & Naples & Italy & gridshell.it & B. D'Amico &  & \cite{DAmico2015a}\\26 & 2016 & JPO & Pavilion & Toulouse & France & Quaternion & Navier + Terrell &  & \\27 & 2016 & FAV & Pavilion & Montpellier & France & Quaternion & Navier + Terrell &  & \\28 & 2016 & CLC & Workshop & Noisy-Champs & France & ENPC & Navier &  & \\27 & 2016 & Trondheim & Workshop & Trondheim & Norway & Students & NTNU &  & \cite{Mork2016}\\
+N & Year & Nickname & Type & City & Country & Architecte & Engineer & Page & Citation\\
+1 & 1962 & Experimental structure  & Workshop & Berkeley & USA & Students & F. Otto & p.~270 & \cite{IL10}\\
+2 & 1962 & Exhibition pavilion & Pavilion & Essen & Germany & F. Otto & F. Otto & p.~272 & \cite{IL10}\\
+3 & 1967 & German Pavilion & Pavilion & Montreal & Canada & F. Otto & Lehonardt & p.~274 & \cite{IL10}\\
+4 & 1973 & Seibu & Experiment & Tokyo & Japan & IL & IL & p.~245 & \cite{IL13}\\
+5 & 1974 & Basket shell & Experiment & Amehabad & India & G. Sarabhai & IL & p.~304 & \cite{IL10}\\
+6 & 1974 & Experimental structure  & Experiment & London & England & Students & Arup + IL & p.~306 & \cite{IL10}\\
+7 & 1975 & Mannheim Multihalle & Building & Mannheim & Germany & C. Mutshler & Arup + IL & p.~308 & \cite{IL10}\\
+8 & 1973 & Ferrocement gridshell & Building & Ahmedabad & India & G. Sarabhai & G. Ramaswamy + IL & p.~248 & \cite{IL13}\\
+9 & 1976 & AA Bamboo Latice Shell & Workshop & London & England & Students & J. Park + B. Oleiko & p.~255 & \cite{IL13}\\
+10 & 1976 & Test structure of a gridshell & Experiment & Stuttgart & Germany & Students & J. Hennicke & p.~298 & \cite{IL10}\\
+11 & 1977 & Small Pavilion & Workshop & Mexico City & Mexico & Students & J. Hennicke & p.~258 & \cite{IL13}\\
+11 & 1977 & Small Greenhouse & Workshop & Zitacuaro & Mexico & Students & F. Montero & p.~260 & \cite{IL13}\\
+12 & 1977 & Experimental structure & Workshop & Mexico City & Mexico & Students & F. Montero & p.~270 & \cite{IL13}\\
+13 & 1977 & Experimental structure & Workshop & Mexico City & Mexico & Students & F. Montero & p.~270 & \cite{IL13}\\
+14 & 1995 & Westminster Lodge & Building & Dorset & England & E. Cullinan & F. Otto + Happold & p.~90 & \cite{Burton2010}\\
+15 & 1998 & Earth Center & Building & Doncaster & England & Grant & Happold &  & \\
+16 & 2000 & Japan Pavilion & Pavilion & Hannover & Germany & S. Ban + F. Otto & Happold &  & \cite{Ban2006}\\
+17 & 2002 & Downland & Building & Downland & England & E. Cullinan & Happold + C. William &  & \cite{Harris2003}\\
+18 & 2003 & Life Science Centre Trust & Building & Pishwanton & England &  &  &  & \\
+19 & 2006 & Savill & Building & Savill & England & G. Howells & Happold + C. William &  & \cite{Harris2008}\\
+20 & 2007 & Chiddingstone Orangery & Roofing & Kent & England & P. Hulbert & Happold &  & \\
+21 & 2007 & ENPC & Experiment & Noisy-Champs & France & Navier & Navier &  & \cite{Douthe2006}\\
+22 & 2011 & Solidays & Pavilion & Paris & France & ENPC & Navier + T/E/S/S &  & \cite{Baverel2012}\\
+23 & 2012 & Toledo & Workshop & Naples & Italy & gridshell.it & B. D'Amico &  & \cite{DAmico2014}\\
+24 & 2013 & Créteil & Building & Créteil & France & T/E/S/S & T/E/S/S + Navier &  & \cite{DuPeloux2016}\\
+25 & 2014 & Toledo 2.0 & Workshop & Naples & Italy & gridshell.it & B. D'Amico &  & \cite{DAmico2015a}\\
+26 & 2016 & JPO & Pavilion & Toulouse & France & Quaternion & Navier + Terrell &  & \\
+27 & 2016 & FAV & Pavilion & Montpellier & France & Quaternion & Navier + Terrell &  & \\
+28 & 2016 & CLC & Workshop & Noisy-Champs & France & ENPC & Navier &  & \\
+27 & 2016 & Trondheim & Workshop & Trondheim & Norway & Students & NTNU &  & \cite{Mork2016}\\
  	\end{tabular}
 \captionof{table}[Key numbers]{Key numbers.}
 %\end{fullpage}
