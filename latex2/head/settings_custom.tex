@@ -44,7 +44,8 @@
 \usepackage[
 backend=biber, 
 natbib=true, % provide alias to natbib command
-style=alphabetic, citestyle=alphabetic, 
+%style=alphabetic, citestyle=alphabetic, 
+style=numeric, citestyle=numeric, 
 doi=false, isbn=false, url=false,
 maxcitenames=2, maxbibnames=100,
 firstinits=true,
@@ -54,6 +55,8 @@ useprefix=true, % use von as part of the family name (du peloux)
 \addbibresource{library.bib}
 \defbibheading{subbibliography}[\refname]{\section{#1}}
 \renewcommand*{\multicitedelim}{\addcomma\space}
+\newcommand{\citef}[2][]{\citeauthor{#2} \citeyear{#2} \cite[#1]{#2}} % custom full cite
+
 
 % STYLES
 % ===========================
