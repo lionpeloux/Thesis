@@ -369,26 +369,67 @@ The second experiment is a hybrid structure (see \cref{fig:booby}). It is part o
 In this section we depict the research works that are related to elastic gridshells. Several topics have been identified to organize the review.
 
 \subsection{Mechanics}
+
+\subsubsection{Formfinding}
+
+\citef{Adriaenssens2000} propose a 6-DOF discrete beam element that integrates in a dynamic relaxation solver. This element is meant for the numerical analysis of bent elements in cable net and gridshell structures.
+
+\citef{Adriaenssens1999} present a new 3-DOF discrete element for the formfinding of elastic rods. This element is valid only for rods that are straight in their rest configuration and that have an isotropic cross-section. \citef{Barnes1999} integrate this element for numerical analysis based on dynamic relaxation. \citef{Adriaenssens2001} observe a better stability of this element compare to their previous 6-DOF element.
+
+\citef{Barnes2013} try to take account for torsional behavior in slender rods with anisotropic cross-section. They do not resort to any additional degree of freedom. Instead, they monitor the (geometric) torsion of a discrete space curve by computing the rotation rate between two consecutive osculating planes. This is valid only in rare specific cases where geometric torsion and mechanical torsion matches and is of little practical use.
+
+\citef{DAmico2014} implement the 6-DOF beam element developed earlier by \citef{Adriaenssens2000} and use it to formfind elastic gridshells.
+
+\citef{DuPeloux2015} propose a new 4-DOF element that takes account for both bending and torsion behaviors of slender rods. This element is valid for rods with anisotropic cross-section as well as for rod that are not straight in their rest configuration. They propose 
+
+\cite{Barnes2013}
+\cite{DAmico2014}
+\cite{DAmico2016}
+\cite{Poulsen2015}
+\cite{Vaulot2016}
+
+
+\subsubsection{Stability}
+Flambement (Malek, Mesnil, Lefevre)
+\citet{Mesnil2013}
+\citet{Mesnil2015a}
+\citet{Mesnil2017a}
+\citet{Lefevre2015}
+
+\cite{Toussaint2007}
+
+\subsubsection{Form-structure interaction}
+\citef{Malek2012} study how corrugation in shapes affect the mechanics of gridshells.
+\citef{Jensen2013} propose to interconnect several gridshells to form a stronger structure.
+
+\subsubsection{Robustness}
+
+\citet{Tayeb2013} study how the high level of redundancy in a gridshell enhance its resistance to collapse. They show that because of the redundancy, a pseudo ductile behavior of the structure is still observable when a brittle material is used (such as GFRP).
+
 \subsection{Geometry}
-In \citetitle{IL10}, \citef[]{IL10} study the uniform mesh net with square meshes. They propose a classification for suspended nets (pp.~68-69) and give an inventory of common problems such as overlapping and singularities. They explain how to build valuable physical models for hanging nets (pp.~50-55) and how to measure them with either close-range stereo-photogrammetry, a simple measuring table or the parallel light measurement technique (pp.~130-134). Finally, they propose a geometric method to find square meshes from a given curved shape and called the \emph{compass method} (pp.~140-141).
+\subsubsection{Generation of Chebychev nets}
+
+In \citetitle{IL10}, \citef[]{IL10} study the uniform mesh net with square cells. They propose a classification for suspended nets (pp.~68-69) and give an inventory of common problems such as overlapping and singularities. They explain how to build valuable physical models for hanging nets (pp.~50-55) and how to measure them with either close-range stereo-photogrammetry, a simple measuring table or the parallel light measurement technique (pp.~130-134). Finally, they propose a geometric method to find Chebyshev meshes from a given curved shape called the \emph{compass method} (pp.~140-141).
 
 \citef{Bouhaya2009} propose an alternative to the compass method for finding gridshell meshes on an imposed surface. This method consists in numerically dropping a grid onto a fixed shape. The simulation is achieved with a dynamic explicit finite element solver. Therefore, the proposed method can take into account the real mechanics of the grid, which is not possible with the compass method.
 
-\citef{Bouhaya2014} implement the compass method in a geometry software. For a fixed mesh size and starting point they parametrically generate a large number of discrete guidelines on the surface. The generation is controlled by a vector of angles controlling the expansion of a guideline on the surface. The method is then coupled with a genetic algorithm to find meshes were curvature is minimized for the elements.
+\citef{Bouhaya2014} implement the compass method in a geometry software. For a fixed mesh pitch and starting point they parametrically generate a large number of discrete guidelines on the surface. The generation of a guideline is controlled by a vector of angles controlling the expansion on the surface. The method is then coupled with a genetic algorithm to find meshes where the curvature of the elements is minimized.
 
 \citef{Lafuente2012} propose a variational approach to find grids that minimize the curvature of the elements. This is done by introducing penalty energies. Consequently, the mesh is allowed to move away from the imposed shape and the bars are allowed to dilate from their initial length.
 
-\citef{DuPeloux2011} implement the compass method in Rhino and Grasshopper. They use it to design two large-scale gridshells in composite materials in 2011 \cite{Baverel2012} and 2003 \Cite{DuPeloux2016}.
+\citef{DuPeloux2011} implement the compass method in \grasshopper{}. They use it to design two large-scale gridshells in composite material in 2011 \cite{Baverel2012} and 2013 \Cite{DuPeloux2016}.
 
-\citef{Lefevre2015} propose and extended compass method that take into account the eccentricity that exists between the layers of elements. This gap is generally due to the connection system.
+\citef{Lefevre2015} propose and extended compass method that take into account the eccentricity between the layers of rods. This gap is generally due to the connection system.
 
-\citef{Masson2017} prove the existence of a global smooth Chebyshev net on complete, simply connected surfaces when the total absolute curvature is bounded by $2\pi$. His thesis tries to understand when a given surface is meshable by a gridshell net and how to mesh larger portions of a given surface by connecting several pieces of Chebyshev net and dealing with singularities.
+\citef{Masson2017} prove the existence of a global smooth Chebyshev net on complete, simply connected surfaces when the total absolute curvature is bounded by $2\pi$. In his thesis, \citef{Masson2017b} study the conditions of existence of Chebyshev nets with singularities and give methods to construct them.
 
-\cite{Pone2016} implement the compass method (but call it Netfish). And couple it wit a genetic algorithm.
+\citef{Pone2016} propose a tool similar to the ones developed by \citef{DuPeloux2011} and \citef{Bouhaya2014}.
 
+\subsubsection{Morphogenesis}
 
+\citef{Douthe2016} propose a reverse approach. Instead of trying to fit a mesh on an imposed surface, they construct discrete surfaces that embed the required properties. They show that the dual mesh of an isoradial mesh is a Chebyshev net. They give a method to construct such nets.
 
-\citef[pp~123-124]{IL10}
+\citef{Mesnil2017} propose various methods to generate construction-aware discrete surfaces. Some of them are applicable to elastic gridshells.
 
 \subsection{Material}
 \subsection{Erection}
@@ -398,14 +439,7 @@ In \citetitle{IL10}, \citef[]{IL10} study the uniform mesh net with square meshe
 
 
 \subsection{Formfinding and structural analysis}
-Les méthodes numériques de Day, Barnes, Adriaenssen, Douthe, Lefevre, Tayeb
-3/6/4 DOF, prise en compte de la torsion.
-\citet{Adriaenssens1999, Adriaenssens2001}
-\cite{Barnes2013}
-\cite{DAmico2014}
-\cite{DAmico2016}
-\cite{Poulsen2015}
-\cite{Vaulot2016}
+
 
 \cite{DuPeloux2015}
 \citet{Malek2012}
