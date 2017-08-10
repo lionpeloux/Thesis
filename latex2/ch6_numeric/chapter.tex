@@ -486,6 +486,166 @@ Although this paragraph could seem superfluous to the reader, this point is a ma
 
 \subsection{Interpolation}
 
+\clearpage
+\section{Dynamic relaxation}
+
+\IncMargin{2em}
+\begin{figure}[p]
+\begin{fullpage}
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwProg{Fn}{Function}{:}{}
+\SetKwFunction{Solve}{Solve}
+\SetKwFunction{Init}{Init}
+\SetKwFunction{Run}{Run}
+\SetKwFunction{Move}{Move}
+\SetKwFunction{CalculateF}{CalcInternalForces}
+\SetKwFunction{CalculateM}{CalcInternalMoments}
+\SetKwFunction{CalculateA}{CalcAcceleration}
+\SetKwFunction{CalculateV}{CalcVelocity}
+\SetKwFunction{CalculateE}{CalcKEnergy}
+\SetKwFunction{SumFM}{AggregateForcesAndMoments}
+\SetKwFunction{SyncFM}{SynchronizeForcesAndMoments}
+\SetKwFunction{SumM}{AggregateMasses}
+\SetKwFunction{SyncM}{SynchronizeMasses}
+\SetKwFunction{InterpX}{InterpolatePosition}
+\SetKwFunction{InterpR}{InterpolatePosition}
+\SetKwFunction{Reset}{Reset}
+
+\SetKwData{Model}{model}
+\SetKwData{Node}{node}
+\SetKwData{Joint}{joint}
+\SetKwData{Element}{element}
+\SetKwData{CVG}{cvg}
+\SetKwData{MAX}{maxIteration}
+
+%\Input{A model to analyzed}
+%\Output{An analyzed model}
+
+% SOLVE
+\Fn{\Solve{\Model, \CVG, \MAX}}{
+\BlankLine
+\Init{} \;
+\Repeat{convergence criterion reached}{
+\Run{}\;
+}
+}{\KwRet}
+\BlankLine\BlankLine
+
+\caption{disjoint decomposition}\label{algo_disjdecomp}
+\end{algorithm}
+\end{fullpage}
+\end{figure}
+\DecMargin{2em}
+
+% ======== ALGO RUN
+
+
+\IncMargin{2em}
+\begin{figure}[p]
+\begin{fullpage}
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwProg{Fn}{Function}{:}{}
+\SetKwFunction{Solve}{Solve}
+\SetKwFunction{Init}{Init}
+\SetKwFunction{Run}{Run}
+\SetKwFunction{Move}{Move}
+\SetKwFunction{CalculateF}{CalcInternalForces}
+\SetKwFunction{CalculateM}{CalcInternalMoments}
+\SetKwFunction{CalculateA}{CalcAcceleration}
+\SetKwFunction{CalculateV}{CalcVelocity}
+\SetKwFunction{CalculateE}{CalcKEnergy}
+\SetKwFunction{SumFM}{AggregateForcesAndMoments}
+\SetKwFunction{SyncFM}{SynchronizeForcesAndMoments}
+\SetKwFunction{SumM}{AggregateMasses}
+\SetKwFunction{SyncM}{SynchronizeMasses}
+\SetKwFunction{InterpX}{InterpolatePosition}
+\SetKwFunction{InterpR}{InterpolatePosition}
+\SetKwFunction{Reset}{Reset}
+
+\SetKwData{Model}{model}
+\SetKwData{Node}{node}
+\SetKwData{Joint}{joint}
+\SetKwData{Element}{element}
+\SetKwData{CVG}{cvg}
+\SetKwData{MAX}{maxIteration}
+
+%\Input{A model to analyzed}
+%\Output{An analyzed model}
+
+% RUN
+\Fn{\Run{}}{
+\BlankLine
+\ForEach(\tcc*[f]{$\vect{dx} = \vect{v_x}  dt$, $\vect{d\theta} = \vect{v_{\theta}}  dt$}){\Node in \Model}{
+	\Move{$\vect{dx}, \vect{d\theta}$} \;
+}
+\BlankLine
+\tcc{Elements calculate internal forces and moments}
+\ForEach(){\Element in \Model}{
+\CalculateF{$\vect{x}, \vect{d}_1,  \vect{d}_2,  \vect{d}_3$}
+\tcc*[r]{$\vect{F}^{int}(\vect{x}, \vect{d}_1,  \vect{d}_2,  \vect{d}_3)$}
+
+\CalculateM{$\vect{x}, \vect{d}_1,  \vect{d}_2,  \vect{d}_3$}
+\tcc*[r]{$\vect{M}^{int}(\vect{x}, \vect{d}_1,  \vect{d}_2,  \vect{d}_3)$}
+}
+\BlankLine
+\tcc{Joints coordinate the dynamic of several nodes}
+\ForEach(){\Joint in \Model}{
+\SumFM{} \;
+\SumM{} \;
+\SyncFM{} \;
+\SyncM{} \;
+}
+\BlankLine
+\tcc{Calculate translational kinetic energy}
+\ForEach(){\Node in \Model}{
+	\CalculateA{$m_x, \vect{F}$}
+	\tcc*[f]{$\vect{a_x}(t) = \vect{R_x}/m_x$}
+	
+	\CalculateV{$\vect{a_x}, dt$}
+	\tcc*[f]{$\vect{v_x}(t+\tfrac{dt}{2}) = \vect{v_x}(t-\tfrac{dt}{2}) + dt \vect{a_x}(t)$}
+	
+	\CalculateE{$\vect{v_x}$}
+	\tcc*[f]{$E_x(t+\tfrac{dt}{2}) =  \tfrac{1}{2}\sum m_x \vect{v_x}^2(t+\tfrac{dt}{2})$}
+}
+\BlankLine
+\tcc{Detect pic of kinetic energy}
+\If{$E_x(t+\tfrac{dt}{2}) < E_x(t-\tfrac{dt}{2})$}{
+	\InterpX{} \;
+	\Reset{} \;
+}
+
+\BlankLine
+\tcc{Calculate rotational kinetic energy}
+\ForEach(){\Node in \Model}{
+	\CalculateA{$m_{\theta}, \vect{M}$}
+	\tcc*[f]{$\vect{a_{\theta}}(t) = \vect{R_x}/m_{\theta}$}
+	
+	\CalculateV{$\vect{a_{\theta}}, dt$}
+	\tcc*[f]{$\vect{v_{\theta}}(t+\tfrac{dt}{2}) = \vect{v_{\theta}}(t-\tfrac{dt}{2}) + dt \vect{a_{\theta}}(t)$}
+	
+	\CalculateE{$\vect{v_{\theta}}$}
+	\tcc*[f]{$E_{\theta} = \tfrac{1}{2}\sum m \vect{v_{\theta}}^2(t+\tfrac{dt}{2})$}
+}
+\BlankLine
+\tcc{Detect pic of kinetic energy}
+\If{$E_{\theta}(t+\tfrac{dt}{2})  < E_{\theta}(t-\tfrac{dt}{2})$}{
+	\InterpR{} \;
+	\Reset{} \;
+}
+
+}{\KwRet}
+
+\caption{disjoint decomposition}\label{algo_disjdecomp}
+\end{algorithm}
+\end{fullpage}
+\end{figure}
+\DecMargin{2em}
+
+
 
 \section{Conclusion}
 Remind that the beam is subject to a distributed external force $\vect{f}_{ext}$ and a distributed external moment $\vect{m}_{ext}$.
