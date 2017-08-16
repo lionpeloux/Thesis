@@ -2,58 +2,87 @@
 % Contact : lionel.dupeloux@gmail
 % Year : 2017
 
-\chapter{Elastic rod~: variational approch}
+\chapter{Elastic rod~: variational approach}
 \label{sec:ch_energy}
 
-
+This chapter should be understood as an extension of the work initiated by \citef{Tayeb2015a} and published by \citef{DuPeloux2015} and \citef{Lefevre2017}.
 
 % #######################################################
 \section{Introduction}
 % #######################################################
 
-\subsection{Goals and contribution}
-In this section a novel element with 4 degrees of freedom accounting for torsion and bending behaviours is presented. The beam is considered in Kirchhoff's theory framework, so that it is supposed to be inextensible and its sections are supposed to remain orthogonal to the centreline during deformation. The reduction from the classic 6-DoF model to this 4-DoF model is achieved by an appropriate curve-angle representation based on a relevant curve framing. Energies are then formulated and leads to internal forces and moments acting on the beam. The static equilibrium is deduced from a damped fictitious dynamic with an adapted dynamic relaxation algorithm.
+Elastic gridshells are lightweight structures made of interconnected slender beams (see \cref{chp:gridshell}). Modeling the deformation process of such structures is complex as it involves to take account for the geometric non linearities induced by the large displacements and rotations of the grid. More over, the large number of connexions and the coupling between flexion and torsion highly increase the complexity of the analysis.
 
-\subsection{Related work}
-Basile~\cite{Bergou2010}
-Basile~\cite{Bergou2008}
-Basile~\cite{Audoly2010}
-Sina~\cite{Nabaei2014}
-\cite{Fuller1978},~\cite{deVries2005}, ~\cite{Vauquelin2000},~\cite{Berger2009}
+To facilitate the design process of elastic gridshells, architects and engineers need a dedicated numerical tool that provide a good level of interactivity -- which means that numerical computations must converge within a reasonable time, if not in real time -- and gives deep insights on the geometry and on the mechanical behavior of the grid. This tool must be able to model complex connexions and various types of support conditions to enhance the user experience during the formfinding stage and to improve his ability to explore the space of constructible shapes.
 
-Pou intro~:~\cite{Jung2010}
+In this chapter, our goal is to develop a beam model suitable for the modeling of grids of interconnected slender beams in order to study the mechanics of elastic gridshells. For such beams, Kirchhoff's theory of rods is considered to be appropriate. We follow recent advances in the field of computer graphics about hair modeling \cite{Bergou2008} to build a reduced degrees of freedom rod model thanks to an appropriate curve-angle representation. This representation is based on a relevant curve framing, namely the Bishop frame presented in \cref{sec:bishop}. The rod will be considered inextensible. Moreover, it will be assumed that cross-sections remain normal to the rod centerline. The internal forces and moments acting on the rod will be deduced from the differentiation of the elastic energy of the beam with respect to the degrees of freedom of the system.
 
-Dynamic relaxation~:
-\cite{Lewis2003}
-En particulier,voir pour un comparatif avec une méthode implicite.
+This chapter is devoted to the development of the beam model. The formulation of a discrete element and its implementation in a numerical solver are treated in a dedicated chapter (see \cref{chp:numerical_model}).
 
 \subsection{Overview}
+We begin this chapter by establishing a representation for any geometric configuration of a Kirchhoff rod (see \cref{sec:kirchhoff_rod}) based on a curve-angle description. This representation is 
 
-
+\subsection{Contributions}
+\begin{itemize}
+\item We consolidate the mathematical development of the beam model by introducing the Fréchet and Gateaux derivatives in function spaces.
+\item We clarify the independence of the the rotational degree of freedom ($\theta$) with respect to  translational degrees of freedom ($\vect{x}$).
+\item We factorize the expressions of the internal forces and moments by reusing the quasi-static assumption.
+\item We identify the contributions of axial and shear forces, bending and torsion moments in the expressions of internal forces and moments.
+\item We prove the equivalence with the shear force obtained from the dynamical equations of Kirchhoff.
+\item We suggest that the dynamical Kirchhoff equations should be a more straight forward starting point to build up similar theories.
+\end{itemize}
+
+\subsection{Related work}
+\citef{Bergou2008} present a discrete treatment of adapted framed curves, parallel transport, and holonomy. Based on this framework they propose a curve-angle representation of the geometric configuration of slender rods. In this representation, the orientation of the material frame is established with respect to the Bishop frame by a single scalar angle. Upon this representation they build a mechanical model for slender elastic rods with anisotropic cross-section and arbitrary rest configuration. In the dynamic the centerline is treated explicitly and material frames are treated as quasistatic. \citef{Bergou2010} improve there previous model for the modeling of viscous threads.
+
+\citef{Nabaei2014} implements the model developed by \cite{Bergou2008} in IPOPT, an interior point optimizer, to solve the static equilibrium of simply connected systems of twisted elastica.
+
+\citef{Tayeb2015a}, \citef{DuPeloux2015} and \citef{Lefevre2017} follow \cite{Bergou2008} to model grids of interconnected slender beams. They implement their model in a dynamic relaxation solver to formfind elastic gridshells. They formulate a special connexion.
+
+\cite{Spillmann2007}.
+\cite{Fuller1978},~\cite{deVries2005}, ~\cite{Vauquelin2000},~\cite{Berger2009}
+
+Bertail
+Spilmann
+Hose
+Pour intro~:~\cite{Jung2010}
 
 
-\note{
-\begin{enumerate}
-\item quaternion pour piloter les input / ouput ?
-\item calcul de la hessienne au moins pour les $\theta$ comme Audoly. Ne serait-ce pas possible pour les $x$ ?  Avec ma technique du transport parallèle il me semble pourvoir avoir accès au DL à  l'ordre 2 \dots
-\item Formulation pour les efforts ponctuels / moments extérieurs en vue d'une résolution par minimisation. Voir F. Bertails
-\item prise en compte des contraintes => méméthide des multiplicateurs de lagrange
-\end{enumerate}
 
 
 
-}
 
-
+%\note{
+%\begin{enumerate}
+%\item quaternion pour piloter les input / ouput ?
+%\item calcul de la hessienne au moins pour les $\theta$ comme Audoly. Ne serait-ce pas possible pour les $x$ ?  Avec ma technique du transport parallèle il me semble pourvoir avoir accès au DL à  l'ordre 2 \dots
+%\item Formulation pour les efforts ponctuels / moments extérieurs en vue d'une résolution par minimisation. Voir F. Bertails
+%\item prise en compte des contraintes => méméthide des multiplicateurs de lagrange
+%\end{enumerate}
+%}
 
 % #######################################################
-\section{Kirchhoff rod}
-The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross sections. The centerline is parameterized by its arc-length. Cross sections orientations are followed along the centerline by their material frame $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ which is an adapted orthonormal moving frame aligned to section's principal axes of inertia. Here, \guil{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned to the centerline's tangent. In the literature, this description is also known as a \emph{Cosserat Curve}~\cite{Spillmann2007}.
+\section{Kirchhoff rod}\label{sec:kirchhoff_rod}
+Kirchhoff's theory of rods is presented thoroughly in the next chapter (see \cref{chp:kirchhoff}). In this chapter, although the assumptions are not exactly the ones made in  Kirchhoff's theory, we will stick to this denomination as introduced by \cite{Bergou2008}. In the present theory we will assume that~:
+\begin{itemize}
+\item the rod is inextensible,
+\item cross-sections remain planar and normal to the centerline,
+\item strains remain small so that the material deforms elastically.
+\end{itemize}
 
-\subsection{Inextensibility}
-Note the previous description is only valid for inextensible rods in order to follow material points by their arc-length indifferently in their rest or deformed configuration. As explained in~\cite{Audoly2010}, this hypothesis is usually relevant for slender beams. Indeed, in practice, if a slender member faces substantial axial strain the bending behaviour would become negligible due to the important difference between axial and bending stiffness. The length of the rod will be denoted $L$ and the arc-length $s$ will vary (with no loss of generality) in $[0,L]$.
+\subsection{Geometric configuration}
+The geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross-section. The centerline is a space curve parameterized by its arc length, denoted $s$. Cross-section orientations are followed along the centerline by a material frame $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ which is an adapted orthonormal moving frame aligned with the principal axes of inertia of the cross-section. 
 
-\subsection{Euler-Bernouilli}
+Recall from \cref{sec:amf} that \emph{adapted} means $\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)$ is aligned with the tangent vector of the centerline. Her, the prime symbol denotes the derivation with repspect to the arc length parameter $s$. Recall also from \cref{sec:arclength_param} that $\norm{\vect{x}'(s)}=1$ because $\vect{x}$ is parametrized by arc length.
+
+\subsection{Inextensibility assumption}
+We assume that the rod is inextensible. As explained in \cite{Audoly2010}, based on a scaling argument, two cases arise for slender beams~: either the centerline stretches and the bending and twisting forces become negligible compared to the axial forces~; either the centerline remains inextensible. As we are not interested in the first case (that is dealing with beams used as cables in tension) we will assume that inextensibility assumption.
+
+Remark that the previous description is only valid for inextensible rods in order to follow material points by their arc length indifferently in their rest or deformed configuration. As explained in~\cite{Audoly2010}, this hypothesis is usually relevant for slender beams. Indeed, in practice, if a slender member faces substantial axial strain the bending behaviour would become negligible due to the important difference between axial and bending stiffness. 
+
+Here and thereafter, the length of the rod will be denoted $L$ and the arc length $s$ will vary (with no loss of generality) in $[0,L]$.
+
+\subsection{Euler-Bernouilli assumption}
 Strains are supposed to remain small so that material frame remains orthogonal to the centerline in the deformed configuration. Thus, differentiating the conditions of orthonormality leads to the following differential equations governing the evolution of $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ along the centerline~:
 \begin{equation} \label{eq:3_1}
 	\begin{bmatrix}
@@ -74,13 +103,14 @@ Strains are supposed to remain small so that material frame remains orthogonal t
 	\end{bmatrix}
 \end{equation}
 
-\note{La théorie des poutres est une application de la théorie de l'élasticité isotrope. Pour mener les calculs de résistance des matériaux, on considère les hypothèses suivantes~:
 
-(1) hypothèse de Bernoulli~: au cours de la déformation, les sections droites restent perpendiculaires à  la courbe moyenne ;
-
-(2) les sections droites restent planes selon Navier-Bernoulli (pas de gauchissement).
-
-L'hypothèse de Bernoulli permet de négliger le cisaillement dans le cas de la flexion~: le risque de rupture est alors due à  l'extension des fibres situées à  l'extérieur de la flexion, et la flèche est due au moment fléchissant. Cette hypothèse n'est pas valable pour les poutres courtes car ces dernières sont hors des limites de validité du modèle de poutre, à  savoir que la dimension des sections doit être petite devant la longueur de la courbe moyenne. Le cisaillement est pris en compte dans le modèle de Timoshenko et Mindlin.}
+%\note{La théorie des poutres est une application de la théorie de l'élasticité isotrope. Pour mener les calculs de résistance des matériaux, on considère les hypothèses suivantes~:
+%
+%(1) hypothèse de Bernoulli~: au cours de la déformation, les sections droites restent perpendiculaires à  la courbe moyenne ;
+%
+%(2) les sections droites restent planes selon Navier-Bernoulli (pas de gauchissement).
+%
+%L'hypothèse de Bernoulli permet de négliger le cisaillement dans le cas de la flexion~: le risque de rupture est alors due à  l'extension des fibres situées à  l'extérieur de la flexion, et la flèche est due au moment fléchissant. Cette hypothèse n'est pas valable pour les poutres courtes car ces dernières sont hors des limites de validité du modèle de poutre, à  savoir que la dimension des sections doit être petite devant la longueur de la courbe moyenne. Le cisaillement est pris en compte dans le modèle de Timoshenko et Mindlin.}
 
 \subsection{Darboux vector}
 Those equations can be formulated with the \emph{Darboux vector} of the chosen material frame, which represents the rotational velocity of the frame along $\vect{x}(s)$~:
@@ -106,7 +136,7 @@ The material curvatures are denoted $\kappa_1(s)$ and $\kappa_2(s)$ and represen
 	\quad,\quad
 	\vect{b}(s) = \vect{t}(s) \times \vect{n}(s) = \frac{\vect{t}(s) \times \vect{t}'(s)}{\kappa(s)}
 \end{equation}
-To describe the osculating plane in which lies the bending part of the deformation, let's introduce the \emph{curvature binormal} $\kappa\vect{b}(s) = \vect{t}(s)\times\vect{t}'(s)$, the vector of direction $\vect{b}(s)$ and norm $\kappa(s)$. At each point of arc-length $s$ the osculating plane is normal to $\kappa\vect{b}(s)$.
+To describe the osculating plane in which lies the bending part of the deformation, let's introduce the \emph{curvature binormal} $\kappa\vect{b}(s) = \vect{t}(s)\times\vect{t}'(s)$, the vector of direction $\vect{b}(s)$ and norm $\kappa(s)$. At each point of arc length $s$ the osculating plane is normal to $\kappa\vect{b}(s)$.
 
 \subsection{Elastic energy}
 Kirrchhoff's theory assigns an elastic energy to beams according to their strain~\cite{Audoly2010}. In this theory, a beam is supposed to be inextensible. Thus the elastic energy ($\mathcal{E}_p$) only accounts for torsion and bending behaviors and is given by~:
@@ -163,12 +193,12 @@ Thus, by the help of $\vect{\Omega}_b(s)$, it's possible to transport a given ve
 \subsection{Axial strain}
 There is no axial strain to be considered as far as the rod is supposed to be unstretchable.
 
-Remark that the inextensibility hypothesis implies that any admissible perturbation ($\lambda\vect{h}_x$) of the rod's centerline ($\vect{x}$) is locally orthogonal to the centerline itself. Indeed, at each arc-length $s$ an inextensible rod must satisfies~:
+Remark that the inextensibility hypothesis implies that any admissible perturbation ($\lambda\vect{h}_x$) of the rod's centerline ($\vect{x}$) is locally orthogonal to the centerline itself. Indeed, at each arc length $s$ an inextensible rod must satisfies~:
 \begin{equation}\label{eq:3_6}
 	\|\vect{x}'\| = \|(\vect{x}+\lambda\vect{h}_x)'\| = 1 \Rightarrow \vect{d}_3 \cdot \vect{h}'_x = -\tfrac{\lambda^2}{2}\|\vect{h}'_x\|^2 = o(\lambda) \simeq 0
 \end{equation}
 
-In other words, this means that the same arc-length parametrization can be used to locate beam sections along the centerline along the deformation path. This would not be the case if the centerline would shorten or stretch out during its deformation. It is worth to mention here that this property ($\vect{d}_3 \cdot \vect{h}'_x = 0$) will be used several times in the following sections.
+In other words, this means that the same arc length parametrization can be used to locate beam sections along the centerline along the deformation path. This would not be the case if the centerline would shorten or stretch out during its deformation. It is worth to mention here that this property ($\vect{d}_3 \cdot \vect{h}'_x = 0$) will be used several times in the following sections.
 
 \subsection{Bending strain}
 
@@ -388,7 +418,7 @@ $F = \{\vect{t}, \vect{u},\vect{v}\}$~: the Bishop frame in the reference config
 $\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$~: the frame obtained by parallel transporting $F_\epsilon$ back on $F$.
 \end{itemize}
 
-What we want to achive is to write at arc-length $s$ the Bishop frame in the deformed configuration $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the Bishop frame in the reference configuration $\{\vect{t}, \vect{u},\vect{v}\}$ for a small perturbation $\epsilon$ of the centerline. This transformation can be decomposed in two rotations~:
+What we want to achive is to write at arc length $s$ the Bishop frame in the deformed configuration $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$ on the Bishop frame in the reference configuration $\{\vect{t}, \vect{u},\vect{v}\}$ for a small perturbation $\epsilon$ of the centerline. This transformation can be decomposed in two rotations~:
 
 \begin{itemize}
 \item
@@ -423,7 +453,7 @@ This variation is closely related to the writhe of closed curves. As explained i
 
 Note that the derivative of $\theta$ with respect to $\vect{x}$ can be evaluated by the change of writhe in the curve as suggested in~\cite{deVries2005}. This approach is completly equivalent.
 
-One can also see this lack of alignement in terms of rotation. Parallel transport being a propagation of frame from $s = 0$, the cumulated rotation of Bishop frame from the deformed configuration around the initial configuration at arc-length $s$ is the cumulated angle of rotation of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ around $\vect{d}_3[\vect{x}]$. Recalling the rotation rate of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ is $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ by definition of zero-twisting frame, one can write~:
+One can also see this lack of alignement in terms of rotation. Parallel transport being a propagation of frame from $s = 0$, the cumulated rotation of Bishop frame from the deformed configuration around the initial configuration at arc length $s$ is the cumulated angle of rotation of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ around $\vect{d}_3[\vect{x}]$. Recalling the rotation rate of $\vect{u}[\vect{x} + \lambda\vect{h}_x]$ is $\kappa\vect{b}[\vect{x} + \lambda\vect{h}_x]$ by definition of zero-twisting frame, one can write~:
 \begin{equation}
 	\Psi_\epsilon[\vect{x}](s) =
 	-\int_0^s \kappa\vect{b}[\vect{x} + \lambda\vect{h}_x] \cdot \vect{d}_3[\vect{x}] \,dt

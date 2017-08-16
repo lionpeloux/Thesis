@@ -2,8 +2,7 @@
 % Contact : lionel.dupeloux@gmail
 % Year : 2017
 
-\chapter{Numerical Model}
-\label{sec:ch_kirchhoff}
+\chapter{Numerical Model} \label{chp:numerical_model}
 
 \section{Introduction}
 
@@ -11,7 +10,16 @@ Penser à expliquer le dualisme edge / vertex. En pratique, on a envie de contr�
 
 Expliquer l'interpolation des efforts. Il y a un choix a faire dans la DR. Soit on écrit l'équilibre sur le noeud (de dimension null). Soir on écrit l'équilibre sur une tranche de dimension $l_i+l{i+1}/2$. Mais si l'on veut maintenir la précision des conditions de passage, la DR fonctionne avec des noeuds et pas des tranches, le mieux est d'opter pour un équilibre du noeud. La DR va minimiser les résidus aux noeuds et donc on aura les bonnes conditions de passage sous Fext et Mext. J'ai montré que la convergence était plus rapide et précise. On a pas de décalage dans les diagrammes des efforts (si il y en a, ce sont uniquement les défauts de convergence, le résidu , n'étant pas strictement nul au noeud à la fin de la DR).
 
-\subsection{Main hypothesis}
+\subsection{Overview}
+
+\subsection{Contributions}
+\begin{itemize}
+	\item We use the parallel transport in time and not in space.
+\end{itemize}
+
+\subsection{Related works}
+
+\section{Main hypothesis}
 
 On néglige les forces d'inertie liées à la rotation de l'élément  (devant quoi ?? traitement quasi-statique par rapport à la rotation). Cette hypothèse est faite explicitement chez Florence Bertail~:
 
@@ -35,7 +43,7 @@ Principe~:
 %\end{figure} 
 
 
-\subsection{Discret beam model}
+\section{Discret beam model}
 % =======================
 Let's introduce the discrete biarc model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} ($\Gamma$) and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross-section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent segments which are three-vertices and two-edges elements with uniform material and section properties.
 
@@ -488,6 +496,10 @@ Although this paragraph could seem superfluous to the reader, this point is a ma
 
 \clearpage
 \section{Dynamic relaxation}
+
+Dynamic relaxation~:
+\cite{Lewis2003}
+En particulier, voir pour un comparatif avec une méthode implicite.
 
 \IncMargin{2em}
 \begin{figure}[p]
