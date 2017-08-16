@@ -1,65 +1,52 @@
 \chapter{Geometry of smooth and discrete space curves}
 \section{Introduction}
+In this chapter, our goal is to develop a comprehensive view of the geometry of space curves and how to frame such curves. Indeed, framed curve representations are of central importance when dealing with slender beam models, as they are often modeled using curvilinear coordinate systems. This is the kind of representation on which our beam model will be based on.
 
+Although the theoretical beam model takes place in the smooth world, our model will be implemented in a numerical solver, hence the necessity of a discrete representation. However, the two world are intimately related to each other and this is why we chose to present them both in this chapter.\footnote{\citef[preface]{LHospital1696}~: \blockquote{Car les courbes n’étant que des polygones d’une infinité de côtés, \& ne différant
+entr' elles que par la différence des angles que ces côtés infiniment petits font
+entr'eux~; il n’appartient qu’à l’Analyse des infiniment petits de déterminer la
+position de ces cotés pour avoir la courbure qu’ils forment \belp{}}.}
+
+A comprehensive understanding of the geometry of discrete curves will enable to build a beam model with reduced degrees of freedom and capable of representing discontinuities in curvature. This last point is of particular interest when modeling real structures with complex boundary conditions and connexions where concentrated moments are transferred (that is jumps in curvature occur).
+
+\subsection{Overview}
+We start this chapter by recalling the fundamentals of smooth parametric curves (see \cref{sec:paramcrvs}). We introduce the \emph{Frenet frame}, a crucial tool for the local characterization of space curves (see \cref{sec:frenet_trihedron}), and we identify two geometric invariants, the curvature and the torsion of Frenet, that fully describe the geometry of a given space curve (see \cref{sec:curves_of_dc}). We then introduce the notion of moving frame which allow to define a local orientation to each material point on a curve (see \cref{sec:curve_framing}). This description will later be essential when modeling cross-section of beams. Among all the possible ways to frame a curve we look at rotation-minimizing frames. These frames are constructed thanks to the parallel transport operator, defined in the same section, which leads to the introduction of the \emph{Bishop frame}~: a torsion-free moving frame that will be at the heart of the beam model developed in the following chapters.
+
+We then move on the discrete case and we first draw up a representation of a discrete curve as an ordered sequence of vertices linked by edges (see \cref{sec:discrete_curves}). We gather several definitions of the curvature for a discrete curve and we interpret them in terms of their osculating circle (see \cref{sec:discrete_curvature}). Among these definitions, we focus on the curvatures defined respectively by the circumscribed and the inscribed osculating circles. We extend their definition to the curve endings as this is a matter of concern when dealing with mechanical boundary conditions -- such as pinned or fixed endings. We study their behavior with respect to the turning angle -- that is the angle between two consecutive edges -- and we analyze their sensitivity to non uniform discretizations as this is a matter of concern when modeling real structures (sse \cref{sec:bench_disc}). We then compare to what extent these curvatures can represent accurately the bending energy of typical curves, namely a circular curve and an elastica curve (see \cref{sec:bench_energy}). For these two curvatures we demonstrate that a natural definition  for the tangent vector emerges and we show how to construct it all along the discrete curve. This vector will later be associated to the cross-section normal in our Kirchhoff beam model (see \cref{sec:discrete_tangent}). Finally, we recall two methods to parallel transport vectors or frames along a discrete curve (see \cref{sec:discrete_pt}). These methods will be used later to construct a twist-free reference frame fro our beam model.
+
+\subsection{Contributions}
+%Here, we summarize our contributions that are presented in this chapter~: 
 \begin{itemize}
-\item on regarde la question de la paramétrization car elle est liée à la question de l'inextensibilité.
-\item on s'intéresse aux courbures discretes au début/fin => conditions limites + connexions
-\item on compare les courbures pour comprendre laquelle est la plus pertinente dans notre cas physique
-\item vertex vs edge quantity
-\item cf intro benchmarking : discretization non uniforme et autre
+\item We gather several definitions of the curvature for a a discrete curve and we interpret them in terms of their osculating circle.
+\item We focus on the discrete curvatures defined respectively by the circumscribed and the inscribed osculating circles. We extend their definition to curve endings, which is crucial when modeling mechanical boundary conditions where nodes are positioned at points of interest.
+\item  We study their behavior with respect to the turning angle and we analyze their sensitivity to non uniform discretization, which is likely to arise when modeling real structures.
+\item We compare to what extent these curvatures can represent accurately the bending energy of typical bended shapes (circle and elastica) regarding the sharpness of the discretization. This help us to chose what curvature representation to implement in our beam model.
+\item We demonstrate that a natural definition for the tangent vector at vertices emerges for these curvatures. This will lead to a model with reduced number of degrees of freedom.
+\item We show how the local curvature and the tangent vector are related one to each other. This will lead to a straightforward modeling of boundary conditions and connexions. This will also allow to model discontinuities in curvature at vertices, thus enabling the modeling of applied concentrated moment and jumps in beam properties ($ES$, $EI$, $GJ$).
 \end{itemize}
 
-\note{idée~:
-Rapprocher l'étude des courbes continues et des discrétisées avec le concept de modèle de la «courbe polygone» de Leibniz et de ses successeurs, une infinité de côtés infiniment petits.~\cite[p.235]{Delcourt2011}
-
-Voir aussi que la geometry des space curves semble intimement liée à celle des surface.
-\cite{Coolidge2013,Delcourt2011}
-}
-
-\blockcquote[Liebniz]{}{Car les courbes n’étant que des polygones d’une infinité de côtés, et ne différent
-entre elles que par la différence des angles que ces côtés infiniment petits font
-entre eux; il n’appartient qu’à l’Analyse des infiniment petits de déterminer la
-position de ces cotés pour avoir la courbure qu’ils forment [\dots]}.
-
-Attention à la terminologie smooth vs. continious~:
-
-\blockquote{A smooth curve is a curve which is a smooth function,  where the word "curve" is interpreted in the analytic geometry context. In particular, a smooth curve is a continuous map f from a one-dimensional space to an n-dimensional space which on its domain has continuous derivatives up to a desired order.\footnote{Definition of a smooth curve from mathworld~: \url{http://mathworld.wolfram.com/SmoothCurve.html}}
-} 
-
-\subsection{Goals and contributions}
-Dans ce chapitre, après un bref rappel sur le cadre mathématique d'étude des courbes paramétrique de l'espace, on présente les notions de courbures et de torsion géométrique associées au repère de Frenet. On montre ensuite le cas plus général d'un repère mobile quelconque attaché à une courbe gamma. On définit enfin la particularité d'un repère mobile adapté à un courbe, et on présente, en sus du repère de Frenet, une approche différente pour accrocher des repères le long d'une courbe (Bishop / RMF / Zéro-twisting frame)
-
-Contributions~: présentation et comparaison de différentes façons d'estimer la courbure discrete
 
 \subsection{Related work}
 
-\cite{Guggenheimer1989, Klok1986, Bloomenthal1990, Hanson95, Wang2008, Poston1995, Menninger2013}
+\citef{Delcourt2011} gives a thorough historical review of the study of space curves from Clairaut to Darboux. This history is paved with the nouns of illustre mathematicians such as Euler, Bernoulli, Monge, Fourier, Lagrange, Cauchy, Serret, Frenet, \telp{} It reveals that the study of curves was often related to the study of physical problems (e.g. the elastica for Bernoulli \& Euler, the helix for Pito).
 
-\citet{Bishop1975}
-\citep{Bishop1975}
-\citeauthor{Bishop1975}
-\citeyear{Bishop1975}
+In his lecture notes on discrete differential geometry of curves and curfaces, \citef{Hoffmann2008} presents three definitions for the discrete curvature. In his lecture notes on discrete differential geometry of plane curves, \citef{Vouga2014} constructs new discrete curvatures that mimic some of the interesting properties of the curvature in the smooth case. He remarks that none of the established discrete curvatures can reproduce all the properties of the curvature in the smooth case.
 
-\cite{Bishop1975}
-\cite{Bergou2008}
-\cite{Hoffmann2008}
-\cite{Bluthe2014}
-\cite{Frenet1852}
-\cite{Delcourt2007}
-\cite{Farouki2014}
-\cite{Guggenheimer1989}
-\cite{Klok1986}
+\citef{Bishop1975} remarks that the usual Frenet frame is not the only way to frame curve. He gives the skew-symmetric system of differential equations that any moving frame satisfies. He remarks that this system is governed by only three coefficient entries, which represent the components of the angular velocity vector of the frame expressed on the frame axes. He argues that the Frenet frame gains part of its significance because it is adapted to the curve and because one component of its angular velocity is null. Hence, he looks for other kind of moving frames that are both adapted and with one of the components of the angular velocity vector that is null. In particular, he looks at adapted frames that does not turn around the curve~: what will be called a Bishop frame hereafter.
 
-\subsection{Overview}
+\citef{Klok1986} makes use of the Bishop frame to produce rotation-minimizing sweeps for visualizing 3D ribbons and cylinders. He remarks that for closed trajectories the start and end frames might not align properly. \citef{Guggenheimer1989} proposes a faster method to compute Klok's frame in relation to the Frenet frame. For that, he remarks that any frame is obtained from the Frenet frame by a rotation around the tangent vector. \citef{Bloomenthal1990} introduces the rotation method to propagate reference frames along a curve. \citef{Hanson95} propose an algorithm to parallel transport frames along a curve using the rotation method. \citef{Poston1995} propose a quadratically convergent algorithm, also based on the rotation method, to find untwisted sweeping NURBS surfaces within a given error bound $\epsilon$. 
+
+\citef{Wang2008} introduce the double reflexion method to propagate rotation minimizing frames. This method is supposed to be more stable than the rotation method
+\citef{Farouki2014} investigate the use of rotation-minimizing frames that minimize the rotation around the binormal vector of the curve (compare to Bishop frame that minimize the rotation around the tangent vector of the curve).
+
+
 
 % --------------------------------------------------------------------------------------------------------------------------------------------
 % SMOOTH SPACE CURVE
 % --------------------------------------------------------------------------------------------------------------------------------------------
+\section{Paramectric curves}\label{sec:paramcrvs}
 
-
-\section{Paramectric curves}
-
-In this section we recall some fundamental results on parametric curves. In particular, we recall that there is more than one way to parametrize a curve. Amongst all the possible ways to parametrize a given curve, the arc length parametrization is of special interest. With this parametrization, the way a curve is described by a single parameter becomes unequivocal.\footnote{This is note rigorously exact but that is the idea. Indeed, this is true only for a given choice of orientation and to within a constant.} This parametrization is naturally related to what is commonly understood as the \textquote{length of a curve}. 
+In this section we recall some fundamental results on (smooth) parametric curves.\footnote{Definition form \href{http://mathworld.wolfram.com/SmoothCurve.html}{mathworld}~: \blockquote{A smooth curve is a curve which is a smooth function,  where the word \textquote{curve} is interpreted in the analytic geometry context. In particular, a smooth curve is a continuous map from a one-dimensional space to an n-dimensional space which on its domain has continuous derivatives up to a desired order.}.} In particular, we recall that there is more than one way to parametrize a curve. Amongst all the possible ways to parametrize a given curve, the arc length parametrization is of special interest. With this parametrization, the way a curve is described by a single parameter becomes unequivocal.\footnote{This is note rigorously exact but that is the idea. Indeed, this is true only for a given choice of orientation and to within a constant.} This parametrization is naturally related to what is commonly understood as the \textquote{length of a curve}. 
 
 % parametric curve
 \subsection{Definition}
@@ -125,7 +112,7 @@ Thereafter, for a regular curve $\gamma$, $\gamma(t)$ will denote the point $F(t
 % FRENET THRIEDRON
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
-\section{Frenet trihedron}\label{sec:frenettrihedron}
+\section{Frenet trihedron}\label{sec:frenet_trihedron}
 
 %\note{From now, we will assume that the curve $\gamma$ is a regular parametric curve of class ${\mathcal{C}}^{1}$ parametrized by its arc length $s \in [0,L]$.}
 
@@ -249,10 +236,10 @@ Note that the normal unit vector and the binormal unit vector $\{\vect{n},\vect{
 % CURVE INVARIANTS
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
-\section{Curves of double curvature}
+\section{Curves of double curvature}\label{sec:curves_of_dc}
 
 The study of space curves belongs to the field of differential geometry. According to~\cite[p.28]{Delcourt2007}, the terminology \emph{curve of double curvature} is attributed to Pitot around 1724.\footnote{\blockcquote[p.28]{Pitot1726}{Les Anciens ont nommé cette courbe Spirale ou Hélice~; parce que la formation sur le cylindre suit la même analogie que la formation d’une spirale ordinaire sur un plan; mais elle est bien différente de la spirale ordinaire, étant une des courbes à double courbure, ou une des lignes qu’on conçoit tracée sur la surface des Solides. Peut-être que ces sortes de courbes à double courbure, ou prises sur la surface des Solides, feront un jour l’objet des recherches des géomètres. Celle que nous venons d’examiner est, je crois, la plus simple de toutes.
-}} However, as stated in~\cite[p.321]{Coolidge2013} curvature and torsion where probably first thought by Monge around 1771.\footnote{\blockcquote[p.363]{Monge1809}{On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point~; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions~; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion~; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.}.} It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g.\ \emph{the elastica}) and the study of curves of double curvature were intimately related to each other.
+}} However, as stated in~\cite[p.321]{Coolidge2013} curvature and torsion where probably first thought by Monge around 1771.\footnote{\blockcquote[p.363]{Monge1809}{On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point~; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions~; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion~; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.}.} It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g. \emph{the elastica}) and the study of curves of double curvature were intimately related to each other.
 
 Space curves were historically understood as \emph{curves of double curvature} by extension to the case of planar curves, where the curvature measures the deviance of a curve from being a straight line. The second curvature, nowadays known as the \textquote{torsion} or \textquote{second generalized curvature}, measures the deviance of a curve from being planar. 
 
@@ -447,7 +434,7 @@ Again, this system can be seen as the \emph{equations of motion} of the Frenet t
 % CURVE FRAMING
 % --------------------------------------------------------------------------------------------------------------------------------------------
 
-\section{Curve framing}
+\section{Curve framing}\label{sec:curve_framing}
 
 %From now on, we consider $\gamma$ to be a biregular arc length parametrized curve.
 
@@ -661,18 +648,7 @@ The Frenet frame satisfies the \emph{Frenet-Serret formulas} (see \cref{sec:serr
 	\end{bmatrix}
 \label{eq:frenetframegoverning}
 \end{equation}
-Remember the generic system of differential equations of an adapted moving frame attached to a curve, established in \cref{eq:movingframe}, where~:
-\begin{subequations}
-	\begin{alignat}{2}
-		&\vect{e}_{3}(s) &&= \vect{t}(s)
-		\\
-		&k_{1}(s) &&= 0
-		\\
-		&k_{2}(s) &&= \kappa(s)
-		\\
-		&\tau(s) &&= \tau_{f}(s)
-	\end{alignat}
-\end{subequations}
+Remember the generic system of differential equations of an adapted moving frame attached to a curve, established in \cref{eq:movingframe}, where $\vect{e}_{3}(s) = \vect{t}(s)$, $k_{1}(s) = 0$, $k_{2}(s) = \kappa(s)$ and $\tau(s)= \tau_{f}(s)$.
 
 \subsubsection{Angular velocity}
 Consequently, the angular velocity vector ($\vect{\Omega_{f}}$) of the Frenet frame, also known as the \emph{Darboux vector} in this particular case, is given by~:
@@ -704,7 +680,7 @@ A second benefit is that any adapted frame can be obtained by a rotation of the 
 % BISHOP FRAME
 \subsection{Bishop frame}\label{sec:bishop}
 
-A \emph{Bishop frame} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity~: \footnote{Bishop frames were Introduced as \emph{relatively parallel adapted frames} in~\cite{Bishop1975}.}
+A \emph{Bishop frame} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity~: \footnote{Bishop frames were introduced as \emph{relatively parallel adapted frames} in~\cite{Bishop1975}.}
 \begin{equation}
 	\vect{\Omega} \cdot \vect{t} = \tau =\vect{u^{'}} \cdot \vect{v} = - \vect{u} \cdot \vect{v^{'}} = 0
 \end{equation}
@@ -801,47 +777,48 @@ Let $\gamma$ be a \emph{circular helix} of parameter $a$ and $k$. In a cartesian
 	= a \cos t \, \vect{e}_x + a \sin t \, \vect{e}_y + k t \, \vect{e}_z
 \end{equation}
 The speed of this parametrization, the curvature and the geometric torsion are uniform and given by~:
-\begin{equation}
-	v(t) = \sqrt{a^2+k^2}
-	\quad,\quad
-	\kappa(t) = \frac{a}{a^2 + k^2}
-	\quad,\quad
-	\tau_f(t) = \frac{k}{a^2 + k^2}
-\end{equation}
-The Frenet frame components are given by (with $\alpha = v \kappa$ and $\beta = v \tau_f$)~:
-\begin{equation}
-	\begin{aligned}
-	\vect{t}(t) &=
-		\begin{bmatrix} 
-			- \alpha \cos t, \alpha \sin t, \beta t 
-		\end{bmatrix}
-	\\
-	\vect{n}(t) &= 
-		\begin{bmatrix} 
-			-\cos t, -\sin t, 0 
-		\end{bmatrix}
-	\\
-	\vect{b}(t) &=
-		\begin{bmatrix} 
-			\beta \sin t, - \beta \cos t, \alpha
-	\end{bmatrix} 	
-	\end{aligned}
-\end{equation}
-And the Bishop frame components are given by~:
-\begin{equation}
-	\begin{aligned}
-		\vect{u}(t) &= 
-		\begin{bmatrix} 	
-			-\cos t \cos \beta t - \beta  \sin t \sin \beta t, -\sin t \cos \beta t + \beta  \cos t \sin \beta t, - \alpha \sin \beta t
-		\end{bmatrix}
+\begin{subequations}
+	\begin{alignat}{2}
+		&v(t) &&= \sqrt{a^2+k^2}
 		\\
-		\vect{v}(t) &= 
-		\begin{bmatrix} 
+		&\kappa(t) &&= \frac{a}{a^2 + k^2}
+		\\	
+		&\tau_f(t) &&= \frac{k}{a^2 + k^2}
+	\end{alignat}
+\end{subequations}
+The Frenet frame components are given by (with $\alpha = v \kappa$ and $\beta = v \tau_f$)~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\vect{t}(t) &&=
+		\begin{bmatrix}  - \alpha \cos t, \alpha \sin t, \beta t  \end{bmatrix}
+		\\
+		&\vect{n}(t) &&=  \begin{bmatrix}  -\cos t, -\sin t, 0  \end{bmatrix}
+		\\
+		&\vect{b}(t) &&= \begin{bmatrix}  \beta \sin t, - \beta \cos t, \alpha \end{bmatrix} 	
+	\end{alignat}
+\end{subequations}
+And the Bishop frame components are given by~:
+\begin{subequations}
+	\begin{alignat}{1}
+		\vect{u}(t) &= \begin{bmatrix} 	
+			-\cos t \cos \beta t - \beta  \sin t \sin \beta t, -\sin t \cos \beta t + \beta  \cos t \sin \beta t, - \alpha \sin \beta t
+			\end{bmatrix}
+		\\
+		\vect{v}(t) &= \begin{bmatrix} 
 			-\cos t \sin \beta t + \beta  \sin t \cos \beta t, -\sin t \sin \beta t - \beta  \cos t \cos \beta t, \alpha \cos \beta t
 		\end{bmatrix}
-	\end{aligned}
-\end{equation}
-\todo[inline]{Graphiques à mettre à jour + commentaire sur les résultats}
+	\end{alignat}
+\end{subequations}
+At $t=0$ the two frames coincide. At $t>0$ the Bishop frame is obtained from the Frenet frame by a rotation around $\vect{t}(t)$ of an angle $\theta(t) = - \tau_f \cdot (v t)$.  
+
+The angular velocities of the Frenet and Bishop frames are respectively given by~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\vect{v}_f(t) &&= \begin{bmatrix} \tau_f , 0, \kappa \end{bmatrix}
+		\\
+		&\vect{v}_b(t) &&= \begin{bmatrix} 0 , \kappa \sin \theta, \kappa \cos \theta \end{bmatrix}
+	\end{alignat}
+\end{subequations}
 
 \begin{figure}[t]
 \centering
@@ -851,6 +828,8 @@ And the Bishop frame components are given by~:
 	\caption[]{Comparison between Frenet and Bishop frame velocity for a spirale curve.}
 	\label{fig:frame_bench}
 \end{figure}
+
+\todo[inline]{Graphiques à mettre à jour + commentaire sur les résultats}
 
 %\begin{figure}[t]
 %\centering
@@ -865,7 +844,7 @@ And the Bishop frame components are given by~:
 
 % DISCRETE CURVES
 % ================
-\section{Discrete curves}
+\section{Discrete curves}\label{sec:discrete_curves}
 
 The previous section has introduced the fundamental analytical tools to develop a solid understanding of the geometry of smooth space curves. These tools will be essentials for the construction of the beam model presented later in \cref{sec:energy} and \cref{sec:krichhoff}. In this section we look for equivalent notions in the case of discrete space curves, as the developed model will be implemented in a numerical program to solve real mechanical problems through discrete element models (see \cref{sec:discretization}).
 
@@ -963,7 +942,7 @@ Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n 
 
 % DISCRETE CURVATURE
 % ===================
-\section{Discrete curvature}
+\section{Discrete curvature}\label{sec:discrete_curvature}
 \citef{Vouga2014} defines and compares three different definitions of the discrete curvature that does not suppose that $\norm{\vect{e}_i}$ is constant. By trying to mimic some properties of the curvature in the smooth case \citef{Carroll2014} and \citef{Bobenko2015} also define and compare three different definitions of the discrete curvature from the osculating circle. One main drawback of all the said proposals is that the question of the curvature at  start and end points is never treated. But this is of main importance when dealing with beams as the nature of the boundary conditions can make the curvature to be null or not at its ends, depending if somme moment has to be transfer or not. In this sens, the question of discrete curvature could not be treated separately with the question of the tangent vector.
 \todo[inline]{Ce paragraphe est à peaufiner}
 
@@ -996,7 +975,7 @@ Curvature is defined from the osculating circle, which is the best approximation
 		\bottomrule
 		\end{tabularx}
 		\vspace{10pt}
-		\caption{Review of several discrete curvature definitions mentioned in the literature.}
+		\captionof{table}[Review of several discrete curvature definitions]{Review of several discrete curvature definitions mentioned in the literature.}
 		\label{tab:kb_def}
 \end{figure}
 
@@ -1153,7 +1132,7 @@ In particular,~\citet{Vouga2014} details which discrete curvature definitions pa
 
 % sensitivity to non uniform discretization
 % ----------------------------------------------------
-\subsection{Benchmarking~: sensitivity to non uniform discretization}
+\subsection{Benchmarking~: sensitivity to non uniform discretization}\label{sec:bench_disc}
 In this section we compare the two main discrete curvature notions (circumscribed versus inscribed) regarding their sensibility to non uniform discretization.
 
 \begin{figure}[!p]
@@ -1240,7 +1219,7 @@ Passing $\pi/4$ and increasing $\varphi$, $\kappa_3$ exhibits a good behavior~: 
 
 % accuracy in bending energy representation
 % ---------------------------------------------------------
-\subsection{Benchmarking~: accuracy in bending energy representation}
+\subsection{Benchmarking~: accuracy in bending energy representation}\label{sec:bench_energy}
 
 In this section we compare, for three remarkable types of curves (line, semicircle and elastica), the discrete bending energies $\mathcal{E}_1$ and $\mathcal{E}_3$ of the discrete curve, respectively based on definitions $\kappa_1$ and $\kappa_3$ (see \cref{tab:kb_def}), to the bending energy $\mathcal{E}$ of the smooth curve. We study the convergence of these energies as the sharpness of the discretization increases. The smooth and discrete bending energies are defined as~:
 \begin{subequations}
@@ -1285,7 +1264,7 @@ We consider a sequence of elastica curves of fixed length $L$ and variable curva
 
 % DISCRETE TANGENT VECTOR
 % ===================
-\section{Discrete tangent vector}\label{sec:tangent}
+\section{Discrete tangent vector}\label{sec:discrete_tangent}
 
 In this section we study how to define the discrete unit tangent vector relatively to a discrete curve. While a natural definition exists along the edges (see \cref{sec:tangent_edge}), there is no obvious choice at vertices were the curve kinks.
 
@@ -1451,7 +1430,7 @@ Note that, contrary to the current portion, curvatures at endings are subjected 
 
 % DISCRETE FRAMES
 % =================
-\section{Discrete parallel transport}
+\section{Discrete parallel transport}\label{sec:discrete_pt}
 
 Discrete parallel transport can be computed by analogy to the smooth case as the minimal rotation around t. However, this method gets unstable when $\vect{t}_i$ an $\vect{t}_{i+1}$ get almost collinear because of the cross product (although the rotation angle tends to zero, the rotation axis become very sensitive to numerical instabilities).
 
