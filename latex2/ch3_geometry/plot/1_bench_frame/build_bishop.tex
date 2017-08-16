@@ -1,8 +1,19 @@
-\documentclass[tikz,border={0.5cm 0.25cm 0.5cm 0.5cm}]{standalone} % left bottom right top
+% !TEX encoding = UTF-8 Unicode
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
+
+% ===========================
+% COMPILER DIRECTIVES
+% ===========================
+% !BIB TS-program = biber
+% !BIB program = biber
+
+\documentclass[tikz,border={2cm 0.0cm 2cm 1.5cm}]{standalone} % left bottom right top[tikz,border={2cm 0.5cm 2cm 3cm}]{standalone} % left bottom right top
+
 \usepackage{tikz, pgfplots,pgfplotstable}
 \input{../../../head/settings_styles.tex}
 \begin{document}
-\pgfplotstableread{bishop.txt}\Table
 \input{plot_bishop.tex}
 \end{document}
 
