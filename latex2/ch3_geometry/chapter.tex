@@ -315,7 +315,7 @@ The \emph{center of curvature} is defined as the center of the osculating circle
 \label{sec:kb}
 Finally, following~\cite{Bergou2008} we define the \emph{curvature binormal vector}. Let $\gamma$ be a biregular arc length parametrized curve. Let $s\in [0,L]$ be an arc length parameter. The \emph{curvature binormal vector} is defined as~:
 \begin{equation}
-	\vect{\kappa b}(s) = \vect{t}(s) \times \vect{t}'(s) = \kappa(s)\cdot\vect{b}(s)
+	\vect{\kappa b}(s) = \kappa(s)\cdot\vect{b}(s) = \vect{t}(s) \times \vect{t}'(s)
 	\quad,\quad
 	\norm{\vect{\kappa b}(s)}= \kappa(s)
 \label{eq:kb}
@@ -562,6 +562,7 @@ Let $F$ be a moving frame as defined in the previous section. $F$ is said to be 
 For an adapted frame, the components $k_1$ and $k_2$ of the angular velocity vector are related to the curvature of $\gamma$~: \footnote{This is why for an initially straight rod with an isotropic cross-section bending and torsion are uncoupled. Indeed, in that case the bending energy does not depend on the orientation of the cross-sections anymore as it depends only on the curvature of the rod~: $\mathcal{E}_b = EI_1\kappa_1^2 + EI_2\kappa_2^2 = EI\kappa^2$.}
 \begin{equation}
 	\kappa(s) = \norm{\vect{e}'_{3}(s)} = \norm{k_2(s)\vect{e}_1(s) + k_1(s)\vect{e}_2(s)} = \sqrt{{k_{1}(s)}^2 + {k_{2}(s)}^2}
+	\label{eq:kb_components}
 \end{equation}
 Moreover, recalling the definition of the curvature binormal vector ($\vect{\kappa b}$) from \cref{eq:kb}, it is easy to see that for an adapted moving frame the following relation holds~:
  \begin{equation}
@@ -570,6 +571,7 @@ Moreover, recalling the definition of the curvature binormal vector ($\vect{\kap
 Consequently, the angular velocity vector of an adapted moving frame can be written as~:
  \begin{equation}
 	\vect{\Omega}(s) = \vect{\kappa b}(s)  + \tau(s) \vect{t}(s)
+	\label{eq:angular_velocity}
 \end{equation}
 This last result is very interesting as it shows that any adapted moving frame will differ from each other only by their twisting speed, as $\vect{\Omega}_{\perp} =  \vect{\kappa b}$ only depends on the curve.
 
@@ -689,6 +691,7 @@ A second benefit is that any adapted frame can be obtained by a rotation of the 
 A \emph{Bishop frame} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \emph{zero-twisting} or \emph{parallel-transported} frame, is an adapted moving frame that has no tangential angular velocity~: \footnote{Bishop frames were introduced as \emph{relatively parallel adapted frames} in~\cite{Bishop1975}.}
 \begin{equation}
 	\vect{\Omega} \cdot \vect{t} = \tau =\vect{u^{'}} \cdot \vect{v} = - \vect{u} \cdot \vect{v^{'}} = 0
+	\label{eq:null_velocity}
 \end{equation}
 Because a Bishop frame is an adapted frame, it can be defined relatively to the Frenet frame by a rotation around the unit tangent vector. A Bishop frame is a frame that cancels out the rotational movement of the Frenet frame around the tangent vector. At arc length parameter $s$, the Frenet frame has continuously rotated around its tangent vector of a cumulative angle~: $\int_0^s \tau_f(t)dt$. Thus, any Bishop frame will be obtained, within a constant rotation angle $\theta_0$, through a rotation of the Frenet frame around the tangent vector by an angle~:
 \begin{equation}
