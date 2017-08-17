@@ -1,6 +1,7 @@
 % Author :  Lionel du Peloux
 % Contact : lionel.dupeloux@gmail
 % Year : 2017
+% !TEX encoding = UTF-8 Unicode
 
 \chapter{Elastic rod~: equilibrium approach}
 \label{chp:kirchhoff}
@@ -8,11 +9,30 @@
 \section{Introduction}
 Ici on explique que l'approche par les équations d'équilibre est beaucoup plus directe que l'approche énergétique.
 
+
+
+\subsection{Overview}
+Résumé du chapitre
+
+\footnote{For a shearable rod, the condition that $\vect{d}_3$ and $\vect{t}$ coincide is relaxed.}
+\footnote{in the directions of the principal axes of inertia of its cross-section}
+\footnote{The parameter $\rconf{s}$, usually chosen as the arc length parameter for the undeformed rod, is no longer the arc length parameter for the deformed rod, since there are deformations of shear and extension. The current arc length of the deformed rod is a function of $\rconf{s}$, which is often denoted by $s(\rconf{s})$.}
+
+
+\blockcquote[p.~xvii]{Benvenuto1991b}{The battle between weight and rigidity constitutes, in itself, the single aesthetic theme of art in architecture~: and to bring out this conflict in the most varied and clearest way is its office.}
+
+\blockcquote[p.~xvii]{Villaggio1997}{The theory of elastic structures is, by definition, the collection of all reasonable models, proposed during almost three centuries, concerned with simplifying the solutions of problems involving elastic bodies. The equations describing the motion and equilibrium of a three-dimensional elastic body were formulated in full generality during the first half of the nineteenth century, but their solutions are known only in a few cases.}
+
+\blockcquote[p.~68]{Audoly2010}{In a deformed state, the center line has no particular reason to remain straight and, in general, $\vect{d}_1$ and $\vect{d}_2$ will twist along the center line. However, in the case of small strain that we consider, the triad $(\vect{d}_1,\vect{d}_2,\vect{d}_3)$ remains approximately orthonormal, provided it has been chosen orthonormal in the reference configuration. This is known as the Euler-Bernoulli or Navier-Bernoulli kinematical hypothesis, or sometimes the assumption of unshearable rods.}
+
+Extension to the case of thin-walled sections by~\cite{Dias2015, Vetyukov2014} in the case of ribbons. From the Vlasov
+
+\blockcquote[p.]{Dias2014}{For thin beams having a slender cross-section, $h \ll w$, the classical rod theory of Kirchhoff is known to be inapplicable. Such beams are usually modeled using Vlasov’s theory for thin-walled beams. Vlasov’s models can be justified from 3D elasticity but only in the case of moderate deformations, when the cross-sections bend by a small amount. In the present work, however, we have considered large deformations of thin strips. The strip has been modeled as an inextensible  plate, and the geometric  constraint of inextensibility has been treated exactly~: the cross-sections are allowed to bend by a significant amount. Our model extends the classical strip model of Sadowsky, and reformulate it in a way that fits into the classical theory of rods.}
+
 \subsection{Contributions}
 \begin{itemize}
 \item We use the parallel transport in time and not in space
 \end{itemize}
-
 
 \subsection{Related work}
 Ici il faudrait préciser la terminologie des auteurs / équations / hypothèses~:
@@ -74,24 +94,6 @@ Pour des cas test :
 Pour la cinématique, superposition d'un mouvement rigide et d'un warping de la section :
 \cite{Simo1991} dans l'extension de \cite{Reissner1973}
 
-
-\subsection{Overview}
-Résumé du chapitre
-
-\footnote{For a shearable rod, the condition that $\vect{d}_3$ and $\vect{t}$ coincide is relaxed.}
-\footnote{in the directions of the principal axes of inertia of its cross-section}
-\footnote{The parameter $\rconf{s}$, usually chosen as the arc length parameter for the undeformed rod, is no longer the arc length parameter for the deformed rod, since there are deformations of shear and extension. The current arc length of the deformed rod is a function of $\rconf{s}$, which is often denoted by $s(\rconf{s})$.}
-
-
-\blockcquote[p.~xvii]{Benvenuto1991b}{The battle between weight and rigidity constitutes, in itself, the single aesthetic theme of art in architecture~: and to bring out this conflict in the most varied and clearest way is its office.}
-
-\blockcquote[p.~xvii]{Villaggio1997}{The theory of elastic structures is, by definition, the collection of all reasonable models, proposed during almost three centuries, concerned with simplifying the solutions of problems involving elastic bodies. The equations describing the motion and equilibrium of a three-dimensional elastic body were formulated in full generality during the first half of the nineteenth century, but their solutions are known only in a few cases.}
-
-\blockcquote[p.~68]{Audoly2010}{In a deformed state, the center line has no particular reason to remain straight and, in general, $\vect{d}_1$ and $\vect{d}_2$ will twist along the center line. However, in the case of small strain that we consider, the triad $(\vect{d}_1,\vect{d}_2,\vect{d}_3)$ remains approximately orthonormal, provided it has been chosen orthonormal in the reference configuration. This is known as the Euler-Bernoulli or Navier-Bernoulli kinematical hypothesis, or sometimes the assumption of unshearable rods.}
-
-Extension to the case of thin-walled sections by~\cite{Dias2015, Vetyukov2014} in the case of ribbons. From the Vlasov
-
-\blockcquote[p.]{Dias2014}{For thin beams having a slender cross-section, $h \ll w$, the classical rod theory of Kirchhoff is known to be inapplicable. Such beams are usually modeled using Vlasov’s theory for thin-walled beams. Vlasov’s models can be justified from 3D elasticity but only in the case of moderate deformations, when the cross-sections bend by a small amount. In the present work, however, we have considered large deformations of thin strips. The strip has been modeled as an inextensible  plate, and the geometric  constraint of inextensibility has been treated exactly~: the cross-sections are allowed to bend by a significant amount. Our model extends the classical strip model of Sadowsky, and reformulate it in a way that fits into the classical theory of rods.}
 
 \clearpage
 \section{Introduction to the special Cosserat theory of rods}
@@ -408,7 +410,7 @@ going further with non uniform torsion~\cite{Alves2014}
 
 % Description of the motion
 % ----------------------------------
-\subsection{Description of the motion}
+\subsection{Description of the motion}\label{sec:kirchhoff_motion}
 To describe the motion of a Kirchhoff rod, we use the framework presented in \cref{sec:cosserat_motion} for Cosserat rods.\footnote{We use the notation employed by Antman in his \emph{special Cosserat theory of rods}~: \blockcquote[p.~270]{Antman2005}{The motion of a special Cosserat rod is defined by three vector-valued functions~: $ [s_1, s_2] \times \mathbb{R} \ni  (s,t) \mapsto \vect{r}(s,t), \; \vect{d}_1 (s,t), \; \vect{d}_2 (s,t) \in \mathbb{E}^3$}. However, somme specific assumptions will be made over the directors in the context of Kirchhoff's theory.} However, we restrict its scope by requiring that transverse shear strains are negligible quantities, which is one of the fundamental assumptions made by Kirchhoff in his theory~:
 \begin{subequations}
 	\begin{alignat}{3}
@@ -444,7 +446,7 @@ Consequently, for each $s$ in the reference configuration, $({X_1}, {X_2})$ is a
 
 Finally, the cross-section is assumed to be bounded and the planar boundary curve is defined by the implicit equation~: $f_s(X_1,X_2) = 0$. It is also required that the shear center and the centroid of the cross-section are at the same location, otherwise one would require a more complex kinematic description of the rod.\footnote{Some details are given in the conclusion.}
 
-\subsubsection{Deformed configuration}
+\subsubsection{Deformed configuration}\label{sec:kirchhoff_deform_conf}
 % --------------------------------------------------
 We now examine the motion of a Krichhoff rod and we call \emph{deformed} configuration its actual configuration at time $t$. In this configuration the rod undergoes internal stresses under body loads, external loads and constrains. 
 

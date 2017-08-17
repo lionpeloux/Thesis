@@ -2160,14 +2160,17 @@
     <bcf:citekey order="38">Audoly2010</bcf:citekey>
     <bcf:citekey order="39">Audoly2010</bcf:citekey>
     <bcf:citekey order="40">Audoly2010</bcf:citekey>
-    <bcf:citekey order="41">Bergou2008</bcf:citekey>
-    <bcf:citekey order="42">Bishop1975</bcf:citekey>
-    <bcf:citekey order="43">Adriaenssens1999</bcf:citekey>
+    <bcf:citekey order="41">Audoly2010</bcf:citekey>
+    <bcf:citekey order="42">Bergou2008</bcf:citekey>
+    <bcf:citekey order="43">Bergou2008</bcf:citekey>
     <bcf:citekey order="44">Bergou2008</bcf:citekey>
-    <bcf:citekey order="45">Nabei2014</bcf:citekey>
-    <bcf:citekey order="46">Fuller1978</bcf:citekey>
-    <bcf:citekey order="47">Fuller1978</bcf:citekey>
-    <bcf:citekey order="48">deVries2005</bcf:citekey>
+    <bcf:citekey order="45">Bishop1975</bcf:citekey>
+    <bcf:citekey order="46">Adriaenssens1999</bcf:citekey>
+    <bcf:citekey order="47">Bergou2008</bcf:citekey>
+    <bcf:citekey order="48">Nabei2014</bcf:citekey>
+    <bcf:citekey order="49">Fuller1978</bcf:citekey>
+    <bcf:citekey order="50">Fuller1978</bcf:citekey>
+    <bcf:citekey order="51">deVries2005</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

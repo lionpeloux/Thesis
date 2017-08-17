@@ -1,6 +1,7 @@
 % Author :  Lionel du Peloux
 % Contact : lionel.dupeloux@gmail
 % Year : 2017
+% !TEX encoding = UTF-8 Unicode
 
 \chapter{Numerical Model} \label{chp:numerical_model}
 
@@ -345,13 +346,7 @@ However, this values need to be adjusted so that the static condition for rotati
 					+  \frac{1}{2} \mat{B}_{i}(\vect{\kappa b}_{2i}^+ - \rconf{\vect{\kappa b}}_{2i}^+)
 \end{equation}
 To enforce the jump discontinuity in bending moment ($\vect{M}^{ext} = \vect{M}^- - \vect{M}^+$) across the handle vertex, we define the left and right bending moments at $\vect{x}_{2i}$ as~:
-\begin{subequations}
-	\begin{align}
-		{\vect{M}_{2i}^{\perp}}^{-}	&=  \vect{M}_{2i} + \frac{1}{2} \vect{M}_{2i}^{ext} 
-		\\[0.5em]
-		{\vect{M}_{2i}^{\perp}}^{+}	&=  \vect{M}_{2i} - \frac{1}{2} \vect{M}_{2i}^{ext} 
-	\end{align}
-\end{subequations}
+
 Note that in the case where no external concentrated bending moment is applied to the handle vertex, the internal bending moment is continuous across the vertex.
 
 \subsubsection{Left/right curvature at handle vertices}

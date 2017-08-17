@@ -1,4 +1,9 @@
-\chapter{Geometry of smooth and discrete space curves}
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
+% !TEX encoding = UTF-8 Unicode
+
+\chapter{Geometry of smooth and discrete space curves}\label{chp:curve}
 \section{Introduction}
 In this chapter, our goal is to develop a comprehensive view of the geometry of space curves and how to frame such curves. Indeed, framed curve representations are of central importance when dealing with slender beam models, as they are often modeled using curvilinear coordinate systems. This is the kind of representation on which our beam model will be based on.
 
@@ -70,7 +75,7 @@ Let $\gamma=(I,F)$ be a parametric curve, and $t_0 \in I$ be a parameter.
 Here and thereafter, the prime symbol denotes the derivation with respect to the parameter and the product symbol denotes the cross product.
 % reparametrization
 \subsection{Reparametrization}
-Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\mathbb{R}}^{3}$ an interval, and $\varphi\colon I\mapsto J$ be a ${\mathcal{C}}^{k}$ diffeomorphisme. Lets define $G=F\circ\varphi$. Then~:
+Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\mathbb{R}}^{3}$ an interval, and $\varphi\colon I\mapsto J$ be a ${\mathcal{C}}^{k}$ diffeomorphisme. Let's define $G=F\circ\varphi$. Then~:
 \begin{itemize}
 	\item $G\in{\mathcal{C}}^{k}(J,{\mathbb{R}}^3)$
 	\item $G(J)=F(I)$
@@ -96,6 +101,7 @@ Note that as expected, the length of $\gamma$ is invariant under reparametrizati
 
 % arc length
 \subsection{Arc length parametrization}\label{sec:arclength_param}
+
 Let $\gamma=(I,F)$ be a regular parametric curve. Let $t_0 \in I$ be a given parameter. The following map is said to be the \emph{arc length of origin $t_0$} of $\gamma$~:
 \begin{equation}
 	s \colon t \mapsto \int_{t_{0}}^{t}\norm{F'(u)}du
@@ -104,7 +110,7 @@ Let $\gamma=(I,F)$ be a regular parametric curve. Let $t_0 \in I$ be a given par
 \end{equation}
 The arc length $s \colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
 
-Lets define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\forall s \in J,\; \norm{G'(s)} = 1$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed ($\norm{G'} = 1$).\footnote{Regular curves are also known as \emph{unit speed} curves.}
+Let's define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\forall s \in J,\; \norm{G'(s)} = 1$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed ($\norm{G'} = 1$).\footnote{Regular curves are also known as \emph{unit speed} curves.}
 
 Thereafter, for a regular curve $\gamma$, $\gamma(t)$ will denote the point $F(t)$ of parameter $t \in I$ while $\gamma(s)$ will denote the point $G(s)$ of arc length $s \in J=[0,L]$.
 
@@ -445,7 +451,7 @@ In his paper~\cite{Bishop1975} Bishop establishes the differential equation that
 In this section we introduce the notion of \emph{moving frame} and two properties of interest that such a frame can exhibit in addition, namely~: to be \emph{adapted} to the curve ; and to be \emph{rotation-minimizing} regrading a given direction. We then reconsider the case of the Frenet frame regrading this mathematical framework. Finally, we introduce the \emph{zero-twisting} frame also known as the \emph{Bishop} frame.\footnote{Named after Bishop who introduced it.} This tool will be fundamental for our futur study of slender beams.
 
 % moving frame
-\subsection{Moving frame}
+\subsection{Moving frame}\label{sec:moving_frame}
 
 Let $\gamma$ be a curve parametrized by arc length. A map $F$ which associates to each point of arc length parameter $s$ a direct orthonormal trihedron is said to be a \emph{moving frame}~:
 \begin{equation}
@@ -510,7 +516,7 @@ Since the progression of any moving frame along $\gamma$ is ruled by a first-ord
 \centering
 \includegraphics[]{darboux.pdf}
 \captionof{figure}[Geometric interpretation of the angular velocity vector of a moving frame]{Geometric interpretation of the angular velocity vector of a moving frame.}
-\label{fig:3_4}
+\label{fig:geo_interpretation}
 \end{figure}
 
 % ANGULAR VELOCITY VECTOR
@@ -528,7 +534,7 @@ This system can be seen as the \emph{equations of motion} of the frame moving al
 	\end{bmatrix}
 \end{equation}
 This result is straightforward deduced from \cref{eq:movingframe}. Note that the cross product reveals the skew-symmetric nature of the system, which could already be seen in \cref{eq:movingframe}.
-Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc length $s$ and $s+ds$ (see \cref{fig:3_4}) shows that the scalar functions $\tau$, $k_{1}$ and $k_{2}$ effectively correspond to the angular speed of the frame moving along $\gamma$, respectively around $\vect{e}_{3}$, $\vect{e}_{1}$ and $\vect{e}_{2}$~:
+Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc length $s$ and $s+ds$ (see \cref{fig:geo_interpretation}) shows that the scalar functions $\tau$, $k_{1}$ and $k_{2}$ effectively correspond to the angular speed of the frame moving along $\gamma$, respectively around $\vect{e}_{3}$, $\vect{e}_{1}$ and $\vect{e}_{2}$~:
 \begin{subequations}
 	\begin{alignat}{2}
 		&\frac{d\theta_3}{ds}(s) &&= \tau(s)
@@ -1228,7 +1234,7 @@ In this section we compare, for three remarkable types of curves (line, semicirc
 % Straight line
 \subsubsection{Straight line}
 
-Lets consider any straight line. Its smooth curvature is null. So are the discrete curvatures $\kappa_1$ and $\kappa_3$ (see \cref{tab:kb_def}). In this case, the discrete bending energies perfectly match the bending energy of the smooth curve~:
+Let's consider any straight line. Its smooth curvature is null. So are the discrete curvatures $\kappa_1$ and $\kappa_3$ (see \cref{tab:kb_def}). In this case, the discrete bending energies perfectly match the bending energy of the smooth curve~:
 \begin{equation}
 	\mathcal{E} = \mathcal{E}_1 = \mathcal{E}_3 = 0
 \end{equation}
@@ -1236,7 +1242,7 @@ Lets consider any straight line. Its smooth curvature is null. So are the discre
 % Circle
 \subsubsection{Semicircle}
 
-Lets consider a semicircle of curvature $\kappa =1/r$ and length $L = \pi r$. This curve is discretized into $n$ edges of equal length $|\vect{e}_n| = 2r\sin (\varphi/2)$ where $\varphi = \tfrac{\pi}{n}$ (see \cref{fig:semicircle}). The total length of the discrete curve is given by~: $L_n = n |\vect{e}_n| = L \frac{\sin(\varphi/2)}{\varphi/2}$. In this simple case, the bending energies can be expressed analytically~:
+Let's consider a semicircle of curvature $\kappa =1/r$ and length $L = \pi r$. This curve is discretized into $n$ edges of equal length $|\vect{e}_n| = 2r\sin (\varphi/2)$ where $\varphi = \tfrac{\pi}{n}$ (see \cref{fig:semicircle}). The total length of the discrete curve is given by~: $L_n = n |\vect{e}_n| = L \frac{\sin(\varphi/2)}{\varphi/2}$. In this simple case, the bending energies can be expressed analytically~:
 \begin{subequations}
 \setlength{\jot}{6pt}
 \begin{alignat}{5}
@@ -1249,7 +1255,7 @@ Note that $\kappa_1$ equals the curvature of the smooth curve. Consequently, the
 
 % Elastica
 \subsubsection{Elastica}
-Lets consider a sequence of elastica curves of fixed length $L$ and variable curvature $\kappa$ (see \cref{fig:elastica_seq}). This curves correspond to a buckled shape of a straight pinned-pinned beam that would have been forced to retract its span. These curves are discretized into $n$ edges of equal length (see \cref{fig:elastica_discretization}). This time, there is no analytical expressions available for $\mathcal{E}$, $\mathcal{E}_1$ and $\mathcal{E}_3$. Results are obtained by numerical integration and plotted in \cref{fig:bench_elastica}. Again, graphs show that $\mathcal{E}_1$ converges to the smooth case faster than $\mathcal{E}_3$ for most of the curves excepted the ones with low overall curvature (1 to 5).
+Let's consider a sequence of elastica curves of fixed length $L$ and variable curvature $\kappa$ (see \cref{fig:elastica_seq}). This curves correspond to a buckled shape of a straight pinned-pinned beam that would have been forced to retract its span. These curves are discretized into $n$ edges of equal length (see \cref{fig:elastica_discretization}). This time, there is no analytical expressions available for $\mathcal{E}$, $\mathcal{E}_1$ and $\mathcal{E}_3$. Results are obtained by numerical integration and plotted in \cref{fig:bench_elastica}. Again, graphs show that $\mathcal{E}_1$ converges to the smooth case faster than $\mathcal{E}_3$ for most of the curves excepted the ones with low overall curvature (1 to 5).
 
 % Conclusion
 \subsubsection{Conclusion}
