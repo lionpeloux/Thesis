@@ -21,7 +21,7 @@ In this chapter, our goal is to develop a beam model suitable for the modeling o
 This chapter is devoted to the development of the beam model. The formulation of a discrete element and its implementation in a numerical solver are treated in a dedicated chapter (see \cref{chp:numerical_model}).
 
 \subsection{Overview}
-We begin this chapter by establishing a representation for any geometric configuration of a Kirchhoff rod (see \cref{sec:kirchhoff_rod}) based on a curve-angle description. This representation is 
+We begin this chapter by presenting Kirchhoff model of rods based on two main hypothesis~: the inextensibility and the Euler-Bernouili assumption (see \cref{sec:kirchhoff_rod}). We introduce a \dofs{6} representation of the rod composed of a centerline and a material frame. Thanks to a convenient reference frame we reduce this formulation to \dofs{4} and adopt a curve-angle description of the rod (see \cref{sec:crvangle}). From there, we formulate a variational problem that will lead to the calculation of the internal forces and moments acting on the rod (see \cref{sec:varpb}). We calculate the gradients of the elastic energy to obtain the internal twisting moment (see \cref{sec:dE_dtheta}) and the internal forces (see \cref{sec:dE_dx}). Finally, we discuss the potential of our model and suggest new possibilities (see \cref{sec:discussVar}).
 
 \subsection{Contributions}
 \begin{itemize}
@@ -40,24 +40,14 @@ We begin this chapter by establishing a representation for any geometric configu
 
 \citef{Tayeb2015a}, \citef{DuPeloux2015} and \citef{Lefevre2017} follow \cite{Bergou2008} to model grids of interconnected slender beams. They implement their model in a dynamic relaxation solver to formfind elastic gridshells. They formulate a special connexion.
 
-\cite{Spillmann2007}.
-\cite{Fuller1978},~\cite{deVries2005}, ~\cite{Vauquelin2000},~\cite{Berger2009}
-Mireille Gregoire
-Bertail
-Spilmann
-Hose
-Pour intro~:~\cite{Jung2010}
+\citef{Gregoire2007} use the Cosserat theory of rods to simulate naturally straight hoses (application to wire routing or assembly simulation for the automotive industry). The material frame is parametrized by a global rotation using quaternions. The simulation is treated in a quasi-static manner. The problem is formulated as an energy minimization problem solved with newton, conjugate gradient or steepest descent method. \citef{Theetten2008} formulate a geometrically exact dynamic spline model for the simulation of one dimensional objects. They handle elastic and plastic deformations as fracture. \citef{Bertails2006} model the non linear behavior of hair strands with super-helicies. This work is extended later by \citef{Bertails2012} using super-clothoids. This methods have the advantage to postulate a precise geometric interpolation at each point of the rod. \citef{Spillmann2007} adopt a somehow similar approach. They remark that solving directly the Lagrangian equations of motion by a gradient method is too expensive. Thus, they fall back to a semi-implicit Euler integration scheme.
 
+\citef{Jung2010} provide a deep insight to the discrete mechanics of Cosserat rods, as discrete mechanics is a field of research of growing importance.
 
+\citef{Fuller1978}, \citef{Vauquelin2000}, \citef{deVries2005} and \citef{Berger2009} are worth to read to understand the variation of the parallel transport when deforming a path.
 
-%\note{
-%\begin{enumerate}
-%\item quaternion pour piloter les input / ouput ?
-%\item calcul de la hessienne au moins pour les $\theta$ comme Audoly. Ne serait-ce pas possible pour les $x$ ?  Avec ma technique du transport parallèle il me semble pourvoir avoir accès au DL à  l'ordre 2 \dots
-%\item Formulation pour les efforts ponctuels / moments extérieurs en vue d'une résolution par minimisation. Voir F. Bertails
-%\item prise en compte des contraintes => méméthide des multiplicateurs de lagrange
-%\end{enumerate}
-%}
+%Quaternions also lack singular points and gimbal lock, contrarily to Euler or Cardan angles.
+
 
 % #######################################################
 \section{Kirchhoff rod}\label{sec:kirchhoff_rod}
@@ -173,11 +163,14 @@ The twisting moment ($Q$) and the components of the bending moment ($M_1$, $M_2$
 		M_2 = EI_2 (\kappa_2 - \rconf{\kappa_2}) \label{eq:M2}
 	\end{alignat}
 \end{subequations}
-We also introduce the vector of internal moments as~:
-\begin{equation}
-	\vect{M} = Q\vect{d}_3 + M_1\vect{d}_1 + M_2\vect{d}_2
+We also introduce the vector of internal moments and its as~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\vect{M} &&= Q\vect{d}_3 + M_1\vect{d}_1 + M_2\vect{d}_2 \\
+		&\vect{M}^{\perp} &&= M_1\vect{d}_1 + M_2\vect{d}_2 
+	\end{alignat}	
 \label{eq:vM}
-\end{equation}
+\end{subequations}
 
 \subsection{Elastic energy}
 Kirchhoff's theory assigns an elastic energy to beams according to their strain~\cite{Audoly2010}. In this theory, a beam is supposed to be inextensible. Thus the elastic energy ($\mathcal{E}$) only accounts for bending and torsion and behaviors and is given by~:
@@ -196,7 +189,7 @@ Indeed, by definition for a rod with isotropic cross-section~: $EI_1 = EI_2 = EI
 
 In that particular case, the geometry of the centerline is not influenced by the amount of uniform twist (hence torsion) present in the rod.
 
-\section{Curve-angle representation}
+\section{Curve-angle representation}\label{sec:crvangle}
 
 In the previous paragraph we have shown how the elastic energy of a rod can be computed with respect to the position of its centerline and the orientation of its cross-sections. This representation can be naturally described with six degrees of freedom (\dofs{6})~: \footnote{This is the usual choice in which the orientation of the material frame is parametrized by a rotation matrix, or equivalently a quaternion.}
 \begin{itemize}
@@ -290,11 +283,11 @@ We introduce the vector of material curvatures ($\vect{\omega}$) as the 2-dimens
 	\end{bmatrix*}
 \end{equation}
 
-\section{Definition of the variational problem}
+\section{Definition of the variational problem}\label{sec:varpb}
 We now have all the ingredients to build the variational problem that will lead us to the determination of the internal forces ($\vect{f}$) and the internal twisting moment ($\vect{m}$) acting on the centerline. Indeed, the quasi-static out-of-balance internal forces and twisting moment acting on the beam are calculated by differentiating the elastic energy of the system with respect to the 4 \dofs{} of the system, namely $\vect{x}$ and $\theta$.
 
 \subsection{Calculus of variations}
-Differentiating $\mathcal{E}$ with respect to $\vect{x}$ will yield the linear resultant of the internal forces ($\vect{f}$, see \cref{eq:dE_dtheta}), while differentiating $\mathcal{E}$ with respect to $\theta$ will yield the linear resultant of the internal twisting moment ($\vect{m}$, see \cref{eq:dE_dx}). Main results for the calculus of variations are reminded in \cref{chp:variation}.
+Differentiating $\mathcal{E}$ with respect to $\vect{x}$ will yield the linear resultant of the internal forces ($\vect{f}$, see \cref{sec:dE_dtheta}), while differentiating $\mathcal{E}$ with respect to $\theta$ will yield the linear resultant of the internal twisting moment ($\vect{m}$, see \cref{sec:dE_dx}). Main results for the calculus of variations are reminded in \cref{chp:variation}.
 
 These forces and moments will be used later in a damped explicit dynamic procedure to solve the equilibrium of the system. However, they are nothing but the gradient of the elastic energy and any other variational method can be employed to find a geometric configuration that minimize the elastic energy, that is a configuration in which the rod is at static equilibrium (our ultime goal).
 
@@ -362,7 +355,7 @@ for the computation of $\vect{f}$.
 
 This assumption is not mandatory -- for instance it is not made by \citef{Nabaei2014} -- but was found to lead to simpler and faster computations.
 
-\section{Energy gradient with respect to $\theta$~: twisting moment}\label{eq:dE_dtheta}
+\section{Energy gradient with respect to $\theta$~: twisting moment}\label{sec:dE_dtheta}
 
 For the calculus of variations, the reader is invited to refer to \cref{chp:variation} where the notations employed through out this section are defined and where main results are reminded. 
 
@@ -494,7 +487,7 @@ or equivalently~:
 \end{equation}
 
 
-\section{Energy gradient with respect to $x$~: internal forces}\label{eq:dE_dx}
+\section{Energy gradient with respect to $x$~: internal forces}\label{sec:dE_dx}
 
 For the calculus of variations, the reader is invited to refer to \cref{chp:variation} where the notations employed through out this section are defined and where main results are reminded. 
 
@@ -882,7 +875,7 @@ Calculus of $\mathcal{A}$~:
 		\end{bmatrix*}\cdot \vect{h}_x'' \;dt \\
 \label{eq:calcA}
 \end{equation}
-One can remark that the (row) vector found in \cref{eq:calcA} can be rewritten as~: \footnote{Here, we mix up vector and matrix notations. The matrix form of a vector is given by the components of the vector in the material frame coordinate system. For instance, $({\vect{d}_3} \times \vect{M})^T$ is a row vector that writes in its matrix form~: $\begin{bmatrix} 0,\;-M2,\;M1 \end{bmatrix}$.}
+One can remark that the (row) vector found in \cref{eq:calcA} can be rewritten as~: \footnote{Here, we mix up vector and matrix notations. The matrix form of a vector is given by the components of the vector in the material frame coordinate system. For instance, $({\vect{d}_3} \times \vect{M}^{\perp})^T$ is a row vector that writes in its matrix form~: $\begin{bmatrix} 0,\;-M2,\;M1 \end{bmatrix}$.}
 \begin{equation}
 	\left(\vect{\omega} - \rconf{\vect{\omega}}\right)^T \mat{B}
 		\begin{bmatrix*}[r]
@@ -890,36 +883,36 @@ One can remark that the (row) vector found in \cref{eq:calcA} can be rewritten a
 			{\vect{d}_1}^T\\
 		\end{bmatrix*}
 	=  M_2{\vect{d}_1}^T - M_1{\vect{d}_2}^T
-	= - ({\vect{d}_3} \times \vect{M})^T
+	= - ({\vect{d}_3} \times \vect{M}^{\perp})^T
 \end{equation}
 Thus,  $\mathcal{A}$ could be rewritten in it's vectoriel form~:
 \begin{equation}
 	\begin{aligned}
 	\mathcal{A}
-	& = -\int_{0}^{L} ({\vect{d}_3} \times \vect{M}) \cdot \vect{h}_x'' \;dt \\
-	& = -\left[\left({\vect{d}_3} \times \vect{M}\right) \cdot \vect{h}_x'\right]_0^L
-		+ \int_{0}^{L} \left({\vect{d}_3} \times \vect{M}\right)'\cdot \vect{h}_x' \;dt \\
-	& = -\left[\left({\vect{d}_3} \times \vect{M}\right) \cdot \vect{h}_x'\right]_0^L
+	& = -\int_{0}^{L} ({\vect{d}_3} \times \vect{M}^{\perp}) \cdot \vect{h}_x'' \;dt \\
+	& = -\left[\left({\vect{d}_3} \times \vect{M}^{\perp}\right) \cdot \vect{h}_x'\right]_0^L
+		+ \int_{0}^{L} \left({\vect{d}_3} \times \vect{M}^{\perp}\right)'\cdot \vect{h}_x' \;dt \\
+	& = -\left[\left({\vect{d}_3} \times \vect{M}^{\perp}\right) \cdot \vect{h}_x'\right]_0^L
 		+ \int_{0}^{L} \left(
-			\left({\vect{d}_3} \times \vect{M}'\right) \cdot \vect{h}_x'
-			+ \left({\vect{h}'_x} \times \vect{d}_3'\right) \cdot \vect{M}
+			\left({\vect{d}_3} \times {\vect{M}^{\perp}}'\right) \cdot \vect{h}_x'
+			+ \left({\vect{h}'_x} \times \vect{d}_3'\right) \cdot \vect{M}^{\perp}
 			 \right)\;dt \\
 	\end{aligned}
 \end{equation}
-Recall that from \cref{eq:axialstrain} that $\vect{h}'_x \cdot \vect{d}_3 = 0$  and from \cref{eq:mf_motion} that $\vect{d}'_3 \cdot \vect{d}_3 = 0$. Hence, $\vect{h}'_x \times \vect{d}_3'$ is colinear to $\vect{d}_3$. Or by definition $\vect{M}$ is orthogonal to $\vect{d}_3$. Thus, $\left({\vect{h}'_x} \times \vect{d}_3'\right) \cdot \vect{M} = 0$.
+Recall that from \cref{eq:axialstrain} that $\vect{h}'_x \cdot \vect{d}_3 = 0$  and from \cref{eq:mf_motion} that $\vect{d}'_3 \cdot \vect{d}_3 = 0$. Hence, $\vect{h}'_x \times \vect{d}_3'$ is colinear to $\vect{d}_3$. Or by definition $\vect{M}^{\perp}$ is orthogonal to $\vect{d}_3$. Thus, $\left({\vect{h}'_x} \times \vect{d}_3'\right) \cdot \vect{M}^{\perp} = 0$.
 Finally, after a second integration by parts~:
 \begin{equation}
 	\begin{aligned}
 	\mathcal{A}
-	& = -\left[\left({\vect{d}_3} \times \vect{M}\right) \cdot \vect{h}_x'\right]_0^L
+	& = -\left[\left({\vect{d}_3} \times \vect{M}^{\perp}\right) \cdot \vect{h}_x'\right]_0^L
 		+ \int_{0}^{L} \left(
-			{\vect{d}_3} \times \vect{M}'\right) \cdot \vect{h}_x'
+			{\vect{d}_3} \times {\vect{M}^{\perp}}'\right) \cdot \vect{h}_x'
 			 \;dt \\
-	& = 	\left[
-			({\vect{d}_3} \times \vect{M}') \cdot \vect{h}''_x\
-			- ({\vect{d}_3} \times \vect{M}) \cdot \vect{h}_x'
+	& = 	\phantom{-}\left[
+			({\vect{d}_3} \times {\vect{M}^{\perp}}') \cdot \vect{h}''_x\
+			- ({\vect{d}_3} \times \vect{M}^{\perp}) \cdot \vect{h}_x'
 		\right]_0^L
-		- \int_{0}^{L} \left({\vect{d}_3} \times \vect{M}'\right)' \cdot \vect{h}_x \;dt \\
+		- \int_{0}^{L} \left({\vect{d}_3} \times {\vect{M}^{\perp}}'\right)' \cdot \vect{h}_x \;dt \\
 	\end{aligned}
 \label{eq:A}
 \end{equation}
@@ -1021,7 +1014,7 @@ Finally, combining \cref{eq:A,eq:BC} into \cref{eq:dEdx} yields~:
 		\pdiffof{x}{\mathcal{E}_b[\vect{\omega}[\vect{x}]]}{s}{\vect{h}_x}
 		=
 		\int_{0}^{L} \left(
-		- \left({\vect{d}_3} \times \vect{M}'\right)'
+		- \left({\vect{d}_3} \times {\vect{M}^{\perp}}'\right)'
 		- \left(\beta(\theta' -{\rconf{\theta}'}) \vect{\kappa b}\right)'
 		\right)\cdot \vect{h}_x \;dt\\
 \label{eq:dEbdx}
@@ -1034,34 +1027,44 @@ The gradient of the elastic energy with respect to $\vect{x}$ is obtained from \
 	\scalar{-\vect{f}(s)}{\vect{h}_x} &= \pdiffof{x}{\mathcal{E}}{s}{\vect{h}_x}
 		=
 		- \int_{0}^{L} \left(
-		\left({\vect{d}_3} \times \vect{M}'\right)'
+		\left({\vect{d}_3} \times {\vect{M}^{\perp}}'\right)'
 		+ \left(\beta(\theta' -{\rconf{\theta}'}) \vect{\kappa b}\right)'
 		\right)\cdot \vect{h}_x \;dt\\
 	\end{aligned}
 \end{equation}
 Finally, we can conclude on the expression of the distributed internal forces acting on the centermine~:
 \begin{equation}
-	\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}'(s) + \beta\left(\theta' -{\rconf{\theta}'}\right) \vect{\kappa b}\right)'(s)
+	\vect{f}(s) = \left({\vect{d}_3} \times {\vect{M}^{\perp}}'(s) + \beta\left(\theta' -{\rconf{\theta}'}\right) \vect{\kappa b}\right)'(s)
 \end{equation}
 Remark that this expression can be rewritten thanks to \cref{eq:Q2} as~:
 \begin{equation}
-	\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}' + Q \vect{\kappa b}\right)'(s)
+	\vect{f}(s) = \left({\vect{d}_3} \times {\vect{M}^{\perp}}' + Q \vect{\kappa b}\right)'(s)
 \label{eq:fint}
 \end{equation}
 
-\section{Internal forces and moments acting on the rod}
-We gather and recall from \cref{eq:fint,eq:mint} the expressions of the quasi-static internal forces and internal twisting moment acting on the rod~:
+\section{Shear force acting on the rod}\label{sec:fmint}
+From \cref{eq:fint,eq:mint} we deduce the internal shear force and distributed twisting moment acting on the rod~:
 \begin{subequations}
 	\begin{alignat}{2}
-	&\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}' + Q \vect{\kappa b}\right)'(s)\\
-	&m(s) = Q'(s) +  \kappa_1(s) M_2(s) - \kappa_2(s) M_1(s)
+	\vect{F} &=  {\vect{d}_3} \times \vect{M}' \label{eq:Fshear}\\
+	m &= Q' +  \kappa_1\;M_2 - \kappa_2\; M_1
 	\end{alignat}
 \end{subequations}
-Remark that we fall back on the static member of the dynamical equations of rods in Kirchhoff's theory (see \cref{eq:motion}). Hence, we have proved the equivalence between the present approach (based on the calculus of variations and the formulation of an elastic energy) and a more direct approach from the well-established dynamical equations.
+Remark that we fall back on the static member of the dynamical equations of rods in Kirchhoff's theory (see \cref{eq:motion}). Hence, we have proved the equivalence between the present approach (based on the calculus of variations and the formulation of an elastic energy) and a more direct approach from the well-established Kirchhoff equations.\footnote{It is easy from \cref{eq:Fshear} to retrieve \cref{eq:motion_4,eq:motion_5} considering that~: 
+\begin{equation*}
+	\begin{aligned}
+	{\vect{d}_3} \times \vect{M}'
+	&= \vect{d}_3 \times ({\vect{M}^{\perp}}' + (Q\;\vect{d}_3)') \\
+	&= \vect{d}_3 \times ({\vect{M}^{\perp}}' + Q\;\vect{d}'_3) \\
+	&=  \vect{d}_3 \times ({\vect{M}^{\perp}}' + Q\;(\tau \vect{d}_3 + \vect{\kappa b}) \times \vect{d}_3) \\
+	&= \vect{d}_3 \times {\vect{M}^{\perp}}' +  Q\;\vect{\kappa b}
+	\end{aligned}
+\end{equation*}}
 
-\section{Conclusion}
-We have build upon \citef{Bergou2008} a reduced coordinate beam theory for the modeling of slender rods with anisotropic cross-section and arbitrary natural geometry. This model assumes that the rod is inextensible, that cross-sections remain plane and perpendicular to the centerline and that the material behaves linearly
+\section{Discussion}\label{sec:discussVar}
+We have build upon \citef{Bergou2008} a reduced coordinate beam theory for the modeling of slender rods with anisotropic cross-section and arbitrary natural geometry. This model assumes that the rod is inextensible, that cross-sections remain plane and perpendicular to the centerline, and that the material behaves linearly.
 
+This model is a serious step forward for the modeling of elastic gridshells compared to the actual \dofs{3} beam element developed by \citef{Adriaenssens2001} and extended by \citef{Douthe2006} has It enables the modeling of~: fixed support conditions~; rectangular beams like the one used in timber gridshells; complex connections. However, nothing was done to take into account external loads and this is at that point a drawback worth to mentionne.
 
 Unlike \citef{Bergou2008} and \citef{Nabaei2014}~:
 \begin{itemize}
@@ -1070,21 +1073,10 @@ Unlike \citef{Bergou2008} and \citef{Nabaei2014}~:
 \item Our model is developed in the smooth world and thus the choice of the discretization is left to the stage of the numerical implementation, which we believe gives more flexibility.
 \end{itemize}
 
-On retrouve les équations de kirchhoff dynamique où l'on a négligé les forces inertielles de rotation d'un élément de poutre autour de $\vect{d}_1$ et $\vect{d}_2$ pour ne garder que la dynamique de rotation de la section autour de la fibre neutre $\vect{d}_3$.
+\section{Conclusion}
+From this first model, we suggest to look at a different approach based on the dynamical Kirchhoff equations for rods. Although this development would be theoretically equivalent to the present approach, it would probably lead in a more straightforward manner to the calculation of the forces acting on the centerline, as suggested by \cref{sec:fmint}. Moreover, unlike the variational approach, the dynamic equations are easy to write taking into account the action of external forces and moments acting on the rod. This would lead to a more easy-to-implement and theoretically-solid management of these actions.
 
-The shear force acting on the right side of a section is nothing but $\vect{T} = \int \vect{f}$~:
-\begin{equation}
-	\vect{T}(s) = \vect{d}_3 \times \vect{M}'
-		+ Q \vect{\kappa b}
-\end{equation}
-The linear momentum acting on the centerline is given by~:
-\begin{equation}
-	m(s) = Q' - \vect{\kappa b} \cdot (\vect{d}_3 \times \mat{M})
-\end{equation}
- The main hypothesis are~:
-\begin{itemize}
-\item Bernoulli~: $\vect{d}_i \cdot \vect{d}_j = \delta_{ij}$
-\item Inextensibility~: $\|\vect{d}'_3\| = 1$
-\item Quasistatic~: at each timestep regarding bending motion $m(s) = 0$
-\end{itemize}
+Finally, this approach might be better to treat the inextensibility not as a constraint but as part as an internal force acting on the centerline.
+
+
 
