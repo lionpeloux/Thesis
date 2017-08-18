@@ -2192,7 +2192,9 @@
     <bcf:citekey order="70">Nabaei2014</bcf:citekey>
     <bcf:citekey order="71">Fuller1978</bcf:citekey>
     <bcf:citekey order="72">Fuller1978</bcf:citekey>
-    <bcf:citekey order="73">deVries2005</bcf:citekey>
+    <bcf:citekey order="73">Fuller1978</bcf:citekey>
+    <bcf:citekey order="74">Fuller1978</bcf:citekey>
+    <bcf:citekey order="75">deVries2005</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
