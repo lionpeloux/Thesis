@@ -42,14 +42,11 @@ We begin this chapter by establishing a representation for any geometric configu
 
 \cite{Spillmann2007}.
 \cite{Fuller1978},~\cite{deVries2005}, ~\cite{Vauquelin2000},~\cite{Berger2009}
-
+Mireille Gregoire
 Bertail
 Spilmann
 Hose
 Pour intro~:~\cite{Jung2010}
-
-
-
 
 
 
@@ -171,11 +168,16 @@ Note that In the literature these quantities are sometimes called \emph{strain r
 The twisting moment ($Q$) and the components of the bending moment ($M_1$, $M_2$) are determined through the usual material constitutive equations~:
 \begin{subequations}
 	\begin{alignat}{2}
-		Q = GJ (\tau_1 - \rconf{\tau_1}) \\
-		M_1 = EI_1 (\kappa_1 - \rconf{\kappa_1}) \\
-		M_2 = EI_2 (\kappa_2 - \rconf{\kappa_2})
+		Q = GJ (\tau_1 - \rconf{\tau_1}) \label{eq:Q}\\
+		M_1 = EI_1 (\kappa_1 - \rconf{\kappa_1}) \label{eq:M1}\\
+		M_2 = EI_2 (\kappa_2 - \rconf{\kappa_2}) \label{eq:M2}
 	\end{alignat}
 \end{subequations}
+We also introduce the vector of internal moments as~:
+\begin{equation}
+	\vect{M} = Q\vect{d}_3 + M_1\vect{d}_1 + M_2\vect{d}_2
+\label{eq:vM}
+\end{equation}
 
 \subsection{Elastic energy}
 Kirchhoff's theory assigns an elastic energy to beams according to their strain~\cite{Audoly2010}. In this theory, a beam is supposed to be inextensible. Thus the elastic energy ($\mathcal{E}$) only accounts for bending and torsion and behaviors and is given by~:
@@ -267,6 +269,7 @@ With this \dofs{4} representation, the material twist is directly expressed in t
 Finally, using the definition of $\tau$ from \cref{eq:mf_motion} and the fact that $\vect{\kappa b}$ is perpendicular to $\vect{d}_3$ we can deduce that $\tau=\theta'$~:
 \begin{equation}
 	\tau = \vect{d}'_1 \cdot \vect{d}_2 = (\theta'\vect{d}_2 + \vect{\kappa b}\times\vect{d}_1)\cdot \vect{d}_2 = \theta' + \vect{d}_3\cdot\vect{\kappa b} = \theta'
+\label{eq:thetatau}
 \end{equation}
 Here, the benefits of the curve-angle representation are revealed as the material twist is now simply given by the rate of $\theta$ with respect to the arc length parameter $s$. Everything happens as if the Bishop would enable a directe measurement of the mechanical torsion, getting ride of the intrinsic geometric torsion of the centerline itself (aka the torsion of Frenet).
 \subsection{Vector of material curvatures}
@@ -288,10 +291,10 @@ We introduce the vector of material curvatures ($\vect{\omega}$) as the 2-dimens
 \end{equation}
 
 \section{Definition of the variational problem}
-We now have all the ingredients to build the variational problem that will lead us to the determination of the internal forces ($\vect{f}$) and the internal moments ($\vect{m}$) acting on the centerline. Indeed, the quasi-static out-of-balance internal forces and moments acting on the beam are calculated by differentiating the elastic energy of the system with respect to the 4 \dofs{} of the system, namely $\vect{x}$ and $\theta$.
+We now have all the ingredients to build the variational problem that will lead us to the determination of the internal forces ($\vect{f}$) and the internal twisting moment ($\vect{m}$) acting on the centerline. Indeed, the quasi-static out-of-balance internal forces and twisting moment acting on the beam are calculated by differentiating the elastic energy of the system with respect to the 4 \dofs{} of the system, namely $\vect{x}$ and $\theta$.
 
 \subsection{Calculus of variations}
-Differentiating $\mathcal{E}$ with respect to $\vect{x}$ will yield the linear resultant of the internal forces ($\vect{f}$, see \cref{eq:dE_dtheta}), while differentiating $\mathcal{E}$ with respect to $\theta$ will yield the linear resultant of the internal moments ($\vect{m}$, see \cref{eq:dE_dx}). Main results for the calculus of variations are reminded in \cref{chp:variation}.
+Differentiating $\mathcal{E}$ with respect to $\vect{x}$ will yield the linear resultant of the internal forces ($\vect{f}$, see \cref{eq:dE_dtheta}), while differentiating $\mathcal{E}$ with respect to $\theta$ will yield the linear resultant of the internal twisting moment ($\vect{m}$, see \cref{eq:dE_dx}). Main results for the calculus of variations are reminded in \cref{chp:variation}.
 
 These forces and moments will be used later in a damped explicit dynamic procedure to solve the equilibrium of the system. However, they are nothing but the gradient of the elastic energy and any other variational method can be employed to find a geometric configuration that minimize the elastic energy, that is a configuration in which the rod is at static equilibrium (our ultime goal).
 
@@ -300,6 +303,7 @@ Introducing $\vect{\omega}$ and $\theta$, the elastic energy defined in \cref{eq
 		\mathcal{E} = \mathcal{E}_{b} + \mathcal{E}_{t} =
 		\tfrac{1}{2} \int_{0}^{L} (\vect{\omega}-\rconf{\vect{\omega}})^T B (\vect{\omega}-\rconf{\vect{\omega}}) ds
 		+ \tfrac{1}{2} \int_{0}^{L} \beta(\theta' -{\rconf{\theta}'})^2 ds
+\label{eq:E2}
 \end{equation}
 where $B$ is the bending stiffness matrix given in material frame coordinate system and $\beta$ is the torsional stiffness given by~:
 \begin{equation}
@@ -310,6 +314,8 @@ where $B$ is the bending stiffness matrix given in material frame coordinate sys
 	\quad,\quad
 	\beta(s) = (GJ)(s)
 \end{equation}
+The matrix notation introduced in \cref{eq:E2} will enable more compact forms for equations. It will be used through out this chapter. Remark who the scalar product of vectors is treated as matrix multiplication with a row and column vector.
+
 The internal shear forces and the internal twisting moment are then given by~:
 \begin{subequations}
 	\begin{alignat}{2}
@@ -345,7 +351,7 @@ $\tau$ only depends on $\theta$ and is thus independent of $\vect{x}$.
 Remark that the twisting energy ($\mathcal{E}_{t}$) only depends on $\theta$ and is independent regarding $\vect{x}$ while the bending energy ($\mathcal{E}_{b}$) depends on both $\theta$ and $\vect{x}$ variables (remind that $\kappa_1$ and $\kappa_2$ are the projections of $\vect{\kappa b}$ over $\vect{d}_1$ over $\vect{d}_2$). Thus, a coupling between bending and twisting appears and the minimum of the whole elastic energy is not necessarily reached for concomitant minimums of bending and twisting energies.
 
 \subsection{Quasistatic assumption}
-Following~\citef{Bergou2008}, it is relevant to assume that the propagation of twist waves is instantaneous compared to the propagation of bending waves because for slender rods the axial stiffness is usually an order of magnitude higher than the bending stiffness. This means that the internal forces ($\vect{f}$) and the internal moment of torsion ($\vect{m}$) act on two different timescales in the rod dynamic.
+Following~\citef{Bergou2008}, it is relevant to assume that the propagation of twist waves is instantaneous compared to the propagation of bending waves because for slender rods the axial stiffness is usually an order of magnitude higher than the bending stiffness. This means that the distributed internal forces ($\vect{f}$) and the  distributed internal moment of torsion ($\vect{m}$) act on two different timescales in the rod dynamic.
 
 Thus, on the timescale of action of the internal forces on the center line, driving the bending waves, the twist waves propagate instantaneously, so that~:
 \begin{equation}
@@ -402,7 +408,7 @@ where $\mat{J}$ is the matrix that acts on two dimensional vectors by counter-cl
 
 \subsection{Computation of the twisting moment}
 
-The moment of torsion is given by the functional derivative of the elastic energy with respect to $\theta$, which can be decomposed into~:
+The distributed moment of torsion is given by the functional derivative of the elastic energy with respect to $\theta$, which can be decomposed into~:
 \begin{equation}
 	\begin{aligned}
 	\scalar{-m(s)}{h_\theta} 
@@ -457,18 +463,35 @@ The gradient of the elastic energy with respect to $\theta$ is obtained from \cr
 		&= \int_{0}^{L} \left(\left(\beta(\theta' -{\rconf{\theta}'})(\delta_L-\delta_0) - \left(\beta(\theta' -{\rconf{\theta}'})\right)'\right) - (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\right) \cdot h_\theta \;dt
 	\end{aligned}
 \end{equation}
-Finally, we can conclude on the expression of the internal twisting moment~:
+Finally, we can conclude on the expression of the distributed internal twisting moment~:
 \begin{equation}
-	m(s) = - \left(\beta(\theta' -{\rconf{\theta}'})(\delta_L-\delta_0) - \left(\beta\left(\theta' -{\rconf{\theta}'}\right)\right)'\right) + (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}
+	m(s) = - \left(\beta(\theta' -{\rconf{\theta}'})(\delta_L-\delta_0) - \left(\beta\left(\theta' -{\rconf{\theta}'}\right)\right)'\right)(s) + \left((\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\right)(s)
+\end{equation}
+Remark with \cref{eq:thetatau,eq:Q}, respectively with \cref{eq:M1,eq:M2}, that~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\beta\left(\theta' -{\rconf{\theta}'}\right) = Q \label{eq:Q2}\\
+		&(\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega} = \kappa_1 M_2 - \kappa_2 M_1
+	\end{alignat}
+\end{subequations}
+Hence, the quasi-static distributed internal twisting moment acting on the centerline is given for all $s$ in $]0,L[$ by~:
+\begin{equation}
+	m(s) = Q'(s) +  \kappa_1(s) M_2(s) - \kappa_2(s) M_1(s)
+\label{eq:mint}
 \end{equation}
 
+
 \subsubsection{Quasistatic hypothesis}
-The quasistatic assumption (see \cref{eq:quasistat_hyp}) stipulates that the gradient of the elastic energy with respect to $\theta$ can be considered null ($\pdiff{\theta}{\mathcal{E}}{s} = 0$) for the calculation of the internal forces, which involves that for all $s$ in $[0,L]$~:
+The quasistatic assumption (see \cref{eq:quasistat_hyp}) stipulates that the gradient of the elastic energy with respect to $\theta$ can be considered null ($\pdiff{\theta}{\mathcal{E}}{s} = 0$) for the calculation of the internal forces, which implies that for all $s$ in $[0,L]$~:
 \begin{equation}
 	\left(\left(\beta(\theta' -{\rconf{\theta}'})\right)' + (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\right)(s) = 0
 \label{eq:quasistat}
 \end{equation}
-
+or equivalently~:
+\begin{equation}
+	Q'(s) +  \kappa_1(s) M_2(s) - \kappa_2(s) M_1(s) = 0
+\label{eq:quasistat}
+\end{equation}
 
 
 \section{Energy gradient with respect to $x$~: internal forces}\label{eq:dE_dx}
@@ -771,26 +794,31 @@ Which finally leads to~:
 \begin{equation}
 		\vect{\omega}[\vect{x}+\lambda \vect{h}_x]  =
 		\vect{\omega}[\vect{x}] - \Psi_\epsilon\mat{J}\vect{\omega}[\vect{x}]+\lambda
-		\begin{bmatrix}
+		\begin{bmatrix*}[r]
 			-\vect{h}_x''\cdot\vect{d}_2\\
 			\vect{h}_x''\cdot\vect{d}_1\\
-		\end{bmatrix} + o(\lambda)
+		\end{bmatrix*} + o(\lambda)
 \end{equation}
 Reminding the expression of $\Psi_\epsilon$ computed in \cref{eq:psi}, one can express the derivative of the vector of material curvatures with respect to $\vect{x}$ as~:
 \begin{equation}
 			\pdiffof{x}{\vect{\omega}}{s}{\vect{h}_x}
 	= 	\left(\int_0^L \left(\left(\delta_s-\delta_0\right)\vect{\kappa b} - (1-H_s)\vect{\kappa b}'\right)\cdot  \vect{h}_x \,dt\right)\mat{J}\vect{\omega}+
-		\begin{bmatrix}
+		\begin{bmatrix*}[r]
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
-		\end{bmatrix}\cdot \vect{h}_x''
+		\end{bmatrix*}\cdot \vect{h}_x''
 \label{eq:dwdx}
 \end{equation}
-
+Here, we have introduce a condensed matrix notation to write $\begin{bmatrix*}[r] -{\vect{d}_2}^T\\ {\vect{d}_1}^T\\ \end{bmatrix*}$ as a 2x3 matrix. The entries of the first line are $-{\vect{d}_2}^T = \begin{bmatrix} 0,\;0,\;-1 \end{bmatrix}$ while the entries of the second line are ${\vect{d}_1}^T = \begin{bmatrix} 0,\;1,\;0 \end{bmatrix}$. Thus, the matrix entries in the material frame coordinate system are given by~:
+\begin{equation}
+	\begin{bmatrix*}[r] -{\vect{d}_2}^T\\ {\vect{d}_1}^T \end{bmatrix*}
+	= 
+	\begin{bmatrix} 0 & 0 & -1 \\ 0 & 1 & 0 \end{bmatrix}
+\end{equation}
+Remark also how the scalar product $\vect{h}_x''\cdot\vect{d}_2$ in vector notation is treated as a product in matrix notation~: ${\vect{d}_2}^T \cdot \vect{h}_x'' =  {(\vect{h}_x'')}^T \cdot {\vect{d}_2}$.
 
 \subsection{Computation of the forces acting on the centerline}
-
-The internal forces acting on the centerline are given by the functional derivative of the elastic energy with respect to $\vect{x}$, which can be decomposed into~:
+The distributed internal forces acting on the centerline are given by the functional derivative of the elastic energy with respect to $\vect{x}$, which can be decomposed into~:
 \begin{equation}
 	\begin{aligned}
 	\scalar{-\vect{f}(s)}{\vect{h}_x} 
@@ -829,10 +857,10 @@ where $\mathcal{A} $, $\mathcal{B}$ and $\mathcal{C}$ are given by~:
 \begin{subequations}
 	\begin{gather}
 	\mathcal{A} = \int_{0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}
-	\begin{bmatrix}
+	\begin{bmatrix*}[r]
 		-{\vect{d}_2}^T\\
 		{\vect{d}_1}^T\\
-	\end{bmatrix}\cdot \vect{h}_x'' \;dt \\
+	\end{bmatrix*}\cdot \vect{h}_x'' \;dt \\
 	\mathcal{B} =
 	\int_{t=0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}\mat{J}\vect{\omega}
 	\left(\int_{u=0}^L \left(\delta_t-\delta_0\right)\vect{\kappa b}\cdot  \vect{h}_x \;du\right)
@@ -848,32 +876,22 @@ Calculus of $\mathcal{A}$~:
 \begin{equation}
 	\mathcal{A}
 	= \int_{0}^{L} (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B}
-		\begin{bmatrix}
+		\begin{bmatrix*}[r]
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
-		\end{bmatrix}\cdot \vect{h}_x'' \;dt \\
+		\end{bmatrix*}\cdot \vect{h}_x'' \;dt \\
+\label{eq:calcA}
 \end{equation}
-
-Recalling the bending moment is given by~:
-\begin{equation}
-	\vect{M}
-	= (\kappa_1 - \rconf{\kappa}_1)EI_1\vect{d}_1 + (\kappa_2 - \rconf{\kappa}_2)EI_2\vect{d}_2
-	= M_1\vect{d}_1 + M_2\vect{d}_2
-\end{equation}
-One can remark that~:
+One can remark that the (row) vector found in \cref{eq:calcA} can be rewritten as~: \footnote{Here, we mix up vector and matrix notations. The matrix form of a vector is given by the components of the vector in the material frame coordinate system. For instance, $({\vect{d}_3} \times \vect{M})^T$ is a row vector that writes in its matrix form~: $\begin{bmatrix} 0,\;-M2,\;M1 \end{bmatrix}$.}
 \begin{equation}
 	\left(\vect{\omega} - \rconf{\vect{\omega}}\right)^T \mat{B}
-		\begin{bmatrix}
+		\begin{bmatrix*}[r]
 			-{\vect{d}_2}^T\\
 			{\vect{d}_1}^T\\
-		\end{bmatrix}
+		\end{bmatrix*}
 	=  M_2{\vect{d}_1}^T - M_1{\vect{d}_2}^T
 	= - ({\vect{d}_3} \times \vect{M})^T
 \end{equation}
-
-\note{
-Rq~: on mixe abusivement 2 formes d'écritures, matricielle et vectorielle, à cause du produit scalaire que l'on écrit tantôt sous sa forme vectorielle et parfois matricielle (à l'aide de la transposée).}
-
 Thus,  $\mathcal{A}$ could be rewritten in it's vectoriel form~:
 \begin{equation}
 	\begin{aligned}
@@ -1021,28 +1039,36 @@ The gradient of the elastic energy with respect to $\vect{x}$ is obtained from \
 		\right)\cdot \vect{h}_x \;dt\\
 	\end{aligned}
 \end{equation}
-Finally, we can conclude on the expression of the internal forces~:
+Finally, we can conclude on the expression of the distributed internal forces acting on the centermine~:
 \begin{equation}
-	\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}'\right)'
-		+ \left(\beta(\theta' -{\rconf{\theta}'}) \vect{\kappa b}\right)'
+	\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}'(s) + \beta\left(\theta' -{\rconf{\theta}'}\right) \vect{\kappa b}\right)'(s)
+\end{equation}
+Remark that this expression can be rewritten thanks to \cref{eq:Q2} as~:
+\begin{equation}
+	\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}' + Q \vect{\kappa b}\right)'(s)
+\label{eq:fint}
 \end{equation}
 
-
-\note{
-Remarquer ici que l'expression est purement locale.
-Elle ne dépend pas du sens de parcours de la poutre, contrairement au raisonnement suivi.
-Cette différence est notable avec la démarche de B. Audoly.
-Faire le bilan des bénéfices de l'hypothèse quasi-statique~:
-- expressions rigoureusement vraies à  l'équilibre statique
-- simplification ds le calcul des efforts
-- rapidité dans le calcul avec des expressions plus simples
-- il n'est pas forcément intéressant en terme d'algorithmie d'imposer l'hypothèse quasistatique au cours du calcul. Il faudrait faire un bench pour savoir.
-
-On retombe sur les équations de Kirchhoff à un terme manquant pret. Qui exprime la contribution de la variation moment de flexion à cause de la torsion $\tau \vect{M}`$. Peut-être que ce terme est finalement d'un ordre supérieur, si l'on suppose une variation lente de la torsion ? Comment comprendre la disparition de ce terme qui semble nécessaire à l'équilibre statique d'un élément de poutre si l'on en croit les équations de Kirchhoff ?
-
-}
+\section{Internal forces and moments acting on the rod}
+We gather and recall from \cref{eq:fint,eq:mint} the expressions of the quasi-static internal forces and internal twisting moment acting on the rod~:
+\begin{subequations}
+	\begin{alignat}{2}
+	&\vect{f}(s) = \left({\vect{d}_3} \times \vect{M}' + Q \vect{\kappa b}\right)'(s)\\
+	&m(s) = Q'(s) +  \kappa_1(s) M_2(s) - \kappa_2(s) M_1(s)
+	\end{alignat}
+\end{subequations}
+Remark that we fall back on the static member of the dynamical equations of rods in Kirchhoff's theory (see \cref{eq:motion}). Hence, we have proved the equivalence between the present approach (based on the calculus of variations and the formulation of an elastic energy) and a more direct approach from the well-established dynamical equations.
 
 \section{Conclusion}
+We have build upon \citef{Bergou2008} a reduced coordinate beam theory for the modeling of slender rods with anisotropic cross-section and arbitrary natural geometry. This model assumes that the rod is inextensible, that cross-sections remain plane and perpendicular to the centerline and that the material behaves linearly
+
+
+Unlike \citef{Bergou2008} and \citef{Nabaei2014}~:
+\begin{itemize}
+\item Our expressions for the internal forces and twisting moment acting on the rod have the advantage to be fully local, which leads to simpler and faster numerical evaluations.
+\item We have retrieved the physical meaning of the energy gradients in terms of shear, bending and twisting of the rod. This is a critical point for the post-analysis of the results given by the model as our goal is to understand and predict the behavior or real structures.
+\item Our model is developed in the smooth world and thus the choice of the discretization is left to the stage of the numerical implementation, which we believe gives more flexibility.
+\end{itemize}
 
 On retrouve les équations de kirchhoff dynamique où l'on a négligé les forces inertielles de rotation d'un élément de poutre autour de $\vect{d}_1$ et $\vect{d}_2$ pour ne garder que la dynamique de rotation de la section autour de la fibre neutre $\vect{d}_3$.
 

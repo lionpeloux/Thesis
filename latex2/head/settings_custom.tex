@@ -1,7 +1,7 @@
 % Author :  Lionel du Peloux
 % Contact : lionel.dupeloux@gmail
 % Year : 2017
-
+% !TEX encoding = UTF-8 Unicode
 
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -32,16 +32,72 @@
 % \usepackage{etoc}
 
 \usepackage{etoolbox} % if then else in macro
+\usepackage{bookmark} % manipulate bookmark level
+
 
 % deactivate flushbottom
 \frenchspacing
 \raggedbottom
 
+% DATE TIME
+% ===========================
+\usepackage{datetime}
+\addto\captionsenglish{% Replace "english" with the language you use
+  \renewcommand{\contentsname}%
+    {Table of Content}%
+}
+
+% METADATA
+% ===========================
+% http://www.mathstat.dal.ca/~selinger/pdfa/
+% https://tex.stackexchange.com/questions/139308/how-to-embed-abstract-as-an-xmp-metadata
+% SPEC SUBLIN : http://dublincore.org/documents/dces/
+% https://tex.stackexchange.com/questions/139716/is-it-possible-to-use-both-hyperxmp-and-xmpincl-in-latex
+
+\newcommand\mytitle{Modeling of bending-torsion couplings in active-bending structures. Application to the design of elastic gridshell.}
+\newcommand\myauthor{Lionel du Peloux}
+\newcommand\mykeywords{gridshell, active bending, freeform, dynamic relaxation}
+\newcommand\myabstract{My abstract.}
+
+% to be used with pdfx
+%\usepackage{filecontents}
+%\begin{filecontents*}{\jobname.xmpdata}
+%	\Doi{12345}
+%\end{filecontents*}
+
+%% have a look at : https://tex.stackexchange.com/questions/139308/how-to-embed-abstract-as-an-xmp-metadata
+% DOI : https://github.com/semprag/tex/blob/master/sp.cls
+\hypersetup{%
+pdftype={thesis},
+pdftitle={\mytitle},
+pdfauthor={\myauthor},
+pdfproducer={\myauthor},
+pdfauthortitle={Technical Assistant, Level III},
+pdfdate={\the\year-\the\month-\the\day},
+pdfcopyright={Copyright (C) \the\year, \myauthor},
+pdfsubject={elastic gridshells},
+pdfkeywords={\mykeywords},
+pdflicenseurl={http://creativecommons.org/licenses/by-nc-nd/3.0/},
+pdfcaptionwriter={Scott Pakin},
+pdfcontactaddress={Kramgasse 49},
+pdfcontactcity={Paris},
+pdfcontactpostcode={75},
+pdfcontactcountry={France},
+pdfcontactphone={},
+pdfcontactemail={lionel.dupeloux@gmail.com},
+pdfcontacturl={%
+http://www.thinkshell.fr,
+https://www.facebook.com/AlbertEinstein
+},
+pdflang={en},
+pdfmetalang={en},
+baseurl={http://www.thinkshell.fr}
+}
+
 
 % TODO
 % ===========================
 \usepackage{todonotes}
-
 
 % BMATRIX
 % ===========================

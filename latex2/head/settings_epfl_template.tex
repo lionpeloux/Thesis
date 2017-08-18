@@ -1,3 +1,4 @@
+% !TEX encoding = UTF-8 Unicode
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %		Thesis Settings
@@ -12,6 +13,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage[french,english]{babel}
 
+% File Metadata
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EDOC THESIS TEMPLATE: Variant 1.0 -> Latin modern, large text width&height
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,6 +24,8 @@
 %\usepackage[a4paper,top=22mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
 \usepackage[a4paper,top=32mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % EDOC THESIS TEMPLATE: Variant 2.0 -> Utopia, Gabarrit A (lighter pages)
@@ -80,14 +87,20 @@
 \usepackage{listings}
 \lstset{language=[LaTeX]Tex,tabsize=4, basicstyle=\scriptsize\ttfamily, showstringspaces=false, numbers=left, numberstyle=\tiny, numbersep=10pt, breaklines=true, breakautoindent=true, breakindent=10pt}
 
+
+
 % HYP REF LINK IN PDF
-\usepackage{hyperref}
+\usepackage{hyperxmp} % pdf metadada (LDP)
+%\usepackage[a-1b]{pdfx}
+\usepackage{hyperref} % pdf metadada (LDP)
+
 \hypersetup{pdfborder={0 0 0},
 	colorlinks=true,
 	linkcolor=red,
 	citecolor=red,
 	urlcolor=blue}
 \urlstyle{same}
+
 
 \makeatletter
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
