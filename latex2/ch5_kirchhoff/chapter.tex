@@ -7,28 +7,46 @@
 \label{chp:kirchhoff}
 
 \section{Introduction}
-Ici on explique que l'approche par les équations d'équilibre est beaucoup plus directe que l'approche énergétique.
 
-\footnote{For a shearable rod, the condition that $\vect{d}_3$ and $\vect{t}$ coincide is relaxed.}
-\footnote{in the directions of the principal axes of inertia of its cross-section}
-\footnote{The parameter $\rconf{s}$, usually chosen as the arc length parameter for the undeformed rod, is no longer the arc length parameter for the deformed rod, since there are deformations of shear and extension. The current arc length of the deformed rod is a function of $\rconf{s}$, which is often denoted by $s(\rconf{s})$.}
+In this chapter, following \citef{Dill1992}, we present thoroughly the theory of slender rods developed by Kirchhoff, Clebsch and Love at the end of the XIX\textsuperscript{th} century. This theory can be applied for motions where strains remain small although displacements and rotations may be large, which is perfectly suitable to the modeling of elastic gridshell structures where the material must be employed in its elastic range but the structure undergoes large displacements during the forming process.\footnote{This is classically referred to as \textquote{material linearity} but \emph{geometric nonlinearity}.}
 
+We will see that this theory requires nothing more than that, and that the shear strains are negligible compare to the axial strain. In particular, the rod is not supposed to be strictly inextensible, nor the cross-sections are assumed to remain strictly plane.
 
-\blockcquote[p.~xvii]{Benvenuto1991b}{The battle between weight and rigidity constitutes, in itself, the single aesthetic theme of art in architecture~: and to bring out this conflict in the most varied and clearest way is its office.}
+The discrete beam element presented in \cref{chp:numerical_model} will directly results from the discretization of the dynamical Kirchhoff equations presented here, combined with an appropriate use of the the discrete curve-angle representation (see \cref{sec:crvangle}) and the discrete inscribed curvature (see \cref{sec:inscribe_dc}).
 
-\blockcquote[p.~xvii]{Villaggio1997}{The theory of elastic structures is, by definition, the collection of all reasonable models, proposed during almost three centuries, concerned with simplifying the sol of problems involving elastic bodies. The equations describing the motion and equilibrium of a three-dimensional elastic body were formulated in full generality during the first half of the nineteenth century, but their solutions are known only in a few cases.}
-
-\blockcquote[p.~68]{Audoly2010}{In a deformed state, the center line has no particular reason to remain straight and, in general, $\vect{d}_1$ and $\vect{d}_2$ will twist along the center line. However, in the case of small strain that we consider, the triad $(\vect{d}_1,\vect{d}_2,\vect{d}_3)$ remains approximately orthonormal, provided it has been chosen orthonormal in the reference configuration. This is known as the Euler-Bernoulli or Navier-Bernoulli kinematical hypothesis, or sometimes the assumption of unshearable rods.}
-
-Extension to the case of thin-walled sections by~\cite{Dias2015, Vetyukov2014} in the case of ribbons. From the Vlasov
-
-\blockcquote[p.]{Dias2014}{For thin beams having a slender cross-section, $h \ll w$, the classical rod theory of Kirchhoff is known to be inapplicable. Such beams are usually modeled using Vlasov’s theory for thin-walled beams. Vlasov’s models can be justified from 3D elasticity but only in the case of moderate deformations, when the cross-sections bend by a small amount. In the present work, however, we have considered large deformations of thin strips. The strip has been modeled as an inextensible  plate, and the geometric  constraint of inextensibility has been treated exactly~: the cross-sections are allowed to bend by a significant amount. Our model extends the classical strip model of Sadowsky, and reformulate it in a way that fits into the classical theory of rods.}
-
-\subsection{Overview}
-
-We begin by a short introduction on the Cosserat theory of rods (see \cref{sec:cosserat_theory}). From this theory, we study only the way the motion of a rod is described in a very generic manner, through its force and moment strain vectors. We then restrain our study to the Kirchhoff theory of rods (see \cref{sec:kirchhoff_theory})~: we specialize the description inherited from the Cosserat theory to our needs so it fulfills the specific assumptions made in Kirchhoff theory~; we establish the dynamical equations of a rod under external loading~; we recall the canonical form of the strain and stress tensors~; and finally we retrieve the usual material constitutive equations as a consequence of the small strains and elasticity assumptions. Finally, we show that the static member of the equations of motion can be retrieved from simple geometric considerations (see \cref{sec:geointerp}).
-
-
+The motivations for this work were build upon the experience gained in the previous chapter (see \cref{chp:energy}). Although the variational approach actually leads to the calculation of the quasi-static internal force and moment acting on the rod, these results are more straightforwardly obtained with the approach developed in this chapter, that is through writing the dynamic equilibrium of the rod. But it is not simply a matter of taste considering the perspective of the discrete element we intend to build and solve through a damped dynamic explicit time integration, namely a \emph{dynamic relaxation} procedure (see \cref{chp:numerical_model}). Indeed, the equilibrium approach enables an immediate and full dynamic treatment of the rod, drops the stiff and unnecessary constraint of inextensibility and naturally integrates the treatment of applied loads. It also offers a more physical and less mathematical understanding of the problem, which is a matter of concern when designing real structures.\footnote{The formalism of the energy formulation has it pros as it is more straightforwardly translated into minimization problems.}
+%
+%Finally, 
+%
+%Moreover, in the field of bending active structures, 
+%
+%This chapter gives a more solid background to 
+%
+%
+%This theory is valid for solids where one dimension is much larger than the two others and for motions
+%
+%Ici on explique que l'approche par les équations d'équilibre est beaucoup plus directe que l'approche énergétique.
+%
+%\footnote{For a shearable rod, the condition that $\vect{d}_3$ and $\vect{t}$ coincide is relaxed.}
+%\footnote{in the directions of the principal axes of inertia of its cross-section}
+%\footnote{The parameter $\rconf{s}$, usually chosen as the arc length parameter for the undeformed rod, is no longer the arc length parameter for the deformed rod, since there are deformations of shear and extension. The current arc length of the deformed rod is a function of $\rconf{s}$, which is often denoted by $s(\rconf{s})$.}
+%
+%
+%\blockcquote[p.~xvii]{Benvenuto1991b}{The battle between weight and rigidity constitutes, in itself, the single aesthetic theme of art in architecture~: and to bring out this conflict in the most varied and clearest way is its office.}
+%
+%\blockcquote[p.~xvii]{Villaggio1997}{The theory of elastic structures is, by definition, the collection of all reasonable models, proposed during almost three centuries, concerned with simplifying the sol of problems involving elastic bodies. The equations describing the motion and equilibrium of a three-dimensional elastic body were formulated in full generality during the first half of the nineteenth century, but their solutions are known only in a few cases.}
+%
+%\blockcquote[p.~68]{Audoly2010}{In a deformed state, the center line has no particular reason to remain straight and, in general, $\vect{d}_1$ and $\vect{d}_2$ will twist along the center line. However, in the case of small strain that we consider, the triad $(\vect{d}_1,\vect{d}_2,\vect{d}_3)$ remains approximately orthonormal, provided it has been chosen orthonormal in the reference configuration. This is known as the Euler-Bernoulli or Navier-Bernoulli kinematical hypothesis, or sometimes the assumption of unshearable rods.}
+%
+%Extension to the case of thin-walled sections by~\cite{Dias2015, Vetyukov2014} in the case of ribbons. From the Vlasov
+%
+%\blockcquote[p.]{Dias2014}{For thin beams having a slender cross-section, $h \ll w$, the classical rod theory of Kirchhoff is known to be inapplicable. Such beams are usually modeled using Vlasov’s theory for thin-walled beams. Vlasov’s models can be justified from 3D elasticity but only in the case of moderate deformations, when the cross-sections bend by a small amount. In the present work, however, we have considered large deformations of thin strips. The strip has been modeled as an inextensible  plate, and the geometric  constraint of inextensibility has been treated exactly~: the cross-sections are allowed to bend by a significant amount. Our model extends the classical strip model of Sadowsky, and reformulate it in a way that fits into the classical theory of rods.}
+%
+%\subsection{Overview}
+%
+%We begin by a short introduction on the Cosserat theory of rods (see \cref{sec:cosserat_theory}). From this theory, we study only the way the motion of a rod is described in a very generic manner, through its force and moment strain vectors. We then restrain our study to the Kirchhoff theory of rods (see \cref{sec:kirchhoff_theory})~: we specialize the description inherited from the Cosserat theory to our needs so it fulfills the specific assumptions made in Kirchhoff theory~; we establish the dynamical equations of a rod under external loading~; we recall the canonical form of the strain and stress tensors~; and finally we retrieve the usual material constitutive equations as a consequence of the small strains and elasticity assumptions. Finally, we show that the static member of the equations of motion can be retrieved from simple geometric considerations (see \cref{sec:geointerp}).
+%
+%
 
 \subsection{Contributions}
 \begin{itemize}
@@ -1139,7 +1157,7 @@ The non-zero components of the stress tensor are given by~:
 %\newpage
 \section{Geometric interpretation of Kirchhoff's equations}\label{sec:geointerp}
 
-The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motion_2,eq:motion_3,eq:motion_4,eq:motion_5,eq:motion_6}) have been established expressing the fundamental principles of balance of linear and angular momentums. An alternative approach, leading to the same results, consists in differentiating the elastic energy of a given configuration of the rod -- assumed to be stationary -- with respect to the degrees of freedom of the mechanical system (principle of virtual work). This latter approach is the one developed throughout the previous chapter (see \cref{chap:energy}).\footnote{This is also the approach developed in~\cite{Audoly2010} for strictly inextensible rods. It was yet employed in 1973 by Reissner in~\cite{Reissner1973}.} 
+The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motion_2,eq:motion_3,eq:motion_4,eq:motion_5,eq:motion_6}) have been established expressing the fundamental principles of balance of linear and angular momentums. An alternative approach, leading to the same results, consists in differentiating the elastic energy of a given configuration of the rod -- assumed to be stationary -- with respect to the degrees of freedom of the mechanical system (principle of virtual work). This latter approach is the one developed throughout the previous chapter (see \cref{chp:energy}).\footnote{This is also the approach developed in~\cite{Audoly2010} for strictly inextensible rods. It was yet employed in 1973 by Reissner in~\cite{Reissner1973}.} 
 
 However, the approach through equilibrium seems easier to understand as it is (almost) just a matter of balance between forces and moments acting on infinitesimal slices of the rods (see \cref{fig:slice}). This is of obvious pedagogical interest as it allows to understand how the geometry of the rod influences the distribution of the elastic energy between extension, flexion and torsion.
 
