@@ -9,11 +9,6 @@
 \section{Introduction}
 Ici on explique que l'approche par les équations d'équilibre est beaucoup plus directe que l'approche énergétique.
 
-
-
-\subsection{Overview}
-Résumé du chapitre
-
 \footnote{For a shearable rod, the condition that $\vect{d}_3$ and $\vect{t}$ coincide is relaxed.}
 \footnote{in the directions of the principal axes of inertia of its cross-section}
 \footnote{The parameter $\rconf{s}$, usually chosen as the arc length parameter for the undeformed rod, is no longer the arc length parameter for the deformed rod, since there are deformations of shear and extension. The current arc length of the deformed rod is a function of $\rconf{s}$, which is often denoted by $s(\rconf{s})$.}
@@ -21,7 +16,7 @@ Résumé du chapitre
 
 \blockcquote[p.~xvii]{Benvenuto1991b}{The battle between weight and rigidity constitutes, in itself, the single aesthetic theme of art in architecture~: and to bring out this conflict in the most varied and clearest way is its office.}
 
-\blockcquote[p.~xvii]{Villaggio1997}{The theory of elastic structures is, by definition, the collection of all reasonable models, proposed during almost three centuries, concerned with simplifying the solutions of problems involving elastic bodies. The equations describing the motion and equilibrium of a three-dimensional elastic body were formulated in full generality during the first half of the nineteenth century, but their solutions are known only in a few cases.}
+\blockcquote[p.~xvii]{Villaggio1997}{The theory of elastic structures is, by definition, the collection of all reasonable models, proposed during almost three centuries, concerned with simplifying the sol of problems involving elastic bodies. The equations describing the motion and equilibrium of a three-dimensional elastic body were formulated in full generality during the first half of the nineteenth century, but their solutions are known only in a few cases.}
 
 \blockcquote[p.~68]{Audoly2010}{In a deformed state, the center line has no particular reason to remain straight and, in general, $\vect{d}_1$ and $\vect{d}_2$ will twist along the center line. However, in the case of small strain that we consider, the triad $(\vect{d}_1,\vect{d}_2,\vect{d}_3)$ remains approximately orthonormal, provided it has been chosen orthonormal in the reference configuration. This is known as the Euler-Bernoulli or Navier-Bernoulli kinematical hypothesis, or sometimes the assumption of unshearable rods.}
 
@@ -29,9 +24,17 @@ Extension to the case of thin-walled sections by~\cite{Dias2015, Vetyukov2014} i
 
 \blockcquote[p.]{Dias2014}{For thin beams having a slender cross-section, $h \ll w$, the classical rod theory of Kirchhoff is known to be inapplicable. Such beams are usually modeled using Vlasov’s theory for thin-walled beams. Vlasov’s models can be justified from 3D elasticity but only in the case of moderate deformations, when the cross-sections bend by a small amount. In the present work, however, we have considered large deformations of thin strips. The strip has been modeled as an inextensible  plate, and the geometric  constraint of inextensibility has been treated exactly~: the cross-sections are allowed to bend by a significant amount. Our model extends the classical strip model of Sadowsky, and reformulate it in a way that fits into the classical theory of rods.}
 
+\subsection{Overview}
+
+We begin by a short introduction on the Cosserat theory of rods (see \cref{sec:cosserat_theory}). From this theory, we study only the way the motion of a rod is described in a very generic manner, through its force and moment strain vectors. We then restrain our study to the Kirchhoff theory of rods (see \cref{sec:kirchhoff_theory})~: we specialize the description inherited from the Cosserat theory to our needs so it fulfills the specific assumptions made in Kirchhoff theory~; we establish the dynamical equations of a rod under external loading~; we recall the canonical form of the strain and stress tensors~; and finally we retrieve the usual material constitutive equations as a consequence of the small strains and elasticity assumptions. Finally, we show that the static member of the equations of motion can be retrieved from simple geometric considerations (see \cref{sec:geointerp}).
+
+
+
 \subsection{Contributions}
 \begin{itemize}
-\item We use the parallel transport in time and not in space
+\item We describe the motion of a Kirchhoff rod as a particular case of the motion of a Cosserat rod. This would enable to extend the present work in order to take into account shear effects, while sticking to the same geometrical description.
+\item We retrieve the equations of motion of a Kirchhoff rod with a careful treatment of the assumptions, following \cite{Dill1992}. This allow us to established a framework
+\item We highlight the pedagogical interest of this approach compared to the variational approach by showing that the static members of Kirchhoff equations are nothing but first-order balance equations.
 \end{itemize}
 
 \subsection{Related work}
@@ -66,38 +69,38 @@ Timoshenko~:~\cite{Timoshenko1921, Timoshenko1922, Timoshenko1951}
 
 
 Départ~:
-\cite{Day1965}~: already includes a rotational DOF !!
-\cite{Wakefield1980}
-\cite{Barnes1999}~: revue intéressante de la DR.
+\citef{Day1965}~: already includes a rotational DOF !!
+\citef{Wakefield1980}
+\citef{Barnes1999}~: revue intéressante de la DR.
 
 3 pts classique~:
-\cite{Adriaenssens1999}
-\cite{Douthe2006}
+\citef{Adriaenssens1999}
+\citef{Douthe2006}
 
 2 x 3pts~:
-\cite{Barnes2013}
+\citef{Barnes2013}
 
 6 Dofs~:
-\cite{DAmico2014}
+\citef{DAmico2014}
 
 4Dofs~:
-\cite{DuPeloux2015}
-\cite{DAmico2016}
+\citef{DuPeloux2015}
+\citef{DAmico2016}
 
 Dans le champ de l'animation  avec élément finis
-\cite{Duan2013}
-\cite{Meier2014}
+\citef{Duan2013}
+\citef{Meier2014}
 
 Pour des cas test :
-\cite{Ibrahimbegovic1995}
-\cite{Lazaro2016}
+\citef{Ibrahimbegovic1995}
+\citef{Lazaro2016}
 
 Pour la cinématique, superposition d'un mouvement rigide et d'un warping de la section :
-\cite{Simo1991} dans l'extension de \cite{Reissner1973}
+\citef{Simo1991} dans l'extension de \citef{Reissner1973}
 
 
 \clearpage
-\section{Introduction to the special Cosserat theory of rods}
+\section{Introduction to the special Cosserat theory of rods}\label{sec:cosserat_theory}
 
 This paragraph gives a very brief overview of the \emph{special Cosserat theory of rods}, as presented by~\citef{Antman2005}, that accounts for bending, torsion, extension and shear  behaviors of slender beams.\footnote{\blockcquote[p.~270]{Antman2005}{[we formulate] a general dynamical theory of rods that can undergo large deformations in space by suffering flexure, torsion, extension, and shear. We call the resulting geometrically exact theory the \emph{special Cosserat theory of rods}.}} This theory -- which is a \emph{director theory} of rods -- was first introduced by~\cite{Antman1974}. It gives a larger scope to the basements of the present work -- which relies on the \emph{Kirchhoff theory of rods} -- as the last is a special case of this larger theoretical framework. Thus, what is presented in this paragraph could be considered as a reasonable starting point to extend the present work, for instance to take account for shear or large extension, which might be relevant for some engineering problems or form-finding processes.
 
@@ -139,13 +142,13 @@ This paragraph gives a very brief overview of the \emph{special Cosserat theory 
 	\begin{fullpage}
 		\captionsetup[subfloat]{captionskip=10pt}
      		\centering
-     		\subfloat[][Deformed cross-section $\mathcal{S}(s)$.]{\includegraphics{cosserat_motion_trans_def_a.pdf}\label{fig:cosserat_2a}}
+     		\subfloat[][Deformed cross-section $\mathcal{S}(s)$]{\includegraphics{cosserat_motion_trans_def_a.pdf}\label{fig:cosserat_2a}}
 		\hspace{2.5cm}
-		\subfloat[][Deformed cross-section $\mathcal{S}(s+ds)$.]{\includegraphics{cosserat_motion_trans_def_b.pdf}\label{fig:cosserat_2b}} \\
+		\subfloat[][Deformed cross-section $\mathcal{S}(s+ds)$]{\includegraphics{cosserat_motion_trans_def_b.pdf}\label{fig:cosserat_2b}} \\
 		\vspace{20pt}
-		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s)$.]{\includegraphics{cosserat_motion_trans_ref_a.pdf}\label{fig:cosserat_2c}}
+		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s)$]{\includegraphics{cosserat_motion_trans_ref_a.pdf}\label{fig:cosserat_2c}}
 		\hspace{2.5cm}
-		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s+ds)$.]{\includegraphics{cosserat_motion_trans_ref_b.pdf}\label{fig:cosserat_2d}}
+		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s+ds)$]{\includegraphics{cosserat_motion_trans_ref_b.pdf}\label{fig:cosserat_2d}}
 		\vspace{20pt}
 		\captionof{figure}[Description of the motion for a Cosserat rod: transverse section]{Description of the motion for a Cosserat rod. These are the transverse sections from \cref{fig:cosserat_1} (however note that \cref{fig:cosserat_1} is drawn with $\varkappa_2 < 0$ while $\varkappa_2 > 0$ in \cref{fig:cosserat_2}). The section curve is drawn in a dashed blue fashion. Remark how the deformed material point is located through $\vect{x}$ and $\vect{r} = X_{\alpha}\vect{d}_{\alpha} + u_{k}\vect{d}_{k}$. Cross-sections are rotating around $\vect{d}_3$ at speed $\varkappa_3$. The beam is subjected to flexion ($\varkappa_1 > 0$, $\varkappa_2 > 0$), torsion ($\varkappa_3 > 0$) and extension ($\epsilon > 0$). Fibers that are compressed -- both directly by axial compression or indirectly by flexion -- are subjected to transverse expansion due to the Poisson effect (see up-right of \cref{fig:cosserat_2a,fig:cosserat_2b}). Reciprocally, fibers in tension -- both directly by axial tension or indirectly by flexion -- are subjected to transverse contraction (see bottom-left of \cref{fig:cosserat_2a,fig:cosserat_2b}).}
 		\label{fig:cosserat_2}    
@@ -363,7 +366,7 @@ The reader is invited to refer to~\cite{Antman2005} to get a deeper understandin
 \end{table}
 
 \clearpage
-\section{Kirchhoff theory of rods}
+\section{Kirchhoff theory of rods}\label{sec:kirchhoff_theory}
 
 The theory for the finite displacement of thin rods has been developed by Kirchhoff, Clebsch and Love.
 
@@ -690,6 +693,8 @@ Since $X_1$ and $X_2$ are the coordinates with respect to the centroid ($\vect{x
 		&I_1 		&&= \iint_{\mathcal{S}(s)} {X_2}^2 \;dX_1 dX_2
 		\\
 		&I_2 		&&= \iint_{\mathcal{S}(s)} {X_1}^2 \;dX_1 dX_2
+		\\
+		&I_p 		&&= \iint_{\mathcal{S}(s)} ({X_1}^2 + {X_2}^2) \;dX_1 dX_2
 	\end{alignat}
 \end{subequations}
 Moreover, for a given cross-section the definition of the centroid yields~:
@@ -859,10 +864,12 @@ where $\varphi_s$ is the warping function (in torsion) of $\mathcal{S}(s)$, dete
 	\\[0.5em]
 	0 &= \frac{\partial f_s}{\partial {X_1}}\left(\frac{\partial \varphi_s}{\partial {X_1}} - X_2 \right) 
 	+ \frac{\partial f_s}{\partial {X_2}}\left(\frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right)
-	&& \quad, \quad f_s(X_1,X_2) = 0
+	&& \quad, \quad f_s(X_1,X_2) = 0 \label{eq:warpingCL}
 	\end{alignat}
 \end{subequations}
 These equations have known analytical solutions for classical shapes such as circles, ellipses, squares or rectangles. For other shapes, when it is not easy to find analytical solutions, the membrane analogy introduced by Prandtl~\cite{Prandtl1903} can be employed.\footnote{Recent advances~\cite{Koohestani2014} in the formfinding of soap films with the force density method might be of practical use to evaluate the warping function.}
+
+Note that the boundary condition given by \cref{eq:warpingCL} stipulates that cross-sections are free to warp.
 
 \subsection{Strain tensor}
 Here, we remind the canonical form of the strain tensor ($\tens{E}$) for the cross-section $\mathcal{S}(s)$ in the context of Kirchhoff's approximation~: 
@@ -914,7 +921,7 @@ From \cref{eq:F,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive eq
 		&= ES\epsilon
 	\end{aligned}
 \end{equation}
-From \cref{eq:M,eq:piola2,eq:stress_c,eq:stress_d,eq:strain_e,eq:strain_d} we deduce the constitutive equation for the axial component of the internal moments~: 
+From \cref{eq:M,eq:piola2,eq:stress_c,eq:stress_d,eq:strain_e,eq:strain_d} we deduce the constitutive equation for the axial component of the internal moments, that is the twisting moment~: 
 \begin{equation}
 % 	\label{eq:constitutive_M3}
 	\begin{aligned}
@@ -927,6 +934,17 @@ From \cref{eq:M,eq:piola2,eq:stress_c,eq:stress_d,eq:strain_e,eq:strain_d} we de
 		 \Big] \;dX_1 dX_2 
 	\end{aligned}
 \end{equation}
+Introducing the torsional constant of St Venant ($J$) this equation rewrites~:
+\begin{subequations}
+	\begin{alignat}{2}
+	M_3 &= GJ (\varkappa_3 - \rconf{\varkappa}_3)
+	\\
+	J &= \iint_{\mathcal{S}(s)} \Big[ X_1 \left( \frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right ) - X_2 \left( \frac{\partial \varphi_s}{\partial {X_1}}  - X_2 \right )
+		 \Big] \;dX_1 dX_2 \label{eq:torsioncst_def}
+	\end{alignat}
+\end{subequations}
+Remark from \cref{eq:torsioncst_def} that when the section does not warp ($\varphi_s$=0), the torsion constant is nothing but the polar moment of inertia of the section ($I_p$).
+
 From \cref{eq:M,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive equation for the first component of the internal moments~: 
 \begin{equation}
 % 	\label{eq:constitutive_M3}
@@ -950,9 +968,33 @@ From \cref{eq:M,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive eq
 	\end{aligned}
 \end{equation}
 
+\subsection{Discussion}
+Observe that the internal shear forces are reacting parameters and are given by the balance equations (see \cref{eq:motion_4,eq:motion_5}). Transverse shear deformations are neglected and the related stresses are not given by the present theory.
+
+Cross-sections are not assumed to be subject to rigid body motions but to deform closely to such movements. Indeed, the torsion constant of St Venant ($J$) is found assuming the cross-sections can warp (see \cref{eq:torsioncst}). Otherwise, the constant torsion would be nothing but the polar moment of inertia, which would not lead to the correct evaluation of the torsional stiffness of the rod.
+
+Because of the chosen description of motion (see \cref{sec:kirchhoff_motion}), cross-sections are assumed to rotate around their center of mass. Hence, the model is only valid for sections where the shear center is located at the center of mass. This preclude thin walled open cross-sections. For further understanding of the warping of sections, refer to \cite{Alves2014}.
+
+
+%
+%It is mandatory to suppose that sections can wrapped
+%
+%Warping is supposed to happen freely. 
+
+%
+%\item
+%There is a noticeable symmetry in the equations between the roles played by $F_1$, $F_2$ and $M_1$, $M_2$ and by the roles played by $F_3$ and $M_3$.
+%\item
+%Warping is supposed to happen freely.
+%\item
+%Going further with torsion : donner des citations
+%\item
+%Going further with shear and extension : \cite{Reissner1973}
+%\end{itemize}
+
 \clearpage
-\subsection{Summary of the theory}
-Let's summarize the assumptions and results of Kirchhoff's theory of rods on which our discret beam model will be based on.
+\section{Summary of Kirchhoff theory}
+Let's summarize the assumptions and results of Kirchhoff's theory of rods on which our discret beam model (see \cref{chp:numerical_model}) will be based on.
 
 In the reference configuration the rod is described by its reference strains~:
 \begin{equation}
@@ -976,7 +1018,7 @@ The rod is subjected to internal forces and moments~:
 	\vect{M} &= M_1\vect{d}_1 + M_2\vect{d}_2 + M_3\vect{d}_3
 	\end{alignat}
 \end{subequations}
-The rod is subjected to external and body loads described as distributed forces and moments acting on the centerline -- either given per unit length of the reference configuration ($\vect{f}_{s} $, $\vect{m}_{s} $) or per unit length of the actual configuration ($\vect{f}_{s_t}$, $\vect{m}_{s_t} $) -- and given in the following condensed form~:
+The rod is subjected to external and body loads described as distributed forces and moments acting on the centerline -- either given per unit length of the reference configuration ($\vect{f}_{s} $, $\vect{m}_{s} $) or per unit length of the actual configuration ($\vect{f}_{s_t}$, $\vect{m}_{s_t} $) -- and given by~:
 \begin{subequations}
 	\begin{alignat}{1}
 	\vect{f} &= \vect{f}_{s}  + (1+\epsilon)\vect{f}_{s_t} = f_1\vect{d}_1 + f_2\vect{d}_2 + f_3\vect{d}_3
@@ -1006,7 +1048,7 @@ where $S$, $I_1$, $I_2$, $J$ are respectively the area, the second moments of in
 	&I_2	&&= \iint_{\mathcal{S}(s)} {X_1}^2 \;dX_1 dX_2
 	\\
 	&J 	&&= \iint_{\mathcal{S}(s)} X_1 \left( \frac{\partial \varphi_s}{\partial {X_2}} + X_1 \right ) - X_2 \left( \frac{\partial \varphi_s}{\partial {X_1}}  - X_2 \right )
-			\;dX_1 dX_2 
+			\;dX_1 dX_2 \label{eq:torsioncst}
 	\end{alignat}
 \end{subequations}
 and $\varphi_s$ is the warping fonction of the cross-section that satisfies the differential system~: 
@@ -1088,34 +1130,25 @@ The non-zero components of the stress tensor are given by~:
 	\end{alignat}
 \end{subequations}
 
-\subsection{Comments}
 
-\begin{itemize}
-\item 
-The internal shear forces are reacting parameters and are given by the balance equations. Transverse shear deformations and stresses are not given by the present theory.
-\item
-There is a noticeable symmetry in the equations between the roles played by $F_1$, $F_2$ and $M_1$, $M_2$ and by the roles played by $F_2$ and $M_3$.
-\item
-Warping is supposed to happen freely.
-\item
-Going further with torsion : donner des citations
-\item
-Going further with shear and extension : \cite{Reissner1973}
-\end{itemize}
 
 
 
 
 %\makebox[\textwidth]{} % necessaire pour le saut de page et le flush des floats
 %\newpage
-\section{Geometric interpretation of Kirchhoff's equations}
+\section{Geometric interpretation of Kirchhoff's equations}\label{sec:geointerp}
 
-The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motion_2,eq:motion_3,eq:motion_4,eq:motion_5,eq:motion_6}) have been established expressing the fundamental principles of balance of linear and angular momentums. An alternative approach, leading to the same results, consists in differentiating the elastic energy of a given configuration of the rod -- assumed to be stationary -- with respect to the degrees of freedom of the mechanical system (principle of virtual work).\footnote{This is the approach employed in the theory presented in \cref{sec:ch_energy} and is also the one developed in~\cite{Audoly2010} for strictly inextensible rods. It was yet employed in 1973 by Reissner in~\cite{Reissner1973}.} However, the approach through equilibrium seems easier to understood as it is (almost) just a matter of balance between forces and moments on infinitesimal slices of the rods (see \cref{fig:slice}). This is of obvious pedagogical interest as it allows to understand how the geometry of the rod influence the distribution of the elastic energy between extension, flexion and torsion. To emphasis this, we provide the proper drawings (see \cref{fig:kb,fig:d1,fig:d2}) and computations for the contribution of internal forces and moments to the balance of linear and angular momentums. This is what we call the \textquote{geometric interpretation} of Kirchhoff's equations.
+The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motion_2,eq:motion_3,eq:motion_4,eq:motion_5,eq:motion_6}) have been established expressing the fundamental principles of balance of linear and angular momentums. An alternative approach, leading to the same results, consists in differentiating the elastic energy of a given configuration of the rod -- assumed to be stationary -- with respect to the degrees of freedom of the mechanical system (principle of virtual work). This latter approach is the one developed throughout the previous chapter (see \cref{chap:energy}).\footnote{This is also the approach developed in~\cite{Audoly2010} for strictly inextensible rods. It was yet employed in 1973 by Reissner in~\cite{Reissner1973}.} 
+
+However, the approach through equilibrium seems easier to understand as it is (almost) just a matter of balance between forces and moments acting on infinitesimal slices of the rods (see \cref{fig:slice}). This is of obvious pedagogical interest as it allows to understand how the geometry of the rod influences the distribution of the elastic energy between extension, flexion and torsion.
+
+To emphasis this, in this section we provide the proper drawings (see \cref{fig:kb,fig:d1,fig:d2}) and computations for the contribution of internal forces and moments to the balance of linear and angular momentums. This is what we call here the \textquote{geometric interpretation} of Kirchhoff equations.
 \begin{figure}[p]
   \begin{fullpage}
 	\centering
 	\includegraphics[]{kirchhoff_geometry.pdf}
-	\captionof{figure}[Geometric interpretation of Kirchhoff's equations]{Geometric interpretation of Kirchhoff's equations. Flexion and torsion of an elementary slice of a Kirchhoff rod of length $ds$. Projections of the deformations are given in the material planes defined by $\vect{d}_1$, $\vect{d}_2$, $\vect{d}_3$.}
+	\captionof{figure}[Geometric interpretation of Kirchhoff's equations]{Geometric interpretation of Kirchhoff's equations. Flexion and torsion of an elementary slice of a Kirchhoff rod of length $ds$. Projections of the deformations are given in the material planes perpendicular to $\vect{d}_1$, $\vect{d}_2$ and $\vect{d}_3$. The element takes its curvature $\kappa$ in the plane perpendicular to $\vect{\kappa b}$ and represented by a gray triangle. On the figure, $\vect{\kappa b}$ is positioned at the peak of this triangle, which is the center of the osculating circle associated to it.}
 	\label{fig:slice}
  \end{fullpage}
 \end{figure} 
@@ -1123,12 +1156,12 @@ The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motio
   \begin{leftfullpage}
     \captionsetup[subfloat]{captionskip=10pt}
      	\centering
-     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_kb.pdf}\label{fig:kb_a}} \\
+     	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_kb.pdf}\label{fig:kb_a}} \\
 	\vspace{30pt}
-	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_kb.pdf}\label{fig:kb_b}}
-	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_kb.pdf}\label{fig:kb_c}}
+	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_kb.pdf}\label{fig:kb_b}}
+	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_kb.pdf}\label{fig:kb_c}}
 	\vspace{30pt}
-	\captionof{figure}[Interpretation~: influence of the curvature ($\kappa$)]{Influence of the curvature ($\kappa$) in the deflection of internal forces and moments along the centerline.}     
+	\captionof{figure}[Interpretation~: influence of the curvature ($\kappa$)]{Influence of the curvature ($\kappa$) in the deflection of internal forces and moments along the centerline. The osculating plane, perpendicular to $\vect{\kappa b}$, is represented in grey. $\vect{N}$ is the axial component of the internal force along $\vect{d}_3$. $\vect{Q}$ is the axial component of the internal moment, also known as the twisting moment along $\vect{d}_3$.}     
 	\label{fig:kb}
  \end{leftfullpage}
 \end{figure}
@@ -1157,12 +1190,12 @@ The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motio
   \begin{leftfullpage}
     \captionsetup[subfloat]{captionskip=10pt}
      	\centering
-     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_d1.pdf}\label{fig:d1_a}} \\
+     	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_d1.pdf}\label{fig:d1_a}} \\
 	\vspace{30pt}
-	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_d1.pdf}\label{fig:d1_b}}
-	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_d1.pdf}\label{fig:d1_c}}
+	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_d1.pdf}\label{fig:d1_b}}
+	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_d1.pdf}\label{fig:d1_c}}
 	\vspace{30pt}
-	\captionof{figure}[Interpretation~: influence of the first material curvature ($\kappa_1$)]{Influence of the first material curvature ($\kappa_1$) in the deflection of internal forces and moments along the centerline.}     
+	\captionof{figure}[Interpretation~: influence of the first material curvature ($\kappa_1$)]{Influence of the first material curvature ($\kappa_1$) in the deflection of internal forces and moments along the centerline. The plane perpendicular to $\vect{d}_1(s)$ is represented in grey. $\vect{F}_2$ is the transverse or shear component of the internal force along $\vect{d}_2$. $\vect{M}_2$ is the transverse or bending component of the internal moment along $\vect{d}_2$.}     
 	\label{fig:d1}
  \end{leftfullpage}
 \end{figure}
@@ -1171,19 +1204,19 @@ The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motio
 	\subsubsection{Contributions to the balance of forces}
 	\vspace{10pt}
 	
-	$\vect{T}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~: 
+	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~: 
 	\begin{equation*}
-		-T_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau T_2(s) ds + o(ds)
+		-F_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau F_2(s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{T}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~: 
+	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~: 
 	\begin{equation*}
-		-T_2(s) + T_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = T'_2 (s) ds + o(ds)
+		-F_2(s) + F_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = T'_2 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{T}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~: 
+	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~: 
 	\begin{equation*}
-		T_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 T_2(s) ds + o(ds)
+		F_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 F_2(s) ds + o(ds)
 	\end{equation*}
 		
 	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_2 ds$ around $\vect{d}_2$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~: 
@@ -1195,9 +1228,9 @@ The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motio
 	\subsubsection{Contributions to the balance of moments}
 	\vspace{10pt}
 	
-	$\vect{T}_2(s+ds)$ is deflected from the plane normal to $\vect{d}_1(s)$ by a rotation of angle $\tau ds$ around $\vect{d}_3$ (\cref{fig:d1_b}). It produces a moment around $\vect{d}_1$ with the lever arm $b =  \cos(\kappa_2 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~: 
+	$\vect{F}_2(s+ds)$ is deflected from the plane normal to $\vect{d}_1(s)$ by a rotation of angle $\tau ds$ around $\vect{d}_3$ (\cref{fig:d1_b}). It produces a moment around $\vect{d}_1$ with the lever arm $b =  \cos(\kappa_2 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~: 
 	\begin{equation*}
-		-T_2(s+ds) \cos(\tau ds) (\cos(\kappa_2 ds) ds) = -T_2(s) ds + o(ds)
+		-F_2(s+ds) \cos(\tau ds) (\cos(\kappa_2 ds) ds) = -F_2(s) ds + o(ds)
 	\end{equation*}
 	
 	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~: 
@@ -1228,12 +1261,12 @@ The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motio
   \begin{leftfullpage}
     \captionsetup[subfloat]{captionskip=10pt}
      	\centering
-     	\subfloat[][Infinitesimal deformation.]{\includegraphics{kirchhoff_geometry_d2.pdf}\label{fig:d2_a}} \\
+     	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_d2.pdf}\label{fig:d2_a}} \\
 	\vspace{30pt}
-	\subfloat[][Contributions of the internal forces.]{\includegraphics{kirchhoff_balance_T_d2.pdf}\label{fig:d2_b}}
-	\subfloat[][Contributions of the internal moments.]{\includegraphics{kirchhoff_balance_M_d2.pdf}\label{fig:d2_c}}
+	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_d2.pdf}\label{fig:d2_b}}
+	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_d2.pdf}\label{fig:d2_c}}
 	\vspace{30pt}
-	\captionof{figure}[Interpretation~: influence of the second material curvature ($\kappa_2$)]{Influence of the second material curvature ($\kappa_2$) in the deflection of internal forces and moments along the centerline.}     
+	\captionof{figure}[Interpretation~: influence of the second material curvature ($\kappa_2$)]{Influence of the second material curvature ($\kappa_2$) in the deflection of internal forces and moments along the centerline. The plane perpendicular to $\vect{d}_2(s)$ is represented in grey. $\vect{F}_1$ is the transverse or shear component of the internal force along $\vect{d}_1$. $\vect{M}_1$ is the transverse or bending component of the internal moment along $\vect{d}_1$.}     
 	\label{fig:d2}
  \end{leftfullpage}
 \end{figure}
@@ -1242,19 +1275,19 @@ The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motio
 	\subsubsection{Contributions to the balance of forces}
 	\vspace{10pt}
 	
-	$\vect{T}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~: 
+	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~: 
 	\begin{equation*}
-		-T_1(s) + T_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = T'_1 (s) ds + o(ds)
+		-F_1(s) + F_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = T'_1 (s) ds + o(ds)
 	\end{equation*}
 	
-	$\vect{T}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~: 
+	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~: 
 	\begin{equation*}
-		T_1(s+ds) \sin(\tau ds) \cos(\kappa_1 ds) = \tau T_1 (s) ds + o(ds)
+		F_1(s+ds) \sin(\tau ds) \cos(\kappa_1 ds) = \tau F_1 (s) ds + o(ds)
 	\end{equation*}	
 	
-	$\vect{T}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~: 
+	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~: 
 	\begin{equation*}
-		-T_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = - \kappa_2 T_1(s) ds + o(ds)
+		-F_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = - \kappa_2 F_1(s) ds + o(ds)
 	\end{equation*}	
 	
 	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_1 ds$ around $\vect{d}_1$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~: 
@@ -1266,9 +1299,9 @@ The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motio
 	\subsubsection{Contributions to the balance of moments}
 	\vspace{10pt}
 	
-		$\vect{T}_1(s+ds)$ is deflected from the plane normal to $\vect{d}_2(s)$ by the angle $\tau ds$ around $\vect{d}_3$ along $ds$ (\cref{fig:d2_b}). It produces a moment around $\vect{d}_2$ with the lever arm $b =  \cos(\kappa_1 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~: 
+		$\vect{F}_1(s+ds)$ is deflected from the plane normal to $\vect{d}_2(s)$ by the angle $\tau ds$ around $\vect{d}_3$ along $ds$ (\cref{fig:d2_b}). It produces a moment around $\vect{d}_2$ with the lever arm $b =  \cos(\kappa_1 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~: 
 	\begin{equation*}
-		T_1(s+ds) \cos(\tau ds) (\cos(\kappa_1 ds) ds) = T_1(s) ds + o(ds)
+		F_1(s+ds) \cos(\tau ds) (\cos(\kappa_1 ds) ds) = F_1(s) ds + o(ds)
 	\end{equation*}
 	
 	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~: 
@@ -1295,6 +1328,16 @@ The previous equations for the motion of the rod (see \cref{eq:motion_1,eq:motio
 
 \clearpage
 \section{Conclusion}
+We have draw up in a very different manner a new framework for the study of slender elastic rods in large displacement.
+
++ proche de l'approche Barnes, Adriaenssens, Douthe
++ physique / compréhension des memberes statiques comme des équilibres de force (suelement de la trigo !)
++ hypothèses plus claires (pas d'inextensibilité, pas de quasistatique mais une assertion sur les moments d'inertie)
++ clarifie la transposition du moment en couple d'effort proposé par Adrienssen, Doute, D'amico. Qu'"on comporend comme une équation d'éqiulibre statique.
++ complète traitement naturel des charges appliquées
+
+
+
 Remind that the beam is subject to a distributed external force $\vect{f}_{ext}$ and a distributed external moment $\vect{m}_{ext}$.
 
 We neglect rotational inertial effects on $\vect{d}_1$ et $\vect{d}_2$ in \eqref{eq:3_16_b} and \eqref{eq:3_16_c} which leads to the following shear force~:
