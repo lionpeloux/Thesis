@@ -40,11 +40,18 @@ We begin this chapter by presenting Kirchhoff model of rods based on two main hy
 
 \citef{Tayeb2015a}, \citef{DuPeloux2015} and \citef{Lefevre2017} follow \cite{Bergou2008} to model grids of interconnected slender beams. They implement their model in a dynamic relaxation solver to formfind elastic gridshells. They formulate a special connexion.
 
-\citef{Gregoire2007} use the Cosserat theory of rods to simulate naturally straight hoses (application to wire routing or assembly simulation for the automotive industry). The material frame is parametrized by a global rotation using quaternions. The simulation is treated in a quasi-static manner. The problem is formulated as an energy minimization problem solved with newton, conjugate gradient or steepest descent method. \citef{Theetten2008} formulate a geometrically exact dynamic spline model for the simulation of one dimensional objects. They handle elastic and plastic deformations as fracture. \citef{Bertails2006} model the non linear behavior of hair strands with super-helicies. This work is extended later by \citef{Bertails2012} using super-clothoids. This methods have the advantage to postulate a precise geometric interpolation at each point of the rod. \citef{Spillmann2007} adopt a somehow similar approach. They remark that solving directly the Lagrangian equations of motion by a gradient method is too expensive. Thus, they fall back to a semi-implicit Euler integration scheme.
+\citef{Gregoire2007} use the Cosserat theory of rods to simulate naturally straight hoses -- for applications to wire routing or assembly simulation in the automotive industry). The material frame is parametrized by a global rotation using quaternions. The simulation is treated in a quasi-static manner. The problem is formulated as an energy minimization problem solved with newton, conjugate gradient or steepest descent method. \citef{Theetten2008} formulate a geometrically exact dynamic spline model for the simulation of one dimensional objects. They handle elastic and plastic deformations as fracture. \citef{Bertails2006} model the non linear behavior of hair strands with super-helicies. This work is extended later by \citef{Bertails2012} using super-clothoids. This methods have the advantage to postulate a precise geometric interpolation at each point of the rod. \citef{Spillmann2007} adopt a somehow similar approach. They remark that solving directly the Lagrangian equations of motion by a gradient method is too expensive. Thus, they fall back to a semi-implicit Euler integration scheme.
 
 \citef{Jung2010} provide a deep insight to the discrete mechanics of Cosserat rods, as discrete mechanics is a field of research of growing importance.
 
 \citef{Fuller1978}, \citef{Vauquelin2000}, \citef{deVries2005} and \citef{Berger2009} are worth to read to understand the variation of the parallel transport when deforming a path.
+
+A intégrer
+
+\blockcquote[p.~607]{Langer1996}{Note that $\gamma$ having unit speed corresponds to the rod being inextensible; this is not always assumed in the theory, nor is the material frame necessarily assumed to be orthonormal as it is here}
+\blockcquote[p.~607]{Langer1996}{Natural frames and the curve angle representation of rod}
+
+\citef{Alexander1982} : the ambiguous twist of love.
 
 %Quaternions also lack singular points and gimbal lock, contrarily to Euler or Cardan angles.
 
@@ -183,7 +190,9 @@ Kirchhoff's theory assigns an elastic energy to beams according to their strain~
 Here, $\rconf{\kappa}_1$, $\rconf{\kappa}_2$ and $\rconf{\tau}$  denote the \emph{natural} material curvatures and material twist of the rod in its rest configuration. $E$ and $G$ are the elastic and shear modulus of the material. $I_1$ and $I_2$ are the moments of inertia of the cross-section. $J$ is the torsion constant of the cross-section.
 
 \subsubsection{Initially straight isotropic rod~: a special case}
-From this energy formulation an interesting an well-known result on elastic rods can be retrieved.\footnote{For instance, this result is cited by \citef{Adriaenssens1999}.}. This results stipulates that torsion is uniform in a rod with isotropic cross-section and naturally straight.
+From this energy formulation an interesting an well-known result on elastic rods can be retrieved. This results stipulates that torsion is uniform in a rod with isotropic cross-section and naturally straight.\footnote{This result was already known by Love \cite[§~234]{Love1906} and is mentioned by \citef{Adriaenssens1999} and \citef{Douthe2007}.} 
+
+Cette proposition est démontrée dans le paragraphe 273 de la théorie de l’élasticité de Love [66] ainsi que sous une forme plus condensée par S. Adriaenssens [3]
 
 Indeed, by definition for a rod with isotropic cross-section~: $EI_1 = EI_2 = EI$. If in addition the rod is straight in its rest configuration~: $\rconf{\kappa}_1 = \rconf{\kappa}_2 = \rconf{\tau} = 0$. The bending energy becomes~: $\mathcal{E}_{b} = EI_1\;\kappa_1^2 + EI_2\;\kappa_2^2 = EI(\kappa_1^2 + \kappa_2^2) = EI\kappa^2$. Consequently, the elastic energy of the rod is composed of two independent terms~: $\mathcal{E}_{b}[\vect{x}]$ and $\mathcal{E}_{r}[\theta]$. The coupling between bending and twisting disappears and the global minimum of elastic energy is reached when minimizing separately bending an twisting energies. This meansthat the geometry of the rod at static equilibrium ($\vect{x}$) is the one that minimized $\mathcal{E}_{b}[\vect{x}]$. And the minimum of $\mathcal{E}_{t}[\theta]$ is obviously achieved for a uniform twist ($\tau = cst$) along the centerline, only prescribed by the boundary conditions at the extremities of the rod (least-squares minimization).
 
@@ -197,7 +206,7 @@ In the previous paragraph we have shown how the elastic energy of a rod can be c
 \item and \dofs{3} for the orientation of the cross-sections.
 \end{itemize}
 
-Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of the rod that accounts for only \dofs{4}~:
+Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of the rod that accounts for only \dofs{4}~: \footnote{The curve-angle representation was first introduced by \cite{Langer1996}.}
 \begin{itemize}
 \item \dofs{3} for the position of the centerline,
 \item and only \dofs{1} for the orientation of the cross-sections.

@@ -24,6 +24,39 @@ Expliquer l'interpolation des efforts. Il y a un choix a faire dans la DR. Soit 
 
 \subsection{Related works}
 
+\citef{Miki2014} : DR as a gradient descent method
+
+
+Départ~:
+\citef{Day1965}~: already includes a rotational DOF !!
+\citef{Wakefield1980}
+\citef{Barnes1999}~: revue intéressante de la DR.
+
+3 pts classique~:
+\citef{Adriaenssens1999}
+\citef{Douthe2006}
+
+2 x 3pts~:
+\citef{Barnes2013}
+
+6 Dofs~:
+\citef{DAmico2014}
+
+4Dofs~:
+\citef{DuPeloux2015}
+\citef{DAmico2016}
+
+Dans le champ de l'animation  avec élément finis
+\citef{Duan2013}
+\citef{Meier2014}
+
+Pour des cas test :
+\citef{Ibrahimbegovic1995}
+\citef{Lazaro2016}
+
+
+
+
 \section{Main hypothesis}
 
 On néglige les forces d'inertie liées à la rotation de l'élément  (devant quoi ?? traitement quasi-statique par rapport à la rotation). Cette hypothèse est faite explicitement chez Florence Bertail~:
@@ -75,7 +108,7 @@ Beams can either be closed or open. The corresponding number of vertices, edges 
 	\end{tabularx}
 	\label{tab:count}}
 	\vspace{10pt}
-	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a three-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
+	\captionof{figure}[Biarc model for a discrete beam element]{Biarc model for a discrete beam element. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a three-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
 \end{fullpage}
 \end{figure}
 

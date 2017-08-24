@@ -8,13 +8,18 @@
 
 \section{Introduction}
 
-In this chapter, following \citef{Dill1992}, we present thoroughly the theory of slender rods developed by Kirchhoff, Clebsch and Love at the end of the XIX\textsuperscript{th} century. This theory can be applied for motions where strains remain small although displacements and rotations may be large, which is perfectly suitable to the modeling of elastic gridshell structures where the material must be employed in its elastic range but the structure undergoes large displacements during the forming process.\footnote{This is classically referred to as \textquote{material linearity} but \emph{geometric nonlinearity}.}
+In this chapter, following \citef{Dill1992}, we present thoroughly the theory of slender rods developed by Kirchhoff, Clebsch and Love at the end of the XIX\textsuperscript{th} century. This theory can be applied for motions where strains remain small although displacements and rotations may be large, which is perfectly suitable to the modeling of elastic gridshell structures where the material must be employed in its elastic range but the structure undergoes large displacements during the forming process.\footnote{This is classically referred to as \textquote{material linearity} but \textquote{geometric nonlinearity}.}
 
 We will see that this theory requires nothing more than that, and that the shear strains are negligible compare to the axial strain. In particular, the rod is not supposed to be strictly inextensible, nor the cross-sections are assumed to remain strictly plane.
 
-The discrete beam element presented in \cref{chp:numerical_model} will directly results from the discretization of the dynamical Kirchhoff equations presented here, combined with an appropriate use of the the discrete curve-angle representation (see \cref{sec:crvangle}) and the discrete inscribed curvature (see \cref{sec:inscribe_dc}).
+The discrete beam element presented in \cref{chp:numerical_model} will directly results from the discretization of the dynamical Kirchhoff equations presented here, combined with an appropriate use of the discrete curve-angle representation (see \cref{sec:crvangle}) and the circumscribed discrete curvature (see \cref{sec:circumscribe_dc}).
 
-The motivations for this work were build upon the experience gained in the previous chapter (see \cref{chp:energy}). Although the variational approach actually leads to the calculation of the quasi-static internal force and moment acting on the rod, these results are more straightforwardly obtained with the approach developed in this chapter, that is through writing the dynamic equilibrium of the rod. But it is not simply a matter of taste considering the perspective of the discrete element we intend to build and solve through a damped dynamic explicit time integration, namely a \emph{dynamic relaxation} procedure (see \cref{chp:numerical_model}). Indeed, the equilibrium approach enables an immediate and full dynamic treatment of the rod, drops the stiff and unnecessary constraint of inextensibility and naturally integrates the treatment of applied loads. It also offers a more physical and less mathematical understanding of the problem, which is a matter of concern when designing real structures.\footnote{The formalism of the energy formulation has it pros as it is more straightforwardly translated into minimization problems.}
+The motivations for this work were build upon the experience gained in the previous chapter (see \cref{chp:energy}). Although the variational approach actually leads to the calculation of the quasi-static internal force and moment acting on the rod, these results are more straightforwardly obtained with the approach developed in this chapter, that is through writing the dynamic equilibrium of the rod. But it is not simply a matter of taste considering the perspective of the discrete element we intend to build and solve through a damped dynamic explicit time integration, namely a \emph{dynamic relaxation} procedure (see \cref{chp:numerical_model}). Indeed, the equilibrium approach enables an immediate and full dynamic treatment of the rod, drops the stiff and unnecessary constraint of inextensibility and naturally integrates the treatment of applied loads. It also offers a more physical and less mathematical understanding of the problem, which is a matter of concern when designing real structures.\footnote{The formalism of the energy formulation has it pros as it is more straightforwardly translated into minimization problems. Therefor, its resolution is naturally opened to a wide range of algorithm such as Newton-Raphson method, the conjugate gradient method, the steepest descent methods, \telp{}}
+
+Finally, this approach is closer \textquote{in spirit} to what have been proposed previously in the field of active bending structures about the \dofs{3} or \dofs{6} \emph{spline beam elements}, and first introduced by \citef{Adriaenssens2001}. It brings a more robust background to explain how internal forces and moments are derived in those elements. For instance, in \cite{Adriaenssens2001,Douthe2006,DAmico2014} the unbalanced shear forces acting on the rod during its motion are deduced -- with no justification -- from the bending moment, itself computed from the curvature of the rod. We show here that this result is a consequence of the dynamic Kirchhoff equations where some inertial terms have been neglected (see \cref{sec:eq_of_motion}).
+
+
+
 %
 %Finally, 
 %
@@ -42,85 +47,44 @@ The motivations for this work were build upon the experience gained in the previ
 %
 %\blockcquote[p.]{Dias2014}{For thin beams having a slender cross-section, $h \ll w$, the classical rod theory of Kirchhoff is known to be inapplicable. Such beams are usually modeled using Vlasov’s theory for thin-walled beams. Vlasov’s models can be justified from 3D elasticity but only in the case of moderate deformations, when the cross-sections bend by a small amount. In the present work, however, we have considered large deformations of thin strips. The strip has been modeled as an inextensible  plate, and the geometric  constraint of inextensibility has been treated exactly~: the cross-sections are allowed to bend by a significant amount. Our model extends the classical strip model of Sadowsky, and reformulate it in a way that fits into the classical theory of rods.}
 %
-%\subsection{Overview}
-%
-%We begin by a short introduction on the Cosserat theory of rods (see \cref{sec:cosserat_theory}). From this theory, we study only the way the motion of a rod is described in a very generic manner, through its force and moment strain vectors. We then restrain our study to the Kirchhoff theory of rods (see \cref{sec:kirchhoff_theory})~: we specialize the description inherited from the Cosserat theory to our needs so it fulfills the specific assumptions made in Kirchhoff theory~; we establish the dynamical equations of a rod under external loading~; we recall the canonical form of the strain and stress tensors~; and finally we retrieve the usual material constitutive equations as a consequence of the small strains and elasticity assumptions. Finally, we show that the static member of the equations of motion can be retrieved from simple geometric considerations (see \cref{sec:geointerp}).
-%
-%
+
+\subsection{Overview}
+
+We begin by a short introduction on the Cosserat theory of rods (see \cref{sec:cosserat_theory}). From this theory, we study only the way the motion of a rod is described in a very generic manner, through its force and moment strain vectors. We then restrain our study to the Kirchhoff theory of rods (see \cref{sec:kirchhoff_theory})~: we specialize the description inherited from the Cosserat theory to our needs so it fulfills the specific assumptions made in Kirchhoff theory~; we establish the dynamical equations of a rod under external loading~; we recall the canonical form of the strain and stress tensors~; and finally we retrieve the usual material constitutive equations as a consequence of the small strains and elasticity assumptions. Finally, we show that the static member of the equations of motion can be retrieved from simple geometric considerations (see \cref{sec:geointerp}).
 
 \subsection{Contributions}
 \begin{itemize}
 \item We describe the motion of a Kirchhoff rod as a particular case of the motion of a Cosserat rod. This would enable to extend the present work in order to take into account shear effects, while sticking to the same geometrical description.
-\item We retrieve the equations of motion of a Kirchhoff rod with a careful treatment of the assumptions, following \cite{Dill1992}. This allow us to established a framework
+\item We retrieve the equations of motion of a Kirchhoff rod with a careful treatment of the assumptions, following \cite{Dill1992}.
 \item We highlight the pedagogical interest of this approach compared to the variational approach by showing that the static members of Kirchhoff equations are nothing but first-order balance equations.
 \end{itemize}
 
 \subsection{Related work}
-Ici il faudrait préciser la terminologie des auteurs / équations / hypothèses~:
-Euler-Bernoulli, Navier-Bernoulli, Kirchhoff, Love, Clebesh, Cosserat, Vlassov
-On peu s'instruire dans la publi de Dill~\cite{Dill1992}.
-Regarder en particulier le premier chapitre de l'HDR de Neukirch~\cite{Neukirch2009}.
-Regarder également la chronologie des modèles proposée dans la thèse de Theetten~\cite{Theetten2007}.
-Pourquoi pas proposer une frise chronologique + un tableau de synthèse des hyptohèses.
 
-\citef{Dill1992}
-\citef{Neukirch2009}
-\citef{Adriaenssens1999}
-\citef{Hoogenboom2006}
-\citef{Lang2009}
-\citef{Spillmann2008}
-\citef{Antman2005}
-\citef{Cao2008}
+The theory for slender rods presented here was developed at the end of the XIX\textsuperscript{th} century by Kirchhoff \cite{Kirchhoff1850,Kirchhoff1876}, Clebsch \cite{Clebsch1883} and Love \cite{Love1906}.
 
-\cite{Neukirch2009}~: p69 -~\cite{Dill1992}~: p16
-
-Dans les tentatives dans notre domaine, citer~:
-
-Kirchhoff~:~\cite{Kirchhoff1850, Kirchhoff1876} \\
-Clebsch~:~\cite{Clebsch1883} \\
-Love~:~\cite{Love1892} \\
-Timoshenko~:~\cite{Timoshenko1921, Timoshenko1922, Timoshenko1951}
-
-\blockcquote[p.~607]{Langer1996}{Note that $\gamma$ having unit speed corresponds to the rod being inextensible; this is not always assumed in the theory, nor is the material frame necessarily assumed to be orthonormal as it is here}
-
-\blockcquote[p.~607]{Langer1996}{Natural frames and the curve angle representation of rod}
+\citef{Dill1992} revisits the work of these pioneers and treats their theory in the framework of modern continuum mechanics. He gives the dynamic equations of balance of momentum, with a careful and precise treatment of the assumptions. In particular, he makes the correct distinction between material and geometric curvatures, a subtlety that is often hidden behind the assumption that the beam is inextensible \cite{Adriaenssens1999,Douthe2007,DAmico2014}.\footnote{\blockcquote[p.~5]{Dill1992}{The principal normal, binormal, and torsion of the axis, viewed as an element of a space curve, have no special significance in the theory of rods. Use of those special directions as base vectors does not simplify the theory and can mislead the reader into attributing significance to them when none exists. In particular, the curvature of the rod should not be confused with the curvature of the space curve which the axis forms.}} His work is mentioned by \citef{Neukirch2009}. 
 
 
-Départ~:
-\citef{Day1965}~: already includes a rotational DOF !!
-\citef{Wakefield1980}
-\citef{Barnes1999}~: revue intéressante de la DR.
+\citef{Timoshenko1921} proposes a theory that extends Kirchhoff, Clebsch and Love works to take into account shear effects, considering that cross-sections might not stay perpendicular to the centerline of the beam. For plane problems, he measures the amount of shear through a rotation of the cross-section with respect to the beam axis.
 
-3 pts classique~:
-\citef{Adriaenssens1999}
-\citef{Douthe2006}
+\citef{Reissner1973} and \citef{Simo1991} introduce the notion of \emph{geometrically exact} beam, that is a beam model in which the description of the geometry is free of any assumption. They derive generalized Kirchhoff equations for rods that can undergo stretching, shearing, bending, torsion and even warping in \cite{Simo1991} with the help of a 7\textsuperscript{th} degree of freedom. The problem is formulated from the principle of virtual work and is fully nonlinear, which means it accounts for both large-displacements and finite-strains. Similar attempts where proposed by \cite{Antman1974}. These formulations are nothing but two-director Cosserat theories in which the material frames is constrained to remain orthonormal, but not necessary adapted to the centerline.
+ 
+\citef{Antman2005} develops the \emph{special theory of Cosserat rods}, a very generic theory applicable to the modeling of solids where one dimension is much larger than the other two. This theory is a generalization of the works of Antman, Reissner and Simo where the directors of the material frame is not constrained to rigid body motions. Several authors interested in the modeling and simulation of nonlinear dynamics of rods built their work upon Antman's theory, among which we can cite \citef{Gregoire2007}, \citef{Spillmann2007} or \citef{Cao2008}.
 
-2 x 3pts~:
-\citef{Barnes2013}
+\citef{Lang2009} claim that Lagrangian field theory leads to a more straightforward development of the work of Simo \cite{Simo1991} that is directly formulated using quaternions, which could be of practical interest when considering its implementation in a numerical solver.
 
-6 Dofs~:
-\citef{DAmico2014}
+\citef{Moulton2013} offers an interesting treatment of extensible rods to model plants growth, whereas all the other papers cited here usually try to built their model upon the assumption that the rod is inextensible.
 
-4Dofs~:
-\citef{DuPeloux2015}
-\citef{DAmico2016}
+%Pourquoi pas proposer une frise chronologique + un tableau de synthèse des hyptohèses.
 
-Dans le champ de l'animation  avec élément finis
-\citef{Duan2013}
-\citef{Meier2014}
-
-Pour des cas test :
-\citef{Ibrahimbegovic1995}
-\citef{Lazaro2016}
-
-Pour la cinématique, superposition d'un mouvement rigide et d'un warping de la section :
-\citef{Simo1991} dans l'extension de \citef{Reissner1973}
-
+%
+%
 
 \clearpage
 \section{Introduction to the special Cosserat theory of rods}\label{sec:cosserat_theory}
 
-This paragraph gives a very brief overview of the \emph{special Cosserat theory of rods}, as presented by~\citef{Antman2005}, that accounts for bending, torsion, extension and shear  behaviors of slender beams.\footnote{\blockcquote[p.~270]{Antman2005}{[we formulate] a general dynamical theory of rods that can undergo large deformations in space by suffering flexure, torsion, extension, and shear. We call the resulting geometrically exact theory the \emph{special Cosserat theory of rods}.}} This theory -- which is a \emph{director theory} of rods -- was first introduced by~\cite{Antman1974}. It gives a larger scope to the basements of the present work -- which relies on the \emph{Kirchhoff theory of rods} -- as the last is a special case of this larger theoretical framework. Thus, what is presented in this paragraph could be considered as a reasonable starting point to extend the present work, for instance to take account for shear or large extension, which might be relevant for some engineering problems or form-finding processes.
+This paragraph gives a very brief overview of the \emph{special Cosserat theory of rods}, as presented by~\citef{Antman2005}, that accounts for bending, torsion, extension and shear  behaviors of slender beams.\footnote{\blockcquote[p.~270]{Antman2005}{[we formulate] a general dynamical theory of rods that can undergo large deformations in space by suffering flexure, torsion, extension, and shear. We call the resulting geometrically exact theory the \emph{special Cosserat theory of rods}.}} This theory -- which is a \emph{director theory} of rods -- was first introduced by~\cite{Antman1974}. It gives a larger scope to the basements of the present work -- which relies on the \emph{Kirchhoff theory of rods} -- as the last is a special case of this larger theoretical framework. Thus, what is presented in this paragraph could be considered as a reasonable starting point to extend the present work, for instance to take account for shear deformations or large extensions, which might be relevant for some engineering problems or form-finding processes.
 
  It has been largely employed in various fields~\cite{Shi1995, Bergou2010}.
 
@@ -386,22 +350,22 @@ The reader is invited to refer to~\cite{Antman2005} to get a deeper understandin
 \clearpage
 \section{Kirchhoff theory of rods}\label{sec:kirchhoff_theory}
 
-The theory for the finite displacement of thin rods has been developed by Kirchhoff, Clebsch and Love.
+In this section we recall the principle of Kirchhoff theory of rods and we treat its geometrical description with the framework presented in \cref{sec:cosserat_theory} from Cosserat's theory.\footnote{\blockcquote[p.~238]{Antman2005}{The classical elastic rod theory of Kirchhoff (1859), called the kinetic analogue, is is a special case of our rod theory [\dots]}.} Kirchhoff's theory accounts for finite displacements but small strains, which means that only geometric nonlinearities can be modeled. We will show in \cref{sec:constit} that in the framework of 3D elasticity it is precisely the assumption of small strains that leads to the well-known material constitutive laws.
 
-force and moment strains (Reissnner)~:  $\varkappa $ 
-S'inspirer de l'intro de Reissner 1973
+Our goal is to present a clean theory that leads to the dynamical equations of Kirchhoff. These equations will then be discretize in the next chapter to build a discrete element suitable for the computation of elastic gridshells.
 
-In this section we follow~\cite{Dill1992} to introduce \emph{Kirchhoff's theory of rods}, where Dill \textquote{examine the classical theory of finite displacements of thin rods as developped by Kirchhoff and Clebesch, and presented by Love}. \blockcquote[p.~238]{Antman2005}{The classical elastic rod theory of Kirchhoff (1859), called the kinetic analogue, is is a special case of our rod theory [\dots]}
+As reported by Dill, in the literature most of the assumptions presented as the Kirchhoff assumptions were in fact not made by Kirchhoff, Clebsch nor Love. Actually a \emph{Kirchhoff-Love} rod is a rod in which the deformed configuration differs only by \emph{small deformations} from a configuration that satisfies the \emph{Euler-Bernoulli} assumptions, that is~: cross-sections are plane, undeformed and perpendicular to the beam centerline.
 
-Dans un même genre, le papier de Reissner (1973) vaut le détour~\cite{Reissner1973}
+Hence, a Kirchhoff rod does not presuppose that the centerline is inextensible -- but that the extension is small -- nor that cross-sections remain plane -- but that their warping deformation is small. These hypothesis, if strictly respected in the model, would not lead to the right expression of the torsion constant or the correct expression of the material curvatures.\footnote{}
 
-We assume that material and section properties are slowly varying along the centerline.
-Note that symbols referring to this configuration will carry an overbar.
+But to what extent these deformations are considered small ? The answer is that Kirchhoff's theory is a complete \emph{first order} theory in the parameter $\alpha$~:
+\begin{equation}
+	\alpha = \sup_{s \in [0,L]} \{ h/L, h \norm{\vect{\varkappa}}, h\norm{\rconf{\vect{\varkappa}}}, \epsilon \}
+\end{equation}
+where $L$ is the rod length, $h$ is the characteristic width of the cross-section, $\epsilon$ is the axial extension, $\vect{\varkappa}$ and $\rconf{\vect{\varkappa}}$ are the vectors of material curvatures respectively in the deformed and unstressed configurations \cite{Dill1992,Coleman1993}.
 
-référence importante pour la rod~\cite{Moulton2013} ,~\cite[p.~109]{Villaggio1997}.
-modeling of DNA molecules, pipes or hosing, plant, hair, surgery, 
 
-\footnote{\blockcquote[p.~5]{Dill1992}{The principal normal, binormal, and torsion of the axis, viewed as an element of a space curve, have no special significance in the theory of rods. Use of those special directions as base vectors does not simplify the theory and can mislead the reader into attributing significance to them when none exists. In particular, the curvature of the rod should not be confused with the curvature of the space curve which the axis forms.}}
+
 \footnote{\blockcquote[p.~18]{Dill1992}{Kirchhoff's theory can only apply to that class of problems for three dimensional bodies such that the loads on the sides are relatively small and slowly varying. The dominate mode of deformation must be a global bending and twisting with small axial extension. If there are substantial local variations in curvatures or substantial transverse shears, his theory of bending of rods will not provide a satisfactory first approximation.}}
 \footnote{\blockcquote[p.~15]{Dill1992}{There are no constitutive relations for $F_1$ or $F_2$. They are determined by the balance of momentum as in the elementary linear theory of bending of rods.}}
 A thorough order-of-magnitude analysis is exposed in~\cite{Dill1992, Coleman1993}
@@ -411,48 +375,27 @@ A thorough order-of-magnitude analysis is exposed in~\cite{Dill1992, Coleman1993
 
 Pour la rod extensible~:~\cite{Cisternas2002}
 
-ces équations sont valables à l'ordre 2 en $\alpha$~\cite{Coleman1993} où~:
+Linear theory for non uniform torsion~\cite{Vlasov1961}. Formula for shear center~\cite{Elter1984}. Going further with non uniform torsion~\cite{Alves2014}
 
-Kirchhoff's theory is a first order theory regarding the parameter $\alpha$, valid when $\alpha$ is small. This means that terms of order $O(\alpha^2)$ will be considered negligible
-~:
-\begin{equation}
-	\alpha = \sup_{s \in [0,L]} \{ h/L, h \norm{\vect{\omega}}, h\norm{\rconf{\vect{\omega}}}, \epsilon \}
-\end{equation}
+Pioneer works on non lieanr dynamics of rods~\cite{Weiss2002}. For an historical review~:~\cite{Benvenuto1991a}. Short review of the history of 1D beam models~:\cite[p.~243]{Antman2005}
 
 
-The model is valid for uniform torsion. No restrained warping. For more and warping, see~:
-The correction for shear in Kirchhoff's theory, introduce by Timoshenko in~\cite{Timoshenko1921}
-The \emph{Timoshenko theory of beams}~:~\cite{Timoshenko1945a,Timoshenko1945b,Timoshenko1945c}
-Include non uniform torsion \blockcquote{Timoshenko1945b}{The problem becomes more complicated if cross sections are not free to warp or if the torque varies along the length of the bar. Warping in such cases varies along the bar and tor- sion is accompanied by tension or compression of longitudinal fibers. The rate of change of the angle of twist along the axis of the bar also varies, and we call this the case of non-uniform torsion.}
+% non uniform torsion
+%\blockcquote{Campanile2009}{In the traditional theory of non-uniform torsion the axial displacement field is expressed as the product of the unit twist angle and the warping function. The first one, variable along the beam axis, is obtained by a global congruence condition; the second one, instead, defined over the cross-section, is determined by solving a Neumann problem associated to the Laplace equation, as well as for the uniform torsion problem. So, as in the classical theory the warping function doesn’t punctually satisfy the first indefinite equilibrium equation, the principal aim of this work is to develop a new theory for non-uniform torsion of beams with axial symmetric cross-section, fully restrained on both ends and loaded by a constant torque, that permits to punctually satisfy the previous equation, by means of a trigonometric expansion of the axial displacement and unit twist angle functions. Furthermore, as the classical theory is generally applied with good results to the global and local analysis of ship structures, two beams having the first one an open profile, the second one a closed section, have been analyzed, in order to compare the two theories.}
 
-Linear theory for non uniform torsion~\cite{Vlasov1961}
-Formula for shear center~\cite{Elter1984}
-A geometrically exact Kirchhoff beam model including torsion warping~:~\cite{Manta2016}
+%\subsubsection{Hypothesis}
+%% ----------------------------------
+%
+%\begin{itemize}
+%\item the rod is slender
+%\item cross-section deformations remain small, although rotations may be large
+%\item cross-section shear-center and centroid are at the same location
+%\item material and cross-section properties vary slowly along the rod
+%The model is valid for uniform torsion. No restrained warping. For more and warping, see~:
 
-Pioneer works on non lieanr dynamics of rods~\cite{Weiss2002}
-More recent works~:~\cite{Manta2016}
-
-For an historical review~:~\cite{Benvenuto1991a}
-Short review of the history of 1D beam models~:\cite[p.~243]{Antman2005}
-
-
-See~\cite{Reissner1973} for an extension of Kirchhoff's theory, as mentioned also in~\cite{Reissner1981}
-
-going further with non uniform torsion~\cite{Alves2014}
-
-\blockcquote{Campanile2009}{In the traditional theory of non-uniform torsion the axial displacement field is expressed as the product of the unit twist angle and the warping function. The first one, variable along the beam axis, is obtained by a global congruence condition; the second one, instead, defined over the cross-section, is determined by solving a Neumann problem associated to the Laplace equation, as well as for the uniform torsion problem. So, as in the classical theory the warping function doesn’t punctually satisfy the first indefinite equilibrium equation, the principal aim of this work is to develop a new theory for non-uniform torsion of beams with axial symmetric cross-section, fully restrained on both ends and loaded by a constant torque, that permits to punctually satisfy the previous equation, by means of a trigonometric expansion of the axial displacement and unit twist angle functions. Furthermore, as the classical theory is generally applied with good results to the global and local analysis of ship structures, two beams having the first one an open profile, the second one a closed section, have been analyzed, in order to compare the two theories.}
-
-\subsubsection{Hypothesis}
-% ----------------------------------
-
-\begin{itemize}
-\item the rod is slender
-\item cross-section deformations remain small, although rotations may be large
-\item cross-section shear-center and centroid are at the same location
-\item material and cross-section properties vary slowly along the rod
-\end{itemize}
-
-\clearpage
+%\end{itemize}
+%
+%\clearpage
 
 % Description of the motion
 % ----------------------------------
@@ -796,7 +739,7 @@ Using \cref{eq:m} the balance of linear momentum referring to the \emph{referenc
 	+ \vect{m}_{s}  + (1+\epsilon)\vect{m}_{s_t}  \\
 	& &&\quad + \vect{x} \times \big(\vect{f}_{s}  + (1+\epsilon)\vect{f}_{s_t} \big) \;ds \nonumber
 \end{alignat}
-Finally, combining \cref{eq:angularbalance2} with \cref{eq:linearmotion,eq:angularinertia}, the equation for the balance of angular momentum reduce to~: \footnote{Note the simplification of the term $\rho S \ddot{\vect{x}}$. Alternatively, the balance equations could be written for the slice considered as a rigid body. In the barycentric frame of the slice~: $\frac{d}{dt}(dI_G) = \vect{M}(s+ds)-\vect{M}(s) + \vect{m}(s)ds + (\tfrac{1}{2}ds\vect{x}')\times \vect{F}(s+ds) + (-\tfrac{1}{2}ds\vect{x}')\times -\vect{F}(s) = \left(\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{x}'\times \vect{F}(s)\right)ds$ with $dI_G \simeq \rho ds (I_1 \vect{d}_1 + I_2 \vect{d}_2 + (I_1+I_2) \vect{d}_3)$.}\textsuperscript{,}\footnote{This equation also writes~: $(1+\epsilon)\Bigl(\frac{\partial \vect{M}}{\partial s_t} + \frac{\partial \vect{x}}{\partial s_t} \times \vect{F} + (1+\epsilon)^{-1}\vect{m}_{s}  +  \vect{m}_{s_t} \Bigr) = \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}$.}
+Finally, combining \cref{eq:angularbalance2} with \cref{eq:linearmotion,eq:angularinertia}, the equation for the balance of angular momentum reduce to~: \footnote{Note the simplification of the term $\rho S \ddot{\vect{x}}$. Alternatively, the balance equations could be written for the slice considered as a rigid body. In the barycentric frame of the slice~: $\frac{d}{dt}(dI_G) = \vect{M}(s+ds)-\vect{M}(s) + \vect{m}(s)ds + (\tfrac{1}{2}ds\vect{x}')\times \vect{F}(s+ds) + (-\tfrac{1}{2}ds\vect{x}')\times -\vect{F}(s) = \left(\frac{\partial \vect{M}}{\partial s}(s)+\vect{m}(s) + \vect{x}'\times \vect{F}(s)\right)ds$ with $dI_G \simeq \rho ds (I_1 \vect{d}_1 + I_2 \vect{d}_2 + (I_1+I_2) \vect{d}_3)$.}\textsuperscript{,}\footnote{This equation also writes~: $(1+\epsilon)\Bigl(\frac{\partial \vect{M}}{\partial s_t} + \frac{\partial \vect{x}}{\partial s_t} \times \vect{F} + (1+\epsilon)^{-1}\vect{m}_{s}  +  \vect{m}_{s_t} \Bigr) = \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}$.}\textsuperscript{,}\footnote{Under this form, this equation is presented by \citef{Neukirch2009}.}
 \begin{equation}
 	\frac{\partial \vect{M}}{\partial s} 
 	+ \frac{\partial \vect{x}}{\partial s} \times \vect{F}
@@ -804,7 +747,7 @@ Finally, combining \cref{eq:angularbalance2} with \cref{eq:linearmotion,eq:angul
 	= \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}
 \end{equation}
 
-\subsection{Equations of motion}
+\subsection{Equations of motion}\label{sec:eq_of_motion}
 With some scaling arguments~\citef{Dill1992} shows that terms in $\omega_1$ and $\omega_2$ should be negligible in the inertial forces of the rod given in \cref{eq:angularinertia}, which yields to~: \footnote{\blockcquote[p. 17]{Dill1992}{It follows that $\varkappa_1$ and $\varkappa_2$ can be neglected in the kinetic energy [\ldots]. However, $\varkappa_3$, which provides the angular momentum about the axis of the rod, must be retained. This assumption of Kirchhoff is consistent with the technical theory of beams where rotary inertia is known to provide corrections to the natural frequencies of vibration of $O(\alpha^2)$ if the length measure is the half-wave length}.}\textsuperscript{,}\footnote{This assumption is made in numerous publications but often with ambiguous or no justifications, as of instance~: \blockcquote[]{Casati2013}{neglecting inertial momentum due to the vanishing cross-section lead to the following dynamic equations for a Kirchhoff rod}.}
 \begin{subequations}
 	\begin{alignat}{1}
@@ -885,9 +828,9 @@ where $\varphi_s$ is the warping function (in torsion) of $\mathcal{S}(s)$, dete
 	&& \quad, \quad f_s(X_1,X_2) = 0 \label{eq:warpingCL}
 	\end{alignat}
 \end{subequations}
-These equations have known analytical solutions for classical shapes such as circles, ellipses, squares or rectangles. For other shapes, when it is not easy to find analytical solutions, the membrane analogy introduced by Prandtl~\cite{Prandtl1903} can be employed.\footnote{Recent advances~\cite{Koohestani2014} in the formfinding of soap films with the force density method might be of practical use to evaluate the warping function.}
+These equations have known analytical solutions for classical shapes such as circles, ellipses, squares or rectangles. For other shapes, when it is not easy to find analytical solutions, the membrane analogy introduced by Prandtl~\cite{Prandtl1903} can be employed.\footnote{Recent advances~\cite{Koohestani2014} in the formfinding of soap films with the force density method might be of practical use to evaluate the warping function.} A careful introduction to the question of torsion in bars is proposed by \citef[p.~258-315]{Timoshenko1951}.
 
-Note that the boundary condition given by \cref{eq:warpingCL} stipulates that cross-sections are free to warp.
+Note that the boundary condition given by \cref{eq:warpingCL} stipulates that cross-sections are free to warp. The problem is more complex when warping is restrained. In this case, called \emph{non-uniform torsion}, the twisting stiffness is modified.\footnote{\blockcquote{Timoshenko1945b}{The problem becomes more complicated if cross sections are not free to warp or if the torque varies along the length of the bar. Warping in such cases varies along the bar and torsion is accompanied by tension or compression of longitudinal fibers. The rate of change of the angle of twist along the axis of the bar also varies, and we call this the case of non-uniform torsion.}.}
 
 \subsection{Strain tensor}
 Here, we remind the canonical form of the strain tensor ($\tens{E}$) for the cross-section $\mathcal{S}(s)$ in the context of Kirchhoff's approximation~: 
@@ -923,7 +866,7 @@ Thus, the Piola stress vector defined in \cref{eq:piola} becomes~:
 	\vect{\sigma_n} = \sigma_{31}\vect{d}_1 + \sigma_{32}\vect{d}_2 + \sigma_{33}\vect{d}_3 \label{eq:piola2}
 \end{equation}
 
-\subsection{Constitutive equations for internal forces and moments}
+\subsection{Constitutive equations for internal forces and moments}\label{sec:constit}
 In Kirchhoff's theory, constitutive equations for internal forces and moments should not be considered as assumptions. Indeed, as shown hereafter, they are somehow consequences of the assumptions made on the motion -- that is the rod remains close to a motion where cross-sections remain planar, undistorted and perpendicular to the centerline -- and on the material -- the Hookean elasticity -- of the rod.
 
 From \cref{eq:F,eq:piola2,eq:stress_a,eq:strain_a} we deduce the constitutive equation for the axial component of the internal forces~: \footnote{Also recall from \cref{eq:centroid} that $\iint_{\mathcal{S}(s)} {X_1} \;dX_1 dX_2 = 0$ and $\iint_{\mathcal{S}(s)} {X_2} \;dX_1 dX_2 = 0$.}

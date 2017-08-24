@@ -2120,10 +2120,52 @@
     <bcf:datasource type="file" datatype="bibtex">library.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">Barnes1999</bcf:citekey>
-    <bcf:citekey order="1">Adriaenssens1999</bcf:citekey>
-    <bcf:citekey order="1">Douthe2006</bcf:citekey>
-    <bcf:citekey order="2">Lewis2003</bcf:citekey>
+    <bcf:citekey order="1">Miki2014\@inpenc@undefined@{utf8}</bcf:citekey>
+    <bcf:citekey order="2">Miki2014\@inpenc@undefined@{utf8}</bcf:citekey>
+    <bcf:citekey order="3">Miki2014\@inpenc@undefined@{utf8}</bcf:citekey>
+    <bcf:citekey order="4">Day1965</bcf:citekey>
+    <bcf:citekey order="5">Day1965</bcf:citekey>
+    <bcf:citekey order="6">Day1965</bcf:citekey>
+    <bcf:citekey order="7">Wakefield1980</bcf:citekey>
+    <bcf:citekey order="8">Wakefield1980</bcf:citekey>
+    <bcf:citekey order="9">Wakefield1980</bcf:citekey>
+    <bcf:citekey order="10">Barnes1999</bcf:citekey>
+    <bcf:citekey order="11">Barnes1999</bcf:citekey>
+    <bcf:citekey order="12">Barnes1999</bcf:citekey>
+    <bcf:citekey order="13">Adriaenssens1999</bcf:citekey>
+    <bcf:citekey order="14">Adriaenssens1999</bcf:citekey>
+    <bcf:citekey order="15">Adriaenssens1999</bcf:citekey>
+    <bcf:citekey order="16">Douthe2006</bcf:citekey>
+    <bcf:citekey order="17">Douthe2006</bcf:citekey>
+    <bcf:citekey order="18">Douthe2006</bcf:citekey>
+    <bcf:citekey order="19">Barnes2013</bcf:citekey>
+    <bcf:citekey order="20">Barnes2013</bcf:citekey>
+    <bcf:citekey order="21">Barnes2013</bcf:citekey>
+    <bcf:citekey order="22">DAmico2014</bcf:citekey>
+    <bcf:citekey order="23">DAmico2014</bcf:citekey>
+    <bcf:citekey order="24">DAmico2014</bcf:citekey>
+    <bcf:citekey order="25">DuPeloux2015</bcf:citekey>
+    <bcf:citekey order="26">DuPeloux2015</bcf:citekey>
+    <bcf:citekey order="27">DuPeloux2015</bcf:citekey>
+    <bcf:citekey order="28">DAmico2016</bcf:citekey>
+    <bcf:citekey order="29">DAmico2016</bcf:citekey>
+    <bcf:citekey order="30">DAmico2016</bcf:citekey>
+    <bcf:citekey order="31">Duan2013</bcf:citekey>
+    <bcf:citekey order="32">Duan2013</bcf:citekey>
+    <bcf:citekey order="33">Duan2013</bcf:citekey>
+    <bcf:citekey order="34">Meier2014</bcf:citekey>
+    <bcf:citekey order="35">Meier2014</bcf:citekey>
+    <bcf:citekey order="36">Meier2014</bcf:citekey>
+    <bcf:citekey order="37">Ibrahimbegovic1995</bcf:citekey>
+    <bcf:citekey order="38">Ibrahimbegovic1995</bcf:citekey>
+    <bcf:citekey order="39">Ibrahimbegovic1995</bcf:citekey>
+    <bcf:citekey order="40">Lazaro2016</bcf:citekey>
+    <bcf:citekey order="41">Lazaro2016</bcf:citekey>
+    <bcf:citekey order="42">Lazaro2016</bcf:citekey>
+    <bcf:citekey order="43">Barnes1999</bcf:citekey>
+    <bcf:citekey order="43">Adriaenssens1999</bcf:citekey>
+    <bcf:citekey order="43">Douthe2006</bcf:citekey>
+    <bcf:citekey order="44">Lewis2003</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
