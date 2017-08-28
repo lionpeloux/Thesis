@@ -2120,9 +2120,9 @@
     <bcf:datasource type="file" datatype="bibtex">library.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">Miki2014\@inpenc@undefined@{utf8}</bcf:citekey>
-    <bcf:citekey order="2">Miki2014\@inpenc@undefined@{utf8}</bcf:citekey>
-    <bcf:citekey order="3">Miki2014\@inpenc@undefined@{utf8}</bcf:citekey>
+    <bcf:citekey order="1">Miki2014</bcf:citekey>
+    <bcf:citekey order="2">Miki2014</bcf:citekey>
+    <bcf:citekey order="3">Miki2014</bcf:citekey>
     <bcf:citekey order="4">Day1965</bcf:citekey>
     <bcf:citekey order="5">Day1965</bcf:citekey>
     <bcf:citekey order="6">Day1965</bcf:citekey>
@@ -2162,10 +2162,23 @@
     <bcf:citekey order="40">Lazaro2016</bcf:citekey>
     <bcf:citekey order="41">Lazaro2016</bcf:citekey>
     <bcf:citekey order="42">Lazaro2016</bcf:citekey>
-    <bcf:citekey order="43">Barnes1999</bcf:citekey>
-    <bcf:citekey order="43">Adriaenssens1999</bcf:citekey>
-    <bcf:citekey order="43">Douthe2006</bcf:citekey>
-    <bcf:citekey order="44">Lewis2003</bcf:citekey>
+    <bcf:citekey order="43">Dang2010</bcf:citekey>
+    <bcf:citekey order="44">Dang2010</bcf:citekey>
+    <bcf:citekey order="45">Dang2010</bcf:citekey>
+    <bcf:citekey order="46">Rezaiee2012</bcf:citekey>
+    <bcf:citekey order="47">Rezaiee2012</bcf:citekey>
+    <bcf:citekey order="48">Rezaiee2012</bcf:citekey>
+    <bcf:citekey order="49">Barnes1999</bcf:citekey>
+    <bcf:citekey order="49">Adriaenssens1999</bcf:citekey>
+    <bcf:citekey order="49">Douthe2006</bcf:citekey>
+    <bcf:citekey order="50">Lefevre2017</bcf:citekey>
+    <bcf:citekey order="51">Day1965</bcf:citekey>
+    <bcf:citekey order="52">Day1965</bcf:citekey>
+    <bcf:citekey order="53">Day1965</bcf:citekey>
+    <bcf:citekey order="54">Belytschko1983</bcf:citekey>
+    <bcf:citekey order="55">Belytschko1983</bcf:citekey>
+    <bcf:citekey order="56">Belytschko1983</bcf:citekey>
+    <bcf:citekey order="57">Lewis2003</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

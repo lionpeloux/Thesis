@@ -24,8 +24,7 @@ Expliquer l'interpolation des efforts. Il y a un choix a faire dans la DR. Soit 
 
 \subsection{Related works}
 
-\citef{Miki2014} : DR as a gradient descent method
-
+\citef{Miki2014}~: DR as a gradient descent method
 
 Départ~:
 \citef{Day1965}~: already includes a rotational DOF !!
@@ -54,9 +53,12 @@ Pour des cas test :
 \citef{Ibrahimbegovic1995}
 \citef{Lazaro2016}
 
+\citef{Dang2010}
+\citef{Rezaiee2012}
 
 
 
+\clearpage
 \section{Main hypothesis}
 
 On néglige les forces d'inertie liées à la rotation de l'élément  (devant quoi ?? traitement quasi-statique par rapport à la rotation). Cette hypothèse est faite explicitement chez Florence Bertail~:
@@ -111,6 +113,8 @@ Beams can either be closed or open. The corresponding number of vertices, edges 
 	\captionof{figure}[Biarc model for a discrete beam element]{Biarc model for a discrete beam element. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a three-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
 \end{fullpage}
 \end{figure}
+
+\subsection{Description of the motion}
 
 \subsubsection{Centerline}
 % --------------------------------
@@ -188,7 +192,7 @@ Under deformations the discrete rod is subject to internal forces and moments. T
 \begin{itemize}
 \item The shear force : $\vect{F}^{\perp} = F_1 \vect{d}_1 + F_2 \vect{d}_2$ 
 \item The axial force : $\vect{N} = N \vect{d}_3$
-\item The bending moment : $\vect{M} = M_1 \vect{d}_1 + M_2 \vect{d}_2$ 
+\item The bending moment : $\vect{M}^{\perp} = M_1 \vect{d}_1 + M_2 \vect{d}_2$ 
 \item The twisting moment : $\vect{Q} = Q \vect{d}_3$ 
 \end{itemize}
 
@@ -285,16 +289,16 @@ With the help of the matrix notation, the constitutive equations \cref{eq:consti
 % Discret extension and axial force
 % --------------------------------------------
 \subsection{Discret extension and axial force}
-We assume the axial force ($\vect{N}$) to vary linearly over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$ regarding the arc length parameter. The variation occurs if the segment is subject to a uniform distributed load $f_3$ over the segment. Consequently, the axial strain ($1 + \epsilon$) is also required to vary linearly. The value of the axial extension at mid span of each edge are given by~:
+We assume the axial force ($\vect{N}$) to vary linearly over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$ regarding the arc length parameter. The variation occurs if the segment is subject to a uniform distributed load $f_3$ over the segment. Consequently, the axial strain $\epsilon$ is also required to vary linearly. The value of the axial extension at mid span of each edge is given by~:
 \begin{equation}
 	\epsilon_{i+1/2} = {l_{i}}\,/\,{\rconf{l}_i} - 1 \quad , \quad i \in \llbracket 0, n_e-1 \rrbracket
 \end{equation}
 Consequently, the axial force at mid span of each edge is computed directly with the constitutive equation \cref{eq:constitutive_a} as~:
 \begin{subequations}
 	\begin{alignat}{3}
-	\vect{N}_{2i+1/2} &= N_{2i+1/2}\, \vect{u}_{2i} \quad &&\text{where} \quad {N_{2i+1/2}} = ES_i \,\epsilon_{2i+1/2}
+	\vect{N}_{2i+1/2} &= N_{2i+1/2}\, \vect{u}_{2i} \quad &&, \quad {N_{2i+1/2}} = ES_i \,\epsilon_{2i+1/2}
 	\\
-	\vect{N}_{2i+3/2} &= N_{2i+3/2}\, \vect{u}_{2i+1}\quad &&\text{where} \quad {N_{2i+3/2}} = ES_i \,\epsilon_{2i+3/2}
+	\vect{N}_{2i+3/2} &= N_{2i+3/2}\, \vect{u}_{2i+1}\quad &&, \quad {N_{2i+3/2}} = ES_i \,\epsilon_{2i+3/2}
 	\end{alignat}
 \end{subequations}
 Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive extension ($\epsilon_{i+1/2} > 0$), vertex $\vect{x}_{i+1}$ \textquote{attracts} vertex $\vect{x}_{i}$ to it as $\vect{d}_{3,i+1/2} = \vect{u}_{i}$ is pointing from $\vect{x}_{i}$ towards $\vect{x}_{i+1}$. Remark also that $\epsilon_{i+1/2} = 0 \Leftrightarrow l_i = \rconf{l}_i$ when the rod is not stretched.
@@ -351,7 +355,7 @@ Equivalently, the definition of the osculating circles of the ($i-1$)th and $i$t
 
 \subsubsection{Unit tangent vector at handle vertices}
 % ----------------------------------------------------------------------
-The unit tangent vector $\vect{t}_{2i}$ -- that is the beam section normal -- at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex.\footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.}
+The unit tangent vector $\vect{t}_{2i}$ -- that is the cross-section normal -- at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex.\footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.}
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E4.pdf}
@@ -361,7 +365,7 @@ The unit tangent vector $\vect{t}_{2i}$ -- that is the beam section normal -- at
 	\end{aligned}$
 \end{tabularx}
 
-This way, the determination of the tangent vectors -- or equivalently the section normals -- in the static equilibrium configuration will be done in the flow of the dynamic relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the section normals.
+This way, the determination of the tangent vectors -- or equivalently the section normals -- in the static equilibrium configuration will be done in the flow of the dynamic relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the cross-section normals.
 
 \subsubsection{Left/right bending moment at handle vertices}
 % ---------------------------------------------------------------------------------
@@ -377,13 +381,20 @@ Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\
 	\end{aligned}$
 \end{tabularx}
 
-However, this values need to be adjusted so that the static condition for rotational equilibrium is satisfied at all time ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$). Then, this condition will be satisfied in particular at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}$) for the internal bending moment as~:
+However, this values need to be adjusted so that the static condition for rotational equilibrium is satisfied at all time ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$). Therefore, this condition will be satisfied in particular at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}$) for the internal bending moment as~:
 \begin{equation}
 		\vect{M}_{2i}^{\perp}	=  \frac{1}{2} \mat{B}_{i-1}(\vect{\kappa b}_{2i}^- - \rconf{\vect{\kappa b}}_{2i}^-)
 					+  \frac{1}{2} \mat{B}_{i}(\vect{\kappa b}_{2i}^+ - \rconf{\vect{\kappa b}}_{2i}^+)
 \end{equation}
 To enforce the jump discontinuity in bending moment ($\vect{M}^{ext} = \vect{M}^- - \vect{M}^+$) across the handle vertex, we define the left and right bending moments at $\vect{x}_{2i}$ as~:
-Note that in the case where no external concentrated bending moment is applied to the handle vertex, the internal bending moment is continuous across the vertex.
+\begin{subequations}
+	\begin{align}
+		{\vect{M}_{2i}^{\perp}}^{-} &=  \vect{M}_{2i}^{\perp}	 + \frac{1}{2} \vect{M}_{2i}^{\perp,\;ext}
+		\\[0.5em]
+		{\vect{M}_{2i}^{\perp}}^{+} &=   \vect{M}_{2i}^{\perp}	 - \frac{1}{2} \vect{M}_{2i}^{\perp,\;ext}
+	\end{align}
+\end{subequations}
+Note that in the case where no external concentrated bending moment is applied to the handle vertex, the internal bending moment is continuous across the vertex as expected.
 
 \subsubsection{Left/right curvature at handle vertices}
 % --------------------------------------------------------------------
@@ -415,12 +426,12 @@ Thus, the material twist of the rod at mid edge is given by~:
 	\begin{align}
 		\tau_{i+1/2} = \frac{\Delta\theta_{i}}{{l}_i}\label{eq:d_twist}
 		\\[0.5em]
-		\varkappa_{3,i+1/2} = \frac{\Delta\theta_{i}}{\rconf{l}_i}\label{eq:d_twist}
+		\varkappa_{3,\,i+1/2} = \frac{\Delta\theta_{i}}{\rconf{l}_i}\label{eq:d_twist}
 	\end{align}
 \end{subequations}
 To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod si framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta(s)$ around $\vect{d}_3(s) =\vect{t}(s)$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
 
-In the discrete case, although it is possible to frame the whole curve with a Bishop frame to achieve the computation of the rate of twist, it is more convenient to measure $\Delta\theta_{i}$ step by step using the existing material frames at vertices $\vect{x}_i$ and $\vect{x}_{i+1}$. This is done in a to step process : 
+In the discrete case, although it is possible to frame the whole curve with a Bishop frame to achieve the computation of the rate of twist \cite{Lefevre2017}, it is more convenient to measure $\Delta\theta_{i}$ step by step using the existing material frames at vertices $\vect{x}_i$ and $\vect{x}_{i+1}$. This is done in a two step process : 
 \begin{enumerate}
 \item 
 Parallel transport the material frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ at vertex $\vect{x}_i$ onto vertex $\vect{x}_{i+1}$. We call $\{\vect{d}_{1,i}^{\para}, \vect{d}_{2,i}^{\para},\vect{d}_{3,i}^{\para}\}$ the resulting framed positioned at $\vect{x}_{i+1}$ such that $\vect{d}_{3,i}^{\para} = \vect{d}_{3,i+1}$.
@@ -430,12 +441,12 @@ Measure $\Delta\theta_{i} = \angle{(\vect{d}_{1,i}^{\para},\vect{d}_{1,i+1})} = 
 Consequently, the twisting moment at mid span of each edge is computed directly with the appropriate constitutive equation :
 \begin{subequations}
 	\begin{alignat}{3}
-	\vect{Q}_{2i+1/2} &= Q_{2i+1/2}\, \vect{u}_{2i} \quad &&,\quad {Q_{2i+1/2}} = GJ_i(\varkappa_{3,2i+1/2} - \rconf{\varkappa}_{3,2i+1/2})
+	\vect{Q}_{2i+1/2} &= Q_{2i+1/2}\, \vect{u}_{2i} \quad &&,\quad {Q_{2i+1/2}} = GJ_i(\varkappa_{3,\,2i+1/2} - \rconf{\varkappa}_{3,\,2i+1/2})
 	\\
-	\vect{Q}_{2i+3/2} &= Q_{2i+3/2}\, \vect{u}_{2i+1}\quad &&, \quad {Q_{2i+3/2}} = GJ_i(\varkappa_{3,2i+3/2} - \rconf{\varkappa}_{3,2i+3/2})
+	\vect{Q}_{2i+3/2} &= Q_{2i+3/2}\, \vect{u}_{2i+1}\quad &&, \quad {Q_{2i+3/2}} = GJ_i(\varkappa_{3,\,2i+3/2} - \rconf{\varkappa}_{3,\,2i+3/2})
 	\end{alignat}
 \end{subequations}
-Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive twist ($\varkappa_{3,i+1/2} > 0$), frame $\{\vect{d}_{1,i+1},\vect{d}_{2,i+1},\vect{d}_{3,i+1}\}$ makes frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ to rotate positively around $\vect{u}_i$ as $Q_{i+1/2} > 0$.
+Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive twist ($\varkappa_{3,\,i+1/2} > 0$), frame $\{\vect{d}_{1,i+1},\vect{d}_{2,i+1},\vect{d}_{3,i+1}\}$ makes frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ to rotate positively around $\vect{u}_i$ as $Q_{i+1/2} > 0$.
 
 % Discret shear force
 % --------------------------
@@ -463,9 +474,25 @@ In the discrete case, the shear force is evaluated at mid span of each edge by :
 		\label{eq:dshear_b}
 	\end{alignat}
 \end{subequations}
-Remark that the derivative of the internal moments at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{ch:interpolation}. 
+Remark that the derivative of the internal moment at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{ch:interpolation}. 
 
 Expressed in the form of \cref{eq:dshear_a,eq:dshear_b}, the discrete shear force has the interesting property to remain strictly orthogonal to $\vect{d}_{3,i+1/2} = \vect{u}_i$. While this is true in the continuous world, this property can easily be lost in the discrete case where mean values and derivatives are evaluated through finite summations or finite differences.
+
+%Equivalent equations could be expressed in a scalar form derived from \cref{eq:dshear_a,eq:dshear_b} as~:
+%\begin{subequations}
+%	\begin{alignat}{3}
+%		&F_{1,\;2i+1/2}  =  \frac{\rconf{l}_{2i}}{l_{2i}}
+%		 \left( 
+%		 -\frac{M_{2,\,2i+1} - M_{2,\,2i}^{+}}{\rconf{l}_{2i}}
+%		 - \varkappa_{3,\,2i+1/2}M_{1,\,2i+1/2}
+%		 +\varkappa_{1,\,2i+1/2}Q_{2i+1/2}
+%		 \right)
+%		\\[0.5em]
+%		&\vect{F}^{\perp}_{2i+3/2}
+%		=  \vect{u}_{2i+1} &&\times \left( \frac{\vect{M}_{2i+2}^- - \vect{M}_{2i+1}}{l_{2i+1}}+ \frac{\rconf{l}_{2i+1}}{l_{2i+1}} \vect{m}_i \right)
+%		\label{eq:dshear_b}
+%	\end{alignat}
+%\end{subequations}
 
 \subsubsection{Matrix notation}
 Because there is a derivation with respect to $s$ in \cref{eq:dshear_a,eq:dshear_b}, one must be very careful when writing these equations in matrix notation. Indeed, their counterparts will translate differently wether the symbols will be decomposed in the \emph{global} frame basis or in the \emph{material} frame basis.
@@ -524,9 +551,136 @@ Thus, in the discrete case, the evaluation of the derivative of the moment at mi
 Although this paragraph could seem superfluous to the reader, this point is a matter of concern when implementing the model into an algorithm. Indeed, the developper always has the choice between two natural data structures where vectors are represented by a triplet either in the global frame basis or in the material frame basis (see \cref{eq:stiffnessmatrix}). Even more, he can decide to mix the two for practical reasons, for instance if it leads to less arithmetic computations. In particular, the stiffness matrix has a nice diagonal shape when written in the material frame basis. Thus it seems desirable to do the computation of the bending moment in this basis. On the contrary, we've just seen that it seems easier to compute the shear force in the global frame basis.
 
 \subsection{Interpolation}
+At this point, for a given geometric configuration, we know how to compute the bending moment at vertices. But we only know how to compute the twisting moment, the axial force and the shear force at mid edges. However, our final goal is to described the discrete rod as a particle-spring system were mass is lumped at vertices and elements are modeled as interactions between vertices. In this representation, all actions must be resumed to vertex actions, the only conceptual entity that will have a meaning to the dynamic process.
+
+Therefore, we need to express the value of the twisting moment, the axial force and the shear force at vertices and not only at mid edges. This can be done using \cref{eq:motion} were the inertial member is set to zero, that is neglecting the inertial forces. Although this is not exactly true during the dynamic of the rod, it is exactly true at static equilibrium, the only state we are interested in.
+
+\subsubsection{Axial force}
+From \cref{eq:motion_3} we evaluate the variation of the axial force over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ and deduce the variation of axial strain from the constant axial stiffness $ES$ of the segment~: 
+\begin{subequations}
+	\begin{alignat}{2}
+		&\Delta N_{i+1/2} &&= -l_i  \cdot {[\varkappa_1 F_2 - \varkappa_2 F_1 + f_3]}_{i+1/2}
+		\\
+		&\Delta \epsilon_{i+1/2} &&= \Delta N_{i+1/2} / {ES}_i
+	\end{alignat}
+\end{subequations}
+Then we conclude on the expression of the axial force at vertices~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&N_{i}^{+} &&= N_{i+1/2} - \frac{1}{2} \Delta N_{i+1/2}  \\[0.5em]
+		&N_{i+1}^{-} &&= N_{i+1/2} + \frac{1}{2} \Delta N_{i+1/2}
+	\end{alignat}
+\end{subequations}
+and the expression of the axial strain at vertices~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\epsilon_{i}^{+} &&= \epsilon_{i+1/2} - \frac{1}{2} \Delta \epsilon_{i+1/2}  \\[0.5em]
+		&\epsilon_{i+1}^{-} &&= \epsilon_{i+1/2} + \frac{1}{2} \Delta \epsilon_{i+1/2}
+	\end{alignat}
+\end{subequations}
+Remark how a distributed external axial force modifies the value of the axial component of the internal force at vertices, and thus is taken into account in the final static equilibrium.
+
+\subsubsection{Shear force}
+From \cref{eq:motion_1,eq:motion_2} we evaluate the variation of the shear force over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ ~: 
+\begin{subequations}
+	\begin{alignat}{2}
+		&\Delta F_{1,\,i+1/2}^{} &&= - l_i  \cdot {[\varkappa_2 F_3 - \varkappa_3 F_2 + f_1]}_{i+1/2}
+		\\
+		&\Delta F_{2,\,i+1/2}^{} &&= - l_i  \cdot {[\varkappa_3 F_1 - \varkappa_1 F_3 + f_2]}_{i+1/2}
+	\end{alignat}
+\end{subequations}
+Then we conclude on the expression of the shear force components at vertices~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&F_{1,\,i}^{+} &&= F_{1,\,i+1/2} - \frac{1}{2} \Delta F_{1,\,i+1/2}  \\[0.5em]
+		&F_{1,\,i+1}^{-} &&= F_{1,\,i+1/2} + \frac{1}{2} \Delta F_{1,\,i+1/2} \\[0.5em]
+		&F_{2,\,i}^{+} &&= F_{2,\,i+1/2} - \frac{1}{2} \Delta F_{2,\,i+1/2}  \\[0.5em]
+		&F_{2,\,i+1}^{-} &&= F_{2,\,i+1/2} + \frac{1}{2} \Delta F_{2,\,i+1/2}
+	\end{alignat}
+\end{subequations}
+Remark how a distributed external shear force modifies the value of the shear components of the nternal force at vertices, and thus is taken into account in the final static equilibrium.
+
+\subsubsection{Twisting moment}
+From \cref{eq:motion_6} we evaluate the variation of the twisting moment over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ and deduce the variation of twist from the constant torsional stiffness $GJ$ of the segment~: 
+\begin{subequations}
+	\begin{alignat}{2}
+		&\Delta Q_{i+1/2} &&= -l_i  \cdot {[\varkappa_1 M_2 - \varkappa_2 M_1 + m_3]}_{i+1/2}
+		\\
+		&\Delta \varkappa_{3,\,i+1/2} &&= \Delta Q_{i+1/2} / {GJ}_i
+	\end{alignat}
+\end{subequations}
+Then we conclude on the expression of the twisting moment at vertices~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&Q_{i}^{+} &&= Q_{i+1/2} - \frac{1}{2} \Delta Q_{i+1/2}  \\[0.5em]
+		&Q_{i+1}^{-} &&= Q_{i+1/2} + \frac{1}{2} \Delta Q_{i+1/2}
+	\end{alignat}
+\end{subequations}
+and the expression of the rate of twist at vertices~:
+\begin{subequations}
+	\begin{alignat}{2}
+		&\varkappa_{3,\,i}^{+} &&= \varkappa_{3,\,i+1/2} - \frac{1}{2} \Delta \varkappa_{3,\,i+1/2}  \\[0.5em]
+		&\varkappa_{3,\,i+1}^{-} &&= \varkappa_{3,\,i+1/2} + \frac{1}{2} \Delta \varkappa_{3,\,i+1/2}
+	\end{alignat}
+\end{subequations}
+Remark how a distributed external twisting moment modifies the value of the axial component of the internal moment at vertices, and thus is taken into account in the final static equilibrium.
+
+
+
+
+
+
 
 \clearpage
 \section{Dynamic relaxation}
+From the previous section we have established the basis for a discrete rod element that can account for extension, flexion and torsion. This element is made of two types of vertices~: the ghost and the handle vertices. This allows to model discontinuities at handle vertices, which is one of the main contribution of the work exposed in this chapter. We have established a precise discrete geometric representation of a slender rod. And from a given configuration we have learned to compute the internal force and moment acting on rod vertices using Kirchhoff's theory. Therefore, we are able to compute the resultant of the internal force and moment acting on a given vertex of the rod.\footnote{Note that the internal force and moment embed the action of distributed external force and moment applied to the rod.}
+
+We now expose a process to find the static equilibrium of a rod, which is our ultimate goal. This process is called \emph{Dynamic relaxation} and was first introduced by \citef{Day1965}. We assume that we know the stress-free configuration of the rod, its material properties and cross-section properties. The rod might also be subjected to known external loads such as climatic loads. Finally, we call initial configuration the actual configuration of the rod at time $t=0$. In this configuration, the rod is (a priori) not at static equilibrium.
+
+In the dynamic relaxation procedure, a discretized mechanical system is dropped from a known initial configuration at time $t=0$. Because the system is not yet in a state of static equilibrium, the internal forces does not equilibrates the external forces. Thus, the system is subject to a motion. This motion is integrated through time and artificially damped. When all the kinetic energy is dissipated by the damping the system has reached a state of static equilibrium.
+
+Because the motion is only a mean to find the position of the system in a static equilibrium, the damping does not need to be realistic and should be chosen so that the system approaches the static position as fast as possible.
+
+Here, we use the fictitious kinetic damping proposed by Cundall in 1976. Th
+
+\citef{Belytschko1983}
+
+
+L’amortissement cinétique a été proposé par P. Cundall en 1976 [35]
+
+
+\subsection{Stages of the procedure}
+
+
+ 
+The idea behind the dynamic relaxation algorithm is to find a state of static equilibrium of a given mechanical system. THis 
+
+with an explicit scheme (central difference time integrator)
+
+
+
+giving its rest stress, cross-section properties, material properties and initial geometric configuration.
+
+ 
+
+
+%
+%The dynamic relaxation method first appeared in the 1960s with Day16 and Otter.17 The goal of this method is to find a static equilibrium. To do so, starting from a given configuration with zero speed, a fictitious dynamic is sim- ulated, where the system under study is immobilized each time it reaches a maximum of kinetic energy and is then released again with zero speed. By immobilizing the sys- tem, the kinetic energy of the system is dissipated. We then simulate a dynamic with “kinetic” damping. For a conservative system, the maximum of kinetic
+%energy is a minimum of potential energy, so that when we reach a kinetic energy peak on a trajectory, it is the local minimum of potential energy on this trajectory. Immobilizing the system at kinetic energy peaks is therefore an efficient way to converge toward the static equilibrium, defined as the minimum of potential energy. This is why the kinetic damping is chosen for this damped dynamic. An example of such a fictitious dynamic is illustrated in Figure 3, where we look for the static equilibrium of a ball in an ellipsoidal bowl. In this example, the ball is stopped and released with zero speed each time it reaches a maxi- mum speed.
+%Let us now explicit the algorithm of the dynamic relax- ation method for a system with N nodes xxt
+%t
+%,,⋅ 01
+%N
+%− , with
+%Mi as the mass affected to the node xi
+%t . The time interval
+%is denoted by ∆t .
+%Algorithm
+
+
+
+
+
 
 Dynamic relaxation~:
 \cite{Lewis2003}
@@ -689,6 +843,7 @@ En particulier, voir pour un comparatif avec une méthode implicite.
 \DecMargin{2em}
 
 
+\clearpage
 
 \section{Conclusion}
 Remind that the beam is subject to a distributed external force $\vect{f}_{ext}$ and a distributed external moment $\vect{m}_{ext}$.
