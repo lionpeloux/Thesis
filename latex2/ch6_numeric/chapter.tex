@@ -161,6 +161,9 @@ Finally, we define the \emph{chord length} of the $i$th segment as the distance 
 	L_i = \norm{\vect{e}_{2i} + \vect{e}_{2i+1}} \quad , \quad i \in \llbracket 0, n_s-1 \rrbracket
 \end{equation}
 
+\subsubsection{Material frames}
+% ---------------------------------------
+
 \subsubsection{Material and section properties}
 % ------------------------------------------------------------
 In addition, the model assumes that a segment has uniform section ($S$, $I_1$, $I_2$, $J$)\footnote{$S$ is the cross-section area ; $I_1$, $I_2$ and $J$ are the principal moments of inertia of the cross-section.} and material ($E$, $G$)\footnote{$E$ is the elastic modulus and $G$ is the shear  modulus for the considered material} properties over its length $s \in ]s_{2i},s_{2i+2}[$. For the sake of simplicity, we introduce for further calculations the \emph{material stiffness matrix} ($\mat{B}_i$) attached to each segment. It has the following form in the material frame basis~:
@@ -393,6 +396,7 @@ To enforce the jump discontinuity in bending moment ($\vect{M}^{ext} = \vect{M}^
 		\\[0.5em]
 		{\vect{M}_{2i}^{\perp}}^{+} &=   \vect{M}_{2i}^{\perp}	 - \frac{1}{2} \vect{M}_{2i}^{\perp,\;ext}
 	\end{align}
+	\label{eq:DeltaM}
 \end{subequations}
 Note that in the case where no external concentrated bending moment is applied to the handle vertex, the internal bending moment is continuous across the vertex as expected.
 
@@ -473,6 +477,7 @@ In the discrete case, the shear force is evaluated at mid span of each edge by :
 		=  \vect{u}_{2i+1} &&\times \left( \frac{\vect{M}_{2i+2}^- - \vect{M}_{2i+1}}{l_{2i+1}}+ \frac{\rconf{l}_{2i+1}}{l_{2i+1}} \vect{m}_i \right)
 		\label{eq:dshear_b}
 	\end{alignat}
+	\label{eq:dshear}
 \end{subequations}
 Remark that the derivative of the internal moment at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{ch:interpolation}. 
 
@@ -560,6 +565,7 @@ From \cref{eq:motion_3} we evaluate the variation of the axial force over a segm
 \begin{subequations}
 	\begin{alignat}{2}
 		&\Delta N_{i+1/2} &&= -l_i  \cdot {[\varkappa_1 F_2 - \varkappa_2 F_1 + f_3]}_{i+1/2}
+		\label{eq:DeltaN}
 		\\
 		&\Delta \epsilon_{i+1/2} &&= \Delta N_{i+1/2} / {ES}_i
 	\end{alignat}
@@ -570,6 +576,7 @@ Then we conclude on the expression of the axial force at vertices~:
 		&N_{i}^{+} &&= N_{i+1/2} - \frac{1}{2} \Delta N_{i+1/2}  \\[0.5em]
 		&N_{i+1}^{-} &&= N_{i+1/2} + \frac{1}{2} \Delta N_{i+1/2}
 	\end{alignat}
+	\label{eq:dNi}
 \end{subequations}
 and the expression of the axial strain at vertices~:
 \begin{subequations}
@@ -588,6 +595,7 @@ From \cref{eq:motion_1,eq:motion_2} we evaluate the variation of the shear force
 		\\
 		&\Delta F_{2,\,i+1/2}^{} &&= - l_i  \cdot {[\varkappa_3 F_1 - \varkappa_1 F_3 + f_2]}_{i+1/2}
 	\end{alignat}
+	\label{eq:DeltaF}
 \end{subequations}
 Then we conclude on the expression of the shear force components at vertices~:
 \begin{subequations}
@@ -597,6 +605,7 @@ Then we conclude on the expression of the shear force components at vertices~:
 		&F_{2,\,i}^{+} &&= F_{2,\,i+1/2} - \frac{1}{2} \Delta F_{2,\,i+1/2}  \\[0.5em]
 		&F_{2,\,i+1}^{-} &&= F_{2,\,i+1/2} + \frac{1}{2} \Delta F_{2,\,i+1/2}
 	\end{alignat}
+	\label{eq:dFi}
 \end{subequations}
 Remark how a distributed external shear force modifies the value of the shear components of the nternal force at vertices, and thus is taken into account in the final static equilibrium.
 
@@ -605,6 +614,7 @@ From \cref{eq:motion_6} we evaluate the variation of the twisting moment over a 
 \begin{subequations}
 	\begin{alignat}{2}
 		&\Delta Q_{i+1/2} &&= -l_i  \cdot {[\varkappa_1 M_2 - \varkappa_2 M_1 + m_3]}_{i+1/2}
+		\label{eq:DeltaQ}
 		\\
 		&\Delta \varkappa_{3,\,i+1/2} &&= \Delta Q_{i+1/2} / {GJ}_i
 	\end{alignat}
@@ -615,6 +625,7 @@ Then we conclude on the expression of the twisting moment at vertices~:
 		&Q_{i}^{+} &&= Q_{i+1/2} - \frac{1}{2} \Delta Q_{i+1/2}  \\[0.5em]
 		&Q_{i+1}^{-} &&= Q_{i+1/2} + \frac{1}{2} \Delta Q_{i+1/2}
 	\end{alignat}
+	\label{eq:dQi}
 \end{subequations}
 and the expression of the rate of twist at vertices~:
 \begin{subequations}
@@ -641,28 +652,139 @@ In the dynamic relaxation procedure, a discretized mechanical system is dropped 
 
 Because the motion is only a mean to find the position of the system in a static equilibrium, the damping does not need to be realistic and should be chosen so that the system approaches the static position as fast as possible.
 
-Here, we use the fictitious kinetic damping proposed by Cundall in 1976. Th
-
+Here, we use the fictitious kinetic damping proposed by Cundall in 1976.
 \citef{Belytschko1983}
-
-
 L’amortissement cinétique a été proposé par P. Cundall en 1976 [35]
-
-
-\subsection{Stages of the procedure}
-
-
- 
-The idea behind the dynamic relaxation algorithm is to find a state of static equilibrium of a given mechanical system. THis 
-
 with an explicit scheme (central difference time integrator)
 
 
+\subsection{Stages of the procedure}
+Previously, we have idealized our mechanical system as a \dofs{4} particle spring system where each vertex is assimilated as a \emph{particle}, also called \emph{node}, represented by a material frame. Each node has its own mass and is subjected to internal and external forces. If not balanced, the node moves as it is not in a state of equilibrium.
 
-giving its rest stress, cross-section properties, material properties and initial geometric configuration.
+\subsection{Resultants acting on a particle}\label{sec:resFM}
+In this section, we express the resultant force and the resultant twisting moment acting on a particle. If not balanced, these resultants will make the particle to move and rotate with respect to its degrees of freedom.
 
- 
+\subsubsection{Resultant force}
+The translational resultant force ($\vect{R}_i^x$) acting on a particle is the sum of two contributions. The first one ($\vect{F}_i^{ext}$) is the resultant of the concentrated forces applied to the particle such as climatic loads, support reactions or loads transferred through connections. The second one ($\vect{F}_i^{int}$) is the resultant of the internal forces applied by the upstream and downstream parts of the rod to the particle and given by \cref{eq:dNi,eq:dFi}. This leads to the following equations~:
+\begin{subequations}
+\begin{alignat}{2}
+	&\vect{R}_i^x &&= \vect{F}_i^{int} + \vect{F}_i^{ext} 
+	\\
+	&\vect{F}_i^{int} &&= - \vect{F}_i^{-} + \vect{F}_i^{+} 
+	\\
+	& \vect{F}_i^{-}  &&= N_i^- \,\vect{d}_{3,\,i}  + F_{1,\,i}^{-} \,\vect{d}_{1,\,i}  + F_{2,\,i}^{-} \,\vect{d}_{2,\,i}
+	\\
+	&\vect{F}_i^{+}  &&= N_i^+ \,\vect{d}_{3,\,i}  + F_{1,\,i}^{+} \,\vect{d}_{1,\,i}  + F_{2,\,i}^{+} \,\vect{d}_{2,\,i}
+\end{alignat}
+\end{subequations}
+Note that the contribution of the distributed external forces ($\vect{f}_i^{ext}$) is already taken into account via the interpolation of the internal force (see \cref{eq:DeltaN,eq:DeltaF}). Likewise, the contribution of the distributed external bending moment ($\vect{m}_i^{\perp,\,ext}$) is also taken into account via the calculation of the internal shear force (see \cref{eq:dshear}). Finally, the contribution of the concentrated external bending moments is yet included via the expression of the discrete shear force (see \cref{eq:DeltaM,eq:dshear}).
 
+\subsubsection{Resultant twisting moment}
+In the same manner, the rotational resultant moment ($R_i^{\theta}$) acting on a particle is the sum of two contributions.\footnote{Actually, $R_i^{\theta}$ is the component of the resultant moment along $\vect{d}_{3,\,i}$. We only need to compute this component as we have only one rotational degree of freedom in our model.} The first one ($Q_i^{ext}$) is the resultant of the concentrated twisting moments applied to the particle. The second one (${Q}_i^{int}$) is the resultant of the internal twisting moment applied by the upstream and downstream parts of the rod to the particle and given by \cref{eq:dQi}. This leads to the following equations~:
+\begin{subequations}
+\begin{alignat}{2}
+	&{R}_i^{\theta} &&= {Q}_i^{int} + {Q}_i^{ext} 
+	\\
+	&{Q}_i^{int} &&= - {Q}_i^{-} + {Q}_i^{+} 
+\end{alignat}
+\end{subequations}
+Note that the contribution of the distributed external twisting moment ($q_i^{ext}$) is already taken into account via the interpolation of the internal twisting moment (see \cref{eq:DeltaQ}).
+
+\subsection{Explicite time integration}
+The particles of the system evolves according to the laws of motion, with respect to the 4 degrees of freedom of the system ($\vect{x}$ and $\theta$), given by~:
+\begin{subequations}
+\label{eq:dmotion}
+\begin{alignat}{3}
+	& m_i^x\; \ddot{\vect{x}}_i  + \lambda^x_i \dot{\vect{x}}_i && = \vect{R}_i^x \label{eq:dmotion_a}
+	\\
+	& m_i^{\theta} \; \ddot{\theta}_i + \lambda^{\theta}_i \dot{\theta}_i&& = R_i^{\theta} \label{eq:dmotion_b}
+\end{alignat}
+\end{subequations}
+where $\ddot{\vect{x}}_i$ is the translational acceleration of the particle, $\ddot{\theta}_i$ is the rotational acceleration of the particle and $\lambda^x_i \dot{\vect{x}}_i$ and  $\lambda^{\theta}_i \dot{\theta}_i$ are the viscous damping coefficients. Hereinafter we will consider no viscous damping. Later, we will introduce an artificial kinetic damping. For a detailed traitement of various damping methods in the dynamic relaxation method, refer to \cite{Belytschko1983,Rezaiee2012}.
+
+In this section, we give the stages required to integrate these equations through time. The dynamic relaxation procedure is based on a central-difference scheme. We call $\Delta t$ the time step. And we assume that the system is in the initial configuration at time $t=0$.
+
+\subsubsection{Acceleration}
+At time $t$, considering the position of the system is known ($\vect{x}_i$ and $\{\vect{d}_{3,\,i},\vect{d}_{1,\,i},\vect{d}_{2,\,i}\}$), we can compute the resultant force ($\vect{R}_i^x$) and the resultant twisting moment ($R_i^{\theta}$) acting on the particles (see \cref{sec:resFM}). Using \cref{eq:dmotion} the acceleration of the particles at time $t$ is straightforwardly deduced as~:
+\begin{subequations}
+\label{eq:da}
+\begin{alignat}{3}
+	& \ddot{\vect{x}}_i^t && = \frac{\vect{R}_i^x}{m_i^x}
+	\\[0.5em]
+	& \ddot{\theta}_i^t && = \frac{R_i^{\theta}}{m_i^{\theta}}
+\end{alignat}
+\end{subequations}
+
+\subsubsection{Velocity}
+The translational and rotational velocities of a particle are evaluated with the following central difference scheme~:
+\begin{equation}
+	a_i^t = \frac{v_i^{t+\Delta t / 2} - v_i^{t+\Delta t / 2}}{\Delta t}
+\end{equation}
+where $a_i$ is the acceleration an $v_i$ is the velocity of the particle. Thus, the translational and rotational velocities of a particle at time $t + \Delta t / 2$ are computed from the velocities at time $t - \Delta t / 2$ by~:
+\begin{subequations}
+\label{eq:dv}
+\begin{alignat}{5}
+	& \dot{\vect{x}}_i^{t+\Delta t / 2} &&
+	=  \dot{\vect{x}}_i^{t-\Delta t / 2} 
+	&&+ \Delta t  \cdot \frac{\vect{R}_i^x}{m_i^x}
+	\\[0.5em]
+	& \dot{\theta}_i^{t+\Delta t / 2} &&
+	=  \dot{\theta}_i^{t-\Delta t / 2} 
+	&&+ \Delta t  \cdot \frac{R_i^{\theta}}{m_i^{\theta}}
+\end{alignat}
+\end{subequations}
+
+\subsubsection{Position}
+To update the position of the system, we use the same central difference scheme but this time on the velocity~:
+\begin{equation}
+	v_i^{t+\Delta t / 2} = \frac{x_i^{t+\Delta t} - x_i^{t}}{\Delta t}
+\end{equation}
+where $v_i$ is the acceleration an $x_i$ is the position of the particle. Thus, the translational and rotational positions of a particle at time $t + \Delta t$ are computed from the velocities at time $t + \Delta t / 2$ by~:
+\begin{subequations}
+\label{eq:dx}
+\begin{alignat}{5}
+	& \vect{x}_i^{t+\Delta t} 
+	&& =  \vect{x}_i^{t} + \Delta t  \cdot  \dot{\vect{x}}_i^{t+\Delta t / 2}
+	\\[0.5em]
+	& {\theta}_i^{t+\Delta t} 
+	&& =  {\theta}_i^{t} + \Delta t  \cdot  \dot{{\theta}}_i^{t+\Delta t / 2}
+\end{alignat}
+\end{subequations}
+Using \cref{eq:dv} the position at time $t+\Delta t$ can be expressed with respect to the position, velocity and resultants computed at time $t$ as~:
+\begin{subequations}
+\label{eq:dx2}
+\begin{alignat}{5}
+	& \vect{x}_i^{t+\Delta t} 
+	&& =  \vect{x}_i^{t} + \Delta t \cdot \dot{\vect{x}}_i^{t-\Delta t / 2} 	
+	&&+ {\Delta t}^2  \cdot \frac{\vect{R}_i^x}{m_i^x}
+	\\[0.5em]
+	& {\theta}_i^{t+\Delta t} 
+	&& =  {\theta}_i^{t} + \Delta t  \cdot  \dot{{\theta}}_i^{t- \Delta t / 2}
+	&&+ {\Delta t}^2  \cdot \frac{R_i^{\theta}}{m_i^{\theta}}
+\end{alignat}
+\end{subequations}
+From this new position, it is now possible to compute the new resultant force and moment acting on the particles, to update their acceleration, then to update their velocity, and then to compute the new position of the system, at time $t + 2\Delta t$. This process can be repeated indefinitely to follow the motion of the system.
+
+Note that the motion will be realistic to the extent that the computed forces and moments will be realistic and to the extent that the time step is small enough. Indeed, at each time step an approximation error is done in the evaluation of the velocity and the position of the system with the central difference scheme. This error is integrated through time and nothing here is done to correct it and to prevent its accumulation along the dynamic.
+
+\subsection{Damping}
+If no damping is introduced to dissipate some energy, there is no reason that the system will stop to move. Here, our goal is to dissipate the kinetic energy of the system as fast as possible to fall into a state of static equilibrium. This can be achieved either through viscous or kinetic damping. Here, we choose to implement the kinetic damping as it is known to produce good results for a wide range of cases \cite{Rezaiee2012}.
+
+\subsubsection{Kinetic damping}
+Kinetic damping was first introduced by \citef{Cundall1976}. The idea behind this type of damping is simple. For a conservative system, the mechanical energy is conserved during motion and is the sum of two forms of energy~: the potential energy and the kinetic energy. Therefore, the potential energy of the system is minimized when its kinetic energy is maximized. T
+
+To find a state of static equilibrium, that is a state of minimal potential energy, Cundall proposes to track the kinetic energy of the system during motion. When a peak is detected, the system is frozen in its position and then released but with no initial velocity. When the system is released, the mechanical energy of the system has decreased and is all stocked under potential energy form. The motion start again and part of the potential energy is converted to kinetic energy until a new peak is detected. Progressively, from peak to peak, the potential energy is progressively lowered to a minimum and the system falls in a state of static equilibrium. 
+
+
+Hence dissipating the kinetic enrgy of the system will 
+
+This damping is used in combination with the parabolic interpolation introduced by \citef{Barnes1999}. The advantage of this technique is double~:
+\begin{itemize}
+\item The damping occurs at the interpolated position, that is for a higher level of kinetic energy. Hence, more kinetic energy is dissipated which should improve the convergence speed.
+\item Because of the interpolation, the system is less subject to \emph{time step locking} when the system moves back and forth between two positions.
+\end{itemize}
+
+\subsection{Convergence}
 
 %
 %The dynamic relaxation method first appeared in the 1960s with Day16 and Otter.17 The goal of this method is to find a static equilibrium. To do so, starting from a given configuration with zero speed, a fictitious dynamic is sim- ulated, where the system under study is immobilized each time it reaches a maximum of kinetic energy and is then released again with zero speed. By immobilizing the sys- tem, the kinetic energy of the system is dissipated. We then simulate a dynamic with “kinetic” damping. For a conservative system, the maximum of kinetic

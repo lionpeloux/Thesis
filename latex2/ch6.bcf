@@ -2178,7 +2178,16 @@
     <bcf:citekey order="54">Belytschko1983</bcf:citekey>
     <bcf:citekey order="55">Belytschko1983</bcf:citekey>
     <bcf:citekey order="56">Belytschko1983</bcf:citekey>
-    <bcf:citekey order="57">Lewis2003</bcf:citekey>
+    <bcf:citekey order="57">Belytschko1983</bcf:citekey>
+    <bcf:citekey order="57">Rezaiee2012</bcf:citekey>
+    <bcf:citekey order="58">Rezaiee2012</bcf:citekey>
+    <bcf:citekey order="59">Cundall1976</bcf:citekey>
+    <bcf:citekey order="60">Cundall1976</bcf:citekey>
+    <bcf:citekey order="61">Cundall1976</bcf:citekey>
+    <bcf:citekey order="62">Barnes1999</bcf:citekey>
+    <bcf:citekey order="63">Barnes1999</bcf:citekey>
+    <bcf:citekey order="64">Barnes1999</bcf:citekey>
+    <bcf:citekey order="65">Lewis2003</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
