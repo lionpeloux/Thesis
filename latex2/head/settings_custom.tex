@@ -183,8 +183,8 @@ useprefix=true, % use von as part of the family name (du peloux)
 
 \newcommand{\dofs}[1]{%
 	\ifstrempty{#1}{DOFs}{%
-		\ifnumequal{#1}{1}{1-DOF}{%
-			#1-DOFs%
+		\ifnumequal{#1}{1}{1\,-DOF}{%
+			#1\,-DOFs%
 		}%
 	}%
 }
