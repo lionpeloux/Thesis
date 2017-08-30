@@ -327,7 +327,7 @@ The internal shear forces and the internal twisting moment are then given by~:
 \end{subequations}
 It is importante to notice that as the rod is supposed to be inextensible, the elastic energy does not include any term to characterized the axial strain. This assumption will have to be treated as a constraint when solving the variational problem. For instance, \citef{Bergou2008} choose to enforce inextensibility at each time step with a reprojection algorithm while \citef{Lefevre2017} choose to enforce this constraint thanks to a penalty energy. Hence, $\vect{f}$ will give only the internal shear forces acting on the centerline.\footnote{This is somehow equivalent to what is remarked by Dill~: \blockcquote[]{Dill1992}{The resultant shears $F_1$ and $F_2$ are not determined by the constitutive equations. They are reactive parameters in the equations of balance of momentum as they are in the elementary beam theory.}.}
 
-\subsection{Prerequisite for the computation of energy gradients}
+\subsection{Prerequisite for the computation of energy gradients}\label{sec:dofchain}
 To compute the energy gradients with respect to the degrees of freedom of the rod it is primordial to understand how these \dofs{} are chained (see \cref{fig:dofs})~:
 \begin{figure}[h]
      		\centering

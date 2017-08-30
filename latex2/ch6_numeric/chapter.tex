@@ -57,7 +57,6 @@ Pour des cas test :
 \citef{Rezaiee2012}
 
 
-
 \clearpage
 \section{Main hypothesis}
 
@@ -83,7 +82,7 @@ Principe~:
 %\end{figure} 
 
 
-\section{Discret beam model}
+\section{Discret beam model}\label{sec:dmodel}
 % =======================
 Let's introduce the discrete biarc model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} ($\Gamma$) and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross-section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent segments which are three-vertices and two-edges elements with uniform material and section properties.
 
@@ -662,10 +661,10 @@ with an explicit scheme (central difference time integrator)
 Previously, we have idealized our mechanical system as a \dofs{4} particle spring system where each vertex is assimilated as a \emph{particle}, also called \emph{node}, represented by a material frame. Each node has its own mass and is subjected to internal and external forces. If not balanced, the node moves as it is not in a state of equilibrium.
 
 \subsection{Resultants acting on a particle}\label{sec:resFM}
-In this section, we express the resultant force and the resultant twisting moment acting on a particle. If not balanced, these resultants will make the particle to move and rotate with respect to its degrees of freedom.
+In this section, we express the resultant force and the resultant twisting moment acting on a particle. If not balanced, these resultants will make the particle to move and rotate with respect to its degrees of freedom $\vect{x}$ and $\theta$.
 
 \subsubsection{Resultant force}
-The translational resultant force ($\vect{R}_i^x$) acting on a particle is the sum of two contributions. The first one ($\vect{F}_i^{ext}$) is the resultant of the concentrated forces applied to the particle such as climatic loads, support reactions or loads transferred through connections. The second one ($\vect{F}_i^{int}$) is the resultant of the internal forces applied by the upstream and downstream parts of the rod to the particle and given by \cref{eq:dNi,eq:dFi}. This leads to the following equations~:
+The translational resultant force ($\vect{R}_i^x$) acting on a particle is the sum of two contributions. The first one ($\vect{F}_i^{ext}$) is the resultant of the concentrated forces applied to the particle such as climatic loads, support reactions or loads transferred through connections. The second one ($\vect{F}_i^{int}$) is the resultant of the internal forces applied by the upstream and downstream parts of the rod to the particle and given by \cref{eq:dNi,eq:dFi}. This leads to the following equations~: \footnote{Recall the convention from \cref{sec:}~: the internal force and moment are chosen to be the action of the downstream part of the rod upon the upstream part of the rod.}
 \begin{subequations}
 \begin{alignat}{2}
 	&\vect{R}_i^x &&= \vect{F}_i^{int} + \vect{F}_i^{ext} 
@@ -690,7 +689,7 @@ In the same manner, the rotational resultant moment ($R_i^{\theta}$) acting on a
 \end{subequations}
 Note that the contribution of the distributed external twisting moment ($q_i^{ext}$) is already taken into account via the interpolation of the internal twisting moment (see \cref{eq:DeltaQ}).
 
-\subsection{Explicite time integration}
+\subsection{Equations of motion}
 The particles of the system evolves according to the laws of motion, with respect to the 4 degrees of freedom of the system ($\vect{x}$ and $\theta$), given by~:
 \begin{subequations}
 \label{eq:dmotion}
@@ -700,9 +699,34 @@ The particles of the system evolves according to the laws of motion, with respec
 	& m_i^{\theta} \; \ddot{\theta}_i + \lambda^{\theta}_i \dot{\theta}_i&& = R_i^{\theta} \label{eq:dmotion_b}
 \end{alignat}
 \end{subequations}
-where $\ddot{\vect{x}}_i$ is the translational acceleration of the particle, $\ddot{\theta}_i$ is the rotational acceleration of the particle and $\lambda^x_i \dot{\vect{x}}_i$ and  $\lambda^{\theta}_i \dot{\theta}_i$ are the viscous damping coefficients. Hereinafter we will consider no viscous damping. Later, we will introduce an artificial kinetic damping. For a detailed traitement of various damping methods in the dynamic relaxation method, refer to \cite{Belytschko1983,Rezaiee2012}.
+where $\ddot{\vect{x}}_i$ is the translational acceleration of the particle, $\ddot{\theta}_i$ is the rotational acceleration of the particle and $\lambda^x_i$ and  $\lambda^{\theta}_i$ are the viscous damping coefficients.
 
-In this section, we give the stages required to integrate these equations through time. The dynamic relaxation procedure is based on a central-difference scheme. We call $\Delta t$ the time step. And we assume that the system is in the initial configuration at time $t=0$.
+Hereinafter we will consider no viscous damping. Instead, we will rely on an artificial kinetic damping (see \cref{sec:damping}). For a detailed traitement of various damping methods in the dynamic relaxation method, refer to \cite{Belytschko1983,Rezaiee2012}.
+
+\subsubsection{Coupling between flexion and torsion}
+Although \cref{eq:dmotion_a,eq:dmotion_b} may seem uncoupled to the reader, it is not the case as the coupling occurs through the material frame (see \cref{sec:dofchain}). Recall that both $\vect{R}_i^x$ and $R_i^{\theta}$ do depend on the $\vect{x}_i$ and $\theta_i$ variables.
+
+\subsubsection{Nonlinearity}
+In a linear analysis the expression of the resultant force and the resultant moment would be linearized and written in the matrix form~:
+\begin{subequations}
+\begin{alignat}{3}
+	& \mat{M}^x\; \mat{\ddot{X}}  + \mat{\lambda}^x \mat{\dot{X}} && = \mat{K}^x \mat{X}
+	\\
+	& \mat{M}^{\theta} \; \mat{\ddot{\Theta}} + \mat{\lambda}^{\theta} \mat{\dot{\Theta}}&& =  \mat{K}^{\theta}\mat{\Theta}
+\end{alignat}
+\end{subequations}
+where $\mat{X}$ and $\mat{\Theta}$ are the column vectors of the translational and rotational degrees of freedom of the system~; $\mat{M}^{x}$ and $\mat{M}^{\theta}$ are the mass matrices~; $\mat{\lambda}^{x}$ and $\mat{\lambda}^{\theta}$ are the damping matrices and $\mat{K}^x$ and $\mat{K}^{\theta}$ are the stiffness matrices. 
+
+Saying that the system is linearized involves that the dependence of $\vect{R}_i^x$ and $R_i^{\theta}$ with respect to the degrees of freedom $\vect{x}_i$ and $\theta_i$ will be modeled as a (linear) matrix product and that $\mat{K}^x$ and $\mat{K}^{\theta}$ are computed independently of these variables. In other words, this means that $\vect{R}_i^x$ and $R_i^{\theta}$ are calculated as a linear combination of the degrees of freedom, and that the coefficients of this combination are the matrix entries of  
+$\mat{K}^x$ and $\mat{K}^{\theta}$.
+
+Here, this factorization is not possible. $\vect{R}_i^x$ and $R_i^{\theta}$ are computed from the degrees of freedom of the system but the relation is not linear (see how the internal force and moment are computed in \cref{sec:dmodel}). Therefore, the geometric system given in \cref{eq:dmotion_a,eq:dmotion_b} is effectively nonlinear.
+
+\subsection{Explicite time integration}
+
+In this section, we give the stages required to integrate these equations through time. The dynamic relaxation procedure is based on a central-difference scheme. We call $\Delta t$ the time step. And we call \emph{initial configuration} the configuration of the system at time $t=0$.
+
+Note that the time step $\Delta t$ is not necessary constant through time and could be \emph{adapted} during the analysis process. However, for simplicity we will treat only the case where it is constant but it is easy to extend the present work to work with a variable time step.
 
 \subsubsection{Acceleration}
 At time $t$, considering the position of the system is known ($\vect{x}_i$ and $\{\vect{d}_{3,\,i},\vect{d}_{1,\,i},\vect{d}_{2,\,i}\}$), we can compute the resultant force ($\vect{R}_i^x$) and the resultant twisting moment ($R_i^{\theta}$) acting on the particles (see \cref{sec:resFM}). Using \cref{eq:dmotion} the acceleration of the particles at time $t$ is straightforwardly deduced as~:
@@ -737,9 +761,9 @@ where $a_i$ is the acceleration an $v_i$ is the velocity of the particle. Thus, 
 \subsubsection{Position}
 To update the position of the system, we use the same central difference scheme but this time on the velocity~:
 \begin{equation}
-	v_i^{t+\Delta t / 2} = \frac{x_i^{t+\Delta t} - x_i^{t}}{\Delta t}
+	v_i^{t+\Delta t / 2} = \frac{q_i^{t+\Delta t} - q_i^{t}}{\Delta t}
 \end{equation}
-where $v_i$ is the acceleration an $x_i$ is the position of the particle. Thus, the translational and rotational positions of a particle at time $t + \Delta t$ are computed from the velocities at time $t + \Delta t / 2$ by~:
+where $v_i$ is the acceleration an $q_i$ is the position of the particle (either in translation or rotation). Thus, the translational and rotational positions of a particle at time $t + \Delta t$ are computed from the velocities at time $t + \Delta t / 2$ by~:
 \begin{subequations}
 \label{eq:dx}
 \begin{alignat}{5}
@@ -763,28 +787,136 @@ Using \cref{eq:dv} the position at time $t+\Delta t$ can be expressed with respe
 	&&+ {\Delta t}^2  \cdot \frac{R_i^{\theta}}{m_i^{\theta}}
 \end{alignat}
 \end{subequations}
+
+\subsubsection{Motion}
 From this new position, it is now possible to compute the new resultant force and moment acting on the particles, to update their acceleration, then to update their velocity, and then to compute the new position of the system, at time $t + 2\Delta t$. This process can be repeated indefinitely to follow the motion of the system.
 
-Note that the motion will be realistic to the extent that the computed forces and moments will be realistic and to the extent that the time step is small enough. Indeed, at each time step an approximation error is done in the evaluation of the velocity and the position of the system with the central difference scheme. This error is integrated through time and nothing here is done to correct it and to prevent its accumulation along the dynamic.
+\subsubsection{Initialization}
+The iterative process described in this section to simulate step by step the motion of the system needs to be initialized. At the moment, \cref{eq:dx2} only describes how to get the position of the system at $t + \Delta t$ knowing its position, velocity and acceleartion at time $t$.
 
-\subsection{Damping}
-If no damping is introduced to dissipate some energy, there is no reason that the system will stop to move. Here, our goal is to dissipate the kinetic energy of the system as fast as possible to fall into a state of static equilibrium. This can be achieved either through viscous or kinetic damping. Here, we choose to implement the kinetic damping as it is known to produce good results for a wide range of cases \cite{Rezaiee2012}.
+At time $t=0$, or each time that the system will be damped (see \cref{sec:damping}), we consider that the system is released wit no initial velocity, which means that~:
+\begin{equation}
+	v_i^{0} = \frac{1}{2} (v_i^{-\Delta t / 2} + v_i^{+\Delta t / 2}) = 0 
+	\quad \Rightarrow \quad
+	v_i^{-\Delta t / 2}   = - v_i^{+\Delta t / 2}
+\end{equation}
+Therefore, the velocity at time $\Delta t / 2$ given in \cref{eq:dv} becomes~:
+\begin{subequations}
+\label{eq:dv0}
+\begin{alignat}{5}
+	& \dot{\vect{x}}_i^{+\Delta t / 2} &&
+	=  \frac{1}{2} \Delta t  \cdot \frac{\vect{R}_i^x}{m_i^x}
+	\\[0.5em]
+	& \dot{\theta}_i^{+\Delta t / 2} &&
+	=  \frac{1}{2} \Delta t  \cdot \frac{R_i^{\theta}}{m_i^{\theta}}
+\end{alignat}
+\end{subequations}
+and the next position at time $t + \Delta t$ is still computed from \cref{eq:dx}.
+\subsubsection{Error propagation}
+Note that the motion will be realistic to the extent that the computed forces and moments will be realistic and to the extent that the time step will be small enough. Indeed, at each time step an approximation error is done in the evaluation of the velocity and the position of the system with the central difference scheme. This error is integrated through time and nothing here is done to correct it and to prevent its accumulation along the dynamic. It is not a matter of concern for us as we are only interested in the quasi-static response of the system and not in a accurate modeling of the system's motion. Moreover, higher accuracy numerical integrators would be more computationally expensive, which is against our goal to achieve real time interactive simulation of elastic gridshells.
+
+Lots of other integration schemes exist, among which we can cite the \emph{Explicit Euler}, the \emph{Symplectic Euler}, the \emph{Störmer-Verlet} and the \emph{4\textsuperscript{th} order Runge-Kutta} schemes. These schemes are briefly presented in \cite{Fierz2013}. For a complete treatment of numerical integrators refer to the book from \citef{Hairer2006}.
+
+\subsection{Damping}\label{sec:damping}
+If no damping is introduced to dissipate some energy, there is no reason that the system will stop to move. Here, our goal is to dissipate the kinetic energy of the system as fast as possible to fall into a state of static equilibrium. This can be achieved with any kind of damping, among which the most well-known are viscous and kinetic damping. 
+
+Here, we choose to implement the kinetic damping as it is known to produce the best results for a wide range of cases \cite{Rezaiee2012}.
 
 \subsubsection{Kinetic damping}
-Kinetic damping was first introduced by \citef{Cundall1976}. The idea behind this type of damping is simple. For a conservative system, the mechanical energy is conserved during motion and is the sum of two forms of energy~: the potential energy and the kinetic energy. Therefore, the potential energy of the system is minimized when its kinetic energy is maximized. T
+Kinetic damping was first introduced by \citef{Cundall1976}. The idea behind this type of damping is simple. For a conservative system, the mechanical energy ($\mathcal{E}_m$) is conserved during motion and is the sum of two forms of energy~: the potential energy ($\mathcal{E}_p$) and the kinetic energy ($\mathcal{E}_k$). Therefore, the potential energy of the system is minimized when its kinetic energy is maximized.
 
-To find a state of static equilibrium, that is a state of minimal potential energy, Cundall proposes to track the kinetic energy of the system during motion. When a peak is detected, the system is frozen in its position and then released but with no initial velocity. When the system is released, the mechanical energy of the system has decreased and is all stocked under potential energy form. The motion start again and part of the potential energy is converted to kinetic energy until a new peak is detected. Progressively, from peak to peak, the potential energy is progressively lowered to a minimum and the system falls in a state of static equilibrium. 
+To find a state of static equilibrium, that is a state of minimal potential energy, Cundall proposes to track the kinetic energy of the system during motion. When a peak is detected, the system is frozen in its position and then released with no initial velocity, that is with no initia kinetic energy. When the system is released, the overall mechanical energy of the system has decreased and is all stocked under potential energy form. The motion start again and part of the initial potential energy is converted to kinetic energy, until a new peak is detected. Progressively, from peak to peak, the potential energy is progressively lowered to a minimum and the system falls in a state of static equilibrium.
+
+Because of the discrete nature of the numerical process, a peak of kinetic energy is detected in the interval $[t-\Delta t/2,t+\Delta t/2]$ when~:
+\begin{equation}
+	\mathcal{E}_k^{t-\Delta t/2} >  \mathcal{E}_k^{t+\Delta t/2}
+\end{equation}
+where the kinetic energy of the system is computed from the mass and the velocity of the particles by~:
+\begin{subequations}
+\label{eq:Ek}
+\begin{alignat}{5}
+	& \mathcal{E}_k^{x,\,t-\Delta t/2} && =  \sum_i \tfrac{1}{2} m_i^x \dot{\vect{x}}_i^{t-\Delta t / 2} 
+	\\[0.5em]
+	& \mathcal{E}_k^{\theta,\,t-\Delta t/2} && = \sum_i \tfrac{1}{2} m_i^{\theta} \dot{{\theta}}_i^{t-\Delta t / 2} 
+	\\[0.5em]
+	& \mathcal{E}_k^{t-\Delta t/2} && = \mathcal{E}_k^{x,\,t-\Delta t/2} + \mathcal{E}_k^{\theta,\,t-\Delta t/2} 
+\end{alignat}
+\end{subequations}
+Here, we have made the distinction between the translational part of the kinetic energy ($\mathcal{E}_k^{x}$) and the rotational part of the kinetic energy ($\mathcal{E}_k^{\theta}$). Indeed, the kinetic damping can be triggered either considering the global kinetic energy of the system or considering separately the translational and rotational parts of the kinetic energy of the system.\footnote{That is when a peak of $\mathcal{E}_k^{x}$ or a peak of $\mathcal{E}_k^{\theta}$ is detected the kinetic damping is triggered.}
 
 
-Hence dissipating the kinetic enrgy of the system will 
+\subsubsection{Peak interpolation}
+When a peak is detected at time $t+\Delta t /2$, the simplest way to proceed is to froze the system in its actual position, at time $t$, and to release it from this position with no initial velocity. However, the peak of kinetic energy as occurred at time $t^*$ somewhere in between times $t-\Delta t/2$ and $t+\Delta t/2$. To maximise the effect of the kinetic damping the position of the peak could be guessed using a parabolic interpolation of the kinetic energy.
 
+Let us define $\mathcal{E}_0$, $\mathcal{E}_1$ and $ \mathcal{E}_2$ the last three consecutive values of the kinetic energy~:
+\begin{subequations}
+\begin{alignat}{5}
+	& \mathcal{E}_0 &&= \mathcal{E}_k^{t-\tfrac{3}{2}\Delta t}
+	\\[0.5em]
+	& \mathcal{E}_1 &&= \mathcal{E}_k^{t-\tfrac{1}{2}\Delta t}
+	\\[0.5em]
+	& \mathcal{E}_2 &&= \mathcal{E}_k^{t+\tfrac{1}{2}\Delta t}
+\end{alignat}
+\end{subequations}
+We define the following parameters for the parabolic interpolation of the kinetic energy~:
+\begin{subequations}
+\label{eq:InterpParam}
+\begin{alignat}{5}
+	& \alpha = \frac{\mathcal{E}_1 - \mathcal{E}_0}{\mathcal{E}_1 - \mathcal{E}_2} \geqslant 0
+	\\[0.5em]
+	& \xi = \frac{\mathcal{E}_2 - \mathcal{E}_1}{\mathcal{E}_0 - 2\mathcal{E}_1 + \mathcal{E}_2} = \frac{1}{1 + \alpha} \in [0,1]
+\end{alignat}
+\end{subequations}
+With these parameters, the position of the peak and the value of the kinetic energy at the peak are given by~:
+\begin{subequations}
+\label{eq:InterpEk}
+\begin{alignat}{5}
+	& t^* = t - \xi t
+	\\[0.5em]
+	& \mathcal{E}^* = \mathcal{E}_1 + \frac{1-2\xi}{8} (\mathcal{E}_2 - \mathcal{E}_0)
+\end{alignat}
+\end{subequations}
+The system is then pushed backward ($\xi</2$) or forward ($\xi>1/2$) to the position $\vect{x}_i^*$ and $\theta_i^*$ given by~:
+\begin{subequations}
+\label{eq:InterpX}
+\begin{alignat}{5}
+	& \vect{x}_i^{*} 
+	&& =  \vect{x}_i^{t-\Delta t} + (1-\xi) \Delta t  \cdot  \dot{\vect{x}}_i^{t-\Delta t / 2}
+	\\[0.5em]
+	& {\theta}_i^{*} 
+	&& =  {\theta}_i^{t-\Delta t} + (1-\xi) \Delta t  \cdot  \dot{{\theta}}_i^{t-\Delta t / 2}
+\end{alignat}
+\end{subequations}
+These equations can be advantageously rewritten to minimize memory allocation by avoiding the storage of the position and the speed of the system at time $t-\Delta t / 2$~:
+\begin{subequations}
+\label{eq:InterpX2}
+\begin{alignat}{5}
+	& \vect{x}_i^{*} 
+	&& =  \vect{x}_i^{t} -\xi   \Delta t  \cdot \dot{\vect{x}}_i^{t-\Delta t / 2} 
+	&& =  \vect{x}_i^{t} -\xi   \Delta t  \cdot (\dot{\vect{x}}_i^{t+\Delta t / 2} - {\Delta t} \cdot \frac{\vect{R}_i^{x,\,t}}{m_i^x} )
+	\\[0.5em]
+	& {\theta}_i^{*} 
+	&& =  {\theta}_i^{t} -\xi \Delta t \cdot \dot{{\theta}}_i^{t-\Delta t / 2} 
+	&& =  {\theta}_i^{t} -\xi \Delta t \cdot (\dot{{\theta}}_i^{t+\Delta t / 2} - {\Delta t}  \cdot \frac{R_i^{\theta,\,t}}{m_i^{\theta}})
+\end{alignat}
+\end{subequations}
 This damping is used in combination with the parabolic interpolation introduced by \citef{Barnes1999}. The advantage of this technique is double~:
 \begin{itemize}
 \item The damping occurs at the interpolated position, that is for a higher level of kinetic energy. Hence, more kinetic energy is dissipated which should improve the convergence speed.
 \item Because of the interpolation, the system is less subject to \emph{time step locking} when the system moves back and forth between two positions.
 \end{itemize}
 
+
+\subsection{Stability}
+
+\subsubsection{Fictitious mass}
+
 \subsection{Convergence}
+\begin{itemize}
+\item relative kinetic energy
+\item absolute kinetic energy
+\item residual at nodes (force, velocity)
+\end{itemize}
 
 %
 %The dynamic relaxation method first appeared in the 1960s with Day16 and Otter.17 The goal of this method is to find a static equilibrium. To do so, starting from a given configuration with zero speed, a fictitious dynamic is sim- ulated, where the system under study is immobilized each time it reaches a maximum of kinetic energy and is then released again with zero speed. By immobilizing the sys- tem, the kinetic energy of the system is dissipated. We then simulate a dynamic with “kinetic” damping. For a conservative system, the maximum of kinetic
@@ -964,6 +1096,31 @@ En particulier, voir pour un comparatif avec une méthode implicite.
 \end{figure}
 \DecMargin{2em}
 
+
+\section{Support Reaction}
+
+\section{Marsupilami}
+détails et conseils d'implementation
+Optimisation : parallélisation / chebfun calcul polynomial
+POO : modèle objet
+Evènement vs procédural
+C\#
+Parler de perfview. Peut-être sortir un résulat. 
+Parler de serialization
+Donner guide lines and recommendations.
+Modularité : evaluation courbure, schéma d'intégration, autorefine, autobreak, plasticity
+Design pattern
+
+Events-driven vs asynchronous vs parallel.
+
+\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous. 
+
+Therefore, handling of events can either be synchronous or asynchronous. JavaScript, for example, uses a synchronous eventing system.
+
+Asynchronous means that actions can happen independent of the current "main" execution stream. Mind you, it does NOT mean "parallel", or "different thread". An "asynchronous" action may actually run on the main thread, blocking the "main" execution stream in the meantime. So don't confuse "asynchronous" with "multi-threading".
+
+You may say that, technically speaking, an asynchronous operation automatically assumes eventing -- at least "completed", "faulted" or "aborted/cancelled" events (one or more of these) are sent to the instigator of the operation (or the underlying O/S itself) to signal that the operation has ceased. Thus, async is always event-driven, but not the other way round.
+}
 
 \clearpage
 
