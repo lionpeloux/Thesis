@@ -200,6 +200,7 @@ latex/_minted-ldp_thesis/
 
 # Mac OSX
 *.DS_Store
-*.pdf
+
+latex2/*.pdf
 
 
