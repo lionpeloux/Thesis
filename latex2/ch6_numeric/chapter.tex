@@ -90,7 +90,7 @@ Principe~:
 
 \section{Discret beam model}\label{sec:dmodel}
 % =======================
-Let's introduce the discrete biarc model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} ($\Gamma$) and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross-section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent segments which are three-vertices and two-edges elements with uniform material and section properties.
+Let's introduce the discrete \emph{biarc} model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} ($\Gamma$) and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross-section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent \emph{segments} which are three-vertices and two-edges elements with uniform material and section properties.
 
 Beams can either be closed or open. The corresponding number of vertices, edges and segments are reported in \cref{tab:count}.
 \begin{figure}[p]
@@ -157,7 +157,7 @@ Thus, the centerline is parametrized by arc length and $\Gamma(s_i) = \vect{x}_i
 
 \subsubsection{Segments}
 % ---------------------------------
-The discrete centerline is divided into $n_s$ curved segments. Each segment is a three-noded element -- see \cref{fig:discrete_model} where the area covered by a segment is represented as a grey solid hatch. The $i$th segment is composed of three vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) spanning two edges ($\vect{e}_{2i}, \vect{e}_{2i+1}$). The (i-1)th segment and the $i$th segment share the same vertex $\vect{x}_{2i}$ at arc length $s_{2i}$.
+The discrete centerline is divided into $n_s$ curved segments. Each segment is a three-noded element where the area covered by a segment is represented as a grey solid hatch (see \cref{fig:discrete_model}). The $i$th segment is composed of three vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) spanning two edges ($\vect{e}_{2i}, \vect{e}_{2i+1}$). The ($i-1$)th segment and the $i$th segment share the same vertex $\vect{x}_{2i}$ at arc length $s_{2i}$.
 
 Each segment has two end vertices called \emph{handle} ($\vect{x}_{2i}, \vect{x}_{2i+2}$) and one mid vertex called \emph{ghost} ($\vect{x}_{2i+1}$) as this one is not accessible to the end user in order to interact with the model (link, restrain, loading, \dots). Ghost vertices are used only for internal purpose to give a higher richness in the kinematic description of a segment than a two-noded segment would.
 
@@ -168,6 +168,7 @@ Finally, we define the \emph{chord length} of the $i$th segment as the distance 
 
 \subsubsection{Material frames}
 % ---------------------------------------
+A discrete material frame $\{\vect{d}_{3}, \vect{d}_{1}, \vect{d}_{2}\}_i$ is associated to each vertex $\vect{x}_i$. $\vect{d}_{1,\,i}$ and $\vect{d}_{2,\,i}$ are chosen to be aligned with the principle axes of the cross-section at vertex $\vect{x}_i$. At mid edge, the definition of $\vect{d}_{3,\,i+1/2}$ is consistent with the discrete curvature based on the circumscribed osculating circle (see \cref{sec:discrete_tangent_circumscribed}).
 
 \subsubsection{Material and section properties}
 % ------------------------------------------------------------
@@ -196,7 +197,7 @@ Additional External concentrated forces ($\vect{F}^{ext}$) and moments ($\vect{M
 
  \subsubsection{Internal forces and moments}
 % ---------------------------------------------------------
-Under deformations the discrete rod is subject to internal forces and moments. Their components in the material frame basis are named as follow :
+The discrete rod is subjected to internal forces ($\vect{F} = \vect{N}\vect{d}_3 + F_1 \vect{d}_1 + F_2 \vect{d}_2$) and moments ($\vect{M} = Q\vect{d}_3 + M_1 \vect{d}_1 + M_2 \vect{d}_2$). Their components in the material frame basis are named as follow :
 \begin{itemize}
 \item The shear force : $\vect{F}^{\perp} = F_1 \vect{d}_1 + F_2 \vect{d}_2$ 
 \item The axial force : $\vect{N} = N \vect{d}_3$
@@ -207,7 +208,7 @@ Under deformations the discrete rod is subject to internal forces and moments. T
 % Modeling discontinuities
 % ------------------------------------
  \subsection{Modeling discontinuities}
-The model assumes that cross-section and material properties as well as distributed loads are uniform over each segment. Referring to the structure of the equations of motion, and because the centerline is required to be a regular curve in the stress-free configuration, strains, stresses, displacements, internal forces and internal moments must be piecewise continuous functions of the arc length parameter, continuous over each segment $]s_{2i},s_{2i+2}[$. Discontinuities of these functions might occur at handle vertices ($\vect{x}_{2i}$), for instance if there is a jump in material or cross-section properties or if concentrated loads are applied at handle vertices. Moreover, the centerline curve itself will stay $\mathcal{C}^1$ during the motion, as it is chosen to be $\mathcal{C}^1$ in the reference configuration.\footnote{This preclude the modeling of beams with kinks as the tangent vector would not be continuously defined at those points. In such a case, the beam should be modeled in two separate parts linked together in a rigid manner.}\textsuperscript{,}\footnote{The centerline is not $\mathcal{C}^2$ as discontinuities in curvature may occur. For instance, if no punctual loads are applied, the bending moment is continuous over the rod. As the bending moment is linked to the curvature through the constitutive equation $M = EI\varkappa$, a discontinuity in $I$ will lead to a discontinuity in $\varkappa$. Conversely, a discontinuity in $\varkappa$ will lead to a discontinuity in $I$.}
+The model assumes that cross-section and material properties as well as distributed loads are uniform over each segment. Referring to the structure of the equations of motion, and because the centerline is required to be a regular curve in the stress-free configuration, strains, stresses, displacements, internal forces and internal moments must be piecewise continuous functions of the arc length parameter, continuous over each segment $]s_{2i},s_{2i+2}[$. Discontinuities of these functions might occur at handle vertices ($\vect{x}_{2i}$), for instance if there is a jump in material or cross-section properties or if concentrated loads are applied at handle vertices. Moreover, the centerline curve itself will stay $\mathcal{C}^1$ during the motion, as it is chosen to be $\mathcal{C}^1$ in the reference configuration.\footnote{This preclude the modeling of beams with kinks as the tangent vector would not be continuously defined at these points. In such a case, the beam should be modeled in two separate parts linked together in a rigid manner.}\textsuperscript{,}\footnote{The centerline is not necessarily $\mathcal{C}^2$ as discontinuities in curvature may occur. For instance, if no punctual loads are applied, the bending moment is continuous over the rod. As the bending moment is linked to the curvature through the constitutive equation $M = EI\varkappa$, a discontinuity in $I$ will lead to a discontinuity in $\varkappa$. Conversely, a discontinuity in $\varkappa$ will lead to a discontinuity in $I$.}
 
 Here and subsequently, for such a function, the left and right limits at handle vertices ($s_{2i}$) will be denoted with superscripts $f_{2i}^-$ and $f_{2i}^+$. Possibly, the function is continuous so that the left and right limits agree ($f_{2i}^- = f_{2i}^+$).
 
@@ -716,7 +717,7 @@ In a linear analysis the expression of the resultant force and the resultant mom
 	& \mat{M}^{\theta} \; \mat{\ddot{\Theta}} + \mat{\lambda}^{\theta} \mat{\dot{\Theta}}&& =  \mat{K}^{\theta}\mat{\Theta}
 \end{alignat}
 \end{subequations}
-where $\mat{X}$ and $\mat{\Theta}$ are the column vectors of the translational ($\vect{x}_i$) and rotational ($\theta_i$) degrees of freedom of the system~; $\mat{M}^{x}$ and $\mat{M}^{\theta}$ are the mass matrices~; $\mat{\lambda}^{x}$ and $\mat{\lambda}^{\theta}$ are the damping matrices and $\mat{K}^x$ and $\mat{K}^{\theta}$ are the stiffness matrices. 
+where $\mat{X}$ and $\mat{\Theta}$ are the column vectors of the translational ($\vect{x}_i$) and rotational ($\theta_i$) degrees of freedom of the system~; $\mat{M}^{x}$ and $\mat{M}^{\theta}$ are the mass matrices~; $\mat{\lambda}^{x}$ and $\mat{\lambda}^{\theta}$ are the damping matrices and $\mat{K}^x$ and $\mat{K}^{\theta}$ are the stiffness matrices.\footnote{For non linear simulation, the stiffness matrix is replaced by the \emph{tangent} stiffness matrix and is reevaluated at each time step.}
 
 Saying that the system is linearized involves that the dependence of $\vect{R}_i^x$ and $R_i^{\theta}$ with respect to the degrees of freedom $\vect{x}_i$ and $\theta_i$ will be modeled as a (linear) matrix product and that $\mat{K}^x$ and $\mat{K}^{\theta}$ are computed independently of these variables. In other words, this means that $\vect{R}_i^x$ and $R_i^{\theta}$ are calculated as a linear combination of the degrees of freedom, and that the coefficients of this combination are the matrix entries of  
 $\mat{K}^x$ and $\mat{K}^{\theta}$.
@@ -742,10 +743,14 @@ At time $t$, considering the position of the system is known ($\vect{x}_i$ and $
 
 \subsubsection{Velocity}
 The translational and rotational velocities of a particle are evaluated with the following central difference scheme~:
-\begin{equation}
-	a_i^t = \frac{v_i^{t+\dt{} / 2} - v_i^{t+\dt{} / 2}}{\dt{}}
-\end{equation}
-where $a_i$ is the acceleration an $v_i$ is the velocity of the particle. Thus, the translational and rotational velocities of a particle at time $t + \dt{} / 2$ are computed from the velocities at time $t - \dt{} / 2$ by~:
+\begin{subequations}
+\begin{alignat}{3}
+	& \ddot{\vect{x}}_i^t && =\frac{\dot{\vect{x}}_i^{t+\dt{} / 2} - \dot{\vect{x}}_i^{t-\dt{} / 2}}{\dt{}}
+	\\[0.5em]
+	& \ddot{\theta}_i^t && = \frac{\dot{\theta}_i^{t+\dt{} / 2} - \dot{\theta}_i^{t-\dt{} / 2}}{\dt{}}
+\end{alignat}
+\end{subequations}
+where $\dot{\vect{x}}_i$ and $\dot{\theta}_i$ are the translational and rotational velocities of the particle. Thus, the velocity of a particle at time $t + \dt{} / 2$ is computed from its velociticty at time $t - \dt{} / 2$ by~:
 \begin{subequations}
 \label{eq:dv}
 \begin{alignat}{5}
@@ -761,10 +766,14 @@ where $a_i$ is the acceleration an $v_i$ is the velocity of the particle. Thus, 
 
 \subsubsection{Position}
 To update the position of the system, we use the same central difference scheme but this time on the velocity~:
-\begin{equation}
-	v_i^{t+\dt{} / 2} = \frac{q_i^{t+\dt{}} - q_i^{t}}{\dt{}}
-\end{equation}
-where $v_i$ is the acceleration an $q_i$ is the position of the particle (either in translation or rotation). Thus, the translational and rotational positions of a particle at time $t + \dt{}$ are computed from the velocities at time $t + \dt{} / 2$ by~:
+\begin{subequations}
+\begin{alignat}{3}
+	& \dot{\vect{x}}_i^{t+h/2} && =\frac{{\vect{x}}_i^{t} - {\vect{x}}_i^{t-\dt{}}}{\dt{}}
+	\\[0.5em]
+	& \dot{\theta}_i^{t+h/2} && = \frac{{\theta}_i^{t} - {\theta}_i^{t-\dt{}}}{\dt{}}
+\end{alignat}
+\end{subequations}
+Thus, the translational and rotational positions of a particle at time $t + \dt{}$ are computed from the velocities at time $t + \dt{} / 2$ by~:
 \begin{subequations}
 \label{eq:dx}
 \begin{alignat}{5}
@@ -796,11 +805,17 @@ From this new position, it is now possible to compute the new resultant force an
 The iterative process described in this section to simulate step by step the motion of the system needs to be initialized. At the moment, \cref{eq:dx2} only describes how to get the position of the system at $t + \dt{}$ knowing its position, velocity and acceleration at time $t$.
 
 At time $t=0$, or each time that the system will be damped (see \cref{sec:damping}), we consider that the system is released with no initial velocity, which means that~:
-\begin{equation}
-	v_i^{0} = \frac{1}{2} (v_i^{-\dt{} / 2} + v_i^{+\dt{} / 2}) = 0 
+\begin{subequations}
+\begin{alignat}{3}
+	& \dot{\vect{x}}_i^{0} && = \frac{\vect{x}_i^{-\dt{}/2} + \vect{x}_i^{+\dt{}/2}}{2}
 	\quad \Rightarrow \quad
-	v_i^{-\dt{} / 2}   = - v_i^{+\dt{} / 2}
-\end{equation}
+	 \dot{\vect{x}}_i^{-\dt{} / 2}   = -  \dot{\vect{x}}_i^{+\dt{} / 2}
+	\\[0.5em]
+	& \dot{\theta}_i^{0} && = \frac{\theta_i^{-\dt{}/2} + \theta_i^{+\dt{}/2}}{2}
+	\quad \Rightarrow \quad
+	\dot{\theta}_i^{-\dt{} / 2}   = - \dot{\theta}_i^{+\dt{} / 2}
+\end{alignat}
+\end{subequations}
 Therefore, the velocity at time $\dt{} / 2$ given in \cref{eq:dv} becomes~:
 \begin{subequations}
 \label{eq:dv0}
@@ -861,11 +876,19 @@ When a peak is detected at time $t+\dt{} /2$, the simplest way to proceed is to 
 Let us define $\mathcal{E}_0$, $\mathcal{E}_1$ and $ \mathcal{E}_2$ the last three consecutive values of the kinetic energy~:
 \begin{subequations}
 \begin{alignat}{5}
-	& \mathcal{E}_0 &&= \mathcal{E}_k^{t-\tfrac{3}{2}\dt{}}
+	& \mathcal{E}_0 &&= \mathcal{E}_k^{t-3\dt{}/2}
 	\\[0.5em]
-	& \mathcal{E}_1 &&= \mathcal{E}_k^{t-\tfrac{1}{2}\dt{}}
+	& \mathcal{E}_1 &&= \mathcal{E}_k^{t-\dt{}/2}
 	\\[0.5em]
-	& \mathcal{E}_2 &&= \mathcal{E}_k^{t+\tfrac{1}{2}\dt{}}
+	& \mathcal{E}_2 &&= \mathcal{E}_k^{t+\dt{}/2}
+\end{alignat}
+\end{subequations}
+Because a peak has just occur, the following inequalities hold~:
+\begin{subequations}
+\begin{alignat}{5}
+	& \mathcal{E}_1 \geqslant \mathcal{E}_0
+	\\
+	& \mathcal{E}_1 \geqslant \mathcal{E}_2
 \end{alignat}
 \end{subequations}
 We define the following parameters for the parabolic interpolation of the kinetic energy~:
@@ -881,20 +904,20 @@ With these parameters, the position of the peak and the value of the kinetic ene
 \begin{subequations}
 \label{eq:InterpEk}
 \begin{alignat}{5}
-	& t^* &&= t - \xi t
+	& t^* &&= t - \xi t 
 	\\[0.5em]
-	& \mathcal{E}^* &&= \mathcal{E}_1 + \frac{1-2\xi}{8} (\mathcal{E}_2 - \mathcal{E}_0)
+	& \mathcal{E}^* &&= \mathcal{E}_1 + \frac{1-2\xi}{8} (\mathcal{E}_2 - \mathcal{E}_0)  \geqslant \mathcal{E}_1
 \end{alignat}
 \end{subequations}
-The system is then pushed backward ($\xi</2$) or forward ($\xi>1/2$) to the position $\vect{x}_i^*$ and $\theta_i^*$ given by~:
+Observe that $1-2\xi$ and $\mathcal{E}_2 - \mathcal{E}_0$ have the same sign. Therefore, as expected $\mathcal{E}^*$ is always greater than $\mathcal{E}_1$. The system is then pushed backward to the interpolated position $\vect{x}_i^*$ and $\theta_i^*$ given by~:
 \begin{subequations}
 \label{eq:InterpX}
 \begin{alignat}{5}
 	& \vect{x}_i^{*} 
-	&& =  \vect{x}_i^{t-\dt{}} &&+ (1-\xi) \dt{}  \cdot  \dot{\vect{x}}_i^{t-\dt{} / 2}
+	&& =  \vect{x}_i^{t} && -\xi \dt{}  \cdot  \dot{\vect{x}}_i^{t-\dt{} / 2}
 	\\[0.5em]
 	& {\theta}_i^{*} 
-	&& =  {\theta}_i^{t-\dt{}} &&+ (1-\xi) \dt{}  \cdot  \dot{{\theta}}_i^{t-\dt{} / 2}
+	&& =  {\theta}_i^{t} && -\xi \dt{}  \cdot  \dot{{\theta}}_i^{t-\dt{} / 2}
 \end{alignat}
 \end{subequations}
 These equations can be advantageously rewritten to minimize memory allocation by avoiding the storage of the position and the speed of the system respectively at time $t-\dt{}$ and $t-\dt{} / 2$~:
@@ -910,7 +933,7 @@ These equations can be advantageously rewritten to minimize memory allocation by
 	&& =  {\theta}_i^{t} -\xi \dt{} \cdot (\dot{{\theta}}_i^{t+\dt{} / 2} - {\dt{}}  \cdot \frac{R_i^{\theta,\,t}}{m_i^{\theta}})
 \end{alignat}
 \end{subequations}
-The parabolic interpolation was introduced by \citef{Barnes1999}. The advantage of this technique is double. Firstly, the damping occurs at the interpolated position, that is for a higher level of kinetic energy. Hence, more kinetic energy is dissipated which should improve the convergence speed. Secondly, because of the interpolation, the system is less subject to \emph{time step locking} when the system moves back and forth between two positions.
+The parabolic interpolation was introduced by \citef{Barnes1999}. The advantage of this technique is double. Firstly, the damping occurs at the interpolated position, that is for a higher level of kinetic energy ($\mathcal{E}^* \geqslant \mathcal{E}_1$). Hence, more kinetic energy is dissipated which should improve the convergence speed. Secondly, because of the interpolation, the system is less subject to \emph{time step locking} when the system moves back and forth between two positions.
 
 \subsection{Convergence criteria}
 Several criteria exist in the literature to determine when to stop the time integration and to decide wether the algorithm has converged to a state of static equilibrium or not. It is very unlikely that the system will fall exactly in such a state but instead it will approach it an so a \emph{convergence criteria} is required. We recall here the main ideas.
@@ -954,7 +977,7 @@ Displacement criteria are very similar to velocity criteria. The convergence is 
 The kinetic energy can also be employed to form convergence criteria. Somehow, it is nothing but a velocity criteria weighted by the fictitious mass of the particles. It make sens as particles contribute to the motion proportionally to their mass. All the criteria exposed previously can be formed with the kinetic energy $\tfrac{1}{2} m_i^x \dot{\vect{x}}_i^{t}$ and $\tfrac{1}{2} m_i^{\theta} \dot{{\theta}}_i^{t}$ of the particles.
 
 \subsubsection{Relative criterion}
-Somehow, it can be useful to proportionate the convergence criteria to the size of the system. For the same level of convergence a system with 1000 elements is likely to have a higher kinetic energy than a system with 1 element.
+It can be useful to proportionate the convergence criteria to the size of the system. For the same level of convergence a system with 1000 elements is likely to have a higher kinetic energy than a system with 1 element.
 
 For instance, to solve this problem some authors \cite{Barnes1975,Douthe2007} have proposed to define the kinetic energy convergence threshold as a fraction (say $1/1000$) of the maximum kinetic energy observed previously during the motion~:
 \begin{subequations}
@@ -968,22 +991,46 @@ For instance, to solve this problem some authors \cite{Barnes1975,Douthe2007} ha
 \end{subequations}
 Hence, this criterion is \emph{adaptative} and also \emph{relative} to the size of the problem. The same approach can be adopted for force, velocity or displacement based criteria.
 
-\subsection{Stability}
-The stability of the dynamic relaxation algorithm has been studied in many ways, depending the type of damping used. The main idea is to remind that the time step ($\dt{}$) and the mass of the particles ($m_i^x$, $m_i^{\theta}$) are parameters of the numerical integration. Therefore, because we are not interested by the motion itself but by the quasi-static response of the system when properly damped, the time step and the mass should be chosen~:
+\subsection{Stability and critical damping}
+Because we are not interested by the motion itself but by the quasi-static response of the system when properly damped, the time step ($\dt{}$) and the mass of the particles ($m_i^x$, $m_i^{\theta}$) should be chosen in order~:
 \begin{itemize}
-\item to ensure that the algorithm will converge to a state of static equilibrium~;
-\item to produce the fastest convergence possible.
+\item to ensure that the algorithm will converge to a state of static equilibrium (stability)~;
+\item to produce the fastest convergence possible (critical damping).
 \end{itemize}
-Automatic evaluation of these parameters are proposed by \citef{Papadrakakis1981}. 
+In the case of viscous damping, the optimal damping coefficients are determined to ensure stability and near critical damping of the motion. \citef{Papadrakakis1981} proposes an automatic evaluation of these coefficients, which are computed from the time step and the entries of the tangent stiffness matrix. The method also applies in case of kinetic damping. \citef{Barnes1999} analyzes a simple unidimensional mass-spring system to postulate that the optimal fictitious mass of a particle is related to the time step and the directe stiffness at the particle by~:
+\begin{equation}
+	m_i = \frac{h^2}{2} K_i
+\end{equation}
+$K_i$ should be understood as the greatest directe stiffness that can occur during the simulation process.
+For a structure with only tension and compression members, Barnes computes the fictitious mass of a particle according to the geometric and material stiffness of all the members that are connected to if~:
+\begin{equation}
+	\frac{h^2}{2} \sum \bigl[\frac{EL}{L_0} + g \frac{N}{L} \bigr]
+\end{equation}
+\citef{Douthe2007} extends the formulation of Barnes to account for flexural stiffness~:
+\begin{equation}
+	\frac{h^2}{2} \sum \bigl[\frac{EL}{L_0} + g \left(\frac{N}{L} + \frac{EI}{L^3} \right) \bigr]
+\end{equation}
+In practise, the bending stifness is negligible in front of the axial stifness.
 
-\subsubsection{Fictitious mass}
+As we are looking for a static equi- librium, they have no influence on the equilibrium found. But as explained in Lewis,33 in order to ensure stability, the following Courant–Friedrichs–Lewy (CFL) condition holds
+In this case the time step is generally set to $1$ and the lumped mass of the particles are chosen to ensure near critical damping \cite{Barnes1977}~:
 
-\subsection{Convergence}
-\begin{itemize}
-\item relative kinetic energy
-\item absolute kinetic energy
-\item residual at nodes (force, velocity)
-\end{itemize}
+
+
+
+ has shown with the 
+
+
+The stability of the dynamic relaxation algorithm has been studied several authors, depending the type of damping used and the field of research they are originated. 
+
+gives a review of the 
+\citef{Cassel1976} : damping is adjusted to a near critical level and computed from the mass matrix, the time step and the tangent stiffness matrix entries.
+proposes a method for the automatic evaluation of the dynamic relaxation parameters. Gershgorin theorem.
+\citef{Rodriguez2011a} generalizes the proposal of Barnes for all kind of elements and with 
+\citef{Underwood1983}
+Gershgorin bound theorem, which
+Here we formulate 
+
 
 %
 %The dynamic relaxation method first appeared in the 1960s with Day16 and Otter.17 The goal of this method is to find a static equilibrium. To do so, starting from a given configuration with zero speed, a fictitious dynamic is sim- ulated, where the system under study is immobilized each time it reaches a maximum of kinetic energy and is then released again with zero speed. By immobilizing the sys- tem, the kinetic energy of the system is dissipated. We then simulate a dynamic with “kinetic” damping. For a conservative system, the maximum of kinetic
