@@ -1,94 +1,83 @@
-using Gadfly
-using Compose
-using Reel
 using Elliptic
 
-
-# paramètres du pendule
-g = 9.81            # gravitée
-m₀ = 1.0            # masse du pendule
-l = 1.0             # longueur du pendule
-ω₀ = sqrt(g/l)      # periode de référence
-
-# initialisation
-θ₀ = deg2rad(60)   # angle de départ en degré
-
-# résultat analytique
-
-
-
-
-# relaxation dynamique
-h = 0.05             # time step
-Elim = 1e-30
-m = 1.0 # masse fictive
-
-E₀ = 0
-E₁ = 0
-E₂ = 0
-
-θ̈_list = Float64[]       # accélération à t
-θ̇_list = Float64[]       # vitesse à t+h/2
-θ_list = Float64[]       # position à t
-Ek_list = Float64[]      # énergie cinétique à t+h/2
-Ek_list = Float64[]      # énergie cinétique à t+h/2
-Ep_list = Float64[]       # énergie cinétique à t+h/2
-t_list = Float64[]       # temps
-
-# Init (t = 0)
-n = 0
-t = 0
-θ̇ = 0
-θ = θ₀
-
-for n = 1:1000
-    # θ̈[t] = - m₀ * ω₀ * ω₀ * sin(θ[t])
-    R = - m₀ * ω₀ * ω₀ * sin(θ[end])
-    θ̈ = R/m
-    #append!(θ̈, R/m)
-
-    # θ̇[t + h/2] = θ̇[t - h/2] + h * θ̈[t])
-    θ̇ = θ̇ + h * θ̈[end]
-    #append!(θ̇, θ̇[end] + h * θ̈[end])
-
-    # E[t + h/2] = 1/2 * m * θ̇[t + h/2] * θ̇[t + h/2]
-    Ek = 0.5 * m * (θ̇ * θ̇)
-
-    if Ek < Elim
-        println("CVG[",n,"] : ", Ek)
-        break
-    end
-
-    if Ek < E₂ # pic
-        E₀ = E₁
-        E₁ = E₂
-        E₂ = Elim
-
-        θ̇ = 0
-        println("PEAK[",n,"] : ", Ek)
-    else
-        E₀ = E₁
-        E₁ = E₂
-        E₂ = Ek
-
-        θ = θ + h * θ̇
-        t = t + h
-    end
-
-
-    Ep = -m*g*l*cos(θ)
-    append!(Ep_list,Ep)
-    append!(Ek_list,E₂)
-    append!(t_list,t)
-    append!(θ̇_list,θ̇)
-    append!(θ_list,θ)
-
+function T₀(ω₀,θ₀)
+    return 2*π/ω₀
 end
 
-println(θ_list)
-plot(y = Ek_list, x = t_list, Scale.y_log10)
-plot(y = θ_list, x = t_list, Scale.x_log10)
-plot(y = Ep_list, x = θ_list)
+function T(ω₀,θ₀)
+    k = sin(θ₀/2)
+    return 4/ω₀ * Elliptic.K(k)
+end
 
+function Borda(ω₀,θ₀)
+    return T₀(ω₀,θ₀) * (1 + θ₀*θ₀/16)
+end
 
-#foreach(Ek -> println(Ek), Ek_list)
+function θt(t,ω₀,θ₀)
+    k = sin(θ₀/2)
+    T = (4 / ω₀) * Elliptic.K(k)
+    θ = 2 * asin(k * Elliptic.Jacobi.sn(ω₀ * t, k))
+    return θ
+end
+
+function θt_normalized(t,ω₀,θ₀)
+    k = sin(θ₀/2)
+    T = (4 / ω₀) * Elliptic.K(k)
+    θ = 2 * asin(k * Elliptic.Jacobi.sn(ω₀ * t * T, k))
+    return θ
+end
+
+function θ̇t(t,ω₀,θ₀)
+    k = sin(θ₀/2)
+    θ̇ = 2 * k * ω₀ * Elliptic.Jacobi.cn(ω₀ * t,k)
+    return θ̇
+end
+
+function θ̇t_normalized(t,ω₀,θ₀)
+    k = sin(θ₀/2)
+    T = (4 / ω₀) * Elliptic.K(k)
+    θ̇ = 2 * k * ω₀ * Elliptic.Jacobi.cn(ω₀ * t * T,k)
+    return θ̇
+end
+
+#
+# f1(t) = function(t) θ̇t_normalized(t,ω₀,θ₀) end
+# f1(10)
+#
+# plot_Nθ = Function[]
+# for θ₀ in 10:10:180
+#     push!(plot_Nθ, t -> θ̇t_normalized(t,ω₀,θ₀))
+#     println(θ₀)
+# end
+# plot(plot_Nθ, 0, 4)
+#
+#
+# plot_Nθ[5](5)
+# θ₀_list = [15,30,45,60,90,160]
+# plot_Nθ = Function[]
+# plot_ω = Function[]
+# plot_Nω = Function[]
+# for θ₀ in θ₀_list
+#     println(θ₀)
+#     push!(plot_Nθ,t -> NormedPosition(t,ω₀,deg2rad(θ₀)))
+#     push!(plot_ω,t -> Velocity(t,ω₀,deg2rad(θ₀)))
+#     push!(plot_Nω,t -> NormedVelocity(t,ω₀,deg2rad(θ₀)))
+# end
+#
+#
+# function Func_NormedPosition(ω₀,θ₀)
+#     k = sin(θ₀/2)
+#     T = (4 / ω₀) * Elliptic.K(k)
+#     Nθ(t) = 2 * asin(k * Elliptic.Jacobi.sn(ω₀*t*T, k)) / θ₀
+#     return Nθ
+# end
+#
+#
+#
+# plot([sin],0,10)
+# plot(y = Ep_list, x = θ_list)
+# plot([Func_NormedPosition(ω₀,deg2rad(10)),Func_NormedPosition(ω₀,deg2rad(160))], 0, 2)
+#
+# plot(plot_ω, 0, 5)
+# plot(plot_Nω, 0, 10)
+# #foreach(Ek -> println(Ek), Ek_list)

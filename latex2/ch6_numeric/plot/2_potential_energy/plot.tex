@@ -1,0 +1,33 @@
+% INVOKE \pgfplotstableread{data.txt}\Table
+% with the rigth path for data.txt before input
+\begin{tikzpicture}[TikzStyle]
+	\PlotStyle{100}{80}{-3.15}{3.15}{0}{1}
+	\begin{axis}[
+		xtick={-3.1415926536, -1.5707963268, 0, 1.5707963268, 3.1415926536},
+    		xticklabels={$-\pi$, $-\pi/2$,  $0$,  $\pi/2$,$\pi$},
+%		xlabel={Displacement (mm)},
+%		ylabel={Force (N)},
+%		ytick={0, 400, 800, 1200, 1600},
+%		yticklabels={0, 400, 800, 1200, 1600},
+%		legend cell align=left,
+%		legend pos=north east,
+%		legend style={font=\small, row sep=2pt},
+%		legend columns=2,
+%		transpose legend,
+%		legend style={at={(0.5,1.1)},anchor=south, font=\small, row sep=2pt, column sep=5pt, overlay},
+		% use overlay to exclude legend from boundingbox
+		]
+			\addplot[gray8, smooth, thick] 
+				table[x expr=\thisrowno{0}, y expr=\thisrowno{1}] {\TableTH};
+		
+			\addplot[Tblue, only marks, thick, mark=*] 
+				table[x expr=\thisrowno{0}, y expr=\thisrowno{1}] {\TableDR};
+				
+%			\addplot[Tblue, only marks, thick, mark=*] 
+%				table[x expr=\thisrowno{2}, y expr=\thisrowno{3}] {\TableDR};
+%				
+%			\addplot[Tblue, only marks, thick, mark=*] 
+%				table[x expr=\thisrowno{4}, y expr=\thisrowno{5}] {\TableDR};
+%
+	\end{axis}
+\end{tikzpicture}

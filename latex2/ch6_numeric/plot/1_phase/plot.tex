@@ -1,0 +1,59 @@
+% INVOKE \pgfplotstableread{data.txt}\Table
+% with the rigth path for data.txt before input
+\begin{tikzpicture}[TikzStyle]
+	\PlotStyle{100}{80}{-3.15}{3.15}{-6.30}{6.30}
+	\begin{axis}[
+%		xtick={0, 10, 20, 30, 40},
+%    		xticklabels={$0$, $10$,  $20$,  $30$,$40$},
+%		xlabel={Displacement (mm)},
+%		ylabel={Force (N)},
+%		ytick={0, 400, 800, 1200, 1600},
+%		yticklabels={0, 400, 800, 1200, 1600},
+%		legend cell align=left,
+%		legend pos=north east,
+%		legend style={font=\small, row sep=2pt},
+%		legend columns=2,
+%		transpose legend,
+%		legend style={at={(0.5,1.1)},anchor=south, font=\small, row sep=2pt, column sep=5pt, overlay},
+		% use overlay to exclude legend from boundingbox
+		]
+			\pgfplotstablegetcolsof{\TableISO}
+  			\pgfmathparse{(\pgfplotsretval/2 - 1}
+			\foreach \x in {0,...,\pgfmathresult}
+			{
+				\pgfmathtruncatemacro{\Xcol}{\x * 2}
+  				\pgfmathtruncatemacro{\Ycol}{1 + \x * 2}   	
+		
+				\addplot[gray8, smooth, thin] 
+				table [x index=\Xcol, y index=\Ycol] {\TableISO};
+            		} 
+		
+			\pgfmathtruncatemacro{\Peak}{2}
+			\pgfmathtruncatemacro{\Xcol}{\Peak * 2}
+  			\pgfmathtruncatemacro{\Ycol}{1 + \Peak * 2}   	
+			\addplot[Tblue, thick, mark=*] 
+				table[x index=\Xcol, y index=\Ycol] {\TableDR};
+%			\addplot[Tblue, smooth, dashed, thick]
+%       			table[x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\Table};
+%			\addlegendentry{20\textdegree C + DST}
+%			
+%			% 40°C			
+%			\addplot[gray2, smooth, thick]
+%       			table[x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\Table};
+%			\addlegendentry{40\textdegree C}
+%			
+%			\addplot[gray2, smooth, dashed, thick]
+%       			table[x expr=\thisrowno{0}, y expr=\thisrowno{4}] {\Table};
+%			\addlegendentry{40\textdegree C + DST}
+%			
+%			% 60°C			
+%			\addplot[gray8, smooth, thick]
+%       			table[x expr=\thisrowno{0}, y expr=\thisrowno{5}] {\Table};
+%			\addlegendentry{60\textdegree C}
+%			
+%			\addplot[gray8, smooth, dashed, thick]
+%       			table[x expr=\thisrowno{0}, y expr=\thisrowno{6}] {\Table};
+%			\addlegendentry{20\textdegree C + DST}
+
+	\end{axis}
+\end{tikzpicture}

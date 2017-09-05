@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:gadfly="http://www.gadflyjl.org/ns"
+     version="1.2"
+     width="120mm" height="120mm" viewBox="0 0 120 120"
+     stroke="none"
+     fill="#000000"
+     stroke-width="0.3"
+     font-size="3.88"
+>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-1">
+  <use xlink:href="#img-b3372f51-2" x="101.57" y="36"/>
+</g>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-3">
+  <use xlink:href="#img-b3372f51-4" x="105.11" y="28.42"/>
+</g>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-5">
+  <use xlink:href="#img-b3372f51-6" x="107.27" y="20.34"/>
+</g>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-7">
+  <use xlink:href="#img-b3372f51-8" x="108" y="12"/>
+</g>
+<g stroke="#A9A9A9" fill="#FFFFFF" stroke-width="0.5" id="img-b3372f51-9">
+  <path d="M60,12 L 96.77 42.85 z"/>
+</g>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-10">
+  <use xlink:href="#img-b3372f51-11" x="96.77" y="42.85"/>
+</g>
+<g stroke-width="0.75" stroke="#000000" fill="#FFFFFF" id="img-b3372f51-12">
+  <use xlink:href="#img-b3372f51-13" x="60" y="12"/>
+</g>
+<defs>
+  <g id="img-b3372f51-2">
+    <circle cx="0" cy="0" r="0.6"/>
+  </g>
+  <g id="img-b3372f51-4">
+    <circle cx="0" cy="0" r="0.6"/>
+  </g>
+  <g id="img-b3372f51-6">
+    <circle cx="0" cy="0" r="0.6"/>
+  </g>
+  <g id="img-b3372f51-8">
+    <circle cx="0" cy="0" r="0.6"/>
+  </g>
+  <g id="img-b3372f51-11">
+    <circle cx="0" cy="0" r="2.4"/>
+  </g>
+  <g id="img-b3372f51-13">
+    <circle cx="0" cy="0" r="1.2"/>
+  </g>
+</defs>
+</svg>
