@@ -1210,6 +1210,46 @@ En particulier, voir pour un comparatif avec une méthode implicite.
 \end{figure}
 \DecMargin{2em}
 
+\clearpage
+
+\section{Pendulum}
+
+$g = 9.81 \si{m/s^2}$
+
+$m = 1.0 \si{kg}$
+
+$\theta_0 = \ang{135}$
+
+$\omega_0 = 1.0 \si{s^{-1}}$
+
+$h = 0.1 \si{s}$
+
+
+\begin{figure}[p]
+     	\centering
+	\begin{leftfullpage}	
+		\subfloat[][First steps until the first peak of $\mathcal{E}_k$ is reached.]{\includegraphics[width=100mm]{pendulum.pdf}} \\
+		\subfloat[][Potential energy of the pendulum for the first steps.]{\includegraphics[width=120mm]{ch6_numeric/plot/1_pendulum/build_Ep.pdf}}
+		\vspace{10pt}
+		\captionof{figure}[]{Application of the DR process to the simple plane pendulum.}
+		\label{fig:sd}    
+	\end{leftfullpage}
+\end{figure}
+\begin{figure}[p]
+     	\centering
+	\begin{fullpage}	
+		\subfloat[][Typical profile of the kinetic damping.]{\includegraphics[width=120mm]{ch6_numeric/plot/1_pendulum/build_Ek.pdf}} \\
+		\subfloat[][Convergence of the DR process in the phase space.]{\includegraphics[width=120mm]{ch6_numeric/plot/1_pendulum/build_Phase.pdf}} \\
+		\vspace{10pt}
+		\captionof{figure}[]{Convergence of the DR process for the simple plane pendulum.}
+		\label{fig:sd}    
+	\end{fullpage}
+\end{figure}
+
+
+
+
+
 
 \section{Support Reaction}
 

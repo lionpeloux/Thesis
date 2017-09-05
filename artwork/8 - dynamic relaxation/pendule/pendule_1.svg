@@ -9,20 +9,20 @@
      stroke-width="0.3"
      font-size="3.88"
 >
-<g stroke="#A9A9A9" fill="#FFFFFF" stroke-width="0.5" id="img-3357f015-1">
+<g stroke="#A9A9A9" fill="#FFFFFF" stroke-width="0.5" id="img-e7663151-1">
   <path d="M60,12 L 108 12 z"/>
 </g>
-<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-3357f015-2">
-  <use xlink:href="#img-3357f015-3" x="108" y="12"/>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-e7663151-2">
+  <use xlink:href="#img-e7663151-3" x="108" y="12"/>
 </g>
-<g stroke-width="0.75" stroke="#000000" fill="#FFFFFF" id="img-3357f015-4">
-  <use xlink:href="#img-3357f015-5" x="60" y="12"/>
+<g stroke-width="0.75" stroke="#000000" fill="#FFFFFF" id="img-e7663151-4">
+  <use xlink:href="#img-e7663151-5" x="60" y="12"/>
 </g>
 <defs>
-  <g id="img-3357f015-3">
+  <g id="img-e7663151-3">
     <circle cx="0" cy="0" r="2.4"/>
   </g>
-  <g id="img-3357f015-5">
+  <g id="img-e7663151-5">
     <circle cx="0" cy="0" r="1.2"/>
   </g>
 </defs>

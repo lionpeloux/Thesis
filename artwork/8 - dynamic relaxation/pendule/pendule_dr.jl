@@ -1,6 +1,7 @@
-using Gadfly
-using Compose
+using Gadfly, Compose
 include("pendule.jl")
+
+# intégration du mouvement par relaxation dynamique
 
 # relaxation du pendule simple
 # les resultats sont stockés sous forme de tableau de tableau
@@ -9,12 +10,8 @@ include("pendule.jl")
 function Relax(m₀, l, θ₀, h, Elim)
 
     # m₀    : masse du pendule
-    # l     : longueur du pendule
-    # θ₀    : angle de départ
-
     g = 9.81            # gravitée
     ω₀ = sqrt(g/l)      # periode de référence
-    k = sin(θ₀/2)
 
     # relaxation dynamique
     # Elim  : énergie cinétique limite
@@ -39,7 +36,6 @@ function Relax(m₀, l, θ₀, h, Elim)
     θ̇ = 0
     θ = θ₀
 
-
     push!(θ_list[peakCount + 1], [t,θ])
     push!(θ̇_list[peakCount + 1], [t,θ̇])
 
@@ -59,18 +55,9 @@ function Relax(m₀, l, θ₀, h, Elim)
         θ̇ = θ̇ + h * θ̈
         push!(θ̇_list[peakCount + 1], [t+h/2,θ̇])
 
-        # θ[t + h] = θ[t] + h * θ̇[t + h/2])
-        θ = θ + h * θ̇
-        push!(θ_list[peakCount + 1], [t+h/2,θ])
-
         # E[t + h/2] = 1/2 * m * θ̇[t + h/2] * θ̇[t + h/2]
-        Ek = 0.5 * m * (θ̇ * θ̇)
+        Ek = 0.5 * m * (l*θ̇) * (l*θ̇)
         push!(Ek_list[peakCount + 1], [t+h/2,Ek])
-
-        Ep = m₀*g*l*(1 - cos(θ))
-        push!(Ep_list[peakCount + 1], [t+h/2,Ep])
-
-        t = t + h
 
         if Ek < Elim
             println("CVG[",n,"] : ", Ek)
@@ -78,35 +65,42 @@ function Relax(m₀, l, θ₀, h, Elim)
         end
 
         if Ek < E₂ # pic
-            println("PEAK[",n,"] : ", Ek)
-            peakCount += 1
-            push!(θ̈_list,[])
-            push!(θ̇_list,[])
-            push!(θ_list,[])
-            push!(Ek_list,[])
-            push!(Ep_list,[])
-            push!(t_list,[])
+            if isDamped
+                println("PEAK[",n,"] : ", Ek)
+                peakCount += 1
+                push!(θ̈_list,[])
+                push!(θ̇_list,[])
+                push!(θ_list,[])
+                push!(Ek_list,[])
+                push!(Ep_list,[])
+                push!(t_list,[])
 
-            # peak position
-            t = t - h
-            θ = θ - h * θ̇
-            θ̇ = 0
-            E₀ = 0
-            E₁ = 0
-            E₂ = 0
+                # peak position
+                θ̇ = 0
+                E₀ = 0
+                E₁ = 0
+                E₂ = 0
 
-            push!(θ_list[peakCount + 1], [t,θ])
-            push!(θ̇_list[peakCount + 1], [t,θ̇])
+                push!(θ_list[peakCount + 1], [t,θ])
+                push!(θ̇_list[peakCount + 1], [t,θ̇])
 
-            Ek = 0.5 * m * (θ̇ * θ̇)
-            push!(Ek_list[peakCount + 1], [t,Ek])
+                Ek = 0.5 * m * (l*θ̇) * (l*θ̇)
+                push!(Ek_list[peakCount + 1], [t,Ek])
+
+                Ep = m₀*g*l*(1 - cos(θ))
+                push!(Ep_list[peakCount + 1], [t,Ep])
+            end
+        else
+
+            # θ[t + h] = θ[t] + h * θ̇[t + h/2])
+            θ = θ + h * θ̇
+            push!(θ_list[peakCount + 1], [t+h,θ])
 
             Ep = m₀*g*l*(1 - cos(θ))
-            push!(Ep_list[peakCount + 1], [t,Ep])
+            push!(Ep_list[peakCount + 1], [t+h,Ep])
 
+            t = t + h
 
-
-        else
             E₀ = E₁
             E₁ = E₂
             E₂ = Ek
@@ -114,205 +108,240 @@ function Relax(m₀, l, θ₀, h, Elim)
 
     end
 
-    return [θ_list,θ̇_list,θ̈_list,Ek_list,Ep_list]
+    return (θ_list,θ̇_list,θ̈_list,Ep_list,Ek_list)
 end
+
 
 # lance la DR avec un jeu de paramètres
 begin
+    isNormalization = true
+    isDamped = true
+
     g = 9.81
     m₀ = 1.0
-    l = 1.0
-    θ₀ = deg2rad(145)
+
+    θ₀ = deg2rad(160)
+    l = 1.0/0.1
     ω₀ = sqrt(g/l)
-    h = 0.01
+    h = 0.05
     Eclim = 1e-20
     Func_Ep(θ) = m₀*g*l*(1 - cos(θ))
-    Func_Ek(θ̇) = 0.5 * m₀ * θ̇ * θ̇
-    res = Relax(m₀, l, θ₀ , h, Eclim)
+    Func_Ek(θ̇) = 0.5 * m₀ * (l * θ̇) * (l * θ̇)
+
+    # ratio pour normalization
+    if isNormalization
+        Tmax = T(ω₀,deg2rad(180))
+        θmax = pi
+        θ̇max = θ̇t_normalized(0.25,ω₀,0.99 * θmax)
+        Epmax = Func_Ep(θmax)
+        Ekmax = Func_Ek(θ̇max)
+        Emmax = Epmax
+    else
+        Tmax : 1.0
+        θmax = 1.0
+        θ̇max = 1.0
+        Epmax = 1.0
+        Ekmax = 1.0
+        Emmax = 1.0
+    end
+
+    # do dynamic relaxation
+    relax = Relax(m₀, l, θ₀ , h, Eclim)
 end
 
+# ====================
 # transfère Ek vers Ep
-begin
-    peak = 2
-    t = Float64[]
-    Ek = Float64[]
-    Ep = Float64[]
-    Em = Float64[]
-    layers = Layer[]
+# ====================
+
+function GetData_Ek_Ep(relax)
+    Npeak = length(relax[1])
+    θ_list = relax[1]
+    Ep_list = relax[4]
+    Ek_list = relax[5]
 
     # courbes de la DR
-    for i =1:length(res[4][peak+1])
-        vEk = res[4][peak+1][i]
-        vEp = res[5][peak+1][i]
-        push!(t,vEk[1])
-        push!(Ek,vEk[2])
-        push!(Ep,vEp[2])
-        push!(Em,vEk[2] + vEp[2])
+    t_Ep_dr = Vector{Float64}[]
+    t_Ek_dr = Vector{Float64}[]
+    Ep_dr = Vector{Float64}[]
+    Em_dr = Vector{Float64}[]
+    Ek_dr = Vector{Float64}[]
+    for peak in 1:Npeak
+        push!(t_Ep_dr, [])
+        push!(t_Ek_dr, [])
+        push!(Ek_dr,[])
+        push!(Ep_dr,[])
+        push!(Em_dr,[])
+        Niter = length(Ep_list[peak])
+        for i in 1:Niter
+            (t_Ep,Ep) = Ep_list[peak][i]
+            (t_Ek,Ek) = Ek_list[peak][i]
+            Em = (Ek + Ep) / Epmax
+            Ep = Ep / Epmax
+            Ek = Ek / Ekmax
+            push!(t_Ep_dr[peak], t_Ep)
+            push!(t_Ek_dr[peak], t_Ek)
+            push!(Ek_dr[peak],Ek)
+            push!(Ep_dr[peak],Ep)
+            push!(Em_dr[peak],Em)
+        end
+        # one more iteration of Ek (has +1 value)
+        (t_Ek,Ek) = Ek_list[peak][Niter+1]
+        Em = (Ek + Ep) / Epmax
+        Ep = Ep / Epmax
+        Ek = Ek / Ekmax
+        push!(t_Ek_dr[peak], t_Ek)
+        push!(Ek_dr[peak],Ek)
     end
-    append!(layers, layer(x=t, y=Ek, Geom.point))
-    append!(layers, layer(x=t, y=Ep, Geom.point))
-    append!(layers, layer(x=t, y=Em, Geom.point))
+    data_dr = (t_Ep_dr, t_Ek_dr, Ep_dr, Ek_dr, Em_dr)
 
-    # courbes theoriques
-    θ₀ = abs(res[1][peak+1][1][2])
-    tmin = t[1]
-    tmax = t[end]
-    r = Float64[]
-    N = 30
-    for i in 1:N
-        push!(r, tmin + (tmax-tmin) * (i-1)/(N-1))
-        println(θ₀)
-        println(θt(r[i] - tmin,ω₀,θ₀))
+    # courbes théoriques
+    t_th = Vector{Float64}[]
+    Ek_th = Vector{Float64}[]
+    Ep_th = Vector{Float64}[]
+    Em_th = Vector{Float64}[]
+    for peak in 1:Npeak
+        θ₀ = abs(θ_list[peak][1][2])
+        tmin = t_Ep_dr[peak][1]
+        tmax = t_Ep_dr[peak][end]
+        push!(t_th, SampleInterval(tmin,tmax,100))
+        push!(Ep_th, map(t->Func_Ep(θt(t-tmin,ω₀,θ₀))/Epmax, t_th[peak]))
+        push!(Ek_th, map(t->Func_Ek(θ̇t(t-tmin,ω₀,θ₀))/Ekmax, t_th[peak]))
+        push!(Em_th, map(t->(Func_Ep(θt(t-tmin,ω₀,θ₀))+Func_Ek(θ̇t(t-tmin,ω₀,θ₀)))/Epmax, t_th[peak]))
     end
+    data_th = (t_th, Ep_th, Ek_th, Em_th)
 
-    append!(layers, layer(x=r, y=map(t->Func_Ep(θt(t-tmin,ω₀,θ₀)),r), Geom.path()))
-    append!(layers, layer(x=r, y=map(t->Func_Ek(θ̇t(t-tmin,ω₀,θ₀)),r), Geom.path()))
-    append!(layers, layer(x=r, y=map(t->Func_Ep(θt(t-tmin,ω₀,θ₀)) + Func_Ek(θ̇t(t-tmin,ω₀,θ₀)),r), Geom.path()))
-    plot(layers)
+    return (data_dr, data_th)
 end
-
-
-# graph de l'energie potentielle
 begin
     layers = Layer[]
-    θ = Vector{Float64}[]
-    Ep = Vector{Float64}[]
-    Epmax = Func_Ep(pi)
-    θmax = pi
-    # DR
-    for peak in 1:4
-        push!(θ,[])
-        push!(Ep,[])
-        for i =1:length(res[4][peak])
-            vEp = res[5][peak][i]
-            vθ = res[1][peak][i]
-            push!(θ[peak],vθ[2]/θmax)
-            push!(Ep[peak],vEp[2]/Epmax)
-        end
-    end
+    (data_dr, data_th) = GetData_Ek_Ep(relax)
+    peak = 4
 
-    # export phase graphe
-    rowMax = maximum(map(length,θ))
-    A = Matrix(rowMax,2*length(θ))
-    for j in 1:length(θ)
-        for i in 1:length(θ[j])
-            A[i,2*(j-1)+1] = θ[j][i]
-            A[i,2*(j-1)+2] = Ep[j][i]
-        end
-        for i in length(θ[j])+1:rowMax
-            A[i,2*(j-1)+1] = "nan"
-            A[i,2*(j-1)+2] = "nan"
-        end
-    end
+    (t_Ep, t_Ek, Ep, Ek, Em) = data_dr
+    append!(layers, layer(x=t_Ek[peak], y=Ek[peak], Geom.point, theme_Ek))
+    append!(layers, layer(x=t_Ep[peak], y=Ep[peak], Geom.point, theme_Ep))
+    append!(layers, layer(x=t_Ep[peak], y=Em[peak], Geom.point, theme_Em))
 
-    # export Ep graphe
-    out_file = open("Ep_dr.txt", "w")
-    writedlm(out_file, A , '\t')
-    close(out_file)
+    (t, Ep, Ek, Em) = data_th
+    append!(layers, layer(x=t[peak], y=Ek[peak], Geom.path(), theme_Ek))
+    append!(layers, layer(x=t[peak], y=Ep[peak], Geom.path(), theme_Ep))
+    append!(layers, layer(x=t[peak], y=Em[peak], Geom.path(), theme_Em))
 
-    # Rheorique
-    N = 200
-    r = []
-    for i in 1:N
-        push!(r, π * (-1 + 2 * i/N) / θmax)
-    end
-
-    # export Ep graphe
-    A = zip(r,map(θ->Func_Ep(θ * θmax)/Epmax,r))
-    out_file = open("Ep_theory.txt", "w")
-    writedlm(out_file, A , '\t')
-    close(out_file)
-
-    for peak in 1:1
-        append!(layers,layer(x=θ[peak], y=Ep[peak], Geom.point))
-    end
-    append!(layers,layer(x=r, y=map(θ->Func_Ep(θ * θmax)/Epmax,r), Geom.line))
     plot(layers)
 end
 
-# graph de phase
+# ====================
+# puit de Ep
+# ====================
+function GetData_Ep(relax)
+    Npeak = length(relax[1])
+    θ_list = relax[1]
+    Ep_list = relax[4]
+
+    # courbes de la DR
+    θ_dr = Vector{Float64}[]
+    Ep_dr = Vector{Float64}[]
+    for peak in 1:Npeak
+        push!(θ_dr, [])
+        push!(Ep_dr,[])
+        Niter = length(θ_list[peak])
+        for i =1:Niter
+            (t,θ) = θ_list[peak][i]
+            (t,Ep) = Ep_list[peak][i]
+            θ = θ / θmax
+            Ep = Ep / Epmax
+            push!(θ_dr[peak], θ)
+            push!(Ep_dr[peak],Ep)
+        end
+    end
+    data_dr = (θ_dr, Ep_dr)
+
+    # courbes théoriques
+    θ_th = SampleInterval(-pi/θmax,pi/θmax,200)
+    Ep_th = map(θ->Func_Ep(θ * θmax)/Epmax,θ_th)
+    data_th = (θ_th, Ep_th)
+
+    return (data_dr, data_th)
+end
 begin
     layers = Layer[]
-    θmax = pi
-    θ̇max = θ̇t(0,ω₀,deg2rad(180)) # normalization
+    (data_dr, data_th) = GetData_Ep(relax)
+    data_th
+    peak = 1
 
-    # diagrame DR
-    θ = Vector{Float64}[]
-    θ̇ = Vector{Float64}[]
-    for peak in 1:4
+    (θ, Ep) = data_dr
+    append!(layers, layer(x=θ[peak], y=Ep[peak], Geom.point, theme_Ep))
 
-        push!(θ,[])
-        push!(θ̇,[])
-
-        # tout l'historique
-        if peak > 1
-            append!(θ[peak],θ[peak-1])
-            append!(θ̇[peak],θ̇[peak-1])
-        end
-
-
-        for i in 1:length(res[1][peak])
-            push!(θ[peak], res[1][peak][i][2])
-            push!(θ̇[peak], res[2][peak][i][2])
-        end
-
-    end
-
-    # export phase graphe
-    rowMax = maximum(map(length,θ))
-    A = Matrix(rowMax,2*length(θ))
-    for j in 1:length(θ)
-        for i in 1:length(θ[j])
-            A[i,2*(j-1)+1] = θ[j][i]/θmax
-            A[i,2*(j-1)+2] = θ̇[j][i]/θ̇max
-        end
-        for i in length(θ[j])+1:rowMax
-            A[i,2*(j-1)+1] = "nan"
-            A[i,2*(j-1)+2] = "nan"
-        end
-    end
-
-    A
-    # export Ep graphe
-    # A = zip(θ,Ep)
-    out_file = open("Phase_dr.txt", "w")
-    writedlm(out_file, A , '\t')
-    close(out_file)
-
-    append!(layers, layer(x=map(x->x/θmax,θ[end]),y=map(x->x/θ̇max,θ̇[end]),Geom.point,Geom.path()))
-
-    # diagrame theorique
-    θ = Vector{Float64}[]
-    θ̇ = Vector{Float64}[]
-    counter = 1
-    for θr in 179:-10:0
-        N = 300
-        push!(θ,[])
-        push!(θ̇,[])
-        for i in 1:N
-            t = (i-1)/(N-1)
-            push!(θ[counter], θt_normalized(t,ω₀,deg2rad(θr))/θmax)
-            push!(θ̇[counter], θ̇t_normalized(t,ω₀,deg2rad(θr))/θ̇max)
-        end
-        append!(layers, layer(x=θ[counter],y=θ̇[counter],Geom.path()))
-        counter += 1
-    end
-
-    # export phase graphe
-    A = Matrix(length(θ[1]),2*length(θ))
-    for j in 1:length(θ)
-        for i in 1:length(θ[1])
-            A[i,2*(j-1)+1] = θ[j][i]/θmax
-            A[i,2*(j-1)+2] = θ̇[j][i]/θ̇max
-        end
-    end
-    out_file = open("Phase_iso.txt", "w")
-    writedlm(out_file, A , '\t')
-    close(out_file)
-
-    # plot to ATOM
+    (θ, Ep) = data_th
+    append!(layers, layer(x=θ, y=Ep, Geom.path(), theme_Ep))
     plot(layers)
 end
 
-run(`pdflatex`)
-zds
+# ====================
+# diagramme de phase
+# ====================
+function GetData_Phase(relax)
+    Npeak = length(relax[1])
+    θ_list = relax[1]
+    θ̇_list = relax[2]
+
+    # courbes de la DR
+    θ_dr = Vector{Float64}[]
+    θ̇_dr = Vector{Float64}[]
+    for peak in 1:Npeak
+        push!(θ_dr, [])
+        push!(θ̇_dr,[])
+        Niter = length(θ_list[peak])
+        # en t=0, les données sont alignées
+        (t1,θ) = θ_list[peak][1]
+        (t2,θ̇) = θ̇_list[peak][1]
+        push!(θ_dr[peak], θ / θmax)
+        push!(θ̇_dr[peak], θ̇ / θ̇max)
+        # en t >= h les données sont décalées de h/2
+        for i =2:Niter
+            (t1,θ) = θ_list[peak][i]
+            (t2,θ̇) = θ̇_list[peak][i]
+            θ = θ / θmax
+            θ̇ = 0.5 * (θ̇_dr[peak][end] + θ̇ / θ̇max)
+            push!(θ_dr[peak], θ)
+            push!(θ̇_dr[peak], θ̇)
+        end
+    end
+    data_dr = (θ_dr, θ̇_dr)
+
+    # courbes théoriques
+    θ_th = Vector{Float64}[]
+    θ̇_th = Vector{Float64}[]
+    Niso = 20
+    Niter = 200
+    for θr in SampleInterval(0,0.98*pi, Niso)
+        tn = SampleInterval(0,1, Niter)
+        push!(θ_th,[])
+        push!(θ̇_th,[])
+        append!(θ_th[end], map(t->θt_normalized(t,ω₀,θr)/θmax,tn))
+        append!(θ̇_th[end], map(t->θ̇t_normalized(t,ω₀,θr)/θ̇max,tn))
+    end
+    data_th = (θ_th, θ̇_th)
+
+    return (data_dr, data_th)
+end
+begin
+    layers = Layer[]
+    (data_dr, data_th) = GetData_Phase(relax)
+    (θ, θ̇) = data_dr
+    for peak in 1:length(data_dr[1])
+        append!(layers, layer(x=θ[peak], y=θ̇[peak], Geom.point, theme_Ep))
+    end
+
+    (θ, θ̇) = data_th
+    for i in 1:length(θ)
+        append!(layers, layer(x=θ[i], y=θ̇[i], Geom.path(), theme_Ep))
+    end
+
+    plot(layers)
+end
+
+
+
+
+# run(`pdflatex`)

@@ -9,17 +9,17 @@
      stroke-width="0.3"
      font-size="3.88"
 >
-<g stroke="#0000FF" id="img-bdd5b7a7-1">
-  <use xlink:href="#img-bdd5b7a7-2" x="60" y="60"/>
+<g stroke="#0000FF" id="img-e71c254c-1">
+  <use xlink:href="#img-e71c254c-2" x="60" y="60"/>
 </g>
-<g stroke="#FF0000" id="img-bdd5b7a7-3">
-  <use xlink:href="#img-bdd5b7a7-4" x="60" y="60"/>
+<g stroke="#FF0000" id="img-e71c254c-3">
+  <use xlink:href="#img-e71c254c-4" x="60" y="60"/>
 </g>
 <defs>
-  <g id="img-bdd5b7a7-2">
+  <g id="img-e71c254c-2">
     <circle cx="0" cy="0" r="24"/>
   </g>
-  <g id="img-bdd5b7a7-4">
+  <g id="img-e71c254c-4">
     <circle cx="0" cy="0" r="12"/>
   </g>
 </defs>

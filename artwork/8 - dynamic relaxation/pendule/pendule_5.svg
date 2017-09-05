@@ -9,44 +9,44 @@
      stroke-width="0.3"
      font-size="3.88"
 >
-<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-1">
-  <use xlink:href="#img-b3372f51-2" x="101.57" y="36"/>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-dc7a1b59-1">
+  <use xlink:href="#img-dc7a1b59-2" x="101.57" y="36"/>
 </g>
-<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-3">
-  <use xlink:href="#img-b3372f51-4" x="105.11" y="28.42"/>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-dc7a1b59-3">
+  <use xlink:href="#img-dc7a1b59-4" x="105.11" y="28.42"/>
 </g>
-<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-5">
-  <use xlink:href="#img-b3372f51-6" x="107.27" y="20.34"/>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-dc7a1b59-5">
+  <use xlink:href="#img-dc7a1b59-6" x="107.27" y="20.34"/>
 </g>
-<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-7">
-  <use xlink:href="#img-b3372f51-8" x="108" y="12"/>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-dc7a1b59-7">
+  <use xlink:href="#img-dc7a1b59-8" x="108" y="12"/>
 </g>
-<g stroke="#A9A9A9" fill="#FFFFFF" stroke-width="0.5" id="img-b3372f51-9">
+<g stroke="#A9A9A9" fill="#FFFFFF" stroke-width="0.5" id="img-dc7a1b59-9">
   <path d="M60,12 L 96.77 42.85 z"/>
 </g>
-<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-b3372f51-10">
-  <use xlink:href="#img-b3372f51-11" x="96.77" y="42.85"/>
+<g stroke-width="1.5" stroke="#6887FF" stroke-opacity="0.300" fill="#6887FF" id="img-dc7a1b59-10">
+  <use xlink:href="#img-dc7a1b59-11" x="96.77" y="42.85"/>
 </g>
-<g stroke-width="0.75" stroke="#000000" fill="#FFFFFF" id="img-b3372f51-12">
-  <use xlink:href="#img-b3372f51-13" x="60" y="12"/>
+<g stroke-width="0.75" stroke="#000000" fill="#FFFFFF" id="img-dc7a1b59-12">
+  <use xlink:href="#img-dc7a1b59-13" x="60" y="12"/>
 </g>
 <defs>
-  <g id="img-b3372f51-2">
+  <g id="img-dc7a1b59-2">
     <circle cx="0" cy="0" r="0.6"/>
   </g>
-  <g id="img-b3372f51-4">
+  <g id="img-dc7a1b59-4">
     <circle cx="0" cy="0" r="0.6"/>
   </g>
-  <g id="img-b3372f51-6">
+  <g id="img-dc7a1b59-6">
     <circle cx="0" cy="0" r="0.6"/>
   </g>
-  <g id="img-b3372f51-8">
+  <g id="img-dc7a1b59-8">
     <circle cx="0" cy="0" r="0.6"/>
   </g>
-  <g id="img-b3372f51-11">
+  <g id="img-dc7a1b59-11">
     <circle cx="0" cy="0" r="2.4"/>
   </g>
-  <g id="img-b3372f51-13">
+  <g id="img-dc7a1b59-13">
     <circle cx="0" cy="0" r="1.2"/>
   </g>
 </defs>

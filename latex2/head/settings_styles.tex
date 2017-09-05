@@ -47,3 +47,31 @@
 	%
 	every axis/.append style={font=\normalsize}, % normalsize, small, footnotesize or tiny
 }}
+
+% use this command \PlotStyle{width}{height}{xmin}{xmax}{ymin}{ymax} to apply the default style
+% width and height must be given in mm
+\newcommand{\PlotStyleYLog}[6]{
+	\def \plotwidth{#1}
+	\def \plotheight{#2}
+	\def \plotratio{\plotwidth / \plotheight}
+	\def \plotmargin{0.05}
+	\pgfplotsset{
+ 	compat=1.14,
+ 	width=\plotwidth mm,
+	height=\plotheight mm,
+	scale only axis,
+	domain = #3 : #4,
+	%
+	xmin=#3 - (#4-#3) * \plotmargin,
+	xmax=#4 + (#4-#3) * \plotmargin, 
+%	restrict x to domain = #3 : #4, marche pas bien avec axis log. utiliser log10(#3):log10(#4) ?
+	%
+	ymin = 10^(log10(#5) - \plotmargin * \plotratio * (log10(#6) - log10(#5))),
+	ymax = 10^(log10(#6) + \plotmargin * \plotratio * (log10(#6) - log10(#5))),
+%	restrict y to domain = #5 : #6,
+	%
+	grid=major,
+	grid style = { line cap = round, Tgray, line width = 0.25pt},
+	%
+	every axis/.append style={font=\normalsize}, % normalsize, small, footnotesize or tiny
+}}
