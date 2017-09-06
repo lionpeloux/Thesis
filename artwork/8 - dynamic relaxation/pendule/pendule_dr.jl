@@ -123,7 +123,7 @@ begin
     θ₀ = deg2rad(160)
     l = 1.0/0.1
     ω₀ = sqrt(g/l)
-    h = 0.05
+    h = 1.2
     Eclim = 1e-20
     Func_Ep(θ) = m₀*g*l*(1 - cos(θ))
     Func_Ek(θ̇) = 0.5 * m₀ * (l * θ̇) * (l * θ̇)
@@ -330,7 +330,7 @@ begin
     (data_dr, data_th) = GetData_Phase(relax)
     (θ, θ̇) = data_dr
     for peak in 1:length(data_dr[1])
-        append!(layers, layer(x=θ[peak], y=θ̇[peak], Geom.point, theme_Ep))
+        append!(layers, layer(x=θ[peak], y=θ̇[peak], Geom.point,Geom.path(), theme_Ep))
     end
 
     (θ, θ̇) = data_th
