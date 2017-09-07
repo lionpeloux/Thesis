@@ -43,59 +43,30 @@ Finally, several test cases are presented to validate the model (see \cref{sec:t
 \end{itemize}
 
 \subsection{Related works}
-\citef{Day1965} introduces the \emph{dynamic relaxation} method. He remarks that for a damped system the \blockquote{static equilibrium of a structure under a system of applied forces may be found by following the movement of the structure from its initial, un-deformed and unloaded, position until all vibrations resulting from its subsequent loading have died out}. He proposes to chose the damping factor to achieve critical damping, that is to obtained the fastest convergence to the steady state. He uses this computing method to study the non linear deformation of plan portal frame parametrized by two rotational degrees of freedom.
+\citef{Day1965} introduces the \emph{Dynamic Relaxation} method also presented by \citef{Otter1966}. He remarks that for a damped system the \blockquote{static equilibrium of a structure under a system of applied forces may be found by following the movement of the structure from its initial, un-deformed and unloaded, position until all vibrations resulting from its subsequent loading have died out}. He proposes to chose the damping factor to achieve critical damping, that is to obtained the fastest convergence to the steady state. He uses this computing method to study the non linear deformation of plan portal frames parametrized by two rotational degrees of freedom.
 
+\citef{Cassel1976} study the stability of the method. They formulate a stability criterion expressed as a relation between the time step, the mass and the entries of the stiffness matrix. A similar criterion is formulated by \citef{Barnes1975}. Later, a proof of this criterion using Gershgorin theorem is made by \citef{Papadrakakis1981} and \citef{Underwood1983} who achieved automatic determination of the Dynamic Relaxation parameters to ensure stability but no necessarily critical damping.
 
-\citef{Miki2014}~: DR as a gradient descent method
+\citef{Barnes1977} uses the Dynamic Relaxation to design and analyze nonlinear cable, membrane and inflatable structures. \citef{Wakefield1980} uses Dynamic Relaxation to study pretension networks with compression arches. He remarks that the method can be interpreted as a first order gradient optimization method. He first introduces a simplified planar bending element \cite[p.~120]{Wakefield1980}, which is the parent of the classical \dofs{3} spline beam element. A review of the work from Barnes, Wakefield and Papadrakakis is available in \cite{Barnes1999}.\footnote{Wakefield and Papadrakakis where phd students of Barnes in the late 70's.}
 
-Départ~:
+A worth to read investigation of the use of Dynamic Relaxation for inflatable structures is given by \cite{Rodriguez2011a}.
 
-\citef{Wakefield1980}
-\citef{Barnes1999}~: revue intéressante de la DR.
+\citef{Miki2014} also interpret Dynamic Relaxation as a gradient descent method. They extend the method to integrate equality constraint conditions. However, the proposed method does not exhibit a better convergence speed than the one with kinetic damping.
 
-3 pts classique~:
-\citef{Adriaenssens1999}
-\citef{Douthe2006}
+The classical \dofs{3} spline beam element is formulated by Adriaenssens, Barnes, and Williams \cite{Barnes1999,Adriaenssens1999,Adriaenssens2001}. This model is used by \cite{Douthe2006} for the formfinding of elastic gridshells in composite materials. They Improve the calculation of the lumped mass to take account for the geometric bending stiffness of the element. They formulate a connection model that takes into account the eccentricity between the structural members.
 
-2 x 3pts~:
-\citef{Barnes2013}
+\citef{Adriaenssens2000} introduces a \dofs{6} beam element compatible with the Dynamic Relaxation method. This element is implemented by \citef{Olsson2012}, \citef{Poulsen2015} and \cite{DAmico2014} in custom numerical frameworks to study nonlinear behavior of grid structures.
 
-6 Dofs~:
-\citef{DAmico2014}
-
-4Dofs~:
-\citef{DuPeloux2015}
-\citef{DAmico2016}
-
-Dans le champ de l'animation  avec élément finis
-\citef{Duan2013}
-\citef{Meier2014}
-
-Pour des cas test :
-\citef{Ibrahimbegovic1995}
-\citef{Lazaro2016}
-
-\citef{Dang2010}
-\citef{Rezaiee2012}
-
-\citef{Noh2013}
-\citef{Cundall1976}
-\citef{Rezaiee2011}
-\citef{Rodriguez2011,Rodriguez2011a} : lifejacket
-\citef{Cassel1976}
-\citef{Silva2006}
+A first attempt to formulate a reduced model that takes into account torsion in the element is made by \citef{Barnes2013}. Twisting is evaluated by the measure of the geometric torsion of the centerline, which obviously gives correct results in very special cases. Following \citef{Bergou2008}, Tayeb, Lefevre and du Peloux propose a novel \dofs{4} beam element suitable for the structural analysis of elastic gridshells \cite{DuPeloux2015,Lefevre2017}. A closely related work is proposed by \citef{DAmico2016} but relies on a Catmull-Rom spline interpolation that complexifies the treatment of the element end nodes.
 
 
 
-gives a review of the 
-\citef{Cassel1976} : damping is adjusted to a near critical level and computed from the mass matrix, the time step and the tangent stiffness matrix entries.
-proposes a method for the automatic evaluation of the dynamic relaxation parameters. Gershgorin theorem.
-\citef{Rodriguez2011a} generalizes the proposal of Barnes for all kind of elements and with 
-\citef{Underwood1983}
-Gershgorin bound theorem, which
-Here we formulate 
+Reste à inclure :
 
-\clearpage
+\citef{Duan2013}, \citef{Meier2014}, \citef{Lazaro2016}, \citef{Dang2010}, \citef{Rezaiee2012}, \citef{Rezaiee2011}, \citef{Noh2013}, \citef{Silva2006},
+
+%Pour des cas test :
+%\citef{Ibrahimbegovic1995}
 
 \section{Discret beam element}\label{sec:dmodel}
 % =======================
@@ -384,7 +355,7 @@ The unit tangent vector $\vect{t}_{2i}$ -- that is the cross-section normal -- a
 	\end{aligned}$
 \end{tabularx}
 
-This way, the determination of the tangent vectors -- or equivalently the section normals -- in the static equilibrium configuration will be done in the flow of the dynamic relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the cross-section normals.
+This way, the determination of the tangent vectors -- or equivalently the section normals -- in the static equilibrium configuration will be done in the flow of the Dynamic Relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the cross-section normals.
 
 \subsubsection{Left/right bending moment at handle vertices}
 % ---------------------------------------------------------------------------------
@@ -652,13 +623,13 @@ and the expression of the rate of twist at vertices~:
 \end{subequations}
 Remark how a distributed external twisting moment ($m_3$) modifies the value of the axial component of the internal moment at vertices, and thus is taken into account in the final static equilibrium.
 
-\section{Dynamic relaxation}\label{sec:DR}
+\section{Dynamic Relaxation}\label{sec:DR}
 From the previous section we have established the basis for a discrete rod element that can account for extension, flexion and torsion. This element is made of two types of vertices~: the ghost and the handle vertices. This allows to model discontinuities at handle vertices, which is one of the main contribution of the work exposed in this chapter. We have established a precise \dofs{4} discrete geometric representation of a slender rod. And from a given configuration we have learned to compute the internal forces and moments acting on the rod vertices using Kirchhoff's theory. Therefore, we are able to compute the resultant of the internal force and moment acting on a given vertex of the rod.\footnote{Note that the internal forces and moments embed the action of distributed external forces and moments applied to the rod.}
 
 We now expose a process to find the static equilibrium of a rod, which is our ultimate goal. This process is called \emph{Dynamic Relaxation} and was first introduced by \citef{Day1965}. We assume that we know the stress-free configuration of the rod, its material properties and cross-section properties. The rod might also be subjected to known external loads such as climatic loads. Finally, we call initial configuration the actual configuration of the rod at time $t=0$. In this configuration, the rod is (a priori) not at static equilibrium.
 
 \subsection{Overview of the procedure}
-In the dynamic relaxation procedure, a discretized mechanical system is dropped from a known initial configuration at time $t=0$. Technically, the mechanical system is now idealized to a \emph{particle-spring system} where each vertex is assimilated to a \emph{particle}, also called \emph{node}, represented by a material frame. Each particle has its own mass and is subjected to internal and external forces and moments. Because the system is not yet in a state of static equilibrium, the internal forces does not equilibrate the external forces. Thus, the system is subject to a motion. This motion is integrated through time and artificially damped. When all the kinetic energy is dissipated by the damping the system has reached a state of static equilibrium, which is the steady state response of the system.
+In the Dynamic Relaxation procedure, a discretized mechanical system is dropped from a known initial configuration at time $t=0$. Technically, the mechanical system is now idealized to a \emph{particle-spring system} where each vertex is assimilated to a \emph{particle}, also called \emph{node}, represented by a material frame. Each particle has its own mass and is subjected to internal and external forces and moments. Because the system is not yet in a state of static equilibrium, the internal forces does not equilibrate the external forces. Thus, the system is subject to a motion. This motion is integrated through time and artificially damped. When all the kinetic energy is dissipated by the damping the system has reached a state of static equilibrium, which is the steady state response of the system.
 
 Because the motion is only a mean to find a static equilibrium position of the system, the damping does not need to be realistic and should be chosen so that the system approaches the static position as fast as possible. This is also known as critical damping.
 
@@ -703,7 +674,7 @@ The particles of the system evolve according to the laws of motion, with respect
 \end{subequations}
 where $\ddot{\vect{x}}_i$ is the translational acceleration of the particle, $\ddot{\theta}_i$ is the rotational acceleration of the particle and $\lambda^x_i$ and  $\lambda^{\theta}_i$ are the viscous damping coefficients.
 
-Hereinafter we will consider no viscous damping. Instead, we will rely on an artificial kinetic damping (see \cref{sec:damping}). For a detailed traitement of various damping methods in the dynamic relaxation method, refer to \cite{Underwood1983,Rezaiee2012}.
+Hereinafter we will consider no viscous damping. Instead, we will rely on an artificial kinetic damping (see \cref{sec:damping}). For a detailed traitement of various damping methods in the Dynamic Relaxation method, refer to \cite{Underwood1983,Rezaiee2012}.
 
 \subsubsection{Coupling between flexion and torsion}
 Although \cref{eq:dmotion_a,eq:dmotion_b} may seem uncoupled to the reader, it is not the case as the coupling occurs through the material frame (see \cref{sec:dofchain}). Recall that both $\vect{R}_i^x$ and $R_i^{\theta}$ do depend on the $\vect{x}_i$ and $\theta_i$ variables.
@@ -726,7 +697,7 @@ Here, this factorization is not possible. $\vect{R}_i^x$ and $R_i^{\theta}$ are 
 
 \subsection{Explicite time integration}
 
-In this section, we give the stages required to integrate these equations through time. The dynamic relaxation procedure is based on a central-difference scheme. We call $\dt{}$ the time step. And we call \emph{initial configuration} the configuration of the system at time $t=0$.
+In this section, we give the stages required to integrate these equations through time. The Dynamic Relaxation procedure is based on a central-difference scheme. We call $\dt{}$ the time step. And we call \emph{initial configuration} the configuration of the system at time $t=0$.
 
 Note that the time step $\dt{}$ is not necessary constant through time and could be \emph{adapted} during the analysis process. However, for simplicity we will treat only the case where it is constant but it is easy to extend the present work to work with a variable time step.
 
@@ -1029,7 +1000,7 @@ By analogy to these works, following \cite{Lefevre2017} we define the twisting f
 in practice, as remarked in \cite{Douthe2007} the fictitious masses do not evolve a lot between two peaks of kinetic energy. Therefore, they can be reevaluated only after each peak to minimize the computational cost of the algorithm.
 
 \subsection{Application to the simple plane pendulum}
-The simple pendulum -- where a weight is suspended from a pivot so that it can swing freely -- is of practical interest to illustrate how the dynamic relaxation procedure works. We recall the analytical solution for this nonlinear problem. We then explore the progress of the Dynamic Relaxation method to find the position of static equilibriul of the pendulum.
+The simple pendulum -- where a weight is suspended from a pivot so that it can swing freely -- is of practical interest to illustrate how the Dynamic Relaxation procedure works. We recall the analytical solution for this nonlinear problem. We then explore the progress of the Dynamic Relaxation method to find the position of static equilibriul of the pendulum.
 
 \subsubsection{Equation of motion}
 Let us call $m$ the mass and $l$ the length of the pendulum (see \cref{fig:pendulum}). The angle $\theta(t)$ gives the position of the pendulum at time $t$ from the vertical axis. The motion of the pendulum is given by the following differential equation~:
