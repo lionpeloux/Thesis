@@ -6,28 +6,50 @@
 \chapter{Numerical Model} \label{chp:numerical_model}
 
 \section{Introduction}
+In this chapter we construct a novel discret beam element that we call the \emph{biarc beam element}. It relies on the results from \cref{chp:curve} and \cref{chp:kirchhoff}.
 
-Penser à expliquer le dualisme edge / vertex. En pratique, on a envie de contrôler le model par les noeuds et les propriétés sur les bords. Ce que peu de models savent faire. C'est aussi mieux pour les conditions de bords. C'est le vrai avantage de ce modèle.
+This element has a minimal number of degrees of freedom due to a reduced discrete curve-angle representation and can model extension, flexion and torsion of the rod in the framework of Kirchhoff theory. The introduction of ghost vertices enriches our previous model \cite{DuPeloux2015,Lefevre2017} in order to better represent and localized discontinuities in the model. In particular this leads to a more accurate treatment of boundary conditions, connections and loadings. This element easily integrates inside a Dynamic Relaxation procedure to find the static equilibrium of nonlinear problems.
 
-Expliquer l'interpolation des efforts. Il y a un choix a faire dans la DR. Soit on écrit l'équilibre sur le noeud (de dimension null). Soir on écrit l'équilibre sur une tranche de dimension $l_i+l{i+1}/2$. Mais si l'on veut maintenir la précision des conditions de passage, la DR fonctionne avec des noeuds et pas des tranches, le mieux est d'opter pour un équilibre du noeud. La DR va minimiser les résidus aux noeuds et donc on aura les bonnes conditions de passage sous Fext et Mext. J'ai montré que la convergence était plus rapide et précise. On a pas de décalage dans les diagrammes des efforts (si il y en a, ce sont uniquement les défauts de convergence, le résidu , n'étant pas strictement nul au noeud à la fin de la DR).
+In the end, that makes this element very suitable for the modeling of elastic gridshells with anisotropic cross-sections and complex connections, which are known limitations of the classical \dofs{3} spline beam element \cite{Adriaenssens2001,Douthe2006}. Moreovcer, the reduced formulation should improve both speed and stability of the numerical method compared to the classical \dofs{6} beam element \cite{Adriaenssens2000,DAmico2014}.
+
+The interest of our approach is that the entire model is derived directly from the motion equations of the rod and thus is perfectly in the line of the pioneer works in this field \cite{Day1965}.
 
 \subsection{Overview}
+We first construct a novel discret beam element called the \emph{biarc model} (see \cref{sec:dmodel}). This element is based on Kirchhoff theory of slender rods presented in \cref{chp:kirchhoff}. The mechanical behavior of the element is derived entirely from the equations of motion \cref{eq:motion} summarized in \cref{sec:ksummary}~:
+\begin{itemize}
+\item we compute the discret force ($\vect{\eta}$) and moment ($\vect{\varkappa}$) strain vectors from the geometry of the centerline~;
+\item we compute the bending moment ($\vect{M}^{\perp}$) at vertices from the material constitutive laws~;
+\item we compute the twisting moment ($\vect{Q}$) and the axial force ($\vect{N}$) at mid-edges from the material constitutive laws~;
+\item we compute the shear force ($\vect{F}^{\perp}$) at mid-edges from the equations of motion \cref{eq:motion_4,eq:motion_5}~;
+\item we interpolate the twisting moment and the axial and shear forces at vertices~;
+\end{itemize}
+Once the internal forces and moments acting on the vertices of the rod are known, we reinterpret the rod model as a simple \emph{particle-spring} system (see \cref{sec:DR}). We study the motion of this system by integrating explicitly the motion equations of the particles with a simple finite difference scheme. The motion is artificially damped so the system falls into a state of static equilibrium. This method is called the \emph{Dynamic Relaxation}. The dynamic itself is not a matter of concern as we are only interested in the steady state. Therefore, the parameters of the dynamic (mass and time step) are optimized to achieve \emph{critical damping}, the damping for which the convergence is the fastest, and to ensure the numerical stability of the method.
+
+Boundary conditions and connections between rods are treated separately (see \cref{sec:enriching}). This topic is of special interest when modeling real structures, which is are ultimate goal.
+
+The model has been implemented in a C\# library called \emph{Marsupilami}, intended to be a lightweight and dependence-free portable API. It is not a standalone executable software and has no graphical user-interface (GUI). To that purpose, a plugin for \grasshopper{} has also been implemented which serves as a functional GUI inside the \rhino{} environnement. The core concepts of \emph{Marsupilami} are presented in \cref{sec:software}). This work was the occasion to develop a finer understanding of software architecture. Several guidelines are proposed to further develop what is more a prototype and validation code than a full-featured software.
+
+Finally, several test cases are presented to validate the model (see \cref{sec:testcase}).
 
 \subsection{Contributions}
 \begin{itemize}
-	\item We use the parallel transport in time and not in space.
-	\item we clarify the edge-vertex representation in a natural manner (material properties to the edges, the rest to the vertices)
-	\item We give interpolation of internal forces and moments across the path
-	\item We propose a new discrete element with 3 nodes (2H + 1G)
-	\item We take account for discontinuities a Handle vertices (curvature, discontinuities)
+	\item We introduce a new \dofs{4} biarc kinematic to model the rod motion with ghost and handle vertices.
+	\item We clarify the representation of edge and vertex quantities in a natural manner where material and cross-section properties are associated to the edges, and internal forces and moments are associated to the vertices.
+	\item The biarc kinematic allows to model discontinuities at the junction between biarc segments.
+	\item The mechanic of the rod is entirely derived from the motion equations.
+	\item We give a full treatment of boundary conditions.
+	\item We implement our element inside a Dynamic Relaxation algorithm.
+	\item We use parallel transport only locally so that there is no more need to maintain a global reference frame for each beam.
 \end{itemize}
 
 \subsection{Related works}
+\citef{Day1965} introduces the \emph{dynamic relaxation} method. He remarks that for a damped system the \blockquote{static equilibrium of a structure under a system of applied forces may be found by following the movement of the structure from its initial, un-deformed and unloaded, position until all vibrations resulting from its subsequent loading have died out}. He proposes to chose the damping factor to achieve critical damping, that is to obtained the fastest convergence to the steady state. He uses this computing method to study the non linear deformation of plan portal frame parametrized by two rotational degrees of freedom.
+
 
 \citef{Miki2014}~: DR as a gradient descent method
 
 Départ~:
-\citef{Day1965}~: already includes a rotational DOF !!
+
 \citef{Wakefield1980}
 \citef{Barnes1999}~: revue intéressante de la DR.
 
@@ -74,35 +96,13 @@ Gershgorin bound theorem, which
 Here we formulate 
 
 \clearpage
-\section{Main hypothesis}
 
-On néglige les forces d'inertie liées à la rotation de l'élément  (devant quoi ?? traitement quasi-statique par rapport à la rotation). Cette hypothèse est faite explicitement chez Florence Bertail~:
-
-
-
-Cette hypothèse est faite mais passée sous silence chez Douthe, Adriaenssen, D'Amico lorsqu'ils déduisent l'effort tranchant du moment de flexion.
-
-Principe~:
-
-- les équations constitutives permettent le calcul de $M_1$, $M_2$, $Q$ à partir de la géométrie $\{\vect{x},\theta\}$.
-
-- La seconde loi de kirchhoff projetée sur les axes matériels 1 et 2 de la section me donnent accès aux efforts tranchants $T_1$ et $T_2$.
-
-- La seconde loi de kirchhoff projetée sur les axes matériel 3 (tangente à la centerline) de la section me donnent l"hypothèse quasi-statique de Audoly.
-
-%\begin{figure}[t]
-%	\centering
-%	\includegraphics[]{discrete_model.pdf}
-%	\caption{Biarc model for a discrete beam. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a 3-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
-%	\label{fig:discrete_model}
-%\end{figure} 
-
-
-\section{Discret beam model}\label{sec:dmodel}
+\section{Discret beam element}\label{sec:dmodel}
 % =======================
-Let's introduce the discrete \emph{biarc} model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} ($\Gamma$) and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross-section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent \emph{segments} which are three-vertices and two-edges elements with uniform material and section properties.
+Let us introduce the discrete \emph{biarc} model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} ($\Gamma$) and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross-section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent \emph{segments} which are three-vertices and two-edges elements with uniform material and section properties.
 
-Beams can either be closed or open. The corresponding number of vertices, edges and segments are reported in \cref{tab:count}.
+Elements can either be closed or open. The relations between the corresponding number of vertices, edges and segments are reported in \cref{tab:count}.
+
 \begin{figure}[p]
 \begin{fullpage}
 	\captionsetup[subfloat]{captionskip=20pt}
@@ -129,8 +129,8 @@ Beams can either be closed or open. The corresponding number of vertices, edges 
 \end{fullpage}
 \end{figure}
 
-\subsection{Description of the motion}
-
+\subsection{Description of the element}
+Here we present how we model all the required informations involved in the element representation~: its geometry (centerline, material frames, cross-sections), its materiality (elastic and shear modulus) and its mechanical state (internal forces and moments). An element is also subject to external loads (external forces and moments).
 \subsubsection{Centerline}
 % --------------------------------
 The discrete centerline is a polygonal space curve (\cref{fig:discrete_model}) defined as an ordered sequence of $n+1$ pairwise disjoint \emph{vertices}~: $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n) \in \mathbb{R}^{3(n+1)}$. Consecutive pairs of vertices define $n$ straight segments $(\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1})$ called \emph{edges} and pointing from one vertex to the next one~: 
@@ -197,14 +197,6 @@ where $EI_1$ and $EI_2$ are the bending stiffnesses and $GJ$ is the torsional st
 	ES_i 	\quad , \quad i \in \llbracket 0, n_s-1 \rrbracket
 \end{equation}
 
-\subsubsection{Distributed loads}
-% -----------------------------------------
-The model assumes that each segment can be loaded with some distributed forces ($\vect{f}^{ext} = f_k\vect{d}_k$) and moments ($\vect{m}^{ext} = m_k\vect{d}_k$). These forces and moments are required to be uniform over each segment but can vary from one segment to another. They can represent body loads such as self weight or thermal loads or external loads such as wind, snow, pressure,~\dots
-
-\subsubsection{Concentrated loads}
-% ---------------------------------------
-Additional External concentrated forces ($\vect{F}^{ext}$) and moments ($\vect{M}^{ext}$) are applied to the segment's end vertices ($\vect{x}_{2i}$,  $\vect{x}_{2i+2}$). Note that the model does not allow to load ghost vertices, and this is precisely why they are called \textquote{ghost}.
-
  \subsubsection{Internal forces and moments}
 % ---------------------------------------------------------
 The discrete rod is subjected to internal forces ($\vect{F} = F_1 \vect{d}_1 + F_2 \vect{d}_2 + \vect{N}\vect{d}_3$) and moments ($\vect{M} = M_1 \vect{d}_1 + M_2 \vect{d}_2 + Q\vect{d}_3$). Their components in the material frame basis are named as follow :
@@ -215,9 +207,17 @@ The discrete rod is subjected to internal forces ($\vect{F} = F_1 \vect{d}_1 + F
 \item The twisting moment : $\vect{Q} = Q \vect{d}_3$ 
 \end{itemize}
 
+\subsubsection{Distributed loads}
+% -----------------------------------------
+The model assumes that each segment can be loaded with some distributed forces ($\vect{f}^{ext} = f_k\vect{d}_k$) and moments ($\vect{m}^{ext} = m_k\vect{d}_k$). These forces and moments are required to be uniform over each segment but can vary from one segment to another. They can represent body loads such as self weight or thermal loads or external loads such as wind, snow, pressure,~\dots
+
+\subsubsection{Concentrated loads}
+% ---------------------------------------
+Additional External concentrated forces ($\vect{F}^{ext}$) and moments ($\vect{M}^{ext}$) are applied to the segment's end vertices ($\vect{x}_{2i}$,  $\vect{x}_{2i+2}$). Note that the model does not allow to load ghost vertices, and this is precisely why they are called \textquote{ghost}.
+
 % Modeling discontinuities
 % ------------------------------------
- \subsection{Modeling discontinuities}
+ \subsection{Modeling of discontinuities}
 The model assumes that cross-section and material properties as well as distributed loads are uniform over each segment. Referring to the structure of the equations of motion, and because the centerline is required to be a regular curve in the stress-free configuration, strains, stresses, displacements, internal forces and internal moments must be piecewise continuous functions of the arc length parameter, continuous over each segment $]s_{2i},s_{2i+2}[$. Discontinuities of these functions might occur at handle vertices ($\vect{x}_{2i}$), for instance if there is a jump in material or cross-section properties or if concentrated loads are applied at handle vertices. Moreover, the centerline curve itself will stay $\mathcal{C}^1$ during the motion, as it is chosen to be $\mathcal{C}^1$ in the reference configuration.\footnote{This preclude the modeling of beams with kinks as the tangent vector would not be continuously defined at these points. In such a case, the beam should be modeled in two separate parts linked together in a rigid manner.}\textsuperscript{,}\footnote{The centerline is not necessarily $\mathcal{C}^2$ as discontinuities in curvature may occur. For instance, if no punctual loads are applied, the bending moment is continuous over the rod. As the bending moment is linked to the curvature through the constitutive equation $M = EI\varkappa$, a discontinuity in $I$ will lead to a discontinuity in $\varkappa$. Conversely, a discontinuity in $\varkappa$ will lead to a discontinuity in $I$.}
 
 Here and subsequently, for such a function, the left and right limits at handle vertices ($s_{2i}$) will be denoted with superscripts $f_{2i}^-$ and $f_{2i}^+$. Possibly, the function is continuous so that the left and right limits agree ($f_{2i}^- = f_{2i}^+$).
@@ -652,15 +652,13 @@ and the expression of the rate of twist at vertices~:
 \end{subequations}
 Remark how a distributed external twisting moment ($m_3$) modifies the value of the axial component of the internal moment at vertices, and thus is taken into account in the final static equilibrium.
 
-
-\clearpage
-\section{Dynamic relaxation}
+\section{Dynamic relaxation}\label{sec:DR}
 From the previous section we have established the basis for a discrete rod element that can account for extension, flexion and torsion. This element is made of two types of vertices~: the ghost and the handle vertices. This allows to model discontinuities at handle vertices, which is one of the main contribution of the work exposed in this chapter. We have established a precise \dofs{4} discrete geometric representation of a slender rod. And from a given configuration we have learned to compute the internal forces and moments acting on the rod vertices using Kirchhoff's theory. Therefore, we are able to compute the resultant of the internal force and moment acting on a given vertex of the rod.\footnote{Note that the internal forces and moments embed the action of distributed external forces and moments applied to the rod.}
 
 We now expose a process to find the static equilibrium of a rod, which is our ultimate goal. This process is called \emph{Dynamic Relaxation} and was first introduced by \citef{Day1965}. We assume that we know the stress-free configuration of the rod, its material properties and cross-section properties. The rod might also be subjected to known external loads such as climatic loads. Finally, we call initial configuration the actual configuration of the rod at time $t=0$. In this configuration, the rod is (a priori) not at static equilibrium.
 
 \subsection{Overview of the procedure}
-In the dynamic relaxation procedure, a discretized mechanical system is dropped from a known initial configuration at time $t=0$. Technically, the mechanical system is now idealized to a \emph{particle spring system} where each vertex is assimilated to a \emph{particle}, also called \emph{node}, represented by a material frame. Each particle has its own mass and is subjected to internal and external forces and moments. Because the system is not yet in a state of static equilibrium, the internal forces does not equilibrate the external forces. Thus, the system is subject to a motion. This motion is integrated through time and artificially damped. When all the kinetic energy is dissipated by the damping the system has reached a state of static equilibrium, which is the steady state response of the system.
+In the dynamic relaxation procedure, a discretized mechanical system is dropped from a known initial configuration at time $t=0$. Technically, the mechanical system is now idealized to a \emph{particle-spring system} where each vertex is assimilated to a \emph{particle}, also called \emph{node}, represented by a material frame. Each particle has its own mass and is subjected to internal and external forces and moments. Because the system is not yet in a state of static equilibrium, the internal forces does not equilibrate the external forces. Thus, the system is subject to a motion. This motion is integrated through time and artificially damped. When all the kinetic energy is dissipated by the damping the system has reached a state of static equilibrium, which is the steady state response of the system.
 
 Because the motion is only a mean to find a static equilibrium position of the system, the damping does not need to be realistic and should be chosen so that the system approaches the static position as fast as possible. This is also known as critical damping.
 
@@ -935,7 +933,7 @@ These equations can be advantageously rewritten to minimize memory allocation by
 \end{subequations}
 The parabolic interpolation was introduced by \citef{Barnes1999}. The advantage of this technique is double. Firstly, the damping occurs at the interpolated position, that is for a higher level of kinetic energy ($\mathcal{E}^* \geqslant \mathcal{E}_1$, see \cref{fig:ek_interp}). Hence, more kinetic energy is dissipated which should improve the convergence speed. Secondly, because of the interpolation, the system is less subject to \emph{time step locking} when the system moves back and forth between two positions.
 
-\subsection{Convergence criteria}
+\subsection{Convergence}
 Several criteria exist in the literature to determine when to stop the time integration and to decide wether the algorithm has converged to a state of static equilibrium or not. It is very unlikely that the system will fall exactly in such a state but instead it will approach it an so a \emph{convergence criteria} is required. We recall here the main ideas.
 
 \subsubsection{Criterion based on the resultant force}
@@ -992,6 +990,8 @@ Some authors have proposed another option to address this problem \cite{Barnes19
 \end{alignat}
 \end{subequations}
 Hence, this criterion is \emph{adaptative} and also \emph{relative} to the size of the problem. The same approach can be adopted for force, velocity or displacement based criteria.
+
+%Expliquer l'interpolation des efforts. Il y a un choix a faire dans la DR. Soit on écrit l'équilibre sur le noeud (de dimension null). Soir on écrit l'équilibre sur une tranche de dimension $l_i+l{i+1}/2$. Mais si l'on veut maintenir la précision des conditions de passage, la DR fonctionne avec des noeuds et pas des tranches, le mieux est d'opter pour un équilibre du noeud. La DR va minimiser les résidus aux noeuds et donc on aura les bonnes conditions de passage sous Fext et Mext. J'ai montré que la convergence était plus rapide et précise. On a pas de décalage dans les diagrammes des efforts (si il y en a, ce sont uniquement les défauts de convergence, le résidu , n'étant pas strictement nul au noeud à la fin de la DR).
 
 \subsection{Stability and critical damping}\label{sec:stab_crit}
 Because we are not interested by the motion itself but by the quasi-static response of the system when properly damped, the time step ($\dt{}$) and the mass of the particles ($m_i^x$, $m_i^{\theta}$) should be chosen in order~:
@@ -1122,15 +1122,12 @@ This application is also useful to understand the relation between accuracy, sta
 	\end{fullpage}
 \end{figure}
 
-\clearpage
-
-
-\section{Enriching the model}
+\section{Enriching the model}\label{sec:enriching}
 \subsection{Support}
 \subsection{Connexion}
 
-
-\section{Software}
+\clearpage
+\section{Software}\label{sec:software}
 Un effort a été fait, plus une preuve de concept qu'un vrai loigiciel.
 Nous donnons ici les guide line pour une implémentation plus compète.
 
@@ -1213,7 +1210,7 @@ Asynchronous means that actions can happen independent of the current "main" exe
 You may say that, technically speaking, an asynchronous operation automatically assumes eventing -- at least "completed", "faulted" or "aborted/cancelled" events (one or more of these) are sent to the instigator of the operation (or the underlying O/S itself) to signal that the operation has ceased. Thus, async is always event-driven, but not the other way round.
 }
 \clearpage
-\section{Test case}
+\section{Test case}\label{sec:testcase}
 
 \clearpage
 
