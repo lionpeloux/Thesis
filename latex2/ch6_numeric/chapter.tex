@@ -27,7 +27,7 @@ Once the internal forces and moments acting on the vertices of the rod are known
 
 Boundary conditions and connections between rods are treated separately (see \cref{sec:enriching}). This topic is of special interest when modeling real structures, which is are ultimate goal.
 
-The model has been implemented in a C\# library called \emph{Marsupilami}, intended to be a lightweight and dependence-free portable API. It is not a standalone executable software and has no graphical user-interface (GUI). To that purpose, a plugin for \grasshopper{} has also been implemented which serves as a functional GUI inside the \rhino{} environnement. The core concepts of \emph{Marsupilami} are presented in \cref{sec:software}). This work was the occasion to develop a finer understanding of software architecture. Several guidelines are proposed to further develop what is more a prototype and validation code than a full-featured software.
+The model has been implemented in a C\# library called \emph{Marsupilami}, intended to be a lightweight and dependence-free portable API. It is not a standalone executable software and has no graphical user-interface (GUI). To that purpose, a plugin for \grasshopper{} has also been implemented which serves as a functional GUI inside the \rhino{} environnement. The core concepts of \emph{Marsupilami} are presented in \cref{sec:software}. This work was the occasion to develop a finer understanding of software architecture. Several guidelines are proposed to further develop what is more a prototype and validation code than a full-featured software.
 
 Finally, several test cases are presented to validate the model (see \cref{sec:testcase}).
 
@@ -43,15 +43,25 @@ Finally, several test cases are presented to validate the model (see \cref{sec:t
 \end{itemize}
 
 \subsection{Related works}
+
+\subsubsection{Dynamic Relaxation}
+
 \citef{Day1965} introduces the \emph{Dynamic Relaxation} method also presented by \citef{Otter1966}. He remarks that for a damped system the \blockquote{static equilibrium of a structure under a system of applied forces may be found by following the movement of the structure from its initial, un-deformed and unloaded, position until all vibrations resulting from its subsequent loading have died out}. He proposes to chose the damping factor to achieve critical damping, that is to obtained the fastest convergence to the steady state. He uses this computing method to study the non linear deformation of plan portal frames parametrized by two rotational degrees of freedom.
 
 \citef{Cassel1976} study the stability of the method. They formulate a stability criterion expressed as a relation between the time step, the mass and the entries of the stiffness matrix. A similar criterion is formulated by \citef{Barnes1975}. Later, a proof of this criterion using Gershgorin theorem is made by \citef{Papadrakakis1981} and \citef{Underwood1983} who achieved automatic determination of the Dynamic Relaxation parameters to ensure stability but no necessarily critical damping.
 
 \citef{Barnes1977} uses the Dynamic Relaxation to design and analyze nonlinear cable, membrane and inflatable structures. \citef{Wakefield1980} uses Dynamic Relaxation to study pretension networks with compression arches. He remarks that the method can be interpreted as a first order gradient optimization method. He first introduces a simplified planar bending element \cite[p.~120]{Wakefield1980}, which is the parent of the classical \dofs{3} spline beam element. A review of the work from Barnes, Wakefield and Papadrakakis is available in \cite{Barnes1999}.\footnote{Wakefield and Papadrakakis where phd students of Barnes in the late 70's.}
 
-A worth to read investigation of the use of Dynamic Relaxation for inflatable structures is given by \cite{Rodriguez2011a}.
+Interesting investigations of the use of Dynamic Relaxation are proposed by \cite{Rodriguez2011a} for the study of inflatable structures and by \citef{Dang2010} for geotechnical engineering. \citef{Silva2006} shows the efficiency of the Dynamic Relaxation method compare to the Newton-Rapshon method in the nonlinear simulation of flexible lines. He highlights the robustness of the Dynamic Relaxation method, able to reach convergence where the Newton-Rapshon method fails.
+
+\citef{Rezaiee2012} proposes a very large scope benchmark of Dynamic Relaxation method variants. His results show that the kinetic damping variant \cite{
+Topping2007} has generally the fastest convergence CPU speed, while the viscous damping variant from Underwood \cite{Underwood1983} generally converges with the smallest number of iterations.
 
 \citef{Miki2014} also interpret Dynamic Relaxation as a gradient descent method. They extend the method to integrate equality constraint conditions. However, the proposed method does not exhibit a better convergence speed than the one with kinetic damping.
+
+Bathe is a reference author in the field of structural dynamics. He has worked on many time integration methods, either implicit or explicit \cite{Noh2013}. His work could be a valuable starting point to pick new ideas to improve the time integration scheme presented in this thesis, if the dynamic of the structure were to be studied for instance.
+
+\subsubsection{Discrete element}
 
 The classical \dofs{3} spline beam element is formulated by Adriaenssens, Barnes, and Williams \cite{Barnes1999,Adriaenssens1999,Adriaenssens2001}. This model is used by \cite{Douthe2006} for the formfinding of elastic gridshells in composite materials. They Improve the calculation of the lumped mass to take account for the geometric bending stiffness of the element. They formulate a connection model that takes into account the eccentricity between the structural members.
 
@@ -59,11 +69,11 @@ The classical \dofs{3} spline beam element is formulated by Adriaenssens, Barnes
 
 A first attempt to formulate a reduced model that takes into account torsion in the element is made by \citef{Barnes2013}. Twisting is evaluated by the measure of the geometric torsion of the centerline, which obviously gives correct results in very special cases. Following \citef{Bergou2008}, Tayeb, Lefevre and du Peloux propose a novel \dofs{4} beam element suitable for the structural analysis of elastic gridshells \cite{DuPeloux2015,Lefevre2017}. A closely related work is proposed by \citef{DAmico2016} but relies on a Catmull-Rom spline interpolation that complexifies the treatment of the element end nodes.
 
+\citef{Duan2013} developpes a geometrically exact beam model with a finite-element formulation to capture dynamic elastic deformations of slender bodies. The ordinary differential equations are solved using a multiple shooting algorithm based on numerical integration with Runge–Kutta method. Although the results show a good accuracy, the computational cost seems prohibitive for real time rendering of grid structures with a large number of connections.
 
 
-Reste à inclure :
 
-\citef{Duan2013}, \citef{Meier2014}, \citef{Lazaro2016}, \citef{Dang2010}, \citef{Rezaiee2012}, \citef{Rezaiee2011}, \citef{Noh2013}, \citef{Silva2006},
+
 
 %Pour des cas test :
 %\citef{Ibrahimbegovic1995}
@@ -1099,11 +1109,102 @@ This application is also useful to understand the relation between accuracy, sta
 
 \clearpage
 \section{Software}\label{sec:software}
-Un effort a été fait, plus une preuve de concept qu'un vrai loigiciel.
-Nous donnons ici les guide line pour une implémentation plus compète.
+The present model has been implemented in a numerical software called \emph{Marsupilami}. A first version of this software, based on the \dofs{3} spline beam element, was used successfully in the structural design of the Ephemeral Cathedral of Créteil (see \cref{chp:creteil}) and other smaller timber gridshells (see \cref{fig:jpofav}). During this thesis \emph{Marsupilami} has been completely redeveloped to include rotational \dofs{} capabilities. Lots of new features have been 
 
-Séparer l'état d'un système (c'est à dire l'état de ses degrés de libertrés) avec sa description topologique (élements, propriéts).
-Quid du chargement ?
+\subsection{Architecture of the software}
+The code of \emph{Marsupilami} is divided into three libraries presented hereinafter~: \textit{Marsupilami.Math}, \textit{Marsupilami.CoreLib} and \textit{Marsupilami.Gh}.
+
+\subsubsection{Marsupilami.Math.dll}
+This is a small standalone math library. It defines three data types~: \textit{MPoint}, \textit{MVector} and \textit{MFrame}. \textit{MPoint} and \textit{MVector} types store three coordinates \textit{X}, \textit{Y} and \textit{Z} in double-precision floating-point format (see \cref{fig:mathlib}). \textit{Frame} type is composed of a \textit{MPoint} called \textit{Origin} and three \textit{MVector} called \textit{XAxis}, \textit{YAxis} and \textit{ZAxis}. The \textit{MFrame} type serves to represent a material frame where \textit{XAxis} and \textit{YAxis} are the first and second material axis of the cross-section, and the \textit{ZAxis} is the normal vector of the cross-section.
+
+Although some math libraries already exist for C\#, it was found useful to build our own library so that it can be customized to our needs without restrictions. In particular, when it comes to software optimization for such a CPU-bound application you would better know exactly was is done insight the math routines. Having your own math library facilitates benchmarking several variants of the math routines and select the optimal one.
+ 
+
+ 
+
+\subsubsection{Marsupilami.CoreLib.dll}
+This is the core library. It defines structured objects such as element, section, material, model, solver. It is concieved as an API that third-party software can use to provide computation (for instance Excel, Rhino Grasshopper, Dynamo, \telp{}).
+
+\subsubsection{Marsupilami.Gh.gha}
+This is a grasshopper plugin that exposes the logic of \textit{Marsupilami.CoreLib.dll}. Marsupilami types are mapped to Grasshopper types. Display methods are provided. Easier to build and constuyrct some models
+
+\begin{figure}[t]
+     	\centering
+	\includegraphics[width=0.8\textwidth]{mathlib.png}
+	\captionof{figure}[]{Partial class diagram of \textit{Marsupilami.Math.dll}.}
+	\label{fig:mathlib} 
+\end{figure}
+
+\begin{table}
+\center
+%		\ra{1.5}
+	\begin{tabularx}{0.4\textwidth}{@{} X ccccc @{}}
+		\toprule
+		 	& add 	& sub 	& mul 	& div 	& sqrt \\
+		\midrule
+		cost	& 1 		& 1 		& 4 		& 10 		& 20	\\
+		\bottomrule	
+	\end{tabularx}
+	\label{tab:count}
+	\vspace{10pt}
+	\captionof{table}[Simple cost model for arithmetic operations]{Simple cost model for arithmetic operations.}
+	\label{tab:costmodel}
+\end{table}
+
+\subsection{Key aspects}
+Implementation details : \cite{Olsson2012}, \cite{Poulsen2015}
+
+\subsubsection{Language}
+Why C\# ? 
+
+\subsubsection{Code abstraction}
+Modularité : evaluation courbure, schéma d'intégration, autorefine, autobreak, plasticity
+Design pattern
+\cite{Clune2012} : An object-oriented architecture for extensible structural design software
+\cite{Bishop2008} : design patterns
+
+\subsubsection{Event driven}
+Events-driven vs asynchronous vs parallel. 
+Evènement vs procédural
+\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous. 
+Therefore, handling of events can either be synchronous or asynchronous. JavaScript, for example, uses a synchronous eventing system.
+Asynchronous means that actions can happen independent of the current "main" execution stream. Mind you, it does NOT mean "parallel", or "different thread". An "asynchronous" action may actually run on the main thread, blocking the "main" execution stream in the meantime. So don't confuse "asynchronous" with "multi-threading".
+You may say that, technically speaking, an asynchronous operation automatically assumes eventing -- at least "completed", "faulted" or "aborted/cancelled" events (one or more of these) are sent to the instigator of the operation (or the underlying O/S itself) to signal that the operation has ceased. Thus, async is always event-driven, but not the other way round.
+}
+
+\subsubsection{Serialization}
+SQlite, JSON, XML.
+
+\subsection{Performance}
+Software optimization is both a very active field of research and a nightmare for non specialists. It is virtually impossible to find good rules of thumb in the literature to orient critical implementation decisions. For instance a question that looks so simple as~: \textquote{Should I use a Struct of Arrays or and Array of Structs ?} ... is not so simple at all ; and the answer is generally \textquote{It depends ...}. And indeed, it depends on the coding language you chose, the coding skills you have to make the language talk to the processor in the way you want and not in the way you think it will. It also depends on complex hardware considerations. Optimizations can be made at all levels of abstraction of a software, from the highest level (algorithm) to the lowest level (assembly code).
+
+To embrace the complexity of this problematic the reader is invited to refer to the excellent book \emph{Writing High-Performance .NET Code} \cite{Watson2014}.
+
+\subsubsection{Know what things cost}
+When it comes to software performance, the first stage should always be to measure what things cost (See \href{https://msdn.microsoft.com/en-us/library/ms973852.aspx}{know what things cost}).\footnote{\url{https://msdn.microsoft.com/en-us/library/ms973852.aspx}} Once the bottlenecks are identified, 
+then the optimization of the critical pieces of code can begin. To this end, two tools were employed during the development of \emph{Marsupilami} :
+\begin{itemize}
+\item Cost Model~: a very simple cost model was established to assign a performance rating to each base math routine, based on the number of arithmetic and trigonometric  operations it performes (see \cref{tab:costmodel}). This cost model was established through micro benchmarks with the \href{https://github.com/Microsoft/perfview}{BenchmarkDotNet} library.
+\item Measure~: performance measurements were conducted on full analysis of several test cases with the library \href{https://github.com/Microsoft/perfview}{PerfView}. 
+\end{itemize}
+
+\subsubsection{Algorithmic optimization}
+The analyses made with PerfView showed that rotation and parallel transportation of frames are critical operations for the performance of the program. A thorough work was done to optimize all the costly math routines by using the minimal logic to perform the operations.
+
+Further improvements might be achieved using polynomial representations of trigonometric functions but not time was left to dig seriously into this direction \cite{Trefethen2007,Chevillard2010}.\cite{Green2003}. The optimization of math routines and in particular trigonometric functions is a field of research to itself \cite{Green2003}.
+
+\subsubsection{Vectorization}
+\emph{Marsupilami} leverages the built-in capabilities offered by the .Net framework to parallelize some of the work. At the moment, the computation of the internal forces and moments of the elements is made inside a parallel loop. Still, a lot remains to be explored in this area~:
+\begin{itemize}
+\item Single Instruction Multiple Data (SIMD) instructions allow vectorization of arithmetic and trigonometric operations at the CPU level and can offer up to a x8 speed up.
+\item Dynamic relaxation is very suitable for parallelization \cite{Topping1994}. New hardware capabilities such as multicore CPU or GPU cards with hundreds of cores can be leveraged to speed up the computation \cite{Rek2016,Liew2016}.
+\end{itemize}
+However, this technologies are relatively recent and still complex to implement as they require low level coding. They are note easily implementable from C\# and \emph{Marsupilami} does not rely on any of these technology.
+
+\subsubsection{Code abstraction}
+\blockcquote[p.~155]{Watson2014}{In-depth performance optimization will often defy code abstractions.}
+
+\subsection{Further guidelines}
 
 \subsubsection{Tips}
 
@@ -1137,14 +1238,13 @@ AoS vs OaS particle vs Collection of Particle.
 \subsubsection{Structure of the algorithm}
 
 
-
-\IncMargin{2em}
-\begin{figure}[p]
-\begin{fullpage}
-	\input{ch6_numeric/algo/algo_dr.tex}
-\end{fullpage}
-\end{figure}
-\DecMargin{2em}
+%\IncMargin{2em}
+%\begin{figure}[p]
+%\begin{fullpage}
+%	\input{ch6_numeric/algo/algo_dr.tex}
+%\end{fullpage}
+%\end{figure}
+%\DecMargin{2em}
 
 \IncMargin{2em}
 \begin{figure}[p]
@@ -1156,30 +1256,6 @@ AoS vs OaS particle vs Collection of Particle.
 
 \clearpage
 
-\subsubsection{Implementation guidlines}
-
-
-détails et conseils d'implementation
-Optimisation : parallélisation / chebfun calcul polynomial
-POO : modèle objet
-Evènement vs procédural
-C\#
-Parler de perfview. Peut-être sortir un résulat. 
-Parler de serialization
-Donner guide lines and recommendations.
-Modularité : evaluation courbure, schéma d'intégration, autorefine, autobreak, plasticity
-Design pattern
-
-Events-driven vs asynchronous vs parallel.
-
-\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous. 
-
-Therefore, handling of events can either be synchronous or asynchronous. JavaScript, for example, uses a synchronous eventing system.
-
-Asynchronous means that actions can happen independent of the current "main" execution stream. Mind you, it does NOT mean "parallel", or "different thread". An "asynchronous" action may actually run on the main thread, blocking the "main" execution stream in the meantime. So don't confuse "asynchronous" with "multi-threading".
-
-You may say that, technically speaking, an asynchronous operation automatically assumes eventing -- at least "completed", "faulted" or "aborted/cancelled" events (one or more of these) are sent to the instigator of the operation (or the underlying O/S itself) to signal that the operation has ceased. Thus, async is always event-driven, but not the other way round.
-}
 \clearpage
 \section{Test case}\label{sec:testcase}
 
