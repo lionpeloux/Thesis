@@ -1,0 +1,23 @@
+%\documentclass[12pt]{article}
+\documentclass[tikz,border={2cm 0.5cm 2cm 2.5cm}]{standalone} % left bottom right top
+\usepackage{tikz, pgfplots,pgfplotstable}
+\usepackage{textcomp}
+
+% insert legend entry as a key in \addplot[legend entry=$$]
+\pgfplotsset{
+    legend entry/.initial=, every axis plot post/.code={%
+        \pgfkeysgetvalue{/pgfplots/legend entry}\tempValue
+        	\ifx\tempValue\empty
+            \pgfkeysalso{/pgfplots/forget plot}%
+        \else
+            \expandafter\addlegendentry\expandafter{\tempValue}%
+        \fi
+    },
+}
+
+\input{../../../head/settings_styles.tex}
+\begin{document}
+\pgfplotstableread{EkTrace.txt}\Table
+\input{plot_Ek.tex}
+\end{document}
+

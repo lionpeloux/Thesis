@@ -1,0 +1,43 @@
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwProg{Fn}{Function}{:}{}
+\SetKwFunction{Solve}{Solve}
+\SetKwFunction{Init}{Init}
+\SetKwFunction{Run}{Run}
+\SetKwFunction{Move}{Move}
+\SetKwFunction{CalculateF}{CalcInternalForces}
+\SetKwFunction{CalculateM}{CalcInternalMoments}
+\SetKwFunction{CalculateA}{CalcAcceleration}
+\SetKwFunction{CalculateV}{CalcVelocity}
+\SetKwFunction{CalculateE}{CalcKEnergy}
+\SetKwFunction{SumFM}{AggregateForcesAndMoments}
+\SetKwFunction{SyncFM}{SynchronizeForcesAndMoments}
+\SetKwFunction{SumM}{AggregateMasses}
+\SetKwFunction{SyncM}{SynchronizeMasses}
+\SetKwFunction{InterpX}{InterpolatePosition}
+\SetKwFunction{InterpR}{InterpolatePosition}
+\SetKwFunction{Reset}{Reset}
+
+\SetKwData{Model}{model}
+\SetKwData{Node}{node}
+\SetKwData{Joint}{joint}
+\SetKwData{Element}{element}
+\SetKwData{CVG}{cvg}
+\SetKwData{MAX}{maxIteration}
+
+%\Input{A model to analyzed}
+%\Output{An analyzed model}
+
+% SOLVE
+\Fn{\Solve{\Model, \CVG, \MAX}}{
+\BlankLine
+\Init{} \;
+\Repeat{convergence criterion reached}{
+\Run{}\;
+}
+}{\KwRet}
+\BlankLine\BlankLine
+
+\caption{disjoint decomposition}\label{algo_disjdecomp}
+\end{algorithm}

@@ -1,0 +1,36 @@
+% INVOKE \pgfplotstableread{data.txt}\Table
+% with the rigth path for data.txt before input
+\begin{tikzpicture}[TikzStyle]
+	\PlotStyle{100}{80}{0}{40}{0}{3500}
+	\begin{axis}[
+		xtick={0, 10, 20, 30, 40},
+    		xticklabels={$0$, $10$,  $20$,  $30$,$40$},
+		xlabel={Displacement (mm)},
+		ylabel={Force (N)},
+		ytick={0, 500, 1000, 1500, 2000, 2500, 3000, 3500},
+		yticklabels={0, 500, 1000, 1500, 2000, 2500, 3000, 3500},
+		legend cell align=left,
+%		legend pos=north east,
+%		legend style={font=\small, row sep=2pt},
+		legend columns=3,
+%		transpose legend,
+		legend style={at={(0.5,1.1)},anchor=south, font=\small, row sep=2pt, column sep=5pt, overlay},
+		% use overlay to exclude legend from boundingbox
+		]
+			% 5Nm			
+			\addplot[gray2, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{1}] {\Table};
+			\addlegendentry{5\,Nm}
+			
+			% 20Nm			
+			\addplot[Tblue, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{2}] {\Table};
+			\addlegendentry{20\,Nm}
+			
+			% 30Nm			
+			\addplot[gray8, smooth, thick]
+       			table[x expr=\thisrowno{0}, y expr=\thisrowno{3}] {\Table};
+			\addlegendentry{30\,Nm}
+			
+	\end{axis}
+\end{tikzpicture}

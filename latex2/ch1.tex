@@ -14,7 +14,6 @@
 % ===========================
 \input{head/settings_epfl_template.tex}
 \input{head/settings_custom.tex}
-\graphicspath{{./ch1_gridshell/img/}}
 
 % ===========================
 % DOCUMENT
@@ -27,8 +26,6 @@
 \setcounter{page}{0}
 \setcounter{chapter}{0}
 \tableofcontents
-\listoffigures
-\listoftables
 
 % space before each new paragraph according to the template guidelines.
 % needs to be after titlepage and frontmatter to keep the table of contents lists short
@@ -36,8 +33,6 @@
 
 % MAIN MATTER
 \mainmatter
-\include{ch1_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-
-%\printbibliography
+\include{ch1_introduction/chapter}
 
 \end{document}

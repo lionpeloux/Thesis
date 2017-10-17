@@ -1,0 +1,41 @@
+% INVOKE \pgfplotstableread{data.txt}\Table
+% with the rigth path for data.txt before input
+\begin{tikzpicture}[TikzStyle]
+	\PlotStyle{100}{80}{-1}{1}{-1}{1}
+	\begin{axis}[
+%		xtick={0, 10, 20, 30, 40},
+%    		xticklabels={$0$, $10$,  $20$,  $30$,$40$},
+		xlabel={$\theta / \theta_{max}$},
+		ylabel={$\dot{\theta} / \dot{\theta}_{max}$},
+%		ytick={0, 400, 800, 1200, 1600},
+%		yticklabels={0, 400, 800, 1200, 1600},
+%		legend pos=north east,
+		legend style={font=\small, row sep=2pt},
+		legend columns=3,
+		legend style={at={(0.5,1.1)},anchor=south, font=\small, row sep=2pt, column sep=5pt, overlay},
+		]
+			\addplot[gray8, smooth, thin, legend entry =$\theta^{UD}$] table [x index=0, y index=1] {\TableSPACE};
+			\pgfplotstablegetcolsof{\TableSPACE}
+  			\pgfmathparse{(\pgfplotsretval/2 - 1}
+			\foreach \x in {1,...,\pgfmathresult}
+			{
+				\pgfmathtruncatemacro{\Xcol}{\x * 2}
+  				\pgfmathtruncatemacro{\Ycol}{1 + \x * 2}   	
+				\addplot[gray8, smooth, thin] table [x index=\Xcol, y index=\Ycol] {\TableSPACE};
+            		} 
+		
+			\addplot[Tblue, thick, mark=*, legend entry =$\theta^{DR}$]  table [x index=0, y index=1] {\TableDR};
+%			\addlegendentry{};
+			
+			\pgfplotstablegetcolsof{\TableDR}
+  			\pgfmathparse{(\pgfplotsretval/2 - 1}
+			\foreach \x in {1,...,\pgfmathresult}
+			{
+				\pgfmathtruncatemacro{\Xcol}{\x * 2}
+  				\pgfmathtruncatemacro{\Ycol}{1 + \x * 2}   	
+		
+				\addplot[Tblue, thick] 
+				table [x index=\Xcol, y index=\Ycol] {\TableDR};
+            		} 
+	\end{axis}
+\end{tikzpicture}

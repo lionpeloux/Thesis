@@ -1,1 +1,0 @@
-N	Year	Nickname	Type	City	Country	Architecte	Engineer	Material	Surface(m2)	Span	REF1	1962	Berkley	Workshop	Berkeley	USA	F. Otto	F. Otto	steel	52,00	7,80	\cite[p.~270]{IL10}2	1962	Essen	Pavilion	Essen	Germany	F. Otto	F. Otto	wood	198,00	16,80	\cite[p.~272]{IL10}

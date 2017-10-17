@@ -1,0 +1,26 @@
+% INVOKE \pgfplotstableread{data.txt}\Table
+% with the rigth path for data.txt before input
+\begin{tikzpicture}[TikzStyle]
+	\PlotStyle{100}{80}{-1}{1}{0}{1}
+	\begin{axis}[
+		xtick={-1,-0.5,0,0.5,1},
+%		xtick={-3.1415926536, -1.5707963268, 0, 1.5707963268, 3.1415926536},
+%    		xticklabels={$-\pi$, $-\pi/2$,  $0$,  $\pi/2$,$\pi$},
+		xlabel={$\theta / \theta_{max}$},
+		ylabel={$\dot{\theta} / \dot{\theta}_{max}$},
+		legend style={font=\small, row sep=2pt},
+		legend columns=3,
+		legend style={at={(0.5,1.1)},anchor=south, font=\small, row sep=2pt, column sep=5pt, overlay},
+		]
+			\addplot[gray8, smooth, thick, legend entry = $\mathcal{E}_p$]  table[x expr=\thisrowno{0}, y expr=\thisrowno{1}] {\Table};
+		
+			\addplot[Tblue, only marks, thick, mark=*, legend entry = $\mathcal{E}_p^{DR}$]  table[x expr=\thisrowno{2}, y expr=\thisrowno{3}] {\Table};
+				
+%			\addplot[Tblue, only marks, thick, mark=*] 
+%				table[x expr=\thisrowno{2}, y expr=\thisrowno{3}] {\TableDR};
+%				
+%			\addplot[Tblue, only marks, thick, mark=*] 
+%				table[x expr=\thisrowno{4}, y expr=\thisrowno{5}] {\TableDR};
+%
+	\end{axis}
+\end{tikzpicture}

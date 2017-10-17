@@ -1,0 +1,11 @@
+%\documentclass[12pt]{article}
+\documentclass[tikz,border={2cm 0.5cm 2cm 0.5cm}]{standalone} % left bottom right top
+\usepackage{tikz, pgfplots,pgfplotstable}
+\usepackage{textcomp}
+\input{../../../head/settings_styles.tex}
+\begin{document}
+\pgfplotstableread{PhaseSpace.txt}\TableSPACE
+\pgfplotstableread{PhaseDR.txt}\TableDR
+\input{plot.tex}
+\end{document}
+

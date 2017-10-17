@@ -1,0 +1,30 @@
+
+\begin{tikzpicture}[TikzStyle]
+\PlotStyle{100}{80}{0}{6.2831853072}{-1}{1}
+\begin{axis}[
+	xlabel={$t$},
+	ytick={-1,-0.5,0,0.5,1},
+	xtick={0, 1.5707963268, 3.1415926536, 4.7123889804, 6.2831853072},
+	xticklabels={0,$\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2 \pi$},
+	%
+	legend cell align=left,
+	legend columns=3,
+%	transpose legend,
+	legend style={at={(0.5,1.05)},anchor=south, font=\small, row sep=2pt, column sep=5pt, overlay},
+	%
+	]
+	\newcommand\da{1.0}
+	\newcommand\dk{0.5}
+	\newcommand\dkappa{\da/(\da*\da + \dk*\dk)}
+	\newcommand\dtau{\dk/(\da*\da + \dk*\dk)}	
+	\newcommand\dv{sqrt(\da*\da + \dk*\dk)}
+
+	\addplot[Tblue, smooth, thick]{0};
+	\addlegendentry{$\Omega_b^3$}
+	\addplot[gray8, smooth, semithick]{\dkappa * sin(deg(- \dv * \dtau * x))};
+	\addlegendentry{$\Omega_b^1$}
+	\addplot[gray4, smooth, semithick]{\dkappa * cos(deg(- \dv * \dtau * x))};
+	\addlegendentry{$\Omega_b^2$}
+
+\end{axis}
+\end{tikzpicture}

@@ -13,8 +13,8 @@
 % PREAMBLE
 % ===========================
 \input{head/settings_epfl_template.tex}
-\input{head/settings_custom.tex} 
-\graphicspath{{./ch2_creteil/img/}}
+\input{head/settings_custom.tex}
+\graphicspath{{./ch2_gridshell/img/}}
 
 % ===========================
 % DOCUMENT
@@ -26,7 +26,6 @@
 \input{head/titlepage.tex}
 \setcounter{page}{0}
 \setcounter{chapter}{1}
-\setcounter{tocdepth}{2}
 \tableofcontents
 \listoffigures
 \listoftables
@@ -37,6 +36,8 @@
 
 % MAIN MATTER
 \mainmatter
-\include{ch2_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+
+%\printbibliography
 
 \end{document}
