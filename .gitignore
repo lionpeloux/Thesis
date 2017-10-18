@@ -193,7 +193,6 @@ FakesAssemblies/
 *.bbl
 *.blg
 *.pygtex
-*.pdf
 
 #images/
 #img/
@@ -205,3 +204,11 @@ latex/_minted-ldp_thesis/
 
 
 
+*.pdf
+/latex2/ch1.pdf
+/latex2/ch4.pdf
+/latex2/ch3.pdf
+/latex2/ch5.pdf
+/latex2/ch6.pdf
+/latex2/thesis.pdf
+/latex2/ch2.pdf

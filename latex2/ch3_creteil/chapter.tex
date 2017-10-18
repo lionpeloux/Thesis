@@ -12,44 +12,54 @@ The Ephemeral Cathedral of Créteil, France, is an elastic gridshell structure m
 This large-scale prototype represents a first in the building industry which still shows excessive apprehension for the use of non-traditional materials such as composites, especially when it comes to structural applications. This is emphasized by the fact that only pre-norms or professional recommendations exist for composite materials, which is quite insufficient when one has to deal with insurers and legal technical controls.
 Although this structure is not the first elastic gridshell ever built in \emph{Glass Fiber Reinforced Polymer} (GFRP) composite material, it should be regarded as the first true building using this technology. Indeed, this prototype -- which can legally accommodate up to 500 people -- complies with all the required performances : structural stiffness, fire safety, waterproofness, lightning, thermal comfort, etc. To our knowledge, this building is still the only one of this kind ever built.
 
-It is worth to mentionne that this project arises thanks to a long-term collaboration between {T/E/S/S atelier d'ingénierie}\footnote{A structural design firm based in Paris, France : \url{http://tess.fr}} and the laboratory Navier\footnote{Architected Materials and Structures (AMS) research team, specializes in the field of mechanics of materials and structures : \url{http://navier.enpc.fr/Materiaux-et-Structures?lang=en}} and marks the accomplishment of a ten years research project in this field.\footnote{Note that I developed this project in 2012 while I was a structural engineer at T/E/S/S, using the knowledge I had previously gained on the gridshell project for the Solidays music festival in 2011 while I was a research engineer at Navier. I started this thesis in octobre 2014, 18 months after the opening of the temporary cathedral to pursue my research on this topic started in may 2010.} More over, this challenge was both technical and human as the structure was built by the parishioners them selfs.
+It is worth to mentionne that this project arises thanks to a long-term collaboration between {T/E/S/S atelier d'ingénierie}\footnote{A structural design firm based in Paris, France : \url{http://tess.fr}} and the laboratoire Navier\footnote{Architected Materials and Structures (AMS) research team, specializes in the field of mechanics of materials and structures : \url{http://navier.enpc.fr/Materiaux-et-Structures?lang=en}} and marks the accomplishment of a ten years research project in this field.\footnote{Note that I developed this project in 2012 while I was a structural engineer at T/E/S/S, using the knowledge I had previously gained on the gridshell project for the Solidays music festival in 2011 while I was a research engineer at Navier. I started this thesis in octobre 2014, 18 months after the opening of the temporary cathedral to pursue my research on this topic started in may 2010.} Moreover, this challenge was both technical and human as the structure was built by the parishioners themselves.
 
 \subsection{Overview}
 
+The chapter begins by a synthetic introduction to the project recalling the context, challenges and main architectural considerations that prevailed to the birth of this innovative building (see \cref{sec:proj_overview}). We then present the construction process of the structure (see \cref{sec:construction_process}) and how the shell was designed using the compass method and a dynamic relaxation program implemented by myself in conjonction with the structural analysis software GSA (see \cref{sec:proj_design}). From this general basis we give two focus~: one on the use of composite materials in such an application (see \cref{sec:design_gfrp}) and one on the design of the construction details (see \cref{sec:construction_details}). In a short section we get back on the hygrometric behavior of the structure which was problematic (see \cref{sec:hygro}). Finally, we conduct a cost analysis of the project and determine the economic strength and weakness of the technology, which allows us to identify some potential improvements (see \cref{sec:costanalysis}).
 
 \subsection{Contributions}
 
 This project was at the heart of the motivations for this thesis as it acted as a proof of feasibility and as a validation of the design tools and methods developed until then. The gained experience has highlighted further research directions that are presented in this manuscript.
 
-In this chapter, we present the key aspects of the design and construction of this building. The main contribution of this work is to exhibit a method to design and build gridshells in a shape-driven design process. In such a process, architecture plays its full role as it is less dependent on purely structural considerations. Moreover, a building is much more than a shelter and has to satisfy serious requirements. To fill this gap, a meticulous attention was brought to the development of construction details. These technical developments lead to numerous testings. This chapter focus on this fundamental aspect as it is also a key contribution. Finally, we point out and analyze our experience, and we draw up some recommendations for further developments.
+\begin{itemize}
+\item We set-up a method to design and build gridshells in a shape-driven design process. In such a process, architecture plays its full role as it is less dependent on purely structural considerations.
+\item We propose a method to deal with composite materials that is compatible with the existing regulatory framework, which is not mean to deal with such non-standard materials.
+\item A building is much more than a shelter and has to satisfy serious requirements. To fill this gap, a meticulous attention was brought to the development of construction details which is also a major contribution of this work.
+\item We propose a meticulous cost analysis of the project in order to further improve the economic viability of the technology.
+\end{itemize}
 
-\subsection{Related work}
-
-A thorough review is given in \cref{sec:review}. 
-
-
-\begin{figure}[p]
-	\centering
-	\begin{fullpage}
-		\includegraphics[width=1\textwidth]{situation_map}
-		\caption[Situation map]{Situation map. The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.}\label{fig:situation_map}    
-		\vspace{1.5cm}
-		\includegraphics[width=0.7\textwidth]{form}
-		\caption[Architectural sketch]{Architectural sketch. Major and minor volumes are agglomerated into one volume. Here, the morphological register allowed by elastic gridshells appears to be relevant.}\label{fig:form}    
-	\end{fullpage} 
-\end{figure}
-
-\section{Project overview}
+\section{Project overview}\label{sec:proj_overview}
 %===================
 \subsection{Context and challenges}
 %----------------------------------------------
-Creteil is a city of 90.000 inhabitants in the southeast suburb of Paris. Its urbanization began in the late 50’s, impelled by the French architect Charles-Gustave Stoskopf. In 1976 he designed Notre Dame of Créteil, a modest catholic church made of concrete, which became a cathedral 10 years later (see item 2 in \cref{fig:situation_map}). Recently, the diocese of Créteil has undertaken a major architectural redevelopment project of its cathedral, including a timber shell covering the religious area and the creation of a new cultural area. Once transformed, the edifice shall be more visible, more hospitable and livelier for citizens. Inevitably, such a molt takes time and a temporary place of worship was required to ensure liturgical services during the two-years work. In November 2011, T/E/S/S, the structural design office in charge of the cathedral renovation project, made an ambitious proposal to the diocese~: based on a previous successful experience – the construction of a composite gridshell for the festival Solidays \cite{Baverel2012} – T/E/S/S suggested that rather installing a basic tent, the parishioners should construct themselves a temporary cathedral.\footnote{See the video of the construction of Solidays' gridshell here : \url{https://youtu.be/24LLfcVIZWw}.}\textsuperscript{,}\footnote{See the video of the construction of Creteil's gridshell here : \url{https://youtu.be/jLq-UfOdnQQ}.}
+Creteil is a city of 90.000 inhabitants in the southeast suburb of Paris. Its urbanization began in the late 50’s, impelled by the French architect Charles-Gustave Stoskopf. In 1976 he designed \emph{Notre Dame of Créteil}, a modest catholic church made of concrete, which became a cathedral 10 years later (see item 2 in \cref{fig:situation_map}). Recently, the diocese of Créteil has undertaken a major architectural redevelopment project of its cathedral, including a timber shell covering the religious area and the creation of a new cultural area. Once transformed, the edifice shall be more visible, more hospitable and livelier for citizens. Inevitably, such a molt takes time and a temporary place of worship was required to ensure liturgical services during the two-years work. In November 2011, T/E/S/S, the structural design office in charge of the cathedral renovation project, made an ambitious proposal to the diocese~: based on a previous successful experience – the construction of a composite gridshell for the festival Solidays \cite{Baverel2012} – T/E/S/S suggested that rather installing a basic tent, the parishioners should construct themselves a temporary cathedral.\footnote{See the video of the construction of Solidays' gridshell here : \url{https://youtu.be/24LLfcVIZWw}.}\textsuperscript{,}\footnote{See the video of the construction of Creteil's gridshell here : \url{https://youtu.be/jLq-UfOdnQQ}.}
+
+\begin{figure}[t]
+	\centering
+%	\begin{fullpage}
+		\includegraphics[width=1\textwidth]{situation_map}
+		\caption[Situation map]{Situation map. The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.}
+		\label{fig:situation_map}    
+%	\end{fullpage} 
+\end{figure}
 
 \subsection{Architectural considerations on the form}
 %------------------------------------------------------------------
 The origin of this building form was driven by two objectives, that is, to provide a variety of appropriate internal spaces within which the community could assemble, and to provide an externally welcoming and visually interesting form. According to the architect Tom Gray, today, the internal organization of a roman catholic church is in large part driven by the post Vatican II vision of a religious celebration being a collective gathering of the community around the Eucharist, center of spiritual life. A circular seating arrangement is often considered the most convivial form to create a sense of belonging while minimizing a sense of hierarchy. However the community is not only using the building for religious celebration but also for encounters on a more informal manner, for example spontaneous gatherings after religious ceremonies. In the early Roman church, such gathering of the community was facilitated by the presence of an anti-space to the main space called a \emph{narthex}, through which one passed on entering the church. It was therefore felt appropriate that the formal freedom which the gridshell system offered would be used to explore forms composed of an agglomeration of major and a minor volumes which contain the two functions~: formal and informal gatherings (see item 1 and 2 in \cref{fig:form}).
 
 Formal explorations were undertaken using modeling clay. The final form is based loosely on two adjacent semi spherical volumes of different size, which are merged into one complex form. Externally the fear of the design team was that the totally convex blob form could look intimidating. It was therefore decided that the two spherical virtual forms, which would be joined to make the final form, would be arranged not in a symmetrical axial manner, but in an asymmetrical curved composition. The resulting form seen in plan is convex on one side and concave on the other. The concave form in plan allows for double curvature to be introduced into what would be otherwise a simpler blob and gives sensuality and visual interest to the building.
+
+\begin{figure}[t]
+	\centering
+%	\begin{fullpage}
+%		\includegraphics[width=1\textwidth]{situation_map}
+%		\caption[Situation map]{Situation map. The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.}\label{fig:situation_map}    
+%		\vspace{1.5cm}
+		\includegraphics[width=0.7\textwidth]{form}
+		\caption[Architectural sketch]{Architectural sketch (T. Gray). Major and minor volumes are agglomerated into one volume. Here, the morphological register allowed by elastic gridshells appears to be relevant.}\label{fig:form}    
+%	\end{fullpage} 
+\end{figure}
 
 \begin{figure}[p]
 	%
@@ -99,22 +109,20 @@ The temporary cathedral is located on a land owned by the municipality, which is
 It is formally quite difficult to integrate doors, which must be verticals, into a complex geometry. Either the gridshell could be deformed to accommodate the geometrical requirements of doors, or the doors could be integrated into an independent form. The latter approach was chosen. In looking for forms to house the doors, reference was made to the conical monumental doorways with rings of concentric decoration, which welcome the faithful to romanesque and gothic churches in France. The conical forms were found to be coherent to the overall geometry of the building. The entrance doors were therefore inserted into a conical hooded form made of rolled steel plates and stiffened by concentric steel tubes, which not only make reference to historic precedence but also refer to the gridshell to be discovered inside (see \cref{fig:door_int}). The cone of the entrance doors was positioned in the concave side of the building giving access directly to the narthex part of the internal volume. To the rear of the church is situated a service door. The steel hood, which houses this door, is curved tightly around the door and takes up an ovoid form.
 
 \subsection{Daylight}
-The gridshell is covered in a PVC membrane, which is opaque. How to introduce daylight into the interior was a major subject of reflection. The simplest way found was to use transparent membrane placed occasionally on the membrane. A small amount of light was required in the interior to create a contemplative atmosphere. The lights would in consequence glow and would be seen as luminous insertions in the vault, like stars in the celestial vault or the apse of some Romanesque churches. The stars were patterned on the joints of the PVC membrane. The almond shape came from simplification of the cutting into the panels either side of the joints and to avoid stress concentrations around cuts in the membrane. This shape, known as Mandela, is frequently used in Marian religious imagery. The distribution of the transparent insertions is quite uniform but gets denser above the pinnacle.
+The gridshell is covered by a PVC membrane, which is opaque. How to introduce daylight into the interior was a major subject of reflection. The simplest way found was to use transparent membrane placed occasionally on the membrane. A small amount of light was required in the interior to create a contemplative atmosphere. The lights would in consequence glow and would be seen as luminous insertions in the vault, like stars in the celestial vault or the apse of some Romanesque churches. The stars were patterned on the joints of the PVC membrane. The almond shape came from simplification of the cutting into the panels either side of the joints and to avoid stress concentrations around cuts in the membrane. This shape, known as Mandela, is frequently used in Marian religious imagery. The distribution of the transparent insertions is quite uniform but gets denser above the pinnacle.
 
 \subsection{Technical description}
 % ------------------------------------------
 
-The gridshell structure is made of long glass fibre tubes (\O 42~mm) fastened together with scaffold swivel couplers (see, \cref{fig:swivel}). The structural members of the grid, all of different lengths, are built  from one, two or three composite tubes connected with steel sleeves (see \cref{fig:sleeve}). The length of the tubes is limited to 12~m to enable transportation through standard trucks. The tubes are organized in three layers. During assembly, the first two layers are first placed perpendicular to one another on the ground. They form the \emph{quadrangular primary grid}. The distance between the tubes of these two layers is constant, resulting in a regular grid. This primary grid is elastically deformed to obtain the final shape. The third layer of tubes acts as bracing. It gives the structure a shell-like behavior. The tubes are fixed to the primary grid once the shape has been obtained
+The gridshell structure is made of long glass fibre tubes (\O 42~mm) fastened together with scaffold swivel couplers (see, \cref{fig:swivel}). The structural members of the grid, all of different lengths, are built  from one, two or three composite tubes connected with steel sleeves (see \cref{fig:sleeve}). The length of the tubes is limited to 12~m to enable transportation through standard trucks. The tubes are organized in three layers. During assembly, the first two layers are first placed perpendicular to one another on the ground. They form the \emph{quadrangular primary grid}. The distance between the tubes of these two layers is constant, resulting in a regular grid. This primary grid is elastically deformed to obtain the final shape. The third layer of tubes acts as bracing. It gives the structure a shell-like behavior. The tubes are fixed to the primary grid once the shape has been obtained.
 
 The structure is anchored to a concrete strip footing with a special anchorage system, which ensures transfer of loads from the composite structure to the ground (see \cref{fig:anchorage}). A similar system enables fixation of the structure to the doors (see \cref{fig:door_int}).
 
-A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers the structure. The transparent portion of the structure allows daylight inside the gridshell. The fabric is stretched on the peripheral edge of a dedicated beam with a double-lacing system (halyard and strap, see \cref{fig:edge}). At the ground level, the lacing edge of the beam is made of a bent, composite rod nailed to the concrete slab. At the grid–door junction, a steel arch is welded to the doorframe (see \cref{fig:door_ext}).
-
-The PVC fabric is waterproof and, since it is a continuous membrane, has no joints except at the perimeter. At the perimeter, a continuous strip of membrane is prefixed to the internal surface of the membrane and fixed to the ground slab. At the doors, a flexible strip of the membrane is riveted to the doorframe.
-\vspace{2cm}
+A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers the structure. The transparent portion of the structure allows daylight inside the gridshell. The fabric is stretched on the peripheral edge of a dedicated beam with a double-lacing system (halyard and strap, see \cref{fig:edge}). At the ground level, the lacing edge of the beam is made of a bent composite rod nailed to the concrete slab. At the grid–door junction, a steel arch is welded to the doorframe (see \cref{fig:door_ext}). The PVC fabric is waterproof and, since it is a continuous membrane, has no joints except at the perimeter. At the perimeter, a continuous strip of membrane is prefixed to the internal surface of the membrane and fixed to the ground slab. At the doors, a flexible strip of the membrane is riveted to the doorframe.
+\vspace{0.4cm}
 \begin{table}[h]
 \centering
-\ra{1.1}
+\ra{0.95}
 %\begin{fullpage}
  	\begin{tabular}{@{}lllrr@{}}
 	\toprule
@@ -148,7 +156,7 @@ The PVC fabric is waterproof and, since it is a continuous membrane, has no join
 				& weight						& kg/m\textsuperscript{2}	& 1 \\
 	\bottomrule
  	\end{tabular}
-\captionof{table}[Key numbers]{Key numbers.}
+\captionof{table}[Key figures]{Key figures.}
 %\end{fullpage}
 \end{table}
 
@@ -171,14 +179,14 @@ The PVC fabric is waterproof and, since it is a continuous membrane, has no join
 \clearpage
 
 
-\section{Construction process}
+\section{Construction process}\label{sec:construction_process}
 % ====================
 
 \subsection{Assembly of the grid}
-The first two directions of tubes were assembled perpendicularly on the ground with the swivel couplers (see \cref{fig:swivel}) to form the \emph{primary} grid. The resulting grid covered about 600~m\textsuperscript{2} (see \cref{fig:cp_1}). At each intersection, the tubes were fastened together with a coupler, installed manually by the volunteers. They were asked not to tighten the bolts but just to engage the collars in order to prevent potential damages from the collar over the tube. Once the assembly of the primary grid was complet, the swivel couplers were tightened with a torque wrench to the optimal torque specified specified by the laboratory Navier. The whole stage took two full days. Note that because the anchorages sticked out from the slab, it was decided not to assemble the grid on the concrete slab to ensure that the grid would be able to slide freely on the ground and not get clung in the anchorages during the erection stage.
+The first two directions of tubes were assembled perpendicularly on the ground with the swivel couplers (see \cref{fig:swivel}) to form the \emph{primary} grid. The resulting grid covered about 600~m\textsuperscript{2} (see \cref{fig:cp_1}). At each intersection, the tubes were fastened together with a coupler, installed manually by the volunteers. They were asked not to tighten the bolts but just to engage the collars in order to prevent potential damages from the collar over the tube. Once the assembly of the primary grid was complet, the swivel couplers were tightened with a torque wrench to the optimal torque specified by the laboratoire Navier (F. Tayeb, J-F. Caron, L. du Peloux). The whole stage took two full days. Note that because the anchorages sticked out from the slab, it was decided not to assemble the grid on the concrete slab to ensure that the grid would be able to slide freely on the ground and not get clung in the anchorages during the erection stage.
 
 \subsection{Deformation of the grid}
-The next stage consisted in lifting the grid simultaneously with two mobile cranes (35t). Once lifted up, the grid took nearly its final form (see \cref{fig:cp_2}). The structure was slowly moved above the slab until tube endings faced at best their respective anchor points. Then, tube after tube, the workers pined the grid to the ground anchorages (see \cref{fig:cp_3}). This stage is tricky, especially at the beginning because only few tubes are connected to the ground. If the grid moves it can easily break these few tubes. The action of pinning a tube is done with a single bolt. The end of each composite tube is equipped with a rotating steel clevis. Similarly, each ground anchorage is composed of a steel plate fixed to the concrete slab and a rotating clevis. To pin a tube to an anchorage, their clevis are aligned one to each other and a pin is positioned in their central hole (see \cref{fig:anchorage}). When all the tubes were pinned to their anchorage, the grid was stable and secured and the cranes were removed (see \cref{fig:cp_4}). The stage lasted one full day.
+The next stage consisted in lifting the grid simultaneously with two mobile cranes (35t). Once lifted up, the grid took nearly its final form (see \cref{fig:cp_2}). The structure was slowly moved above the slab until tube endings faced at best their respective anchor points. Then, tube after tube, the workers pined the grid to the ground anchorages (see \cref{fig:cp_3}). This stage is tricky, especially at the beginning because only few tubes are connected to the ground. If the grid moves it can easily break these few tubes. The action of pinning a tube is done with a single bolt. The end of each composite tube is equipped with a rotating steel clevis. Similarly, each ground anchorage is composed of a steel plate fixed to the concrete slab and a rotating clevis. To pin a tube to an anchorage, their clevis are aligned one to each other and a pin is positioned in their central hole (see \cref{fig:anchorage}). When all the tubes were pinned to their anchorage, the grid was stable and secured and the cranes were removed (see \cref{fig:cp_4}). This stage lasted one full day.
 
 \subsection{Bracing of the grid}
 Once the primary grid was deformed into the final shape, it was braced by a third direction of tubes called the \emph{triangulation}. The triangulation tubes split the quadrangular mesh of the primary grid into triangles (see \cref{fig:cp_5}). This work was tedious as it required working at height in aerial buckets. Tubes were hand-conveyed in the structure and attached to the tubes of the second layer with an additional swivel coupler. Each node of the structure would then be composed of two connections (see \cref{fig:swivel_dwg}). Once triangulated the structure behaves like a shell and its stiffness increases largely.
@@ -208,10 +216,10 @@ Once the primary grid was deformed into the final shape, it was braced by a thir
 \subsection{Covering of the gridshell}
 Finally, the structure is covered with a PVC coated fabric. The membrane comes rolled up. The roll is positioned at one side. Then it is progressively unrolled toward the other side (see \cref{fig:cp_6}). This step requires professional rope workers. Once the membrane is in place, it is hand tensioned with a system of halyard and strap (see \cref{fig:edge}). All included, this stage lasted no more than a single day for a team of six workers.
 
-This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis were successfully conducted with the required accuracy (see \cref{sec:formfinding}).
+This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis was successfully conducted with the required accuracy (see \cref{sec:form-finding}).
 
 %\clearpage
-\section{Structural design}
+\section{Structural design}\label{sec:proj_design}
 %=================
 
 In this section, we exhibit a methodology to design a gridshell with a shape-centered approach. This is one of the key originality of this work and it was first implemented for the Solidays gridshell in 2011. The idea is to identify a grid and a set of supports that once the grid is bended and anchored to its foundations has a geometry as close as possible to the target shape designed by the architect.
@@ -233,14 +241,14 @@ Developing this structural design was a complex process. Indeed, for each step, 
 
 \subsection{3D modelling of the intended shape}
 %------------------------------------------
-The first step of the process consists in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal is to estimate quickly the probability a given shape would lead to the generation of a structurally feasible gridshell.
+The first step of the process consists in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal is to estimate quickly the probability that a given shape would lead to the generation of a structurally feasible gridshell.
 
-Stresses in the grid are mainly due to the bending of the tubes. Therefore, they can be derived directly from the measurement of the geometric curvature of the tubes. Because the principal curvatures of the surface give a quantitative measurement of the local curvature of any curve drawn on a surface, they are relevant indicators to evaluate the stress rate of laying a grid on the said surface.\footnote{Indeed, any normal section of the surface will have its curvature bounded by the principal curvatures of the surface. Therefore, this seems reasonable to seek grids that fulfill this criterion as the structural elements would probably not resist too large variations of curvatures in the plane of the surface.} Particularly, the following condition has to be satisfied everywhere~: 
+Stresses in the grid are mainly due to the bending of the tubes. Therefore, they can be derived directly from the measurement of the geometric curvature of the tubes. Because the principal curvatures of the surface give a quantitative measurement of the local curvature of any curve drawn on a surface, they are relevant indicators to evaluate the stress rate of laying a grid on the said surface.\footnote{Indeed, any normal section of the surface will have its curvature bounded by the principal curvatures of the surface. Therefore this seems reasonable to seek grids that fulfill this criterion as the structural elements would probably not resist too large variations of curvatures in the plane of the surface.} Particularly, the following condition has to be satisfied everywhere~: 
 \begin{equation}
 	\mathrm{E} \cdot \frac{r}{R_{min}} < \frac{\sigma_{k,flex}}{\gamma_{lt}} 
 	\label{eq:crit_1}
 \end{equation}
-where, $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance (see \cref{sec:safety}). 
+where $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance (see \cref{sec:safety}). 
 
 Ideally, the shape is controlled by few key parameters. Thus, it is easier to adapt and optimize the shape through an iterative process towards the above criterion \cref{eq:crit_1}.
 
@@ -262,23 +270,38 @@ In this step, the geometric curvature of the polylines drawn on the surface is a
 	\mathrm{E} \cdot   \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
 	\label{eq:crit_2}
 \end{equation}
-where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see \cref{sec:compass}), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. This method, proposed by \citet{IL10}, was first implemented for the Solidays gridshell in 2011. The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec:swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The aim is to identify at least one grid which satisfies both the architectural and the structural requirements. 
+where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see below), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. I implemented this method, proposed by \citet{IL10}, for the Solidays gridshell in 2011 \cite{DuPeloux2011}.\footnote{This method was also used at the laboratoire Navier by \citef{Bouhaya2014} and more recently by \citef{Masson2017b}.} The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec:swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The goal of the method is to identify at least one grid which satisfies both the architectural and the structural requirements. 
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.8\textwidth]{compass_method.png}
-	\caption[How the compass method works]{How the compass method works.}
-	\label{fig:compass_method}
-	%
-%	\includegraphics[width=1\textwidth]{canevas.png}
-%	\caption[Grasshopper canevas]{Meshing software as a plugin for \emph{Grasshopper}.}
-%	\label{fig:canevas}
+\begin{figure}[t]
+     	\centering
+%	\begin{fullpage}
+		\includegraphics[width=0.8\textwidth]{compass_method.png}
+		\caption[How the compass method works]{How the compass method works.}
+		\label{fig:compass_method}
+		%
+		\vspace{0.75cm}
+		%
+		\includegraphics[width=1\textwidth]{canevas.png}
+		\caption{Meshing software as a plugin for \emph{Grasshopper}.}
+		\label{fig:canevas}
+%	\end{fullpage}
 \end{figure}
 
-\subsubsection{Compass method}\label{sec:compass}
-This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quarters. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{compass_method.png}
+%	\caption[How the compass method works]{How the compass method works.}
+%	\label{fig:compass_method}
+%	%
+%%	\includegraphics[width=1\textwidth]{canevas.png}
+%%	\caption[Grasshopper canevas]{Meshing software as a plugin for \emph{Grasshopper}.}
+%%	\label{fig:canevas}
+%\end{figure}
 
-The compass method does not allow to spread the mesh everywhere on a given surface because it stops when a directrix reaches the boundary of the surface. Only a portion of the surface can be meshed and the covered area varies according to the chosen set of directrices. To overcome this difficulty, we consider the gridshell surface (see \cref{fig:compass_a}) as a part of a larger domain surface (see \cref{fig:compass_c}). Trimmed by a plane, this domain surface should give back the intended shape to build (see \cref{fig:compass_b}). Therefore, it is possible to mesh the domain surface (see \cref{fig:compass_d}) and to retrieve a Chebyshev net that cover completely the initial surface (see \cref{fig:compass_f}).
+\subsubsection{Compass method}\label{sec:compass}
+This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quadrants. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.
+
+The compass method does not allow to spread the mesh everywhere on a given surface because it stops when a directrix reaches the boundary of the surface. Only a portion of the surface can be meshed and the covered area varies according to the chosen set of directrices. To overcome this difficulty, we consider the gridshell surface (see \cref{fig:compass_a}) as a part of a larger domain surface (see \cref{fig:compass_c}). Trimmed by a plane, this domain surface should give back the intended shape to build (see \cref{fig:compass_b}). Therefore, it is possible to mesh the domain surface (see \cref{fig:compass_d}) and to retrieve a Chebyshev net (that is an equilateral mesh) that cover completely the initial surface (see \cref{fig:compass_f}).
 
 The method is easily extended to meshes with variable pitch. This idea was explored to find optimal grids with genetic algorithm by \citet{Bouhaya2014}. It is worth to mention an attempt to extend this method for multilayer Chebyshev grids by \citet{Lefevre2015}.
 
@@ -327,17 +350,17 @@ The method is easily extended to meshes with variable pitch. This idea was explo
 
 
 \subsubsection{Numerical tool}
-Here, a specific software developed by \citet{DuPeloux2011} for \rhino{} and \grasshopper{} allows generating this kind of mesh on any non-uniform rational B-spline surface (NURBS). It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to build programmatically the analysis model and then perform the formfinding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult in conventional analysis softwares for freeform structures. However, the tool does not provide any computation facilities itself and this is exactly the goal of the second part of this thesis.
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1\textwidth]{canevas.png}
-	\caption{Meshing software as a plugin for \emph{Grasshopper}.}
-	\label{fig:canevas}
-\end{figure}
+Here, a specific program developed by \citet{DuPeloux2011} for \rhino{} and \grasshopper{} allows the generation of this kind of mesh on any non-uniform rational B-spline surface (NURBS). It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to build programmatically the analysis model and then perform the form-finding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult in conventional analysis softwares for freeform structures. However, the tool does not provide any computation facilities itself and this is exactly the goal of the second part of this thesis.
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=1\textwidth]{canevas.png}
+%	\caption{Meshing software as a plugin for \emph{Grasshopper}.}
+%	\label{fig:canevas}
+%\end{figure}
 
-\subsection{Formfinding and bending prestress}
+\subsection{Form-finding and bending prestress}\label{sec:form-finding}
 %------------------------------------------
-In the previous steps, the initial form was optimized and promising meshes for the materialization of the future gridshell were identified. However, the produced meshes do not take into account any of the mechanical reality, because only geometrical rules were used in their generation. The formfinding step consists precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses. The calculation is performed numerically thanks to a dynamic relaxation algorithm with kinetic damping and comprise the following steps~:
+In the previous steps, the initial form was optimized and promising meshes for the materialization of the future gridshell were identified. However, the produced meshes do not take into account any of the mechanical reality, because only geometrical rules were used in their generation. The form-finding step consists precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses. The calculation is performed numerically thanks to a dynamic relaxation algorithm with kinetic damping and comprise the following steps~:
 \begin{enumerate}
 \item The grid is bent by a set of applied displacements from its resting position to the compass position.
 \item The grid is then relaxed until it falls in its mechanical equilibrium.
@@ -347,7 +370,7 @@ In the previous steps, the initial form was optimized and promising meshes for t
 
 Two analysis models were built during this process to study the structure with and without bracing tubes.
 
-The computations were realized with the formfinding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such as the one introduced in \citeyear{Adriaenssens2000} by \citet{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task, highlighting the necessity of a dedicated formfinding tool with a higher level of interactivity. This issue that the coupling between rotational and translational degrees of freedom could cause ill-conditioning problems was already noticed by \citet{Adriaenssens2001}. In the same paper, they proposed a 3-DOF element valid for torsion-free cases. Simpler and faster, it is also a lot more stable. This element was reused and extended lat1er for the formfinding of elastic gridshells in composite materials with complex connections by \citet{Douthe2007}.
+The computations were realized with the form-finding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such as the one introduced in \citeyear{Adriaenssens2000} by \citet{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task, highlighting the necessity of a dedicated form-finding tool with a higher level of interactivity. Moreover, coupling between rotational and translational degrees of freedom can cause ill-conditioning problems, which was already noticed by \citet{Adriaenssens2001}. In the same paper, they proposed a 3-DOF element valid for torsion-free cases. Simpler and faster, it is also a lot more stable. This element was reused and extended later for the form-finding of elastic gridshells in composite materials with complex connections by \citet{Douthe2007}.
 
 To tackle numeric instabilities the model had to be simplified~: 
 \begin{itemize}
@@ -362,18 +385,18 @@ To tackle numeric instabilities the model had to be simplified~:
 %	\label{fig:gsa}
 %\end{figure}
 
-The formfinding process should not be regarded as a pure computational stage were only the equilibrium shape has to be found while all other design parameters are fixed. Indeed, as the goal is to find a suitable geometry with the most relaxed permanent bending stresses in the structure, this process could itself be employed to explore optimal geometries that will lead to more relaxed static equilibriums. In the present project the supports were allowed to move slightly around their target position by the mean of spring supports with orthotropic stiffness. This allowed to decrease the overall level of permanent bending stress in the tubes while granting very minor changes in the geometry.
+The form-finding process should not be regarded as a pure computational stage were only the equilibrium shape has to be found while all other design parameters are fixed. Indeed, as the goal is to find a suitable geometry with the most relaxed permanent bending stresses in the structure, this process could itself be employed to explore optimal geometries that will lead to more relaxed static equilibriums. In the present project the supports were allowed to move slightly around their target position by the mean of spring supports with orthotropic stiffness. This allowed to decrease the overall level of permanent bending stress in the tubes while granting very minor changes in the geometry.
 
 Finally the process converges when the shape and the pattern drawn by the mesh are suitable for the architect while the permanent bending stresses are acceptable for the tubes (see \cref{sec:safety}). The end results for this stage are presented in \cref{fig:gsa}. Note the smoothness of the mesh and the convergence of the tubes near the altar. Bending stresses are well distributed and inferior to the maximum design stress allowed (\SI{133}{MPa} in that case). Only few tubes are heavy loaded, in the areas where the curvature is the highest.
 
 \subsection{As-built geometry}\label{sec:asbuilt}
  %-------------------------------------
-Although, the eccentricity ($e = \SI{136}{\mm}$) remains small compared with the span of the shell ($l =\SI{17}{m}$), it is not negligible compared with the mesh size ($w = \SI{1.0}{m}$). Thus, the tube lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assesses that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding is performed only with those two layers. Connection axes has to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by $-e/2$, the green by $+e/2$ and the blue by $+e/2$ along the surface normal.
+Although, the eccentricity ($e = \SI{136}{\mm}$) remains small compared with the span of the shell ($l =\SI{17}{m}$), it is not negligible compared with the mesh size ($w = \SI{1.0}{m}$). Thus, the tube lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assesses that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding is performed only with those two layers. Connection axes has to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by $-e/2$, the green by $+e/2$ and the blue by $+3e/2$ along the surface normal (see \cref{fig:eccentricity}).
 \begin{figure}[p]
      	\centering
 	\begin{fullpage}
-		\includegraphics[width=1\textwidth]{gsa.png}
-		\caption[Permanent bending stresses in the structure under self-weight]{Permanent bending stresses in the structure under self-weight (red tubes : \SI{130}{MPa}).}
+		\includegraphics[width=1\textwidth]{gsa2.jpg}
+		\caption[Permanent bending stresses in the structure under self-weight]{Permanent bending stresses in the structure under self-weight (max = \SI{130}{MPa}).}
 		\label{fig:gsa}
 		%
 		\vspace{1.5cm}
@@ -388,12 +411,12 @@ Although, the eccentricity ($e = \SI{136}{\mm}$) remains small compared with the
 \end{figure}
 \subsection{Structural analysis}
 %------------------------------------------
-A full structural analysis is finally performed on the gridshell, using the two mechanical models created previously during the formfinding stage.
+A full structural analysis is finally performed on the gridshell, using the two mechanical models created previously during the form-finding stage.
 The non-braced model is used to check the grid’s behavior during the construction stages. In particular, it must be verified that the primary grid - the one with no triangulation tubes - has no risk of buckling, both for obvious safety reasons and to ensure the accuracy of the final geometry. Indeed, the more the form is likely to buckle, the more it can be triangulated in a buckled geometry different to the targeted geometry. The model with the triangulated grid is used to confirm the gridshell complies with all the structural requirements during its lifetime. Its behavior under standard loadings is evaluated.
 
 %\newpage \phantom{abc}
 \clearpage
-\section{Designing with GFRP materials}
+\section{Designing with GFRP materials}\label{sec:design_gfrp}
 %------------------------------------------
 This section focuses on the GFRP tubes employed for the structure. We present how we managed to deal with this composite material in the eyes of the existing regulatory framework although there is no applicable norms for composite materials (see \cref{sec:codes}). Beyond the administrative strategy, we present how their flexural strength was evaluated (see \cref{sec:flex}) and how the corresponding partial safety factors were detremined (see \cref{sec:safety}).
 
@@ -557,9 +580,9 @@ When dealing with long-term effects in permanently loaded, pultruded composite m
 
 
 
-\section{Construction details}
+\section{Construction details}\label{sec:construction_details}
 % ====================
-In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (see \cref{fig:swivel}) ; the steel sleeve for connecting several composite tubes to obtain long members from initially short pieces of tubes (see \cref{fig:sleeve}) ; the ground anchorages for fixing the structure to the concrete slab (see \cref{fig:anchorage}) and the lacing edge beam of the fabric (see \autoref{fig:edge}). The challenging issue of connecting the steel and composite parts was solved similarly sleeve and anchorage details.
+In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (see \cref{fig:swivel}) ; the steel sleeve for connecting several composite tubes to obtain long members from initially short pieces of tubes (see \cref{fig:sleeve}) ; the ground anchorages for fixing the structure to the concrete slab (see \cref{fig:anchorage}) and the lacing edge beam of the fabric (see \autoref{fig:edge}). The challenging issue of connecting the steel and composite parts was solved similarly for sleeve and anchorage details.
 
 \subsection{The swivel coupler}\label{sec:swivel}
 % -------------------------------------------------------
@@ -573,10 +596,10 @@ Tubes are connected together with scaffold swivel couplers (see \cref{fig:swivel
 \end{figure}
 
 \subsubsection{Interface layer}
-This coupler is made to assemble two scaffold steel tubes together. Workers should tight strongly the collars of the coupler to ensure that the steel tubes won't slide in their collar. Here, it is clearly impossible to do that. Indeed the GFRP tube is to thin (only \SI{3.5}{\mm} thick) and tightening the collars to the maximum would damage it or even make it collapse. However, preventing the connections to slide along the tubes is critical to maintain the in-plane shear degree of freedom of the grid. If connections would slide, the grid would probably not deploy in space as intended. The grid kinematic would be blocked at some points, developing high stresses that would lead to breakages. To maintain a sufficient level of sliding resistance while preserving the material integrity it was decided to introduce an interface layer to~:
+This coupler is made to assemble two scaffold steel tubes together. Workers should tight strongly the collars of the coupler to ensure that the steel tubes won't slide in their collar. Here, it is clearly impossible to do that. Indeed the GFRP tube is too thin (only \SI{3.5}{\mm} thick) and tightening the collars to the maximum would damage it or even make it collapse. However, preventing the connections to slide along the tubes is critical to maintain the in-plane shear degree of freedom of the grid. If connections would slide, the grid would probably not deploy in space as intended, because its deployability relies on the fact that the mesh is equilateral. The grid kinematic would be blocked at some points, developing high stresses that would lead to breakages. To maintain a sufficient level of sliding resistance while preserving the material integrity it was decided to introduce an interface layer to~:
 \begin{itemize}
-\item increase the poor friction coefficient between the steel collar and the GFRP tube ;
-\item improve the distribution of stresses generated by the transverse compression of the collar over the tube, thus allowing a stronger clamping of the collar.
+\item Increase the poor friction coefficient between the steel collar and the GFRP tube.
+\item Improve the distribution of stresses generated by the transverse compression of the collar over the tube, thus allowing a stronger clamping of the collar.
 \end{itemize}
 
 Several materials were tested in different thickness. Some of the results are presented in \cref{plot:layer_benchmark}. A \SI{1.5}{\mm} thick EPDM ribbon was found to be suitable for the design requirements of the project. This layer improves significantly the sliding resistance from about \SI{300}{\newton} to about \SI{1200}{\newton}. Once the interface layer had been chosen, further tests were conducted to determine the appropriate clamping for the connections. The aim was to maximize the clamping to get the best sliding resistance (see \cref{plot:tightening}) while preserving the  integrity of the tubes. It was found that a tightening torque between \SI{15}{Nm} to \SI{20}{Nm} was the optimal solution \cite{Tayeb2015a}.
@@ -591,7 +614,7 @@ This connection has the advantage to be available almost every where, to be real
 \item The weight of this part is \SI{1.16}{\kg}, which is very heavy compare to the lightness of the system. In this project, the weight of the swivel couplers represents one third of the overall weight of the structure. This could easily be reduced with a dedicated design.
 \item The actual design is not adapted to resist sliding. This is critical as explained previously. This problem occurred locally during the lifting of the grid and it was a pain to finish the deployment of the structure (see \cref{sec:rex}).
 \item  Although the clamping of the collars enhance the resistance to sliding of the couplers, they also activate the ability to transfer some torsion to the tubes. Unfortunately, the tubes are very weak regarding this type of sollicitation (see \cref{tab:tube}). A better design would propose a kinematics that allow the rotation of each collar around the axis of the connection and the axis of the tube.
-\item  As the number of connections is quite huge, the clamping process should be at the heart of the design. The later has to guarantee that the workers will not damage unintentionally the structural members. If clamping would be found to be the way to go -- which indeed might be an relevant option -- the structural elements will have to be stronger to resist both clamping and torsion.
+\item  As the number of connections is quite large, the clamping process should be at the heart of the design. The later has to guarantee that the workers will not damage unintentionally the structural members. If clamping would be found to be the way to go -- which indeed might be a relevant option -- the structural elements will have to be stronger to resist both clamping and torsion.
 \end{itemize}
 
 Furthermore, other design criterion should be taken into account such as the fact that the connection must not damage the membrane. This was resolved in the project thanks to plastic caps (see \cref{fig:sleeve_dwg}). It is worth to mentionne that the problematic of the connection should be treated in symbiosis with the difficult question of the bracing and the covering as it interacts with all the key parts of the system : grid, bracing and membrane. Some propositions to this complex problem were designed and tested during this thesis and are presented in \cref{sec:booby,sec:jpofav}. A noticeable design attempt was proposed in the roof of Chiddingstone's orangery \cref{sec:}.
@@ -603,7 +626,7 @@ Furthermore, other design criterion should be taken into account such as the fac
 \centering
 \begin{fullpage}
 	\includegraphics[]{ch3_creteil/plot/1_layer_benchmark/build.pdf}
-	\caption[Influence of the interface layer on the sliding resistance]{Influence of the interface layer on the sliding resistance (\SI{5}{Nm}). Results from \cite{Tayeb2015a}.}
+	\caption[Influence of the interface layer on the sliding resistance]{Influence of the interface layer on the sliding resistance (torque set to \SI{5}{Nm}). Results from \cite{Tayeb2015a}.}
 	\label{plot:layer_benchmark}
 \end{fullpage}
 \end{figure}
@@ -643,8 +666,8 @@ The sleeve is a steel system that provides mechanical continuity between two adj
 \end{figure}
 
 \subsubsection{Mechanical behaviour}
-Tension forces are transferred from the composite tube to the connector through shear in the pins. Owing to a lower bearing resistance in the composite than in the steel, each of the three pins could be gradually loaded. When loading the system, initially, only one of the three pins is in contact with both the steel tube and the composite tube, because of inevitable minor manufacturing gaps. When the axial load is increased, this pin started to “eat” into the composite tube until the second pin also comes in contact. Thus, the axial load is transferred equally between the two pins. This scheme could work for more until another failure mode occurs.
-For this mode of composite failure, which prevailed in this case, the total bearing capacity of the assembly was thus three times the capacity of a single pin. This total bearing capacity can be calculated from the compressive strength, the composite thickness and the pin diameter~:
+Tension forces are transferred from the composite tube to the connector through shear in the pins. Owing to a lower bearing resistance in the composite than in the steel, each of the three pins could be gradually loaded. When loading the system, initially, only one of the three pins is in contact with both the steel tube and the composite tube, because of inevitable minor manufacturing gaps. When the axial load is increased, this pin starts to “eat” into the composite tube until the second pin also comes in contact. Thus, the axial load is transferred equally between the two pins. This scheme can work with more pins until another failure mode occurs.
+For this mode of composite failure, which prevailed in this case, the total bearing capacity of the assembly is thus three times the capacity of a single pin. This total bearing capacity can be calculated from the compressive strength, the composite thickness and the pin diameter~:
 \begin{equation}
 	F = 3 \times f_{u,c}\cdot d \cdot t = \SI{3150}{daN}
 \end{equation}
@@ -658,7 +681,7 @@ Firstly, the bending stiffness of the rod should be roughly equivalent to the co
 	\label{eq:r1}
 \end{equation}
 \item
-Secondly, the steel quality of the rod should be adjusted such that plastification begins when the composite tube tends to approach its maximum design stress (a third of the yield stress). Thus the rod acted as a \textquote{fuse}~: if the curvature of the system reaches the maximum allowed curvature, the steel rod starts their plastification. The plastic hinge accumulates the rotation thus preventing the curvature to increase in the composite tubes (see \cref{fig:sleeve_d}).
+Secondly, the steel quality of the rod should be adjusted such that plastification begins when the composite tube tends to approach its maximum design stress (a third of the yield stress). Thus the rod acts as a \textquote{fuse}~: if the curvature of the system reaches the maximum allowed curvature, the steel rod starts their plastification. The plastic hinge accumulates the rotation and prevents the curvature to increase in the composite tubes (see \cref{fig:sleeve_d}).
 \begin{equation}
 	\frac{\raisebox{0.2ex}M^{elastic\,max}_{rod}}{\raisebox{-0.2ex}M^{\sigma = \SI{133}{MPa}}_{gfrp}} \simeq 1
 	\label{eq:r2}
@@ -667,7 +690,7 @@ Secondly, the steel quality of the rod should be adjusted such that plastificati
 In this project, the numerical values for the ratios in \cref{eq:r1,eq:r2} were 0.79 and 0.96 respectively.
 
 \subsubsection{Testing the load-bearing capacity of the pinned connection}
-\cref{plot:pintest} shows the tensile test of a three-pin connection between a connector and the corresponding composite tube. The graph reflects the elastic behavior of the composite tube up to \SI{35}{kN}, with slight deviations corresponding to the rearrangement of the pins. The compressive stress applied by each pin to the composite tube exceeds its compressive strength. Progressively, the pins are pulled through the tube under a residual force that tends to stabilize at around \SI{20}{kN}.
+Tensile test of a three-pin connection between a connector and the corresponding composite tube were done (see \cref{plot:pintest}). The graph reflects the elastic behavior of the composite tube up to \SI{35}{kN}, with slight deviations corresponding to the rearrangement of the pins. The compressive stress applied by each pin to the composite tube exceeds its compressive strength. Progressively, the pins are pulled through the tube under a residual force that tends to stabilize at around \SI{20}{kN}. The tests exhibit a ductile behavior of the assembly, which is advantageous for such a structural application.
 
 The theoretical failure modes of a bolt in a pultruded profile are given in \cite{Fiberline2003} and are illustrated in \cref{fig:breaking}. For the present design of the sleeve system, the observed failure modes were tearing (see \cref{fig:sleeve_e}) and contact compression (see \cref{fig:sleeve_f}). Note that this last failure mode is necessary to cumulate the load bearing capacity of each pin.
 
@@ -744,9 +767,9 @@ The theoretical failure modes of a bolt in a pultruded profile are given in \cit
 %------------------------------------------
 The detail of the footing was of major interest because it concentrated lots of technical difficulties and also had a strong visual impact (see \cref{fig:anchorage_dwg}).
 
-In the detail, the gridshell is fixed to the concrete strip thanks to the steel anchorages (6-15). Only the first tow layers of tubes are fixed to the ground or doors (4, 3). The anchorage is made of two parts~: a steel connector (7) is pinned (6) to the composite tube (4) and equipped with a rotating steel clevis (9) ; a steel plate (15) is pinned to the concrete strip footing (26) and mounted with a vertical rotating steel clevis (11). The gridshell is connected to the ground by pinning the two parts of the anchorage. The three axis of rotations of the anchorage system -- one for each clevis axis and one for the axis of the commun pin -- allow to accommodate any orientations of the tube. More over, the rotation of the clevis is ensured by simple bolts (9,12) and nuts (8,13) that allow some adjustments in length. The system provides a quick and easy fixing of the gridshell capable of all the necessary adjustments required in real mounting conditions.
+The gridshell is fixed to the concrete strip thanks to the steel anchorages (6-15). Only the first two layers of tubes are fixed to the ground or doors (4, 3). The anchorage is made of two parts~: a steel connector (7) is pinned (6) to the composite tube (4) and equipped with a rotating steel clevis (9) ; a steel plate (15) is pinned to the concrete strip footing (26) and mounted with a vertical rotating steel clevis (11). The gridshell is connected to the ground by pinning the two parts of the anchorage. The three axis of rotations of the anchorage system -- one for each clevis axis and one for the axis of the common pin -- allow to accommodate any orientations of the tube. Moreover, the rotation of the clevis is ensured by simple bolts (9,12) and nuts (8,13) that allow some adjustments in length. The system provides a quick and easy fixing of the gridshell capable of all the necessary adjustments required in real mounting conditions.
 
-The membrane (1) is laced (17) to a composite rod (19). This rod is bent and clamped every \SI{800}{mm} in a fixed scaffold collar (20) anchored in the concrete strip footing thanks to a steel part (21). This is a clever way to get a nice curved lacing rod at the bottom of the structure. The membrane strip (18) that ensures waterproofness is deported backward so the lacing remains visible. This has a strong and elegant visible impact. This detail runs all around the structure and is reproduced around the doors. This element is subject to heavy shear forces from the tension of the lacing (around \SI{150}{daN/lm}) and this is why we chose a rod instead of a tube with a hollow section.
+The membrane (1) is laced (17) to a composite rod (19). This rod is bent and clamped every \SI{800}{mm} in a fixed scaffold collar (20) anchored in the concrete strip footing thanks to a steel part (21). This is a clever way to get a nice curved lacing rod at the bottom of the structure. The membrane strip (18) that ensures waterproofness is deported backward so that the lacing remains visible. This has a strong and elegant visible impact. This detail runs all around the structure and is reproduced around the doors. This member is subject to heavy shear forces from the tension of the lacing (around \SI{150}{daN/lm}) and this is why we chose a rod instead of a tube with a hollow section.
 
 Thanks to the membrane strip and to a small step in the concrete slab (22) the water is evacuated into the drain, a simple trench full of gravels with two perforated flexible plastic pipes at the bottom.
 
@@ -761,19 +784,19 @@ Thanks to the membrane strip and to a small step in the concrete slab (22) the w
 
 \subsection{The membrane}
 %------------------------------------------
-The membrane is nothing but a tailor-made one-piece clothing manufactured to dress up the structure. It was prefabricated based on the 3D model of the shape computed during the formfinding process (see \cref{sec:formfinding}) and not on some on-site geometric survey. The technical properties of the PVC coated fabric can be found in \cref{tab:membrane}.
+The membrane is nothing but a tailor-made one-piece clothing manufactured to dress up the structure. It was prefabricated based on the 3D model of the shape computed during the form-finding process (see \cref{sec:form-finding}) and not on some on-site geometric survey like for the prototypes presented in \cref{fig:proto}. The technical properties of the PVC coated fabric can be found in \cref{tab:membrane}.
 
 \clearpage
-\section{Hygrothermal behavior}
+\section{Hygrothermal behavior}\label{sec:hygro}
 %------------------------------------------
 \subsection{Temperature}\label{sec:temperature}
 During the first two years and a half of its service life, the building has shown that the thermal comfort was far from ideal as the membrane has very poor thermal properties (see \cref{tab:membrane})~:
 \begin{itemize}
-\item During winter, the confort is ensured during mass by a forced-air heating system positioned on the equipments slab, few meters away from the main structure. This solution is adapted to infrequent occupations of the building. In that case, the energetic cost remains limited even if the solution is far from optimal because of the lack of insulation.
-\item During summer, the temperature raises very fast when the sun shines. The forced-air system is used to ventilate the interior volume. But the comfort level is rapidly insufficient as the interior temperature quickly exceeds \SI{30}{\celsius}. The discomfort is amplified as the membrane gets very hot and radiates toward the inside, increasing the feeling of warm. Consequently, there was no choice but to scheduled the mass earlier at this period of the year. Cooling was not possible for economic reasons as the building was used only few hours a week.
+\item During winter, the confort is ensured during Mass by a forced-air heating system positioned on the equipments slab, few meters away from the main structure. This solution is adapted to infrequent occupations of the building. In that case, the energetic cost remains limited even if the solution is far from optimal because of the lack of insulation.
+\item During summer, the temperature raises very fast when the sun shines. The forced-air system is used to ventilate the interior volume. But the comfort level is rapidly insufficient as the interior temperature quickly exceeds \SI{30}{\celsius}. The discomfort is amplified as the membrane gets very hot and radiates toward the inside, increasing the feeling of warm. Consequently, there was no choice but to scheduled Mass earlier at this period of the year. Cooling was not possible for economic reasons as the building was used only few hours a week.
 \end{itemize}
 
-At the time of writing, the building is being reconfigured and so its purpose is changing. A better thermal comfort is now required and solutions have to be found. Thus, a study on the thermal behavior of the structure has been done.\footnote{This study was done in June 2017 by the design companies T/E/S/S and CHOULET for the reconfiguration project of the temporary cathedral.} The main results are gathered in this thesis. \cref{plot:T_1} presents the monthly exterior temperatures observed at the site location from 8:00 AM to 7:00 PM, which corresponds to the new intended opening hours of the building. Note that the maximum value is given over one hour, that is the observed temperature exceeds this value during a one-hour-wide window in the day. The solar radiation is also given in \cref{plot:T_2}. Two scenarios are studied~:
+At the time of writing, the building is being reconfigured and so its purpose is changing. A better thermal comfort is now required and solutions have to be found. Thus, a study on the thermal behavior of the structure has been done.\footnote{This study was done in June 2017 by the design companies T/E/S/S and CHOULET for the reconfiguration project of the temporary cathedral.} The main results are gathered in this thesis. The monthly exterior temperatures observed at the site location from 8:00 AM to 7:00 PM, which corresponds to the new intended opening hours of the building, are presented in \cref{plot:T_1}. Note that the maximum value is given over one hour, that is the observed temperature exceeds this value during a one-hour-wide window in the day. The solar radiation is also given in \cref{plot:T_2}. Two scenarios are studied~:
 \begin{enumerate}
 \item The structure is completely closed. No ventilation is put in place. The interior temperature can reach \SI{70}{\celsius} (see \cref{plot:T_3}).
 \item The structure is ventilated but no cooling system is put in place. The maximum interior temperature is lowered significantly but it can still reach \SI{50}{\celsius} (see \cref{plot:T_4}).
@@ -809,7 +832,7 @@ Condensation was also noticed in winter and shoulder season. Sometimes, droplets
 
 
 \clearpage
-\section{Cost analysis}
+\section{Cost analysis}\label{sec:costanalysis}
 %------------------------------------------
 \subsection{Overall cost for the client}
 The overall cost of the project -- that is the amount of money paid by the client -- was estimated to 324\,000~€ excluding taxes (see \cref{fig:budget}). This price includes all the possible costs related to the construction of the project~: the cost of the main building (masonry, doors, gridshell, envelop, fittings, heating, electricity, lightning, drainage, sewage, etc.), the cost of the service building, the cost of pedestrian pathways, the cost of the design studies, etc.
@@ -846,13 +869,13 @@ Here we present the cost details for the main building, that is the cathedral it
 Here, the global amount of studies was charged around 83\,300~€, that is 248~€/m\textsuperscript{2} (see \cref{fig:budget}). This heavy cost was compensated by the fact that volunteers provided a lot of free labor (see \cref{fig:manhours}). In a more standard commercial context, the design process would be optimized too and the price of studies would go down to 15\% to 20\% of the price of the building, that is 70 to 95~€/m\textsuperscript{2}. This would bring the final price of the building to 550~€/m\textsuperscript{2}. This price is clearly high if only its sheltering capability is required regarding other technologies. However, if more than sheltering is mandatory, the quality and singularity of the space created here is probably worth the price ; then this technology becomes a lot more affordable than existing traditional systems that can materialized free-forms.
 
 \subsection{Strengths and weaknesses}
-In this project the prefabrication process represents almost half of the cost in man-hours (see \cref{fig:manhours}). The manufacturing of the grid (cutting pipes, marking nodes, preassembling swivel couplers, sleeves and anchorages, etc.) could easily be automated. Composite materials such as GFRP are easy to cut, mill and drill. Small robot arms can do the job quickly with a better accuracy. This idea has been tested in a workshop at the Ecole des Ponts ParisTech in septembre 2016.\footnote{See the video of the construction of a 50~m\textsuperscript{2} wooden gridshell in the workshop \textquote{Building Free Froms}~: \url{http://thinkshell.fr/freeform-wooden-gridshell-2016/}.} More over, a numerical production process would allow to answer quickly to a variety of forms with the same equipment and industrial process.
+In this project the prefabrication process represents almost half of the cost in man-hours (see \cref{fig:manhours}). The manufacturing of the grid (cutting pipes, marking nodes, preassembling swivel couplers, sleeves and anchorages, etc.) could easily be automated. Composite materials such as GFRP are easy to cut, mill and drill. Small robot arms can do the job quickly with a better accuracy. This idea has been tested in a workshop at the Ecole des Ponts ParisTech in septembre 2016.\footnote{See the video of the construction of a 50~m\textsuperscript{2} wooden gridshell in the workshop \textquote{Building Free Forms}~: \url{http://thinkshell.fr/freeform-wooden-gridshell-2016/}.} Moreover, a numerical production process would allow to answer quickly to a variety of forms with the same equipment and industrial process.
 
 Lots of man-hours are spent in the installation of the sleeve system (88~h). That represents 35~\% of the man-hours spent in the grid prefabrication. This part should be reimplemented to allow a simpler and faster installation. Similarly, the connection should be redesigned to avoid the application of the EPDM protection layer and to allow a faster positioning and fastening as it represents 23~\% of the man-hours spent in the prefabrication of the grid. This would also be a preponderant factor of improvement in the bracing stage although this cost is not detailed in \cref{tab:manhours}.
 
-At first sight it seems that the time spending assembling the grid on the construction site -- which represents 22~\% of the man-hours, see \cref{fig:manhours} -- can not easily be reduced. However, the grid system could be divided into transportable modules. These modules would be preassembled in the factory to increase the speed and quality of the production and to minimize on-site works. Thanks to the intrinsic grid kinematic, modules can be folded for transportation. Once on site, modules are unfolded and connected to each other to form the primary flat grid. This idea was tested successfully in two wooden gridshell projects of 50~m\textsuperscript{2} each, with students of the Ecole National d'Architecture de Toulouse and Ecole National d'Architecture de Grenoble in June 2016.\footnote{Construction of two wooden gridshell pavilions : \url{http://www.lemoniteur.fr/article/a-toulouse-les-architectes-se-rassemblent-sous-le-meme-pavillon-32398196}.}
+At first sight it seems that the time spent assembling the grid on the construction site -- which represents 22~\% of the man-hours, see \cref{fig:manhours} -- can not easily be reduced. However, the grid system could be divided into transportable modules. These modules would be preassembled in the factory to increase the speed and quality of the production and to minimize on-site works. Thanks to the intrinsic grid kinematic, modules can be folded for transportation. Once on site, modules are unfolded and connected to each other to form the primary flat grid. This idea was tested successfully in two wooden gridshell projects of 50~m\textsuperscript{2} each, with students of the Ecole National d'Architecture de Toulouse and Ecole National d'Architecture de Grenoble in June 2016 (see \cref{fig:jpofav}).\footnote{Construction of two wooden gridshell pavilions : \url{http://www.lemoniteur.fr/article/a-toulouse-les-architectes-se-rassemblent-sous-le-meme-pavillon-32398196}.}
 
-Bracing is yet another costly stage as it accounts for almost 30~\% of the man-hours (see \cref{fig:manhours}). This work is not easily parallelizable as it requires working at height with proper lifting equipments such as cherry pickers. Thus almost a small and qualified team can do the job. For instance, on the gridshell of Créteil, the team was composed of 6 workers using two aerial lifts. This team spent three full days to complete this task, that is the same amount of days required to assemble the grid and lift it up. Several attempt have been made during this thesis to answer this problematic. The first attempt was to use a bidirectional cable network to brace the grid. The network is installed at the ground level before the grid is deformed. Thus, work at height is reduced to a minimum. The second attempt is a larger thought on the envelope of such structures and tries to tackle two issues with a thin fibre-reinforced concrete skin~: the fact that bracing with a third direction of tubes is time consuming ; and the fact that membrane covering is not adapted for permanent buildings.
+Bracing is yet another costly stage as it accounts for almost 30~\% of the man-hours (see \cref{fig:manhours}). This work is not easily parallelizable as it requires working at height with proper lifting equipments such as cherry pickers. Thus almost a small and qualified team can do the job. For instance, on the gridshell of Créteil, the team was composed of 6 workers using two aerial lifts. This team spent three full days to complete this task, that is the same amount of days required to assemble the grid and lift it up. Several attempt have been made during this thesis to answer this problematic. The first attempt was to use a bidirectional cable network to brace the grid. The network is installed at the ground level before the grid is deformed. Thus, work at height is reduced to a minimum (see \cref{fig:jpofav,fig:clc2016}). The second attempt is a larger thought on the envelope of such structures and tries to tackle two issues with a thin fibre-reinforced concrete skin~: the fact that bracing with a third direction of tubes is time consuming ; and the fact that membrane covering is not adapted for permanent buildings \cite{Cuvilliers2017} (see \cref{fig:booby}).
 
 \clearpage
 
@@ -1042,16 +1065,13 @@ Bracing is yet another costly stage as it accounts for almost 30~\% of the man-h
 
 \section{Conclusions}
 % ------------------------------------------
-This chapter has presented the different steps for the design of a gridshell in composite material : a Temporary Cathedral at Créteil, in Paris suburb, in 2013. The first step was the optimization of the shape in order to avoid local concentrations of curvature. The second step showed a tool to automatically mesh a surface using the compass method. With this tool, the orientation of the mesh is studied according to structural and architectural criterions. The last steps showed the structural analysis of the gridshell and how to get the as-built geometry from the analysis model.
-Architecturally, the structure offers a very interesting space where the textual richness of the tubes against the membrane accentuates the reading of the complex curved surfaces.
+This chapter has presented the different steps for the design of a gridshell in composite material : a Temporary Cathedral at Créteil, in Paris suburb, in 2013. The first step was the optimization of the shape in order to avoid local concentrations of curvature. The second step showed a tool to automatically mesh a surface using the compass method. With this tool, the orientation of the mesh is studied according to structural and architectural criterions. The last step showed the structural analysis of the gridshell and how to get the as-built geometry from the analysis model. Architecturally, the structure offers a very interesting space where the textual richness of the tubes against the membrane accentuates the reading of the complex curved surfaces.
 
-This project demonstrates that gridshells in composite material are suitable for constructing freeform buildings. However, the long-term behavior of these materials needs to be better characterized to extend their lifespan.
-
-At the moment, further developments are conducted by the laboratory to take account for torsional effects and non axisymmetric sections in such structures, as it is studied in \cite{Barnes2013}.
+This project demonstrates that gridshells in composite material are suitable for constructing freeform buildings. However, the long-term behavior of these materials needs to be better characterized to extend their lifespan. At the moment, further developments are conducted by the laboratory to take account for torsional effects and non axisymmetric sections in such structures (which is part of the purpose of this thesis), but also regarding residual properties of the members issued from the dismantling of the 2006 prototype \cite{Douthe2017} (see \cref{fig:proto_a}).
 
 \section{Acknowledgements}
 % ------------------------------------------
-First of all, the authors would like to thank the Catholic Church of Créteil for their trust and their courage, which led to the initiation and successful completion of this ambitious project. Secondly, the authors would like to acknowledge the engineers from T/E/S/S, who had developed this challenging project over 18 months. They have carried out valuable work and permitted research to become a reality through this innovative edifice. Further thanks goes to Viry for the supervision of the construction works, including the delicate erection stage. Thirdly, the authors would like to thank warmly all the people involved in the construction process~: the numerous parish volunteers, the technicians and researchers from the Navier laboratory and the engineers from T/E/S/S and Viry firms. Beyond the technical aspect, their enthusiasm made this project a powerful human experience. Fourth, the authors would like to thank the local firms for their work: BATEM (concrete), Eloi (steel), Esmery Caron (fabric), Solutions Composites (composite material), Axmann (connections) and ENSG. 
+First of all, the authors would like to thank the Catholic Church of Créteil for their trust and their courage, which led to the initiation and successful completion of this ambitious project. Secondly, the authors would like to acknowledge the engineers from T/E/S/S, who had developed this challenging project over 18 months. They have carried out valuable work and permitted research to become a reality through this innovative edifice. Further thanks goes to Viry for the supervision of the construction works, including the delicate erection stage. Thirdly, the authors would like to thank warmly all the people involved in the construction process~: the numerous parish volunteers, the technicians and researchers from the Navier laboratory and the engineers from T/E/S/S and Viry firms. Beyond the technical aspect, their enthusiasm made this project a powerful human experience. Fourth, the authors would like to thank the local firms for their work: BATEM (concrete), Eloi (steel), Esmery Caron (fabric), Solutions Composites (composite material), Axmann (connections) and ENSG (land surveyor). 
 
 
 
