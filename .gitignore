@@ -202,13 +202,18 @@ latex/_minted-ldp_thesis/
 *.DS_Store
 
 
-
-
-*.pdf
 /latex2/ch1.pdf
-/latex2/ch4.pdf
+/latex2/ch2.pdf
 /latex2/ch3.pdf
+/latex2/ch4.pdf
 /latex2/ch5.pdf
 /latex2/ch6.pdf
+/latex2/ch7.pdf
 /latex2/thesis.pdf
-/latex2/ch2.pdf
+
+/latex2/ch8.pdf
+/latex2/thesis_prepress.pdf
+/latex2/thesis_v1.pdf
+/latex2/thesis_v2.pdf
+/latex2/thesis_v3.pdf
+/latex2/thesis_v4.pdf
