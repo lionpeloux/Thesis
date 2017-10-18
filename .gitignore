@@ -193,6 +193,7 @@ FakesAssemblies/
 *.bbl
 *.blg
 *.pygtex
+*.pdf
 
 #images/
 #img/
@@ -201,6 +202,6 @@ latex/_minted-ldp_thesis/
 # Mac OSX
 *.DS_Store
 
-latex2/*.pdf
+
 
 
