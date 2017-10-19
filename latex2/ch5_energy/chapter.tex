@@ -14,7 +14,7 @@ This chapter should be understood as an extension of the work initiated by \cite
 
 Elastic gridshells are lightweight structures made of interconnected slender beams (see \cref{chp:gridshell}). Modeling the deformation process of such structures is complex as it involves to take account for the geometric non linearities induced by the large displacements and rotations of the grid. More over, the large number of connexions and the coupling between flexion and torsion highly increase the complexity of the analysis.
 
-To facilitate the design process of elastic gridshells, architects and engineers need a dedicated numerical tool that provide a good level of interactivity -- which means that numerical computations must converge within a reasonable time, if not in real time -- and gives deep insights on the geometry and on the mechanical behavior of the grid. This tool must be able to model complex connexions and various types of support conditions to enhance the user experience during the formfinding stage and to improve his ability to explore the space of constructible shapes.
+To facilitate the design process of elastic gridshells, architects and engineers need a dedicated numerical tool that provide a good level of interactivity -- which means that numerical computations must converge within a reasonable time, if not in real time -- and gives deep insights on the geometry and on the mechanical behavior of the grid. This tool must be able to model complex connexions and various types of support conditions to enhance the user experience during the form-finding stage and to improve his ability to explore the space of constructible shapes.
 
 In this chapter, our goal is to develop a beam model suitable for the modeling of grids of interconnected slender beams in order to study the mechanics of elastic gridshells. For such beams, Kirchhoff's theory of rods is considered to be appropriate. We follow recent advances in the field of computer graphics about hair modeling \cite{Bergou2008} to build a reduced degrees of freedom rod model thanks to an appropriate curve-angle representation. This representation is based on a relevant curve framing, namely the Bishop frame presented in \cref{sec:bishop}. The rod will be considered inextensible. Moreover, it will be assumed that cross-sections remain normal to the rod centerline. The internal forces and moments acting on the rod will be deduced from the differentiation of the elastic energy of the beam with respect to the degrees of freedom of the system.
 
@@ -83,7 +83,7 @@ Among all the possible geometric configurations of the rod we identify the \emph
 
 Hereinafter, the symbols referring to this configuration will be denoted with an overbar (e.g. $\rconf{\vect{x}}(s)$).
 
-\subsection{Inextensibility assumption}
+\subsection{Inextensibility assumption}\label{sec:inextensibility}
 As explained by \citef{Audoly2010}, based on a scaling argument, two cases arise for slender beams~: either the centerline stretches and bending and twisting forces become negligible compared to axial forces~; either the centerline remains inextensible. As we are not interested in the first case -- in which the beam would behave like a cable, mainly in tension -- we will assume that the rod is effectively inextensible.\footnote{For a complete treatment of the question of inextensibility refer to \cref{sec:kirchhoff_motion} in \cref{chp:kirchhoff}.}
 
 Remark that the previous description (see \cref{sec:description_motion}) is only valid for inextensible rods. Indeed, for an inextensible rod the centerline does not stretches and the arc length parameter for the rest configuration is also a valid arc length parameter for any other configuration.\footnote{For a complete treatment of the question of reparametrization refer to \cref{sec:cosserat_motion} in \cref{chp:kirchhoff}.}
@@ -172,11 +172,11 @@ The twisting moment ($Q$) and the components of the bending moment ($M_1$, $M_2$
 \end{subequations}
 We also introduce the vector of internal moments and its as~:
 \begin{subequations}
+	\label{eq:vM}
 	\begin{alignat}{2}
 		&\vect{M} &&= Q\vect{d}_3 + M_1\vect{d}_1 + M_2\vect{d}_2 \\
 		&\vect{M}^{\perp} &&= M_1\vect{d}_1 + M_2\vect{d}_2 
 	\end{alignat}	
-\label{eq:vM}
 \end{subequations}
 
 \subsection{Elastic energy}
@@ -191,8 +191,6 @@ Here, $\rconf{\kappa}_1$, $\rconf{\kappa}_2$ and $\rconf{\tau}$  denote the \emp
 
 \subsubsection{Initially straight isotropic rod~: a special case}
 From this energy formulation an interesting an well-known result on elastic rods can be retrieved. This results stipulates that torsion is uniform in a rod with isotropic cross-section and naturally straight.\footnote{This result was already known by Love \cite[§~234]{Love1906} and is mentioned by \citef{Adriaenssens1999} and \citef{Douthe2007}.} 
-
-Cette proposition est démontrée dans le paragraphe 273 de la théorie de l’élasticité de Love [66] ainsi que sous une forme plus condensée par S. Adriaenssens [3]
 
 Indeed, by definition for a rod with isotropic cross-section~: $EI_1 = EI_2 = EI$. If in addition the rod is straight in its rest configuration~: $\rconf{\kappa}_1 = \rconf{\kappa}_2 = \rconf{\tau} = 0$. The bending energy becomes~: $\mathcal{E}_{b} = EI_1\;\kappa_1^2 + EI_2\;\kappa_2^2 = EI(\kappa_1^2 + \kappa_2^2) = EI\kappa^2$. Consequently, the elastic energy of the rod is composed of two independent terms~: $\mathcal{E}_{b}[\vect{x}]$ and $\mathcal{E}_{r}[\theta]$. The coupling between bending and twisting disappears and the global minimum of elastic energy is reached when minimizing separately bending an twisting energies. This meansthat the geometry of the rod at static equilibrium ($\vect{x}$) is the one that minimized $\mathcal{E}_{b}[\vect{x}]$. And the minimum of $\mathcal{E}_{t}[\theta]$ is obviously achieved for a uniform twist ($\tau = cst$) along the centerline, only prescribed by the boundary conditions at the extremities of the rod (least-squares minimization).
 

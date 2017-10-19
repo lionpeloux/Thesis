@@ -145,7 +145,7 @@ For a curve parametrized by arc length, this expression simply becomes~:
 	\quad,\quad
 	s \in [0,L]
 \end{equation}
-In differential geometry, the unit tangente to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P}$, when $P$ approches $P_0$ on the path $\gamma$ (see \cref{fig:3_1}). For a regular curve, the left-sided and right-sided limits coïncide as $P^-$ and $P^+$ approche $P_0$ respectively from its left and right sides~:
+In differential geometry, the unit tangent to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P}$, when $P$ approches $P_0$ on the path $\gamma$ (see \cref{fig:3_1}). For a regular curve, the left-sided and right-sided limits coïncide as $P^-$ and $P^+$ approche $P_0$ respectively from its left and right sides~:
 \begin{equation}
 	\vect{t}(P_0)
 	= \lim_{P \to P_0}\frac{\overrightarrow{P_0 P}}{\norm{\overrightarrow{P_0 P}}}
@@ -274,7 +274,7 @@ The curvature is also known to be the \emph{gradient of arc length} (see~\cite[p
 This is easily understood in the case of a circle of radius $r$ extended to a circle of radius $r+dr$, where the total arc length variation is given by~: 
 $L(r + dr) - L(r) = \kappa dr L(r) $.
 
-Note that due to the inner product with the normal vector, only the normal component of the deformation results in an effective extension of the curve. This point is worth to note as it will be related to the \emph{inextensibility assumption} made later in our beam model (see \cref{sec:}).
+Note that due to the inner product with the normal vector, only the normal component of the deformation results in an effective extension of the curve. This point is worth to note as it will be related to the \emph{inextensibility assumption} made later in our beam model (see \cref{sec:inextensibility}).
 
 \subsubsection{Curvature}
 Let $\gamma$ be a regular arc length parametrized curve. Let $s \in [0,L]$ be an arc length parameter. The \emph{curvature} is a positive scalar quantity defined as~:
@@ -847,7 +847,7 @@ The components of the angular velocity of the Frenet frame are constant during t
 % ================
 \section{Discrete curves}\label{sec:discrete_curves}
 
-The previous section has introduced the fundamental analytical tools to develop a solid understanding of the geometry of smooth space curves. These tools will be essentials for the construction of the beam model presented later in \cref{sec:energy} and \cref{sec:krichhoff}. In this section we look for equivalent notions in the case of discrete space curves, as the developed model will be implemented in a numerical program to solve real mechanical problems through discrete element models (see \cref{sec:discretization}).
+The previous section has introduced the fundamental analytical tools to develop a solid understanding of the geometry of smooth space curves. These tools will be essentials for the construction of the beam model presented later in \cref{chp:energy} and \cref{chp:kirchhoff}. In this section we look for equivalent notions in the case of discrete space curves, as the developed model will be implemented in a numerical program to solve real mechanical problems through discrete element models (see \cref{chp:numerical_model}).
 
 The study of those discrete equivalent notions belong to the recent field of \emph{Discrete Differential Geometry}~: \blockcquote[p.7]{Hoffmann2008}{In some sense discrete differential geometry can be considered more fundamental than differential geometry since the later can be obtained form the former as a limit}. In particular, we will see that they are several ways to define the discrete equivalents of the curvature and the unit tangent vector. Though these various ways are equivalent and match their smooth counterpart by passing to the limit, they exhibit different capabilities at the discrete level.
 
@@ -980,66 +980,6 @@ Curvature is defined from the osculating circle, which is the best approximation
 		\label{tab:kb_def}
 \end{figure}
 
-%
-%\afterpage{%    % defer execution until the next page break occurs anyway
-%	\clearpage
-%   	\begin{figure}[t!] % not "pt"
-%      		\centering
-%		\vspace{-5mm}
-%      		% remaining contents of figure environment
-%		\subfloat[][vertex-based]{\includegraphics{kb_vertex.pdf}\label{fig:kb_vertex}}\hspace{5mm}
-%    		\subfloat[][edge-based]{\includegraphics{kb_edge.pdf}\label{fig:kb_edge}} \\[-10pt]
-%		\subfloat[][bitangent with $\norm{\vect{e}_{i-1}}$]{\includegraphics{kb_mixed_a.pdf}\label{fig:kb_mixed_a}}\hspace{5mm}
-%		\subfloat[][bitangent with $\norm{\vect{e}_{i}}$]{\includegraphics{kb_mixed_b.pdf}\label{fig:kb_mixed_b}}
-%		\vspace{10pt}
-%		\captionof{figure}[]{Several ways to define the osculating circle for discrete curves, leading to different notions of discrete curvature.}
-%		\label{fig:kb_def}
-%   	\end{figure}
-%   	\begin{table}[h!] % not t or b or p
-%		\centering
-%      		% remaining contents of table environment
-%      		\renewcommand{\arraystretch}{1.5}
-% 		\begin{tabular}{l | c c c c c c}
-%      		\hline
-%		Curvature ($\kappa_i$) 										&  Locality 	&  $\varphi \mapsto 0$ 	&  $\varphi \mapsto \pi$ 		& Ends  	& Dim 	&  Fitting	\\
-%		\hline
-%		$\kappa_1 = \frac{2\, \sin(\varphi_i)}{\norm{\vect{e}_{i-1}+\vect{e}_i}}$ 	&  $\vect{x}_i$ 	&  $0$				&  $0, 2$					&  yes	&  space	&  clothoid		\\
-%		$\kappa_2 = \frac{\tan(\varphi_i/2)+\tan(\varphi_{i+1}/2)}{l_i}$ 			&  $\vect{e}_i$ 	&  $0$				&  $\infty$					&  no		&  planar	&  circle			\\
-% 		$\kappa_3 = \frac{2\, \tan(\varphi_i / 2)}{\overbar{l_i}} $				&  $\vect{x}_i$	&  $0$ 				&  $\infty$					&  no		&  space	&  circles			\\[5pt]
-%	\hline
-%		$\kappa_4 = \frac{2\,\sin(\varphi_i / 2)}{\overbar{l_i}}$ 				&  $\vect{x}_i$	&  $0$				&  $0, 2$					&  no		&  space	&  clothoid  		\\
-%		$\kappa_5 = \frac{\varphi_i}{\overbar{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\overbar{l_i}$			&  no		&  space	&  elastica  		\\[5pt]
-%		\hline
-%		\end{tabular}
-%		\captionof{figure}[]{Review of several discrete curvature definitions mentioned in the literature.}
-%	\label{tab:kb_def}
-%   \end{table}
-%} % end of argument of `\afterpage` command
-%
-
-%\footnote{
-%Curvature is defined from the osculating circle, which is the best approcximation of a curve by a circle.
-%We can define such a circle and it's radius will be the curvature at that point. Problem~: there are several ways to define such a circle.
-%
-%Très intéressant de constater que cette vision 3 verticies  vs. 2 edges est déjà présente dès le début dans l'histoire de la compréhension de la courbure.
-%
-%Pour Euler, le rayon de courbure est le rapport de l’élément d’arc sur l’angle de contin-
-%gence entre deux tangentes infiniment proches. Par ailleurs, la définition du plan osculateur n’est pas tout à fait lamêmeque chez Bernoulli, plan passant par trois points consécutifs, puis- qu’Euler dit que ce plan contient deux éléments successifs. Il le définit aussi en disant que c’est le plan où la courbe s’incurve. Pour le dire de façon un peu différente~: la tangente contient un élément, c’est le lieu où la courbe est droite, la plan osculateur représente l’étape suivante, c’est le lieu où la courbe est arc de cercle. Nous ne pensons pas trahir Euler en faisant cette présen- tation~: cela justifie que, pour lui, il est naturel de se placer sur le plan osculateur pour calculer le rayon de courbure.~\cite{Delcourt2007}
-%
-%
-%The edge osculating circle.
-%The vertex osculating circle.
-%La localité est meilleur dans le cas du vertex-based discret osculating circle.
-%Pour des anlges élevés, le edge-based discret osculating circle est plus pertinent.
-%La courbure tend vers l'infini quand les 2 edges deviennent colineaires.
-%
-%La définition du plan osculateur est univoque dans le cas discret~: c'est localement le plan défini par 2 edges consécutifs.
-%
-%Ce n'est pas le cas de la courbure qui perd son côté intrinsèque.
-%
-%courbure discrete dans le cas général
-%}
-
 % vertex-based curvature
 % -------------------------------
 \subsubsection{Vertex-based osculating circle (circumscribed)}\label{sec:circumscribed}
@@ -1050,7 +990,7 @@ Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-ba
 	\kappa_i = \norm{\vect{\kappa b}_i} = \frac{2 \, \sin(\varphi_i)}{\norm{\vect{e}_{i-1} + \vect{e}_{i}}}
 \label{eq:def_kb_vertex}
 \end{equation}
-This definition shows a good locality as the curvature is attached to the vertex $\vect{x}_{i}$, right in the place where it occurs on the discret curve. In addition, this definition leads to a natural local spline interpolation by the circumscribed osculating circle itself. This interpolation has the advantage to pass exactly through three vertices, to lie on the osculating plane and to share the same curvature as $\Gamma$ at $\vect{x}_{i}$. It also leads to a natural definition of the tangent vector at $\vect{x}_{i}$ (see \cref{sec:tangent}).
+This definition shows a good locality as the curvature is attached to the vertex $\vect{x}_{i}$, right in the place where it occurs on the discret curve. In addition, this definition leads to a natural local spline interpolation by the circumscribed osculating circle itself. This interpolation has the advantage to pass exactly through three vertices, to lie on the osculating plane and to share the same curvature as $\Gamma$ at $\vect{x}_{i}$. It also leads to a natural definition of the tangent vector at $\vect{x}_{i}$ (see \cref{sec:discrete_tangent_circumscribed}).
 
 Moreover, while this definition is valid only on the current portion of $\Gamma$ ($i \in[1, n-1]$), it is straightforward extended to its endings ($i=0,1$), provided that a unit tangent vector $\vect{t}_{0}$ (respectively $\vect{t}_{n}$) is given at $\vect{x}_{0}$ (resp. $\vect{x}_{n}$), as the unique circle tangent to $\vect{t}_{0}$ (resp. $\vect{t}_{n}$) passing through $\vect{x}_0$ and $\vect{x}_1$ (resp. $\vect{x}_{n-1}$ and $\vect{x}_n$)~:
 \begin{equation}
@@ -1061,17 +1001,6 @@ Moreover, while this definition is valid only on the current portion of $\Gamma$
 This property will be very profitable in the discrete beam model developed later in the manuscript. It is examined more in details in section \cref{sec:tangent} about the definition of the tangent vector.
 
 However, there are some important drawbacks as the curvature is bounded to $[0,2]$ (see \cref{fig:kb_bench}). When the curve tends to kinks ($\varphi \mapsto \pi$), one would expect the curvature to diverge toward infinity, but instead it tends to a finite value equals to $0$ ($l_{i-1} \neq l_i$) or $2$ ($l_{i-1} = l_i$). This issue can be bypassed if the discretization is refined \textquote{enough}. A criterion is given in the next section (\cref{sec:bench_disc}).
-
-%This expression can be written in a more convenient way for futur comparisons~:
-%\begin{equation}
-%	\kappa_1 = \frac{2}{\overbar{l_i}} \sin(\varphi_i / 2) \times \beta_i
-%	\quad , \quad 
-%	\beta_i = 
-%%		\frac{\cos(\varphi_i/2)}{\sqrt{1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}  \sin^2(\varphi_i/2)}} 
-%%		\frac{1}{\sqrt{1 + (1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}) \tan^2(\varphi_i/2)}} 
-%		\left( 1 + (1 - \frac{l_{i-1} l_i}{\overbar{l_i} \overbar{l_i}}) \tan^2(\varphi_i/2) \right)^{-1/2}
-%\end{equation}
-%Note that $\beta_i = 1$ for a constant edge length curve ($l_{i-1} = l_i$).
 
 % edge-based curvature
 % ------------------------------
@@ -1104,32 +1033,6 @@ However, this definition still exhibits some drawbacks. Firstly, remark that the
 In the literature, one can find other definitions for the discrete curvature that also correspond to the definition of an osculating circle. All these definitions are summarized in \cref{tab:kb_def}. For further informations, the reader should refer to~\cite{Carroll2014, Vouga2014, Bobenko2015, Romon2013}.
 
 In particular,~\citet{Vouga2014} details which discrete curvature definitions parallel which property of the smooth curvature. He remarks that there is no \textquote{free-lunch} as none of the proposed definition satisfies every properties of the smooth curvature.
-
-%\note{
-%Unlike the smooth case we can not reparameterize a curve. A discrete curve is parameterized by arc length or it is not~\citep[p. 10]{Hoffmann2008}.
-%
-%Cette condition est extrêmement exigente $\norm{\vect{e}_{i}} = cst$. Elle est tenable pour des modèles de poutre non connectées (où le pas de disctrétisation peut-être choisi uniform) mais pour en cas de connexion. Ce point n'est pas éclairci dans les articles de Audoly.
-%}
-
-%\begin{figure}[t]
-%     \subfloat[][vertex-based]{\includegraphics{kb_vertex.pdf}\label{fig:kb_vertex}}
-%     \subfloat[][edge-based]{\includegraphics{kb_edge.pdf}\label{fig:kb_edge}}
-%     \label{steady_state}
-%     \centering
-%     \captionof{figure}[]{Main definition for the definition of the discrete osculating circle.}
-%\end{figure}
-
-
-
-%\begin{figure}[H]
-%\begin{center}
-%\includegraphics[]{osculating_circle_edge_cst.pdf}
-%\captionof{figure}[]{Another definition of the osculating circle for curve parametrized by arc lengths.}
-%\label{fig:1_1}
-%\end{center}
-%\end{figure}
-
-
 
 % sensitivity to non uniform discretization
 % ----------------------------------------------------
@@ -1173,7 +1076,7 @@ Passing $\pi/4$ and increasing $\varphi$, $\kappa_3$ exhibits a good behavior~: 
 \subsubsection{Conclusion}
 It appears that the discrete curvature related to the inscribed osculating circle exhibits a better behavior -- that is a behavior closer to the smooth case -- on the whole range of possible turning angles. This would be an advantage when modeling highly nonlinear beam configurations such as the ones encountered in hair simulations. 
 
-However, for the kind of structures we are studying here, those kind of configurations are not likely to arise. And if they do, the structure would be severely damaged and this situation is to be avoided by the designers. More over, the sharpness of the discretization could be increased to reduce the value of the turning angles and stay in the range $[0,\pi/4]$ where the circumscribed curvature gives accurate results.
+However, for the kind of structures we are studying here, those kind of configurations are not likely to arise. And if they do, the structure would be severely damaged and this situation is to be avoided by the designers. Moreover, the sharpness of the discretization could be increased to reduce the value of the turning angles and stay in the range $[0,\pi/4]$ where the circumscribed curvature gives accurate results.
 
 %% DOUBLE PAGE SIDE BY SIDE FIGURES
 \begin{figure}[p]
