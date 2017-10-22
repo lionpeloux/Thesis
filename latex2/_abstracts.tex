@@ -6,9 +6,8 @@
 \addcontentsline{toc}{chapter}{Abstract (English/Français)}
 % adds an entry to the table of contents
 % put your text here Summary to be provided
-The last decades have seen the emergence of non-standard architectural shapes. Designers find often themselves helpless with the geometrical complexity of these objects. Furthermore, the available tools dissociate shape and structural behaviour, which adds another complication. This dissertation takes the point of view based on invariance under geometrical transformations, and studies several strategies for fabrication-aware shape modelling. Three technological constraints have been identified and correspond to three independent contributions of this thesis. The repetition of nodes is studied via transformations by parallelism. They are used to generalise surfaces of revolution. A special parametrisation of moulding surfaces is found with this method. The resulting structure has a high node congruence. Cyclidic nets are then used to model shapes parametrised by their lines of curvature. This guarantees meshing by planar panels and torsion-free beam layout. The contribution of this dissertation is the implementation of several improvements, like doubly-curved creases, a hole-filling strategy that allows the extension of cyclidic nets to complex topologies, and the generation of a generalisation of canal surfaces from two rail curves and one profile curves. Finally, an innovative method inspired by descriptive geometry is proposed to generate doubly-curved shapes covered with planar facets. The method, called marionette technique, reduces the problem to a linear problem, which can be solved in real-time. A comparative study shows that this technique can be used to parametrise shape optimisation of shell structures without loss of performance compared to usual modelling technique. The handling of fabrication constraints in shape optimisation opens new possibilities for its practical application, like gridshells or plated shell structures. The relevance of those solutions is demonstrated through multiple case-studies.
 \vspace{12pt}\\
-\textbf{Keywords}~: structural morphology, generative tool, design process, descriptive geometry, structural optimisation, gridshell, marionette mesh, thin shell.
+\textbf{Keywords}~: gridshell, form-finding, active-bending, free-form, torsion, elastic rod.
 
 % French abstract
 \begin{otherlanguage}{french}
@@ -17,13 +16,29 @@ The last decades have seen the emergence of non-standard architectural shapes. D
 %Structures découvertes pleine de potentiel pour former la forme.
 %Tombées dans l'oubli puis remise au goût du jour 25 years later.
 %La thèse aborde sous un angle expérimentale méthodologique et aussi théorique.
-Les structures de type \emph{gridshell élastique} permettent de réaliser des enveloppes courbes par la déformation réversible d'une grille structurelle initialement plane et régulière sans rigidité de cisaillement. Cette capacité à \guil{former la forme} de façon efficiente prend tout son sens dans le contexte actuel où, d’une part la forme s'impose comme une composante prédominante de l'architecture moderne et d’autre part l'enveloppe s'affirme comme le lieu névralgique de la performance des bâtiments.
+Les structures de type \emph{gridshell élastique} permettent de réaliser des enveloppes courbes par la déformation réversible d'une grille structurelle régulière initialement plane. Cette capacité à \guil{former la forme} de façon efficiente prend tout son sens dans le contexte actuel où, d’une part la forme s'impose comme une composante prédominante de l'architecture moderne, et d’autre part l'enveloppe s'affirme comme le lieu névralgique de la performance des bâtiments.
 \\
 \\
-Fruit des recherches de l'architecte et ingénieur allemand Frei Otto dans les années 50, elles ont été rendues populaires par la construction de la Multihalle de Mannheim en 1975. Cependant, en dépit de leur fort potentiel, très peu de projets de ce type ont vu le jour depuis cette réalisation emblématique. 
+Fruit des recherches de l'architecte et ingénieur allemand Frei Otto dans les années 1960, elles ont été rendues populaires par la construction de la Multihalle de Mannheim en 1975. Cependant, en dépit de leur potentiel, très peu de projets de ce type ont vu le jour suite à cette réalisation emblématique qui en a pourtant démontré la faisabilité à grande échelle. Et pour cause, les moyens engagés à l'époque ne sauraient assurer la reproductibilité de cette expérience dans un contexte plus classique de projet, notamment sur le plan économique. Par ailleurs, les techniques et les méthodes développées alors sont pour la plus part tombées en désuétude ou reposent sur des disciplines scientifiques qui ont considérablement évoluées. Sans compter que le cadre réglementaire a lui aussi profondément muté, apportant une certaine rigidité vis-à-vis de la pénétration des innovations. Ainsi la conception des gridshells se pose-t-elle en des termes nouveaux aux architectes et ingénieurs actuels, qui supposent la mise aux points de nouveaux outils et de nouvelles méthodes.
+\\
+\\
+Dans cette thèse, qui marque une étape importante dans une aventure de recherche personnelle initiée en 2010, nous tentons d'embrasser la question de la conception des gridshells élastiques dans toute sa complexité, en abordant aussi bien les aspects théoriques que techniques et constructifs. Dans une première partie, nous livrons une revue approfondie de cette thématique et nous présentons de façon détaillée l'une de nos principales réalisation, la cathédrale éphémère de Créteil, construite en 2013 et toujours en service. Dans une seconde partie, nous développons un élément de poutre discret original avec un nombre minimal de degrés de liberté, bien adapté à la modélisation de la flexion et de la torsion dans les gridshells. Enrichi d'un noeud fantôme, il permet de modéliser plus finement les phénomènes physiques au niveau des connexions et des appuis. Son implémentation est présentée.
 
-
-En effet, la conception d'un tel ouvrage se heurte à deux difficultés majeures. La première difficulté est d'ordre technologique et concerne la fonctionnalisation de la structure en tant que squelette à géométrie non-standard, c'est à dire caractérisée par l'absence d'orthogonalité, pour constituer une enveloppe capable de répondre à un panel toujours plus large de critères performantiels tels que l'étanchéité, l'isolation, l'accoustique, la transparence, \telp{} La seconde difficulté est d'ordre théorique et concerne le développement d'outils de conception adaptés à cette typologie structurelle d'un nouveau genre.
+%Cette thèse marque une étape importante dans cette aventure de recherche initiée en 2010 et qui m'aura conduit à concevoir et à construire plusieurs gridshells de taille importante aussi bien en matériau composite qu'en bois.
+%
+%
+%%
+%% Elle embrasse la question de la conception et de la réalisation 
+%%
+%%\\
+%\\
+%
+%
+%
+%Les techniques et les méthodes mises au point à l'époques sont tombées en désuétudes et les En effet, la conception de ces ouvrages se posent en des termes nouveaux pour les architectes et ingénieurs actuels, 
+%
+%
+%conséquence de l'évolution du cadre réglementaire, de la mutation des techniques de calcul,.
 %
 %
 %
@@ -46,5 +61,5 @@ En effet, la conception d'un tel ouvrage se heurte à deux difficultés majeures
 %
 %Dans ce manuscrit,
 \vspace{12pt}\\
-\textbf{Keywords}~: structural morphology, generative tool, design process, descriptive geometry, structural optimisation,
+\textbf{Keywords}~: gridshell, form-finding, active-bending, free-form, torsion, elastic rod
 \end{otherlanguage}
