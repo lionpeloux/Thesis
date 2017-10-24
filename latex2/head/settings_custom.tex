@@ -94,7 +94,6 @@ pdfmetalang={en},
 baseurl={http://www.thinkshell.fr}
 }
 
-
 % TODO
 % ===========================
 \usepackage{todonotes}
@@ -144,20 +143,20 @@ useprefix=true, % use von as part of the family name (du peloux)
 
 % CAPTION
 % ===========================
-\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[font=small,textfont={normalfont},labelfont={bf,tt}]{caption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
-\captionsetup[subfloat]{captionskip=10 pt}
+\captionsetup[subfloat]{captionskip=10pt}
 
 % CREF
 % ===========================
 \crefformat{section}{§#2#1#3}
-\crefname{table}{tab.}{tables}
+\crefname{table}{tab.}{tabs.}
 \Crefname{table}{Table}{Tables}
-\crefname{figure}{fig.}{figures}
+\crefname{figure}{fig.}{figs.}
 \Crefname{figure}{Figure}{Figures}
-\crefname{equation}{eq.}{eq.}
-\Crefname{figure}{Eq.}{Eq.}
+\crefname{equation}{eq.}{eqs.}
+\Crefname{equation}{Equation}{Equations.}
 
 % PLOTS
 % ===========================
@@ -295,9 +294,9 @@ useprefix=true, % use von as part of the family name (du peloux)
 \usepackage{etoolbox}
 \renewcommand\nomgroup[1]{%
   \item[\bfseries
-  \ifstrequal{#1}{A}{Geometry of curves}{%
-  \ifstrequal{#1}{B}{Mechanics of rods}{%
-  \ifstrequal{#1}{C}{Other Symbols}{}}}%
+  \ifstrequal{#1}{A}{\texttt{Geometry of curves}}{%
+  \ifstrequal{#1}{B}{\texttt{Mechanics of rods}}{%
+  \ifstrequal{#1}{C}{\texttt{Other Symbols}}{}}}%
 ]\vspace{12pt}}
 %\renewcommand{\nomgroup}[1]{\medskip}
 

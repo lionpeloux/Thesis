@@ -9,6 +9,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[a4paper,11pt,fleqn]{book}
 %\documentclass[a4paper,11pt,fleqn,draft]{book}
+
+%\renewcommand*\ttdefault{txtt}
+
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[french,english]{babel}
@@ -20,10 +25,118 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% EDOC THESIS TEMPLATE: Variant 1.0 -> Latin modern, large text width&height
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{lmodern}
-%\usepackage[a4paper,top=22mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
+
 \usepackage[a4paper,top=32mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% FONT
+% ===========================
+% see : https://en.wikibooks.org/wiki/LaTeX/Fonts
+% see : https://tex.stackexchange.com/questions/213835/using-many-typewriter-fonts-in-a-single-document
+
+% SELECT ROMAN FONT (Body)
+% lmr (Latin Modern)
+%\usepackage{lmodern}
+%\renewcommand*{\familydefault}{lmr} 
+\usepackage[scaled=0.85]{beraserif}
+
+% SELECT TYPEWRITER FONT (Headings and Captions)
+% see : http://www.tug.dk/FontCatalogue/typewriterfonts.html
+% txtt (TXTT), cm(c)tt (Computer Modern), lm(v)tt (Latin Modern), qcr (Gyre Cursor), pcr (Adobe Courier)
+\usepackage[scaled=0.85]{beramono}
+%\renewcommand*{\ttdefault}{lmvtt} 
+
+% HYP REF LINK IN PDF
+\usepackage{hyperxmp} % pdf metadada (LDP)
+%\usepackage[a-1b]{pdfx}
+\usepackage{hyperref} % pdf metadada (LDP)
+
+\hypersetup{pdfborder={0 0 0},
+	colorlinks=true,
+	linktoc=page,
+	linkcolor=Tblue,
+	citecolor=Tblue,
+	urlcolor=Tblue} 
+\urlstyle{same}
+
+% HEADINGS
+%\renewcommand*\ttdefault{cmvtt} % cmvtt or pcr
+\usepackage{sectsty}
+\newcommand{\headingfont}[1]{\ttfamily #1}
+\allsectionsfont{\ttfamily}
+
+% PARAGRAPH
+% ===========================
+\setlength{\parindent}{0pt}
+\usepackage{setspace} % increase interline spacing slightly
+\setstretch{1.1}
+
+% TOCLOFT
+% ===========================
+\usepackage[titles]{tocloft}
+
+% PART
+\setlength{\cftbeforepartskip}{3em}
+\renewcommand{\cftpartfont}{\ttfamily\LARGE\bfseries\scshape}
+\renewcommand{\cftpartpagefont}{\ttfamily\LARGE\bfseries\scshape} 
+
+% CHAP
+\usepackage{etoolbox}
+
+% frontmatter
+\renewcommand{\cftchapfont}{\ttfamily\large\scshape}
+\renewcommand{\cftchappagefont}{\ttfamily\large\scshape}
+\let\cftchapfontbase\cftchapfont
+\let\cftchappagefontbase\cftchappagefont
+\preto{\frontmatter}{
+\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{0.0em}}
+}
+
+% mainmatter
+\let\cftchapfontnew\cftchapfont
+\let\cftchappagefontnew\cftchappagefont
+\renewcommand{\cftchapfontnew}{\ttfamily\large\scshape\bfseries}
+\renewcommand{\cftchappagefontnew}{\ttfamily\large\scshape\bfseries}
+\preto{\mainmatter}{
+\addtocontents{toc}{\protect\addvspace{1em}}
+\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{1.0em}}
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchapfont}{\protect\cftchapfontnew}}
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchappagefont}{\protect\cftchappagefontnew}}
+}
+\preto{\appendix}{
+\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{1.0em}}
+}
+
+% backmatter
+\preto{\backmatter}{
+\addtocontents{toc}{\protect\addvspace{2em}}
+\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{0.0em}}
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchapfont}{\protect\cftchapfontbase}}
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchappagefont}{\protect\cftchappagefontbase}}
+}
+
+% SEC
+\renewcommand{\cftsecfont}{\ttfamily\normalsize\scshape}
+\renewcommand{\cftsecpagefont}{\ttfamily\normalsize\scshape}
+
+% SUBSEC
+\renewcommand{\cftsubsecfont}{\ttfamily\small\scshape}
+\renewcommand{\cftsubsecpagefont}{\ttfamily\normalsize\scshape}
+
+% FIG
+\setlength{\cftfigindent}{0em}
+\setlength{\cftfignumwidth}{\cftsubsecnumwidth}
+\renewcommand{\cftfigfont}{\ttfamily\small\scshape}
+\renewcommand{\cftfigpagefont}{\ttfamily\small\scshape}
+
+% TAB
+\setlength{\cfttabindent}{0em}
+\setlength{\cftfignumwidth}{\cftsubsecnumwidth}
+\renewcommand{\cfttabfont}{\ttfamily\small\scshape}
+\renewcommand{\cfttabpagefont}{\ttfamily\small\scshape}
+ 
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -43,10 +156,7 @@
 
 
 
-\setlength{\parindent}{0pt}
 
-\usepackage{setspace} % increase interline spacing slightly
-\setstretch{1.1}
 
 \makeatletter
 \setlength{\@fptop}{0pt}  % for aligning all floating figures/tables etc... to the top margin
@@ -69,14 +179,15 @@
 	\fancyhf{}
 	\renewcommand{\headrulewidth}{0.4pt}
 	\renewcommand{\footrulewidth}{0pt}
-	\fancyhead[OR]{\bfseries \nouppercase{\rightmark}}
-	\fancyhead[EL]{\bfseries \nouppercase{\leftmark}}
-	\fancyfoot[EL,OR]{\thepage}
+	\fancyhead[OR]{\ttfamily \nouppercase{\rightmark}}
+	\fancyhead[EL]{\ttfamily \nouppercase{\leftmark}}
+	\fancyfoot[EL,OR]{\ttfamily\thepage}
 \fancypagestyle{plain}{
 	\fancyhf{}
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
-	\fancyfoot[EL,OR]{\thepage}}
+	\fancyfoot[EL,OR]{\ttfamily\thepage} % \ttfamily\large\scshape\bfseries
+}
 \fancypagestyle{addpagenumbersforpdfimports}{
 	\fancyhead{}
 	\renewcommand{\headrulewidth}{0pt}
@@ -89,17 +200,7 @@
 
 
 
-% HYP REF LINK IN PDF
-\usepackage{hyperxmp} % pdf metadada (LDP)
-%\usepackage[a-1b]{pdfx}
-\usepackage{hyperref} % pdf metadada (LDP)
 
-\hypersetup{pdfborder={0 0 0},
-	colorlinks=true,
-	linkcolor=red,
-	citecolor=red,
-	urlcolor=blue}
-\urlstyle{same}
 
 
 \makeatletter
@@ -118,24 +219,24 @@
 \newcommand*\chapterlabel{}
 %\renewcommand{\thechapter}{\Roman{chapter}}
 \titleformat{\chapter}[display]  % type (section,chapter,etc...) to vary,  shape (eg display-type)
-	{\normalfont\bfseries\Huge} % format of the chapter
+	{\headingfont\bfseries\Huge} % format of the chapter
 	{\gdef\chapterlabel{\thechapter\ }}     % the label
  	{0pt} % separation between label and chapter-title
  	  {\tikzset{external/export next=false} % LDP
 	  \begin{tikzpicture}[remember picture,overlay]
     \node[yshift=-8cm] at (current page.north west)
       {\begin{tikzpicture}[remember picture, overlay]
-        \draw[fill=black] (0,0) rectangle(35.5mm,15mm);
+        \draw[draw=Tblue, fill=Tblue] (0,0) rectangle(35.5mm,15mm); % color box
         \node[anchor=north east,yshift=-7.2cm,xshift=34mm,minimum height=30mm,inner sep=0mm] at (current page.north west)
-        {\parbox[top][30mm][t]{15mm}{\raggedleft $\phantom{\textrm{l}}$\color{white}\chapterlabel}};  %the black l is just to get better base-line alingement
+        {\parbox[top][30mm][t]{15mm}{\raggedleft $\phantom{\texttt{l}}$\color{white}\chapterlabel}};  %the black l is just to get better base-line alignement
         \node[anchor=north west,yshift=-7.2cm,xshift=37mm,text width=\textwidth,minimum height=30mm,inner sep=0mm] at (current page.north west)
-              {\parbox[top][30mm][t]{\textwidth}{\color{black}#1}};
+              {\parbox[top][30mm][t]{\textwidth}{\color{black}#1}}; % color title
        \end{tikzpicture}
       };
    \end{tikzpicture}
    \gdef\chapterlabel{}
   } % code before the title body
-
+  
 \titlespacing*{\chapter}{0pt}{50pt}{80pt} % LDP : change 30pt to 80pt after margin to avoid collision for not numbered chapters
 \titlespacing*{\section}{0pt}{13.2pt}{*0}  % 13.2pt is line spacing for a text with 11pt font size
 \titlespacing*{\subsection}{0pt}{13.2pt}{*0}
@@ -144,7 +245,7 @@
 \newcounter{myparts}
 \newcommand*\partlabel{}
 \titleformat{\part}[display]  % type (section,chapter,etc...) to vary,  shape (eg display-type)
-	{\normalfont\bfseries\Huge} % format of the part
+	{\headingfont\bfseries\Huge} % format of the part
 	{\gdef\partlabel{\thepart\ }}     % the label
  	{0pt} % separation between label and part-title
  	  {\setlength{\unitlength}{20mm}
@@ -153,9 +254,9 @@
     \node[anchor=north west,xshift=-65mm,yshift=-6.9cm-\value{myparts}*20mm] at (current page.north east) % for unknown reasons: 3mm missing -> 65 instead of 62
       {\tikzset{external/export next=false} % LDP
       \begin{tikzpicture}[remember picture, overlay]
-        \draw[fill=black] (0,0) rectangle(62mm,20mm);   % -\value{myparts}\unitlength
-        \node[anchor=north west,yshift=-6.1cm-\value{myparts}*20mm,xshift=-60.5mm,minimum height=30mm,inner sep=0mm] at (current page.north east)
-        {\parbox[top][30mm][t]{55mm}{\raggedright \color{white}Part \partlabel $\phantom{\textrm{l}}$}};  %the phantom l is just to get better base-line alingement
+        \draw[draw=Tblue, fill=Tblue] (0,0) rectangle(62mm,20mm);   % -\value{myparts}\unitlength
+        \node[anchor=north west,yshift=-6.1cm-\value{myparts}*20mm,xshift=-55.0mm,minimum height=30mm,inner sep=0mm] at (current page.north east)
+        {\parbox[top][30mm][t]{55mm}{\raggedright \color{white}Part \partlabel $\phantom{\texttt{l}}$}};  %the phantom l is just to get better base-line alingement / textt vs. texrm
         \node[anchor=north east,yshift=-6.1cm-\value{myparts}*20mm,xshift=-63.5mm,text width=\textwidth,minimum height=30mm,inner sep=0mm] at (current page.north east)
               {\parbox[top][30mm][t]{\textwidth}{\raggedleft \color{black}#1}};
        \end{tikzpicture}
