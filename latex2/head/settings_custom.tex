@@ -169,9 +169,13 @@ useprefix=true, % use von as part of the family name (du peloux)
 % ===========================
 \usepackage{tabularx}
 \usepackage{multirow}
-\usepackage{tabu} % coloring
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \newcolumntype{Z}{>{\raggedright\arraybackslash}X}
+
+% l r c coumns width optional fixed with
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \usepackage{booktabs}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
