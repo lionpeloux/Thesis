@@ -4,7 +4,7 @@
 % !TEX encoding = UTF-8 Unicode
 
 \chapter{Elastic rod~: variational approach}
-\label{chp:energy}
+\label{chp=energy}
 
 This chapter should be understood as an extension of the work initiated by \citef{Tayeb2015a} and published by \citef{DuPeloux2015} and \citef{Lefevre2017}.
 
@@ -12,16 +12,16 @@ This chapter should be understood as an extension of the work initiated by \cite
 \section{Introduction}
 % #######################################################
 
-Elastic gridshells are lightweight structures made of interconnected slender beams (see \cref{chp:gridshell}). Modeling the deformation process of such structures is complex as it involves to take account for the geometric non linearities induced by the large displacements and rotations of the grid. More over, the large number of connexions and the coupling between flexion and torsion highly increase the complexity of the analysis.
+Elastic gridshells are lightweight structures made of interconnected slender beams (see \cref{chp=gridshell}). Modeling the deformation process of such structures is complex as it involves to take account for the geometric non linearities induced by the large displacements and rotations of the grid. More over, the large number of connexions and the coupling between flexion and torsion highly increase the complexity of the analysis.
 
 To facilitate the design process of elastic gridshells, architects and engineers need a dedicated numerical tool that provide a good level of interactivity -- which means that numerical computations must converge within a reasonable time, if not in real time -- and gives deep insights on the geometry and on the mechanical behavior of the grid. This tool must be able to model complex connexions and various types of support conditions to enhance the user experience during the form-finding stage and to improve his ability to explore the space of constructible shapes.
 
-In this chapter, our goal is to develop a beam model suitable for the modeling of grids of interconnected slender beams in order to study the mechanics of elastic gridshells. For such beams, Kirchhoff's theory of rods is considered to be appropriate. We follow recent advances in the field of computer graphics about hair modeling \cite{Bergou2008} to build a reduced degrees of freedom rod model thanks to an appropriate curve-angle representation. This representation is based on a relevant curve framing, namely the Bishop frame presented in \cref{sec:bishop}. The rod will be considered inextensible. Moreover, it will be assumed that cross-sections remain normal to the rod centerline. The internal forces and moments acting on the rod will be deduced from the differentiation of the elastic energy of the beam with respect to the degrees of freedom of the system.
+In this chapter, our goal is to develop a beam model suitable for the modeling of grids of interconnected slender beams in order to study the mechanics of elastic gridshells. For such beams, Kirchhoff's theory of rods is considered to be appropriate. We follow recent advances in the field of computer graphics about hair modeling \cite{Bergou2008} to build a reduced degrees of freedom rod model thanks to an appropriate curve-angle representation. This representation is based on a relevant curve framing, namely the Bishop frame presented in \cref{sec=bishop}. The rod will be considered inextensible. Moreover, it will be assumed that cross-sections remain normal to the rod centerline. The internal forces and moments acting on the rod will be deduced from the differentiation of the elastic energy of the beam with respect to the degrees of freedom of the system.
 
-This chapter is devoted to the development of the beam model. The formulation of a discrete element and its implementation in a numerical solver are treated in a dedicated chapter (see \cref{chp:numerical_model}).
+This chapter is devoted to the development of the beam model. The formulation of a discrete element and its implementation in a numerical solver are treated in a dedicated chapter (see \cref{chp=numerical_model}).
 
 \subsection{Overview}
-We begin this chapter by presenting Kirchhoff model of rods based on two main hypothesis~: the inextensibility and the Euler-Bernouili assumption (see \cref{sec:kirchhoff_rod}). We introduce a \dofs{6} representation of the rod composed of a centerline and a material frame. Thanks to a convenient reference frame we reduce this formulation to \dofs{4} and adopt a curve-angle description of the rod (see \cref{sec:crvangle}). From there, we formulate a variational problem that will lead to the calculation of the internal forces and moments acting on the rod (see \cref{sec:varpb}). We calculate the gradients of the elastic energy to obtain the internal twisting moment (see \cref{sec:dE_dtheta}) and the internal forces (see \cref{sec:dE_dx}). Finally, we discuss the potential of our model and suggest new possibilities (see \cref{sec:discussVar}).
+We begin this chapter by presenting Kirchhoff model of rods based on two main hypothesis~: the inextensibility and the Euler-Bernouili assumption (see \cref{sec=kirchhoff_rod}). We introduce a \dofs{6} representation of the rod composed of a centerline and a material frame. Thanks to a convenient reference frame we reduce this formulation to \dofs{4} and adopt a curve-angle description of the rod (see \cref{sec=crvangle}). From there, we formulate a variational problem that will lead to the calculation of the internal forces and moments acting on the rod (see \cref{sec=varpb}). We calculate the gradients of the elastic energy to obtain the internal twisting moment (see \cref{sec=dE_dtheta}) and the internal forces (see \cref{sec=dE_dx}). Finally, we discuss the potential of our model and suggest new possibilities (see \cref{sec=discussVar}).
 
 \subsection{Contributions}
 \begin{itemize}
@@ -57,8 +57,8 @@ A intégrer
 
 
 % #######################################################
-\section{Kirchhoff rod}\label{sec:kirchhoff_rod}
-Kirchhoff's theory of rods is presented thoroughly in the next chapter (see \cref{chp:kirchhoff}). In this chapter, although the assumptions are not exactly the ones made by  Kirchhoff in his theory, we will stick to this denomination as introduced by \cite{Bergou2008}. In the present theory we will assume that~:
+\section{Kirchhoff rod}\label{sec=kirchhoff_rod}
+Kirchhoff's theory of rods is presented thoroughly in the next chapter (see \cref{chp=kirchhoff}). In this chapter, although the assumptions are not exactly the ones made by  Kirchhoff in his theory, we will stick to this denomination as introduced by \cite{Bergou2008}. In the present theory we will assume that~:
 \begin{itemize}
 \item the rod is inextensible,
 \item cross-sections remain plane,
@@ -66,27 +66,27 @@ Kirchhoff's theory of rods is presented thoroughly in the next chapter (see \cre
 \item the material deforms elastically.
 \end{itemize}
 
-\subsection{Description of the motion}\label{sec:description_motion}
+\subsection{Description of the motion}\label{sec=description_motion}
 We introduce a curvilinear coordinate system to describe the motion of our Kirchhoff rod, compatible with the model assumptions. It is composed of a parametric space curve, called the \emph{centerline}, equipped with a moving frame, called the \emph{material frame}.
 
 \subsubsection{Deformed configuration}
 The actual geometric configuration of the rod is described by its centerline $\vect{x}(s)$ and its cross-sections. The centerline is a space curve parameterized by its arc length, denoted $s$. Cross-sections orientation are followed along the centerline by a material frame $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ which is an adapted orthonormal moving frame aligned with the principal axes of inertia of the cross-section.
 
-Recall from \cref{sec:amf} that \emph{adapted} means that the material frame is aligned with the tangent vector of the centerline~:
+Recall from \cref{sec=amf} that \emph{adapted} means that the material frame is aligned with the tangent vector of the centerline~:
 \begin{equation}
 	\vect{d}_3 (s)=\vect{x}'(s)=\vect{t}(s)
 \end{equation}
-Here, the prime symbol denotes the derivation with respect to the arc length parameter $s$. Recall also from \cref{sec:arclength_param} that $\norm{\vect{x}'(s)}=1$ because $\vect{x}$ is parametrized by arc length.
+Here, the prime symbol denotes the derivation with respect to the arc length parameter $s$. Recall also from \cref{sec=arclength_param} that $\norm{\vect{x}'(s)}=1$ because $\vect{x}$ is parametrized by arc length.
 
 \subsubsection{Stress-free configuration}
 Among all the possible geometric configurations of the rod we identify the \emph{stress-free configuration} or \emph{rest configuration}, that is the configuration in which the rod is stress-free under no external forces and moments applied top it (loads, supports, \telp{}). This configuration is crucial as the elastic energy of a rod in a given configuration relies on both its actual and rest configuration.
 
 Hereinafter, the symbols referring to this configuration will be denoted with an overbar (e.g. $\rconf{\vect{x}}(s)$).
 
-\subsection{Inextensibility assumption}\label{sec:inextensibility}
-As explained by \citef{Audoly2010}, based on a scaling argument, two cases arise for slender beams~: either the centerline stretches and bending and twisting forces become negligible compared to axial forces~; either the centerline remains inextensible. As we are not interested in the first case -- in which the beam would behave like a cable, mainly in tension -- we will assume that the rod is effectively inextensible.\footnote{For a complete treatment of the question of inextensibility refer to \cref{sec:kirchhoff_motion} in \cref{chp:kirchhoff}.}
+\subsection{Inextensibility assumption}\label{sec=inextensibility}
+As explained by \citef{Audoly2010}, based on a scaling argument, two cases arise for slender beams~: either the centerline stretches and bending and twisting forces become negligible compared to axial forces~; either the centerline remains inextensible. As we are not interested in the first case -- in which the beam would behave like a cable, mainly in tension -- we will assume that the rod is effectively inextensible.\footnote{For a complete treatment of the question of inextensibility refer to \cref{sec=kirchhoff_motion} in \cref{chp=kirchhoff}.}
 
-Remark that the previous description (see \cref{sec:description_motion}) is only valid for inextensible rods. Indeed, for an inextensible rod the centerline does not stretches and the arc length parameter for the rest configuration is also a valid arc length parameter for any other configuration.\footnote{For a complete treatment of the question of reparametrization refer to \cref{sec:cosserat_motion} in \cref{chp:kirchhoff}.}
+Remark that the previous description (see \cref{sec=description_motion}) is only valid for inextensible rods. Indeed, for an inextensible rod the centerline does not stretches and the arc length parameter for the rest configuration is also a valid arc length parameter for any other configuration.\footnote{For a complete treatment of the question of reparametrization refer to \cref{sec=cosserat_motion} in \cref{chp=kirchhoff}.}
 
 The inextensibility hypothesis also implies that any admissible perturbation ($\lambda\vect{h}_x$) of the rod's centerline ($\vect{x}$) is locally orthogonal to the centerline itself. Indeed, at each arc length $s$ an inextensible rod must satisfies~:
 \begin{equation}
@@ -98,10 +98,10 @@ It is worth to mention here that this property ($\vect{d}_3 \cdot \vect{h}'_x = 
 Hereinafter, the length of the rod will be denoted $L$ and the arc length $s$ will vary in $[0,L]$, with no loss of generality.
 
 \subsection{Euler-Bernouilli assumption}
-Strains are supposed to remain small so that the cross-sections remain plane and the material frame remains orthonormal and adapted to the centerline during the motion of the rod. In other words the cross-sections undergo rigid body motions.\footnote{For a complete treatment of this point in Kirchhoff's theory refer to \cref{sec:kirchhoff_deform_conf} in \cref{chp:kirchhoff}.}
+Strains are supposed to remain small so that the cross-sections remain plane and the material frame remains orthonormal and adapted to the centerline during the motion of the rod. In other words the cross-sections undergo rigid body motions.\footnote{For a complete treatment of this point in Kirchhoff's theory refer to \cref{sec=kirchhoff_deform_conf} in \cref{chp=kirchhoff}.}
 
 \subsection{Motion of the material frame}
-As a consequence of the Euler-Bernoulli assumption, we can differentiate the conditions of orthonormality of the material frame (see \cref{sec:moving_frame}). This leads to the following system of differential equations governing the evolution of the \emph{material directors} $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ along the centerline~:
+As a consequence of the Euler-Bernoulli assumption, we can differentiate the conditions of orthonormality of the material frame (see \cref{sec=moving_frame}). This leads to the following system of differential equations governing the evolution of the \emph{material directors} $\{\vect{d}_3 (s),\vect{d}_1 (s),\vect{d}_2 (s)\}$ along the centerline~:
 \begin{equation}
 	\begin{bmatrix}
 		\vect{d}'_3(s) \\
@@ -130,9 +130,9 @@ where $\tau(s)$, $\kappa_{1}(s)$ and $\kappa_{2}(s)$ are the rates of rotation o
 	\end{bmatrix}
 	\end{alignat}
 \end{subequations}
-That means that $\tau(s)$, $\kappa_{1}(s)$ and $\kappa_{2}(s)$ are the components of the angular velocity of the material frame around its axes $\vect{d}_3 (s)$, $\vect{d}_1 (s)$ and $\vect{d}_2 (s)$ when it travels along the centerline at unit speed.\footnote{See \cref{fig:geo_interpretation} in \cref{sec:moving_frame} for a geometric interpretation of these rates of rotation.}
+That means that $\tau(s)$, $\kappa_{1}(s)$ and $\kappa_{2}(s)$ are the components of the angular velocity of the material frame around its axes $\vect{d}_3 (s)$, $\vect{d}_1 (s)$ and $\vect{d}_2 (s)$ when it travels along the centerline at unit speed.\footnote{See \cref{fig:geo_interpretation} in \cref{sec=moving_frame} for a geometric interpretation of these rates of rotation.}
 
-Recall from \cref{sec:curvature} how the (geometric) curvature ($\kappa$) of a spatial curve parametrized by arc length is related to the Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ by ~:
+Recall from \cref{sec=curvature} how the (geometric) curvature ($\kappa$) of a spatial curve parametrized by arc length is related to the Frenet frame $\{\vect{t}(s),\vect{n}(s),\vect{b}(s)\}$ by ~:
 \begin{subequations}
 	\begin{alignat}{2}
 		&\vect{t}'(s) = \vect{x}''(s) = \kappa(s) \cdot \vect{n}(s)
@@ -157,7 +157,7 @@ Kirchhoff's theory assigns a physical meaning to the components of $\vect{\Omega
 \item $\kappa_1(s)$ and $\kappa_2(s)$ are called the \emph{material curvatures} and represent the rod's flexion in the principal planes, respectively normal to $\vect{d}_1(s)$ and $\vect{d}_2(s)$ (see \cref{fig:curve_angle_a})~;
 \item $\tau(s)$ is called the \emph{material twist} and represents the cross-sections rate of rotation around $\vect{d}_3(s)$ (see \cref{fig:curve_angle_b}).
 \end{itemize}
-These scalar functions are directly related to the components of the strain tensor as defined in Kirchhoff's theory.\footnote{For a complete treatment of the definition of  strain in Kirchhoff's theory refer to \cref{sec:kirchhoff_strains} in \cref{chp:kirchhoff} or \citef{Dill1992}}
+These scalar functions are directly related to the components of the strain tensor as defined in Kirchhoff's theory.\footnote{For a complete treatment of the definition of  strain in Kirchhoff's theory refer to \cref{sec=kirchhoff_strains} in \cref{chp=kirchhoff} or \citef{Dill1992}}
 
 Note that In the literature these quantities are sometimes called \emph{strain rates} (\citef{Antman2005}) or \emph{moment strains} (\citef{Reissner1973}). However, this depart from the most common definition in which the strain is a dimensionless quantity that~: \blockcquote[p.~19]{Audoly2010}{\belp{} provides a geometrical characterization of deformation~: it measures by how much the solid departs from its natural configuration.}.
 
@@ -196,7 +196,7 @@ Indeed, by definition for a rod with isotropic cross-section~: $EI_1 = EI_2 = EI
 
 In that particular case, the geometry of the centerline is not influenced by the amount of uniform twist (hence torsion) present in the rod.
 
-\section{Curve-angle representation}\label{sec:crvangle}
+\section{Curve-angle representation}\label{sec=crvangle}
 
 In the previous paragraph we have shown how the elastic energy of a rod can be computed with respect to the position of its centerline and the orientation of its cross-sections. This representation can be naturally described with six degrees of freedom (\dofs{6})~: \footnote{This is the usual choice in which the orientation of the material frame is parametrized by a rotation matrix, or equivalently a quaternion.}
 \begin{itemize}
@@ -222,11 +222,11 @@ Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of th
 \end{figure}
 
 \subsection{Definition of the representation}
-This reduction of the number of \dofs{} relies on the choice of a suitable reference frame, namely a Bishop (or zero-twisting) frame denoted $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$. Recall from \cref{sec:bishop} in \cref{chp:curve} that this reference frame is adapted to the centerline and exhibits a null angular velocity around the centerline's tangent vector (see \cref{eq:null_velocity}), which means~:
+This reduction of the number of \dofs{} relies on the choice of a suitable reference frame, namely a Bishop (or zero-twisting) frame denoted $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$. Recall from \cref{sec=bishop} in \cref{chp=curve} that this reference frame is adapted to the centerline and exhibits a null angular velocity around the centerline's tangent vector (see \cref{eq:null_velocity}), which means~:
 \begin{equation}
 	\vect{u}(s)\cdot\vect{v}'(s) = \vect{u'}(s)\cdot\vect{v}(s)=0
 \end{equation}
-The Bishop frame only depends on $\vect{x}$, the geometry of the centerline, and the choice of an initial condition. This reference frame is obtained all along the curve by propagating a given initial frame -- usually chosen at $s=0$ -- with the parallel transport operator (see \cref{sec:paralleltransport}). By construction, this reference frame evolves along the curve with the following angular velocity~:
+The Bishop frame only depends on $\vect{x}$, the geometry of the centerline, and the choice of an initial condition. This reference frame is obtained all along the curve by propagating a given initial frame -- usually chosen at $s=0$ -- with the parallel transport operator (see \cref{sec=paralleltransport}). By construction, this reference frame evolves along the curve with the following angular velocity~:
 \begin{subequations}\label{eq:bishop_motion}
 	\begin{alignat}{2}
 	&\vect{\Omega}_b(s)&&=\vect{\kappa b}=\vect{t}\times\vect{t}'=\vect{x}'\times\vect{x}'' \label{eq:kb2}\\
@@ -290,11 +290,11 @@ We introduce the vector of material curvatures ($\vect{\omega}$) as the 2-dimens
 	\end{bmatrix*}
 \end{equation}
 
-\section{Definition of the variational problem}\label{sec:varpb}
+\section{Definition of the variational problem}\label{sec=varpb}
 We now have all the ingredients to build the variational problem that will lead us to the determination of the internal forces ($\vect{f}$) and the internal twisting moment ($\vect{m}$) acting on the centerline. Indeed, the quasi-static out-of-balance internal forces and twisting moment acting on the beam are calculated by differentiating the elastic energy of the system with respect to the 4 \dofs{} of the system, namely $\vect{x}$ and $\theta$.
 
 \subsection{Calculus of variations}
-Differentiating $\mathcal{E}$ with respect to $\vect{x}$ will yield the linear resultant of the internal forces ($\vect{f}$, see \cref{sec:dE_dtheta}), while differentiating $\mathcal{E}$ with respect to $\theta$ will yield the linear resultant of the internal twisting moment ($\vect{m}$, see \cref{sec:dE_dx}). Main results for the calculus of variations are reminded in \cref{chp:variation}.
+Differentiating $\mathcal{E}$ with respect to $\vect{x}$ will yield the linear resultant of the internal forces ($\vect{f}$, see \cref{sec=dE_dtheta}), while differentiating $\mathcal{E}$ with respect to $\theta$ will yield the linear resultant of the internal twisting moment ($\vect{m}$, see \cref{sec=dE_dx}). Main results for the calculus of variations are reminded in \cref{chp=variation}.
 
 These forces and moments will be used later in a damped explicit dynamic procedure to solve the equilibrium of the system. However, they are nothing but the gradient of the elastic energy and any other variational method can be employed to find a geometric configuration that minimize the elastic energy, that is a configuration in which the rod is at static equilibrium (our ultime goal).
 
@@ -325,7 +325,7 @@ The internal shear forces and the internal twisting moment are then given by~:
 \end{subequations}
 It is importante to notice that as the rod is supposed to be inextensible, the elastic energy does not include any term to characterized the axial strain. This assumption will have to be treated as a constraint when solving the variational problem. For instance, \citef{Bergou2008} choose to enforce inextensibility at each time step with a reprojection algorithm while \citef{Lefevre2017} choose to enforce this constraint thanks to a penalty energy. Hence, $\vect{f}$ will give only the internal shear forces acting on the centerline.\footnote{This is somehow equivalent to what is remarked by Dill~: \blockcquote[]{Dill1992}{The resultant shears $F_1$ and $F_2$ are not determined by the constitutive equations. They are reactive parameters in the equations of balance of momentum as they are in the elementary beam theory.}.}
 
-\subsection{Prerequisite for the computation of energy gradients}\label{sec:dofchain}
+\subsection{Prerequisite for the computation of energy gradients}\label{sec=dofchain}
 To compute the energy gradients with respect to the degrees of freedom of the rod it is primordial to understand how these \dofs{} are chained (see \cref{fig:dofs})~:
 \begin{figure}[h]
      		\centering
@@ -362,9 +362,9 @@ for the computation of $\vect{f}$.
 
 This assumption is not mandatory -- for instance it is not made by \citef{Nabaei2014} -- but was found to lead to simpler and faster computations.
 
-\section{Energy gradient with respect to $\theta$~: twisting moment}\label{sec:dE_dtheta}
+\section{Energy gradient with respect to $\theta$~: twisting moment}\label{sec=dE_dtheta}
 
-For the calculus of variations, the reader is invited to refer to \cref{chp:variation} where the notations employed through out this section are defined and where main results are reminded. 
+For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed through out this section are defined and where main results are reminded. 
 
 \subsection{Derivative of material directors with respect to $\theta$}
 Recalling that $\theta$ and $\vect{x}$ are independant variables and that the Bishop frame $\{\vect{u},\vect{v}\}$ only depends on $\vect{x}$, the decomposition of the material frame directors $\{\vect{d}_1,\vect{d}_2\}$ on the Bishop frame leads directly to the following expression for the derivative of the material directors~:
@@ -494,9 +494,9 @@ or equivalently~:
 \end{equation}
 
 
-\section{Energy gradient with respect to $x$~: internal forces}\label{sec:dE_dx}
+\section{Energy gradient with respect to $x$~: internal forces}\label{sec=dE_dx}
 
-For the calculus of variations, the reader is invited to refer to \cref{chp:variation} where the notations employed through out this section are defined and where main results are reminded. 
+For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed through out this section are defined and where main results are reminded. 
 
 \subsection{Derivative of material directors with respect to $x$}
 A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation of the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame. Let us denote~:
@@ -1049,7 +1049,7 @@ Remark that this expression can be rewritten thanks to \cref{eq:Q2} as~:
 \label{eq:fint}
 \end{equation}
 
-\section{Shear force acting on the rod}\label{sec:fmint}
+\section{Shear force acting on the rod}\label{sec=fmint}
 From \cref{eq:fint,eq:mint} we deduce the internal shear force and distributed twisting moment acting on the rod~:
 \begin{subequations}
 	\begin{alignat}{2}
@@ -1068,7 +1068,7 @@ Remark that we fall back on the static member of the dynamical equations of rods
 	\end{aligned}
 \end{equation*}}
 
-\section{Discussion}\label{sec:discussVar}
+\section{Discussion}\label{sec=discussVar}
 We have build upon \citef{Bergou2008} a reduced coordinate beam theory for the modeling of slender rods with anisotropic cross-section and arbitrary natural geometry. This model assumes that the rod is inextensible, that cross-sections remain plane and perpendicular to the centerline, and that the material behaves linearly.
 
 This model is a serious step forward for the modeling of elastic gridshells compared to the actual \dofs{3} beam element developed by \citef{Adriaenssens2001} and extended by \citef{Douthe2006} has It enables the modeling of~: fixed support conditions~; rectangular beams like the one used in timber gridshells; complex connections. However, nothing was done to take into account external loads and this is at that point a drawback worth to mentionne.
@@ -1081,7 +1081,7 @@ Unlike \citef{Bergou2008} and \citef{Nabaei2014}~:
 \end{itemize}
 
 \section{Conclusion}
-From this first model, we suggest to look at a different approach based on the dynamical Kirchhoff equations for rods. Although this development would be theoretically equivalent to the present approach, it would probably lead in a more straightforward manner to the calculation of the forces acting on the centerline, as suggested by \cref{sec:fmint}. Moreover, unlike the variational approach, the dynamic equations are easy to write taking into account the action of external forces and moments acting on the rod. This would lead to a more easy-to-implement and theoretically-solid management of these actions.
+From this first model, we suggest to look at a different approach based on the dynamical Kirchhoff equations for rods. Although this development would be theoretically equivalent to the present approach, it would probably lead in a more straightforward manner to the calculation of the forces acting on the centerline, as suggested by \cref{sec=fmint}. Moreover, unlike the variational approach, the dynamic equations are easy to write taking into account the action of external forces and moments acting on the rod. This would lead to a more easy-to-implement and theoretically-solid management of these actions.
 
 Finally, this approach might be better to treat the inextensibility not as a constraint but as part as an internal force acting on the centerline.
 

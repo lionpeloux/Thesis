@@ -3,10 +3,10 @@
 % Year : 2017
 % !TEX encoding = UTF-8 Unicode
 
-\chapter{Numerical Model} \label{chp:numerical_model}
+\chapter{Numerical Model} \label{chp=numerical_model}
 
 \section{Introduction}
-In this chapter we construct a novel discret beam element that we call the \emph{biarc beam element}. It relies on the results from \cref{chp:curve} and \cref{chp:kirchhoff}.
+In this chapter we construct a novel discret beam element that we call the \emph{biarc beam element}. It relies on the results from \cref{chp=curve} and \cref{chp=kirchhoff}.
 
 This element has a minimal number of degrees of freedom due to a reduced discrete curve-angle representation and can model extension, flexion and torsion of the rod in the framework of Kirchhoff theory. The introduction of ghost vertices enriches our previous model \cite{DuPeloux2015,Lefevre2017} in order to better represent and localized discontinuities in the model. In particular this leads to a more accurate treatment of boundary conditions, connections and loadings. This element easily integrates inside a Dynamic Relaxation procedure to find the static equilibrium of nonlinear problems.
 
@@ -15,7 +15,7 @@ In the end, that makes this element very suitable for the modeling of elastic gr
 The interest of our approach is that the entire model is derived directly from the motion equations of the rod and thus is perfectly in the line of the pioneer works in this field \cite{Day1965}.
 
 \subsection{Overview}
-We first construct a novel discret beam element called the \emph{biarc model} (see \cref{sec:dmodel}). This element is based on Kirchhoff theory of slender rods presented in \cref{chp:kirchhoff}. The mechanical behavior of the element is derived entirely from the equations of motion \cref{eq:motion} summarized in \cref{sec:ksummary}~:
+We first construct a novel discret beam element called the \emph{biarc model} (see \cref{sec=dmodel}). This element is based on Kirchhoff theory of slender rods presented in \cref{chp=kirchhoff}. The mechanical behavior of the element is derived entirely from the equations of motion \cref{eq:motion} summarized in \cref{sec=ksummary}~:
 \begin{itemize}
 \item we compute the discret force ($\vect{\eta}$) and moment ($\vect{\varkappa}$) strain vectors from the geometry of the centerline~;
 \item we compute the bending moment ($\vect{M}^{\perp}$) at vertices from the material constitutive laws~;
@@ -23,13 +23,13 @@ We first construct a novel discret beam element called the \emph{biarc model} (s
 \item we compute the shear force ($\vect{F}^{\perp}$) at mid-edges from the equations of motion \cref{eq:motion_4,eq:motion_5}~;
 \item we interpolate the twisting moment and the axial and shear forces at vertices~;
 \end{itemize}
-Once the internal forces and moments acting on the vertices of the rod are known, we reinterpret the rod model as a simple \emph{particle-spring} system (see \cref{sec:DR}). We study the motion of this system by integrating explicitly the motion equations of the particles with a simple finite difference scheme. The motion is artificially damped so the system falls into a state of static equilibrium. This method is called the \emph{Dynamic Relaxation}. The dynamic itself is not a matter of concern as we are only interested in the steady state. Therefore, the parameters of the dynamic (mass and time step) are optimized to achieve \emph{critical damping}, the damping for which the convergence is the fastest, and to ensure the numerical stability of the method.
+Once the internal forces and moments acting on the vertices of the rod are known, we reinterpret the rod model as a simple \emph{particle-spring} system (see \cref{sec=DR}). We study the motion of this system by integrating explicitly the motion equations of the particles with a simple finite difference scheme. The motion is artificially damped so the system falls into a state of static equilibrium. This method is called the \emph{Dynamic Relaxation}. The dynamic itself is not a matter of concern as we are only interested in the steady state. Therefore, the parameters of the dynamic (mass and time step) are optimized to achieve \emph{critical damping}, the damping for which the convergence is the fastest, and to ensure the numerical stability of the method.
 
-Boundary conditions and connections between rods are treated separately (see \cref{sec:enriching}). This topic is of special interest when modeling real structures, which is are ultimate goal.
+Boundary conditions and connections between rods are treated separately (see \cref{sec=enriching}). This topic is of special interest when modeling real structures, which is are ultimate goal.
 
-The model has been implemented in a C\# library called \emph{Marsupilami}, intended to be a lightweight and dependence-free portable API. It is not a standalone executable software and has no graphical user-interface (GUI). To that purpose, a plugin for \grasshopper{} has also been implemented which serves as a functional GUI inside the \rhino{} environnement. The core concepts of \emph{Marsupilami} are presented in \cref{sec:software}. This work was the occasion to develop a finer understanding of software architecture. Several guidelines are proposed to further develop what is more a prototype and validation code than a full-featured software.
+The model has been implemented in a C\# library called \emph{Marsupilami}, intended to be a lightweight and dependence-free portable API. It is not a standalone executable software and has no graphical user-interface (GUI). To that purpose, a plugin for \grasshopper{} has also been implemented which serves as a functional GUI inside the \rhino{} environnement. The core concepts of \emph{Marsupilami} are presented in \cref{sec=software}. This work was the occasion to develop a finer understanding of software architecture. Several guidelines are proposed to further develop what is more a prototype and validation code than a full-featured software.
 
-Finally, several test cases are presented to validate the model (see \cref{sec:testcase}).
+Finally, several test cases are presented to validate the model (see \cref{sec=testcase}).
 
 \subsection{Contributions}
 \begin{itemize}
@@ -78,7 +78,7 @@ A first attempt to formulate a reduced model that takes into account torsion in 
 %Pour des cas test :
 %\citef{Ibrahimbegovic1995}
 
-\section{Discret beam element}\label{sec:dmodel}
+\section{Discret beam element}\label{sec=dmodel}
 % =======================
 Let us introduce the discrete \emph{biarc} model to describe the configuration of a beam. It is composed of a discrete curve called \emph{centerline} ($\Gamma$) and a discrete adapted frame called \emph{material frame} as its axes are chosen to be the principal axes of the beam cross-section (\cref{fig:discrete_model}). The centerline itself is organized in $n_s$ consecutive adjacent \emph{segments} which are three-vertices and two-edges elements with uniform material and section properties.
 
@@ -159,7 +159,7 @@ Finally, we define the \emph{chord length} of the $i$th segment as the distance 
 
 \subsubsection{Material frames}
 % ---------------------------------------
-A discrete material frame $\{\vect{d}_{1}, \vect{d}_{2}, \vect{d}_{3}\}_i$ is associated to each vertex $\vect{x}_i$. $\vect{d}_{1,\,i}$ and $\vect{d}_{2,\,i}$ are chosen to be aligned with the principle axes of the cross-section at vertex $\vect{x}_i$. At mid edge, the definition of $\vect{d}_{3,\,i+1/2}$ is consistent with the discrete curvature based on the circumscribed osculating circle (see \cref{sec:discrete_tangent_circumscribed}).
+A discrete material frame $\{\vect{d}_{1}, \vect{d}_{2}, \vect{d}_{3}\}_i$ is associated to each vertex $\vect{x}_i$. $\vect{d}_{1,\,i}$ and $\vect{d}_{2,\,i}$ are chosen to be aligned with the principle axes of the cross-section at vertex $\vect{x}_i$. At mid edge, the definition of $\vect{d}_{3,\,i+1/2}$ is consistent with the discrete curvature based on the circumscribed osculating circle (see \cref{sec=discrete_tangent_circumscribed}).
 
 \subsubsection{Material and section properties}
 % ------------------------------------------------------------
@@ -633,7 +633,7 @@ and the expression of the rate of twist at vertices~:
 \end{subequations}
 Remark how a distributed external twisting moment ($m_3$) modifies the value of the axial component of the internal moment at vertices, and thus is taken into account in the final static equilibrium.
 
-\section{Dynamic Relaxation}\label{sec:DR}
+\section{Dynamic Relaxation}\label{sec=DR}
 From the previous section we have established the basis for a discrete rod element that can account for extension, flexion and torsion. This element is made of two types of vertices~: the ghost and the handle vertices. This allows to model discontinuities at handle vertices, which is one of the main contribution of the work exposed in this chapter. We have established a precise \dofs{4} discrete geometric representation of a slender rod. And from a given configuration we have learned to compute the internal forces and moments acting on the rod vertices using Kirchhoff's theory. Therefore, we are able to compute the resultant of the internal force and moment acting on a given vertex of the rod.\footnote{Note that the internal forces and moments embed the action of distributed external forces and moments applied to the rod.}
 
 We now expose a process to find the static equilibrium of a rod, which is our ultimate goal. This process is called \emph{Dynamic Relaxation} and was first introduced by \citef{Day1965}. We assume that we know the stress-free configuration of the rod, its material properties and cross-section properties. The rod might also be subjected to known external loads such as climatic loads. Finally, we call initial configuration the actual configuration of the rod at time $t=0$. In this configuration, the rod is (a priori) not at static equilibrium.
@@ -643,7 +643,7 @@ In the Dynamic Relaxation procedure, a discretized mechanical system is dropped 
 
 Because the motion is only a mean to find a static equilibrium position of the system, the damping does not need to be realistic and should be chosen so that the system approaches the static position as fast as possible. This is also known as critical damping.
 
-\subsection{Resultants acting on a particle}\label{sec:resFM}
+\subsection{Resultants acting on a particle}\label{sec=resFM}
 In this section, we express the resultant force and the resultant twisting moment acting on a particle. If not balanced, these resultants will make the particle to move and rotate with respect to its degrees of freedom $\vect{x}$ and $\theta$.
 
 \subsubsection{Resultant force}
@@ -684,10 +684,10 @@ The particles of the system evolve according to the laws of motion, with respect
 \end{subequations}
 where $\ddot{\vect{x}}_i$ is the translational acceleration of the particle, $\ddot{\theta}_i$ is the rotational acceleration of the particle and $\lambda^x_i$ and  $\lambda^{\theta}_i$ are the viscous damping coefficients.
 
-Hereinafter we will consider no viscous damping. Instead, we will rely on an artificial kinetic damping (see \cref{sec:damping}). For a detailed traitement of various damping methods in the Dynamic Relaxation method, refer to \cite{Underwood1983,Rezaiee2012}.
+Hereinafter we will consider no viscous damping. Instead, we will rely on an artificial kinetic damping (see \cref{sec=damping}). For a detailed traitement of various damping methods in the Dynamic Relaxation method, refer to \cite{Underwood1983,Rezaiee2012}.
 
 \subsubsection{Coupling between flexion and torsion}
-Although \cref{eq:dmotion_a,eq:dmotion_b} may seem uncoupled to the reader, it is not the case as the coupling occurs through the material frame (see \cref{sec:dofchain}). Recall that both $\vect{R}_i^x$ and $R_i^{\theta}$ do depend on the $\vect{x}_i$ and $\theta_i$ variables.
+Although \cref{eq:dmotion_a,eq:dmotion_b} may seem uncoupled to the reader, it is not the case as the coupling occurs through the material frame (see \cref{sec=dofchain}). Recall that both $\vect{R}_i^x$ and $R_i^{\theta}$ do depend on the $\vect{x}_i$ and $\theta_i$ variables.
 
 \subsubsection{Nonlinearity}
 In a linear analysis the expression of the resultant force and the resultant moment would be linearized and written in the matrix form~:
@@ -703,7 +703,7 @@ where $\mat{X}$ and $\mat{\Theta}$ are the column vectors of the translational (
 Saying that the system is linearized involves that the dependence of $\vect{R}_i^x$ and $R_i^{\theta}$ with respect to the degrees of freedom $\vect{x}_i$ and $\theta_i$ will be modeled as a (linear) matrix product and that $\mat{K}^x$ and $\mat{K}^{\theta}$ are computed independently of these variables. In other words, this means that $\vect{R}_i^x$ and $R_i^{\theta}$ are calculated as a linear combination of the degrees of freedom, and that the coefficients of this combination are the matrix entries of  
 $\mat{K}^x$ and $\mat{K}^{\theta}$.
 
-Here, this factorization is not possible. $\vect{R}_i^x$ and $R_i^{\theta}$ are computed from the degrees of freedom of the system but the relation is not linear (see how the internal force and moment are computed in \cref{sec:dmodel}). Therefore, the geometric system given in \cref{eq:dmotion_a,eq:dmotion_b} is effectively nonlinear.
+Here, this factorization is not possible. $\vect{R}_i^x$ and $R_i^{\theta}$ are computed from the degrees of freedom of the system but the relation is not linear (see how the internal force and moment are computed in \cref{sec=dmodel}). Therefore, the geometric system given in \cref{eq:dmotion_a,eq:dmotion_b} is effectively nonlinear.
 
 \subsection{Explicite time integration}
 
@@ -712,7 +712,7 @@ In this section, we give the stages required to integrate these equations throug
 Note that the time step $\dt{}$ is not necessary constant through time and could be \emph{adapted} during the analysis process. However, for simplicity we will treat only the case where it is constant but it is easy to extend the present work to work with a variable time step.
 
 \subsubsection{Acceleration}
-At time $t$, considering the position of the system is known ($\vect{x}_i$ and $\{\vect{d}_{3,\,i},\vect{d}_{1,\,i},\vect{d}_{2,\,i}\}$), we can compute the resultant force ($\vect{R}_i^x$) and the resultant twisting moment ($R_i^{\theta}$) acting on the particles (see \cref{sec:resFM}). Using \cref{eq:dmotion} the acceleration of the particles at time $t$ is straightforwardly deduced as~:
+At time $t$, considering the position of the system is known ($\vect{x}_i$ and $\{\vect{d}_{3,\,i},\vect{d}_{1,\,i},\vect{d}_{2,\,i}\}$), we can compute the resultant force ($\vect{R}_i^x$) and the resultant twisting moment ($R_i^{\theta}$) acting on the particles (see \cref{sec=resFM}). Using \cref{eq:dmotion} the acceleration of the particles at time $t$ is straightforwardly deduced as~:
 \begin{subequations}
 \label{eq:da}
 \begin{alignat}{3}
@@ -785,7 +785,7 @@ From this new position, it is now possible to compute the new resultant force an
 \subsubsection{Initialization}
 The iterative process described in this section to simulate step by step the motion of the system needs to be initialized. At the moment, \cref{eq:dx2} only describes how to get the position of the system at $t + \dt{}$ knowing its position, velocity and acceleration at time $t$.
 
-At time $t=0$, or each time that the system will be damped (see \cref{sec:damping}), we consider that the system is released with no initial velocity, which means that~:
+At time $t=0$, or each time that the system will be damped (see \cref{sec=damping}), we consider that the system is released with no initial velocity, which means that~:
 \begin{subequations}
 \begin{alignat}{3}
 	& \dot{\vect{x}}_i^{0} && = \frac{\vect{x}_i^{-\dt{}/2} + \vect{x}_i^{+\dt{}/2}}{2}
@@ -814,7 +814,7 @@ Note that the motion will be realistic to the extent that the computed forces an
 
 Lots of other integration schemes exist, among which we can cite the \emph{Explicit Euler}, the \emph{Symplectic Euler}, the \emph{Störmer-Verlet} and the \emph{4\textsuperscript{th} order Runge-Kutta} schemes. These schemes are briefly presented in \cite{Fierz2013}. For a complete treatment of numerical integrators refer to the book from \citef{Hairer2006}.
 
-\subsection{Damping}\label{sec:damping}
+\subsection{Damping}\label{sec=damping}
 If no damping is introduced to dissipate some energy, there is no reason that the system will stop to move. Here, our goal is to dissipate the kinetic energy of the system as fast as possible to fall into a state of static equilibrium. This can be achieved with any kind of damping, among which the most well-known are \emph{viscous damping} and \emph{kinetic damping}. 
 
 Here, we choose to implement the kinetic damping as it is known to produce the best results for a wide range of cases \cite{Rezaiee2012}.
@@ -974,7 +974,7 @@ Hence, this criterion is \emph{adaptative} and also \emph{relative} to the size 
 
 %Expliquer l'interpolation des efforts. Il y a un choix a faire dans la DR. Soit on écrit l'équilibre sur le noeud (de dimension null). Soir on écrit l'équilibre sur une tranche de dimension $l_i+l{i+1}/2$. Mais si l'on veut maintenir la précision des conditions de passage, la DR fonctionne avec des noeuds et pas des tranches, le mieux est d'opter pour un équilibre du noeud. La DR va minimiser les résidus aux noeuds et donc on aura les bonnes conditions de passage sous Fext et Mext. J'ai montré que la convergence était plus rapide et précise. On a pas de décalage dans les diagrammes des efforts (si il y en a, ce sont uniquement les défauts de convergence, le résidu , n'étant pas strictement nul au noeud à la fin de la DR).
 
-\subsection{Stability and critical damping}\label{sec:stab_crit}
+\subsection{Stability and critical damping}\label{sec=stab_crit}
 Because we are not interested by the motion itself but by the quasi-static response of the system when properly damped, the time step ($\dt{}$) and the mass of the particles ($m_i^x$, $m_i^{\theta}$) should be chosen in order~:
 \begin{itemize}
 \item to ensure that the algorithm will converge to a state of static equilibrium (stability)~;
@@ -1017,7 +1017,7 @@ Let us call $m$ the mass and $l$ the length of the pendulum (see \cref{fig:pendu
 \begin{equation}
 	\ddot{\theta} + {\omega_0}^2 \sin{\theta} = 0 \label{eq:nlpendulum}
 \end{equation}
-In addition, we call $\theta_0 = \theta(0)$ the initial position of the pendulum where it is dropped with no initial velocity ($\dot{\theta}(0) = 0$). Remark that $m$ is not involved in \cref{eq:nlpendulum}.\footnote{We could have introduced a fictitious mass ($m_f$) for the weight to optimize the convergence of the algorithm (see \cref{sec:stab_crit}). In this case, the reference pulsation of the pendulum would writes~: $\omega_0 = \sqrt{(m/m_f)\cdot(g/l)}$. The real mass of the weight is the one that give access to the force exerted to the pendulum while the fictitious mass is freely chosen to speed up the convergence of the method.}
+In addition, we call $\theta_0 = \theta(0)$ the initial position of the pendulum where it is dropped with no initial velocity ($\dot{\theta}(0) = 0$). Remark that $m$ is not involved in \cref{eq:nlpendulum}.\footnote{We could have introduced a fictitious mass ($m_f$) for the weight to optimize the convergence of the algorithm (see \cref{sec=stab_crit}). In this case, the reference pulsation of the pendulum would writes~: $\omega_0 = \sqrt{(m/m_f)\cdot(g/l)}$. The real mass of the weight is the one that give access to the force exerted to the pendulum while the fictitious mass is freely chosen to speed up the convergence of the method.}
 
 The kinetic, potential and mechanical energies of the pendulum are given by~:
 \begin{subequations}
@@ -1103,13 +1103,13 @@ This application is also useful to understand the relation between accuracy, sta
 	\end{fullpage}
 \end{figure}
 
-\section{Enriching the model}\label{sec:enriching}
+\section{Enriching the model}\label{sec=enriching}
 \subsection{Support}
 \subsection{Connexion}
 
 \clearpage
-\section{Software}\label{sec:software}
-The present model has been implemented in a numerical software called \emph{Marsupilami}. A first version of this software, based on the \dofs{3} spline beam element, was used successfully in the structural design of the Ephemeral Cathedral of Créteil (see \cref{chp:creteil}) and other smaller timber gridshells (see \cref{fig:jpofav}). During this thesis \emph{Marsupilami} has been completely redeveloped to include rotational \dofs{} capabilities. Lots of new features have been 
+\section{Software}\label{sec=software}
+The present model has been implemented in a numerical software called \emph{Marsupilami}. A first version of this software, based on the \dofs{3} spline beam element, was used successfully in the structural design of the Ephemeral Cathedral of Créteil (see \cref{chp=creteil}) and other smaller timber gridshells (see \cref{fig:jpofav}). During this thesis \emph{Marsupilami} has been completely redeveloped to include rotational \dofs{} capabilities. Lots of new features have been 
 
 \subsection{Architecture of the software}
 The code of \emph{Marsupilami} is divided into three libraries presented hereinafter~: \textit{Marsupilami.Math}, \textit{Marsupilami.CoreLib} and \textit{Marsupilami.Gh}.
@@ -1257,11 +1257,11 @@ AoS vs OaS particle vs Collection of Particle.
 \clearpage
 
 \clearpage
-\section{Test case}\label{sec:testcase}
+\section{Test case}\label{sec=testcase}
 
 The validation of the model is done through a comparison with the finite element solver \emph{Abaqus}. Several test cases have been studied to confirm that our model gives accurate results on typical problems where coupling between bending and torsion occurs.
 
-\subsection{Constrained arch}\label{sec:testcase}
+\subsection{Constrained arch}\label{sec=testcase}
 
 \subsubsection{Definition of the case}
 

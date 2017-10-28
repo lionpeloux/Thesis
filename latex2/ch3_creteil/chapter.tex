@@ -2,7 +2,7 @@
 % Contact : lionel.dupeloux@gmail
 % Year : 2017
 
-\chapter{Ephemeral cathedral : the first GFRP gridshell building}\label{chp:creteil}
+\chapter{Ephemeral cathedral : the first GFRP gridshell building}\label{chp=creteil}
 
 \section{Introduction}
 %===================
@@ -16,7 +16,7 @@ It is worth to mentionne that this project arises thanks to a long-term collabor
 
 \subsection{Overview}
 
-The chapter begins by a synthetic introduction to the project recalling the context, challenges and main architectural considerations that prevailed to the birth of this innovative building (see \cref{sec:proj_overview}). We then present the construction process of the structure (see \cref{sec:construction_process}) and how the shell was designed using the compass method and a dynamic relaxation program implemented by myself in conjonction with the structural analysis software GSA (see \cref{sec:proj_design}). From this general basis we give two focus~: one on the use of composite materials in such an application (see \cref{sec:design_gfrp}) and one on the design of the construction details (see \cref{sec:construction_details}). In a short section we get back on the hygrometric behavior of the structure which was problematic (see \cref{sec:hygro}). Finally, we conduct a cost analysis of the project and determine the economic strength and weakness of the technology, which allows us to identify some potential improvements (see \cref{sec:costanalysis}).
+The chapter begins by a synthetic introduction to the project recalling the context, challenges and main architectural considerations that prevailed to the birth of this innovative building (see \cref{sec=proj_overview}). We then present the construction process of the structure (see \cref{sec=construction_process}) and how the shell was designed using the compass method and a dynamic relaxation program implemented by myself in conjonction with the structural analysis software GSA (see \cref{sec=proj_design}). From this general basis we give two focus~: one on the use of composite materials in such an application (see \cref{sec=design_gfrp}) and one on the design of the construction details (see \cref{sec=construction_details}). In a short section we get back on the hygrometric behavior of the structure which was problematic (see \cref{sec=hygro}). Finally, we conduct a cost analysis of the project and determine the economic strength and weakness of the technology, which allows us to identify some potential improvements (see \cref{sec=costanalysis}).
 
 \subsection{Contributions}
 
@@ -29,7 +29,7 @@ This project was at the heart of the motivations for this thesis as it acted as 
 \item We propose a meticulous cost analysis of the project in order to further improve the economic viability of the technology.
 \end{itemize}
 
-\section{Project overview}\label{sec:proj_overview}
+\section{Project overview}\label{sec=proj_overview}
 %===================
 \subsection{Context and challenges}
 %----------------------------------------------
@@ -179,7 +179,7 @@ A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers
 \clearpage
 
 
-\section{Construction process}\label{sec:construction_process}
+\section{Construction process}\label{sec=construction_process}
 % ====================
 
 \subsection{Assembly of the grid}
@@ -216,10 +216,10 @@ Once the primary grid was deformed into the final shape, it was braced by a thir
 \subsection{Covering of the gridshell}
 Finally, the structure is covered with a PVC coated fabric. The membrane comes rolled up. The roll is positioned at one side. Then it is progressively unrolled toward the other side (see \cref{fig:cp_6}). This step requires professional rope workers. Once the membrane is in place, it is hand tensioned with a system of halyard and strap (see \cref{fig:edge}). All included, this stage lasted no more than a single day for a team of six workers.
 
-This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis was successfully conducted with the required accuracy (see \cref{sec:form-finding}).
+This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis was successfully conducted with the required accuracy (see \cref{sec=form-finding}).
 
 %\clearpage
-\section{Structural design}\label{sec:proj_design}
+\section{Structural design}\label{sec=proj_design}
 %=================
 
 In this section, we exhibit a methodology to design a gridshell with a shape-centered approach. This is one of the key originality of this work and it was first implemented for the Solidays gridshell in 2011. The idea is to identify a grid and a set of supports that once the grid is bended and anchored to its foundations has a geometry as close as possible to the target shape designed by the architect.
@@ -248,7 +248,7 @@ Stresses in the grid are mainly due to the bending of the tubes. Therefore, they
 	\mathrm{E} \cdot \frac{r}{R_{min}} < \frac{\sigma_{k,flex}}{\gamma_{lt}} 
 	\label{eq:crit_1}
 \end{equation}
-where $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance (see \cref{sec:safety}). 
+where $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance (see \cref{sec=safety}). 
 
 Ideally, the shape is controlled by few key parameters. Thus, it is easier to adapt and optimize the shape through an iterative process towards the above criterion \cref{eq:crit_1}.
 
@@ -270,7 +270,7 @@ In this step, the geometric curvature of the polylines drawn on the surface is a
 	\mathrm{E} \cdot   \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
 	\label{eq:crit_2}
 \end{equation}
-where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see below), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. I implemented this method, proposed by \citet{IL10}, for the Solidays gridshell in 2011 \cite{DuPeloux2011}.\footnote{This method was also used at the laboratoire Navier by \citef{Bouhaya2014} and more recently by \citef{Masson2017b}.} The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec:swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The goal of the method is to identify at least one grid which satisfies both the architectural and the structural requirements. 
+where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see below), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. I implemented this method, proposed by \citet{IL10}, for the Solidays gridshell in 2011 \cite{DuPeloux2011}.\footnote{This method was also used at the laboratoire Navier by \citef{Bouhaya2014} and more recently by \citef{Masson2017b}.} The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec=swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The goal of the method is to identify at least one grid which satisfies both the architectural and the structural requirements. 
 
 \begin{figure}[t]
      	\centering
@@ -298,7 +298,7 @@ where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtaine
 %%	\label{fig:canevas}
 %\end{figure}
 
-\subsubsection{Compass method}\label{sec:compass}
+\subsubsection{Compass method}\label{sec=compass}
 This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quadrants. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.
 
 The compass method does not allow to spread the mesh everywhere on a given surface because it stops when a directrix reaches the boundary of the surface. Only a portion of the surface can be meshed and the covered area varies according to the chosen set of directrices. To overcome this difficulty, we consider the gridshell surface (see \cref{fig:compass_a}) as a part of a larger domain surface (see \cref{fig:compass_c}). Trimmed by a plane, this domain surface should give back the intended shape to build (see \cref{fig:compass_b}). Therefore, it is possible to mesh the domain surface (see \cref{fig:compass_d}) and to retrieve a Chebyshev net (that is an equilateral mesh) that cover completely the initial surface (see \cref{fig:compass_f}).
@@ -358,7 +358,7 @@ Here, a specific program developed by \citet{DuPeloux2011} for \rhino{} and \gra
 %	\label{fig:canevas}
 %\end{figure}
 
-\subsection{Form-finding and bending prestress}\label{sec:form-finding}
+\subsection{Form-finding and bending prestress}\label{sec=form-finding}
 %------------------------------------------
 In the previous steps, the initial form was optimized and promising meshes for the materialization of the future gridshell were identified. However, the produced meshes do not take into account any of the mechanical reality, because only geometrical rules were used in their generation. The form-finding step consists precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses. The calculation is performed numerically thanks to a dynamic relaxation algorithm with kinetic damping and comprise the following steps~:
 \begin{enumerate}
@@ -374,7 +374,7 @@ The computations were realized with the form-finding module of the software Oasy
 
 To tackle numeric instabilities the model had to be simplified~: 
 \begin{itemize}
-\item Connections between elements were modeled as rotation-free joints, enforcing only position constrains with out taking into account the eccentricity between the tubes. This becomes a problem when it comes to evaluating the stability of the gridshell as eccentricity can plays a major role \cite{Lefevre2015}. This is also problematic when determining the production length of the tubes and the position of the anchorages (see \cref{sec:asbuilt}). 
+\item Connections between elements were modeled as rotation-free joints, enforcing only position constrains with out taking into account the eccentricity between the tubes. This becomes a problem when it comes to evaluating the stability of the gridshell as eccentricity can plays a major role \cite{Lefevre2015}. This is also problematic when determining the production length of the tubes and the position of the anchorages (see \cref{sec=asbuilt}). 
 \item The triangulation could not be embedded from the start in the model and had to be treated separately and re-injected later on.
 \end{itemize}
 
@@ -387,9 +387,9 @@ To tackle numeric instabilities the model had to be simplified~:
 
 The form-finding process should not be regarded as a pure computational stage were only the equilibrium shape has to be found while all other design parameters are fixed. Indeed, as the goal is to find a suitable geometry with the most relaxed permanent bending stresses in the structure, this process could itself be employed to explore optimal geometries that will lead to more relaxed static equilibriums. In the present project the supports were allowed to move slightly around their target position by the mean of spring supports with orthotropic stiffness. This allowed to decrease the overall level of permanent bending stress in the tubes while granting very minor changes in the geometry.
 
-Finally the process converges when the shape and the pattern drawn by the mesh are suitable for the architect while the permanent bending stresses are acceptable for the tubes (see \cref{sec:safety}). The end results for this stage are presented in \cref{fig:gsa}. Note the smoothness of the mesh and the convergence of the tubes near the altar. Bending stresses are well distributed and inferior to the maximum design stress allowed (\SI{133}{MPa} in that case). Only few tubes are heavy loaded, in the areas where the curvature is the highest.
+Finally the process converges when the shape and the pattern drawn by the mesh are suitable for the architect while the permanent bending stresses are acceptable for the tubes (see \cref{sec=safety}). The end results for this stage are presented in \cref{fig:gsa}. Note the smoothness of the mesh and the convergence of the tubes near the altar. Bending stresses are well distributed and inferior to the maximum design stress allowed (\SI{133}{MPa} in that case). Only few tubes are heavy loaded, in the areas where the curvature is the highest.
 
-\subsection{As-built geometry}\label{sec:asbuilt}
+\subsection{As-built geometry}\label{sec=asbuilt}
  %-------------------------------------
 Although, the eccentricity ($e = \SI{136}{\mm}$) remains small compared with the span of the shell ($l =\SI{17}{m}$), it is not negligible compared with the mesh size ($w = \SI{1.0}{m}$). Thus, the tube lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assesses that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding is performed only with those two layers. Connection axes has to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by $-e/2$, the green by $+e/2$ and the blue by $+3e/2$ along the surface normal (see \cref{fig:eccentricity}).
 \begin{figure}[p]
@@ -416,13 +416,13 @@ The non-braced model is used to check the grid’s behavior during the construct
 
 %\newpage \phantom{abc}
 \clearpage
-\section{Designing with GFRP materials}\label{sec:design_gfrp}
+\section{Designing with GFRP materials}\label{sec=design_gfrp}
 %------------------------------------------
-This section focuses on the GFRP tubes employed for the structure. We present how we managed to deal with this composite material in the eyes of the existing regulatory framework although there is no applicable norms for composite materials (see \cref{sec:codes}). Beyond the administrative strategy, we present how their flexural strength was evaluated (see \cref{sec:flex}) and how the corresponding partial safety factors were detremined (see \cref{sec:safety}).
+This section focuses on the GFRP tubes employed for the structure. We present how we managed to deal with this composite material in the eyes of the existing regulatory framework although there is no applicable norms for composite materials (see \cref{sec=codes}). Beyond the administrative strategy, we present how their flexural strength was evaluated (see \cref{sec=flex}) and how the corresponding partial safety factors were detremined (see \cref{sec=safety}).
 
-\subsection{Properties of the tubes}\label{sec:gfrp}
+\subsection{Properties of the tubes}\label{sec=gfrp}
 % -------------------------------------------------------
-The technical properties of the tube employed for this project are given in \cref{tab:tube}. Although these data were provided by the manufacturer at the time of the project, a test campaign was done to verify the flexural resistance of the tubes taking into account the influence of the swivel couplers clamped on the tubes (see \cref{sec:flex}).
+The technical properties of the tube employed for this project are given in \cref{tab:tube}. Although these data were provided by the manufacturer at the time of the project, a test campaign was done to verify the flexural resistance of the tubes taking into account the influence of the swivel couplers clamped on the tubes (see \cref{sec=flex}).
 %The characterization of this material is presented in detail in this paper \cite{Kotelnikova2012}.
 \begin{table}[p]
 \begin{fullpage}
@@ -487,7 +487,7 @@ The technical properties of the tube employed for this project are given in \cre
 \end{fullpage}
 \end{table}
 
-\subsection{Codes for composite materials}\label{sec:codes}
+\subsection{Codes for composite materials}\label{sec=codes}
 Beyond the technical difficulties related to both design and structural analysis of the shell, the regulatory framework was a vital issue for the success of the project. As it was the first time a structure of this kind was going to host a large number of people for over two years, the question of its reliability over time was a major issue. In order to be built, the gridshell had to comply with existing standards, which do not take into account such an innovative edifice, all in composite material. The strategy adopted to bypass this obstacle is presented herafter.
 
 \subsubsection{First level~: administrative classification of the building}
@@ -499,7 +499,7 @@ The second level, normative, consisted of ensuring that most of the existing reg
 
 As far as possible, the design was made in compliance with the Eurocode, where the structural design is done according to the limit states under normalized loadings (self-weight, snow, wind, etc.). Although, the Eurocodes do not directly take into account composite materials, they propose some probabilistic methods to introduce new materials (EN1990, Annexe D). The mechanical properties of the GFRP pipe were determined as far as possible by tests in conformance with these methods. Alternatively, values were taken according from the Eurocomp \cite{Clarke2003}.\footnote{The Eurocomp is a kind of pre-standard intended for the structural design of buildings and civil engineering works using GFRP composites, consistent with the Eurocode approach. It is considered as the reference design code for GFRP materials.} In some cases, such as for the sleeve, the construction design also benefited from this approach.
 
-\subsection{Flexural strength of the tubes}\label{sec:flex}
+\subsection{Flexural strength of the tubes}\label{sec=flex}
 %------------------------------------------
 The characteristic flexural strength ($\sigma_{k,flex}$) of the GFRP tube was used to verify if the structure complied with the Eurocode. This parameter had a critical impact on the structure’s reliability because in this particular application stresses in the tubes are mainly due to the bending. Thus, it was important to confirm the manufacturer’s permitted value through testing.
 Three-point flexural tests were carried out with and without connections (see \cref{plot:gfrp_tubes}) to determine the characteristic strength according to the Eurocode protocol (Annex D)~:
@@ -557,7 +557,7 @@ For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. I
 \end{fullpage}
 \end{figure}
 
-\subsection{Partial safety factors}\label{sec:safety}
+\subsection{Partial safety factors}\label{sec=safety}
 %------------------------------------------
 The partial coefficients of material resistance (see \cref{tab:gamma}) used in the project were calculated according to the Eurocomp. The short-term coefficient proposed in Eurocomp ($\gamma_{st} = 1.3$) was increased to consider the critical stage of erection, where the deformations could not be controlled accurately.
 When dealing with long-term effects in permanently loaded, pultruded composite materials subjected to creeping and relaxation designers should be careful  \cite{Kotelnikova2012,Bank2006}. In this project, this was reflected in the high partial coefficient for long-term effects.
@@ -580,13 +580,13 @@ When dealing with long-term effects in permanently loaded, pultruded composite m
 
 
 
-\section{Construction details}\label{sec:construction_details}
+\section{Construction details}\label{sec=construction_details}
 % ====================
 In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (see \cref{fig:swivel}) ; the steel sleeve for connecting several composite tubes to obtain long members from initially short pieces of tubes (see \cref{fig:sleeve}) ; the ground anchorages for fixing the structure to the concrete slab (see \cref{fig:anchorage}) and the lacing edge beam of the fabric (see \autoref{fig:edge}). The challenging issue of connecting the steel and composite parts was solved similarly for sleeve and anchorage details.
 
-\subsection{The swivel coupler}\label{sec:swivel}
+\subsection{The swivel coupler}\label{sec=swivel}
 % -------------------------------------------------------
-Tubes are connected together with scaffold swivel couplers (see \cref{fig:swivel}). Each connection is composed of two collars (\O\;\SI{42}{\mm} and \SI{38}{\mm} wide) linked by a steel axis (see \cref{fig:swivel_dwg}). Thus the collars can freely rotate around the axis of the connection. This degree of freedom is responsible for the lack of in-plane shear stiffness of the primary grid and this is precisely this mechanism that allows the flat grid to deform into a free form surface. Each collar is itself composed of two hemicylindrical parts so that it can be opened to easily engage a tube. A M12 nut and a swivel T-bolt allow to lock the tube in the collar using friction. Collars are positioned over a \SI{1.5}{\mm} thick epdm ribbon wrapped around the tubes (see \cref{fig:swivel_dwg}). Once clamped in the connection, the tubes are spaced by a \SI{68}{\mm} distance from axis to axis. Although the mechanical consequences of this eccentricity could be neglected to a first-order approximation, this is not the case for the geometric consequences it induces as explained in \cref{sec:asbuilt}.
+Tubes are connected together with scaffold swivel couplers (see \cref{fig:swivel}). Each connection is composed of two collars (\O\;\SI{42}{\mm} and \SI{38}{\mm} wide) linked by a steel axis (see \cref{fig:swivel_dwg}). Thus the collars can freely rotate around the axis of the connection. This degree of freedom is responsible for the lack of in-plane shear stiffness of the primary grid and this is precisely this mechanism that allows the flat grid to deform into a free form surface. Each collar is itself composed of two hemicylindrical parts so that it can be opened to easily engage a tube. A M12 nut and a swivel T-bolt allow to lock the tube in the collar using friction. Collars are positioned over a \SI{1.5}{\mm} thick epdm ribbon wrapped around the tubes (see \cref{fig:swivel_dwg}). Once clamped in the connection, the tubes are spaced by a \SI{68}{\mm} distance from axis to axis. Although the mechanical consequences of this eccentricity could be neglected to a first-order approximation, this is not the case for the geometric consequences it induces as explained in \cref{sec=asbuilt}.
 
 \begin{figure}[t]
 	\centering
@@ -604,7 +604,7 @@ This coupler is made to assemble two scaffold steel tubes together. Workers shou
 
 Several materials were tested in different thickness. Some of the results are presented in \cref{plot:layer_benchmark}. A \SI{1.5}{\mm} thick EPDM ribbon was found to be suitable for the design requirements of the project. This layer improves significantly the sliding resistance from about \SI{300}{\newton} to about \SI{1200}{\newton}. Once the interface layer had been chosen, further tests were conducted to determine the appropriate clamping for the connections. The aim was to maximize the clamping to get the best sliding resistance (see \cref{plot:tightening}) while preserving the  integrity of the tubes. It was found that a tightening torque between \SI{15}{Nm} to \SI{20}{Nm} was the optimal solution \cite{Tayeb2015a}.
 
-Finally, the ribbons were ordered with a double sided tape (DST) face to facilitate their placement on the tubes. The influence of the temperature regarding the presence of the adhesive has been investigated. The results show that after \SI{40}{\celsius} the scotch creeps and a loss of resistance occurs (see \cref{plot:epdm_temperature}). A recent thermal study of the structure has demonstrated that with no cooling system the temperature inside the building could rise up to \SI{70}{\celsius} (see \cref{sec:temperature,plot:T_3,plot:T_4}).
+Finally, the ribbons were ordered with a double sided tape (DST) face to facilitate their placement on the tubes. The influence of the temperature regarding the presence of the adhesive has been investigated. The results show that after \SI{40}{\celsius} the scotch creeps and a loss of resistance occurs (see \cref{plot:epdm_temperature}). A recent thermal study of the structure has demonstrated that with no cooling system the temperature inside the building could rise up to \SI{70}{\celsius} (see \cref{sec=temperature,plot:T_3,plot:T_4}).
 
 
 
@@ -781,12 +781,12 @@ Thanks to the membrane strip and to a small step in the concrete slab (22) the w
 
 \subsection{The membrane}
 %------------------------------------------
-The membrane is nothing but a tailor-made one-piece clothing manufactured to dress up the structure. It was prefabricated based on the 3D model of the shape computed during the form-finding process (see \cref{sec:form-finding}) and not on some on-site geometric survey like for the prototypes presented in \cref{fig:proto}. The technical properties of the PVC coated fabric can be found in \cref{tab:membrane}.
+The membrane is nothing but a tailor-made one-piece clothing manufactured to dress up the structure. It was prefabricated based on the 3D model of the shape computed during the form-finding process (see \cref{sec=form-finding}) and not on some on-site geometric survey like for the prototypes presented in \cref{fig:proto}. The technical properties of the PVC coated fabric can be found in \cref{tab:membrane}.
 
 \clearpage
-\section{Hygrothermal behavior}\label{sec:hygro}
+\section{Hygrothermal behavior}\label{sec=hygro}
 %------------------------------------------
-\subsection{Temperature}\label{sec:temperature}
+\subsection{Temperature}\label{sec=temperature}
 During the first two years and a half of its service life, the building has shown that the thermal comfort was far from ideal as the membrane has very poor thermal properties (see \cref{tab:membrane})~:
 \begin{itemize}
 \item During winter, the confort is ensured during Mass by a forced-air heating system positioned on the equipments slab, few meters away from the main structure. This solution is adapted to infrequent occupations of the building. In that case, the energetic cost remains limited even if the solution is far from optimal because of the lack of insulation.
@@ -799,7 +799,7 @@ At the time of writing, the building is being reconfigured and so its purpose is
 \item The structure is ventilated but no cooling system is put in place. The maximum interior temperature is lowered significantly but it can still reach \SI{50}{\celsius} (see \cref{plot:T_4}).
 \end{enumerate}
 
-This study confirms what the experience has shown : the temperature inside the building can be very high. Above \SI{30}{\celsius} this is problematic for the comfort of the people. Above \SI{50}{\celsius} and up to \SI{70}{\celsius} it becomes problematic for the building itself. Indeed, this level of temperature is closed to the heat resistance of the membrane (see \cref{tab:membrane}) ; the interface layer faces a serious decrease of its capacity to resist to sliding (\cref{plot:epdm_temperature}) ; the creep of GFRP tubes is speed up (\cref{sec:gfrp}).
+This study confirms what the experience has shown : the temperature inside the building can be very high. Above \SI{30}{\celsius} this is problematic for the comfort of the people. Above \SI{50}{\celsius} and up to \SI{70}{\celsius} it becomes problematic for the building itself. Indeed, this level of temperature is closed to the heat resistance of the membrane (see \cref{tab:membrane}) ; the interface layer faces a serious decrease of its capacity to resist to sliding (\cref{plot:epdm_temperature}) ; the creep of GFRP tubes is speed up (\cref{sec=gfrp}).
 
 \subsection{Moisture}
 Condensation was also noticed in winter and shoulder season. Sometimes, droplets of water could fall abundantly and thus the wooden furnitures had to be protected. This phenomenon was particularly intense the first months because the concrete slab had not yet fully dry-out. To protect the structure and the furnitures, it was decided to maintain the inside temperature above \SI{10}{\celsius} at all times.
@@ -829,12 +829,12 @@ Condensation was also noticed in winter and shoulder season. Sometimes, droplets
 
 
 \clearpage
-\section{Cost analysis}\label{sec:costanalysis}
+\section{Cost analysis}\label{sec=costanalysis}
 %------------------------------------------
 \subsection{Overall cost for the client}
 The overall cost of the project -- that is the amount of money paid by the client -- was estimated to 324\,000~€ excluding taxes (see \cref{fig:budget}). This price includes all the possible costs related to the construction of the project~: the cost of the main building (masonry, doors, gridshell, envelop, fittings, heating, electricity, lightning, drainage, sewage, etc.), the cost of the service building, the cost of pedestrian pathways, the cost of the design studies, etc.
 
-However, this cost does not take into account all the (free) man-hours spent by the volunteers to prefabricate, assemble, erect and brace the gridshell. The real cost of the gridshell system, when a cost is put on this labor, is estimated in \cref{sec:gs_cost}.
+However, this cost does not take into account all the (free) man-hours spent by the volunteers to prefabricate, assemble, erect and brace the gridshell. The real cost of the gridshell system, when a cost is put on this labor, is estimated in \cref{sec=gs_cost}.
 
 Moreover, this project required a lot of design studies and tests to verify the material properties and to validate the strength of key elements such as the swivel coupler with its EPDM layer, the sleeve system and the ground anchorage. The real cost of the studies was by far higher than what was really charged to the client and the difference must be regarded as an investment from the company T/E/S/S. In the same manner, people from the laboratory gave a consistent support during the construction stage as they were the only available experienced workers familiar with the construction of elastic gridshells in composite material \cite{Douthe2010a,Baverel2012} and this labor was not charged back to the client.
 
@@ -855,7 +855,7 @@ The project was favorably accepted by the client based on the estimation that th
 	\end{fullpage}
 \end{figure}
 
-\subsection{Cost details for the building}\label{sec:gs_cost}
+\subsection{Cost details for the building}\label{sec=gs_cost}
 Here we present the cost details for the main building, that is the cathedral itself. We try to understand what is the true cost of the gridshell system in this particular project and we thus eliminate side costs (for instance the cost of fittings, the cost of the pedestrian pathways, the cost of the service building, etc.). The cost allocation is presented per square meter of covered area in \cref{fig:building}. The total price for the building, excluding studies, is 473~€/m\textsuperscript{2}. It is composed of :
 \begin{itemize}
 \item  100~€/m\textsuperscript{2}~: the cost of masonry works (levelling, footings, slab, drainage) detailed in \cref{tab:masonry}. This construction works were made by a professional contractor named BATEM.
