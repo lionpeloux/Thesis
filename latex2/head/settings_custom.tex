@@ -53,7 +53,6 @@
 % https://tex.stackexchange.com/questions/139308/how-to-embed-abstract-as-an-xmp-metadata
 % SPEC SUBLIN : http://dublincore.org/documents/dces/
 % https://tex.stackexchange.com/questions/139716/is-it-possible-to-use-both-hyperxmp-and-xmpincl-in-latex
-
 \newcommand\mytitle{Modeling of bending-torsion couplings in active-bending structures. Application to the design of elastic gridshell.}
 \newcommand\myauthor{Lionel du Peloux}
 \newcommand\mykeywords{gridshell, active bending, freeform, dynamic relaxation}
@@ -113,8 +112,8 @@ style=numeric, citestyle=numeric,
 sorting=none,
 doi=false, isbn=false, url=false,
 maxcitenames=2, maxbibnames=100,
-firstinits=true,
-refsegment=chapter, defernumbers=true,
+firstinits=true, % firstinits old option
+refsegment=chapter, % defernumbers=true, % attention cette option semble faire buger l'ordre des citations dans la biblio
 useprefix=true, % use von as part of the family name (du peloux)
 ]{biblatex} 
 \addbibresource{library.bib}
@@ -122,6 +121,46 @@ useprefix=true, % use von as part of the family name (du peloux)
 \renewcommand*{\multicitedelim}{\addcomma\space}
 \newcommand{\citef}[2][]{\citeauthor{#2} \citeyear{#2} \cite[#1]{#2}} % custom full cite
 
+
+% with this macro you can chose to link the citation labels to local subbib (anchorsegments=true) or to global bib (anchorsegments=false)
+% local links does not work if chapter has no subbib, because there is not subib to point to !
+% https://tex.stackexchange.com/questions/142632/multiple-bibliographies-with-local-links-global-labels-also-global-bibliograph/142720
+\newbool{anchorsegments}\boolfalse{anchorsegments}
+\makeatletter
+\AtBeginDocument{%
+  \ifbool{anchorsegments}
+    {\long\def\blx@bibhyperref[#1]#2{%
+       \blx@sfsave\hyper@natlinkstart{\the\c@refsection @\the\c@refsegment @#1}%
+       \blx@sfrest
+       #2%
+       \blx@sfsave\hyper@natlinkend\blx@sfrest}%
+     \protected\long\def\blx@imc@bibhyperlink#1#2{%
+       \blx@sfsave\hyper@natlinkstart{\the\c@refsection:\the\c@refsegment:#1}%
+       \blx@sfrest
+       #2%
+       \blx@sfsave\hyper@natlinkend\blx@sfrest}%
+     \protected\long\def\blx@imc@bibhypertarget#1#2{%
+       \blx@sfsave\hyper@natanchorstart{\the\c@refsection:\the\c@refsegment:#1}%
+       \blx@sfrest
+       #2%
+       \blx@sfsave\hyper@natanchorend\blx@sfrest}%
+     \protected\def\blx@anchor{%
+       \xifinlist
+         {\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}
+         {\blx@anchors}
+         {}
+         {\listxadd
+            {\blx@anchors}
+            {\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
+          \hyper@natanchorstart{%
+            \the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
+          \hyper@natanchorend}}%
+     \defbibheading{subbibliography}{\section{\refname}}}
+    {\defbibheading{subbibliography}{%
+       \AtNextBibliography{\let\blx@anchor\relax}%
+       \section{\refname}}}}
+\makeatother
+\defbibheading{subbibliography}[\refname]{\chapter*{\bibname}}
 
 % STYLES
 % ===========================
@@ -140,6 +179,7 @@ useprefix=true, % use von as part of the family name (du peloux)
 % LIST OF TABLES
 % ===========================
 \setcounter{lotdepth}{2}
+
 
 % CAPTION
 % ===========================
@@ -453,4 +493,17 @@ useprefix=true, % use von as part of the family name (du peloux)
      \newcommand{\jcv}{\end{verbatim} \end{joutput}}
 
 \usepackage{fancyvrb}
+
+
+%% HYP REF LINK IN PDF ( attention, doit être chargé en dernier sinon bug dans les liens footnote)
+%\usepackage{hyperxmp} % pdf metadada (LDP)
+%%%\usepackage[a-1b]{pdfx}
+%\usepackage{hyperref} % pdf metadada (LDP)
+%\hypersetup{pdfborder={0 0 0},
+%	colorlinks=true,
+%	linktoc=page,
+%	linkcolor=Tblue,
+%	citecolor=Tblue,
+%	urlcolor=Tblue} 
+%\urlstyle{same}
 

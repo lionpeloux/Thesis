@@ -27,7 +27,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[a4paper,top=32mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
-
+\setlength{\headheight}{14pt}
 
 % FONT
 % ===========================
@@ -45,19 +45,6 @@
 % txtt (TXTT), cm(c)tt (Computer Modern), lm(v)tt (Latin Modern), qcr (Gyre Cursor), pcr (Adobe Courier)
 \usepackage[scaled=0.85]{beramono}
 %\renewcommand*{\ttdefault}{lmvtt} 
-
-% HYP REF LINK IN PDF
-\usepackage{hyperxmp} % pdf metadada (LDP)
-%\usepackage[a-1b]{pdfx}
-\usepackage{hyperref} % pdf metadada (LDP)
-
-\hypersetup{pdfborder={0 0 0},
-	colorlinks=true,
-	linktoc=page,
-	linkcolor=Tblue,
-	citecolor=Tblue,
-	urlcolor=Tblue} 
-\urlstyle{same}
 
 % HEADINGS
 %\renewcommand*\ttdefault{cmvtt} % cmvtt or pcr
@@ -163,7 +150,7 @@
 \makeatother
 
 
-\usepackage{graphicx}
+\usepackage[]{graphicx}  % draft = no image
 \usepackage[table]{xcolor}
 \graphicspath{{images/}}
 
@@ -196,9 +183,23 @@
 	\fancyfoot[RO,LE]{\thepage}
 }
 
+\usepackage{notoccite}
+
+
+% HYP REF LINK IN PDF ( attention, doit être chargé en dernier sinon bug dans les liens footnote)
+\usepackage{hyperxmp} % pdf metadada (LDP)
+%%\usepackage[a-1b]{pdfx}
+\usepackage{hyperref} % pdf metadada (LDP)
+\hypersetup{pdfborder={0 0 0},
+	colorlinks=true,
+	linktoc=page,
+	linkcolor=Tblue,
+	citecolor=Tblue,
+	urlcolor=Tblue} 
+\urlstyle{same}
+
 \usepackage{listings}
 \lstset{language=[LaTeX]Tex,tabsize=4, basicstyle=\scriptsize\ttfamily, showstringspaces=false, numbers=left, numberstyle=\tiny, numbersep=10pt, breaklines=true, breakautoindent=true, breakindent=10pt}
-
 
 
 
