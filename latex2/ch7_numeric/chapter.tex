@@ -406,6 +406,7 @@ Finally, the left and right curvature at handle vertex $\vect{x}_{2i}$ are compu
 		\\[0.5em]
 		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} {\vect{M}_{2i}^{\perp}}^{+} + \rconf{\vect{\kappa b}}_{2i}^+ 
 	\end{align}
+\label{eq:lr_bending_moment}
 \end{subequations}
 
 \subsubsection{Bending moment at ghost vertices}
@@ -636,12 +637,12 @@ Remark how a distributed external twisting moment ($m_3$) modifies the value of 
 \section{Dynamic Relaxation}\label{sec=DR}
 From the previous section we have established the basis for a discrete rod element that can account for extension, flexion and torsion. This element is made of two types of vertices~: the ghost and the handle vertices. This allows to model discontinuities at handle vertices, which is one of the main contribution of the work exposed in this chapter. We have established a precise \dofs{4} discrete geometric representation of a slender rod. And from a given configuration we have learned to compute the internal forces and moments acting on the rod vertices using Kirchhoff's theory. Therefore, we are able to compute the resultant of the internal force and moment acting on a given vertex of the rod.\footnote{Note that the internal forces and moments embed the action of distributed external forces and moments applied to the rod.}
 
-We now expose a process to find the static equilibrium of a rod, which is our ultimate goal. This process is called \emph{Dynamic Relaxation} and was first introduced by \citef{Day1965}. We assume that we know the stress-free configuration of the rod, its material properties and cross-section properties. The rod might also be subjected to known external loads such as climatic loads. Finally, we call initial configuration the actual configuration of the rod at time $t=0$. In this configuration, the rod is (a priori) not at static equilibrium.
+We now expose a process to find the static equilibrium of a rod, which is our ultimate goal. This process is called \emph{Dynamic Relaxation} and was first introduced by \citef{Day1965}. We assume that we know the stress-free configuration of the rod, its material and cross-section properties. The rod might also be subjected to known external loads such as climatic loads. Finally, we call initial configuration the actual configuration of the rod at time $t=0$. In this configuration, the rod is (a priori) not at static equilibrium.
 
 \subsection{Overview of the procedure}
-In the Dynamic Relaxation procedure, a discretized mechanical system is dropped from a known initial configuration at time $t=0$. Technically, the mechanical system is now idealized to a \emph{particle-spring system} where each vertex is assimilated to a \emph{particle}, also called \emph{node}, represented by a material frame. Each particle has its own mass and is subjected to internal and external forces and moments. Because the system is not yet in a state of static equilibrium, the internal forces does not equilibrate the external forces. Thus, the system is subject to a motion. This motion is integrated through time and artificially damped. When all the kinetic energy is dissipated by the damping the system has reached a state of static equilibrium, which is the steady state response of the system.
+In the Dynamic Relaxation procedure, a discretized mechanical system is dropped from a known initial configuration at time $t=0$. Technically speaking, the mechanical system is now idealized to a \emph{particle-spring system} where each vertex is assimilated to a \emph{particle}, also called \emph{node}, represented by a material frame. Each particle has its own mass and is subjected to internal and external forces and moments. Because the system is not yet in a state of static equilibrium, the internal forces does not equilibrate the external forces. Thus, the system is subject to a motion. This motion is integrated through time and artificially damped. When all the kinetic energy is dissipated by the damping the system has reached a state of static equilibrium, which is the steady state response of the system.
 
-Because the motion is only a mean to find a static equilibrium position of the system, the damping does not need to be realistic and should be chosen so that the system approaches the static position as fast as possible. This is also known as critical damping.
+Because the motion is only a mean to find a static equilibrium position of the system, the damping does not need to be realistic and should be chosen so that the system approaches the static position as fast as possible. This is also known as \emph{critical damping}.
 
 \subsection{Resultants acting on a particle}\label{sec=resFM}
 In this section, we express the resultant force and the resultant twisting moment acting on a particle. If not balanced, these resultants will make the particle to move and rotate with respect to its degrees of freedom $\vect{x}$ and $\theta$.
@@ -684,7 +685,7 @@ The particles of the system evolve according to the laws of motion, with respect
 \end{subequations}
 where $\ddot{\vect{x}}_i$ is the translational acceleration of the particle, $\ddot{\theta}_i$ is the rotational acceleration of the particle and $\lambda^x_i$ and  $\lambda^{\theta}_i$ are the viscous damping coefficients.
 
-Hereinafter we will consider no viscous damping. Instead, we will rely on an artificial kinetic damping (see \cref{sec=damping}). For a detailed traitement of various damping methods in the Dynamic Relaxation method, refer to \cite{Underwood1983,Rezaiee2012}.
+Hereinafter we will consider no viscous damping. Instead, we will rely on an artificial kinetic damping (see \cref{sec=damping}). For a detailed traitement of various damping methods in the Dynamic Relaxation method refer to \cite{Underwood1983,Rezaiee2012}.
 
 \subsubsection{Coupling between flexion and torsion}
 Although \cref{eq:dmotion_a,eq:dmotion_b} may seem uncoupled to the reader, it is not the case as the coupling occurs through the material frame (see \cref{sec=dofchain}). Recall that both $\vect{R}_i^x$ and $R_i^{\theta}$ do depend on the $\vect{x}_i$ and $\theta_i$ variables.
@@ -1005,7 +1006,6 @@ By analogy to these works, following \cite{Lefevre2017} we define the twisting f
 	K_i = \sum_j \Bigl[\frac{GJ}{L_0} + g \frac{Q}{L} \Bigr]
 \end{equation}
 
-
 \subsubsection{Fictitious mass update}
 in practice, as remarked in \cite{Douthe2007} the fictitious masses do not evolve a lot between two peaks of kinetic energy. Therefore, they can be reevaluated only after each peak to minimize the computational cost of the algorithm.
 
@@ -1104,23 +1104,79 @@ This application is also useful to understand the relation between accuracy, sta
 \end{figure}
 
 \section{Enriching the model}\label{sec=enriching}
-\subsection{Support}
-\subsection{Connexion}
 
-\clearpage
+The question of support conditions and connexions are often kept quiet when a beam model is presented. But it is of critical concerned when modeling real structures which always have to be fixed somewhere or connected to other structural components. Usually these conditions have a preponderant influence on the overall mechanical behavior of a structure and therefore must not be neglected.
+
+One of the main motivations of our work was precisely to develop an element that is capable of modeling real complex bending-active structures, and which can take account of a rich variety of support conditions and connexions. The preliminary work done on the geometry of curves -- spent to build a comprehensive understanding of how tangent vectors and curvature can be interpreted at vertices and especially at end vertices (see \cref{chp=geometry}) -- was essentiil to achieve our goal.
+
+\subsection{Support condition}
+There exists two major ways of modeling support conditions, compatible with the dynamic relaxation procedure~:
+\begin{itemize}
+\item Enforce the condition by means of velocity constraints.
+\item Enforce the condition by means of return forces and moments.
+\end{itemize}
+
+In terms of implementation, when you need to block a specific degree of freedom, either reset its velocity to zero in the dynamic process or apply an additional external force to nullify the resultant of forces and moments applied to that node so it won't move. While both options are valid, it seems that the last one as the advantage to require the explicit computation of the \emph{support reaction} -- that is the return force or moment applied by the support to the particle so it does not move (with respect to a certain degree of freedom).
+
+Also notice that we can identify three types of boundary conditions~:
+\begin{itemize}
+\item \emph{Rigid}, when a support prevent the particle to move along a given degree of freedom.
+\item \emph{Elastic}, when a support applies a return force or moment proportional to the displacement of the particle.
+\item \emph{Free}, when no support exist and the particle is free to move.
+\end{itemize}
+Remarque that a \emph{Free} boundary condition is by extension an \emph{Elastic} boundary condition with an infinitely low stiffness.
+
+In the dynamic relaxation procedure, the tangent vectors are computed from the position of the particles except at the endings where an indecision remains. At these vertices, either ~: 
+\begin{itemize}
+\item The position of the tangent vector is fixed because the cross-section is clamped (i.e. \emph{rigid} boundary condition) and the bending moment is deduced from \cref{eq:cir_kb_ends}.
+\item The end bending moment is prescribed (i.e. \emph{free} or \emph{elastic}) and the tangent vector is obtained by inverting \cref{eq:lr_bending_moment,eq:cir_kb_ends}.
+\end{itemize}
+If the bending moment is prescribed -- either $\vect{M}^{\perp} = 0$ for a \emph{free} end or $\vect{M}^{\perp}\neq 0$ for an elastic support -- the corresponding tangent is deduced from \cref{eq:lr_bending_moment,eq:cir_kb_ends} by :
+\begin{subequations}
+\setlength{\jot}{8pt}
+\begin{alignat}{2}
+	&\vect{\kappa b}_{0} &&= \mat{B}_{0}^{-1} \vect{M}_{0}^{\perp} +  \rconf{\vect{\kappa b}}_{0} \\
+	&\vect{t}_0 &&= \left(1 - \left(\frac{l_0 \kappa_0}{2}\right)^2\right)\vect{u}_0 
+		-  \frac{l_0 \kappa_0}{2} \;\vect{\kappa b}_{0} \times \vect{u}_0
+\end{alignat}
+\end{subequations}
+Note that as expected $\vect{t}_0$ is perpendicular to $\vect{\kappa b}_{0}$. A similar relation can be deduced for $\vect{t}_n$.
+
+\subsection{Connexion}
+A connexion between several beams can usually be interpreted as a set of geometric constraints involving two or more particles. There exists two major ways of modeling connexions, compatible with the dynamic relaxation procedure~:
+\begin{itemize}
+\item The first approach is to enforce the constraint \emph{smoothly} through a set of mechanical actions, namely forces and moments. In that case, the connexion is equivalent to a sort of spring, not necessarily linear, and there is conceptually no difference with what an element really is (see for instance \cite{Lefevre2017}).
+\item The second approach is to enforce the constraint \emph{brutally} through a reprojection process. That is after each time step the configuration of the system is perturbed so it conforms to the constraints prescribed by the definition of the connexions (see for instance \cite{Douthe2007,DAmico2014}).
+\end{itemize}
+
+The last option is straightforward to implement for constraints on translational \dofs{} but more complex to resolve for constraints on rotational \dofs{}. The advantage is that the solution is always valid regarding these constraints. On the contrary, brutal projection can leads to numerical \emph{hysteresis locking} when the system switch back and forth between two configurations, one after and one before the reprojection procedure.
+
+The first option seems more natural to implement and more meaningfull mechanically speaking. The distance between the actual and target configurations of the connexion is evaluated and leads to (proportional) return forces and moments acting on the \dofs{6} particles involved in the constraint. Because the connexion acts similarly to an element, it must be taken into account in the computation of the fictitious mass of the particles. Moreover, the stiffness of the connexion -- that is the coefficient that commensurate the elastic response of the connexion -- is now an extra parameter to adjust to achieve convergence and accuracy of the solution~: to stiff will provoke instabilities in the dynamic procedure~; to soft and the constraint will no be enforced correctly in the final solution.
+
+%Because our element has the ability to model the action of concentrated forces and moments at any handle node, it is quite straight forward to model connexions that link rods together as entities which ensure load and mass transfer between particles.
+%
+%For instance the swivel coupler employed in our GFRP gridshells (see \cref{sec=swivel,fig:swivel_dwg}) links two rods in such a way that~:
+%\begin{itemize}
+%\item the two collars can freely rotate around the connexion axis
+%\item each collar can freely rotates around the tube it is clamped on
+%\end{itemize}
+%Such a connexion is interpreted as a geometric constraint between 
+
 \section{Software}\label{sec=software}
-The present model has been implemented in a numerical software called \emph{Marsupilami}. A first version of this software, based on the \dofs{3} spline beam element, was used successfully in the structural design of the Ephemeral Cathedral of Créteil (see \cref{chp=creteil}) and other smaller timber gridshells (see \cref{fig:jpofav}). During this thesis \emph{Marsupilami} has been completely redeveloped to include rotational \dofs{} capabilities. Lots of new features have been 
+The present model has been implemented in a numerical software called \emph{Marsupilami}. A first version of this software, based on the \dofs{3} spline beam element, was used successfully in the structural design of the Ephemeral Cathedral of Créteil (see \cref{chp=creteil}) and other smaller timber gridshells (see \cref{fig:jpofav}). During this thesis \emph{Marsupilami} has been completely redeveloped to include rotational \dofs{} capabilities.
 
 \subsection{Architecture of the software}
-The code of \emph{Marsupilami} is divided into three libraries presented hereinafter~: \textit{Marsupilami.Math}, \textit{Marsupilami.CoreLib} and \textit{Marsupilami.Gh}.
+The code of \emph{Marsupilami} is divided into three libraries presented hereinafter~: 
+\begin{itemize}
+\item \textit{Marsupilami.Math}
+\item \textit{Marsupilami.CoreLib} 
+\item \textit{Marsupilami.Gh}
+\end{itemize}
 
 \subsubsection{Marsupilami.Math.dll}
 This is a small standalone math library. It defines three data types~: \textit{MPoint}, \textit{MVector} and \textit{MFrame}. \textit{MPoint} and \textit{MVector} types store three coordinates \textit{X}, \textit{Y} and \textit{Z} in double-precision floating-point format (see \cref{fig:mathlib}). \textit{Frame} type is composed of a \textit{MPoint} called \textit{Origin} and three \textit{MVector} called \textit{XAxis}, \textit{YAxis} and \textit{ZAxis}. The \textit{MFrame} type serves to represent a material frame where \textit{XAxis} and \textit{YAxis} are the first and second material axis of the cross-section, and the \textit{ZAxis} is the normal vector of the cross-section.
 
 Although some math libraries already exist for C\#, it was found useful to build our own library so that it can be customized to our needs without restrictions. In particular, when it comes to software optimization for such a CPU-bound application you would better know exactly was is done insight the math routines. Having your own math library facilitates benchmarking several variants of the math routines and select the optimal one.
- 
-
- 
 
 \subsubsection{Marsupilami.CoreLib.dll}
 This is the core library. It defines structured objects such as element, section, material, model, solver. It is concieved as an API that third-party software can use to provide computation (for instance Excel, Rhino Grasshopper, Dynamo, \telp{}).
@@ -1135,45 +1191,46 @@ This is a grasshopper plugin that exposes the logic of \textit{Marsupilami.CoreL
 	\label{fig:mathlib} 
 \end{figure}
 
-\begin{table}
-\center
-%		\ra{1.5}
-	\begin{tabularx}{0.4\textwidth}{@{} X ccccc @{}}
-		\toprule
-		 	& add 	& sub 	& mul 	& div 	& sqrt \\
-		\midrule
-		cost	& 1 		& 1 		& 4 		& 10 		& 20	\\
-		\bottomrule	
-	\end{tabularx}
-	\label{tab:count}
-	\vspace{10pt}
-	\captionof{table}[Simple cost model for arithmetic operations]{Simple cost model for arithmetic operations.}
-	\label{tab:costmodel}
-\end{table}
+
+\subsection{Structure of the algorithm}
+The structure of the dynamic relaxation algorithm implemented in \emph{Marsupilami} is presented in \cref{algo_drmarsu}.
+
+\IncMargin{2em}
+\begin{figure}[p]
+\begin{fullpage}
+	\input{ch7_numeric/algo/algo_run.tex}
+\end{fullpage}
+\end{figure}
+\DecMargin{2em}
+
 
 \subsection{Key aspects}
-Implementation details : \cite{Olsson2012}, \cite{Poulsen2015}
+Discussions about implementing dynamic relaxation can be found in the report from \citef{Olsson2012}, \citef{Poulsen2015}.
 
 \subsubsection{Language}
 Why C\# ? 
 
 \subsubsection{Code abstraction}
-Modularité : evaluation courbure, schéma d'intégration, autorefine, autobreak, plasticity
-Design pattern
-\cite{Clune2012} : An object-oriented architecture for extensible structural design software
-\cite{Bishop2008} : design patterns
+To develop a code with the right level of abstraction, it is advisable to refer to common \emph{design patterns} \cite{Bishop2008, Clune2012}
+
+%Modularité : evaluation courbure, schéma d'intégration, autorefine, autobreak, plasticity
+%Design pattern
+%\cite{Clune2012} : An object-oriented architecture for extensible structural design software
+%\cite{Bishop2008} : design patterns
 
 \subsubsection{Event driven}
-Events-driven vs asynchronous vs parallel. 
-Evènement vs procédural
-\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous. 
-Therefore, handling of events can either be synchronous or asynchronous. JavaScript, for example, uses a synchronous eventing system.
-Asynchronous means that actions can happen independent of the current "main" execution stream. Mind you, it does NOT mean "parallel", or "different thread". An "asynchronous" action may actually run on the main thread, blocking the "main" execution stream in the meantime. So don't confuse "asynchronous" with "multi-threading".
-You may say that, technically speaking, an asynchronous operation automatically assumes eventing -- at least "completed", "faulted" or "aborted/cancelled" events (one or more of these) are sent to the instigator of the operation (or the underlying O/S itself) to signal that the operation has ceased. Thus, async is always event-driven, but not the other way round.
-}
+Part of the solver implementation has been written to be \emph{event driven}.\footnote{\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous.}} This allows to programmatically alter the solving process during its own execution. For some problems, this paradigm is very powerful and can succeed where more classic procedural or functional programming will fail. For instance this paradigm is currently used to implement auto-refinement of the element. It can be used to deal with breakable materials. In the future, it can be employed to add a level of user interactivity so the user can play with design parameters and see in quasi real-time the results, enhancing its design capabilities and reactivity.
+
+%Events-driven vs asynchronous vs parallel. 
+%Evènement vs procédural
+%\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous. 
+%Therefore, handling of events can either be synchronous or asynchronous. JavaScript, for example, uses a synchronous eventing system.
+%Asynchronous means that actions can happen independent of the current "main" execution stream. Mind you, it does NOT mean "parallel", or "different thread". An "asynchronous" action may actually run on the main thread, blocking the "main" execution stream in the meantime. So don't confuse "asynchronous" with "multi-threading".
+%You may say that, technically speaking, an asynchronous operation automatically assumes eventing -- at least "completed", "faulted" or "aborted/cancelled" events (one or more of these) are sent to the instigator of the operation (or the underlying O/S itself) to signal that the operation has ceased. Thus, async is always event-driven, but not the other way round.
+%}
 
 \subsubsection{Serialization}
-SQlite, JSON, XML.
+Serialization should be investigated to allow persistance of model. SQL vs. NoSQL solutions should be compared~: SQlite, Json, XML seem good options.
 
 \subsection{Performance}
 Software optimization is both a very active field of research and a nightmare for non specialists. It is virtually impossible to find good rules of thumb in the literature to orient critical implementation decisions. For instance a question that looks so simple as~: \textquote{Should I use a Struct of Arrays or and Array of Structs ?} ... is not so simple at all ; and the answer is generally \textquote{It depends ...}. And indeed, it depends on the coding language you chose, the coding skills you have to make the language talk to the processor in the way you want and not in the way you think it will. It also depends on complex hardware considerations. Optimizations can be made at all levels of abstraction of a software, from the highest level (algorithm) to the lowest level (assembly code).
@@ -1188,6 +1245,22 @@ then the optimization of the critical pieces of code can begin. To this end, two
 \item Measure~: performance measurements were conducted on full analysis of several test cases with the library \href{https://github.com/Microsoft/perfview}{PerfView}. 
 \end{itemize}
 
+\begin{table}[!b]
+\center
+	\ra{1.0}
+	\begin{tabularx}{0.4\textwidth}{@{} X ccccc @{}}
+		\toprule
+		 	& add 	& sub 	& mul 	& div 	& sqrt \\
+		\midrule
+		cost	& 1 		& 1 		& 4 		& 10 		& 20	\\
+		\bottomrule	
+	\end{tabularx}
+	\label{tab:count}
+	\vspace{10pt}
+	\captionof{table}[Simple cost model for arithmetic operations]{Simple cost model for arithmetic operations.}
+	\label{tab:costmodel}
+\end{table}
+
 \subsubsection{Algorithmic optimization}
 The analyses made with PerfView showed that rotation and parallel transportation of frames are critical operations for the performance of the program. A thorough work was done to optimize all the costly math routines by using the minimal logic to perform the operations.
 
@@ -1199,13 +1272,13 @@ Further improvements might be achieved using polynomial representations of trigo
 \item Single Instruction Multiple Data (SIMD) instructions allow vectorization of arithmetic and trigonometric operations at the CPU level and can offer up to a x8 speed up.
 \item Dynamic relaxation is very suitable for parallelization \cite{Topping1994}. New hardware capabilities such as multicore CPU or GPU cards with hundreds of cores can be leveraged to speed up the computation \cite{Rek2016,Liew2016}.
 \end{itemize}
-However, this technologies are relatively recent and still complex to implement as they require low level coding. They are note easily implementable from C\# and \emph{Marsupilami} does not rely on any of these technology.
+However, this technologies are relatively recent and still complex to implement as they require low level coding. They are note easily implementable from C\# and \emph{Marsupilami} does not rely on any of these technologies.
 
 \subsubsection{Code abstraction}
 \blockcquote[p.~155]{Watson2014}{In-depth performance optimization will often defy code abstractions.}
 
 \subsection{Further guidelines}
-
+This is a raw list of interesting ressources.
 \subsubsection{Tips}
 
 \begin{itemize}
@@ -1214,7 +1287,7 @@ However, this technologies are relatively recent and still complex to implement 
 \item Proprietary solver Knitro, Mosek
 \item webAPI C\# Julia Javascript
 \cite{Moulard2014} : Software Tools for Nonlinear Optimization
-\end{itemize}•
+\end{itemize}
 
 \href{https://neos-guide.org/}{Neos}
 The NEOS Server is a free internet-based service for solving numerical optimization problems. It is able to take models specified in a variety of formats (including AMPL, GAMS and MPS) and pass them to a range of both free and commercial solvers (including Gurobi, CPLEX and Cbc). See here for the full list of solvers and input formats that NEOS supports.
@@ -1234,25 +1307,6 @@ This package provides high-level one-shot functions for linear and mixed-integer
 
 OOP vs structured programming : \url{https://softwareengineering.stackexchange.com/questions/125753/does-object-orientation-really-affect-algorithm-performance}
 AoS vs OaS particle vs Collection of Particle.
-
-\subsubsection{Structure of the algorithm}
-
-
-%\IncMargin{2em}
-%\begin{figure}[p]
-%\begin{fullpage}
-%	\input{ch7_numeric/algo/algo_dr.tex}
-%\end{fullpage}
-%\end{figure}
-%\DecMargin{2em}
-
-\IncMargin{2em}
-\begin{figure}[p]
-\begin{fullpage}
-	\input{ch7_numeric/algo/algo_run.tex}
-\end{fullpage}
-\end{figure}
-\DecMargin{2em}
 
 \clearpage
 
@@ -1306,7 +1360,26 @@ Additionally, we provide full internal force diagrams for the finest discretizat
 & & \multicolumn{5}{c}{number of elements / segments} \\\cmidrule{3-7}
 &  &  6 & 12 & 24 & 48 & 96 \\
 \midrule
-\multirow{8}{*}{Length}&\multirow{4}{*}{smooth}&{\color{Tblue}\normalsize10.262}&{\color{Tblue}\normalsize10.065}&{\color{Tblue}\normalsize10.016}&{\color{Tblue}\normalsize10.004}&{\color{Tblue}\normalsize10.001}\\&&{\color{Tblue}\scriptsize2.6\%}&{\color{Tblue}\scriptsize0.6\%}&{\color{Tblue}\scriptsize0.2\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}\\&&{\color{black}\normalsize10.261}&{\color{black}\normalsize10.065}&{\color{black}\normalsize10.016}&{\color{black}\normalsize10.004}&{\color{black}\normalsize10.001}\\&&{\color{black}\scriptsize2.6\%}&{\color{black}\scriptsize0.6\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{discrete}&{\color{Tblue}\normalsize10.000}&{\color{Tblue}\normalsize10.000}&{\color{Tblue}\normalsize10.000}&{\color{Tblue}\normalsize10.000}&{\color{Tblue}\normalsize10.000}\\&&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}\\&&{\color{black}\normalsize10.000}&{\color{black}\normalsize10.000}&{\color{black}\normalsize10.000}&{\color{black}\normalsize10.000}&{\color{black}\normalsize10.000}\\&&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\\midrule\multirow{12}{*}{Apex}  &\multirow{4}{*}{$x$}&{\color{Tblue}\normalsize-0.001}&{\color{Tblue}\normalsize0.000}&{\color{Tblue}\normalsize0.000}&{\color{Tblue}\normalsize0.000}&{\color{Tblue}\normalsize0.000}\\&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\&&{\color{black}\normalsize0.000}&{\color{black}\normalsize0.000}&{\color{black}\normalsize0.000}&{\color{black}\normalsize0.000}&{\color{black}\normalsize0.000}\\&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$y$}&{\color{Tblue}\normalsize1.455}&{\color{Tblue}\normalsize1.453}&{\color{Tblue}\normalsize1.457}&{\color{Tblue}\normalsize1.458}&{\color{Tblue}\normalsize1.458}\\&&{\color{Tblue}\scriptsize-0.3\%}&{\color{Tblue}\scriptsize-0.4\%}&{\color{Tblue}\scriptsize-0.1\%}&{\color{Tblue}\scriptsize-0.1\%}&{\color{Tblue}\scriptsize-0.1\%}\\&&{\color{black}\normalsize1.643}&{\color{black}\normalsize1.506}&{\color{black}\normalsize1.471}&{\color{black}\normalsize1.462}&{\color{black}\normalsize1.459}\\&&{\color{black}\scriptsize12.6\%}&{\color{black}\scriptsize3.2\%}&{\color{black}\scriptsize0.8\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$z$}&{\color{Tblue}\normalsize3.665}&{\color{Tblue}\normalsize3.615}&{\color{Tblue}\normalsize3.601}&{\color{Tblue}\normalsize3.598}&{\color{Tblue}\normalsize3.597}\\&&{\color{Tblue}\scriptsize1.9\%}&{\color{Tblue}\scriptsize0.5\%}&{\color{Tblue}\scriptsize0.1\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}\\&&{\color{black}\normalsize3.593}&{\color{black}\normalsize3.595}&{\color{black}\normalsize3.596}&{\color{black}\normalsize3.596}&{\color{black}\normalsize3.597}\\&&{\color{black}\scriptsize-0.1\%}&{\color{black}\scriptsize-0.1\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\
+\multirow{8}{*}{Length}&\multirow{4}{*}{smooth}&{\color{Tblue}\normalsize10.262}&{\color{Tblue}\normalsize10.065}&{\color{Tblue}\normalsize10.016}&{\color{Tblue}\normalsize10.004}&{\color{Tblue}\normalsize10.001}\\
+&&{\color{Tblue}\scriptsize2.6\%}&{\color{Tblue}\scriptsize0.6\%}&{\color{Tblue}\scriptsize0.2\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}\\
+&&{\color{black}\normalsize10.261}&{\color{black}\normalsize10.065}&{\color{black}\normalsize10.016}&{\color{black}\normalsize10.004}&{\color{black}\normalsize10.001}\\
+&&{\color{black}\scriptsize2.6\%}&{\color{black}\scriptsize0.6\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{discrete}&{\color{Tblue}\normalsize10.000}&{\color{Tblue}\normalsize10.000}&{\color{Tblue}\normalsize10.000}&{\color{Tblue}\normalsize10.000}&{\color{Tblue}\normalsize10.000}\\
+&&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}\\
+&&{\color{black}\normalsize10.000}&{\color{black}\normalsize10.000}&{\color{black}\normalsize10.000}&{\color{black}\normalsize10.000}&{\color{black}\normalsize10.000}\\
+&&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\\midrule
+\multirow{12}{*}{Apex}  &\multirow{4}{*}{$x$}&{\color{Tblue}\normalsize-0.001}&{\color{Tblue}\normalsize0.000}&{\color{Tblue}\normalsize0.000}&{\color{Tblue}\normalsize0.000}&{\color{Tblue}\normalsize0.000}\\
+&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\
+&&{\color{black}\normalsize0.000}&{\color{black}\normalsize0.000}&{\color{black}\normalsize0.000}&{\color{black}\normalsize0.000}&{\color{black}\normalsize0.000}\\
+&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$y$}&{\color{Tblue}\normalsize1.455}&{\color{Tblue}\normalsize1.453}&{\color{Tblue}\normalsize1.457}&{\color{Tblue}\normalsize1.458}&{\color{Tblue}\normalsize1.458}\\
+&&{\color{Tblue}\scriptsize-0.3\%}&{\color{Tblue}\scriptsize-0.4\%}&{\color{Tblue}\scriptsize-0.1\%}&{\color{Tblue}\scriptsize-0.1\%}&{\color{Tblue}\scriptsize-0.1\%}\\
+&&{\color{black}\normalsize1.643}&{\color{black}\normalsize1.506}&{\color{black}\normalsize1.471}&{\color{black}\normalsize1.462}&{\color{black}\normalsize1.459}\\
+&&{\color{black}\scriptsize12.6\%}&{\color{black}\scriptsize3.2\%}&{\color{black}\scriptsize0.8\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$z$}&{\color{Tblue}\normalsize3.665}&{\color{Tblue}\normalsize3.615}&{\color{Tblue}\normalsize3.601}&{\color{Tblue}\normalsize3.598}&{\color{Tblue}\normalsize3.597}\\
+&&{\color{Tblue}\scriptsize1.9\%}&{\color{Tblue}\scriptsize0.5\%}&{\color{Tblue}\scriptsize0.1\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize0.0\%}\\
+&&{\color{black}\normalsize3.593}&{\color{black}\normalsize3.595}&{\color{black}\normalsize3.596}&{\color{black}\normalsize3.596}&{\color{black}\normalsize3.597}\\
+&&{\color{black}\scriptsize-0.1\%}&{\color{black}\scriptsize-0.1\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\
 \bottomrule
 \end{tabularx}
 \captionof{table}[Geometric parameters for the arch test case]{Geometric parameters for the arch test case (Marsupilami~: blue | Abaqus : black).}
@@ -1330,7 +1403,42 @@ The superposition of the internal force diagrams obtained for the finest discret
 & & \multicolumn{5}{c}{number of elements / segments} \\ \cmidrule{3-7}
 &  &  6 & 12 & 24 & 48 & 96 \\ 
 \midrule
-\multirow{12}{*}{$N$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize 179}&{\color{Tblue}\normalsize 275}&{\color{Tblue}\normalsize 302}&{\color{Tblue}\normalsize 308}&{\color{Tblue}\normalsize 310}\\&&{\color{Tblue}\scriptsize-41.4\%}&{\color{Tblue}\scriptsize-10.1\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize1.3\%}\\&&{\color{black}\normalsize 311}&{\color{black}\normalsize 304}&{\color{black}\normalsize 305}&{\color{black}\normalsize 307}&{\color{black}\normalsize 306}\\&&{\color{black}\scriptsize1.7\%}&{\color{black}\scriptsize-0.6\%}&{\color{black}\scriptsize-0.5\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize- 475}&{\color{Tblue}\normalsize- 585}&{\color{Tblue}\normalsize- 612}&{\color{Tblue}\normalsize- 619}&{\color{Tblue}\normalsize- 620}\\&&{\color{Tblue}\scriptsize-23.6\%}&{\color{Tblue}\scriptsize-5.9\%}&{\color{Tblue}\scriptsize-1.5\%}&{\color{Tblue}\scriptsize-0.4\%}&{\color{Tblue}\scriptsize-0.2\%}\\&&{\color{black}\normalsize- 669}&{\color{black}\normalsize- 633}&{\color{black}\normalsize- 624}&{\color{black}\normalsize- 622}&{\color{black}\normalsize- 622}\\&&{\color{black}\scriptsize7.7\%}&{\color{black}\scriptsize1.9\%}&{\color{black}\scriptsize0.4\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize 181}&{\color{Tblue}\normalsize 275}&{\color{Tblue}\normalsize 302}&{\color{Tblue}\normalsize 308}&{\color{Tblue}\normalsize 310}\\&&{\color{Tblue}\scriptsize-40.8\%}&{\color{Tblue}\scriptsize-10.1\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize1.3\%}\\&&{\color{black}\normalsize 311}&{\color{black}\normalsize 304}&{\color{black}\normalsize 305}&{\color{black}\normalsize 307}&{\color{black}\normalsize 306}\\&&{\color{black}\scriptsize1.7\%}&{\color{black}\scriptsize-0.6\%}&{\color{black}\scriptsize-0.5\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}\\\midrule\multirow{12}{*}{$F1$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize 434}&{\color{Tblue}\normalsize 515}&{\color{Tblue}\normalsize 532}&{\color{Tblue}\normalsize 537}&{\color{Tblue}\normalsize 538}\\&&{\color{Tblue}\scriptsize-19.7\%}&{\color{Tblue}\scriptsize-4.7\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize-0.6\%}&{\color{Tblue}\scriptsize-0.5\%}\\&&{\color{black}\normalsize 634}&{\color{black}\normalsize 567}&{\color{black}\normalsize 548}&{\color{black}\normalsize 542}&{\color{black}\normalsize 540}\\&&{\color{black}\scriptsize17.3\%}&{\color{black}\scriptsize4.9\%}&{\color{black}\scriptsize1.4\%}&{\color{black}\scriptsize0.3\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize 2}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}\\&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\&&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}\\&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize- 432}&{\color{Tblue}\normalsize- 515}&{\color{Tblue}\normalsize- 532}&{\color{Tblue}\normalsize- 537}&{\color{Tblue}\normalsize- 538}\\&&{\color{Tblue}\scriptsize-19.9\%}&{\color{Tblue}\scriptsize-4.7\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize-0.6\%}&{\color{Tblue}\scriptsize-0.5\%}\\&&{\color{black}\normalsize- 634}&{\color{black}\normalsize- 567}&{\color{black}\normalsize- 548}&{\color{black}\normalsize- 542}&{\color{black}\normalsize- 540}\\&&{\color{black}\scriptsize17.3\%}&{\color{black}\scriptsize4.9\%}&{\color{black}\scriptsize1.4\%}&{\color{black}\scriptsize0.3\%}&{\color{black}\scriptsize0.0\%}\\\midrule\multirow{12}{*}{$F2$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize 73}&{\color{Tblue}\normalsize 29}&{\color{Tblue}\normalsize 8}&{\color{Tblue}\normalsize 2}&{\color{Tblue}\normalsize 1}\\&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\&&{\color{black}\normalsize 306}&{\color{black}\normalsize 129}&{\color{black}\normalsize 61}&{\color{black}\normalsize 30}&{\color{black}\normalsize 15}\\&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}\\&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\&&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}\\&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize- 66}&{\color{Tblue}\normalsize- 29}&{\color{Tblue}\normalsize- 8}&{\color{Tblue}\normalsize- 2}&{\color{Tblue}\normalsize- 1}\\&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\&&{\color{black}\normalsize- 306}&{\color{black}\normalsize- 129}&{\color{black}\normalsize- 61}&{\color{black}\normalsize- 30}&{\color{black}\normalsize- 15}\\&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\
+\multirow{12}{*}{$N$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize 179}&{\color{Tblue}\normalsize 275}&{\color{Tblue}\normalsize 302}&{\color{Tblue}\normalsize 308}&{\color{Tblue}\normalsize 310}\\
+&&{\color{Tblue}\scriptsize-41.4\%}&{\color{Tblue}\scriptsize-10.1\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize1.3\%}\\
+&&{\color{black}\normalsize 311}&{\color{black}\normalsize 304}&{\color{black}\normalsize 305}&{\color{black}\normalsize 307}&{\color{black}\normalsize 306}\\
+&&{\color{black}\scriptsize1.7\%}&{\color{black}\scriptsize-0.6\%}&{\color{black}\scriptsize-0.5\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize- 475}&{\color{Tblue}\normalsize- 585}&{\color{Tblue}\normalsize- 612}&{\color{Tblue}\normalsize- 619}&{\color{Tblue}\normalsize- 620}\\
+&&{\color{Tblue}\scriptsize-23.6\%}&{\color{Tblue}\scriptsize-5.9\%}&{\color{Tblue}\scriptsize-1.5\%}&{\color{Tblue}\scriptsize-0.4\%}&{\color{Tblue}\scriptsize-0.2\%}\\
+&&{\color{black}\normalsize- 669}&{\color{black}\normalsize- 633}&{\color{black}\normalsize- 624}&{\color{black}\normalsize- 622}&{\color{black}\normalsize- 622}\\
+&&{\color{black}\scriptsize7.7\%}&{\color{black}\scriptsize1.9\%}&{\color{black}\scriptsize0.4\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize 181}&{\color{Tblue}\normalsize 275}&{\color{Tblue}\normalsize 302}&{\color{Tblue}\normalsize 308}&{\color{Tblue}\normalsize 310}\\
+&&{\color{Tblue}\scriptsize-40.8\%}&{\color{Tblue}\scriptsize-10.1\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize1.3\%}\\
+&&{\color{black}\normalsize 311}&{\color{black}\normalsize 304}&{\color{black}\normalsize 305}&{\color{black}\normalsize 307}&{\color{black}\normalsize 306}\\
+&&{\color{black}\scriptsize1.7\%}&{\color{black}\scriptsize-0.6\%}&{\color{black}\scriptsize-0.5\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}\\\midrule
+\multirow{12}{*}{$F1$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize 434}&{\color{Tblue}\normalsize 515}&{\color{Tblue}\normalsize 532}&{\color{Tblue}\normalsize 537}&{\color{Tblue}\normalsize 538}\\
+&&{\color{Tblue}\scriptsize-19.7\%}&{\color{Tblue}\scriptsize-4.7\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize-0.6\%}&{\color{Tblue}\scriptsize-0.5\%}\\
+&&{\color{black}\normalsize 634}&{\color{black}\normalsize 567}&{\color{black}\normalsize 548}&{\color{black}\normalsize 542}&{\color{black}\normalsize 540}\\
+&&{\color{black}\scriptsize17.3\%}&{\color{black}\scriptsize4.9\%}&{\color{black}\scriptsize1.4\%}&{\color{black}\scriptsize0.3\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize 2}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}\\
+&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\
+&&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}\\
+&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize- 432}&{\color{Tblue}\normalsize- 515}&{\color{Tblue}\normalsize- 532}&{\color{Tblue}\normalsize- 537}&{\color{Tblue}\normalsize- 538}\\
+&&{\color{Tblue}\scriptsize-19.9\%}&{\color{Tblue}\scriptsize-4.7\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize-0.6\%}&{\color{Tblue}\scriptsize-0.5\%}\\
+&&{\color{black}\normalsize- 634}&{\color{black}\normalsize- 567}&{\color{black}\normalsize- 548}&{\color{black}\normalsize- 542}&{\color{black}\normalsize- 540}\\
+&&{\color{black}\scriptsize17.3\%}&{\color{black}\scriptsize4.9\%}&{\color{black}\scriptsize1.4\%}&{\color{black}\scriptsize0.3\%}&{\color{black}\scriptsize0.0\%}\\\midrule
+\multirow{12}{*}{$F2$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize 73}&{\color{Tblue}\normalsize 29}&{\color{Tblue}\normalsize 8}&{\color{Tblue}\normalsize 2}&{\color{Tblue}\normalsize 1}\\
+&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\
+&&{\color{black}\normalsize 306}&{\color{black}\normalsize 129}&{\color{black}\normalsize 61}&{\color{black}\normalsize 30}&{\color{black}\normalsize 15}\\
+&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}\\
+&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\
+&&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}\\
+&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize- 66}&{\color{Tblue}\normalsize- 29}&{\color{Tblue}\normalsize- 8}&{\color{Tblue}\normalsize- 2}&{\color{Tblue}\normalsize- 1}\\
+&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\
+&&{\color{black}\normalsize- 306}&{\color{black}\normalsize- 129}&{\color{black}\normalsize- 61}&{\color{black}\normalsize- 30}&{\color{black}\normalsize- 15}\\
+&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\
 \bottomrule
 \end{tabularx}
 \captionof{table}[Internal forces for the arch test case]{Internal forces for the arch test case (Marsupilami~: blue | Abaqus : black).}
@@ -1347,7 +1455,42 @@ The superposition of the internal force diagrams obtained for the finest discret
 & & \multicolumn{5}{c}{number of elements / segments} \\ \cmidrule{3-7}
 &  &  6 & 12 & 24 & 48 & 96 \\ 
 \midrule
-\multirow{12}{*}{$Q$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize-3 092}&{\color{Tblue}\normalsize-3 009}&{\color{Tblue}\normalsize-2 989}&{\color{Tblue}\normalsize-2 985}&{\color{Tblue}\normalsize-2 984}\\&&{\color{Tblue}\scriptsize3.9\%}&{\color{Tblue}\scriptsize1.1\%}&{\color{Tblue}\scriptsize0.4\%}&{\color{Tblue}\scriptsize0.3\%}&{\color{Tblue}\scriptsize0.3\%}\\&&{\color{black}\normalsize-2 731}&{\color{black}\normalsize-2 885}&{\color{black}\normalsize-2 942}&{\color{black}\normalsize-2 965}&{\color{black}\normalsize-2 976}\\&&{\color{black}\scriptsize-8.2\%}&{\color{black}\scriptsize-3.1\%}&{\color{black}\scriptsize-1.1\%}&{\color{black}\scriptsize-0.4\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}\\&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\&&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}\\&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize3 095}&{\color{Tblue}\normalsize3 009}&{\color{Tblue}\normalsize2 989}&{\color{Tblue}\normalsize2 985}&{\color{Tblue}\normalsize2 984}\\&&{\color{Tblue}\scriptsize4.0\%}&{\color{Tblue}\scriptsize1.1\%}&{\color{Tblue}\scriptsize0.4\%}&{\color{Tblue}\scriptsize0.3\%}&{\color{Tblue}\scriptsize0.3\%}\\&&{\color{black}\normalsize2 731}&{\color{black}\normalsize2 885}&{\color{black}\normalsize2 942}&{\color{black}\normalsize2 965}&{\color{black}\normalsize2 976}\\&&{\color{black}\scriptsize-8.2\%}&{\color{black}\scriptsize-3.1\%}&{\color{black}\scriptsize-1.1\%}&{\color{black}\scriptsize-0.4\%}&{\color{black}\scriptsize0.0\%}\\\midrule\multirow{12}{*}{$M1$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize1 548}&{\color{Tblue}\normalsize1 669}&{\color{Tblue}\normalsize1 709}&{\color{Tblue}\normalsize1 719}&{\color{Tblue}\normalsize1 721}\\&&{\color{Tblue}\scriptsize-11.1\%}&{\color{Tblue}\scriptsize-4.1\%}&{\color{Tblue}\scriptsize-1.8\%}&{\color{Tblue}\scriptsize-1.2\%}&{\color{Tblue}\scriptsize-1.1\%}\\&&{\color{black}\normalsize1 934}&{\color{black}\normalsize1 863}&{\color{black}\normalsize1 795}&{\color{black}\normalsize1 759}&{\color{black}\normalsize1 740}\\&&{\color{black}\scriptsize11.1\%}&{\color{black}\scriptsize7.1\%}&{\color{black}\scriptsize3.2\%}&{\color{black}\scriptsize1.1\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize4 577}&{\color{Tblue}\normalsize4 881}&{\color{Tblue}\normalsize4 964}&{\color{Tblue}\normalsize4 986}&{\color{Tblue}\normalsize4 991}\\&&{\color{Tblue}\scriptsize-8.3\%}&{\color{Tblue}\scriptsize-2.2\%}&{\color{Tblue}\scriptsize-0.6\%}&{\color{Tblue}\scriptsize-0.1\%}&{\color{Tblue}\scriptsize0.0\%}\\&&{\color{black}\normalsize5 106}&{\color{black}\normalsize5 017}&{\color{black}\normalsize4 998}&{\color{black}\normalsize4 994}&{\color{black}\normalsize4 992}\\&&{\color{black}\scriptsize2.3\%}&{\color{black}\scriptsize0.5\%}&{\color{black}\scriptsize0.1\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize1 556}&{\color{Tblue}\normalsize1 669}&{\color{Tblue}\normalsize1 709}&{\color{Tblue}\normalsize1 719}&{\color{Tblue}\normalsize1 721}\\&&{\color{Tblue}\scriptsize-10.6\%}&{\color{Tblue}\scriptsize-4.1\%}&{\color{Tblue}\scriptsize-1.8\%}&{\color{Tblue}\scriptsize-1.2\%}&{\color{Tblue}\scriptsize-1.1\%}\\&&{\color{black}\normalsize1 934}&{\color{black}\normalsize1 863}&{\color{black}\normalsize1 795}&{\color{black}\normalsize1 759}&{\color{black}\normalsize1 740}\\&&{\color{black}\scriptsize11.1\%}&{\color{black}\scriptsize7.1\%}&{\color{black}\scriptsize3.2\%}&{\color{black}\scriptsize1.1\%}&{\color{black}\scriptsize0.0\%}\\\midrule\multirow{12}{*}{$M2$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize-2 014}&{\color{Tblue}\normalsize-1 597}&{\color{Tblue}\normalsize-1 490}&{\color{Tblue}\normalsize-1 464}&{\color{Tblue}\normalsize-1 458}\\&&{\color{Tblue}\scriptsize38.7\%}&{\color{Tblue}\scriptsize9.9\%}&{\color{Tblue}\scriptsize2.6\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize0.4\%}\\&&{\color{black}\normalsize-1 231}&{\color{black}\normalsize-1 378}&{\color{black}\normalsize-1 430}&{\color{black}\normalsize-1 447}&{\color{black}\normalsize-1 453}\\&&{\color{black}\scriptsize-15.3\%}&{\color{black}\scriptsize-5.2\%}&{\color{black}\scriptsize-1.6\%}&{\color{black}\scriptsize-0.4\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize-2 918}&{\color{Tblue}\normalsize-2 791}&{\color{Tblue}\normalsize-2 766}&{\color{Tblue}\normalsize-2 761}&{\color{Tblue}\normalsize-2 760}\\&&{\color{Tblue}\scriptsize5.6\%}&{\color{Tblue}\scriptsize1.0\%}&{\color{Tblue}\scriptsize0.1\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize-0.1\%}\\&&{\color{black}\normalsize-3 217}&{\color{black}\normalsize-2 868}&{\color{black}\normalsize-2 788}&{\color{black}\normalsize-2 768}&{\color{black}\normalsize-2 763}\\&&{\color{black}\scriptsize16.5\%}&{\color{black}\scriptsize3.8\%}&{\color{black}\scriptsize0.9\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize-2 015}&{\color{Tblue}\normalsize-1 597}&{\color{Tblue}\normalsize-1 490}&{\color{Tblue}\normalsize-1 464}&{\color{Tblue}\normalsize-1 458}\\&&{\color{Tblue}\scriptsize38.7\%}&{\color{Tblue}\scriptsize10.0\%}&{\color{Tblue}\scriptsize2.6\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize0.4\%}\\&&{\color{black}\normalsize-1 231}&{\color{black}\normalsize-1 378}&{\color{black}\normalsize-1 430}&{\color{black}\normalsize-1 447}&{\color{black}\normalsize-1 453}\\&&{\color{black}\scriptsize-15.3\%}&{\color{black}\scriptsize-5.2\%}&{\color{black}\scriptsize-1.6\%}&{\color{black}\scriptsize-0.4\%}&{\color{black}\scriptsize0.0\%}\\\bottomrule
+\multirow{12}{*}{$Q$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize-3 092}&{\color{Tblue}\normalsize-3 009}&{\color{Tblue}\normalsize-2 989}&{\color{Tblue}\normalsize-2 985}&{\color{Tblue}\normalsize-2 984}\\
+&&{\color{Tblue}\scriptsize3.9\%}&{\color{Tblue}\scriptsize1.1\%}&{\color{Tblue}\scriptsize0.4\%}&{\color{Tblue}\scriptsize0.3\%}&{\color{Tblue}\scriptsize0.3\%}\\
+&&{\color{black}\normalsize-2 731}&{\color{black}\normalsize-2 885}&{\color{black}\normalsize-2 942}&{\color{black}\normalsize-2 965}&{\color{black}\normalsize-2 976}\\
+&&{\color{black}\scriptsize-8.2\%}&{\color{black}\scriptsize-3.1\%}&{\color{black}\scriptsize-1.1\%}&{\color{black}\scriptsize-0.4\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}&{\color{Tblue}\normalsize 0}\\
+&&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}&{\color{Tblue}\scriptsize-}\\
+&&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}&{\color{black}\normalsize 0}\\
+&&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}&{\color{black}\scriptsize-}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize3 095}&{\color{Tblue}\normalsize3 009}&{\color{Tblue}\normalsize2 989}&{\color{Tblue}\normalsize2 985}&{\color{Tblue}\normalsize2 984}\\
+&&{\color{Tblue}\scriptsize4.0\%}&{\color{Tblue}\scriptsize1.1\%}&{\color{Tblue}\scriptsize0.4\%}&{\color{Tblue}\scriptsize0.3\%}&{\color{Tblue}\scriptsize0.3\%}\\
+&&{\color{black}\normalsize2 731}&{\color{black}\normalsize2 885}&{\color{black}\normalsize2 942}&{\color{black}\normalsize2 965}&{\color{black}\normalsize2 976}\\
+&&{\color{black}\scriptsize-8.2\%}&{\color{black}\scriptsize-3.1\%}&{\color{black}\scriptsize-1.1\%}&{\color{black}\scriptsize-0.4\%}&{\color{black}\scriptsize0.0\%}\\\midrule
+\multirow{12}{*}{$M1$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize1 548}&{\color{Tblue}\normalsize1 669}&{\color{Tblue}\normalsize1 709}&{\color{Tblue}\normalsize1 719}&{\color{Tblue}\normalsize1 721}\\
+&&{\color{Tblue}\scriptsize-11.1\%}&{\color{Tblue}\scriptsize-4.1\%}&{\color{Tblue}\scriptsize-1.8\%}&{\color{Tblue}\scriptsize-1.2\%}&{\color{Tblue}\scriptsize-1.1\%}\\
+&&{\color{black}\normalsize1 934}&{\color{black}\normalsize1 863}&{\color{black}\normalsize1 795}&{\color{black}\normalsize1 759}&{\color{black}\normalsize1 740}\\
+&&{\color{black}\scriptsize11.1\%}&{\color{black}\scriptsize7.1\%}&{\color{black}\scriptsize3.2\%}&{\color{black}\scriptsize1.1\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize4 577}&{\color{Tblue}\normalsize4 881}&{\color{Tblue}\normalsize4 964}&{\color{Tblue}\normalsize4 986}&{\color{Tblue}\normalsize4 991}\\
+&&{\color{Tblue}\scriptsize-8.3\%}&{\color{Tblue}\scriptsize-2.2\%}&{\color{Tblue}\scriptsize-0.6\%}&{\color{Tblue}\scriptsize-0.1\%}&{\color{Tblue}\scriptsize0.0\%}\\
+&&{\color{black}\normalsize5 106}&{\color{black}\normalsize5 017}&{\color{black}\normalsize4 998}&{\color{black}\normalsize4 994}&{\color{black}\normalsize4 992}\\
+&&{\color{black}\scriptsize2.3\%}&{\color{black}\scriptsize0.5\%}&{\color{black}\scriptsize0.1\%}&{\color{black}\scriptsize0.0\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize1 556}&{\color{Tblue}\normalsize1 669}&{\color{Tblue}\normalsize1 709}&{\color{Tblue}\normalsize1 719}&{\color{Tblue}\normalsize1 721}\\
+&&{\color{Tblue}\scriptsize-10.6\%}&{\color{Tblue}\scriptsize-4.1\%}&{\color{Tblue}\scriptsize-1.8\%}&{\color{Tblue}\scriptsize-1.2\%}&{\color{Tblue}\scriptsize-1.1\%}\\
+&&{\color{black}\normalsize1 934}&{\color{black}\normalsize1 863}&{\color{black}\normalsize1 795}&{\color{black}\normalsize1 759}&{\color{black}\normalsize1 740}\\
+&&{\color{black}\scriptsize11.1\%}&{\color{black}\scriptsize7.1\%}&{\color{black}\scriptsize3.2\%}&{\color{black}\scriptsize1.1\%}&{\color{black}\scriptsize0.0\%}\\\midrule
+\multirow{12}{*}{$M2$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize-2 014}&{\color{Tblue}\normalsize-1 597}&{\color{Tblue}\normalsize-1 490}&{\color{Tblue}\normalsize-1 464}&{\color{Tblue}\normalsize-1 458}\\
+&&{\color{Tblue}\scriptsize38.7\%}&{\color{Tblue}\scriptsize9.9\%}&{\color{Tblue}\scriptsize2.6\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize0.4\%}\\
+&&{\color{black}\normalsize-1 231}&{\color{black}\normalsize-1 378}&{\color{black}\normalsize-1 430}&{\color{black}\normalsize-1 447}&{\color{black}\normalsize-1 453}\\
+&&{\color{black}\scriptsize-15.3\%}&{\color{black}\scriptsize-5.2\%}&{\color{black}\scriptsize-1.6\%}&{\color{black}\scriptsize-0.4\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L/2$}&{\color{Tblue}\normalsize-2 918}&{\color{Tblue}\normalsize-2 791}&{\color{Tblue}\normalsize-2 766}&{\color{Tblue}\normalsize-2 761}&{\color{Tblue}\normalsize-2 760}\\
+&&{\color{Tblue}\scriptsize5.6\%}&{\color{Tblue}\scriptsize1.0\%}&{\color{Tblue}\scriptsize0.1\%}&{\color{Tblue}\scriptsize0.0\%}&{\color{Tblue}\scriptsize-0.1\%}\\
+&&{\color{black}\normalsize-3 217}&{\color{black}\normalsize-2 868}&{\color{black}\normalsize-2 788}&{\color{black}\normalsize-2 768}&{\color{black}\normalsize-2 763}\\
+&&{\color{black}\scriptsize16.5\%}&{\color{black}\scriptsize3.8\%}&{\color{black}\scriptsize0.9\%}&{\color{black}\scriptsize0.2\%}&{\color{black}\scriptsize0.0\%}\\\cmidrule[0.5\cmidrulewidth]{2-7}
+&\multirow{4}{*}{$L$}&{\color{Tblue}\normalsize-2 015}&{\color{Tblue}\normalsize-1 597}&{\color{Tblue}\normalsize-1 490}&{\color{Tblue}\normalsize-1 464}&{\color{Tblue}\normalsize-1 458}\\
+&&{\color{Tblue}\scriptsize38.7\%}&{\color{Tblue}\scriptsize10.0\%}&{\color{Tblue}\scriptsize2.6\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize0.4\%}\\
+&&{\color{black}\normalsize-1 231}&{\color{black}\normalsize-1 378}&{\color{black}\normalsize-1 430}&{\color{black}\normalsize-1 447}&{\color{black}\normalsize-1 453}\\
+&&{\color{black}\scriptsize-15.3\%}&{\color{black}\scriptsize-5.2\%}&{\color{black}\scriptsize-1.6\%}&{\color{black}\scriptsize-0.4\%}&{\color{black}\scriptsize0.0\%}\\\bottomrule
 \end{tabularx}
 \captionof{table}[Internal moments for the arch test case]{Internal moments for the arch test case (Marsupilami~: blue | Abaqus : black).}
 \label{tab:resA_moment}

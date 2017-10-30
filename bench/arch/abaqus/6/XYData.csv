@@ -1,0 +1,31 @@
+********************************************************************************
+Field Output Report, written Thu Oct 26 16:09:38 2017
+
+Source 1
+---------
+
+   ODB: C:/SIMULIA/BenchThesis/6/Job.odb
+   Step: ToRotate
+   Frame: Increment     10: Step Time =    1.000
+
+Loc 1 : Nodal values from source 1
+
+Output sorted by column "Node Label".
+
+Field Output reported at nodes for part: PART-1-1
+   Computation algorithm: EXTRAPOLATE_COMPUTE_AVERAGE
+   Averaged at nodes
+   Averaging regions: ODB_REGIONS
+
+            Node        NFORCSO1        NFORCSO2        NFORCSO3        NFORCSO4        NFORCSO5        NFORCSO6
+           Label          @Loc 1          @Loc 1          @Loc 1          @Loc 1          @Loc 1          @Loc 1
+-----------------------------------------------------------------------------------------------------------------
+               1         311.390         305.824         633.657     1.93417E+03    -1.23078E+03    -2.73098E+03
+               2         95.1470         471.667         523.281     2.72922E+03    -2.31178E+03    -2.37138E+03
+               3        -395.118         496.824         269.336     4.29359E+03    -3.01766E+03    -1.38250E+03
+               4        -669.140              0.              0.     5.10614E+03    -3.21749E+03              0.
+               5        -395.118        -496.824        -269.336     4.29359E+03    -3.01766E+03     1.38250E+03
+               6         95.1470        -471.667        -523.281     2.72922E+03    -2.31178E+03     2.37138E+03
+               7         311.390        -305.824        -633.657     1.93417E+03    -1.23078E+03     2.73098E+03
+
+
