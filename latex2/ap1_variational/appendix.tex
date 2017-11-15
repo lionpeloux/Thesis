@@ -260,10 +260,10 @@ Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$.
 \begin{aligned}
 	&\boldsymbol{D}^{2}F(x) = \mat{H}_{x} = \frac{d^2F}{dx}(x) =
 	\begin{bmatrix}
-		\frac{\partial F^2_1}{\partial x_1^2} & \frac{\partial F^2_1}{\partial x_1\partial x_2} &\cdots & \frac{\partial F^2_1}{\partial x_1\partial x_n} \\
-		\frac{\partial F^2_1}{\partial x_2\partial x_1} & \frac{\partial F^2_1}{\partial x_2^2} &\cdots & \frac{\partial F^2_1}{\partial x_2\partial x_n} \\
+		\frac{\partial^2 F}{\partial x_1^2} & \frac{\partial^2 F}{\partial x_1\partial x_2} &\cdots & \frac{\partial^2 F}{\partial x_1\partial x_n} \\
+		\frac{\partial^2 F}{\partial x_2\partial x_1} & \frac{\partial^2 F}{\partial x_2^2} &\cdots & \frac{\partial^2 F}{\partial x_2\partial x_n} \\
 		\vdots & &\ddots & \vdots \\
-		\frac{\partial F^2_p}{\partial x_n\partial x_1} & \frac{\partial F^2_p}{\partial x_n\partial x_2}&\cdots & \frac{\partial F^2_p}{\partial x_n^2}
+		\frac{\partial^2 F}{\partial x_n\partial x_1} & \frac{\partial^2 F}{\partial x_n\partial x_2}&\cdots & \frac{\partial^2 F}{\partial x_n^2}
 	\end{bmatrix}
 	\in\mathcal{M}_{n,n}(\mathbb{R})
 \end{aligned}

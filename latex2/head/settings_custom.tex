@@ -106,11 +106,13 @@ baseurl={http://www.thinkshell.fr}
 \usepackage[
 backend=biber, 
 natbib=true, % provide alias to natbib command
-%style=alphabetic, citestyle=alphabetic, 
-style=numeric, citestyle=numeric, 
+%style=numeric, 
+bibstyle=ieee,%ieee,
+citestyle=numeric,
 %sortcites=true, 
 sorting=none,
 doi=false, isbn=false, url=false,
+mincitenames=1,
 maxcitenames=2, maxbibnames=100,
 firstinits=true, % firstinits old option
 refsegment=chapter, % defernumbers=true, % attention cette option semble faire buger l'ordre des citations dans la biblio
@@ -121,6 +123,27 @@ useprefix=true, % use von as part of the family name (du peloux)
 \renewcommand*{\multicitedelim}{\addcomma\space}
 \newcommand{\citef}[2][]{\citeauthor{#2} \citeyear{#2} \cite[#1]{#2}} % custom full cite
 
+% No quotes or italics in titles, except books and collections in italics.
+%\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1\isdot}
+%\DeclareFieldFormat[book,collection]{title}{\emph{#1}}
+\renewcommand*{\multinamedelim}{\addcomma\addspace} % separator mark between authors
+\renewcommand*{\finalnamedelim}{\addspace and \addspace} % separator mark between authors
+\renewcommand{\labelnamepunct}{\addcomma\addspace}
+
+\renewbibmacro*{in:}{%
+    \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+
+% Remove page prefixes in article
+\DeclareFieldFormat[article]{pages}{#1}
+% Print volume, followed by number in parentheses.
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\renewbibmacro*{volume+number+eid}{%
+	\printfield{volume}%
+    	\printfield{number}}
+
+% Colon for volume(number):pages delimiter.
+\renewcommand*{\bibpagespunct}{%
+	\ifentrytype{article}{\addcolon}{\addcomma\space}}
 
 % with this macro you can chose to link the citation labels to local subbib (anchorsegments=true) or to global bib (anchorsegments=false)
 % local links does not work if chapter has no subbib, because there is not subib to point to !
