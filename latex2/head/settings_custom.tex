@@ -111,7 +111,7 @@ bibstyle=ieee,%ieee,
 citestyle=numeric,
 %sortcites=true, 
 sorting=none,
-doi=false, isbn=false, url=false,
+doi=false, isbn=false, url=true,
 mincitenames=1,
 maxcitenames=2, maxbibnames=100,
 firstinits=true, % firstinits old option
@@ -129,6 +129,16 @@ useprefix=true, % use von as part of the family name (du peloux)
 \renewcommand*{\multinamedelim}{\addcomma\addspace} % separator mark between authors
 \renewcommand*{\finalnamedelim}{\addspace and \addspace} % separator mark between authors
 \renewcommand{\labelnamepunct}{\addcomma\addspace}
+
+\DeclareFieldFormat[misc]{title}{\mkbibquote{#1}}
+% --  clear url field but for wepages
+\AtEveryBibitem{%
+  \ifentrytype{misc}{%
+  }{%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+}
 
 %\DeclareFieldFormat{titlecase}{\MakeUppercase{#1}}\MakeSentenceCase
 %\DeclareFieldFormat{sentencecase}{\MakeUppercase{#1}}
