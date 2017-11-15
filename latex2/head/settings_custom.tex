@@ -130,20 +130,25 @@ useprefix=true, % use von as part of the family name (du peloux)
 \renewcommand*{\finalnamedelim}{\addspace and \addspace} % separator mark between authors
 \renewcommand{\labelnamepunct}{\addcomma\addspace}
 
-\renewbibmacro*{in:}{%
-    \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+%\DeclareFieldFormat{titlecase}{\MakeUppercase{#1}}\MakeSentenceCase
+%\DeclareFieldFormat{sentencecase}{\MakeUppercase{#1}}
 
-% Remove page prefixes in article
-\DeclareFieldFormat[article]{pages}{#1}
-% Print volume, followed by number in parentheses.
-\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
-\renewbibmacro*{volume+number+eid}{%
-	\printfield{volume}%
-    	\printfield{number}}
 
-% Colon for volume(number):pages delimiter.
-\renewcommand*{\bibpagespunct}{%
-	\ifentrytype{article}{\addcolon}{\addcomma\space}}
+
+%\renewbibmacro*{in:}{%
+%    \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+%
+%% Remove page prefixes in article
+%\DeclareFieldFormat[article]{pages}{#1}
+%% Print volume, followed by number in parentheses.
+%\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+%\renewbibmacro*{volume+number+eid}{%
+%	\printfield{volume}%
+%    	\printfield{number}}
+%
+%% Colon for volume(number):pages delimiter.
+%\renewcommand*{\bibpagespunct}{%
+%	\ifentrytype{article}{\addcolon}{\addcomma\space}}
 
 % with this macro you can chose to link the citation labels to local subbib (anchorsegments=true) or to global bib (anchorsegments=false)
 % local links does not work if chapter has no subbib, because there is not subib to point to !
