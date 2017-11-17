@@ -112,11 +112,13 @@ citestyle=numeric,
 dashed=false,
 %sortcites=true, 
 sorting=none,
-doi=false, isbn=false, url=true,
+doi=false, isbn=false, url=false,
 mincitenames=1,
 maxcitenames=2, maxbibnames=100,
 firstinits=true, % firstinits old option
-refsegment=chapter, % defernumbers=true, % attention cette option semble faire buger l'ordre des citations dans la biblio
+%refsegment=chapter, 
+%refsectio=chapter,
+%defernumbers=true, % attention cette option semble faire buger l'ordre des citations dans la biblio
 useprefix=true, % use von as part of the family name (du peloux)
 ]{biblatex} 
 \addbibresource{library.bib}
@@ -131,35 +133,70 @@ useprefix=true, % use von as part of the family name (du peloux)
 \renewcommand*{\finalnamedelim}{\addspace and \addspace} % separator mark between authors
 \renewcommand{\labelnamepunct}{\addcomma\addspace}
 
-\DeclareFieldFormat[misc]{title}{\mkbibquote{#1}}
-% --  clear url field but for wepages
-\AtEveryBibitem{%
-  \ifentrytype{misc}{%
-  }{%
-    \clearfield{url}%
-    \clearfield{urldate}%
-  }%
+% -- resolve espacing latex characters in url field when exporting from Mendeley
+% source : https://tex.stackexchange.com/a/309995
+\DeclareSourcemap{
+    \maps{
+        \map{ % Replaces '{\_}', '{_}' or '\_' with just '_'
+            \step[fieldsource=url,
+                  match=\regexp{\{\\\_\}|\{\_\}|\\\_},
+                  replace=\regexp{\_}]
+        }
+        \map{ % Replaces '{'$\sim$'}', '$\sim$' or '{~}' with just '~'
+            \step[fieldsource=url,
+                  match=\regexp{\{\$\\sim\$\}|\{\~\}|\$\\sim\$},
+                  replace=\regexp{\~}]
+        }
+    }
 }
 
-%\DeclareFieldFormat{titlecase}{\MakeUppercase{#1}}\MakeSentenceCase
-%\DeclareFieldFormat{sentencecase}{\MakeUppercase{#1}}
+\DeclareFieldFormat[misc]{title}{\mkbibquote{#1}}
+% --  clear url field but for wepages
+%\AtEveryBibitem{%
+%  \ifentrytype{misc}{%
+%  }{%
+%    \clearfield{url}%
+%    \clearfield{urldate}%
+%  }%
+%}
 
+% -- href icon for url or doi
+\usepackage{fontawesome}
+\renewcommand{\finentrypunct}{\addperiod~\icohref{}}
+\newcommand{\icohref}{%
+\ifboolexpr{%
+	test {\ifhyperref}
+	and
+	not test {\iftoggle{bbx:url}}
+	and
+	not test {\iftoggle{bbx:doi}}
+ }{%true
+  \iffieldundef{doi}{%true
+  	\iffieldundef{url}{%true
+	}{%false
+		\href{\strfield{url}}{\small\faExternalLink}
+	}
+  }{%false
+  	\href{http://dx.doi.org/\strfield{doi}}{\small\faExternalLink}%sec:\therefsection %seg:\therefsegment name:\refname chap:\thechapter
+  }
+}}
 
-
-%\renewbibmacro*{in:}{%
-%    \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
-%
-%% Remove page prefixes in article
-%\DeclareFieldFormat[article]{pages}{#1}
-%% Print volume, followed by number in parentheses.
-%\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
-%\renewbibmacro*{volume+number+eid}{%
-%	\printfield{volume}%
-%    	\printfield{number}}
-%
-%% Colon for volume(number):pages delimiter.
-%\renewcommand*{\bibpagespunct}{%
-%	\ifentrytype{article}{\addcolon}{\addcomma\space}}
+% -- CV style for personnal biblio
+\defbibenvironment{cvbib}
+{\list
+{\iffieldequals{year}{\bibyear}%
+{\phantom{\printfield[1cm]{year}}}%
+{\printfield[1cm]{year}\savefield{year}{\bibyear}}%
+}
+{\setlength{\labelwidth}{\labelnumberwidth}%
+\setlength{\leftmargin}{\labelwidth}%
+\setlength{\labelsep}{\biblabelsep}%
+\addtolength{\leftmargin}{\labelsep}%
+\setlength{\itemsep}{2\bibitemsep}%
+\setlength{\parsep}{\bibparsep}}%
+\renewcommand*{\makelabel}[1]{\hss##1}}
+{\endlist}
+{\item}
 
 % with this macro you can chose to link the citation labels to local subbib (anchorsegments=true) or to global bib (anchorsegments=false)
 % local links does not work if chapter has no subbib, because there is not subib to point to !
@@ -263,6 +300,7 @@ useprefix=true, % use von as part of the family name (du peloux)
 
 % ACRONYM
 % ===========================
+\newcommand{\Csharp}{{\settoheight{\dimen0}{C}C\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\textbf{\#}}}}}
 \newcommand{\rhino}{\emph{Rhinoceros}}
 \newcommand{\grasshopper}{\emph{Grasshopper}}
 
