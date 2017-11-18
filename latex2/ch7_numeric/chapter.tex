@@ -3,7 +3,8 @@
 % Year : 2017
 % !TEX encoding = UTF-8 Unicode
 
-\chapter{Numerical Model} \label{chp=numerical_model}
+\newrefsegment
+\chapter{Numerical Model}\label{chp=numerical_model}
 
 \section{Introduction}
 In this chapter we construct a novel discret beam element that we call the \emph{biarc beam element}. It relies on the results from \cref{chp=curve} and \cref{chp=kirchhoff}.
@@ -114,17 +115,17 @@ Elements can either be closed or open. The relations between the corresponding n
 Here we present how we model all the required informations involved in the element representation~: its geometry (centerline, material frames, cross-sections), its materiality (elastic and shear modulus) and its mechanical state (internal forces and moments). An element is also subject to external loads (external forces and moments).
 \subsubsection{Centerline}
 % --------------------------------
-The discrete centerline is a polygonal space curve (\cref{fig:discrete_model}) defined as an ordered sequence of $n+1$ pairwise disjoint \emph{vertices}~: $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n) \in \mathbb{R}^{3(n+1)}$. Consecutive pairs of vertices define $n$ straight segments $(\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1})$ called \emph{edges} and pointing from one vertex to the next one~: 
+The discrete centerline is a polygonal space curve (\cref{fig:discrete_model}) defined as an ordered sequence of $n+1$ pairwise disjoint \emph{vertices}~: $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n) \in \mathbb{R}^{3(n+1)}$. Consecutive pairs of vertices define $n$ straight segments $(\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1})$ called \emph{edges} and pointing from one vertex to the next one~:
 \begin{subequations}
 	\begin{alignat}{1}
 	\vect{e}_i 	&= \vect{x}_{i+1} - \vect{x}_{i}
 	\\
-	l_i 		&= \norm{\vect{e}_i} 
+	l_i 		&= \norm{\vect{e}_i}
 	\\
-	\vect{u}_i 	&= \vect{e}_i / l_i = \vect{d}_{3, i+1/2} 
+	\vect{u}_i 	&= \vect{e}_i / l_i = \vect{d}_{3, i+1/2}
 	\end{alignat}
 \end{subequations}
-The length of the $i$th edge is denoted $l_i $ and its normalized direction vector is denoted $\vect{u}_i$. The arc length of the $i$th vertex is denoted $s_i$ and is given by~: 
+The length of the $i$th edge is denoted $l_i $ and its normalized direction vector is denoted $\vect{u}_i$. The arc length of the $i$th vertex is denoted $s_i$ and is given by~:
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -134,7 +135,7 @@ The length of the $i$th edge is denoted $l_i $ and its normalized direction vect
 	\end{aligned}
 	\right.
 \end{equation}
-Thus, the centerline is parametrized by arc length and $\Gamma(s_i) = \vect{x}_i$. Additionally, we define the vertex-based mean length at vertex $\vect{x}_i$~: 
+Thus, the centerline is parametrized by arc length and $\Gamma(s_i) = \vect{x}_i$. Additionally, we define the vertex-based mean length at vertex $\vect{x}_i$~:
 \begin{equation}
 %\setlength{\jot}{8pt}
 	\left\{
@@ -165,7 +166,7 @@ A discrete material frame $\{\vect{d}_{1}, \vect{d}_{2}, \vect{d}_{3}\}_i$ is as
 % ------------------------------------------------------------
 In addition, the model assumes that a segment has uniform section ($S$, $I_1$, $I_2$, $J$)\footnote{$S$ is the cross-section area ; $I_1$, $I_2$ and $J$ are the principal moments of inertia of the cross-section.} and material ($E$, $G$)\footnote{$E$ is the elastic modulus and $G$ is the shear  modulus for the considered material} properties over its length $s \in ]s_{2i},s_{2i+2}[$. For the sake of simplicity, we introduce for further calculations the \emph{material stiffness matrix} ($\mat{B}_i$) attached to each segment. It has the following form in the material frame basis~:
 \begin{equation}
-	\mat{B}_i = \begin{bmatrix} 
+	\mat{B}_i = \begin{bmatrix}
 			EI_1		&	0		&	0		\\
 			0		&	EI_{2}	&	0		\\
 			0		&	0		&	GJ_{}	\\
@@ -182,10 +183,10 @@ where $EI_1$ and $EI_2$ are the bending stiffnesses and $GJ$ is the torsional st
 % ---------------------------------------------------------
 The discrete rod is subjected to internal forces ($\vect{F} = F_1 \vect{d}_1 + F_2 \vect{d}_2 + \vect{N}\vect{d}_3$) and moments ($\vect{M} = M_1 \vect{d}_1 + M_2 \vect{d}_2 + Q\vect{d}_3$). Their components in the material frame basis are named as follow :
 \begin{itemize}
-\item The shear force : $\vect{F}^{\perp} = F_1 \vect{d}_1 + F_2 \vect{d}_2$ 
+\item The shear force : $\vect{F}^{\perp} = F_1 \vect{d}_1 + F_2 \vect{d}_2$
 \item The axial force : $\vect{N} = N \vect{d}_3$
-\item The bending moment : $\vect{M}^{\perp} = M_1 \vect{d}_1 + M_2 \vect{d}_2$ 
-\item The twisting moment : $\vect{Q} = Q \vect{d}_3$ 
+\item The bending moment : $\vect{M}^{\perp} = M_1 \vect{d}_1 + M_2 \vect{d}_2$
+\item The twisting moment : $\vect{Q} = Q \vect{d}_3$
 \end{itemize}
 
 \subsubsection{Distributed loads}
@@ -211,12 +212,12 @@ Here and subsequently, matrix notation will often be used to provide compact exp
 For instance, all this expressions for the curvature binormal vector and the material curvatures vector will be considered equivalent and could be mixed together in the same equation~:
 \begin{subequations}
 	\begin{alignat}{1}
-	&\vect{\kappa b} 
-	= \kappa_1 \vect{d}_1 +  \kappa_2 \vect{d}_2 
+	&\vect{\kappa b}
+	= \kappa_1 \vect{d}_1 +  \kappa_2 \vect{d}_2
 	= \begin{bmatrix} \kappa_1 & \kappa_2 & 0 \end{bmatrix}^T
 	\\
-	&\vect{\varkappa} 
-	= \varkappa_1 \vect{d}_1 +  \varkappa_2 \vect{d}_2 +  \varkappa_3 \vect{d}_3 
+	&\vect{\varkappa}
+	= \varkappa_1 \vect{d}_1 +  \varkappa_2 \vect{d}_2 +  \varkappa_3 \vect{d}_3
 	= \begin{bmatrix} \varkappa_1 & \varkappa_2 & \varkappa_3 \end{bmatrix}^T
 	= (1+\epsilon) \begin{bmatrix} \kappa_1 & \kappa_2 & \tau \end{bmatrix}^T
 	\end{alignat}
@@ -228,32 +229,32 @@ The force strains vector is given by :
 Internal forces are composed of a shear force and an axial force given by~:
 \begin{subequations}
 	\begin{alignat}{3}
-	&\vect{F} 
-	&&= F_1 \vect{d}_1 +  F_2 \vect{d}_2 + N \vect{d}_3 
+	&\vect{F}
+	&&= F_1 \vect{d}_1 +  F_2 \vect{d}_2 + N \vect{d}_3
 	= \begin{bmatrix} F_1 & F_2 & N \end{bmatrix}^T
 	\\
-	&\vect{F}^{\perp} 
+	&\vect{F}^{\perp}
 	&&= F_1 \vect{d}_1 +  F_2 \vect{d}_2
 	= \begin{bmatrix} F_1 & F_2 & 0 \end{bmatrix}^T
 	\\
 	&\vect{F}^{\para} &&= \vect{N}
-	= N \vect{d}_3 
+	= N \vect{d}_3
 	= \begin{bmatrix} 0 & 0 & N \end{bmatrix}^T
 	\end{alignat}
 \end{subequations}
 Internal moments are composed of a bending moment and a twisting moment given by~:
 \begin{subequations}
 	\begin{alignat}{3}
-	&\vect{M} 
-	&&= M_1 \vect{d}_1 +  M_2 \vect{d}_2 + Q \vect{d}_3 
+	&\vect{M}
+	&&= M_1 \vect{d}_1 +  M_2 \vect{d}_2 + Q \vect{d}_3
 	= \begin{bmatrix} M_1 & M_2 & Q \end{bmatrix}^T
 	\\
-	&\vect{M}^{\perp} 
+	&\vect{M}^{\perp}
 	&&= M_1 \vect{d}_1 +  M_2 \vect{d}_2
 	= \begin{bmatrix} M_1 & M_2 & 0 \end{bmatrix}^T
 	\\
 	&\vect{M}^{\para} &&= \vect{Q}
-	= Q \vect{d}_3 
+	= Q \vect{d}_3
 	= \begin{bmatrix} 0 & 0 & Q \end{bmatrix}^T
 	\end{alignat}
 \end{subequations}
@@ -276,12 +277,12 @@ With the help of the matrix notation, the constitutive equations \cref{eq:consti
 %where $\vect{F}_{xyz}'$ and $\vect{M}_{xyz}'$ denote the derivative with respect to $s$ in the inertial frame of reference $\{\vect{x},\vect{x},\vect{z}\}$ whereas $\vect{F}_{123}'$ and $\vect{M}_{123}'$ denote the derivative with respect to $s$ in the local material frame basis $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. Thus the matrix notation for $\vect{F}_{123}'$ and $\vect{M}_{123}'$ are given by :
 %\begin{subequations}
 %	\begin{alignat}{3}
-%	&\vect{F}^{'|123} 
-%	&&= F_1' \vect{d}_1 +  F_2' \vect{d}_2 + N' \vect{d}_3 
+%	&\vect{F}^{'|123}
+%	&&= F_1' \vect{d}_1 +  F_2' \vect{d}_2 + N' \vect{d}_3
 %	= \begin{bmatrix} F_1' & F_2' & N' \end{bmatrix}^T
 %	\\
-%	&\vect{M}^{'|123} 
-%	&&= M_1' \vect{d}_1 +  M_2' \vect{d}_2 + Q' \vect{d}_3 
+%	&\vect{M}^{'|123}
+%	&&= M_1' \vect{d}_1 +  M_2' \vect{d}_2 + Q' \vect{d}_3
 %	= \begin{bmatrix} M_1' & M_2' & Q' \end{bmatrix}^T
 %	\end{alignat}
 %\end{subequations}
@@ -318,10 +319,10 @@ For a given geometry of the centerline, the curvature binormal vector at ghost v
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E1.pdf}
-	& 
+	&
 	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
 	\vect{\kappa b}_{2i-1} 	& =  \frac{2}{L_{i-1}} \vect{u}_{2i-2} \times \vect{u}_{2i-1}\\[0.5em]
-	\vect{\kappa b}_{2i+1} 	& =  \frac{2}{L_{i}} \vect{u}_{2i} \times \vect{u}_{2i+1} 
+	\vect{\kappa b}_{2i+1} 	& =  \frac{2}{L_{i}} \vect{u}_{2i} \times \vect{u}_{2i+1}
 	\end{aligned}$
 \end{tabularx}
 
@@ -329,14 +330,14 @@ For a given geometry of the centerline, the curvature binormal vector at ghost v
 \subsubsection{Unit tangent vector at ghost vertices}
 % ---------------------------------------------------------------------
 
-This definition of the curvature leads to a natural definition of the unit tangent vector at ghost vertex $\vect{x}_{2i-1}$ (resp. $\vect{x}_{2i+1}$), as the unit vector tangent to the osculating circle of the ($i-1$)th segment (resp. $i$th segment) at that point. 
+This definition of the curvature leads to a natural definition of the unit tangent vector at ghost vertex $\vect{x}_{2i-1}$ (resp. $\vect{x}_{2i+1}$), as the unit vector tangent to the osculating circle of the ($i-1$)th segment (resp. $i$th segment) at that point.
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E2.pdf}
-	& 
+	&
 	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
 	\vect{t}_{2i-1}	&=  \frac{l_{2i-1}}{L_{i-1}} \vect{u}_{2i-2}	+ 	\frac{l_{2i-2}}{L_{i-1}} \vect{u}_{2i-1} 	\\[0.5em]
-	\vect{t}_{2i+1} 	&=  \frac{l_{2i+1}}{L_{i}} \vect{u}_{2i}		+ 	\frac{l_{2i}}{L_{i}} \vect{u}_{2i+1} 	
+	\vect{t}_{2i+1} 	&=  \frac{l_{2i+1}}{L_{i}} \vect{u}_{2i}		+ 	\frac{l_{2i}}{L_{i}} \vect{u}_{2i+1}
 	\end{aligned}$
 \end{tabularx}
 
@@ -346,7 +347,7 @@ Equivalently, the definition of the osculating circles of the ($i-1$)th and $i$t
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E3.pdf}
-	& 
+	&
 	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
 	\vect{t}_{2i}^- 	&= 2 (\vect{t}_{2i-1} \cdot \vect{u}_{2i-1}) \vect{u}_{2i-1} - \vect{t}_{2i-1} \\[0.5em]
 	\vect{t}_{2i}^+ 	&= 2 (\vect{t}_{2i+1} \cdot \vect{u}_{2i}) \vect{u}_{2i} - \vect{t}_{2i+1}
@@ -359,7 +360,7 @@ The unit tangent vector $\vect{t}_{2i}$ -- that is the cross-section normal -- a
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E4.pdf}
-	& 
+	&
 	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
 	\vect{t}_{2i} 	&= \frac{\vect{t}_{2i}^- + \vect{t}_{2i}^+ }{\norm{\vect{t}_{2i}^- + \vect{t}_{2i}^+}}
 	\end{aligned}$
@@ -373,7 +374,7 @@ Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E5.pdf}
-	& 
+	&
 	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
 	\vect{\kappa b}_{2i}^- &=  \frac{2}{l_{2i-1}} \vect{u}_{2i-1} \times \vect{t}_{2i}
 	\\[0.5em]
@@ -402,9 +403,9 @@ Note that in the case where no external concentrated bending moment is applied t
 Finally, the left and right curvature at handle vertex $\vect{x}_{2i}$ are computed back with the constitutive law~:
 \begin{subequations}
 	\begin{align}
-		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} {\vect{M}_{2i}^{\perp}}^{-} + \rconf{\vect{\kappa b}}_{2i}^- 
+		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} {\vect{M}_{2i}^{\perp}}^{-} + \rconf{\vect{\kappa b}}_{2i}^-
 		\\[0.5em]
-		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} {\vect{M}_{2i}^{\perp}}^{+} + \rconf{\vect{\kappa b}}_{2i}^+ 
+		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} {\vect{M}_{2i}^{\perp}}^{+} + \rconf{\vect{\kappa b}}_{2i}^+
 	\end{align}
 \label{eq:lr_bending_moment}
 \end{subequations}
@@ -433,11 +434,11 @@ Thus, the material twist of the rod at mid edge is given by~:
 \end{subequations}
 To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod si framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta(s)$ around $\vect{d}_3(s) =\vect{t}(s)$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
 
-In the discrete case, although it is possible to frame the whole curve with a Bishop frame to achieve the computation of the rate of twist \cite{Lefevre2017}, it is more convenient to measure $\Delta\theta_{i}$ step by step using the existing material frames at vertices $\vect{x}_i$ and $\vect{x}_{i+1}$. This is done in a two step process : 
+In the discrete case, although it is possible to frame the whole curve with a Bishop frame to achieve the computation of the rate of twist \cite{Lefevre2017}, it is more convenient to measure $\Delta\theta_{i}$ step by step using the existing material frames at vertices $\vect{x}_i$ and $\vect{x}_{i+1}$. This is done in a two step process :
 \begin{enumerate}
-\item 
+\item
 Parallel transport the material frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ at vertex $\vect{x}_i$ onto vertex $\vect{x}_{i+1}$. We call $\{\vect{d}_{1,i}^{\para}, \vect{d}_{2,i}^{\para},\vect{d}_{3,i}^{\para}\}$ the resulting framed positioned at $\vect{x}_{i+1}$ such that $\vect{d}_{3,i}^{\para} = \vect{d}_{3,i+1}$.
-\item 
+\item
 Measure $\Delta\theta_{i} = \angle{(\vect{d}_{1,i}^{\para},\vect{d}_{1,i+1})} = \angle{(\vect{d}_{2,i}^{\para},\vect{d}_{2,i+1})}$ as the oriented angle needed to align $\vect{d}_{1,i}^{\para}$ with $\vect{d}_{1,i+1}$ (or $\vect{d}_{2,i}^{\para}$ with $\vect{d}_{2,i+1}$) by a rotation of angle $\Delta\theta_{i}$ around $\vect{d}_{3,i+1} = \vect{t}_{i+1}$.
 \end{enumerate}
 Consequently, the twisting moment at mid span of each edge is computed directly with the appropriate constitutive equation :
@@ -459,10 +460,10 @@ Recall that in Kirchhoff's theory the shear force is a reacting parameter, compu
 \end{equation}
 Then, combining \cref{eq:motion_4,eq:motion_5} --~where the inertial terms are neglected~-- with \cref{eq:shearid} leads to the following vectoriel form of the shear force~:
 \begin{equation}
-	\vect{F}^{\perp} 
+	\vect{F}^{\perp}
 	= (1+\epsilon)^{-1} \vect{d}_3 \times \left(\frac{\partial \vect{M}}{\partial s} + \vect{m} \right)
 	=  \vect{d}_3 \times \left(\frac{\partial \vect{M}}{\partial s_t} + \frac{\vect{m}}{1+\epsilon} \right)
-	\label{eq:shear} 
+	\label{eq:shear}
 \end{equation}
 In the discrete case, the shear force is evaluated at mid span of each edge by :
 \begin{subequations}
@@ -477,7 +478,7 @@ In the discrete case, the shear force is evaluated at mid span of each edge by :
 	\end{alignat}
 	\label{eq:dshear}
 \end{subequations}
-Remark that the derivative of the internal moment at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{ch:interpolation}. 
+Remark that the derivative of the internal moment at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{ch:interpolation}.
 
 Expressed in the form of \cref{eq:dshear_a,eq:dshear_b}, the discrete shear force has the interesting property to remain strictly orthogonal to $\vect{d}_{3,i+1/2} = \vect{u}_i$. While this is true in the continuous world, this property can easily be lost in the discrete case where mean values and derivatives are evaluated through finite summations or finite differences.
 
@@ -485,7 +486,7 @@ Expressed in the form of \cref{eq:dshear_a,eq:dshear_b}, the discrete shear forc
 %\begin{subequations}
 %	\begin{alignat}{3}
 %		&F_{1,\;2i+1/2}  =  \frac{\rconf{l}_{2i}}{l_{2i}}
-%		 \left( 
+%		 \left(
 %		 -\frac{M_{2,\,2i+1} - M_{2,\,2i}^{+}}{\rconf{l}_{2i}}
 %		 - \varkappa_{3,\,2i+1/2}M_{1,\,2i+1/2}
 %		 +\varkappa_{1,\,2i+1/2}Q_{2i+1/2}
@@ -547,7 +548,7 @@ Thus, in the discrete case, the evaluation of the derivative of the moment at mi
 	\\
 	&+ &&\frac{1}{2}\left( {\begin{bmatrix}\varkappa_1 & \varkappa_2 & \varkappa_3\end{bmatrix}}_{2i}^T + {\begin{bmatrix}\varkappa_1 & \varkappa_2 & \varkappa_3\end{bmatrix}}_{2i+1}^T \right)
 	\\
-	&\times 
+	&\times
 	&& \frac{1}{2} \left( {\begin{bmatrix}M_1 & M_2 & Q\end{bmatrix}}_{2i}^T + {\begin{bmatrix}M_1 & M_2 & Q\end{bmatrix}}_{2i+1}^T \right)
 	\end{aligned}
 \end{equation}
@@ -559,7 +560,7 @@ At this point, for a given geometric configuration, we know how to compute the b
 Therefore, we need to express the value of the twisting moment, the axial force and the shear force at vertices and not only at mid edges. This can be done using \cref{eq:motion} were the inertial member is set to zero, that is neglecting the inertial forces. Although this is not exactly true during the dynamic of the rod, it is exactly true at static equilibrium, the only state we are interested in.
 
 \subsubsection{Axial force}
-From \cref{eq:motion_3} we evaluate the variation of the axial force over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ and deduce the variation of the axial strain from the constant axial stiffness $ES_i$ of the segment~: 
+From \cref{eq:motion_3} we evaluate the variation of the axial force over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ and deduce the variation of the axial strain from the constant axial stiffness $ES_i$ of the segment~:
 \begin{subequations}
 	\begin{alignat}{2}
 		&\Delta N_{i+1/2} &&= -l_i  \cdot {[\varkappa_1 F_2 - \varkappa_2 F_1 + f_3]}_{i+1/2}
@@ -586,7 +587,7 @@ and the expression of the axial strain at vertices~:
 Remark how a distributed external axial force (${f}_3$) modifies the value of the axial component of the internal force at vertices, and thus is taken into account in the final static equilibrium.
 
 \subsubsection{Shear force}
-From \cref{eq:motion_1,eq:motion_2} we evaluate the variation of the shear force over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ ~: 
+From \cref{eq:motion_1,eq:motion_2} we evaluate the variation of the shear force over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ ~:
 \begin{subequations}
 	\begin{alignat}{2}
 		&\Delta F_{1,\,i+1/2}^{} &&= - l_i  \cdot {[\varkappa_2 F_3 - \varkappa_3 F_2 + f_1]}_{i+1/2}
@@ -608,7 +609,7 @@ Then we conclude on the expression of the shear force components at vertices~:
 Remark how a distributed external shear force ($\vect{f}^{\perp} = f_1\vect{d}_1 + f_2\vect{d}_2$) modifies the value of the shear components of the internal force at vertices, and thus is taken into account in the final static equilibrium.
 
 \subsubsection{Twisting moment}
-From \cref{eq:motion_6} we evaluate the variation of the twisting moment over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ and deduce the variation of twist from the constant torsional stiffness $GJ_i$ of the segment~: 
+From \cref{eq:motion_6} we evaluate the variation of the twisting moment over a segment $]\vect{x}_{i},  \vect{x}_{i+1}[$ and deduce the variation of twist from the constant torsional stiffness $GJ_i$ of the segment~:
 \begin{subequations}
 	\begin{alignat}{2}
 		&\Delta Q_{i+1/2} &&= -l_i  \cdot {[\varkappa_1 M_2 - \varkappa_2 M_1 + m_3]}_{i+1/2}
@@ -651,13 +652,13 @@ In this section, we express the resultant force and the resultant twisting momen
 The translational resultant force ($\vect{R}_i^x$) acting on a particle is the sum of two contributions. The first one ($\vect{F}_i^{ext}$) is the resultant of the concentrated forces applied to the particle such as climatic loads, support reactions or loads transferred through connections. The second one ($\vect{F}_i^{int}$) is the resultant of the internal forces applied by the upstream and downstream parts of the rod to the particle and are given by \cref{eq:dNi,eq:dFi}. This leads to the following equations~: \footnote{Recall the convention from \cref{fig:rodslice}~: the internal force and moment are chosen to be the action of the downstream part of the rod upon the upstream part of the rod.}
 \begin{subequations}
 \begin{alignat}{2}
-	&\vect{R}_i^x &&= \vect{F}_i^{int} + \vect{F}_i^{ext} 
+	&\vect{R}_i^x &&= \vect{F}_i^{int} + \vect{F}_i^{ext}
 	\\
-	&\vect{F}_i^{int} &&= - \vect{F}_i^{-} + \vect{F}_i^{+} 
+	&\vect{F}_i^{int} &&= - \vect{F}_i^{-} + \vect{F}_i^{+}
 	\\
 	& \vect{F}_i^{-}  &&= F_{1,\,i}^{-} \,\vect{d}_{1,\,i}  + F_{2,\,i}^{-} \,\vect{d}_{2,\,i} + N_i^- \,\vect{d}_{3,\,i}
 	\\
-	&\vect{F}_i^{+}  &&= F_{1,\,i}^{+} \,\vect{d}_{1,\,i}  + F_{2,\,i}^{+} \,\vect{d}_{2,\,i} + N_i^+ \,\vect{d}_{3,\,i} 
+	&\vect{F}_i^{+}  &&= F_{1,\,i}^{+} \,\vect{d}_{1,\,i}  + F_{2,\,i}^{+} \,\vect{d}_{2,\,i} + N_i^+ \,\vect{d}_{3,\,i}
 \end{alignat}
 \end{subequations}
 Note that the contribution of the distributed external forces ($\vect{f}_i^{}$) is already taken into account via the interpolation of the internal force (see \cref{eq:DeltaN,eq:DeltaF}). Likewise, the contribution of the distributed external bending moment ($\vect{m}_i^{\perp}$) is also taken into account via the calculation of the internal shear force (see \cref{eq:dshear}). Finally, the contribution of the concentrated external bending moments is yet included via the expression of the discrete shear force (see \cref{eq:DeltaM,eq:dshear}).
@@ -666,9 +667,9 @@ Note that the contribution of the distributed external forces ($\vect{f}_i^{}$) 
 In the same manner, the resultant twisting moment ($R_i^{\theta}$) acting on a particle is the sum of two contributions.\footnote{Actually, $R_i^{\theta}$ is the component of the resultant moment along $\vect{d}_{3,\,i}$. We only need to compute this component as we have only one rotational degree of freedom in our model.} The first one ($Q_i^{ext}$) is the resultant of the concentrated twisting moments applied to the particle. The second one (${Q}_i^{int}$) is the resultant of the internal twisting moment applied by the upstream and downstream parts of the rod to the particle and given by \cref{eq:dQi}. This leads to the following equations~:
 \begin{subequations}
 \begin{alignat}{2}
-	&{R}_i^{\theta} &&= {Q}_i^{int} + {Q}_i^{ext} 
+	&{R}_i^{\theta} &&= {Q}_i^{int} + {Q}_i^{ext}
 	\\
-	&{Q}_i^{int} &&= - {Q}_i^{-} + {Q}_i^{+} 
+	&{Q}_i^{int} &&= - {Q}_i^{-} + {Q}_i^{+}
 \end{alignat}
 \end{subequations}
 Note that the contribution of the distributed external twisting moment ($q_i^{ext}$) is already taken into account via the interpolation of the internal twisting moment (see \cref{eq:DeltaQ}).
@@ -701,7 +702,7 @@ In a linear analysis the expression of the resultant force and the resultant mom
 \end{subequations}
 where $\mat{X}$ and $\mat{\Theta}$ are the column vectors of the translational ($\vect{x}_i$) and rotational ($\theta_i$) degrees of freedom of the system~; $\mat{M}^{x}$ and $\mat{M}^{\theta}$ are the mass matrices~; $\mat{\lambda}^{x}$ and $\mat{\lambda}^{\theta}$ are the damping matrices and $\mat{K}^x$ and $\mat{K}^{\theta}$ are the stiffness matrices.\footnote{For non linear simulation, the stiffness matrix is replaced by the \emph{tangent} stiffness matrix and is reevaluated at each time step.}
 
-Saying that the system is linearized involves that the dependence of $\vect{R}_i^x$ and $R_i^{\theta}$ with respect to the degrees of freedom $\vect{x}_i$ and $\theta_i$ will be modeled as a (linear) matrix product and that $\mat{K}^x$ and $\mat{K}^{\theta}$ are computed independently of these variables. In other words, this means that $\vect{R}_i^x$ and $R_i^{\theta}$ are calculated as a linear combination of the degrees of freedom, and that the coefficients of this combination are the matrix entries of  
+Saying that the system is linearized involves that the dependence of $\vect{R}_i^x$ and $R_i^{\theta}$ with respect to the degrees of freedom $\vect{x}_i$ and $\theta_i$ will be modeled as a (linear) matrix product and that $\mat{K}^x$ and $\mat{K}^{\theta}$ are computed independently of these variables. In other words, this means that $\vect{R}_i^x$ and $R_i^{\theta}$ are calculated as a linear combination of the degrees of freedom, and that the coefficients of this combination are the matrix entries of
 $\mat{K}^x$ and $\mat{K}^{\theta}$.
 
 Here, this factorization is not possible. $\vect{R}_i^x$ and $R_i^{\theta}$ are computed from the degrees of freedom of the system but the relation is not linear (see how the internal force and moment are computed in \cref{sec=dmodel}). Therefore, the geometric system given in \cref{eq:dmotion_a,eq:dmotion_b} is effectively nonlinear.
@@ -737,11 +738,11 @@ where $\dot{\vect{x}}_i$ and $\dot{\theta}_i$ are the translational and rotation
 \label{eq:dv}
 \begin{alignat}{5}
 	& \dot{\vect{x}}_i^{t+\dt{} / 2} &&
-	=  \dot{\vect{x}}_i^{t-\dt{} / 2} 
+	=  \dot{\vect{x}}_i^{t-\dt{} / 2}
 	&&+ \dt{}  \cdot \frac{\vect{R}_i^{x,\,t}}{m_i^x}
 	\\[0.5em]
 	& \dot{\theta}_i^{t+\dt{} / 2} &&
-	=  \dot{\theta}_i^{t-\dt{} / 2} 
+	=  \dot{\theta}_i^{t-\dt{} / 2}
 	&&+ \dt{}  \cdot \frac{R_i^{\theta,\,t}}{m_i^{\theta}}
 \end{alignat}
 \end{subequations}
@@ -759,10 +760,10 @@ Thus, the translational and rotational positions of a particle at time $t + \dt{
 \begin{subequations}
 \label{eq:dx}
 \begin{alignat}{5}
-	& \vect{x}_i^{t+\dt{}} 
+	& \vect{x}_i^{t+\dt{}}
 	&& =  \vect{x}_i^{t} + \dt{}  \cdot  \dot{\vect{x}}_i^{t+\dt{} / 2}
 	\\[0.5em]
-	& {\theta}_i^{t+\dt{}} 
+	& {\theta}_i^{t+\dt{}}
 	&& =  {\theta}_i^{t} + \dt{}  \cdot  \dot{{\theta}}_i^{t+\dt{} / 2}
 \end{alignat}
 \end{subequations}
@@ -770,11 +771,11 @@ Using \cref{eq:dv} the position at time $t+\dt{}$ can be expressed with respect 
 \begin{subequations}
 \label{eq:dx2}
 \begin{alignat}{5}
-	& \vect{x}_i^{t+\dt{}} 
-	&& =  \vect{x}_i^{t} + \dt{} \cdot \dot{\vect{x}}_i^{t-\dt{} / 2} 	
+	& \vect{x}_i^{t+\dt{}}
+	&& =  \vect{x}_i^{t} + \dt{} \cdot \dot{\vect{x}}_i^{t-\dt{} / 2}
 	&&+ {\dt{}}^2  \cdot \frac{\vect{R}_i^{x,\,t}}{m_i^{x}}
 	\\[0.5em]
-	& {\theta}_i^{t+\dt{}} 
+	& {\theta}_i^{t+\dt{}}
 	&& =  {\theta}_i^{t} + \dt{}  \cdot  \dot{{\theta}}_i^{t- \dt{} / 2}
 	&&+ {\dt{}}^2  \cdot \frac{R_i^{\theta,\,t}}{m_i^{\theta}}
 \end{alignat}
@@ -816,7 +817,7 @@ Note that the motion will be realistic to the extent that the computed forces an
 Lots of other integration schemes exist, among which we can cite the \emph{Explicit Euler}, the \emph{Symplectic Euler}, the \emph{Störmer-Verlet} and the \emph{4\textsuperscript{th} order Runge-Kutta} schemes. These schemes are briefly presented in \cite{Fierz2013}. For a complete treatment of numerical integrators refer to the book from \citef{Hairer2006}.
 
 \subsection{Damping}\label{sec=damping}
-If no damping is introduced to dissipate some energy, there is no reason that the system will stop to move. Here, our goal is to dissipate the kinetic energy of the system as fast as possible to fall into a state of static equilibrium. This can be achieved with any kind of damping, among which the most well-known are \emph{viscous damping} and \emph{kinetic damping}. 
+If no damping is introduced to dissipate some energy, there is no reason that the system will stop to move. Here, our goal is to dissipate the kinetic energy of the system as fast as possible to fall into a state of static equilibrium. This can be achieved with any kind of damping, among which the most well-known are \emph{viscous damping} and \emph{kinetic damping}.
 
 Here, we choose to implement the kinetic damping as it is known to produce the best results for a wide range of cases \cite{Rezaiee2012}.
 
@@ -833,11 +834,11 @@ where the kinetic energy of the system is computed from the mass and the velocit
 \begin{subequations}
 \label{eq:Ek}
 \begin{alignat}{5}
-	& \mathcal{E}_k^{x,\,t-\dt{}/2} && =  \sum_i \tfrac{1}{2} m_i^x \dot{\vect{x}}_i^{t-\dt{} / 2} 
+	& \mathcal{E}_k^{x,\,t-\dt{}/2} && =  \sum_i \tfrac{1}{2} m_i^x \dot{\vect{x}}_i^{t-\dt{} / 2}
 	\\[0.5em]
-	& \mathcal{E}_k^{\theta,\,t-\dt{}/2} && = \sum_i \tfrac{1}{2} m_i^{\theta} \dot{{\theta}}_i^{t-\dt{} / 2} 
+	& \mathcal{E}_k^{\theta,\,t-\dt{}/2} && = \sum_i \tfrac{1}{2} m_i^{\theta} \dot{{\theta}}_i^{t-\dt{} / 2}
 	\\[0.5em]
-	& \mathcal{E}_k^{t-\dt{}/2} && = \mathcal{E}_k^{x,\,t-\dt{}/2} + \mathcal{E}_k^{\theta,\,t-\dt{}/2} 
+	& \mathcal{E}_k^{t-\dt{}/2} && = \mathcal{E}_k^{x,\,t-\dt{}/2} + \mathcal{E}_k^{\theta,\,t-\dt{}/2}
 \end{alignat}
 \end{subequations}
 Here, we have made the distinction between the translational part of the kinetic energy ($\mathcal{E}_k^{x}$) and the rotational part of the kinetic energy ($\mathcal{E}_k^{\theta}$). Indeed, the kinetic damping can be triggered either considering the global kinetic energy of the system or considering separately the translational and rotational parts of the kinetic energy of the system.\footnote{That is when a peak of $\mathcal{E}_k^{x}$ or a peak of $\mathcal{E}_k^{\theta}$ is detected the kinetic damping is triggered.}
@@ -886,7 +887,7 @@ With these parameters, the position of the peak and the value of the kinetic ene
 \begin{subequations}
 \label{eq:InterpEk}
 \begin{alignat}{5}
-	& t^* &&= t - \xi t 
+	& t^* &&= t - \xi t
 	\\[0.5em]
 	& \mathcal{E}^* &&= \mathcal{E}_1 + \frac{1-2\xi}{8} (\mathcal{E}_2 - \mathcal{E}_0)  \geqslant \mathcal{E}_1
 \end{alignat}
@@ -895,10 +896,10 @@ Observe that $1-2\xi$ and $\mathcal{E}_2 - \mathcal{E}_0$ have the same sign. Th
 \begin{subequations}
 \label{eq:InterpX}
 \begin{alignat}{5}
-	& \vect{x}_i^{*} 
+	& \vect{x}_i^{*}
 	&& =  \vect{x}_i^{t} && -\xi \dt{}  \cdot  \dot{\vect{x}}_i^{t-\dt{} / 2}
 	\\[0.5em]
-	& {\theta}_i^{*} 
+	& {\theta}_i^{*}
 	&& =  {\theta}_i^{t} && -\xi \dt{}  \cdot  \dot{{\theta}}_i^{t-\dt{} / 2}
 \end{alignat}
 \end{subequations}
@@ -906,10 +907,10 @@ These equations can be advantageously rewritten to minimize memory allocation by
 \begin{subequations}
 \label{eq:InterpX2}
 \begin{alignat}{5}
-	& \vect{x}_i^{*} 
+	& \vect{x}_i^{*}
 	&& =  \vect{x}_i^{t} -\xi   \dt{}  \cdot (\dot{\vect{x}}_i^{t+\dt{} / 2} - {\dt{}} \cdot \frac{\vect{R}_i^{x,\,t}}{m_i^x} )
 	\\[0.5em]
-	& {\theta}_i^{*} 
+	& {\theta}_i^{*}
 	&& =  {\theta}_i^{t} -\xi \dt{} \cdot (\dot{{\theta}}_i^{t+\dt{} / 2} - {\dt{}}  \cdot \frac{R_i^{\theta,\,t}}{m_i^{\theta}})
 \end{alignat}
 \end{subequations}
@@ -964,10 +965,10 @@ It can be useful to proportionate the convergence criteria to the size of the sy
 Some authors have proposed another option to address this problem \cite{Barnes1975,Douthe2007}. They define the kinetic energy convergence threshold as a fraction ($f$) of the maximum kinetic energy observed previously during the motion~:
 \begin{subequations}
 \begin{alignat}{5}
-	& \sum_i \tfrac{1}{2} m_i^x \dot{\vect{x}}_i^{t} 
+	& \sum_i \tfrac{1}{2} m_i^x \dot{\vect{x}}_i^{t}
 	&& \leqslant f \cdot \max_{[0,t]} \mathcal{E}_{k}^{x,\,t}
 	\\[0.5em]
-	& \sum_i \tfrac{1}{2} m_i^{\theta} \dot{{\theta}}_i^{t} 
+	& \sum_i \tfrac{1}{2} m_i^{\theta} \dot{{\theta}}_i^{t}
 	&& \leqslant f \cdot  \max_{[0,t]} \mathcal{E}_{k}^{\theta,\,t}
 \end{alignat}
 \end{subequations}
@@ -1021,10 +1022,10 @@ In addition, we call $\theta_0 = \theta(0)$ the initial position of the pendulum
 
 The kinetic, potential and mechanical energies of the pendulum are given by~:
 \begin{subequations}
-\begin{alignat}{5}	
-	&\mathcal{E}_k = \frac{1}{2} m \dot{\theta}^2 
+\begin{alignat}{5}
+	&\mathcal{E}_k = \frac{1}{2} m \dot{\theta}^2
 	\\
-	&\mathcal{E}_p =  mgl (1-\cos\theta) 
+	&\mathcal{E}_p =  mgl (1-\cos\theta)
 \end{alignat}
 \end{subequations}
 \subsubsection{Linearization for small oscillations}
@@ -1034,7 +1035,7 @@ For a small initial angle ($\theta_0 \ll 1$) \cref{eq:nlpendulum} simplifies to~
 \end{equation}
 and the period $T_0$ and the angular frequency $\omega_0$ of the pendulum are given by~:
 \begin{subequations}
-\begin{alignat}{5}	
+\begin{alignat}{5}
 	&{T_0} &&= \frac{2\pi}{\omega_0}\\[0.5em]
 	&{\omega_0} &&= \left({\frac{g}{l}}\right)^{1/2}
 \end{alignat}
@@ -1046,7 +1047,7 @@ For greater initial angles, the solution is nonlinear and requires elliptic func
 
 The period of the pendulum is given in terms of the elliptic integral $K$ by~:
 \begin{subequations}
-\begin{alignat}{5}	
+\begin{alignat}{5}
 	&T / T_0  = \frac{2}{\pi}K(k)
 	\\[0.5em]
 	& k = \sin (\theta_0 / 2)
@@ -1064,9 +1065,9 @@ The angular velocity of the pendulum is calculated from the conservation of mech
 \end{equation}
 
 \subsubsection{Finding the position of static equilibrium}
-A pendule of mass $m = \SI{1.0}{kg}$ is dropped with no initial velocity at angle $\theta_0 = \SI{135}{\degree}$. The length of the pendulum is defined so that its angular frequency is $\omega_0 = \SI{1.0}{s^{-1}}$. The gravity is $g = \SI{9.81}{m/s^2}$. 
+A pendule of mass $m = \SI{1.0}{kg}$ is dropped with no initial velocity at angle $\theta_0 = \SI{135}{\degree}$. The length of the pendulum is defined so that its angular frequency is $\omega_0 = \SI{1.0}{s^{-1}}$. The gravity is $g = \SI{9.81}{m/s^2}$.
 
-The motion of the pendulum is simulated by the Dynamic Relaxation method with kinetic damping. Interpolation of kinetic energy peaks is not implemented in this example. When a peak is detected, the pendulum is pushed backward to its previous position, frozen and dropped again with no initial velocity. The time step is set to $h = \SI{0.1}{s}$ and the simulation is stopped when the kinetic energy of the pendulum less than $\mathcal{E}_k^{lim} = 10^{-20}$. 
+The motion of the pendulum is simulated by the Dynamic Relaxation method with kinetic damping. Interpolation of kinetic energy peaks is not implemented in this example. When a peak is detected, the pendulum is pushed backward to its previous position, frozen and dropped again with no initial velocity. The time step is set to $h = \SI{0.1}{s}$ and the simulation is stopped when the kinetic energy of the pendulum less than $\mathcal{E}_k^{lim} = 10^{-20}$.
 
 The course of the pendulum for the first iterations is represented in \cref{fig:pendulum}. The pendulum is dropped with no velocity at angle $\theta_0$. Driven by the gravity, it starts to move down slowly and its velocity increases over time. Progressively, its potential energy is transformed into kinetic energy but the overall mechanical energy is conserved because the motion is undamped until a peak of kinetic energy is reached (see \cref{fig:pendulum_Ek}).
 
@@ -1086,7 +1087,7 @@ This application is also useful to understand the relation between accuracy, sta
 
 \begin{figure}[p]
      	\centering
-	\begin{fullpage}	
+	\begin{fullpage}
 		\subfloat[][First steps until the first peak of $\mathcal{E}_k$ is reached.]{\includegraphics[width=100mm]{pendulum.pdf}\label{fig:pendulum}} \\
 		\subfloat[][Potential energy of the pendulum for the first steps.]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Ep.pdf}\label{fig:pendulum_Ep}}
 		\vspace{10pt}
@@ -1095,7 +1096,7 @@ This application is also useful to understand the relation between accuracy, sta
 \end{figure}
 \begin{figure}[p]
      	\centering
-	\begin{fullpage}	
+	\begin{fullpage}
 		\subfloat[][Typical profile of the kinetic damping.]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Ek.pdf}\label{fig:pendulum_Ek}} \\
 		\subfloat[][Convergence of the DR process in the phase space.]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Phase.pdf}\label{fig:pendulum_Phase}} \\
 		\vspace{10pt}
@@ -1126,7 +1127,7 @@ Also notice that we can identify three types of boundary conditions~:
 \end{itemize}
 Remarque that a \emph{Free} boundary condition is by extension an \emph{Elastic} boundary condition with an infinitely low stiffness.
 
-In the dynamic relaxation procedure, the tangent vectors are computed from the position of the particles except at the endings where an indecision remains. At these vertices, either ~: 
+In the dynamic relaxation procedure, the tangent vectors are computed from the position of the particles except at the endings where an indecision remains. At these vertices, either ~:
 \begin{itemize}
 \item The position of the tangent vector is fixed because the cross-section is clamped (i.e. \emph{rigid} boundary condition) and the bending moment is deduced from \cref{eq:cir_kb_ends}.
 \item The end bending moment is prescribed (i.e. \emph{free} or \emph{elastic}) and the tangent vector is obtained by inverting \cref{eq:lr_bending_moment,eq:cir_kb_ends}.
@@ -1136,7 +1137,7 @@ If the bending moment is prescribed -- either $\vect{M}^{\perp} = 0$ for a \emph
 \setlength{\jot}{8pt}
 \begin{alignat}{2}
 	&\vect{\kappa b}_{0} &&= \mat{B}_{0}^{-1} \vect{M}_{0}^{\perp} +  \rconf{\vect{\kappa b}}_{0} \\
-	&\vect{t}_0 &&= \left(1 - \left(\frac{l_0 \kappa_0}{2}\right)^2\right)\vect{u}_0 
+	&\vect{t}_0 &&= \left(1 - \left(\frac{l_0 \kappa_0}{2}\right)^2\right)\vect{u}_0
 		-  \frac{l_0 \kappa_0}{2} \;\vect{\kappa b}_{0} \times \vect{u}_0
 \end{alignat}
 \end{subequations}
@@ -1160,16 +1161,16 @@ The first option seems more natural to implement and more meaningfull mechanical
 %\item the two collars can freely rotate around the connexion axis
 %\item each collar can freely rotates around the tube it is clamped on
 %\end{itemize}
-%Such a connexion is interpreted as a geometric constraint between 
+%Such a connexion is interpreted as a geometric constraint between
 
 \section{Software}\label{sec=software}
 The present model has been implemented in a numerical software called \emph{Marsupilami}. A first version of this software, based on the \dofs{3} spline beam element, was used successfully in the structural design of the Ephemeral Cathedral of Créteil (see \cref{chp=creteil}) and other smaller timber gridshells (see \cref{fig:jpofav}). During this thesis \emph{Marsupilami} has been completely redeveloped to include rotational \dofs{} capabilities.
 
 \subsection{Architecture of the software}
-The code of \emph{Marsupilami} is divided into three libraries presented hereinafter~: 
+The code of \emph{Marsupilami} is divided into three libraries presented hereinafter~:
 \begin{itemize}
 \item \textit{Marsupilami.Math}
-\item \textit{Marsupilami.CoreLib} 
+\item \textit{Marsupilami.CoreLib}
 \item \textit{Marsupilami.Gh}
 \end{itemize}
 
@@ -1188,7 +1189,7 @@ This is a grasshopper plugin that exposes the logic of \textit{Marsupilami.CoreL
      	\centering
 	\includegraphics[width=0.8\textwidth]{mathlib.png}
 	\captionof{figure}[]{Partial class diagram of \textit{Marsupilami.Math.dll}.}
-	\label{fig:mathlib} 
+	\label{fig:mathlib}
 \end{figure}
 
 
@@ -1208,7 +1209,7 @@ The structure of the dynamic relaxation algorithm implemented in \emph{Marsupila
 Discussions about implementing dynamic relaxation can be found in the report from \citef{Olsson2012}, \citef{Poulsen2015}.
 
 \subsubsection{Language}
-Why C\# ? 
+Why C\# ?
 
 \subsubsection{Code abstraction}
 To develop a code with the right level of abstraction, it is advisable to refer to common \emph{design patterns} \cite{Bishop2008, Clune2012}
@@ -1221,9 +1222,9 @@ To develop a code with the right level of abstraction, it is advisable to refer 
 \subsubsection{Event driven}
 Part of the solver implementation has been written to be \emph{event driven}.\footnote{\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous.}} This allows to programmatically alter the solving process during its own execution. For some problems, this paradigm is very powerful and can succeed where more classic procedural or functional programming will fail. For instance this paradigm is currently used to implement auto-refinement of the element. It can be used to deal with breakable materials. In the future, it can be employed to add a level of user interactivity so the user can play with design parameters and see in quasi real-time the results, enhancing its design capabilities and reactivity.
 
-%Events-driven vs asynchronous vs parallel. 
+%Events-driven vs asynchronous vs parallel.
 %Evènement vs procédural
-%\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous. 
+%\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous.
 %Therefore, handling of events can either be synchronous or asynchronous. JavaScript, for example, uses a synchronous eventing system.
 %Asynchronous means that actions can happen independent of the current "main" execution stream. Mind you, it does NOT mean "parallel", or "different thread". An "asynchronous" action may actually run on the main thread, blocking the "main" execution stream in the meantime. So don't confuse "asynchronous" with "multi-threading".
 %You may say that, technically speaking, an asynchronous operation automatically assumes eventing -- at least "completed", "faulted" or "aborted/cancelled" events (one or more of these) are sent to the instigator of the operation (or the underlying O/S itself) to signal that the operation has ceased. Thus, async is always event-driven, but not the other way round.
@@ -1238,11 +1239,11 @@ Software optimization is both a very active field of research and a nightmare fo
 To embrace the complexity of this problematic the reader is invited to refer to the excellent book \emph{Writing High-Performance .NET Code} \cite{Watson2014}.
 
 \subsubsection{Know what things cost}
-When it comes to software performance, the first stage should always be to measure what things cost (See \href{https://msdn.microsoft.com/en-us/library/ms973852.aspx}{know what things cost}).\footnote{\url{https://msdn.microsoft.com/en-us/library/ms973852.aspx}} Once the bottlenecks are identified, 
+When it comes to software performance, the first stage should always be to measure what things cost (See \href{https://msdn.microsoft.com/en-us/library/ms973852.aspx}{know what things cost}).\footnote{\url{https://msdn.microsoft.com/en-us/library/ms973852.aspx}} Once the bottlenecks are identified,
 then the optimization of the critical pieces of code can begin. To this end, two tools were employed during the development of \emph{Marsupilami} :
 \begin{itemize}
 \item Cost Model~: a very simple cost model was established to assign a performance rating to each base math routine, based on the number of arithmetic and trigonometric  operations it performes (see \cref{tab:costmodel}). This cost model was established through micro benchmarks with the \href{https://github.com/Microsoft/perfview}{BenchmarkDotNet} library.
-\item Measure~: performance measurements were conducted on full analysis of several test cases with the library \href{https://github.com/Microsoft/perfview}{PerfView}. 
+\item Measure~: performance measurements were conducted on full analysis of several test cases with the library \href{https://github.com/Microsoft/perfview}{PerfView}.
 \end{itemize}
 
 \begin{table}[!b]
@@ -1253,7 +1254,7 @@ then the optimization of the critical pieces of code can begin. To this end, two
 		 	& add 	& sub 	& mul 	& div 	& sqrt \\
 		\midrule
 		cost	& 1 		& 1 		& 4 		& 10 		& 20	\\
-		\bottomrule	
+		\bottomrule
 	\end{tabularx}
 	\label{tab:count}
 	\vspace{10pt}
@@ -1301,7 +1302,7 @@ Time integration, custom mass matrix, call back to implement kinetic damping, cu
 MathOptInterface.jl :
 
 An abstraction layer for mathematical optimization solvers (\href{http://www.juliaopt.org/MathOptInterface.jl/latest/apimanual.html}{Manual} | \href{https://github.com/JuliaOpt/MathOptInterface.jl}{GitHub})
-MathProgBase.jl : 
+MathProgBase.jl :
 This package provides high-level one-shot functions for linear and mixed-integer programming (linprog and mixintprog), as well as a solver-independent low-level interface for implementing advanced techniques that require efficiently solving a sequence of linear programming problems.
 \url{http://mathprogbasejl.readthedocs.io/en/latest/index.html}
 
@@ -1319,14 +1320,14 @@ The validation of the model is done through a comparison with the finite element
 
 \subsubsection{Definition of the case}
 
-In this test case, a straight slender beam ($L = \SI{10.0}{m}$) is bent into an arch-like shape (see \cref{fig:bench_arch}).\footnote{We previously employed this case in \cite{Lefevre}. A similar example was used by \citef{Bessini2017}.} The cross-section is rectangular ($\SI{4x6}{cm}$) and the bending occurs towards the strong inertia, provoking an out-of-plane displacement of the arch.\footnote{Note that if the arch had been bent against the weak inertia it would have remained planar.} The material axial and shear modulus are chosen to be $E=\SI{25}{GPa}$ and $G=\SI{10}{GPa}$ with a Poisson ratio of $\nu=0.25$.
+In this test case, a straight slender beam ($L = \SI{10.0}{m}$) is bent into an arch-like shape (see \cref{fig:bench_arch}).\footnote{We previously employed this case in \cite{Lefevre2017}. A similar example was used by \citef{Bessini2017}.} The cross-section is rectangular ($\SI{4x6}{cm}$) and the bending occurs towards the strong inertia, provoking an out-of-plane displacement of the arch.\footnote{Note that if the arch had been bent against the weak inertia it would have remained planar.} The material axial and shear modulus are chosen to be $E=\SI{25}{GPa}$ and $G=\SI{10}{GPa}$ with a Poisson ratio of $\nu=0.25$.
 
 The beam is supposed to be clamped at both ends, so that the material tangent $\vect{d}_3$ is forced to lie in the $xz$ plane, making an angle of magnitude $\pi/3$ with respect to the $x$ axis, and so that the second material axis $\vect{d}_2$ is collinear to the $y$ axis. The distance between the ends is et to $\SI{2.0}{m}$.
 \begin{figure}[!h]
      	\centering
 	\includegraphics[width=0.8\textwidth]{bench_A.pdf}
 	\captionof{figure}[Test case of a constrained arch]{Test case of a constrained arch.}
-	\label{fig:bench_arch} 
+	\label{fig:bench_arch}
 \end{figure}
 
 \subsubsection{Results}
@@ -1346,7 +1347,7 @@ Additionally, we provide full internal force diagrams for the finest discretizat
      	\centering
 	\includegraphics[width=0.9\textwidth]{bench_arch_diagram.pdf}
 	\captionof{figure}[Comparison of normalized force diagrams]{Comparison of normalized normalized force diagrams for the finest discretization ($n_{el}=96$ | Marsupilami~: blue | Abaqus : grey).}
-	\label{fig:bench_arch_diagram} 
+	\label{fig:bench_arch_diagram}
 \end{fullpage}
 \end{figure}
 
@@ -1401,7 +1402,7 @@ The superposition of the internal force diagrams obtained for the finest discret
 \begin{tabularx}{0.6\textwidth}{@{} XX rrrrr@{}}
 \toprule
 & & \multicolumn{5}{c}{number of elements / segments} \\ \cmidrule{3-7}
-&  &  6 & 12 & 24 & 48 & 96 \\ 
+&  &  6 & 12 & 24 & 48 & 96 \\
 \midrule
 \multirow{12}{*}{$N$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize 179}&{\color{Tblue}\normalsize 275}&{\color{Tblue}\normalsize 302}&{\color{Tblue}\normalsize 308}&{\color{Tblue}\normalsize 310}\\
 &&{\color{Tblue}\scriptsize-41.4\%}&{\color{Tblue}\scriptsize-10.1\%}&{\color{Tblue}\scriptsize-1.4\%}&{\color{Tblue}\scriptsize0.8\%}&{\color{Tblue}\scriptsize1.3\%}\\
@@ -1453,7 +1454,7 @@ The superposition of the internal force diagrams obtained for the finest discret
 \begin{tabularx}{0.65\textwidth}{@{} XX rrrrr@{}}
 \toprule
 & & \multicolumn{5}{c}{number of elements / segments} \\ \cmidrule{3-7}
-&  &  6 & 12 & 24 & 48 & 96 \\ 
+&  &  6 & 12 & 24 & 48 & 96 \\
 \midrule
 \multirow{12}{*}{$Q$}&\multirow{4}{*}{$0$}&{\color{Tblue}\normalsize-3 092}&{\color{Tblue}\normalsize-3 009}&{\color{Tblue}\normalsize-2 989}&{\color{Tblue}\normalsize-2 985}&{\color{Tblue}\normalsize-2 984}\\
 &&{\color{Tblue}\scriptsize3.9\%}&{\color{Tblue}\scriptsize1.1\%}&{\color{Tblue}\scriptsize0.4\%}&{\color{Tblue}\scriptsize0.3\%}&{\color{Tblue}\scriptsize0.3\%}\\
@@ -1501,5 +1502,3 @@ The superposition of the internal force diagrams obtained for the finest discret
 To be added. Cantilever beam with punctual force and moment load to show how our model is able to render discontinuities accurately.
 
 \section{Conclusion}
-
-

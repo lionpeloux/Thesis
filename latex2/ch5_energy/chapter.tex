@@ -3,8 +3,8 @@
 % Year : 2017
 % !TEX encoding = UTF-8 Unicode
 
-\chapter{Elastic rod~: variational approach}
-\label{chp=energy}
+\newrefsegment
+\chapter{Elastic rod~: variational approach}\label{chp=energy}
 
 This chapter should be understood as an extension of the work initiated by \citef{Tayeb2015a} and published by \citef{DuPeloux2015} and \citef{Lefevre2017}.
 
@@ -44,7 +44,7 @@ We begin this chapter by presenting Kirchhoff model of rods based on two main hy
 
 \citef{Jung2010} provide a deep insight to the discrete mechanics of Cosserat rods, as discrete mechanics is a field of research of growing importance.
 
-\citef{Fuller1978}, \citef{Vauquelin2000}, \citef{deVries2005} and \citef{Berger2009} are worth to read to understand the variation of the parallel transport when deforming a path.
+\citef{Fuller1978}, \citef{Maggs2001}, \citef{deVries2005} and \citef{Berger2009} are worth to read to understand the variation of the parallel transport when deforming a path.
 
 A intégrer
 
@@ -175,8 +175,8 @@ We also introduce the vector of internal moments and its as~:
 	\label{eq:vM}
 	\begin{alignat}{2}
 		&\vect{M} &&= Q\vect{d}_3 + M_1\vect{d}_1 + M_2\vect{d}_2 \\
-		&\vect{M}^{\perp} &&= M_1\vect{d}_1 + M_2\vect{d}_2 
-	\end{alignat}	
+		&\vect{M}^{\perp} &&= M_1\vect{d}_1 + M_2\vect{d}_2
+	\end{alignat}
 \end{subequations}
 
 \subsection{Elastic energy}
@@ -190,7 +190,7 @@ Kirchhoff's theory assigns an elastic energy to beams according to their strain~
 Here, $\rconf{\kappa}_1$, $\rconf{\kappa}_2$ and $\rconf{\tau}$  denote the \emph{natural} material curvatures and material twist of the rod in its rest configuration. $E$ and $G$ are the elastic and shear modulus of the material. $I_1$ and $I_2$ are the moments of inertia of the cross-section. $J$ is the torsion constant of the cross-section.
 
 \subsubsection{Initially straight isotropic rod~: a special case}
-From this energy formulation an interesting an well-known result on elastic rods can be retrieved. This results stipulates that torsion is uniform in a rod with isotropic cross-section and naturally straight.\footnote{This result was already known by Love \cite[§~234]{Love1906} and is mentioned by \citef{Adriaenssens1999} and \citef{Douthe2007}.} 
+From this energy formulation an interesting an well-known result on elastic rods can be retrieved. This results stipulates that torsion is uniform in a rod with isotropic cross-section and naturally straight.\footnote{This result was already known by Love \cite[§~234]{Love1906} and is mentioned by \citef{Adriaenssens1999} and \citef{Douthe2007}.}
 
 Indeed, by definition for a rod with isotropic cross-section~: $EI_1 = EI_2 = EI$. If in addition the rod is straight in its rest configuration~: $\rconf{\kappa}_1 = \rconf{\kappa}_2 = \rconf{\tau} = 0$. The bending energy becomes~: $\mathcal{E}_{b} = EI_1\;\kappa_1^2 + EI_2\;\kappa_2^2 = EI(\kappa_1^2 + \kappa_2^2) = EI\kappa^2$. Consequently, the elastic energy of the rod is composed of two independent terms~: $\mathcal{E}_{b}[\vect{x}]$ and $\mathcal{E}_{r}[\theta]$. The coupling between bending and twisting disappears and the global minimum of elastic energy is reached when minimizing separately bending an twisting energies. This meansthat the geometry of the rod at static equilibrium ($\vect{x}$) is the one that minimized $\mathcal{E}_{b}[\vect{x}]$. And the minimum of $\mathcal{E}_{t}[\theta]$ is obviously achieved for a uniform twist ($\tau = cst$) along the centerline, only prescribed by the boundary conditions at the extremities of the rod (least-squares minimization).
 
@@ -217,7 +217,7 @@ Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of th
 		\subfloat[][angular deviation]{\includegraphics{curve_angle_b.pdf}\label{fig:curve_angle_b}} \\
 		\vspace{10pt}
 		\captionof{figure}[Curve-angle representation of the rod]{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}
-		\label{fig:curve_angle}    
+		\label{fig:curve_angle}
 %	\end{fullpage}
 \end{figure}
 
@@ -259,7 +259,7 @@ Note that the choice of an initial condition for the definition of the Bishop fr
 With this \dofs{4} representation, the material twist is directly expressed in terms of the derivative of $\theta$. Indeed, from \cref{eq:crvangle_matrix,eq:bishop_motion} we obtain~:
 \begin{equation}
 	\begin{aligned}
-		\vect{d}'_1 
+		\vect{d}'_1
 			&= (\cos{\theta} \vect{u} + \sin{\theta}\vect{v})' \\
 			& = (-\sin{\theta} \vect{u} + \cos{\theta}\vect{v})\cdot \theta' +  \cos{\theta} \vect{u}' + \sin{\theta}\vect{v}' \\
 			& = \theta' \vect{d}_2 + \cos{\theta}\; (\vect{\kappa b} \times \vect{u}) + \sin{\theta}\; (\vect{\kappa b} \times \vect{v})\\
@@ -333,16 +333,16 @@ To compute the energy gradients with respect to the degrees of freedom of the ro
 %		\vspace{10pt}
 		\captionof{figure}[Succession of the degrees of freedom]{Succession of the degrees of freedom.}
 %		\vspace{10pt}
-		\label{fig:dofs}    
+		\label{fig:dofs}
 \end{figure}
 \begin{itemize}
-\item 
+\item
 $\vect{x}$ leads to the determination of the curvature binormal ($\vect{\kappa b}$) and to the determination of the reference Bishop frame $\{\vect{t},\vect{u},\vect{v}\}$.
-\item 
+\item
 $\theta$ leads to the determination of the material frame $\{\vect{t},\vect{d}_1,\vect{d}_1\}$ from the reference frame $\{\vect{t},\vect{u},\vect{v}\}$.
-\item 
+\item
 $\kappa_1$ and $\kappa_2$ are the projections of $\vect{\kappa b}$ on $\vect{d}_1$ and $\vect{d}_2$. This means that $\vect{\omega}$ depends on $\vect{x}$ through the determination of $\vect{\kappa b}$ and the determination of $\{\vect{t},\vect{u},\vect{v}\}$ ; and depends on $\theta$ through the determination of $\{\vect{d}_1, \vect{d}_2\}$ from $\{\vect{u}, \vect{v}\}$.
-\item 
+\item
 $\tau$ only depends on $\theta$ and is thus independent of $\vect{x}$.
 \end{itemize}
 
@@ -364,7 +364,7 @@ This assumption is not mandatory -- for instance it is not made by \citef{Nabaei
 
 \section{Energy gradient with respect to $\theta$~: twisting moment}\label{sec=dE_dtheta}
 
-For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed through out this section are defined and where main results are reminded. 
+For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed through out this section are defined and where main results are reminded.
 
 \subsection{Derivative of material directors with respect to $\theta$}
 Recalling that $\theta$ and $\vect{x}$ are independant variables and that the Bishop frame $\{\vect{u},\vect{v}\}$ only depends on $\vect{x}$, the decomposition of the material frame directors $\{\vect{d}_1,\vect{d}_2\}$ on the Bishop frame leads directly to the following expression for the derivative of the material directors~:
@@ -376,7 +376,7 @@ Recalling that $\theta$ and $\vect{x}$ are independant variables and that the Bi
 	&= \vect{d}_2\cdot h_\theta
 	\\[1em]
 	\pdiffof{\theta}{\vect{d}_2}{s}{h_\theta}
-	&= \frac{d}{d\lambda} \vect{d}_2[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}  \\ \nonumber 
+	&= \frac{d}{d\lambda} \vect{d}_2[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}  \\ \nonumber
 	&= \left(-\cos{\theta}\;\vect{u} - \sin{\theta}\;\vect{v}\right) \cdot h_\theta   \\ \nonumber
 	&= -\vect{d}_1\cdot h_\theta
 \end{alignat}
@@ -388,7 +388,7 @@ Regarding the definition of the material curvatures vector and the derivative of
 \begin{equation}
 \begin{aligned}
 	\pdiffof{\theta}{\vect{\omega}}{s}{h_\theta}
-	&= \frac{d}{d\lambda} \vect{\omega}[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0} 
+	&= \frac{d}{d\lambda} \vect{\omega}[\theta + \lambda h_\theta]\Bigr|_{\lambda = 0}
 	\\[0.5em]
 	&= \begin{bmatrix*}[r]
 		\vect{\kappa b}\cdot\vect{d}_2\\
@@ -411,7 +411,7 @@ where $\mat{J}$ is the matrix that acts on two dimensional vectors by counter-cl
 The distributed moment of torsion is given by the functional derivative of the elastic energy with respect to $\theta$, which can be decomposed into~:
 \begin{equation}
 	\begin{aligned}
-	\scalar{-m(s)}{h_\theta} 
+	\scalar{-m(s)}{h_\theta}
 	&= \pdiffof{\theta}{\mathcal{E}}{s}{h_\theta} \\
 	&= \pdiffof{\theta}{\mathcal{E}_b}{s}{h_\theta} + \pdiffof{\theta}{\mathcal{E}_t}{s}{h_\theta}
 	\end{aligned}
@@ -433,7 +433,7 @@ We calculate the partial derivative of the twisting elastic energy with respect 
 \end{equation}
 where $\delta_L$ and $\delta_0$ are the Dirac distributions centered respectively on $s=L$ and $s=°$.
 \subsubsection{Derivative of the bending energy with respect to $\theta$}
- 
+
 To compute the partial derivative of $\mathcal{E}_b$ with respect to $\theta$ we first calculate the derivative of $\mathcal{E}_b$ with respect to $\vect{\omega}$~:
 \begin{equation}
 	\begin{aligned}
@@ -496,7 +496,7 @@ or equivalently~:
 
 \section{Energy gradient with respect to $x$~: internal forces}\label{sec=dE_dx}
 
-For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed through out this section are defined and where main results are reminded. 
+For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed through out this section are defined and where main results are reminded.
 
 \subsection{Derivative of material directors with respect to $x$}
 A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation of the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame. Let us denote~:
@@ -518,7 +518,7 @@ $\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\ep
 \end{figure}
 From \cref{fig:varbishop} we start with an (arbitrary) initial reference frame defined in the rest configuration and denoted $F(0)$, positioned at arc length parameter $s=0$~:
 \begin{itemize}
-\item 
+\item
 Firstly, the intial frame $F(0)$ is parallel transported along the centerline of the rest configuration into the frame $F(s)$ at arc length parameter $s$ (see \cref{fig:varbishop}).
 \item
 Secondly the initial frame $F(0)$ is parallel transported at the starting point of the centerline of the deformed configuration into the frame $F_{\epsilon}(0)$. The frame $F_{\epsilon}(0)$ is then parallel transported along the centerline of the deformed configuration into the frame $F_{\epsilon}(s)$ at arc length parameter $s$. Finally, $F_{\epsilon}(s)$ is parallel transported back onto the frame $F(s)$ of the reference configuration. This frame is denoted $\tilde{F}_\epsilon(s)$ (see \cref{fig:varbishop}).
@@ -678,12 +678,12 @@ Expressing $F_\epsilon$ on the basis $\tilde{F}_\epsilon$ gives for $\vect{u}_\e
 Which can be rearranged in~:
 \begin{subequations}
 \begin{alignat}{1}
-	&\vect{u}_\epsilon = \phantom{-}\cos{\gamma}\sin{\alpha_\epsilon}\;\vect{t} 
-	+ (\cos{\alpha_\epsilon}\cos^2{\gamma} + \cos^2{\gamma})\vect{\tilde{u}_\epsilon} 
+	&\vect{u}_\epsilon = \phantom{-}\cos{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
+	+ (\cos{\alpha_\epsilon}\cos^2{\gamma} + \cos^2{\gamma})\vect{\tilde{u}_\epsilon}
 	+ \phantom{(}\sin{\gamma}\cos{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{v}_\epsilon}
 		\\
-	&\vect{v}_\epsilon = -\sin{\gamma}\sin{\alpha_\epsilon}\;\vect{t} 
-	+ \phantom{.}\cos{\gamma}\sin{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{u}_\epsilon} 
+	&\vect{v}_\epsilon = -\sin{\gamma}\sin{\alpha_\epsilon}\;\vect{t}
+	+ \phantom{.}\cos{\gamma}\sin{\gamma}\;(1-\cos{\alpha_\epsilon})\vect{\tilde{u}_\epsilon}
 	+ (\cos^2{\gamma} + \cos{\alpha_\epsilon}\sin^2{\gamma})\vect{\tilde{v}_\epsilon}
 \end{alignat}
 \end{subequations}
@@ -759,9 +759,9 @@ Recalling the expression of the material frame expressed in the reference Bishop
 Which leads according to the previous equation to~:
 \begin{subequations}
 	\begin{alignat}{7}
-		&\vect{d}_1[\vect{x}+\lambda \vect{h}_x] &&=& \vect{d}_1[\vect{x}] + \Psi_\epsilon\vect{d}_2[\vect{x}] + \alpha_\epsilon\cos{(\theta-\gamma)}\;\vect{t}[\vect{x}] 
+		&\vect{d}_1[\vect{x}+\lambda \vect{h}_x] &&=& \vect{d}_1[\vect{x}] + \Psi_\epsilon\vect{d}_2[\vect{x}] + \alpha_\epsilon\cos{(\theta-\gamma)}\;\vect{t}[\vect{x}]
 		&+ o(\lambda) \\
-		&\vect{d}_2[\vect{x}+\lambda \vect{h}_x] &&=& \vect{d}_2[\vect{x}] - \Psi_\epsilon\vect{d}_1[\vect{x}] - \alpha_\epsilon\sin{(\theta+\gamma)}\;\vect{t}[\vect{x}] 
+		&\vect{d}_2[\vect{x}+\lambda \vect{h}_x] &&=& \vect{d}_2[\vect{x}] - \Psi_\epsilon\vect{d}_1[\vect{x}] - \alpha_\epsilon\sin{(\theta+\gamma)}\;\vect{t}[\vect{x}]
 		&+ o(\lambda)
 		\end{alignat}
 \end{subequations}
@@ -771,12 +771,12 @@ Which leads according to the previous equation to~:
 It is now straightforward from the previous section to express the variation of the material curvatures with respect to a variation $\vect{\epsilon} =\lambda \vect{h}_x$ of $\vect{x}$ while $\theta$ remains unchanged~:
 \begin{subequations}
 	\begin{alignat}{7}
-		&(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] && = 
+		&(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_1[\vect{x}+\lambda \vect{h}_x] && =
 			(\vect{x}''+\lambda \vect{h}_x'')
 			\\ &&&\phantom{=}\cdot\big(\vect{d}_1 + \Psi_\epsilon\vect{d}_2
 			+ \alpha_\epsilon\cos{(\theta-\gamma)}\;\vect{t} + o(\lambda)\big)  \nonumber
 		\\[1em]
-		&(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] && = 
+		&(\vect{x}+\lambda \vect{h}_x)'' \cdot \vect{d}_2[\vect{x}+\lambda \vect{h}_x] && =
 			(\vect{x}''+\lambda \vect{h}_x'')
 			\\ &&&\phantom{=}\cdot\big(\vect{d}_2 - \Psi_\epsilon\vect{d}_1
 			- \alpha_\epsilon\sin{(\theta+\gamma)}\;\vect{t} + o(\lambda)\big) \nonumber
@@ -812,7 +812,7 @@ Reminding the expression of $\Psi_\epsilon$ computed in \cref{eq:psi}, one can e
 Here, we have introduce a condensed matrix notation to write $\begin{bmatrix*}[r] -{\vect{d}_2}^T\\ {\vect{d}_1}^T\\ \end{bmatrix*}$ as a 2x3 matrix. The entries of the first line are $-{\vect{d}_2}^T = \begin{bmatrix} 0,\;0,\;-1 \end{bmatrix}$ while the entries of the second line are ${\vect{d}_1}^T = \begin{bmatrix} 0,\;1,\;0 \end{bmatrix}$. Thus, the matrix entries in the material frame coordinate system are given by~:
 \begin{equation}
 	\begin{bmatrix*}[r] -{\vect{d}_2}^T\\ {\vect{d}_1}^T \end{bmatrix*}
-	= 
+	=
 	\begin{bmatrix} 0 & 0 & -1 \\ 0 & 1 & 0 \end{bmatrix}
 \end{equation}
 Remark also how the scalar product $\vect{h}_x''\cdot\vect{d}_2$ in vector notation is treated as a product in matrix notation~: ${\vect{d}_2}^T \cdot \vect{h}_x'' =  {(\vect{h}_x'')}^T \cdot {\vect{d}_2}$.
@@ -821,7 +821,7 @@ Remark also how the scalar product $\vect{h}_x''\cdot\vect{d}_2$ in vector notat
 The distributed internal forces acting on the centerline are given by the functional derivative of the elastic energy with respect to $\vect{x}$, which can be decomposed into~:
 \begin{equation}
 	\begin{aligned}
-	\scalar{-\vect{f}(s)}{\vect{h}_x} 
+	\scalar{-\vect{f}(s)}{\vect{h}_x}
 	&= \pdiffof{x}{\mathcal{E}}{s}{\vect{h}_x} \\
 	&= \pdiffof{x}{\mathcal{E}_b}{s}{\vect{h}_x} + \pdiffof{x}{\mathcal{E}_t}{s}{\vect{h}_x} \\
 %	&= \pdiffof{x}{\mathcal{E}_b[\vect{\omega}[\vect{x}]]}{s}{\vect{h}_x} + \pdiffof{x}{\mathcal{E}_t[\vect{x}]}{s}{\vect{h}_x} \\
@@ -1057,7 +1057,7 @@ From \cref{eq:fint,eq:mint} we deduce the internal shear force and distributed t
 	m &= Q' +  \kappa_1\;M_2 - \kappa_2\; M_1
 	\end{alignat}
 \end{subequations}
-Remark that we fall back on the static member of the dynamical equations of rods in Kirchhoff's theory (see \cref{eq:motion}). Hence, we have proved the equivalence between the present approach (based on the calculus of variations and the formulation of an elastic energy) and a more direct approach from the well-established Kirchhoff equations.\footnote{It is easy from \cref{eq:Fshear} to retrieve \cref{eq:motion_4,eq:motion_5} considering that~: 
+Remark that we fall back on the static member of the dynamical equations of rods in Kirchhoff's theory (see \cref{eq:motion}). Hence, we have proved the equivalence between the present approach (based on the calculus of variations and the formulation of an elastic energy) and a more direct approach from the well-established Kirchhoff equations.\footnote{It is easy from \cref{eq:Fshear} to retrieve \cref{eq:motion_4,eq:motion_5} considering that~:
 \begin{equation*}
 	\begin{aligned}
 	{\vect{d}_3} \times \vect{M}'
@@ -1084,6 +1084,3 @@ Unlike \citef{Bergou2008} and \citef{Nabaei2014}~:
 From this first model, we suggest to look at a different approach based on the dynamical Kirchhoff equations for rods. Although this development would be theoretically equivalent to the present approach, it would probably lead in a more straightforward manner to the calculation of the forces acting on the centerline, as suggested by \cref{sec=fmint}. Moreover, unlike the variational approach, the dynamic equations are easy to write taking into account the action of external forces and moments acting on the rod. This would lead to a more easy-to-implement and theoretically-solid management of these actions.
 
 Finally, this approach might be better to treat the inextensibility not as a constraint but as part as an internal force acting on the centerline.
-
-
-

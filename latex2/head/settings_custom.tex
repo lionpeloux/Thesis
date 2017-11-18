@@ -198,6 +198,22 @@ useprefix=true, % use von as part of the family name (du peloux)
 {\endlist}
 {\item}
 
+\DeclareSourcemap{
+	\maps[datatype=bibtex]{
+	% -- filter for personnal bib entry
+	% https://tex.stackexchange.com/questions/125744/how-to-print-a-bibliography-for-a-particular-author-only
+	\map[overwrite=true]{
+		\pernottype{misc}
+		\step[fieldsource=author, match={du Peloux}, final]
+		\step[fieldset=keywords, fieldvalue={, own}, append]
+	}
+	% -- replace m2 with a supersript m^2
+	\map{
+	\step[fieldsource=title, match=\regexp{m2}, replace=\regexp{m\\textsuperscript\{2\}}]
+	}
+  	}
+}
+
 % with this macro you can chose to link the citation labels to local subbib (anchorsegments=true) or to global bib (anchorsegments=false)
 % local links does not work if chapter has no subbib, because there is not subib to point to !
 % https://tex.stackexchange.com/questions/142632/multiple-bibliographies-with-local-links-global-labels-also-global-bibliograph/142720

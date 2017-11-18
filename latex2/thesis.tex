@@ -13,7 +13,7 @@
 % PREAMBLE
 % ===========================
 \input{head/settings_epfl_template.tex}
-\input{head/settings_custom.tex} 
+\input{head/settings_custom.tex}
 \graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
 
 % ===========================
@@ -45,22 +45,22 @@
 
 	\newrefsection
 
-	\newrefsegment\include{ch1_introduction/chapter}
-	
+	\include{ch1_introduction/chapter}
+
 	\part{Elastic gridshells}\label{part=1}
-	\newrefsegment\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\newrefsegment\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 	\part{Rich Kirchhoff beam model}\label{part=2}
-	\newrefsegment\include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\newrefsegment\include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\newrefsegment\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{2.0em}} % for extra spacing of conclusion in TOC
-	\newrefsegment\include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{1.0em}} % getback to normal spacing of chapters in TOC
-	\bookmarksetup{startatroot} % ensure the conclusion is not inside part II in bookmarks	
-	\newrefsegment\include{ch8_conclusion/chapter}
+	\bookmarksetup{startatroot} % ensure the conclusion is not inside part II in bookmarks
+	\include{ch8_conclusion/chapter}
 
 % APPENDINX MATTER
 	\part{Appendix}	\label{part=3}
@@ -71,12 +71,20 @@
 
 % BACK MATTER
 \backmatter
-	\bookmarksetup{startatroot} % make sure the bibliography is not inside part III in bookmarks	
+
+	% go back to root for bookmarks
+	\bookmarksetup{startatroot}
+
+	% list of notations
 	\include{_notations}
+
+	% general bibliography
 	\printbibliography[heading=bibintoc]
-	
-	\newrefsection	
-	\newrefcontext[sorting=ydnt] % sort chrono
+
+	% personal publications
+	\newrefsection
+	\newrefcontext[sorting=ydnt]
 	\nocite{*}
-	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=myPapers,env=cvbib]
+	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
+
 \end{document}
