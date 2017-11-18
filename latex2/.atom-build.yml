@@ -1,0 +1,19 @@
+cmd: "pdflatex -synctex=1 -shell-escape {FILE_ACTIVE_NAME}"
+name: pdflatex
+targets:
+  biber:
+    cmd: "biber {FILE_ACTIVE_NAME_BASE}.bcf"
+    name: biber
+    args:
+      - stuff
+  makeindex:
+    cmd: "makeindex {FILE_ACTIVE_NAME_BASE}.nlo -s nomencl.ist -o {FILE_ACTIVE_NAME_BASE}.nls"
+  thesis:
+    cmd: "
+    pdflatex -synctex=1 -shell-escape {FILE_ACTIVE_NAME}
+    && biber {FILE_ACTIVE_NAME_BASE}.bcf
+    && pdflatex -synctex=1 -shell-escape {FILE_ACTIVE_NAME}
+    && makeindex {FILE_ACTIVE_NAME_BASE}.nlo -s nomencl.ist -o {FILE_ACTIVE_NAME_BASE}.nls
+    && pdflatex -synctex=1 -shell-escape {FILE_ACTIVE_NAME}
+    && pdflatex -synctex=1 -shell-escape {FILE_ACTIVE_NAME}
+    "
