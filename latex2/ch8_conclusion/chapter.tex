@@ -6,3 +6,77 @@
 \chapter*{Conclusion}\label{chp=conclu}
 \addcontentsline{toc}{chapter}{\textbf{Conclusion}}
 \markboth{Conclusion}{Conclusion} % necessary to have the correct header with \chapter* and book.cls
+
+Ce travail de thèse s'est intéressé aux modèles de calcul dédiés aux structures précontraintes par flexion. Il s'est inscrit dans un projet de recherche plus large sur les structures de type \emph{gridshell élastique}, développé par le laboratoire Navier. Initié au début des années 2000 par J.-F. Caron et O. Baverel, ce dernier entend revisiter le travail de l'ingénieur et architecte allemand Frei Otto sous le double aspect de la structure et des matériaux composites. J’ai rejoins ce projet en mai 2010 en qualité d’ingénieur de recherche, puis en tant que doctorant à partir d’octobre 2014. Sur ces presque 8 années de collaboration j’ai eu la chance de pouvoir non seulement développer une recherche personnelle sur cette thématique, mais également de pouvoir confronter le fruit de cette recherche à la réalité en concevant et construisant un certain nombre de gridshells en matériau composite ou en bois. Et c’est probablement ce qui caractérise le mieux la spécificité de mon travail : cette confrontation répétée entre théorie et pratique.
+
+Construire courbe se révèle complexe à tous les niveaux et les gridshells n’échappent pas à cette règle. En effet, la définition géométrique de l’ouvrage en constitue la pierre angulaire et, à ce titre, en assure aussi bien l’identité architecturale que la faisabilité sur le plan structurel. Structure et Architecture s’en trouvent ainsi associées de manière symbiotique. Et c’est dans ce lien étroit que se noue leur complexité intrinsèque.
+
+Dans la première partie de notre travail, nous avons souhaité nous immerger en profondeur et par l’expérience dans la complexité de ces structures. Nous avons commencé notre étude (see \cref{chp=gridshell}) par effectuer une revue critique des projets de gridshell élastique réalisés depuis les années 1960 jusqu’à nos jours. Cette brève histoire dessine à elle seule le potentiel de ces structures, notamment en terme d’expression formelle et de performance structurelle. Loin de les enfermer dans un style d’architecture particulier, elle en souligne au contraire la grande variété. Nous avons complété cette revue de projet par une revue de littérature approfondie sur l’ensemble des domaines de recherche connexes à cette thématique (géométrie, structure, matériaux, logiciel).
+
+Nous avons ensuite présenté la plus importante de nos réalisations, la conception et la construction de la cathédrale éphémère de Créteil, premier véritable bâtiment réalisé à ce jour sur le principe du gridshell élastique en matériau composite (see \cref{chp=creteil}). Construit en 2013, il est toujours en service. A cette occasion, nous avons mis au point une méthode, des outils et des critères d’évaluation pour permettre à des concepteurs -- architectes et ingénieurs -- de répondre de façon maîtrisée à un projet de gridshell \cite{DuPeloux2016}. Cette méthode s'appuie sur la réalisation d'une maquette numérique interactive qui associe des fonctions de modelage 3D basées sur une représentation NURBS des surfaces, des fonctions de maillage par la méthode du compas, et des fonctions de recherche de forme grâce à un code de calcul non linéaire basé sur la méthode de la relaxation dynamique. Elle a la particularité de recentrer le processus de conception sur la définition d’une forme et redonne ainsi de la place à l’expression de l’intention architecturale, là où la complexité des techniques de recherche de forme (sur modèle physique ou numérique) l’en avait privée. Nous avons montré comment cette liberté « retrouvée » a effectivement servi l’architecture du projet pour créer un espace qui fasse sens vis-à-vis de sa destination et qui ne soit pas le produit de contraintes purement techniques. Ce travail, publié en 2016, s’est récemment vu distingué par l’International Association for Bridge and Structural Engine (IABSE).\footnote{IABSE Awards 2017, Outstanding Paper Award, Technical Report.}
+
+Les outils que nous avons mis au point à l'occasion de ce projet ont pallié à l’inadéquation des outils de design existants, qui sont davantage orientés vers la justification des ouvrages que vers leur conception. Ils nous ont permis d’appréhender la problématique de l’interaction forme-maillage-structure avec beaucoup plus d’agilité que si nous avions eu recours aux seuls outils disponibles dans le commerce. Ils ont rendu possible le développement de ce projet de cathédrale éphémère dans des contraintes de planning et de coût sévères, à l’opposé des moyens engagés pour la Multihalle de Mannheim en 1975. Cependant, cette méthode a également montré un certain nombre de limites qui ont restreint notre capacité à développer une représentation riche et fonctionnelle du projet sous la forme d'une maquette numérique.
+
+Sur le plan de la fonctionnalité de la représentation, il faut bien reconnaître que la maquette actuelle ne permet ni le niveau d'interactivité ni le niveau de réactivité qu'offrirait une simple maquette physique manipulable \emph{à la main}. Bien que cet aspect n'ai pas constitué l'enjeu principal de notre travail, nous avons porté une grande attention à cette question dans le développement de nos outils, en essayant d'optimiser l'intégration des fonctions et la rapidité du code de calcul pour fournir l'expérience utilisateur la plus fluide et intuitive possible. C'est pour ces mêmes raisons que nous avons choisi d'implémenter nos outils dans le framework Rhinoceros \& Grasshopper. Pour aller plus loin sur les questions d'interactivité on pourrait explorer le champ de la réalité virtuelle et augmentée pour s'affranchir des limitations inhérentes à l'utilisation d'une souris, d'un clavier et d'un écran pour accéder à la maquette. Pour aller plus loin sur les questions de réactivité on pourrait explorer la piste du calcul parallèle (SIMD, CPU, GPU, \telp{}) pour accélérer les codes de maillage et de recherche de forme ; on pourrait également explorer d'autres méthodes de résolution numériques potentiellement plus rapides que la relaxation dynamique ; ou bien on pourrait encore implémenter des fonctionnalités de raffinement automatique de grille pour travailler avec les modèles les plus légers possibles en terme de degrés de liberté.
+
+Sur le plan de la richesse de la représentation, le code de calcul structurel utilisé reposait sur un élément de poutre discret à seulement trois degrés de liberté \cite{Adriaenssens2000}. De ce fait, il ne permettait pas la modélisation des phénomènes de torsion et de couplage flexion-torsion dans les éléments structuraux. Bien que ces phénomènes puissent être négligés en première approximation dans le cas de grilles constituées de poutres de section circulaire et rectilignes dans leur configuration naturelle, ces phénomènes peuvent cependant se révéler critiques pour des matériaux fortement anisotropes comme le bois et ou les composites pultrudés, qui en effet résistent mal à des sollicitations de torsion. Par ailleurs, lorsque la section des poutres employées est anisotrope -- comme c'est souvent le cas pour les gridshells en bois -- ces phénomènes influent fortement sur la forme d'équilibre de la grille et sur le niveau de contrainte observé dans la structure, les poutres pouvant se retrouvées soumises à d'importantes courbures selon leur axe fort d'inertie. En outre, l'élément discret à \dofs{3} ne peut représenter la notion de moment que sous la forme d'un couple d'effort. Il reste donc très limité pour modéliser les conditions cinématiques parfois complexes des connexions ou des conditions d'appui, notamment lorsqu'un transfert de moment s'opère (e.g. au niveau d'un encastrement).
+
+Dans la seconde partie de notre travail (see \cref{part=1}), nous avons donc cherché à dépasser les limitations du model de calcul employé pour le projet de la cathédrale éphémère de Créteil. L'objectif poursuivi était de renforcer la précision et la complétude des informations mécaniques retournées par la maquette aux concepteurs, sans pour autant sacrifier le niveau d'interactivité et de réactivité précédemment atteint et qui faisait justement la pertinence de cet outil.
+
+Dans une première tentative (see \cref{chp=energy}), à partir de travaux récents sur les tiges élastiques appliqués au champ des computer graphics \cite{Bergou2008}, et dans la continuité d'un précédent travail de thèse auquel nous avons collaboré \cite{Tayeb2015a}, nous avons, par une approche variationnelle, formulé un élément de poutre discret qui puisse rendre compte des phénomènes de torsion \cite{Lefevre2017}. La description cinématique de l'élément repose ici sur la définition d'une ligne moyenne comprise comme une courbe paramétrique de l'espace et d'une section droite positionnée à l'aide d'un repère mobile adapté à cette courbe, lui-même entièrement déterminé, à une constante près, par une unique variable scalaire. Ainsi, cet élément possède un nombre minimal de degrés de liberté, à savoir 4. Cependant, ce nouveau modèle ne répond pas à l'ensemble des limitations identifiées précédemment. En particulier, il ne permet pas de représenter certaines discontinuités qui apparaissent là où les actions mécaniques s'exercent de manière concentrée, comme par exemple au niveau d'un appui, d'une connexion ou bien d'une charge ponctuelle. Cette capacité est pourtant primordiale pour l'étude des détails de la structure, qui sont des points clefs du système constructif comme nous l'avons montré dans notre présentation de la cathédrale éphémère.
+
+Dans une seconde tentative (see \cref{chp=kirchhoff}), nous avons donc cherché à combler ces lacunes, à pouvoir rendre compte des discontinuités qui découlent des actions concentrées en sus de phénomènes de torsion. Nous avons commencé par montrer comment, à partir des équations dynamiques de Kirchhoff, nous pouvions formuler de manière relativement directe un élément de poutre à \dofs{4}. Cette approche est apparue plus évidente que la première. Par ailleurs, on a montré qu'elle traitait naturellement la question des actions extérieures et s'insérait parfaitement dans le cadre conceptuel de la relaxation dynamique basé sur le principe fondamental de la dynamique. Puis nous avons développé une réflexion approfondie sur la notion de courbure discrète (see \cref{chp=curve}) qui nous a permis d'identifier les mécanismes géométriques nécessaires à la modélisation des discontinuités de courbure (et donc de moment). En combinant ces résultats nous sommes parvenus à mettre au point un élément de poutre discret à \dofs{4} et 3 noeuds (see \cref{chp=numerical_model}), contre 2 pour les modèles précédents. Ses propriétés de section et de matériau sont supposées uniformes sur la longueur de l'élément. Il rend compte du comportement axial, de flexion et de torsion de la poutre, dans le cadre de la théorie de Kirchhoff, pour des sections dont le centre de torsion est confondu avec le centre de masse. Il peut subir des actions concentrées en ses extrémités et des actions distribuées uniformes en partie courante. Les efforts internes sont donc continus sur la longueur de l'élément mais peuvent subir des sauts au niveau des ses extrémités. Nous avons également présenté la démarche à suivre pour implémenter des conditions d'appui de type libre, rigide ou élastique.
+
+ToDo :
+* parler de la validation du modèle
+* conclure sur la pertinence de l'élément
+* ouvrir sur l'active bending
+* rappeler le questionnement sur l'enveloppe (booby)
+* conclure sur la citation de F. Otto
+
+%
+% Ne pouvant représenter la notion de moment que comme couple d'effort, il ne permettait de modéliser que des conditions cinématiques simplistes pour les connexions ou les conditions d'appuis.
+%
+%
+%
+% Ces phénomènes sont pourtant essentiels pour calculer la forme et les contraintes mécaniques des gridshells constitués de poutres rectangulaires, comme nous l'avons vu au chapitre 2. Pour les mêmes raisons, le modèle ne peut pas rendre compte des transferts de moment, ce qui est très limitant pour la modélisation des connexions entre les poutres et des conditions d'appuis. Enfin, il ne permet pas de modéliser les discontinuités de courbures et d'efforts internes qui interviennent au lieu d'application d'efforts concentrés.
+%
+%
+%
+%
+% Bien que la réactivité de
+%
+%
+% qui donne à comprendre, lorsqu'on la manipule, bien plus que des informations géométriques sur la forme de la structure
+%
+% Bien que le code de calcul développé
+%
+%
+% De ce point de vue, cette finctionnalité là
+%
+%  Le moteur de recherche de forme
+%
+%
+% l'idéal serait d'offrir une expérience utilisateur dans la manipulation de la maquette numérique qui soit semblable
+%
+% l'idéal serait d'offrir pour la maquette numérique une expérience utilisateur semblable à ce que
+%
+% d'interaction avec le model numérique qui soit semblable à celle
+%
+%   le même niveau d'interactivé et de réactivité dans la manipulation du model numérique
+%
+%
+%
+%
+%
+% , ne permettent pas aux concepteurs de développer une représentation suffisamment riche du projet.
+%
+%
+
+%
+%
+% et D’une part la manipulation d’une maquette numérique n’offre pas la même expérience que son équivalent physique.
+%
+% On est encore loin de l’optimal, à savoir une maquette numérique que l’on pourrait manipuler avec la même aisance qu’un modèle physique et dont les résultats nous seraient communiqués en temps réel.
+%
+% Le code de calcul développé pour la recherche de forme repose sur un élément discret à seulement trois degrés de libertés. Cette restriction est limitante sur plusieurs points. Premièrement elle ne permet pas de rendre compte du comportement en torsion et du couplage flexion-torsion qui se développe dans les poutres précontraintes par flexion.
