@@ -1,0 +1,45 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "pdflatex",
+            "type": "shell",
+            "command": "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -shell-escape thesis",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "biber",
+            "type": "shell",
+            "command": "biber thesis",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "makeindex",
+            "type": "shell",
+            "command": "makeindex thesis.nlo -s nomencl.ist -o thesis.nls",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -shell-escape thesis && biber thesis && pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -shell-escape thesis && pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -shell-escape thesis",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "build(index)",
+            "type": "shell",
+            "command": "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -shell-escape thesis && biber thesis && makeindex thesis.nlo -s nomencl.ist -o thesis.nls && pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -shell-escape thesis && pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -shell-escape thesis && pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -shell-escape thesis && pdflatex thesis",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
