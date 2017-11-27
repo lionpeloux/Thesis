@@ -42,49 +42,49 @@
 % MAIN MATTER
 \setlength{\parskip}{1em}
 \mainmatter
-%
-% 	\newrefsection
-%
-% 	\include{ch1_introduction/chapter}
-%
-% 	\part{Elastic gridshells}\label{part=1}
-% 	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-%
-% 	\part{Rich Kirchhoff beam model}\label{part=2}
-% 	\include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{2.0em}} % for extra spacing of conclusion in TOC
-% 	\include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-%
-% 	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{1.0em}} % getback to normal spacing of chapters in TOC
+
+	\newrefsection
+
+	\include{ch1_introduction/chapter}
+
+	\part{Elastic gridshells}\label{part=1}
+	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+
+	\part{Rich Kirchhoff beam model}\label{part=2}
+	\include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{2.0em}} % for extra spacing of conclusion in TOC
+	\include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+
+	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{1.0em}} % getback to normal spacing of chapters in TOC
 	\bookmarksetup{startatroot} % ensure the conclusion is not inside part II in bookmarks
 	\include{ch8_conclusion/chapter}
 
-% % APPENDINX MATTER
-% 	\part{Appendix}	\label{part=3}
-% 	\appendix
-% 	\include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-%
-% % BACK MATTER
-% \backmatter
-%
-% 	% go back to root for bookmarks
-% 	\bookmarksetup{startatroot}
-%
-% 	% list of notations
-% 	\include{_notations}
-%
-% 	% general bibliography
-% 	\printbibliography[heading=bibintoc]
-%
-% 	% personal publications
-% 	\newrefsection
-% 	\newrefcontext[sorting=ydnt]
-% 	\nocite{*}
-% 	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
+% APPENDINX MATTER
+	\part{Appendix}	\label{part=3}
+	\appendix
+	\include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+
+% BACK MATTER
+\backmatter
+
+	% go back to root for bookmarks
+	\bookmarksetup{startatroot}
+
+	% list of notations
+	\include{_notations}
+
+	% general bibliography
+	\printbibliography[heading=bibintoc]
+
+	% personal publications
+	\newrefsection
+	\newrefcontext[sorting=ydnt]
+	\nocite{*}
+	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
 
 \end{document}
