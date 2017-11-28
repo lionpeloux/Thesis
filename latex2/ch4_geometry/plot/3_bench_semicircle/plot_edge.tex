@@ -3,6 +3,8 @@
 	\begin{axis}[
 	xtick={0,5,10,15,20,25,30,35,40,45,50},
 	ytick={0,2,4,6,8,10},
+	xlabel={$n$},
+%	ylabel={$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%},
 	]
 		\addplot [Tblue, smooth, thick]
         		table [x expr=\thisrowno{0}, y expr=\thisrowno{7}] {\Table};	
