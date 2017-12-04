@@ -7,18 +7,18 @@
 \chapter{Numerical Model}\label{chp=numerical_model}
 
 \section{Introduction}
-In this chapter we construct a novel discret beam element that we call the \emph{biarc beam element}. It relies on the results from \cref{chp=curve} and \cref{chp=kirchhoff}.
+In this chapter we construct a novel discrete beam element that we call the \emph{biarc beam element}. It relies on the results from \cref{chp=curve} and \cref{chp=kirchhoff}.
 
-This element has a minimal number of degrees of freedom due to a reduced discrete curve-angle representation and can model extension, flexion and torsion of the rod in the framework of Kirchhoff theory. The introduction of ghost vertices enriches our previous model \cite{DuPeloux2015,Lefevre2017} in order to better represent and localized discontinuities in the model. In particular this leads to a more accurate treatment of boundary conditions, connections and loadings. This element easily integrates inside a Dynamic Relaxation procedure to find the static equilibrium of nonlinear problems.
+This element has a minimal number of degrees of freedom due to a reduced discrete curve-angle representation and can model extension, flexion and torsion of the rod in the framework of Kirchhoff theory. The introduction of ghost vertices enriches our previous model \cite{DuPeloux2015,Lefevre2017} in order to better represent and localize discontinuities in the model. In particular this leads to a more accurate treatment of boundary conditions, connections and loadings. This element easily integrates inside a Dynamic Relaxation (DR) procedure to find the static equilibrium of nonlinear problems.
 
-In the end, that makes this element very suitable for the modeling of elastic gridshells with anisotropic cross-sections and complex connections, which are known limitations of the classical \dofs{3} spline beam element \cite{Adriaenssens2001,Douthe2006}. Moreovcer, the reduced formulation should improve both speed and stability of the numerical method compared to the classical \dofs{6} beam element \cite{Adriaenssens2000,DAmico2014}.
+In the end, that makes this element very suitable for the modeling of elastic gridshells with anisotropic cross-sections and complex connections, which are known limitations of the classical \dofs{3} spline beam element \cite{Adriaenssens2001,Douthe2006}. Moreover, the reduced formulation should improve both speed and stability of the numerical method compared to the classical \dofs{6} beam element \cite{Adriaenssens2000,DAmico2014}.
 
 The interest of our approach is that the entire model is derived directly from the motion equations of the rod and thus is perfectly in the line of the pioneer works in this field \cite{Day1965}.
 
 \subsection{Overview}
-We first construct a novel discret beam element called the \emph{biarc model} (see \cref{sec=dmodel}). This element is based on Kirchhoff theory of slender rods presented in \cref{chp=kirchhoff}. The mechanical behavior of the element is derived entirely from the equations of motion \cref{eq:motion} summarized in \cref{sec=ksummary}~:
+We first construct a novel discrete beam element called the \emph{biarc model} (see \cref{sec=dmodel}). This element is based on Kirchhoff theory of slender rods presented in \cref{chp=kirchhoff}. The mechanical behavior of the element is derived entirely from the equations of motion \cref{eq:motion} summarized in \cref{sec=ksummary}~:
 \begin{itemize}
-\item we compute the discret force ($\vect{\eta}$) and moment ($\vect{\varkappa}$) strain vectors from the geometry of the centerline~;
+\item we compute the discrete force ($\vect{\eta}$) and moment ($\vect{\varkappa}$) strain vectors from the geometry of the centerline~;
 \item we compute the bending moment ($\vect{M}^{\perp}$) at vertices from the material constitutive laws~;
 \item we compute the twisting moment ($\vect{Q}$) and the axial force ($\vect{N}$) at mid-edges from the material constitutive laws~;
 \item we compute the shear force ($\vect{F}^{\perp}$) at mid-edges from the equations of motion \cref{eq:motion_4,eq:motion_5}~;
@@ -26,7 +26,7 @@ We first construct a novel discret beam element called the \emph{biarc model} (s
 \end{itemize}
 Once the internal forces and moments acting on the vertices of the rod are known, we reinterpret the rod model as a simple \emph{particle-spring} system (see \cref{sec=DR}). We study the motion of this system by integrating explicitly the motion equations of the particles with a simple finite difference scheme. The motion is artificially damped so the system falls into a state of static equilibrium. This method is called the \emph{Dynamic Relaxation}. The dynamic itself is not a matter of concern as we are only interested in the steady state. Therefore, the parameters of the dynamic (mass and time step) are optimized to achieve \emph{critical damping}, the damping for which the convergence is the fastest, and to ensure the numerical stability of the method.
 
-Boundary conditions and connections between rods are treated separately (see \cref{sec=enriching}). This topic is of special interest when modeling real structures, which is are ultimate goal.
+Boundary conditions and connections between rods are treated separately (see \cref{sec=enriching}). This topic is of special interest when modeling real structures, which is our ultimate goal.
 
 The model has been implemented in a C\# library called \emph{Marsupilami}, intended to be a lightweight and dependence-free portable API. It is not a standalone executable software and has no graphical user-interface (GUI). To that purpose, a plugin for \grasshopper{} has also been implemented which serves as a functional GUI inside the \rhino{} environnement. The core concepts of \emph{Marsupilami} are presented in \cref{sec=software}. This work was the occasion to develop a finer understanding of software architecture. Several guidelines are proposed to further develop what is more a prototype and validation code than a full-featured software.
 
@@ -47,16 +47,15 @@ Finally, several test cases are presented to validate the model (see \cref{sec=t
 
 \subsubsection{Dynamic Relaxation}
 
-\citef{Day1965} introduces the \emph{Dynamic Relaxation} method also presented by \citef{Otter1966}. He remarks that for a damped system the \blockquote{static equilibrium of a structure under a system of applied forces may be found by following the movement of the structure from its initial, un-deformed and unloaded, position until all vibrations resulting from its subsequent loading have died out}. He proposes to chose the damping factor to achieve critical damping, that is to obtained the fastest convergence to the steady state. He uses this computing method to study the non linear deformation of plan portal frames parametrized by two rotational degrees of freedom.
+\citef{Day1965} introduces the \emph{Dynamic Relaxation} method also presented by \citef{Otter1966}. He remarks that for a damped system the \blockquote{static equilibrium of a structure under a system of applied forces may be found by following the movement of the structure from its initial, un-deformed and unloaded, position until all vibrations resulting from its subsequent loading have died out}. He proposes to choose the damping factor to achieve critical damping, that is to obtained the fastest convergence to the steady state. He uses this computing method to study the non linear deformation of planar portal frames parameterized by two rotational degrees of freedom.
 
-\citef{Cassel1976} study the stability of the method. They formulate a stability criterion expressed as a relation between the time step, the mass and the entries of the stiffness matrix. A similar criterion is formulated by \citef{Barnes1975}. Later, a proof of this criterion using Gershgorin theorem is made by \citef{Papadrakakis1981} and \citef{Underwood1983} who achieved automatic determination of the Dynamic Relaxation parameters to ensure stability but no necessarily critical damping.
+\citef{Cassel1976} study the stability of the method. They formulate a stability criterion expressed as a relation between the time step, the mass and the entries of the stiffness matrix. A similar criterion is formulated by \citef{Barnes1975}. Later, a proof of this criterion using Gershgorin theorem is made by \citef{Papadrakakis1981} and \citef{Underwood1983} who achieved automatic determination of the Dynamic Relaxation parameters to ensure stability but not necessarily critical damping.
 
 \citef{Barnes1977} uses the Dynamic Relaxation to design and analyze nonlinear cable, membrane and inflatable structures. \citef{Wakefield1980} uses Dynamic Relaxation to study pretension networks with compression arches. He remarks that the method can be interpreted as a first order gradient optimization method. He first introduces a simplified planar bending element \cite[p.~120]{Wakefield1980}, which is the parent of the classical \dofs{3} spline beam element. A review of the work from Barnes, Wakefield and Papadrakakis is available in \cite{Barnes1999}.\footnote{Wakefield and Papadrakakis where phd students of Barnes in the late 70's.}
 
-Interesting investigations of the use of Dynamic Relaxation are proposed by \cite{Rodriguez2011a} for the study of inflatable structures and by \citef{Dang2010} for geotechnical engineering. \citef{Silva2006} shows the efficiency of the Dynamic Relaxation method compare to the Newton-Rapshon method in the nonlinear simulation of flexible lines. He highlights the robustness of the Dynamic Relaxation method, able to reach convergence where the Newton-Rapshon method fails.
+Interesting investigations of the use of Dynamic Relaxation are proposed by \cite{Rodriguez2011a} for the study of inflatable structures and by \citef{Dang2010} for geotechnical engineering. \citef{Silva2006} show the efficiency of the Dynamic Relaxation method compared to the Newton-Rapshon method in the nonlinear simulation of flexible lines. He highlights the robustness of the Dynamic Relaxation method, able to reach convergence where the Newton-Rapshon method fails.
 
-\citef{Rezaiee2012} proposes a very large scope benchmark of Dynamic Relaxation method variants. His results show that the kinetic damping variant \cite{
-Topping2007} has generally the fastest convergence CPU speed, while the viscous damping variant from Underwood \cite{Underwood1983} generally converges with the smallest number of iterations.
+\citef{Rezaiee2012} propose a very large scope benchmark of Dynamic Relaxation method variants. His results show that the kinetic damping variant \cite{Topping2007} has generally the fastest convergence CPU speed, while the viscous damping variant from Underwood \cite{Underwood1983} generally converges with the smallest number of iterations.
 
 \citef{Miki2014} also interpret Dynamic Relaxation as a gradient descent method. They extend the method to integrate equality constraint conditions. However, the proposed method does not exhibit a better convergence speed than the one with kinetic damping.
 
@@ -64,13 +63,13 @@ Bathe is a reference author in the field of structural dynamics. He has worked o
 
 \subsubsection{Discrete element}
 
-The classical \dofs{3} spline beam element is formulated by Adriaenssens, Barnes, and Williams \cite{Barnes1999,Adriaenssens1999,Adriaenssens2001}. This model is used by \cite{Douthe2006} for the form-finding of elastic gridshells in composite materials. They Improve the calculation of the lumped mass to take account for the geometric bending stiffness of the element. They formulate a connection model that takes into account the eccentricity between the structural members.
+The classical \dofs{3} spline beam element is formulated by Adriaenssens, Barnes, and Williams \cite{Barnes1999,Adriaenssens1999,Adriaenssens2001}. This model is used by \citef{Douthe2006} for the form-finding of elastic gridshells in composite materials. They improve the calculation of the lumped mass to take account for the geometric bending stiffness of the element. They formulate a connection model that takes into account the eccentricity between the structural members.
 
-\citef{Adriaenssens2000} introduces a \dofs{6} beam element compatible with the Dynamic Relaxation method. This element is implemented by \citef{Olsson2012}, \citef{Poulsen2015} and \cite{DAmico2014} in custom numerical frameworks to study nonlinear behavior of grid structures.
+\citef{Adriaenssens2000} introduces a \dofs{6} beam element compatible with the Dynamic Relaxation method. This element is implemented by \citef{Olsson2012}, \citef{Poulsen2015} and \citef{DAmico2014} in custom numerical frameworks to study nonlinear behavior of grid structures.
 
 A first attempt to formulate a reduced model that takes into account torsion in the element is made by \citef{Barnes2013}. Twisting is evaluated by the measure of the geometric torsion of the centerline, which obviously gives correct results in very special cases. Following \citef{Bergou2008}, Tayeb, Lefevre and du Peloux propose a novel \dofs{4} beam element suitable for the structural analysis of elastic gridshells \cite{DuPeloux2015,Lefevre2017}. A closely related work is proposed by \citef{DAmico2016} but relies on a Catmull-Rom spline interpolation that complexifies the treatment of the element end nodes.
 
-\citef{Duan2013} developpes a geometrically exact beam model with a finite-element formulation to capture dynamic elastic deformations of slender bodies. The ordinary differential equations are solved using a multiple shooting algorithm based on numerical integration with Runge–Kutta method. Although the results show a good accuracy, the computational cost seems prohibitive for real-time rendering of grid structures with a large number of connections.
+\citef{Duan2013} develop a geometrically exact beam model with a finite-element formulation to capture dynamic elastic deformations of slender bodies. The ordinary differential equations are solved using a multiple shooting algorithm based on numerical integration with Runge–Kutta method. Although the results show a good accuracy, the computational cost seems prohibitive for real-time rendering of grid structures with a large number of connections.
 
 
 
@@ -89,9 +88,9 @@ Elements can either be closed or open. The relations between the corresponding n
 \begin{fullpage}
 	\captionsetup[subfloat]{captionskip=20pt}
      	\centering
-     	\subfloat[][Centerline of the discrete biarc model.]{\includegraphics{discrete_model.pdf}\label{fig:discrete_model}} \\
+     	\subfloat[][Centerline of the discrete biarc model]{\includegraphics{discrete_model.pdf}\label{fig:discrete_model}} \\
 	\vspace{30pt}
-	\subfloat[][Number of segments, edges and vertices whether the centerline is closed or open.]{
+	\subfloat[][Number of segments, edges and vertices whether the centerline is closed or open]{\label{tab:count}%
 		 \ra{1.2}
 		 \begin{tabularx}{0.45\textwidth}{@{} X l r  r@{}}
 		 \toprule
@@ -104,8 +103,8 @@ Elements can either be closed or open. The relations between the corresponding n
 		ghosts & $n_g$ & $n_s$ & $n_s$ \\
 		handles & $n_h$ & $n_s+1$ & $n_s$ \\
 		\bottomrule
-	\end{tabularx}
-	\label{tab:count}}
+		
+	\end{tabularx}}
 	\vspace{10pt}
 	\captionof{figure}[Biarc model for a discrete beam element]{Biarc model for a discrete beam element. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a three-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
 \end{fullpage}
@@ -135,7 +134,7 @@ The length of the $i$th edge is denoted $l_i $ and its normalized direction vect
 	\end{aligned}
 	\right.
 \end{equation}
-Thus, the centerline is parametrized by arc length and $\Gamma(s_i) = \vect{x}_i$. Additionally, we define the vertex-based mean length at vertex $\vect{x}_i$~:
+Thus, the centerline is parameterized by arc length and $\Gamma(s_i) = \vect{x}_i$. Additionally, we define the vertex-based mean length at vertex $\vect{x}_i$~:
 \begin{equation}
 %\setlength{\jot}{8pt}
 	\left\{
@@ -160,11 +159,11 @@ Finally, we define the \emph{chord length} of the $i$th segment as the distance 
 
 \subsubsection{Material frames}
 % ---------------------------------------
-A discrete material frame $\{\vect{d}_{1}, \vect{d}_{2}, \vect{d}_{3}\}_i$ is associated to each vertex $\vect{x}_i$. $\vect{d}_{1,\,i}$ and $\vect{d}_{2,\,i}$ are chosen to be aligned with the principle axes of the cross-section at vertex $\vect{x}_i$. At mid edge, the definition of $\vect{d}_{3,\,i+1/2}$ is consistent with the discrete curvature based on the circumscribed osculating circle (see \cref{sec=discrete_tangent_circumscribed}).
+A discrete material frame $\{\vect{d}_{1}, \vect{d}_{2}, \vect{d}_{3}\}_i$ is associated to each vertex $\vect{x}_i$. Material directors $\vect{d}_{1,\,i}$ and $\vect{d}_{2,\,i}$ are chosen to be aligned with the principle axes of the cross-section at vertex $\vect{x}_i$. At mid edge, the definition of $\vect{d}_{3,\,i+1/2}$ is consistent with the discrete curvature based on the circumscribed osculating circle (see \cref{sec=discrete_tangent_circumscribed}).
 
 \subsubsection{Material and section properties}
 % ------------------------------------------------------------
-In addition, the model assumes that a segment has uniform section ($S$, $I_1$, $I_2$, $J$)\footnote{$S$ is the cross-section area ; $I_1$, $I_2$ and $J$ are the principal moments of inertia of the cross-section.} and material ($E$, $G$)\footnote{$E$ is the elastic modulus and $G$ is the shear  modulus for the considered material} properties over its length $s \in ]s_{2i},s_{2i+2}[$. For the sake of simplicity, we introduce for further calculations the \emph{material stiffness matrix} ($\mat{B}_i$) attached to each segment. It has the following form in the material frame basis~:
+In addition, the model assumes that a segment has uniform section ($S$, $I_1$, $I_2$, $J$)\footnote{$S$ is the cross-section area ; $I_1$, $I_2$ and $J$ are the principal moments of inertia of the cross-section.} and material ($E$, $G$)\footnote{$E$ is the elastic modulus and $G$ is the shear  modulus for the considered material.} properties over its length $s \in ]s_{2i},s_{2i+2}[$. For the sake of simplicity, we introduce for further calculations the \emph{material stiffness matrix} ($\mat{B}_i$) attached to each segment. It has the following form in the material frame basis~:
 \begin{equation}
 	\mat{B}_i = \begin{bmatrix}
 			EI_1		&	0		&	0		\\
@@ -191,18 +190,18 @@ The discrete rod is subjected to internal forces ($\vect{F} = F_1 \vect{d}_1 + F
 
 \subsubsection{Distributed loads}
 % -----------------------------------------
-The model assumes that each segment can be loaded with some distributed forces ($\vect{f}^{ext} = f_k\vect{d}_k$) and moments ($\vect{m}^{ext} = m_k\vect{d}_k$). These forces and moments are required to be uniform over each segment but can vary from one segment to another. They can represent body loads such as self weight or thermal loads or external loads such as wind, snow, pressure,~\dots
+The model assumes that each segment can be loaded with some distributed forces ($\vect{f}^{ext} = f_k\vect{d}_k$) and moments ($\vect{m}^{ext} = m_k\vect{d}_k$). These forces and moments are required to be uniform over each segment but can vary from one segment to another. They can represent body loads such as self weight or thermal loads~; or external loads such as wind, snow, pressure,~\dots
 
 \subsubsection{Concentrated loads}
 % ---------------------------------------
-Additional External concentrated forces ($\vect{F}^{ext}$) and moments ($\vect{M}^{ext}$) are applied to the segment's end vertices ($\vect{x}_{2i}$,  $\vect{x}_{2i+2}$). Note that the model does not allow to load ghost vertices, and this is precisely why they are called \textquote{ghost}.
+Additional external concentrated forces ($\vect{F}^{ext}$) and moments ($\vect{M}^{ext}$) are applied to the segment's end vertices ($\vect{x}_{2i}$,  $\vect{x}_{2i+2}$). Note that the model does not allow to load ghost vertices, and this is precisely why they are called \emph{ghost}.
 
 % Modeling discontinuities
 % ------------------------------------
  \subsection{Modeling of discontinuities}
 The model assumes that cross-section and material properties as well as distributed loads are uniform over each segment. Referring to the structure of the equations of motion, and because the centerline is required to be a regular curve in the stress-free configuration, strains, stresses, displacements, internal forces and internal moments must be piecewise continuous functions of the arc length parameter, continuous over each segment $]s_{2i},s_{2i+2}[$. Discontinuities of these functions might occur at handle vertices ($\vect{x}_{2i}$), for instance if there is a jump in material or cross-section properties or if concentrated loads are applied at handle vertices. Moreover, the centerline curve itself will stay $\mathcal{C}^1$ during the motion, as it is chosen to be $\mathcal{C}^1$ in the reference configuration.\footnote{This preclude the modeling of beams with kinks as the tangent vector would not be continuously defined at these points. In such a case, the beam should be modeled in two separate parts linked together in a rigid manner.}\textsuperscript{,}\footnote{The centerline is not necessarily $\mathcal{C}^2$ as discontinuities in curvature may occur. For instance, if no punctual loads are applied, the bending moment is continuous over the rod. As the bending moment is linked to the curvature through the constitutive equation $M = EI\varkappa$, a discontinuity in $I$ will lead to a discontinuity in $\varkappa$. Conversely, a discontinuity in $\varkappa$ will lead to a discontinuity in $I$.}
 
-Here and subsequently, for such a function, the left and right limits at handle vertices ($s_{2i}$) will be denoted with superscripts $f_{2i}^-$ and $f_{2i}^+$. Possibly, the function is continuous so that the left and right limits agree ($f_{2i}^- = f_{2i}^+$).
+Here and subsequently, for such a function the left and right limits at handle vertices ($s_{2i}$) will be denoted with superscripts $f_{2i}^-$ and $f_{2i}^+$. Possibly, the function is continuous so that the left and right limits agree ($f_{2i}^- = f_{2i}^+$).
 
 % Matrix notation
 % --------------------
@@ -290,16 +289,16 @@ With the help of the matrix notation, the constitutive equations \cref{eq:consti
 % Discret extension and axial force
 % --------------------------------------------
 \subsection{Discret extension and axial force}
-We assume the axial force ($\vect{N}$) to vary linearly over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$ regarding the arc length parameter. The variation occurs if the segment is subject to a uniform distributed load $f_3$ over the segment. Consequently, the axial strain $\epsilon$ is also required to vary linearly. The value of the axial extension at mid span of each edge is given by~:
+We assume the axial force ($\vect{N}$) to vary linearly over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$ with the arc length parameter. The variation occurs if the segment is subject to a uniform distributed load $f_3$ over the segment. Consequently, the axial strain $\epsilon$ is also required to vary linearly. The value of the axial extension at mid span of each edge is given by~:
 \begin{equation}
 	\epsilon_{i+1/2} = {l_{i}}\,/\,{\rconf{l}_i} - 1 \quad , \quad i \in \llbracket 0, n_e-1 \rrbracket
 \end{equation}
 Consequently, the axial force at mid span of each edge is computed directly with the constitutive equation \cref{eq:constitutive_a} as~:
 \begin{subequations}
 	\begin{alignat}{3}
-	\vect{N}_{2i+1/2} &= N_{2i+1/2}\, \vect{u}_{2i} \quad &&, \quad {N_{2i+1/2}} = ES_i \,\epsilon_{2i+1/2}
+	\vect{N}_{2i+1/2} &= N_{2i+1/2}\, \vect{u}_{2i} \quad &&\text{where} \quad {N_{2i+1/2}} = ES_i \,\epsilon_{2i+1/2}
 	\\
-	\vect{N}_{2i+3/2} &= N_{2i+3/2}\, \vect{u}_{2i+1}\quad &&, \quad {N_{2i+3/2}} = ES_i \,\epsilon_{2i+3/2}
+	\vect{N}_{2i+3/2} &= N_{2i+3/2}\, \vect{u}_{2i+1}\quad &&\text{where} \quad {N_{2i+3/2}} = ES_i \,\epsilon_{2i+3/2}
 	\end{alignat}
 \end{subequations}
 Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive extension ($\epsilon_{i+1/2} > 0$), vertex $\vect{x}_{i+1}$ \textquote{attracts} vertex $\vect{x}_{i}$ to it as $\vect{d}_{3,i+1/2} = \vect{u}_{i}$ is pointing from $\vect{x}_{i}$ towards $\vect{x}_{i+1}$. Remark also that $\epsilon_{i+1/2} = 0 \Leftrightarrow l_i = \rconf{l}_i$ when the rod is not stretched.
@@ -356,7 +355,7 @@ Equivalently, the definition of the osculating circles of the ($i-1$)th and $i$t
 
 \subsubsection{Unit tangent vector at handle vertices}
 % ----------------------------------------------------------------------
-The unit tangent vector $\vect{t}_{2i}$ -- that is the cross-section normal -- at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex.\footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.}
+The unit tangent vector $\vect{t}_{2i}$ (that is the cross-section normal) at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex.\footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.}
 
 \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
 	\includegraphics[]{E4.pdf}
@@ -366,7 +365,7 @@ The unit tangent vector $\vect{t}_{2i}$ -- that is the cross-section normal -- a
 	\end{aligned}$
 \end{tabularx}
 
-This way, the determination of the tangent vectors -- or equivalently the section normals -- in the static equilibrium configuration will be done in the flow of the Dynamic Relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the cross-section normals.
+This way, the determination of the tangent vectors (or equivalently the section normals) in the static equilibrium configuration will be done in the flow of the Dynamic Relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the cross-section normals.
 
 \subsubsection{Left/right bending moment at handle vertices}
 % ---------------------------------------------------------------------------------
@@ -382,7 +381,7 @@ Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\
 	\end{aligned}$
 \end{tabularx}
 
-However, this values need to be adjusted so that the static condition for rotational equilibrium is satisfied at all time ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$). Therefore, this condition will be satisfied in particular at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}$) for the internal bending moment as~:
+However, this values need to be adjusted so that the static condition for rotational equilibrium is satisfied at all time ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$). Therefore, this condition will be satisfied in particular at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}^{\perp}$) for the internal bending moment as~:
 \begin{equation}
 		\vect{M}_{2i}^{\perp}	=  \frac{1}{2} \mat{B}_{i-1}(\vect{\kappa b}_{2i}^- - \rconf{\vect{\kappa b}}_{2i}^-)
 					+  \frac{1}{2} \mat{B}_{i}(\vect{\kappa b}_{2i}^+ - \rconf{\vect{\kappa b}}_{2i}^+)
@@ -432,21 +431,21 @@ Thus, the material twist of the rod at mid edge is given by~:
 		\varkappa_{3,\,i+1/2} = \frac{\Delta\theta_{i}}{\rconf{l}_i}\label{eq:d_twist}
 	\end{align}
 \end{subequations}
-To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod si framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta(s)$ around $\vect{d}_3(s) =\vect{t}(s)$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
+To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod is framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta(s)$ around $\vect{d}_3(s) =\vect{t}(s)$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
 
 In the discrete case, although it is possible to frame the whole curve with a Bishop frame to achieve the computation of the rate of twist \cite{Lefevre2017}, it is more convenient to measure $\Delta\theta_{i}$ step by step using the existing material frames at vertices $\vect{x}_i$ and $\vect{x}_{i+1}$. This is done in a two step process :
 \begin{enumerate}
 \item
-Parallel transport the material frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ at vertex $\vect{x}_i$ onto vertex $\vect{x}_{i+1}$. We call $\{\vect{d}_{1,i}^{\para}, \vect{d}_{2,i}^{\para},\vect{d}_{3,i}^{\para}\}$ the resulting framed positioned at $\vect{x}_{i+1}$ such that $\vect{d}_{3,i}^{\para} = \vect{d}_{3,i+1}$.
+Parallel transport the material frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ at vertex $\vect{x}_i$ onto vertex $\vect{x}_{i+1}$. We call $\{\vect{d}_{1,i}^{\para}, \vect{d}_{2,i}^{\para},\vect{d}_{3,i}^{\para}\}$ the resulting frame positioned at $\vect{x}_{i+1}$ such that $\vect{d}_{3,i}^{\para} = \vect{d}_{3,i+1}$.
 \item
 Measure $\Delta\theta_{i} = \angle{(\vect{d}_{1,i}^{\para},\vect{d}_{1,i+1})} = \angle{(\vect{d}_{2,i}^{\para},\vect{d}_{2,i+1})}$ as the oriented angle needed to align $\vect{d}_{1,i}^{\para}$ with $\vect{d}_{1,i+1}$ (or $\vect{d}_{2,i}^{\para}$ with $\vect{d}_{2,i+1}$) by a rotation of angle $\Delta\theta_{i}$ around $\vect{d}_{3,i+1} = \vect{t}_{i+1}$.
 \end{enumerate}
 Consequently, the twisting moment at mid span of each edge is computed directly with the appropriate constitutive equation :
 \begin{subequations}
 	\begin{alignat}{3}
-	\vect{Q}_{2i+1/2} &= Q_{2i+1/2}\, \vect{u}_{2i} \quad &&,\quad {Q_{2i+1/2}} = GJ_i(\varkappa_{3,\,2i+1/2} - \rconf{\varkappa}_{3,\,2i+1/2})
+	\vect{Q}_{2i+1/2} &= Q_{2i+1/2}\, \vect{u}_{2i} \quad &&\text{where} \quad {Q_{2i+1/2}} = GJ_i(\varkappa_{3,\,2i+1/2} - \rconf{\varkappa}_{3,\,2i+1/2})
 	\\
-	\vect{Q}_{2i+3/2} &= Q_{2i+3/2}\, \vect{u}_{2i+1}\quad &&, \quad {Q_{2i+3/2}} = GJ_i(\varkappa_{3,\,2i+3/2} - \rconf{\varkappa}_{3,\,2i+3/2})
+	\vect{Q}_{2i+3/2} &= Q_{2i+3/2}\, \vect{u}_{2i+1}\quad &&\text{where} \quad {Q_{2i+3/2}} = GJ_i(\varkappa_{3,\,2i+3/2} - \rconf{\varkappa}_{3,\,2i+3/2})
 	\end{alignat}
 \end{subequations}
 Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a positive twist ($\varkappa_{3,\,i+1/2} > 0$), frame $\{\vect{d}_{1,i+1},\vect{d}_{2,i+1},\vect{d}_{3,i+1}\}$ makes frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ to rotate positively around $\vect{u}_i$ as $Q_{i+1/2} > 0$.
@@ -467,6 +466,7 @@ Then, combining \cref{eq:motion_4,eq:motion_5} --~where the inertial terms are n
 \end{equation}
 In the discrete case, the shear force is evaluated at mid span of each edge by :
 \begin{subequations}
+	\label{eq:dshear}
 	\begin{alignat}{3}
 		&\vect{F}^{\perp}_{2i+1/2}
 		=  \vect{u}_{2i} &&\times \left( \frac{\vect{M}_{2i+1} - \vect{M}_{2i}^{+}}{l_{2i}}+ \frac{\rconf{l}_{2i}}{l_{2i}} \vect{m}_i \right)
@@ -476,7 +476,6 @@ In the discrete case, the shear force is evaluated at mid span of each edge by :
 		=  \vect{u}_{2i+1} &&\times \left( \frac{\vect{M}_{2i+2}^- - \vect{M}_{2i+1}}{l_{2i+1}}+ \frac{\rconf{l}_{2i+1}}{l_{2i+1}} \vect{m}_i \right)
 		\label{eq:dshear_b}
 	\end{alignat}
-	\label{eq:dshear}
 \end{subequations}
 Remark that the derivative of the internal moment at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{ch:interpolation}.
 
@@ -707,7 +706,7 @@ $\mat{K}^x$ and $\mat{K}^{\theta}$.
 
 Here, this factorization is not possible. $\vect{R}_i^x$ and $R_i^{\theta}$ are computed from the degrees of freedom of the system but the relation is not linear (see how the internal force and moment are computed in \cref{sec=dmodel}). Therefore, the geometric system given in \cref{eq:dmotion_a,eq:dmotion_b} is effectively nonlinear.
 
-\subsection{Explicite time integration}
+\subsection{Explicit time integration}
 
 In this section, we give the stages required to integrate these equations through time. The Dynamic Relaxation procedure is based on a central-difference scheme. We call $\dt{}$ the time step. And we call \emph{initial configuration} the configuration of the system at time $t=0$.
 
@@ -733,7 +732,7 @@ The translational and rotational velocities of a particle are evaluated with the
 	& \ddot{\theta}_i^t && = \frac{\dot{\theta}_i^{t+\dt{} / 2} - \dot{\theta}_i^{t-\dt{} / 2}}{\dt{}}
 \end{alignat}
 \end{subequations}
-where $\dot{\vect{x}}_i$ and $\dot{\theta}_i$ are the translational and rotational velocities of the particle. Thus, the velocity of a particle at time $t + \dt{} / 2$ is computed from its velociticty at time $t - \dt{} / 2$ by~:
+where $\dot{\vect{x}}_i$ and $\dot{\theta}_i$ are the translational and rotational velocities of the particle. Thus, the velocity of a particle at time $t + \dt{} / 2$ is computed from its velocity at time $t - \dt{} / 2$ by~:
 \begin{subequations}
 \label{eq:dv}
 \begin{alignat}{5}
@@ -824,7 +823,7 @@ Here, we choose to implement the kinetic damping as it is known to produce the b
 \subsubsection{Kinetic damping}
 Kinetic damping was first introduced by \citef{Cundall1976}. The idea behind this type of damping is simple. For a conservative system, the mechanical energy ($\mathcal{E}_m$) is conserved during motion and is the sum of two forms of energy~: the potential energy ($\mathcal{E}_p$) and the kinetic energy ($\mathcal{E}_k$). Therefore, the potential energy of the system is minimized when its kinetic energy is maximized.
 
-To find a state of static equilibrium, that is a state of minimal potential energy, Cundall proposes to track the kinetic energy of the system during motion. When a peak is detected, the system is frozen in its position and then released with no initial velocity, that is with no initia kinetic energy. When the system is released, the overall mechanical energy of the system has decreased and is all stocked under potential energy form. The motion start again and part of the initial potential energy is converted to kinetic energy, until a new peak is detected. Progressively, from peak to peak, the potential energy is progressively lowered to a minimum and the system falls in a state of static equilibrium.
+To find a state of static equilibrium, that is a state of minimal potential energy, Cundall proposes to track the kinetic energy of the system during motion. When a peak is detected, the system is frozen in its position and then released with no initial velocity, that is with no initial kinetic energy. When the system is released, the overall mechanical energy of the system has decreased and is all stocked under potential energy form. The motion starts again and part of the initial potential energy is converted to kinetic energy, until a new peak is detected. Progressively, from peak to peak, the potential energy is progressively lowered to a minimum and the system falls in a state of static equilibrium.
 
 Because of the discrete nature of the numerical process, a peak of kinetic energy is detected in the interval $[t-3\dt{}/2,\,t+\dt{}/2]$ when (see \cref{fig:ek_interp})~:
 \begin{equation}
@@ -866,7 +865,7 @@ Let us define $\mathcal{E}_0$, $\mathcal{E}_1$ and $ \mathcal{E}_2$ the last thr
 	& \mathcal{E}_2 &&= \mathcal{E}_k^{t+\dt{}/2}
 \end{alignat}
 \end{subequations}
-Because a peak has just occur, the following inequalities hold~:
+Because a peak has just occurred, the following inequalities hold~:
 \begin{subequations}
 \begin{alignat}{5}
 	& \mathcal{E}_1 \geqslant \mathcal{E}_0
@@ -917,7 +916,7 @@ These equations can be advantageously rewritten to minimize memory allocation by
 The parabolic interpolation was introduced by \citef{Barnes1999}. The advantage of this technique is double. Firstly, the damping occurs at the interpolated position, that is for a higher level of kinetic energy ($\mathcal{E}^* \geqslant \mathcal{E}_1$, see \cref{fig:ek_interp}). Hence, more kinetic energy is dissipated which should improve the convergence speed. Secondly, because of the interpolation, the system is less subject to \emph{time step locking} when the system moves back and forth between two positions.
 
 \subsection{Convergence}
-Several criteria exist in the literature to determine when to stop the time integration and to decide wether the algorithm has converged to a state of static equilibrium or not. It is very unlikely that the system will fall exactly in such a state but instead it will approach it an so a \emph{convergence criteria} is required. We recall here the main ideas.
+Several criteria exist in the literature to determine when to stop the time integration and to decide wether the algorithm has converged to a state of static equilibrium or not. It is very unlikely that the system will fall exactly in such a state. Instead it will only get close to it an so a \emph{convergence criteria} is required. We recall here the main ideas.
 
 \subsubsection{Criterion based on the resultant force}
 The system is at static equilibrium when all nodes are at static equilibrium. Thus, it is possible to test for convergence looking at the nodal residuals $\norm{\vect{R}_i^{x,\,t}}$ and $\norm{\vect{R}_i^{\theta,\,t}}$.\footnote{Here, the $\norm{}$ symbol denotes the usual Euclidian norm for vectors.} For instance, convergence could be pronounced when the maximum of the residuals is less than a certain amount of force ($R_{\epsilon}^x$) and moment ($R_{\epsilon}^{\theta}$)~:
@@ -951,13 +950,13 @@ where $N$ is the number of particles in the system. This approach is easily exte
 Recall that when $p=-1$ it is called the \emph{harmonic mean}, when $p=1$ it is called the \emph{arithmetic mean} and when $p=2$ it is called the \emph{quadratic mean}.
 
 \subsubsection{Criterion based on the velocity}
-The system is at static equilibrium when it does not move anymore, that is when the velocity of the system remains null. Thus, it is possible to test for convergence looking at the nodal velocities $\norm{\vect{\ddot{x}}_i^t}$ and $\norm{\ddot{\theta}_i^t}$. The same kind of criteria can be formed.
+The system is at static equilibrium when it does not move anymore, that is when the velocity of the system remains null. Thus, it is possible to test for convergence looking at the nodal velocities $\norm{\vect{\dot{x}}_i^t}$ and $\norm{\dot{\theta}_i^t}$. The same kind of criteria can be formed.
 
 \subsubsection{Criterion based on the displacement}
 Displacement criteria are very similar to velocity criteria. The convergence is pronounced when the displacement of the system is considered negligible. The same kind of criteria can be formed.
 
 \subsubsection{Criterion based on the kinetic energy}
-The kinetic energy can also be employed to form convergence criteria. Somehow, it is nothing but a velocity criteria weighted by the fictitious mass of the particles. It make sens as particles contribute to the motion proportionally to their mass. All the criteria exposed previously can be formed with the kinetic energy $\tfrac{1}{2} m_i^x \dot{\vect{x}}_i^{t}$ and $\tfrac{1}{2} m_i^{\theta} \dot{{\theta}}_i^{t}$ of the particles.
+The kinetic energy can also be employed to form convergence criteria. Somehow, it is nothing but a velocity criteria weighted by the fictitious mass of the particles. It makes sens as particles contribute to the motion proportionally to their mass. All the criteria exposed previously can be formed with the kinetic energy $\tfrac{1}{2} m_i^x \dot{\vect{x}}_i^{t}$ and $\tfrac{1}{2} m_i^{\theta} \dot{{\theta}}_i^{t}$ of the particles.
 
 \subsubsection{Relative and adaptative criterion}
 It can be useful to proportionate the convergence criteria to the size of the system. For the same level of convergence a system with 1000 elements is likely to have a higher kinetic energy than a system with 1 element. The first answer to this issue is to consider a mean value over the particles, as proposed in \cref{eq:meancrit,eq:meancrit_g}.
@@ -1002,16 +1001,16 @@ $ES/L_0$ is the axial stiffness of the element while $N/L$ is its geometric stif
 In practice, the bending stiffness is negligible in front of the axial stiffness. Additional informations can be found in \cite{Lewis2003,Rodriguez2011a}.
 
 \subsubsection{Rotational fictitious mass}
-By analogy to these works, following \cite{Lefevre2017} we define the twisting fictitious mass as~:
+By analogy to these works and following \cite{Lefevre2017} we define the twisting fictitious mass as~:
 \begin{equation}
 	K_i = \sum_j \Bigl[\frac{GJ}{L_0} + g \frac{Q}{L} \Bigr]
 \end{equation}
 
 \subsubsection{Fictitious mass update}
-in practice, as remarked in \cite{Douthe2007} the fictitious masses do not evolve a lot between two peaks of kinetic energy. Therefore, they can be reevaluated only after each peak to minimize the computational cost of the algorithm.
+In practice, as remarked in \cite{Douthe2007} the fictitious masses do not evolve a lot between two peaks of kinetic energy. Therefore, they can be reevaluated only after each peak to minimize the computational cost of the algorithm.
 
 \subsection{Application to the simple plane pendulum}
-The simple pendulum -- where a weight is suspended from a pivot so that it can swing freely -- is of practical interest to illustrate how the Dynamic Relaxation procedure works. We recall the analytical solution for this nonlinear problem. We then explore the progress of the Dynamic Relaxation method to find the position of static equilibriul of the pendulum.
+The simple pendulum -- where a weight is suspended from a pivot so that it can swing freely -- is of practical interest to illustrate how the Dynamic Relaxation procedure works. We recall the analytical solution for this nonlinear problem. We then explore the progress of the Dynamic Relaxation method to find the position of static equilibrium of the pendulum.
 
 \subsubsection{Equation of motion}
 Let us call $m$ the mass and $l$ the length of the pendulum (see \cref{fig:pendulum}). The angle $\theta(t)$ gives the position of the pendulum at time $t$ from the vertical axis. The motion of the pendulum is given by the following differential equation~:
@@ -1064,10 +1063,29 @@ The angular velocity of the pendulum is calculated from the conservation of mech
 	\dot{\theta}(t) = 2 \omega_0 \Bigl( \sin^2 (\theta_0/2) - \sin^2 (\theta/2) \Bigr)^{1/2}
 \end{equation}
 
-\subsubsection{Finding the position of static equilibrium}
-A pendule of mass $m = \SI{1.0}{kg}$ is dropped with no initial velocity at angle $\theta_0 = \SI{135}{\degree}$. The length of the pendulum is defined so that its angular frequency is $\omega_0 = \SI{1.0}{s^{-1}}$. The gravity is $g = \SI{9.81}{m/s^2}$.
+\begin{figure}[p]
+	\centering
+\begin{fullpage}
+   \subfloat[][First steps until the first peak of $\mathcal{E}_k$ is reached]{\includegraphics[width=100mm]{pendulum.pdf}\label{fig:pendulum}} \\
+   \subfloat[][Potential energy of the pendulum for the first steps]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Ep.pdf}\label{fig:pendulum_Ep}}
+   \vspace{10pt}
+   \captionof{figure}[]{Application of the DR process to the simple plane pendulum.}
+\end{fullpage}
+\end{figure}
+\begin{figure}[p]
+	\centering
+\begin{fullpage}
+   \subfloat[][Typical profile of the kinetic damping]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Ek.pdf}\label{fig:pendulum_Ek}} \\
+   \subfloat[][Convergence of the DR process in the phase space]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Phase.pdf}\label{fig:pendulum_Phase}} \\
+   \vspace{10pt}
+   \captionof{figure}[]{Convergence of the DR process for the simple plane pendulum.}
+\end{fullpage}
+\end{figure}
 
-The motion of the pendulum is simulated by the Dynamic Relaxation method with kinetic damping. Interpolation of kinetic energy peaks is not implemented in this example. When a peak is detected, the pendulum is pushed backward to its previous position, frozen and dropped again with no initial velocity. The time step is set to $h = \SI{0.1}{s}$ and the simulation is stopped when the kinetic energy of the pendulum less than $\mathcal{E}_k^{lim} = 10^{-20}$.
+\subsubsection{Finding the position of static equilibrium}
+A pendulum of mass $m = \SI{1.0}{kg}$ is dropped with no initial velocity at angle $\theta_0 = \SI{135}{\degree}$. The length of the pendulum is defined so that its angular frequency is $\omega_0 = \SI{1.0}{s^{-1}}$. The gravity is $g = \SI{9.81}{m/s^2}$.
+
+The motion of the pendulum is simulated by the Dynamic Relaxation method with kinetic damping. Interpolation of kinetic energy peaks is not implemented in this example. When a peak is detected, the pendulum is pushed backward to its previous position, frozen and dropped again with no initial velocity. The time step is set to $h = \SI{0.1}{s}$ and the simulation is stopped when the kinetic energy of the pendulum is less than $\mathcal{E}_k^{lim} = 10^{-20}$.
 
 The course of the pendulum for the first iterations is represented in \cref{fig:pendulum}. The pendulum is dropped with no velocity at angle $\theta_0$. Driven by the gravity, it starts to move down slowly and its velocity increases over time. Progressively, its potential energy is transformed into kinetic energy but the overall mechanical energy is conserved because the motion is undamped until a peak of kinetic energy is reached (see \cref{fig:pendulum_Ek}).
 
@@ -1085,30 +1103,12 @@ This application is also useful to understand the relation between accuracy, sta
 \item When $h \gg T$ the method gets unstable as the dynamic is updated at a lower rate than the typical reaction time of the system. The process fails to capture a plausible motion and bolting is likely to occur. In this case the pendulum will start to swirl.
 \end{itemize}
 
-\begin{figure}[p]
-     	\centering
-	\begin{fullpage}
-		\subfloat[][First steps until the first peak of $\mathcal{E}_k$ is reached.]{\includegraphics[width=100mm]{pendulum.pdf}\label{fig:pendulum}} \\
-		\subfloat[][Potential energy of the pendulum for the first steps.]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Ep.pdf}\label{fig:pendulum_Ep}}
-		\vspace{10pt}
-		\captionof{figure}[]{Application of the DR process to the simple plane pendulum.}
-	\end{fullpage}
-\end{figure}
-\begin{figure}[p]
-     	\centering
-	\begin{fullpage}
-		\subfloat[][Typical profile of the kinetic damping.]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Ek.pdf}\label{fig:pendulum_Ek}} \\
-		\subfloat[][Convergence of the DR process in the phase space.]{\includegraphics[width=120mm]{ch7_numeric/plot/1_pendulum/build_Phase.pdf}\label{fig:pendulum_Phase}} \\
-		\vspace{10pt}
-		\captionof{figure}[]{Convergence of the DR process for the simple plane pendulum.}
-	\end{fullpage}
-\end{figure}
 
 \section{Enriching the model}\label{sec=enriching}
 
 The question of support conditions and connexions are often kept quiet when a beam model is presented. But it is of critical concerned when modeling real structures which always have to be fixed somewhere or connected to other structural components. Usually these conditions have a preponderant influence on the overall mechanical behavior of a structure and therefore must not be neglected.
 
-One of the main motivations of our work was precisely to develop an element that is capable of modeling real complex bending-active structures, and which can take account of a rich variety of support conditions and connexions. The preliminary work done on the geometry of curves -- spent to build a comprehensive understanding of how tangent vectors and curvature can be interpreted at vertices and especially at end vertices (see \cref{chp=geometry}) -- was essentiil to achieve our goal.
+One of the main motivations of our work was precisely to develop an element that is capable of modeling real complex bending-active structures, and which can take account of a rich variety of support conditions and connections. The preliminary work done on the geometry of curves -- spent to build a comprehensive understanding of how tangent vectors and curvature can be interpreted at vertices and especially at end vertices (see \cref{chp=curve}) -- was essential to achieve our goal.
 
 \subsection{Support condition}
 There exists two major ways of modeling support conditions, compatible with the dynamic relaxation procedure~:
@@ -1121,9 +1121,9 @@ In terms of implementation, when you need to block a specific degree of freedom,
 
 Also notice that we can identify three types of boundary conditions~:
 \begin{itemize}
-\item \emph{Rigid}, when a support prevent the particle to move along a given degree of freedom.
+\item \emph{Rigid}, when a support prevents the particle from moving along a given degree of freedom.
 \item \emph{Elastic}, when a support applies a return force or moment proportional to the displacement of the particle.
-\item \emph{Free}, when no support exist and the particle is free to move.
+\item \emph{Free}, when no support exists and the particle is free to move.
 \end{itemize}
 Remarque that a \emph{Free} boundary condition is by extension an \emph{Elastic} boundary condition with an infinitely low stiffness.
 
@@ -1143,25 +1143,25 @@ If the bending moment is prescribed -- either $\vect{M}^{\perp} = 0$ for a \emph
 \end{subequations}
 Note that as expected $\vect{t}_0$ is perpendicular to $\vect{\kappa b}_{0}$. A similar relation can be deduced for $\vect{t}_n$.
 
-\subsection{Connexion}
-A connexion between several beams can usually be interpreted as a set of geometric constraints involving two or more particles. There exists two major ways of modeling connexions, compatible with the dynamic relaxation procedure~:
+\subsection{Connection}
+A connection between several beams can usually be interpreted as a set of geometric constraints involving two or more particles. There exists two major ways of modeling connections, compatible with the dynamic relaxation procedure~:
 \begin{itemize}
-\item The first approach is to enforce the constraint \emph{smoothly} through a set of mechanical actions, namely forces and moments. In that case, the connexion is equivalent to a sort of spring, not necessarily linear, and there is conceptually no difference with what an element really is (see for instance \cite{Lefevre2017}).
+\item The first approach is to enforce the constraint \emph{smoothly} through a set of mechanical actions, namely forces and moments. In that case, the connection is equivalent to a sort of spring, not necessarily linear, and there is conceptually no difference with what an element really is (see for instance \cite{Lefevre2017}).
 \item The second approach is to enforce the constraint \emph{brutally} through a reprojection process. That is after each time step the configuration of the system is perturbed so it conforms to the constraints prescribed by the definition of the connexions (see for instance \cite{Douthe2007,DAmico2014}).
 \end{itemize}
 
 The last option is straightforward to implement for constraints on translational \dofs{} but more complex to resolve for constraints on rotational \dofs{}. The advantage is that the solution is always valid regarding these constraints. On the contrary, brutal projection can leads to numerical \emph{hysteresis locking} when the system switch back and forth between two configurations, one after and one before the reprojection procedure.
 
-The first option seems more natural to implement and more meaningfull mechanically speaking. The distance between the actual and target configurations of the connexion is evaluated and leads to (proportional) return forces and moments acting on the \dofs{6} particles involved in the constraint. Because the connexion acts similarly to an element, it must be taken into account in the computation of the fictitious mass of the particles. Moreover, the stiffness of the connexion -- that is the coefficient that commensurate the elastic response of the connexion -- is now an extra parameter to adjust to achieve convergence and accuracy of the solution~: to stiff will provoke instabilities in the dynamic procedure~; to soft and the constraint will no be enforced correctly in the final solution.
+The first option seems more natural to implement and more meaningfull mechanically speaking. The distance between the actual and target configurations of the connection is evaluated and leads to (proportional) return forces and moments acting on the \dofs{6} particles involved in the constraint. Because the connection acts similarly to an element, it must be taken into account in the computation of the fictitious mass of the particles. Moreover, the stiffness of the connection -- that is the coefficient that commensurate the elastic response of the connection -- is now an extra parameter to adjust in order to achieve convergence and accuracy of the solution~: too stiff will provoke instabilities in the dynamic procedure~; too soft and the constraint will not be enforced correctly in the final solution.
 
 %Because our element has the ability to model the action of concentrated forces and moments at any handle node, it is quite straight forward to model connexions that link rods together as entities which ensure load and mass transfer between particles.
 %
 %For instance the swivel coupler employed in our GFRP gridshells (see \cref{sec=swivel,fig:swivel_dwg}) links two rods in such a way that~:
 %\begin{itemize}
-%\item the two collars can freely rotate around the connexion axis
+%\item the two collars can freely rotate around the connection axis
 %\item each collar can freely rotates around the tube it is clamped on
 %\end{itemize}
-%Such a connexion is interpreted as a geometric constraint between
+%Such a connection is interpreted as a geometric constraint between
 
 \section{Software}\label{sec=software}
 The present model has been implemented in a numerical software called \emph{Marsupilami}. A first version of this software, based on the \dofs{3} spline beam element, was used successfully in the structural design of the Ephemeral Cathedral of Créteil (see \cref{chp=creteil}) and other smaller timber gridshells (see \cref{fig:jpofav}). During this thesis \emph{Marsupilami} has been completely redeveloped to include rotational \dofs{} capabilities.
@@ -1180,10 +1180,10 @@ This is a small standalone math library. It defines three data types~: \textit{M
 Although some math libraries already exist for C\#, it was found useful to build our own library so that it can be customized to our needs without restrictions. In particular, when it comes to software optimization for such a CPU-bound application you would better know exactly was is done insight the math routines. Having your own math library facilitates benchmarking several variants of the math routines and select the optimal one.
 
 \subsubsection{Marsupilami.CoreLib.dll}
-This is the core library. It defines structured objects such as element, section, material, model, solver. It is concieved as an API that third-party software can use to provide computation (for instance Excel, Rhino Grasshopper, Dynamo, \telp{}).
+This is the core library. It defines structured objects such as element, section, material, model, solver. It is concieved as an API that third-party softwares can use to provide computation (for instance Excel, Rhino Grasshopper, Dynamo, \telp{}).
 
 \subsubsection{Marsupilami.Gh.gha}
-This is a grasshopper plugin that exposes the logic of \textit{Marsupilami.CoreLib.dll}. Marsupilami types are mapped to Grasshopper types. Display methods are provided. Easier to build and constuyrct some models
+This is a grasshopper plugin that exposes the logic of \textit{Marsupilami.CoreLib.dll}. Marsupilami types are mapped to Grasshopper types. Display methods are provided. Help the designer to build models.
 
 \begin{figure}[t]
      	\centering
@@ -1194,7 +1194,7 @@ This is a grasshopper plugin that exposes the logic of \textit{Marsupilami.CoreL
 
 
 \subsection{Structure of the algorithm}
-The structure of the dynamic relaxation algorithm implemented in \emph{Marsupilami} is presented in \cref{algo_drmarsu}.
+The structure of the dynamic relaxation algorithm implemented in \emph{Marsupilami} is presented in \cref{alg:drmarsu}.
 
 \IncMargin{2em}
 \begin{figure}[p]
@@ -1206,13 +1206,13 @@ The structure of the dynamic relaxation algorithm implemented in \emph{Marsupila
 
 
 \subsection{Key aspects}
-Discussions about implementing dynamic relaxation can be found in the report from \citef{Olsson2012}, \citef{Poulsen2015}.
+Discussions about implementing dynamic relaxation can be found in the reports from \citef{Olsson2012} and \citef{Poulsen2015}.
 
-\subsubsection{Language}
-Why C\# ?
+% \subsubsection{Language}
+% Why C\# ?
 
 \subsubsection{Code abstraction}
-To develop a code with the right level of abstraction, it is advisable to refer to common \emph{design patterns} \cite{Bishop2008, Clune2012}
+To develop a code with the right level of abstraction, it is advisable to refer to common \emph{design patterns} \cite{Bishop2008, Clune2012}.
 
 %Modularité : evaluation courbure, schéma d'intégration, autorefine, autobreak, plasticity
 %Design pattern
@@ -1239,7 +1239,7 @@ Software optimization is both a very active field of research and a nightmare fo
 To embrace the complexity of this problematic the reader is invited to refer to the excellent book \emph{Writing High-Performance .NET Code} \cite{Watson2014}.
 
 \subsubsection{Know what things cost}
-When it comes to software performance, the first stage should always be to measure what things cost (See \href{https://msdn.microsoft.com/en-us/library/ms973852.aspx}{know what things cost}).\footnote{\url{https://msdn.microsoft.com/en-us/library/ms973852.aspx}} Once the bottlenecks are identified,
+When it comes to software performance, the first stage should always be to measure what things cost (see \href{https://msdn.microsoft.com/en-us/library/ms973852.aspx}{know what things cost}).\footnote{\url{https://msdn.microsoft.com/en-us/library/ms973852.aspx}} Once the bottlenecks are identified,
 then the optimization of the critical pieces of code can begin. To this end, two tools were employed during the development of \emph{Marsupilami} :
 \begin{itemize}
 \item Cost Model~: a very simple cost model was established to assign a performance rating to each base math routine, based on the number of arithmetic and trigonometric  operations it performes (see \cref{tab:costmodel}). This cost model was established through micro benchmarks with the \href{https://github.com/Microsoft/perfview}{BenchmarkDotNet} library.
@@ -1265,7 +1265,7 @@ then the optimization of the critical pieces of code can begin. To this end, two
 \subsubsection{Algorithmic optimization}
 The analyses made with PerfView showed that rotation and parallel transportation of frames are critical operations for the performance of the program. A thorough work was done to optimize all the costly math routines by using the minimal logic to perform the operations.
 
-Further improvements might be achieved using polynomial representations of trigonometric functions but not time was left to dig seriously into this direction \cite{Trefethen2007,Chevillard2010}.\cite{Green2003}. The optimization of math routines and in particular trigonometric functions is a field of research to itself \cite{Green2003}.
+Further improvements might be achieved using polynomial representations of trigonometric functions but no time was left to dig seriously into this direction \cite{Trefethen2007,Chevillard2010}.\cite{Green2003}. The optimization of math routines and in particular trigonometric functions is a field of research to itself \cite{Green2003}.
 
 \subsubsection{Vectorization}
 \emph{Marsupilami} leverages the built-in capabilities offered by the .Net framework to parallelize some of the work. At the moment, the computation of the internal forces and moments of the elements is made inside a parallel loop. Still, a lot remains to be explored in this area~:
@@ -1322,7 +1322,7 @@ The validation of the model is done through a comparison with the finite element
 
 In this test case, a straight slender beam ($L = \SI{10.0}{m}$) is bent into an arch-like shape (see \cref{fig:bench_arch}).\footnote{We previously employed this case in \cite{Lefevre2017}. A similar example was used by \citef{Bessini2017}.} The cross-section is rectangular ($\SI{4x6}{cm}$) and the bending occurs towards the strong inertia, provoking an out-of-plane displacement of the arch.\footnote{Note that if the arch had been bent against the weak inertia it would have remained planar.} The material axial and shear modulus are chosen to be $E=\SI{25}{GPa}$ and $G=\SI{10}{GPa}$ with a Poisson ratio of $\nu=0.25$.
 
-The beam is supposed to be clamped at both ends, so that the material tangent $\vect{d}_3$ is forced to lie in the $xz$ plane, making an angle of magnitude $\pi/3$ with respect to the $x$ axis, and so that the second material axis $\vect{d}_2$ is collinear to the $y$ axis. The distance between the ends is et to $\SI{2.0}{m}$.
+The beam is supposed to be clamped at both ends, so that the material tangent $\vect{d}_3$ is forced to lie in the $xz$ plane, making an angle of magnitude $\pi/3$ with respect to the $x$ axis, and so that the second material axis $\vect{d}_2$ is collinear to the $y$ axis. The distance between the ends is set to $\SI{2.0}{m}$.
 \begin{figure}[!h]
      	\centering
 	\includegraphics[width=0.8\textwidth]{bench_A.pdf}
@@ -1338,9 +1338,9 @@ The results of the computations are summarized in tables where the black color s
 
 For instance, the $y$ component of the apex value for a beam discretized with $6$ elements is $1.455$ with \emph{Marsupilami} and $1.643$ for \emph{Abaqus} (see \cref{tab:resA_geo}). The target value is $1.459$. Thus, the relative errors are respectively given by $1.455/1.459 -1 = -0.3\%$ and $1.643/1.459 -1 = 12.6\%$.
 
-The first table compare the discret and smooth lengths of the model, where the smooth length is interpolated from the discrete model. It also gives the coordinates ($x$, $y$, $z$) of the apex point of the arch (see \cref{tab:resA_geo}). The second table compare the axial ($N$) and shear ($F_1$, $F_2$) forces in the beam at the start ($s=0$), at the apex ($s=L/2$) and at the end ($s=L$) of the beam (see \cref{tab:resA_force}). The third table compare the twisting ($Q$) and bending ($M_1$, $M_2$) moments in the beam at the start($s=0$), at the apex ($s=L/2$) and at the end ($s=L$) of the beam (see \cref{tab:resA_moment}).
+The first table compares the discrete and smooth lengths of the model, where the smooth length is interpolated from the discrete model. It also gives the coordinates ($x$, $y$, $z$) of the apex point of the arch (see \cref{tab:resA_geo}). The second table compares the axial ($N$) and shear ($F_1$, $F_2$) forces in the beam at the start ($s=0$), at the apex ($s=L/2$) and at the end ($s=L$) of the beam (see \cref{tab:resA_force}). The third table compares the twisting ($Q$) and bending ($M_1$, $M_2$) moments in the beam at the start($s=0$), at the apex ($s=L/2$) and at the end ($s=L$) of the beam (see \cref{tab:resA_moment}).
 
-Additionally, we provide full internal force diagrams for the finest discretization with $96$ elements (see \cref{fig:bench_arch_diagram}). The results from \emph{Abaqus} are plotted as a solid grey color while the results from \emph{Marsupilami} our plotted as a bold dashed blue line. Note that the results are normalized.
+Additionally, we provide full internal force diagrams for the finest discretization with $96$ elements (see \cref{fig:bench_arch_diagram}). The results from \emph{Abaqus} are plotted as a solid grey color while the results from \emph{Marsupilami} are plotted as a bold dashed blue line. Note that the results are normalized.
 
 \begin{figure}[p]
 \begin{fullpage}

@@ -10,14 +10,14 @@ In this chapter, our goal is to develop a comprehensive view of the geometry of 
 Although the theoretical beam model takes place in the smooth world, our model will be implemented in a numerical solver, hence the necessity of a discrete representation. However, the two worlds are intimately related to each other and this is why we chose to present them both in this chapter.\footnote{\citef[preface]{LHospital1696}~: \blockquote{Car les courbes n’étant que des polygones d’une infinité de côtés, \& ne différant
 entr' elles que par la différence des angles que ces côtés infiniment petits font
 entr'eux~; il n’appartient qu’à l’Analyse des infiniment petits de déterminer la
-position de ces cotés pour avoir la courbure qu’ils forment \belp{}}.}
+position de ces cotés pour avoir la courbure qu’ils forment~\belp{}.}}
 
-A comprehensive understanding of the geometry of discrete curves will enable to build a beam model with reduced degrees of freedom and capable of representing discontinuities in curvature. This last point is of particular interest when modeling real structures with complex boundary conditions and connexions where concentrated moments are transferred (this is where jumps in curvature occur).
+A comprehensive understanding of the geometry of discrete curves will enable to build a beam model with reduced degrees of freedom and capable of representing discontinuities in curvature. This last point is of particular interest when modeling real structures with complex boundary conditions and connexions where concentrated moments are transferred~(this is where jumps in curvature occur).
 
 \subsection{Overview}
 We start this chapter by recalling the fundamentals of smooth parametric curves (see \cref{sec=paramcrvs}). We introduce the \emph{Frenet frame}, a crucial tool for the local characterization of space curves (see \cref{sec=frenet_trihedron}), and we identify two geometric invariants, the curvature and the torsion of Frenet, that fully describe the geometry of a given space curve (see \cref{sec=curves_of_dc}).\footnote{Here, invariant means invariant under affine isometries.} We then introduce the notion of moving frame which allow to define a local orientation to each material point on a curve (see \cref{sec=curve_framing}). This description will later be essential when modeling cross-section of beams. Among all the possible ways to frame a curve we look at rotation-minimizing frames. These frames are constructed thanks to the parallel transport operator, defined in the same section, which leads to the introduction of the \emph{Bishop frame}~: a torsion-free moving frame that will be at the heart of the beam model developed in the following chapters.
 
-We then move on the discrete case and we first draw up a representation of a discrete curve as an ordered sequence of vertices linked by edges (see \cref{sec=discrete_curves}). We gather several definitions of the curvature for a discrete curve and we interpret them in terms of their osculating circle (see \cref{sec=discrete_curvature}). Among these definitions, we focus on the curvatures defined respectively by the circumscribed and the inscribed osculating circles. We extend their definition to the curve endings as this is a matter of concern when dealing with mechanical boundary conditions -- such as pinned or fixed endings. We study their behavior with respect to the turning angle -- that is the angle between two consecutive edges -- and we analyze their sensitivity to non uniform discretizations as this is a matter of concern when modeling real structures (sse \cref{sec=bench_disc}). We then compare to what extent these curvatures can represent accurately the bending energy of typical curves, namely a circular curve and an elastica curve (see \cref{sec=bench_energy}). For these two curvatures we demonstrate that a natural definition for the tangent vector emerges and we show how to construct it all along the discrete curve. This vector will later be associated to the cross-section normal in our Kirchhoff beam model (see \cref{sec=discrete_tangent}). Finally, we recall two methods to parallel transport vectors or frames along a discrete curve (see \cref{sec=discrete_pt}). These methods will be used later to construct a twist-free reference frame from our beam model.
+We then move on the discrete case and we first draw up a representation of a discrete curve as an ordered sequence of vertices linked by edges (see \cref{sec=discrete_curves}). We gather several definitions of the curvature for a discrete curve and we interpret them in terms of their osculating circle (see \cref{sec=discrete_curvature}). Among these definitions, we focus on the curvatures defined respectively by the circumscribed and the inscribed osculating circles. We extend their definition to the curve endings as this is a matter of concern when dealing with mechanical boundary conditions -- such as pinned or fixed endings. We study their behavior with respect to the turning angle -- that is the angle between two consecutive edges -- and we analyze their sensitivity to non uniform discretizations as this is a matter of concern when modeling real structures (see \cref{sec=bench_disc}). We then compare to what extent these curvatures can represent accurately the bending energy of typical curves, namely a circular curve and an elastica curve (see \cref{sec=bench_energy}). For these two curvatures we demonstrate that a natural definition for the tangent vector emerges and we show how to construct it all along the discrete curve. This vector will later be associated to the cross-section normal vector in our Kirchhoff beam model (see \cref{sec=discrete_tangent}). Finally, we recall two methods to parallel transport vectors or frames along a discrete curve (see \cref{sec=discrete_pt}). These methods will be used later to construct a twist-free reference frame from our beam model.
 
 \subsection{Contributions}
 %Here, we summarize our contributions that are presented in this chapter~: 
@@ -25,9 +25,9 @@ We then move on the discrete case and we first draw up a representation of a dis
 \item We gather several definitions of the curvature for a discrete curve and we interpret them in terms of their osculating circle.
 \item We focus on the discrete curvatures defined respectively by the circumscribed and the inscribed osculating circles. We extend their definition to curve endings, which is crucial when modeling mechanical boundary conditions where nodes are positioned at points of interest.
 \item  We study their behavior with respect to the turning angle and we analyze their sensitivity to non uniform discretization, which is likely to arise when modeling real structures.
-\item We compare to what extent these curvatures can represent accurately the bending energy of typical bended shapes (circle and elastica) regarding the sharpness of the discretization. This help us to chose which curvature representation to implement in our beam model.
+\item We compare to what extent these curvatures can represent accurately the bending energy of typical bended shapes (circle and elastica) regarding the sharpness of the discretization. This help us to choose which curvature representation to implement in our beam model.
 \item We demonstrate that a natural definition for the tangent vector at vertices emerges for these curvatures. This will lead to a model with reduced number of degrees of freedom.
-\item We show how the local curvature and the tangent vector are related one to each other. This will lead to a straightforward modeling of boundary conditions and connexions. This will also allow to model discontinuities in curvature at vertices, thus enabling the modeling of applied concentrated moment and jumps in beam properties ($ES$, $EI$, $GJ$).
+\item We show how the local curvature and the tangent vector are related one to each other. This will lead to a straightforward modeling of boundary conditions and connections. This will also allow to model discontinuities in curvature at vertices, thus enabling the modeling of applied concentrated moments and jumps in beam properties ($ES$, $EI$, $GJ$).
 \end{itemize}
 
 
@@ -37,12 +37,11 @@ We then move on the discrete case and we first draw up a representation of a dis
 
 In his lecture notes on discrete differential geometry of curves and curfaces, \citef{Hoffmann2008} presents three definitions for the discrete curvature. In his lecture notes on discrete differential geometry of plane curves, \citef{Vouga2014} constructs new discrete curvatures that mimic some of the interesting properties of the curvature in the smooth case. He remarks that none of the established discrete curvatures can reproduce all the properties of the curvature in the smooth case.
 
-\citef{Bishop1975} remarks that the usual Frenet frame is not the only way to frame curve. He gives the skew-symmetric system of differential equations that any moving frame satisfies. He remarks that this system is governed by only three coefficient entries, which represent the components of the angular velocity vector of the frame expressed on the frame axes. He argues that the Frenet frame gains part of its significance because it is adapted to the curve and because one component of its angular velocity is null. Hence, he looks for other kind of moving frames that are both adapted and with one of the components of the angular velocity vector that is null. In particular, he looks at adapted frames that does not turn around the curve~: what will be called a Bishop frame hereafter.
+\citef{Bishop1975} remarks that the usual Frenet frame is not the only way to frame a curve. He gives the skew-symmetric system of differential equations that any moving frame satisfies. He remarks that this system is governed by only three coefficient entries, which represent the components of the angular velocity vector of the frame expressed on the frame axes. He argues that the Frenet frame gains part of its significance because it is adapted to the curve and because one component of its angular velocity is null. Hence, he looks for other kind of moving frames that are both adapted and with one of the components of the angular velocity vector that is null. In particular, he looks at adapted frames that does not turn around the curve~: what will be called a Bishop frame hereafter.
 
-\citef{Klok1986} makes use of the Bishop frame to produce rotation-minimizing sweeps for visualizing 3D ribbons and cylinders. He remarks that for closed trajectories the start and end frames might not align properly. \citef{Guggenheimer1989} proposes a faster method to compute Klok's frame in relation to the Frenet frame. For that, he remarks that any frame is obtained from the Frenet frame by a rotation around the tangent vector. \citef{Bloomenthal1990} introduces the rotation method to propagate reference frames along a curve. \citef{Hanson95} propose an algorithm to parallel transport frames along a curve using the rotation method. \citef{Poston1995} propose a quadratically convergent algorithm, also based on the rotation method, to find untwisted sweeping NURBS surfaces within a given error bound $\epsilon$. 
+\citef{Klok1986} makes use of the Bishop frame to produce rotation-minimizing sweeps for visualizing 3D ribbons and cylinders. He remarks that for closed trajectories the start and end frames might not align properly. \citef{Guggenheimer1989} proposes a faster method to compute Klok's frame in relation to the Frenet frame. For that, he remarks that any frame is obtained from the Frenet frame by a rotation around the tangent vector. \citef{Bloomenthal1990} introduces the rotation method to propagate reference frames along a curve. \citef{Hanson95} propose an algorithm to parallel transport frames along a curve using the rotation method. \citef{Poston1995} propose a quadratically convergent algorithm, also based on the rotation method, to find untwisted sweeping NURBS surfaces within a given error bound. 
 
-\citef{Wang2008} introduce the double reflexion method to propagate rotation minimizing frames. This method is supposed to be more stable than the rotation method
-\citef{Farouki2014} investigate the use of rotation-minimizing frames that minimize the rotation around the binormal vector of the curve (compare to Bishop frame that minimizes the rotation around the tangent vector of the curve).
+\citef{Wang2008} introduce the double reflexion method to propagate rotation minimizing frames. This method is supposed to be more stable than the rotation method. \citef{Farouki2014} investigate the use of rotation-minimizing frames that minimize the rotation around the binormal vector of the curve (compared to Bishop frame that minimizes the rotation around the tangent vector of the curve).
 
 
 
@@ -75,7 +74,7 @@ Let $\gamma=(I,F)$ be a parametric curve, and $t_0 \in I$ be a parameter.
 Here and thereafter, the prime symbol denotes the derivation with respect to the parameter and the product symbol denotes the cross product.
 % reparametrization
 \subsection{Reparametrization}
-Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\mathbb{R}}^{3}$ an interval, and $\varphi\colon I\mapsto J$ be a ${\mathcal{C}}^{k}$ diffeomorphisme. Let's define $G=F\circ\varphi$. Then~:
+Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{k}$, $J \in {\mathbb{R}}^{3}$ an interval, and $\varphi\colon I\mapsto J$ be a ${\mathcal{C}}^{k}$ diffeomorphisme. Let us define $G=F\circ\varphi$. Then~:
 \begin{itemize}
 	\item $G\in{\mathcal{C}}^{k}(J,{\mathbb{R}}^3)$
 	\item $G(J)=F(I)$
@@ -93,7 +92,7 @@ Let $\gamma$ be a space curve of class ${\mathcal{C}}^{1}$. A parametrization $(
 
 % curve length
 \subsection{Curve length}
-Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{1}$. The length of $\gamma$ is define as~:
+Let $\gamma=(I,F)$ be a parametric curve of class ${\mathcal{C}}^{1}$. The length of $\gamma$ is defined as~:
 \begin{equation}
 	L=\int_{I}\norm{F'(t)}dt
 \end{equation}
@@ -110,7 +109,7 @@ Let $\gamma=(I,F)$ be a regular parametric curve. Let $t_0 \in I$ be a given par
 \end{equation}
 The arc length $s \colon I\mapsto s(I)$ is an admissible change of parameter for $\gamma$. Indeed, $s$ is a ${\mathcal{C}}^{1}$ diffeomorphisme because it is bijective ($s'>0$).
 
-Let's define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\forall s \in J,\; \norm{G'(s)} = 1$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed ($\norm{G'} = 1$).\footnote{Regular curves are also known as \emph{unit speed} curves.}
+Let us define $G=F\circ s^{-1}$ and $J=s(I)$. Thus $(J,G)$ is a natural reparametrization of $\gamma$ and  $\forall s \in J,\; \norm{G'(s)} = 1$. This parametrization is preferred because the natural parameter s traverses the image of $\gamma$ at unit speed ($\norm{G'} = 1$).\footnote{Regular curves are also known as \emph{unit speed} curves.}
 
 Thereafter, for a regular curve $\gamma$, $\gamma(t)$ will denote the point $F(t)$ of parameter $t \in I$ while $\gamma(s)$ will denote the point $G(s)$ of arc length $s \in J=[0,L]$.
 
@@ -156,8 +155,8 @@ In differential geometry, the unit tangent to the curve $\gamma$ at point $P_0$ 
 
 \begin{figure}[t]
      \centering
-     \subfloat[][Curve's tangent.]{\includegraphics{frenet_tangent.pdf}\label{<figure1>}}
-     \subfloat[][Curve's normal and osculating circle.]{\includegraphics{frenet_normal.pdf}\label{<figure2>}}
+     \subfloat[][Curve's tangent]{\includegraphics{frenet_tangent.pdf}\label{<figure1>}}
+     \subfloat[][Curve's normal and osculating circle]{\includegraphics{frenet_normal.pdf}\label{<figure2>}}
      \captionof{figure}[Definition of the tangent vector and the osculating circle of a curve]{Definition of the tangent vector and the osculating circle of a curve.}
      \label{fig:3_1}
 \end{figure}
@@ -199,11 +198,11 @@ For a curve parametrized by arc length this expression becomes~:
 	\quad,\quad
 	s \in [0,L]
 \end{equation}
-In differential geometry, the unit normal to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P^+}-\overrightarrow{P_0 P^-}$, as $P^-$ and $P^+$ approach $P_0$ respectively from its left and right sides (\cref{fig:3_1})~:
+In differential geometry, the unit normal to the curve $\gamma$ at point $P_0$ is obtained as the limit of the (normalized) vector $\overrightarrow{P_0 P^+}-\overrightarrow{P_0 P^-}$, as $P^-$ and $P^+$ approach $P_0$ respectively from its left and right side~(\cref{fig:3_1})~:
 \begin{equation}
 	\vect{n}(P_0)
 	= \lim_{}\frac{\overrightarrow{P_0 P^+}-\overrightarrow{P_0 P^-}}{\norm{\overrightarrow{P_0 P^+}-\overrightarrow{P_0 P^-}}}
-\label{eq:3_4}
+\label{eq:3_4_2}
 \end{equation}
 Remark that the notion of \emph{normal vector} is ambiguous for non-planar curves as there is an infinite number of possible normal vectors lying in the plane orthogonal to the curve's tangent. In practice, the tangent derivative is a convenient choice as it allows to extend the notion of curvature from planar to non-planar space curves. However, we will see in \cref{sec=bishop} that other kinds of trihedron can be constructed regarding this choice and that one of them is especially suitable for the study of slender beams.
 
@@ -245,9 +244,9 @@ Note that the normal unit vector and the binormal unit vector $\{\vect{n},\vect{
 \section{Curves of double curvature}\label{sec=curves_of_dc}
 
 The study of space curves belongs to the field of differential geometry. According to~\cite[p.28]{Delcourt2007}, the terminology \emph{curve of double curvature} is attributed to Pitot around 1724.\footnote{\blockcquote[p.28]{Pitot1726}{Les Anciens ont nommé cette courbe Spirale ou Hélice~; parce que la formation sur le cylindre suit la même analogie que la formation d’une spirale ordinaire sur un plan; mais elle est bien différente de la spirale ordinaire, étant une des courbes à double courbure, ou une des lignes qu’on conçoit tracée sur la surface des Solides. Peut-être que ces sortes de courbes à double courbure, ou prises sur la surface des Solides, feront un jour l’objet des recherches des géomètres. Celle que nous venons d’examiner est, je crois, la plus simple de toutes.
-}} However, as stated in~\cite[p.321]{Coolidge2013} curvature and torsion where probably first thought by Monge around 1771.\footnote{\blockcquote[p.363]{Monge1809}{On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point~; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions~; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion~; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.}.} It is also interesting to note that, at that time, \textquote{curvature} was also referred to as \textquote{flexure}, reflecting that the study of physical problems (e.g. \emph{the elastica}) and the study of curves of double curvature were intimately related to each other.
+}} However, as stated in~\cite[p.321]{Coolidge2013} curvature and torsion where probably first thought by Monge around 1771.\footnote{\blockcquote[p.363]{Monge1809}{On appelle point d'inflexion, dans une courbe plane, le point où cette ligne, après avoir été concave dans un sens, cesse de l'être pour devenir concave dans l'autre sens. Il est évident que dans ce point, la courbe perd sa courbure, et que les deux élémens consécutifs sont en ligne droite. Mais une courbe à double courbure peut perdre chacune de ses courbures en particulier, ou les perdre toutes deux dans le même point~; c'est-à-dire, qu'il peut arriver ou que trois élémens consécutifs d'une même courbe à double courbure se trouvent dans un même plan, ou que deux de ces élémens soient en ligne droite. Il suit de là que les courbes à double courbure peuvent avoir deux espèces d'inflexions~; la première a lieu lorsque la courbe devient plane, et nous l'appellerons simple inflexion~; la seconde, que nous appellerons double inflexion, a lieu lorsque la courbe devient droite dans un de ses points.}.} It is also interesting to note that, at that time, \emph{curvature} was also referred to as \emph{flexure}, reflecting that the study of physical problems (e.g. \emph{the elastica}) and the study of curves of double curvature were intimately related to each other.
 
-Space curves were historically understood as \emph{curves of double curvature} by extension to the case of planar curves, where the curvature measures the deviance of a curve from being a straight line. The second curvature, nowadays known as the \textquote{torsion} or \textquote{second generalized curvature}, measures the deviance of a curve from being planar. 
+Space curves were historically understood as \emph{curves of double curvature} by extension to the case of planar curves, where the curvature measures the deviance of a curve from being a straight line. The second curvature, nowadays known as the \emph{torsion} or \emph{second generalized curvature}, measures the deviance of a curve from being planar. 
 
 %\note{arclength is a Euclidean invariant of the curve.}
 
@@ -320,7 +319,7 @@ Finally, following~\cite{Bergou2008} we define the \emph{curvature binormal vect
 	\norm{\vect{\kappa b}(s)}= \kappa(s)
 \label{eq:kb}
 \end{equation}
-This vector will be useful as it embed all the necessary information on the curve's curvature. We will see in \cref{sec=bishopvelocity} that this vector is associated to the angular velocity of a specific adapted moving frame attached to the curve and called the \emph{Bishop frame}.
+This vector will be useful as it embeds all the necessary information on the curvature of the curve. We will see in \cref{sec=bishopvelocity} that this vector is associated to the angular velocity of a specific adapted moving frame attached to the curve and called the \emph{Bishop frame}.
 
 % Torsion
 \subsection{Second invariant~: the torsion}\label{sec=torsion}
@@ -346,11 +345,11 @@ Remark that the \emph{torsion} is denoted \textquote{$\tau_f$} and not simply \t
 
 % Fundamental theorem of space curves
 \subsection{Fundamental theorem of space curves}\label{sec=fundamental}
-This two \emph{generalized curvatures}, respectively the curvature ($\kappa$) and the torsion ($\tau_f$), are \emph{invariant} regarding the choice of parametrization and under \emph{euclidean motions}. The \emph{Fundamental theorem of space curves} states that a curve is fully described, up to a Euclidean motion of ${\mathbb{R}}^3$, by its positive curvature ($\kappa > 0$) and torsion ($\tau_f$)~\cite[p.229]{Gray2006}.
+These two \emph{generalized curvatures}, respectively the curvature ($\kappa$) and the torsion ($\tau_f$), are \emph{invariant} regarding the choice of parametrization and under \emph{euclidean motions}.\footnote{Or equivalently under affine isometries.} The \emph{fundamental theorem of space curves} states that a curve is fully described, up to a Euclidean motion of ${\mathbb{R}}^3$, by its positive curvature ($\kappa > 0$) and torsion ($\tau_f$)~\cite[p.229]{Gray2006}.
 
 % The Serret-Frenet formulas
 \subsection{Serret-Frenet formulas}\label{sec=serret}
-The \emph{Fundamental theorem of space curves} is somehow a consequence of the \emph{Serret-Frenet formulas}, which is the first-order system of differential equations satisfied by the Frenet trihedron. Let $\gamma$ be a biregular arc length parametrized curve. Let $s \in [0,L]$ be an arc length parameter. Then, the Frenet trihedron satisfies the following formulas~:
+The \emph{fundamental theorem of space curves} is somehow a consequence of the \emph{Serret-Frenet formulas}, which is the first-order system of differential equations satisfied by the Frenet trihedron. Let $\gamma$ be a biregular arc length parametrized curve. Let $s \in [0,L]$ be an arc length parameter. Then, the Frenet trihedron satisfies the following formulas~:
 \begin{subequations}
 	\begin{alignat}{2}
 		&\vect{t}'(s) 	&&=  \kappa(s) \vect{n}(s)
@@ -392,7 +391,7 @@ Because the Frenet trihedron satisfies a first-order system of differential equa
 %	\item a curve of constant curvature and constant torsion is a circular helix.
 %\end{itemize}
 
-Finally, those formulas can be generalized to any non unit-speed parametrization of a curve.\footnote{See~\cite[p.203]{Gray2006} for a complete proof.} Let $\gamma = (I,F)$ be a biregular parametric curve. Let $t \in I$ be a parameter. Then the following \emph{generalized Serret-Frenet formulas} hold~:
+Finally, these formulas can be generalized to any non unit-speed parametrization of a curve.\footnote{See~\cite[p.203]{Gray2006} for a complete proof.} Let $\gamma = (I,F)$ be a biregular parametric curve. Let $t \in I$ be a parameter. Then the following \emph{generalized Serret-Frenet formulas} hold~:
 \begin{subequations}
 	\begin{alignat}{2}
 		&\vect{t}'(t) 	&&=  v(t) \kappa_{}(t) \vect{n}(t)
@@ -524,7 +523,7 @@ Since the progression of any moving frame along $\gamma$ is ruled by a first-ord
 This system can be seen as the \emph{equations of motion} of the frame moving along the curve $\gamma$ at unit speed ($\norm{\gamma'}=1$). Indeed, introducing its \emph{angular velocity vector} ($\vect{\Omega}$), the previous system is expressed as~:
 \begin{equation}
 	\vect{e}'_{i}(s) = \vect{\Omega}(s) \times \vect{e}_{i}(s)
-	\quad avec \quad
+	\quad \text{where} \quad
 	\vect{\Omega}(s)
 	=
 	\begin{bmatrix}
@@ -533,7 +532,7 @@ This system can be seen as the \emph{equations of motion} of the frame moving al
 		k_2(s)
 	\end{bmatrix}
 \end{equation}
-This result is straightforward deduced from \cref{eq:movingframe}. Note that the cross product reveals the skew-symmetric nature of the system, which could already be seen in \cref{eq:movingframe}.
+This result is straightforwardly deduced from \cref{eq:movingframe}. Note that the cross product reveals the skew-symmetric nature of the system, which could already be seen in \cref{eq:movingframe}.
 Geometrically, decomposing the infinitesimal rotation of the moving frame around its directors between arc length $s$ and $s+ds$ (see \cref{fig:geo_interpretation}) shows that the scalar functions $\tau$, $k_{1}$ and $k_{2}$ effectively correspond to the angular speed of the frame moving along $\gamma$, respectively around $\vect{e}_{3}$, $\vect{e}_{1}$ and $\vect{e}_{2}$~:
 \begin{subequations}
 	\begin{alignat}{2}
@@ -677,11 +676,11 @@ Note also that $\vect{t}'(s)$ and $\vect{b}'(s)$ are collinear to $\vect{n}(s)$.
 \subsubsection{Drawbacks and benefits}\label{sec=frenetdrawbacks}
 %\footnote{\note{une perturbation de la courbe dans le sens de la courbure engendre une variation de longueur de la courbe proportionnelle à l'inverse de la courbure (au premier ordre) + schéma.}}\textsuperscript{,}\footnote{\note{une perturbation de la courbe dans le sens de la binormale (en tout point) préserve la longueur de la courbe au 1er ordre~: c'est un déplacement qui conserve l'hypothèse d'inextensibilité au premier ordre.}}\textsuperscript{,}\footnote{\note{Examiner la question de la fermeture sur une boucle fermée. Schéma.}}
 
-The Frenet frame is not continuously defined if $\gamma$ is not $\mathcal{C}^2$. This is problematic for the study of slender beams as the centerline of a beam subject to punctual external forces and moments or to material discontinuities will not be $\mathcal{C}^2$ but only picewise $\mathcal{C}^2$. In that case, the centerline tangent will be continuously defined everywhere but the curvature will be subject to discontinuities, that is $\vect{t}'$ will not be continuously defined.
+The Frenet frame is not continuously defined if $\gamma$ is not $\mathcal{C}^2$. This is problematic for the study of slender beams as the centerline of a beam subject to concentrated external forces and moments or to material discontinuities will not be $\mathcal{C}^2$ but only picewise $\mathcal{C}^2$. In that case, the centerline tangent will be continuously defined everywhere but the curvature will be subject to discontinuities, that is $\vect{t}'$ will not be continuously defined.
 
 Moreover, even if $\gamma$ is $\mathcal{C}^2$, the Frenet frame is not defined where the curvature vanishes, which obviously is an admissible configuration for a beam centerline. This issue can be partially addressed by parallel transporting the normal vector along the straight regions of the curve. Thus, the extended frame will still satisfy the governing equations exposed in \cref{eq:frenetframegoverning}. However, if the osculating planes are not parallels on both sides of a region of null curvature, torsion will be subject to a discontinuity and so the Frenet frame (\cref{fig:3_3}).\footnote{This is also highlighted in~\cite{Bloomenthal1990, Wang2008}.} Again, if the region of null curvature is not a point, that is the region is not an inflexion point but a locus where the curve is locally a straight line, the change in torsion on both sides of the region can be accommodated by a continuous rotation from one end to the other.
 
-One benefit of the Frenet frame is that, when transported along a \emph{closed curve}, the frame at the end of the curve will align back with the frame at the beginning of the curve, that is the frame will returns to its initial value after a complete turn. During its trip, the frame will make a total twist of $\int_0^L \tau_f(s)ds = 0[2\pi]$ around the tangent vector.
+One benefit of the Frenet frame is that, when transported along a \emph{closed curve}, the frame at the end of the curve will align back with the frame at the beginning of the curve, that is the frame will return to its initial value after a complete turn. During its trip, the frame will make a total twist of $\int_0^L \tau_f(s)ds = 0[2\pi]$ around the tangent vector.
 
 A second benefit is that any adapted frame can be obtained by a rotation of the Frenet frame around the unit tangent vector~\cite[p.2]{Guggenheimer1989}.
 
@@ -693,7 +692,7 @@ A \emph{Bishop frame} denoted $\{\vect{t},\vect{u},\vect{v}\}$, also known as \e
 	\vect{\Omega} \cdot \vect{t} = \tau =\vect{u}' \cdot \vect{v} = - \vect{u} \cdot \vect{v}' = 0
 	\label{eq:null_velocity}
 \end{equation}
-Because a Bishop frame is an adapted frame, it can be defined relatively to the Frenet frame by a rotation around the unit tangent vector. A Bishop frame is a frame that cancels out the rotational movement of the Frenet frame around the tangent vector. At arc length parameter $s$, the Frenet frame has continuously rotated around its tangent vector of a cumulative angle~: $\int_0^s \tau_f(t)dt$. Thus, any Bishop frame will be obtained, within a constant rotation angle $\theta_0$, through a rotation of the Frenet frame around the tangent vector by an angle~:
+Because a Bishop frame is an adapted frame, it can be defined relatively to the Frenet frame by a rotation around the unit tangent vector. A Bishop frame is a frame that \emph{cancels out} the rotational movement of the Frenet frame around the tangent vector. At arc length parameter $s$, the Frenet frame has continuously rotated around its tangent vector of a cumulative angle~: $\int_0^s \tau_f(t)dt$. Thus, any Bishop frame will be obtained, within a constant rotation angle $\theta_0$, through a rotation of the Frenet frame around the tangent vector by an angle~:
 \begin{equation}
 	\theta(s)  =  - \int_0^s \tau_f(t)dt + \theta_0(s)
 \end{equation}
@@ -730,12 +729,13 @@ The Bishop frame satisfies the following system of differential equations, which
 One can remember the generic differential equations of an adapted moving frame attached to a curve, where~: \footnote{
 \begin{equation*}
 	\begin{aligned}
-		&\tau =\vect{u}' \cdot \vect{v} = (\vect{\Omega_f} \times \vect{u} + \theta' \vect{v})\cdot  \vect{v} = \tau_f - \tau_f = 0\\
-		&k_1 = -\vect{t}' \cdot \vect{v} = -\kappa \vect{n} \cdot \vect{v} = \kappa \sin \theta \\
-		&k_2 = \vect{t}' \cdot \vect{u} = \kappa \vect{n} \cdot \vect{u} = \kappa \cos \theta
+		&\tau &&=\vect{u}' \cdot \vect{v} = (\vect{\Omega_f} \times \vect{u} + \theta' \vect{v})\cdot  \vect{v} = \tau_f - \tau_f = 0\\
+		&k_1 &&= -\vect{t}' \cdot \vect{v} = -\kappa \vect{n} \cdot \vect{v} = \kappa \sin \theta \\
+		&k_2 &&= \vect{t}' \cdot \vect{u} = \kappa \vect{n} \cdot \vect{u} = \kappa \cos \theta
 	\end{aligned}
 \end{equation*}
 }
+
 \begin{equation}
 k_{1}(s) = \kappa(s) \sin \theta(s)
 \quad,\quad
@@ -756,12 +756,12 @@ Consequently, the angular velocity vector ($\vect{\Omega_{b}}$) of the Bishop fr
 	\end{bmatrix}
 	= \vect{\kappa b}(s) 
 \end{equation}
-Remark that the Bishop frame satisfies $\vect{\Omega_b}(s) \cdot \vect{t}(s) = 0$ and is thus \emph{rotation-miniminzing} regarding the tangent vector. The motion of this frame through the curve is known as \textquote{roll-free}.
+Remark that the Bishop frame satisfies $\vect{\Omega_b}(s) \cdot \vect{t}(s) = 0$ and is thus \emph{rotation-miniminzing} regarding the tangent vector. The motion of this frame through the curve is known as \emph{roll-free}.
 
 Because the motion of this frame is described by an angular velocity vector that is nothing but the curvature binormal vector ($\vect{\Omega_b} = \vect{\kappa b}$), it can be interpreted in terms of \emph{parallel transport} as defined in \cref{sec=paralleltransport}. Thus, given an initial frame at arc length parameter $s=0$, the Bishop frame at any arc length parameter ($s$) is obtained by parallel transporting the initial frame $\{\vect{t}(0),\vect{u}(0), \vect{v}(0)\}$ along the curve from $0$ to $s$.
 
 \subsubsection{Drawbacks and benefits}
-One of the main benefits of the Bishop frame is that its generative method~: \blockcquote{Bloomenthal1990}{is immune to degeneracies in the curvature vector}. Although we first expressed the construction of the Bishop frame relatively to the Frenet frame (which exists wherever $\gamma$ is biregular), the existence of the Bishop frame, understood in terms of parallel transport, is guaranteed wherever the curvature binormal ($\vect{\kappa b} = \vect{t} \times \vect{t}'$) is defined. To be continuously defined over $[0,L]$, a Bishop frame only needs the curvature binormal vector to be piecewise continuously defined over  $[0,L]$, which only requires that $\gamma'$ is $\mathcal{C}^0$ and that $\gamma''$ is piecewise $\mathcal{C}^0$. Obviously, those weaker existence conditions are profitables to bypass the drawbacks of the Frenet frame regarding the modeling of slender beams listed in \cref{sec=frenetdrawbacks}.
+One of the main benefits of the Bishop frame is that its generative method~: \blockcquote{Bloomenthal1990}{is immune to degeneracies in the curvature vector}. Although we first expressed the construction of the Bishop frame relatively to the Frenet frame (which exists wherever $\gamma$ is biregular), the existence of the Bishop frame, understood in terms of parallel transport, is guaranteed wherever the curvature binormal ($\vect{\kappa b} = \vect{t} \times \vect{t}'$) is defined. To be continuously defined over $[0,L]$, a Bishop frame only needs the curvature binormal vector to be piecewise continuously defined over  $[0,L]$, which only requires that $\gamma'$ is $\mathcal{C}^0$ and that $\gamma''$ is piecewise $\mathcal{C}^0$. Obviously, these weaker existence conditions are profitables to bypass the drawbacks of the Frenet frame regarding the modeling of slender beams listed in \cref{sec=frenetdrawbacks}.
 
 Strictly speaking, a Bishop frame is not a reference frame as it is defined within an initial condition. However, we will see later that strains in a beam are modeled as a rate of change in the Bishop frame, and consequently the initial condition will disappear in the equations.
 
@@ -901,7 +901,7 @@ Recall that for a planar curve, where $\varphi$ denotes the angle between the ta
 
 Let $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n)$ be a discrete curve of edges $\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1}$. $\Gamma$ is said to be~:
 \begin{itemize}
-	\item  \emph{regular} if it has no kinks~: $\vect{e}_{i-1} + \vect{e}_{i} \neq 0 \Leftrightarrow \varphi_i \neq \pi \; | \; \forall i \in \llbracket 1,n-1 \rrbracket $
+	\item  \emph{regular} if no vertex kinks~: $\vect{e}_{i-1} + \vect{e}_{i} \neq 0 \Leftrightarrow \varphi_i \neq \pi \; | \; \forall i \in \llbracket 1,n-1 \rrbracket $
 	\item  \emph{biregular} if no vertex is flat~: $\vect{e}_{i-1} - \vect{e}_{i} \neq 0 \Leftrightarrow \varphi_i \neq 0 \; | \; \forall i \in \llbracket 1,n-1 \rrbracket $
 \end{itemize}
 
@@ -945,7 +945,7 @@ Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n 
 % DISCRETE CURVATURE
 % ===================
 \section{Discrete curvature}\label{sec=discrete_curvature}
-\citef{Vouga2014} defines and compares three different definitions of the discrete curvature that does not suppose that $\norm{\vect{e}_i}$ is constant. By trying to mimic some properties of the curvature in the smooth case \citef{Carroll2014} and \citef{Bobenko2015} also define and compare three different definitions of the discrete curvature from the osculating circle. One main drawback of all the said proposals is that the question of the curvature at  start and end points is never treated. But this is of main importance when dealing with beams as the nature of the boundary conditions can make the curvature to be null or not at its ends, depending if some moment has to be transfer or not. In this sens, the question of discrete curvature could not be treated separately with the question of the tangent vector.
+\citef{Vouga2014} defines and compares three different definitions of the discrete curvature that does not suppose that $\norm{\vect{e}_i}$ is constant. By trying to mimic some properties of the curvature in the smooth case \citef{Carroll2014} and \citef{Bobenko2015} also define and compare three different definitions of the discrete curvature from the osculating circle. One main drawback of all the said proposals is that the question of the curvature at  start and end points is never treated. But this is of main importance when dealing with beams as the nature of the boundary conditions can make the curvature to be null or not at its ends, depending if some moment has to be transferred or not. In this sens, the question of discrete curvature could not be treated separately with the question of the tangent vector.
 
 \subsection{Definition from osculating circles}
 Curvature is defined from the osculating circle, which is the best approximation of a curve by a circle.
@@ -992,7 +992,7 @@ Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{vertex-ba
 \end{equation}
 This definition shows a good locality as the curvature is attached to the vertex $\vect{x}_{i}$, right in the place where it occurs on the discret curve. In addition, this definition leads to a natural local spline interpolation by the circumscribed osculating circle itself. This interpolation has the advantage to pass exactly through three vertices, to lie on the osculating plane and to share the same curvature as $\Gamma$ at $\vect{x}_{i}$. It also leads to a natural definition of the tangent vector at $\vect{x}_{i}$ (see \cref{sec=discrete_tangent_circumscribed}).
 
-Moreover, while this definition is valid only on the current portion of $\Gamma$ ($i \in[1, n-1]$), it is straightforward extended to its endings ($i=0,1$), provided that a unit tangent vector $\vect{t}_{0}$ (respectively $\vect{t}_{n}$) is given at $\vect{x}_{0}$ (resp. $\vect{x}_{n}$), as the unique circle tangent to $\vect{t}_{0}$ (resp. $\vect{t}_{n}$) passing through $\vect{x}_0$ and $\vect{x}_1$ (resp. $\vect{x}_{n-1}$ and $\vect{x}_n$)~:
+Moreover, while this definition is valid only on the current portion of $\Gamma$ ($i \in[1, n-1]$), it is straightforwardly extended to its endings ($i=0,n$), provided that a unit tangent vector $\vect{t}_{0}$ (respectively $\vect{t}_{n}$) is given at $\vect{x}_{0}$ (resp. $\vect{x}_{n}$), as the unique circle tangent to $\vect{t}_{0}$ (resp. $\vect{t}_{n}$) passing through $\vect{x}_0$ and $\vect{x}_1$ (resp. $\vect{x}_{n-1}$ and $\vect{x}_n$)~:
 \begin{equation}
 	\vect{\kappa b}_0 = \frac{2 \, \vect{e}_{0} \times \vect{t}_{0}}{\norm{\vect{e}_{0}}^2} 
 	\quad , \quad
@@ -1000,7 +1000,7 @@ Moreover, while this definition is valid only on the current portion of $\Gamma$
 \end{equation}
 This property will be very profitable in the discrete beam model developed later in the manuscript. It is examined more in details in section \cref{sec=discrete_tangent} about the definition of the tangent vector.
 
-However, there are some important drawbacks as the curvature is bounded to $[0,2]$ (see \cref{fig:kb_bench}). When the curve tends to kinks ($\varphi \mapsto \pi$), one would expect the curvature to diverge toward infinity, but instead it tends to a finite value equals to $0$ ($l_{i-1} \neq l_i$) or $2$ ($l_{i-1} = l_i$). This issue can be bypassed if the discretization is refined \textquote{enough}. A criterion is given in the next section (\cref{sec=bench_disc}).
+However, there are some important drawbacks as the curvature is bounded to $[0,2]$ (see \cref{fig:kb_bench}). When the curve tends to kinks ($\varphi \mapsto \pi$), one would expect the curvature to diverge toward infinity, but instead it tends to a finite value equals to $0$ ($l_{i-1} \neq l_i$) or $2$ ($l_{i-1} = l_i$). This issue can be bypassed if the discretization is refined \emph{enough}. A criterion is given in the next section (\cref{sec=bench_disc}).
 
 % edge-based curvature
 % ------------------------------
@@ -1010,7 +1010,7 @@ Let $\Gamma$ be a discrete curve parametrized by arc length. The \emph{edge-base
 	\kappa_i = \frac{\tan(\varphi_i/2) + \tan(\varphi_{i+1}/2)}{\norm{\vect{e}_{i}}}
 \label{eq:def_kb_edge}
 \end{equation}
-This definition shows an appropriate behavior~: when the curve tends to kicks the radius of curvature tends to zero ($\tan \varphi/2 \mapsto \infty$), and when the curve tends to be a straight line the curvature tends to $0$ ($\tan \varphi/2 \mapsto 0$).
+This definition shows an appropriate behavior~: when the curve tends to kick the radius of curvature tends to zero ($\tan \varphi/2 \mapsto \infty$), and when the curve tends to be a straight line the curvature tends to $0$ ($\tan \varphi/2 \mapsto 0$).
 
 However, it needs $\Gamma$ to be planar which is by far too restrictive regarding our goal (the modeling of 3D slender beams). Finally, this way of defining the curvature is not as local as one would expect as it is defined relatively to the edge $\vect{e}_{i}$ but not where the turning occurs, at vertices.
 
@@ -1023,9 +1023,9 @@ Let $\Gamma$ be a discrete curve parametrized by arc length. Following~\cite{Vou
 	\quad , \quad
 	\kappa_i = \norm{\vect{\kappa b}_i} = \frac{2}{\overbar{l_i}} \tan(\varphi_i/2)
 \end{equation}
-This other definition combines the good locality of the vertex-based approach (see \cref{eq:def_kb_vertex}) and the proper behavior at bounds of the edge-based approach (see \cref{eq:def_kb_edge}). Given two adjacent edges $\vect{e}_{i-1}$ and $\vect{e}_{i}$, there exists  an infinite number of circles that are tangent to both edges (see \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b} for two remarkable circles among them), which center points all lie on the $\varphi_i-\pi$ angle bisector line. The corresponding osculating circle, known as the \emph{inscribed} circle, is constructed to touch both $\vect{e}_{i-1}$ and $\vect{e}_{i}$ at distance $\overbar{l_i}$ from $\vect{x}_{i}$. In the case of a constant edge length discrete curve, this definition of the osculating circle merges to the circles proposed in \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b}.
+This other definition combines the good locality of the vertex-based approach (see \cref{eq:def_kb_vertex}) and the proper behavior at bounds of the edge-based approach (see \cref{eq:def_kb_edge}). Given two adjacent edges $\vect{e}_{i-1}$ and $\vect{e}_{i}$, there exists  an infinite number of circles that are tangent to both edges (see \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b} for two remarkable circles among them), which center points all lie on the $\varphi_i-\pi$ angle bisector line. The corresponding osculating circle, known as the \emph{inscribed} circle, is constructed to touch both $\vect{e}_{i-1}$ and $\vect{e}_{i}$ at distance $\overbar{l_i}/2$ from $\vect{x}_{i}$. In the case of a constant edge length discrete curve, this definition of the osculating circle merges to the circles proposed in \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b}.
 
-However, this definition still exhibits some drawbacks. Firstly, remark that there is an infinity of possible inscribed circles (defined as a circle that is bitangent to two connected edges). Indeed, this circle is unique only if the distance between the common vertex and the points of tangency are prescribed. Although it could seem natural to take the middle of the edges as points of tangency if they have the same length ($\norm{\vect{e}_i} = \norm{\vect{e}_{i+1}}$), there is no obvious choice at all for this parameter (compare \cref{fig:kb_mixed_a} with \cref{fig:kb_mixed_b}). Moreover, the lack of a natural interpolation spline that passes through the vertices and that is in correlation to the osculating circle is also detrimental in the context of our application.
+However, this definition still exhibits some drawbacks. Firstly, remark that there is an infinity of possible inscribed circles (defined as a circle that is bitangent to two connected edges). Indeed, this circle is unique only if the distance between the common vertex and the points of tangency are prescribed. Although it could seem natural to take the middle of the edges as points of tangency if they have the same length ($\norm{\vect{e}_i} = \norm{\vect{e}_{i+1}}$), there is no obvious choice at all for this parameter (compare \cref{fig:kb_mixed_a} with \cref{fig:kb_mixed_b}). Moreover, the lack of a natural interpolation spline which passes through the vertices and that is in correlation to the osculating circle is also detrimental in the context of our application.
 
 % mixed approach
 % ---------------------
@@ -1071,7 +1071,7 @@ These expressions lead to the following formula for the ratio $\kappa_1 / \kappa
 \end{equation}
 Discrete curvatures are plotted in \cref{fig:kb_bench} for three values of $\alpha$. The thickest line is for the case of uniform discretization ($\alpha=1$), whereas the thin lines mark the boundary cases ($\alpha=0.5,2$). The ratio $\kappa_1/\kappa_3$ is plotted in blue and leads to only one thin line (remind \cref{eq:ratio_inv}). The graph shows that $\kappa_1$ and $\kappa_3$ have a very close behavior for small turning angles. The variability regarding $\alpha$ is small when $\varphi$ remains small and gets negligible as $\varphi$ gets smaller.
 
-Passing $\pi/4$ and increasing $\varphi$, $\kappa_3$ exhibits a good behavior~: as the discrete curves tends to kink, $\kappa_3$ diverges towards the infinity as the smooth curvature would behave when the curve kinks. Conversely, the behavior of $\kappa_1$n is not appropriate as it converges to a fixed limit. This limit equals $2$ when the edges have the same length and equals $0$ when they have different lengths.
+Passing $\pi/4$ and increasing $\varphi$, $\kappa_3$ exhibits a good behavior~: as the discrete curves tends to kink, $\kappa_3$ diverges towards the infinity as the smooth curvature would behave when the curve kinks. Conversely, the behavior of $\kappa_1$ is not appropriate as it converges to a fixed limit. This limit equals $2$ when the edges have the same length and equals $0$ when they have different lengths.
 
 \subsubsection{Conclusion}
 It appears that the discrete curvature related to the inscribed osculating circle exhibits a better behavior -- that is a behavior closer to the smooth case -- on the whole range of possible turning angles. This would be an advantage when modeling highly nonlinear beam configurations such as the ones encountered in hair simulations. 
@@ -1140,7 +1140,7 @@ In this section we compare, for three remarkable types of curves (line, semicirc
 % Straight line
 \subsubsection{Straight line}
 
-Let's consider any straight line. Its smooth curvature is null. So are the discrete curvatures $\kappa_1$ and $\kappa_3$ (see \cref{tab:kb_def}). In this case, the discrete bending energies perfectly match the bending energy of the smooth curve~:
+Let us consider any straight line. Its smooth curvature is null. So are the discrete curvatures $\kappa_1$ and $\kappa_3$ (see \cref{tab:kb_def}). In this case, the discrete bending energies perfectly match the bending energy of the smooth curve~:
 \begin{equation}
 	\mathcal{E} = \mathcal{E}_1 = \mathcal{E}_3 = 0
 \end{equation}
@@ -1148,7 +1148,7 @@ Let's consider any straight line. Its smooth curvature is null. So are the discr
 % Circle
 \subsubsection{Semicircle}
 
-Let's consider a semicircle of curvature $\kappa =1/r$ and length $L = \pi r$. This curve is discretized into $n$ edges of equal length $|\vect{e}_n| = 2r\sin (\varphi/2)$ where $\varphi = \tfrac{\pi}{n}$ (see \cref{fig:semicircle}). The total length of the discrete curve is given by~: $L_n = n |\vect{e}_n| = L \frac{\sin(\varphi/2)}{\varphi/2}$. In this simple case, the bending energies can be expressed analytically~:
+Let us consider a semicircle of curvature $\kappa =1/r$ and length $L = \pi r$. This curve is discretized into $n$ edges of equal length $|\vect{e}_n| = 2r\sin (\varphi/2)$ where $\varphi = \tfrac{\pi}{n}$ (see \cref{fig:semicircle}). The total length of the discrete curve is given by~: $L_n = n |\vect{e}_n| = L \frac{\sin(\varphi/2)}{\varphi/2}$. In this simple case, the discrete bending energies can be expressed analytically~:
 \begin{subequations}
 \setlength{\jot}{6pt}
 \begin{alignat}{5}
@@ -1161,11 +1161,11 @@ Note that $\kappa_1$ equals the curvature of the smooth curve. Consequently, the
 
 % Elastica
 \subsubsection{Elastica}
-Let's consider a sequence of elastica curves of fixed length $L$ and variable curvature $\kappa$ (see \cref{fig:elastica_seq}). This curves correspond to a buckled shape of a straight pinned-pinned beam that would have been forced to retract its span. These curves are discretized into $n$ edges of equal length (see \cref{fig:elastica_discretization}). This time, there is no analytical expressions available for $\mathcal{E}$, $\mathcal{E}_1$ and $\mathcal{E}_3$. Results are obtained by numerical integration and plotted in \cref{fig:bench_elastica}. Again, graphs show that $\mathcal{E}_1$ converges to the smooth case faster than $\mathcal{E}_3$ for most of the curves excepted the ones with low overall curvature (1 to 5).
+Let us consider a sequence of elastica curves of fixed length $L$ and variable curvature $\kappa$ (see \cref{fig:elastica_seq}). This curves correspond to a buckled shape of a straight pinned-pinned beam that would have been forced to retract its span. These curves are discretized into $n$ edges of equal length (see \cref{fig:elastica_discretization}). This time, there is no analytical expressions available for $\mathcal{E}$, $\mathcal{E}_1$ and $\mathcal{E}_3$. Results are obtained by numerical integration and plotted in \cref{fig:bench_elastica}. Again, graphs show that $\mathcal{E}_1$ converges to the smooth case faster than $\mathcal{E}_3$ for most of the curves excepted the ones with low overall curvature (1 to 5).
 
 % Conclusion
 \subsubsection{Conclusion}
-\cref{fig:bench_semicircle,fig:bench_elastica} show that for typical curves of mechanical interest -- a semicircle is the shape of a rod with constant bending moment while the elastica is the shape of a buckled rod with no end moments -- the circumscribed curvature gives a better approximation of the bending energy embedded in these curves. Hence, the circumscribed curvature seems to be a good candidate to maximize accuracy while minimizing the sampling of beam elements. This will lead to models with fewer nodes and decrease the cost of the computation.
+\cref{fig:bench_semicircle,fig:bench_elastica} show that for typical curves of mechanical interest -- a semicircle is the shape of a rod with constant bending moment while the elastica is the shape of a buckled rod with no end moments -- the circumscribed curvature gives a better approximation of the bending energy embedded in these curves. Hence, the circumscribed curvature seems to be a good candidate to maximize accuracy while minimizing the sampling of beam elements. This will lead to models with fewer nodes and will decrease the cost of the computation.
 
 % DISCRETE TANGENT VECTOR
 % ===================
@@ -1173,8 +1173,7 @@ Let's consider a sequence of elastica curves of fixed length $L$ and variable cu
 
 In this section we study how to define the discrete unit tangent vector relatively to a discrete curve. While a natural definition exists along the edges (see \cref{sec=tangent_edge}), there is no obvious choice at vertices were the curve kinks.
 
-The ability to define a unique tangent vector is very important to define the normal of cross-sections, to control beam endings, and to relate it to curvature.
-You would control the direction of the section (for a fixed/clamped support condition) or conversly, you would control the moment and seek the corresponding tangent direction (for a pin boundary condition, you know there is no end moments so the curvature is null and you are looking for the tangent).
+The ability to define a unique tangent vector is very important to define the normal vector of a cross-section, to control beam endings, and to relate it to curvature. One would control the direction of the section (for a fixed/clamped support condition) or, conversly, one would control the moment and seek the corresponding tangent direction (for a pin boundary condition, we know there is no end moments so the curvature is null and we are looking for the tangent).
 
 \subsection{Circumscribed case}\label{sec=discrete_tangent_circumscribed}
 
@@ -1236,7 +1235,7 @@ Let $\vect{t}_i^*$ be an arbitrary tangent vector at $\vect{x}_i$. Following \cr
 \end{subequations}
 The corresponding osculating circle will be called the \emph{left-sided} (resp. \emph{right-sided}) circumscribed osculating circle. When $\vect{t}_i^* = \vect{t}_i$, the limits agree one to each other ($\vect{\kappa b}_{i}^- = \vect{\kappa b}_{i}^+ = \vect{\kappa b}_{i}$) and the osculating circles coincide. These definitions perfectly mimic the smooth case where, at a regular ($\norm{\gamma'} \neq 0$) but not biregular ($\norm{\gamma''} = 0$) point, the curvature is discontinuous while the tangent vector reminds smoothly defined.
 
-In mechanics, this situation is likely to arise as discontinuities in material properties or punctual applied moments will necessarily lead to discontinuities in curvature (recall that $M = EI\kappa$).
+In mechanics, this situation is likely to arise as discontinuities in material properties or concentrated applied moments will necessarily lead to discontinuities in curvature (recall that $M = EI\kappa$).
 
 \subsubsection{Curve endings}
 The definition of the left and right sided curvatures given for a vertex in the current portion of $\Gamma$ are still valid for the end vertices $\vect{x}_{0}$ and $\vect{x}_{n}$. Provided that a unit tangent vector $\vect{t}_{0}^*$ (respectively $\vect{t}_{n}^*$) is given at $\vect{x}_{0}$ (resp. $\vect{x}_{n}$), the circumscribed osculating circle is defined as the unique circle passing through $\vect{x}_0$ and $\vect{x}_1$ (resp. $\vect{x}_{n-1}$ and $\vect{x}_n$) tangent to $\vect{t}_{0}^*$ (resp. $\vect{t}_{n}^*$) ; see \cref{fig:kb_vertex_tangent_b} and \cref{fig:kb_vertex_tangent_c}. It leads to the following curvature binormal vectors~:
@@ -1244,10 +1243,11 @@ The definition of the left and right sided curvatures given for a vertex in the 
 \setlength{\jot}{8pt}
 \begin{alignat}{2}
 	&\vect{\kappa b}_0 =\vect{\kappa b}_{0}^+(\vect{t}_0^*)	&&=  \frac{2\, \vect{t}_{0}^* \times \vect{e}_{0} }{\norm{\vect{e}_{0}}^2} \\
-	&\vect{\kappa b}_n =\vect{\kappa b}_{n}^-(\vect{t}_n^*) 	&&=  \frac{2\, \vect{e}_{n-1} \times  \vect{t}_{n}^*}{\norm{\vect{e}_{n-1}}^2} 
+	&\vect{\kappa b}_n =\vect{\kappa b}_{n}^-(\vect{t}_n^*) 	&&=  \frac{2\, \vect{e}_{n-1} \times  \vect{t}_{n}^*}{\norm{\vect{e}_{n-1}}^2}
 \end{alignat}
 \label{eq:cir_kb_ends}
 \end{subequations}
+
 Note that, contrary to the current portion, curvatures at endings are subjected to the definition of a unit tangent vector. This reflects the usual indetermination of boundary conditions. For a given beam whether the end is clamped and the tangent vector is known and one will seek the reacting moment due to the support ; whether the end is pinned and the reacting moment is null (so is the curvature) and one will seek the cross-section orientation.
 
 \subsection{Inscribed case}\label{sec=inscribe_dc}
@@ -1320,7 +1320,7 @@ Let $\vect{t}_i^*$ be an arbitrary tangent vector at $\vect{x}_i$. Following \cr
 	\label{eq:ins_kb_p}
 \end{alignat}
 \end{subequations}
-The corresponding osculating circle will be called the \emph{left-sided} (resp. \emph{right-sided}) inscribed osculating circle. When $\vect{t}_i^* = \vect{t}_i$, the limits agree one to each other ($\vect{\kappa b}_{i}^- = \vect{\kappa b}_{i}^+ = \vect{\kappa b}_{i}$) and the osculating circles coincide. These definitions perfectly mimic the smooth case where, at a regular ($\norm{\gamma'} \neq 0$) but not biregular ($\norm{\gamma''} = 0$) point, the curvature is discontinuous while the tangent vector reminds smoothly defined.
+The corresponding osculating circles will be called the \emph{left-sided} (resp. \emph{right-sided}) inscribed osculating circle. When $\vect{t}_i^* = \vect{t}_i$, the limits agree one to each other ($\vect{\kappa b}_{i}^- = \vect{\kappa b}_{i}^+ = \vect{\kappa b}_{i}$) and the osculating circles coincide. These definitions perfectly mimic the smooth case where, at a regular ($\norm{\gamma'} \neq 0$) but not biregular ($\norm{\gamma''} = 0$) point, the curvature is discontinuous while the tangent vector reminds smoothly defined.
 
 \subsubsection{Curve endings}
 The definition of the left and right sided curvatures given for a vertex in the current portion of $\Gamma$ are still valid for the end vertices $\vect{x}_{0}$ and $\vect{x}_{n}$. Provided that a unit tangent vector $\vect{t}_{0}^*$ (respectively $\vect{t}_{n}^*$) is given at $\vect{x}_{0}$ (resp. $\vect{x}_{n}$), the circumscribed osculating circle is defined as the unique circle passing through $\vect{x}_0$ and $\vect{x}_1$ (resp. $\vect{x}_{n-1}$ and $\vect{x}_n$) tangent to $\vect{t}_{0}^*$ (resp. $\vect{t}_{n}^*$) ; see \cref{fig:kb_edge_tangent_b} and \cref{fig:kb_edge_tangent_c}. It leads to the following curvature binormal vectors~:
@@ -1342,7 +1342,7 @@ When the curvature is prescribed at a given vertex, \cref{eq:cir_kb_m,eq:cir_kb_
 % =================
 \section{Discrete parallel transport}\label{sec=discrete_pt}
 
-Discrete parallel transport can be computed by analogy to the smooth case as the minimal rotation around t. However, this method becomes unstable when $\vect{t}_i$ an $\vect{t}_{i+1}$ get almost collinear because of the cross product (although the rotation angle tends to zero, the rotation axis become very sensitive to numerical instabilities).
+Discrete parallel transport can be computed by analogy to the smooth case as the minimal rotation around t. However, this method becomes unstable when $\vect{t}_i$ an $\vect{t}_{i+1}$ get almost collinear because of the cross product (although the rotation angle tends to zero, the rotation axis becomes very sensitive to numerical instabilities).
 
 Note that while these definitions of parallel transport are illustrated to transport vectors in space from one location $\{\vect{x},\vect{t}\}(s)$ to another $\{\vect{x},\vect{t}\}(s + ds)$, it is identically transposed to parallel transport in time from one location $\{\vect{x},\vect{t}\}(t)$ to another $\{\vect{x},\vect{t}\}(t+dt)$ as suggested in~\cite{Bergou2010}.
 
@@ -1407,7 +1407,7 @@ Remark that for both the circumscribed (see \cref{fig:kb_vertex_tangent_a}) and 
 % =================
 \section{Conclusion}
 
-This chapter has established all the geometrical tools required for our future discrete beam model. Our analysis show that for the type of structures we want to model the discrete curvature defined according to the circumscribed osculating circle is the most suitable as~: 
+This chapter has established all the geometrical tools required for our future discrete beam model. Our analysis shows that for the type of structures we want to model the discrete curvature defined according to the circumscribed osculating circle is the most suitable as~: 
 \begin{itemize}
 \item it provides an unequivocal definition of the discrete curvature in the current portion and at the extremities of the curve ;
 \item it exhibits the fastest convergence when regarding the evaluation of the bending energy of typical curves ;
