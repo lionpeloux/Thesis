@@ -467,9 +467,9 @@ In the reference configuration, because $s$ is the centerline's arc length param
 	\begin{alignat}{4}
 		&\rconf{\varkappa}_3 &&=  \rconf{\vect{d}_1}'  \cdot \rconf{\vect{d}_2} &&= \rconf{\tau} &&= \rconf{\vect{d}_1}'  \cdot \rconf{\vect{d}_2}
 		\\
-		&\rconf{\varkappa}_1 &&=\rconf{ \vect{d}_3}'  \cdot \rconf{\vect{d}_2} &&= \rconf{k}_1 &&= \rconf{\vect{\kappa b}} \cdot \rconf{\vect{d}_1}
+		&\rconf{\varkappa}_1 &&=\rconf{ \vect{d}_3}'  \cdot \rconf{\vect{d}_2} &&= \rconf{\kappa}_1 &&= \rconf{\vect{\kappa b}} \cdot \rconf{\vect{d}_1}
 		\\
-		&\rconf{\varkappa}_2 &&= \rconf{\vect{d}_1}'  \cdot \rconf{\vect{d}_3} &&= \rconf{k}_2 &&= \rconf{\vect{\kappa b}} \cdot \rconf{\vect{d}_2}
+		&\rconf{\varkappa}_2 &&= \rconf{\vect{d}_1}'  \cdot \rconf{\vect{d}_3} &&= \rconf{\kappa}_2 &&= \rconf{\vect{\kappa b}} \cdot \rconf{\vect{d}_2}
 	\end{alignat}
 \end{subequations}
 where $\rconf{\vect{\kappa b}}$ (see \cref{eq:kb}) is the curvature binormal vector of $\rconf{\gamma}$ ~:
@@ -489,9 +489,9 @@ Since the material frame is orthonormal and adapted to the centerline, its evolu
 Note that the strains vector is defined relatively to the arc length $s$ of the \emph{reference} configuration and not the arc length $s_t$ of the \emph{actual} configuration. Thus the strains vector components expressed in the material frame basis are given by~:
 \begin{subequations}
 	\begin{alignat}{3}
-		&{\varkappa}_1 &&= \vect{d}'_3  \cdot \vect{d}_2 &&= (1+\epsilon) {k_1} = (1+\epsilon)\, \vect{\kappa b} \cdot \vect{d}_1
+		&{\varkappa}_1 &&= \vect{d}'_3  \cdot \vect{d}_2 &&= (1+\epsilon) {\kappa_1} = (1+\epsilon)\, \vect{\kappa b} \cdot \vect{d}_1
 		\\[0.5em]
-		&{\varkappa}_2 &&= \vect{d}'_1  \cdot \vect{d}_3 &&= (1+\epsilon) {k_2} = (1+\epsilon)\, \vect{\kappa b} \cdot \vect{d}_2
+		&{\varkappa}_2 &&= \vect{d}'_1  \cdot \vect{d}_3 &&= (1+\epsilon) {\kappa_2} = (1+\epsilon)\, \vect{\kappa b} \cdot \vect{d}_2
 		\\[0.5em]
 		&{\varkappa}_3 &&=  \vect{d}'_1  \cdot \vect{d}_2 &&= (1+\epsilon) {\tau} = (1+\epsilon)\, \frac{\partial \vect{d}_1}{\partial s_t}  \cdot \vect{d}_2
 	\end{alignat}
@@ -500,7 +500,7 @@ where $\vect{\kappa b}$ (see \cref{eq:kb}) is the curvature binormal vector of $
 \begin{equation}
  	\vect{\kappa b} =  \vect{t} \times  \frac{\partial \vect{t}}{\partial s_t} = (1+\epsilon)\, \vect{t} \times \vect{t}'
 \end{equation}
-${\varkappa}_1$ and ${\varkappa}_2$ are called the \emph{material} curvatures. ${\varkappa}_3$ is called the \emph{material} twist. Note this time the dependence of the material moment strains $(\varkappa_3,\varkappa_1,\varkappa_2)$ regarding the extension of the rod. These are the strains employed in the classical constitutive laws that lead to the determination of the internal axial force ($N = ES \epsilon$), internal bending moments ($M_1 = EI_1(\varkappa_1-\rconf{\varkappa}_1)$, $M_2 = EI_2(\varkappa_2-\rconf{\varkappa}_2)$) and internal twisting moment ($Q = GJ((\varkappa_3-\rconf{\varkappa}_3)$).
+${\varkappa}_1$ and ${\varkappa}_2$ are called the \emph{material} curvatures. ${\varkappa}_3$ is called the \emph{material} twist. Note this time the dependence of the material moment strains $(\varkappa_3,\varkappa_1,\varkappa_2)$ regarding the extension of the rod. These are the strains employed in the classical constitutive laws that lead to the determination of the internal axial force ($N = ES \epsilon$), internal bending moments ($M_1 = EI_1(\varkappa_1-\rconf{\varkappa}_1)$, $M_2 = EI_2(\varkappa_2-\rconf{\varkappa}_2)$) and internal twisting moment ($Q = GJ(\varkappa_3-\rconf{\varkappa}_3)$).
 
 Often in the literature the flexural material curvatures are computed as the projection of the curvature binormal vector onto the first two material axes. Here it is demonstrated that this is not exact as it omits the contribution of the rod extension, although it could be a reasonable approximation when $\epsilon \ll 1$.
 
@@ -915,7 +915,7 @@ Because of the chosen description of motion (see \cref{sec=kirchhoff_motion}), c
 
 \clearpage
 \section{Summary of Kirchhoff theory}\label{sec=ksummary}
-Let us summarize the assumptions and results of Kirchhoff's theory of rods on which our discret beam model (see \cref{chp=numerical_model}) will be based on.
+Let us summarize the assumptions and results of Kirchhoff's theory of rods on which our discrete beam model (see \cref{chp=numerical_model}) will be based on.
 
 In the reference configuration the rod is described by its reference strains~:
 \begin{equation}

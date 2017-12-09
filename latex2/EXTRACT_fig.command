@@ -1,4 +1,5 @@
 # clean folders
+# https://tex.stackexchange.com/questions/14974/exporting-all-equations-from-a-document-as-individual-svg-files
 echo =============
 echo EXTRACT EPS
 echo =============
@@ -25,8 +26,8 @@ echo ===========
 echo PDF
 echo ===========
 pdfcrop "thesis.pdf"
-pdfseparate "thesis-crop.pdf" "./_extract/%d.pdf"
-PDFfiles=($( ls ./_extract/*.pdf ))
+pdfseparate "thesis-crop.pdf" "./_extract/float/%d.pdf"
+PDFfiles=($( ls ./_extract/float/*.pdf ))
 
 # generate & eps files
 echo ===========
@@ -36,6 +37,5 @@ p=0
 for ((i=0; i<${#PDFfiles[@]}; i++)); do
 	p=$[$p +1]
 	pdftops -f $p -l $p -eps "thesis-crop.pdf"
-	mv  "thesis-crop.eps" "./_extract/$p.eps"
+	mv  "thesis-crop.eps" "./_extract/float/$p.eps"
 done
-
