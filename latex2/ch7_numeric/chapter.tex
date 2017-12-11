@@ -383,17 +383,17 @@ Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\
 
 However, this values need to be adjusted so that the static condition for rotational equilibrium is satisfied at all time ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$). Therefore, this condition will be satisfied in particular at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}^{\perp}$) for the internal bending moment as~:
 \begin{equation}
-		\vect{M}_{2i}^{\perp}	=  \frac{1}{2} \mat{B}_{i-1}(\vect{\kappa b}_{2i}^- - \rconf{\vect{\kappa b}}_{2i}^-)
-					+  \frac{1}{2} \mat{B}_{i}(\vect{\kappa b}_{2i}^+ - \rconf{\vect{\kappa b}}_{2i}^+)
+		\vect{M}_{2i}^{\perp}	=  \frac{1}{2} \mat{B}_{i-1} ({\vect{\varkappa}_{2i}^{\perp}}^- - {\rconf{\vect{\varkappa}}_{2i}^{\perp}}^-)
+					+  \frac{1}{2} \mat{B}_{i} ({\vect{\varkappa}_{2i}^{\perp}}^+ - {\rconf{\vect{\varkappa}}_{2i}^{\perp}}^+)
 \end{equation}
 To enforce the jump discontinuity in bending moment ($\vect{M}^{ext} = \vect{M}^- - \vect{M}^+$) across the handle vertex, we define the left and right bending moments at $\vect{x}_{2i}$ as~:
 \begin{subequations}
+	\label{eq:DeltaM}
 	\begin{align}
 		{\vect{M}_{2i}^{\perp}}^{-} &=  \vect{M}_{2i}^{\perp}	 + \frac{1}{2} \vect{M}_{2i}^{\perp,\;ext}
 		\\[0.5em]
 		{\vect{M}_{2i}^{\perp}}^{+} &=   \vect{M}_{2i}^{\perp}	 - \frac{1}{2} \vect{M}_{2i}^{\perp,\;ext}
 	\end{align}
-	\label{eq:DeltaM}
 \end{subequations}
 Note that in the case where no external concentrated bending moment is applied to the handle vertex, the internal bending moment is continuous across the vertex as expected.
 
@@ -401,12 +401,12 @@ Note that in the case where no external concentrated bending moment is applied t
 % --------------------------------------------------------------------
 Finally, the left and right curvature at handle vertex $\vect{x}_{2i}$ are computed back with the constitutive law~:
 \begin{subequations}
+	\label{eq:lr_bending_moment}
 	\begin{align}
-		\vect{\kappa b}_{2i}^-  &=  \mat{B}_{i-1}^{\;-1} {\vect{M}_{2i}^{\perp}}^{-} + \rconf{\vect{\kappa b}}_{2i}^-
+		{\vect{\varkappa}_{2i}^{\perp}}^-  &=  \mat{B}_{i-1}^{\;-1} {\vect{M}_{2i}^{\perp}}^{-} + {\rconf{\vect{\varkappa}}_{2i}^{\perp}}^-
 		\\[0.5em]
-		\vect{\kappa b}_{2i}^+  &=  \mat{B}_{i}^{\;-1} {\vect{M}_{2i}^{\perp}}^{+} + \rconf{\vect{\kappa b}}_{2i}^+
+		{\vect{\varkappa}_{2i}^{\perp}}^+  &=  \mat{B}_{i}^{\;-1} {\vect{M}_{2i}^{\perp}}^{+} + {\rconf{\vect{\varkappa}}_{2i}^{\perp}}^+
 	\end{align}
-\label{eq:lr_bending_moment}
 \end{subequations}
 
 \subsubsection{Bending moment at ghost vertices}
@@ -414,9 +414,9 @@ Finally, the left and right curvature at handle vertex $\vect{x}_{2i}$ are compu
 The internal bending moment at ghost vertices is simply given by the constitutive law as~:
 \begin{subequations}
 	\begin{align}
-		\vect{M}_{2i-1}^{\perp} &=  \mat{B}_{i-1}(\vect{\kappa b}_{2i-1} - \rconf{\vect{\kappa b}}_{2i-1})
+		\vect{M}_{2i-1}^{\perp} &=  \mat{B}_{i-1}  (\vect{\varkappa}_{2i-1}^{\perp} - \rconf{\vect{\varkappa}}_{2i-1}^{\perp})
 		\\[0.5em]
-		\vect{M}_{2i+1}^{\perp} &=  \mat{B}_{i}(\vect{\kappa b}_{2i+1} - \rconf{\vect{\kappa b}}_{2i+1})
+		\vect{M}_{2i+1}^{\perp} &=  \mat{B}_{i}  (\vect{\varkappa}_{2i+1}^{\perp} - \rconf{\vect{\varkappa}}_{2i+1}^{\perp})
 	\end{align}
 \end{subequations}
 
