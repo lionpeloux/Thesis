@@ -2,17 +2,42 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="311.811" height="311.811" viewBox="0, 0, 311.811, 311.811">
   <script type="text/ecmascript">
-    <!-- <![CDATA[
-      function MakeTransparent(evt) {
-        evt.target.setAttributeNS(null,"opacity","0.5");
+    <![CDATA[
+      // Format a number over a 2-digit string (7 => 07)
+      function FormatNumber(n){
+          return n > 9 ? "" + n: "0" + n;
       }
 
-      function MakeOpaque(evt) {
-        evt.target.setAttributeNS(null,"opacity","1");
+      // Time out to wait
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
       }
-    ]]> -->
+
+      // Async is requiered for time out to work
+      async function click(evt) {
+        // alert(document.getElementById("Background"));
+        var svgDocument = evt.target.ownerDocument;
+        var svgRoot = svgDocument.documentElement;
+
+        // hide all frames
+        var group;
+        for (group = 1; group < 26; group++) {
+          document.getElementById(FormatNumber(group)).setAttribute("display", "none");
+        }
+
+        // animate frames
+        group = 1;
+        document.getElementById(FormatNumber(group)).setAttribute("display", "");
+        await sleep(100);
+        for (group = 2; group < 26; group++) {
+          document.getElementById(FormatNumber(group-1)).setAttribute("display", "none");
+          document.getElementById(FormatNumber(group)).setAttribute("display", "");
+          await sleep(100);
+        }
+      };
+    ]]>
   </script>
-  <g id="Background" >
+  <g id="Background" onclick="click(evt)">
     <rect x="0" y="0" width="311.811" height="311.811" fill="#FFFFFF"/>
   </g>
   <g id="25">
@@ -233,7 +258,7 @@
       <path d="M158.74,127.559 C158.74,129.125 157.471,130.394 155.906,130.394 C154.34,130.394 153.071,129.125 153.071,127.559 C153.071,125.994 154.34,124.724 155.906,124.724 C157.471,124.724 158.74,125.994 158.74,127.559 z" fill-opacity="0" stroke="#000000" stroke-width="3"/>
     </g>
   </g>
-  <g id="24" display="none" style="opacity:0">
+  <g id="24" display="none">
     <g id="Axis">
       <path d="M14.173,127.559 L297.638,127.559" fill-opacity="0" stroke="#666666" stroke-width="0.75" stroke-linecap="round"/>
       <path d="M155.906,14.173 L155.906,297.638" fill-opacity="0" stroke="#666666" stroke-width="0.75" stroke-dasharray="4.5,3.75" stroke-linecap="round"/>

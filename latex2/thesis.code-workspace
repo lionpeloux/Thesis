@@ -6,6 +6,8 @@
 	],
 	"settings": {
 		"cSpell.language": "fr,fr-FR,en",
-		"cSpell.enabled": true
+		"cSpell.enabled": true,
+		"latex-workshop.latex.autoBuild.onSave.enabled": false,
 	}
+	
 }

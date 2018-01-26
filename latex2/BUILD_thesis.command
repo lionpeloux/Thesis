@@ -1,4 +1,12 @@
-cd "/Users/Lionel/Public/GitHub/Thesis/latex2/"
+# get command dir
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# cd to command directory
+echo "command dir :"
+echo $DIR
+cd "$DIR"
+
+# cd "/Users/Lionel/Public/GitHub/Thesis/latex2/"
 
 pdflatex -synctex=1 -shell-escape thesis.tex
 biber thesis.bcf

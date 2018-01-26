@@ -434,51 +434,20 @@ useprefix=true, % use von as part of the family name (du peloux)
 \usepackage{etoolbox}
 \renewcommand\nomgroup[1]{%
   \item[\bfseries
-  \ifstrequal{#1}{A}{\texttt{Geometry of curves}}{%
-  \ifstrequal{#1}{B}{\texttt{Mechanics of rods}}{%
-  \ifstrequal{#1}{C}{\texttt{Other Symbols}}{}}}%
+  \ifstrequal{#1}{A}{\texttt{Geometry of smooth curves}}{%
+  \ifstrequal{#1}{B}{\texttt{Curve framing}}{%
+  \ifstrequal{#1}{C}{\texttt{Geometry of discrete curves}}{%
+  \ifstrequal{#1}{D}{\texttt{Motion of rods}}{%
+  \ifstrequal{#1}{E}{\texttt{Properties of rods}}{%
+  \ifstrequal{#1}{F}{\texttt{Mechanics of rods}}{%
+  \ifstrequal{#1}{G}{\texttt{Particle spring system}}{}}}}}}}%
 ]\vspace{12pt}}
-%\renewcommand{\nomgroup}[1]{\medskip}
-
-% 
-%% index of notation entry
-%\usepackage[]{glossaries}
-%\newglossary[ntg]{notation}{not}{ntn}{Glossaire}
-%%\newglossary[slg]{symbols}{sym}{sbl}{Nomenclature}
-%\makeindex
-%\makeglossaries
-%
-%\newacronym{tem}{TEM}{Transmission Electron Microscope}
-%\newacronym{sem}{SEM}{Scanning Electron Microscope}
-%
-%\newglossaryentry{real number}
-%{
-%  name={real number},
-%  description={include both rational numbers, such as $42$ and 
-%               $\frac{-23}{129}$, and irrational numbers, 
-%               such as $\pi$ and the square root of two; or,
-%               a real number can be given by an infinite decimal
-%               representation, such as $2.4871773339\ldots$ where
-%               the digits continue in some way; or, the real
-%               numbers may be thought of as points on an infinitely
-%               long number line},
-%  symbol={\ensuremath{\mathbb{R}}}
-%}
-%
-%
-%\newglossaryentry{mesh}{
-%	type=notation,
-%    	name={Mesh},
-%    	description={maillage},
-%    	sort={m}
-%}
 
 % overbar & hat
 % -----------------------------------
 
 % old version (renamed bellow)
 %\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
-
 
 \usepackage{scalerel,stackengine}
 \stackMath

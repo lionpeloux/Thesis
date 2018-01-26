@@ -1,35 +1,88 @@
 % https://fr.sharelatex.com/learn/Nomenclatures
 
-\printnomenclature[1.0 cm] 
+\printnomenclature[1.8 cm] 
 
 % Geometry of curves (A)
-\nomenclature[A, 01]{$\vect{t}$}{The unit tangent vector.}
-\nomenclature[A, 02]{$\vect{n}$}{The unit normal vector.}
-\nomenclature[A, 03]{$\vect{b}$}{The unit binormal vector.}
-\nomenclature[A, 04]{$\vect{\kappa b}$}{The curvature binormal vector.}
-\nomenclature[A, 04]{$\tau_f$}{The torsion of Frenet.}
-\nomenclature[A, 06]{$\vect{\Omega}$}{The darboux vector.}
+\nomenclature[A, 001]{$I$}{An interval of $\mathbb{R}$.}
+\nomenclature[A, 002]{$\gamma$}{A parametric curve.}
+\nomenclature[A, 003]{$t$}{Any curve parameter.}
+\nomenclature[A, 004]{$s$}{The arc length parameter of a curve.}
+\nomenclature[A, 005]{$L$}{The length of a curve.}
+\nomenclature[A, 006]{$\vect{t}$}{The unit tangent vector.}
+\nomenclature[A, 007]{$\vect{n}$}{The unit normal vector.}
+\nomenclature[A, 008]{$\vect{b}$}{The unit binormal vector.}
+\nomenclature[A, 009]{$\kappa$}{The curvature.}
+\nomenclature[A, 010]{$\tau_f$}{The torsion of Frenet.}
+\nomenclature[A, 011]{$\vect{\kappa b}$}{The curvature binormal vector.}
 
-% Mechanics of rods (B)
-\nomenclature[B, 001]{$\gamma, \rconf{\gamma}$}{Centerline curve -- reference configuration.}
-\nomenclature[B, 002]{$\gamma$}{The centerline curve -- actual configuration.}
-\nomenclature[B, 003]{$s$}{The arc length of the centerline -- reference configuration.}
-\nomenclature[B, 004]{$s_t$}{The arc length of the centerline -- actual configuration.}
-\nomenclature[B, 005]{$\rconf{\vect{x}}$}{The centerline position vector -- reference configuration.}
-\nomenclature[B, 006]{$\vect{x}$}{The centerline position vector -- actual configuration.}
-\nomenclature[B, 007]{$\rconf{\vect{\nu}}$}{The force strain vector -- reference configuration.}
-\nomenclature[B, 008]{$\vect{\nu}$}{The force strain vector -- actual configuration.}
-\nomenclature[B, 009]{$\rconf{\vect{\varkappa}}$}{The material curvature (or moment strain) vector -- reference configuration.}
-\nomenclature[B, 010]{$\vect{\varkappa}$}{The material curvature (or moment strain) vector -- actual configuration.}
+% Curve framing (B)
+\nomenclature[B, 012]{$\vect{e}_3,\vect{e}_1,\vect{e}_2$}{Any moving frame.}
+\nomenclature[B, 013]{$\vect{t},\vect{n},\vect{b}$}{The Frenet frame.}
+\nomenclature[B, 014]{$\vect{t},\vect{u},\vect{v}$}{The Bishop frame.}
+\nomenclature[B, 015]{$\vect{\Omega}$}{The Darboux (or angular velocity) vector of a moving frame.}
+\nomenclature[B, 016]{$\tau,k_1,k_2$}{The components of the Darboux vector -- moving frame basis.}
+\nomenclature[B, 017]{}{}
 
-\nomenclature[B, 101]{$\mathcal{E}_s$}{The streching energy.}
-\nomenclature[B, 102]{$\mathcal{E}_b$}{The bending energy.}
-\nomenclature[B, 103]{$\mathcal{E}_t$}{The twisting energy.}
+% Geometry of discret curves (C)
+\nomenclature[C, 001]{$\Gamma$}{A discrete curve.}
+\nomenclature[C, 002]{$\vect{x}_i$}{A vertex of a discrete curve.}
+\nomenclature[C, 003]{$\vect{e}_i$}{An edge of a discrete curve.}
+\nomenclature[C, 004]{$l_i$}{The length of edge $\vect{e}_i$.}
 
-% Other symbols (C)
+% Motion of rods (D)
+\nomenclature[D, 001]{$s$}{The arc length of the centerline -- reference configuration.}
+\nomenclature[D, 002]{$s_t$}{The arc length of the centerline -- actual configuration.}
+\nomenclature[D, 003]{$\rconf{\vect{x}}$}{The centerline position vector -- reference configuration.}
+\nomenclature[D, 004]{$\vect{x}$}{The centerline position vector -- actual configuration.}
+\nomenclature[D, 005]{$\rconf{\vect{d}_3},\rconf{\vect{d}_1},\rconf{\vect{d}_2}$}{The material frame -- reference configuration.}
+\nomenclature[D, 006]{$\vect{d}_3,\vect{d}_1,\vect{d}_2$}{The material frame -- actual configuration.}
+
+\nomenclature[D, 007]{$\dot{\vect{x}}$}{The velocity of the centerline.}
+\nomenclature[D, 008]{$\vect{\omega}$}{The angular velocity of the material frame.}
+
+\nomenclature[D, 010]{$\epsilon$}{The axial extension.}
+\nomenclature[D, 011]{$\rconf{\vect{\nu}}$}{The force strain vector -- reference configuration.}
+\nomenclature[D, 012]{$\vect{\nu}$}{The force strain vector -- actual configuration.}
+\nomenclature[D, 013]{$\rconf{\vect{\varkappa}}$}{The material curvature (or moment strain) vector -- reference configuration.}
+\nomenclature[D, 014]{$\vect{\varkappa}$}{The material curvature (or moment strain) vector -- actual configuration.}
+
+% Properties of rods (E)
+\nomenclature[E, 001]{$E$}{The elastic modulus.}
+\nomenclature[E, 002]{$G$}{The shear modulus.}
+
+\nomenclature[E, 101]{$S$}{The area of the cross-section.}
+\nomenclature[E, 102]{$I_1$}{The first principal axis of inertia of the cross-section.}
+\nomenclature[E, 103]{$I_2$}{The second principal axis of inertia of the cross-section.}
+\nomenclature[E, 104]{$J$}{The torsion constant of the cross-section.}
+\nomenclature[E, 105]{$\varphi$}{The warping function of the cross-section.}
 
 
+% Mechanics of rods (F)
+\nomenclature[F, 101]{$\mathcal{E}_s$}{The stretching energy.}
+\nomenclature[F, 102]{$\mathcal{E}_b$}{The bending energy.}
+\nomenclature[F, 103]{$\mathcal{E}_t$}{The twisting energy.}
 
+\nomenclature[F, 201]{$\vect{F}$}{The vector of internal forces.}
+\nomenclature[F, 202]{$F_3,\,N$}{The axial force -- material frame basis.}
+\nomenclature[F, 203]{$F_1$}{The first component of the shear force -- material frame basis.}
+\nomenclature[F, 204]{$F_2$}{The second component of the shear force -- material frame basis.}
 
+\nomenclature[F, 211]{$\vect{M}$}{The vector of internal moments.}
+\nomenclature[F, 212]{$M_3,\,Q$}{The twisting moment -- material frame basis.}
+\nomenclature[F, 213]{$M_1$}{The first component of the bending moment -- material frame basis.}
+\nomenclature[F, 214]{$M_2$}{The second component of the bending moment -- material frame basis.}
 
+\nomenclature[F, 221]{$\vect{f}$}{The vector of applied distributed forces.}
+\nomenclature[F, 222]{$\vect{m}$}{The vector of applied distributed moments.}
+
+% Particle spring system (G)
+\nomenclature[G, 001]{$m^{\vect{x}}$}{The translational lumped mass.}
+\nomenclature[G, 002]{$m^{\theta}$}{The rotational lumped mass.}
+\nomenclature[G, 003]{$\vect{R}^{\vect{x}}$}{The translational resultant force.}
+\nomenclature[G, 004]{$\vect{R}^{\theta}$}{The resultant twisting moment.}
+\nomenclature[G, 005]{$\lambda^{\vect{x}}$}{The translational viscous damping factor.}
+\nomenclature[G, 006]{$\lambda^{\theta}$}{The rotational viscous damping factor.}
+
+\nomenclature[G, 011]{$h$}{The time step.}
+\nomenclature[G, 012]{$\mathcal{E}_k$}{The kinetic energy.}
 

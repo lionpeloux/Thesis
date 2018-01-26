@@ -1,4 +1,10 @@
-cd "/Users/Lionel/Public/GitHub/Thesis/latex2/"
+# get command dir
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# cd to command directory
+echo "command dir :"
+echo $DIR
+cd "$DIR"
 
 # all options available at : http://milan.kupcevic.net/ghostscript-ps-pdf/
 # embed fonts : https://www.tug.org/mactex/fonts/AboutEmbedding.pdf

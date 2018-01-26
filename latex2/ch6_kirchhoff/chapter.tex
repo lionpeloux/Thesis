@@ -630,9 +630,9 @@ Moreover, for a given cross-section the definition of the centroid yields~:
 For a thin slice of the rod ($\delta\mathcal{V}$) between cross-sections $\mathcal{S}(s)$ and $\mathcal{S}(s+ds)$, \cref{eq:inertial_a,eq:inertial_b} yield respectively~: \footnote{Indeed, since $\iint_{\mathcal{S}(s)} \vect{r} \;dX_1 dX_2 = \vect{0}$ from \cref{eq:centroid_a} we have $\iint_{\mathcal{S}(s)} \ddot{\vect{r}} \;dX_1 dX_2 =  \iint_{\mathcal{S}(s)} \dot{\vect{\omega}} \times \vect{r} + \vect{\omega} \times ( \vect{\omega} \times \vect{r}) \; dX_1 dX_2 = \vect{0}$ and $\iint_{\mathcal{S}(s)} \vect{r} \times \ddot{\vect{x}} \; dX_1 dX_2 = \vect{0}$ as $\vect{\omega}$ and $\vect{x}$ are independent of $X_1$ and $X_2$.}
 \begin{subequations}
 	\begin{alignat}{2}
-		&\iiint_{\delta\mathcal{V}} {\rho} \ddot{\vect{p}} \;dV= ({\rho}S \ddot{\vect{x}})ds
+		&\iiint_{\delta\mathcal{V}} {\rho} \ddot{\vect{p}} \;dV \simeq ({\rho}S \ddot{\vect{x}})ds
 		\\[0.5em]
-		&\iiint_{\delta\mathcal{V}} \rho (\vect{p} \times \ddot{\vect{p}}) \;dV= \left({\rho}S \ddot{\vect{x}} + {\rho} \iint_{\mathcal{S}(s)} \vect{r} \times \ddot{\vect{r}} \; dX_1 dX_2 \right)ds
+		&\iiint_{\delta\mathcal{V}} \rho (\vect{p} \times \ddot{\vect{p}}) \;dV \simeq \left({\rho}S \ddot{\vect{x}} + {\rho} \iint_{\mathcal{S}(s)} \vect{r} \times \ddot{\vect{r}} \; dX_1 dX_2 \right)ds
 	\end{alignat}
 \end{subequations}
 Finally, remark that~:
@@ -646,9 +646,9 @@ Finally, remark that~:
 Thus, reminding \cref{eq:sectionprop,eq:centroid}, one can conclude that the inertial forces reduce to~:
 \begin{subequations}
 	\begin{alignat}{2}
-		&\iiint_{\delta\mathcal{V}} {\rho} \ddot{\vect{x}} \;dV= ({\rho}S \ddot{\vect{x}})ds \label{eq:linearinertia}
+		&\iiint_{\delta\mathcal{V}} {\rho} \ddot{\vect{x}} \;dV \simeq ({\rho}S \ddot{\vect{x}})ds \label{eq:linearinertia}
 		\\[0.5em]
-		&\iiint_{\delta\mathcal{V}} \rho (\vect{p} \times \ddot{\vect{p}}) \;dV = ({\rho}S \ddot{\vect{x}} + \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}) ds \label{eq:angularinertia}
+		&\iiint_{\delta\mathcal{V}} \rho (\vect{p} \times \ddot{\vect{p}}) \;dV \simeq ({\rho}S \ddot{\vect{x}} + \rho I_1 \vect{d}_1 \times \ddot{\vect{d}_1} + \rho I_2 \vect{d}_2 \times \ddot{\vect{d}_2}) ds \label{eq:angularinertia}
 	\end{alignat}
 \end{subequations}
 

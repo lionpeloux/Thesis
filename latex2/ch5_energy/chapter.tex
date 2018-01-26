@@ -22,7 +22,7 @@ In this chapter, our goal is to develop a beam model suitable for the modeling o
 This chapter is devoted to the development of the beam model. The formulation of a discrete element and its implementation in a numerical solver are treated in a dedicated chapter (see \cref{chp=numerical_model}).
 
 \subsection{Overview}
-We begin this chapter by presenting Kirchhoff model of rods based on two main hypothesis~: the inextensibility and the Euler-Bernouili assumptions (see \cref{sec=kirchhoff_rod}). We introduce a \dofs{6} representation of the rod composed of a centerline and a material frame. Thanks to a convenient reference frame we reduce this formulation to \dofs{4} and adopt a curve-angle description of the rod (see \cref{sec=crvangle}). From there, we formulate a variational problem that will lead to the calculation of the internal forces and moments acting on the rod (see \cref{sec=varpb}). We calculate the gradients of the elastic energy to obtain the internal twisting moment (see \cref{sec=dE_dtheta}) and the internal forces (see \cref{sec=dE_dx}). Finally, we discuss the potential of our model and suggest new possibilities (see \cref{sec=discussVar}).
+We begin this chapter by presenting Kirchhoff model of rods based on two main hypothesis~: the inextensibility and the Euler-Bernoulli assumptions (see \cref{sec=kirchhoff_rod}). We introduce a \dofs{6} representation of the rod composed of a centerline and a material frame. Thanks to a convenient reference frame we reduce this formulation to \dofs{4} and adopt a curve-angle description of the rod (see \cref{sec=crvangle}). From there, we formulate a variational problem that will lead to the calculation of the internal forces and moments acting on the rod (see \cref{sec=varpb}). We calculate the gradients of the elastic energy to obtain the internal twisting moment (see \cref{sec=dE_dtheta}) and the internal forces (see \cref{sec=dE_dx}). Finally, we discuss the potential of our model and suggest new possibilities (see \cref{sec=discussVar}).
 
 \subsection{Contributions}
 \begin{itemize}
@@ -92,7 +92,7 @@ The inextensibility hypothesis also implies that any admissible perturbation ($\
 	\|\vect{x}'\| = \|(\vect{x}+\lambda\vect{h}_x)'\| = 1 \Rightarrow \vect{d}_3 \cdot \vect{h}'_x = -\tfrac{\lambda^2}{2}\|\vect{h}'_x\|^2 = o(\lambda) \simeq 0
 	\label{eq:axialstrain}
 \end{equation}
-It is worth to mention here that this property ($\vect{d}_3 \cdot \vect{h}'_x = 0$) will be used several times in the following sections.
+It is worthwhile to mention here that this property ($\vect{d}_3 \cdot \vect{h}'_x = 0$) will be used several times in the following sections.
 
 Hereinafter, the length of the rod will be denoted $L$ and the arc length $s$ will vary in $[0,L]$, with no loss of generality.
 
