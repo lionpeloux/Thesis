@@ -1,0 +1,219 @@
+% \documentclass[11pt,fleqn]{book}
+\documentclass[11pt,fleqn,
+	showrules,
+	blurb
+	]{thesis}
+% ENCODING
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% LANGUAGES
+\usepackage[french,english]{babel}
+
+
+% **************************************************
+% METADATA
+% **************************************************
+\newcommand\mytitle{Modeling of bending-torsion couplings in active-bending structures. Application to the design of elastic gridshell.}
+\newcommand\myauthor{Lionel du Peloux de Saint Romain}
+\newcommand\mykeywords{gridshell, active bending, freeform, dynamic relaxation}
+\newcommand\myabstract{My abstract.}
+
+
+
+
+\usepackage{dpfloat} % for double page float figures aand tables side by side
+
+% **************************************************
+% FIGURES
+% **************************************************
+\usepackage[]{graphicx}  % draft = no image
+\usepackage{subfig}
+
+% **************************************************
+% TABLES
+% **************************************************
+\usepackage{tabularx}
+\usepackage{multirow}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash}X}
+
+% l r c coumns width optional fixed with
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\newcommand{\tablebf}{\fontseries{b}\selectfont} % bold font that does not get wider to keep bold numbers aligned
+
+
+
+% **************************************************
+% QUOTATIONS
+% **************************************************
+\usepackage{csquotes}
+\usepackage{epigraph} % incompatible avec nextpage
+
+% typo
+\newcommand{\telp}{\textellipsis{}}
+\newcommand{\belp}{\textelp{}} % bracket elipsis
+\newcommand{\guil}[1]{\og#1\fg{}}
+\newcommand{\note}[1]{\color{blue}#1\color{black}}
+\newcommand{\Csharp}{{\settoheight{\dimen0}{C}C\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\textbf{\#}}}}}
+\newcommand{\rhino}{\emph{Rhinoceros}}
+\newcommand{\grasshopper}{\emph{Grasshopper}}
+
+\newcommand{\dofs}[1]{%
+	\ifstrempty{#1}{DOFs}{%
+		\ifnumequal{#1}{1}{1\,-DOF}{%
+			#1\,-DOFs%
+		}%
+	}%
+}
+
+\newcommand{\dt}{h} % timestep
+
+
+% **************************************************
+% SI UNITS
+% **************************************************
+\usepackage{siunitx}
+
+% **************************************************
+% COLORS
+% **************************************************
+\usepackage{color}
+% PREDIFINED COLORS
+\definecolor{Tblue}{RGB}{104, 135, 255}
+\definecolor{Tred}{RGB}{255, 110, 103}
+\definecolor{Tgreen}{RGB}{147, 250, 103}
+\definecolor{Tgray}{RGB}{184, 184, 184}
+\definecolor{Tdarkgray}{RGB}{56, 56, 56}
+
+\definecolor{gray2}{cmyk}{0,0,0,0.2}
+\definecolor{gray4}{cmyk}{0,0,0,0.4}
+\definecolor{gray6}{cmyk}{0,0,0,0.6}
+\definecolor{gray8}{cmyk}{0,0,0,0.9}
+
+\definecolor{gray1}{cmyk}{0,0,0,0.1}
+\definecolor{gray3}{cmyk}{0,0,0,0.3}
+\definecolor{gray5}{cmyk}{0,0,0,0.5}
+\definecolor{gray7}{cmyk}{0,0,0,0.7}
+\definecolor{gray9}{cmyk}{0,0,0,0.9}
+
+
+
+% **************************************************
+% HYPERREF
+% **************************************************
+% HYP REF LINK IN PDF ( attention, doit être chargé en dernier sinon bug dans les liens footnote)
+\usepackage{hyperxmp} % pdf metadada (LDP)
+%%\usepackage[a-1b]{pdfx}
+\usepackage{hyperref} % pdf metadada (LDP)
+\hypersetup{pdfborder={0 0 0},
+	colorlinks=true,
+	linktoc=page,
+	linkcolor=Tblue,
+	citecolor=Tblue,
+	urlcolor=Tblue} 
+\urlstyle{same}
+
+% **************************************************
+% CROSS REF
+% **************************************************
+\usepackage[nameinlink, noabbrev]{cleveref} % attention a loader apres hypperef (use nameinlink or noabbrev options)
+
+% **************************************************
+% BIBLATEX
+% **************************************************
+\usepackage[
+backend=biber, 
+natbib=true,
+bibstyle=ieee,
+citestyle=numeric,
+dashed=false,
+sorting=none,
+doi=false, isbn=false, url=false,
+mincitenames=1,
+maxcitenames=2, maxbibnames=100,
+firstinits=true,
+useprefix=true,
+]{biblatex} 
+\addbibresource{library.bib}
+\defbibheading{subbibliography}[\refname]{\section{#1}}
+\renewcommand*{\multicitedelim}{\addcomma\space}
+\newcommand{\citef}[2][]{\citeauthor{#2} \citeyear{#2} \cite[#1]{#2}} % custom full cite
+
+
+\usepackage{kantlipsum}
+
+% **************************************************
+% DOCUMENT
+% **************************************************
+\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
+
+\begin{document}
+
+% --------------------------
+% Front matter
+% --------------------------
+\frontmatter
+
+% preamble
+\setlength{\parskip}{1em}
+
+\newgeometry{
+	paperwidth=\PaperWidth,
+	paperheight=\PaperHeight,
+	inner=\BleedInnerMargin+\SafeContentInnerMargin,
+	outer=\BleedOuterMargin+\SafeContentOuterMargin, 
+	bottom=\SafeContentBottomMargin+\BleedBottomMargin,
+	top=\SafeContentTopMargin+\BleedTopMargin,
+	bindingoffset=0mm,
+}
+\input{head/titlepage.tex}
+\restoregeometry
+\include{_dedication}
+\include{_preface}
+\include{_abstracts}
+\setcounter{tocdepth}{2}
+
+% tocloft
+\setlength{\parskip}{0em}
+\addtocontents{toc}{\protect\addvspace{1em}}
+\tableofcontents
+\listoffigures
+\listoftables
+
+% --------------------------
+% Main matter
+% --------------------------
+\mainmatter
+\setlength{\parskip}{1em}
+
+	\newrefsection
+
+	\include{ch1_introduction/chapter}
+
+	\part{Elastic gridshells}\label{part=1}
+	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+
+	\part{Rich Kirchhoff beam model}\label{part=2}
+	% \include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch8_conclusion/chapter}
+
+	\part{Fake}
+	\chapter{Mon premier chapitre Linel}
+	\section{Une section}
+	\kant[1-10]
+	\section{Une deuxième section}
+	\kant[1-2]
+	\section{Une troisième section}
+	\kant[1-2]
+
+\end{document}

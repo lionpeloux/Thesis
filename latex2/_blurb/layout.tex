@@ -12,19 +12,20 @@
 \usepackage[scaled=0.85]{beramono}
 
 % GEOMETRY : PAGE LAYOUT
+\usepackage{ifthen}
 \usepackage{calc} % to do calc in the premable
 \usepackage[%
-%	twoside,
-	showframe, 
-%	showcrop,
-	]{geometry}
+% twoside,
+showframe, 
+% showcrop,
+]{geometry}
 
 % page layout
-\newlength{\BlurbBleed}\setlength{\BlurbBleed}{3.175mm}
-\newlength{\BlurbMargin}\setlength{\BlurbMargin}{6.350mm}
-\newlength{\BlurbBinding}\setlength{\BlurbBinding}{12.700mm}
-\newlength{\BlurbPageWidth}\setlength{\BlurbPageWidth}{203.20mm}
-\newlength{\BlurbPageHeight}\setlength{\BlurbPageHeight}{254.000mm}
+\newlength{\BlurbPageWidth}\setlength{\BlurbPageWidth}{20.320cm}
+\newlength{\BlurbPageHeight}\setlength{\BlurbPageHeight}{25.401cm}
+\newlength{\BlurbBleed}\setlength{\BlurbBleed}{0.317cm}
+\newlength{\BlurbMargin}\setlength{\BlurbMargin}{0.635cm}
+\newlength{\BlurbBinding}\setlength{\BlurbBinding}{1.270cm}
 
 % paper dimensions
 \newlength{\BlurbPaperWidth}\setlength{\BlurbPaperWidth}{\BlurbPageWidth + \BlurbBleed}
@@ -34,10 +35,9 @@
 \newlength{\BlurbContentWidth}\setlength{\BlurbContentWidth}{\BlurbPageWidth - \BlurbBinding - \BlurbBleed - \BlurbMargin}
 \newlength{\BlurbContentHeight}\setlength{\BlurbContentHeight}{\BlurbPageHeight - 2 \BlurbMargin}
 
-% geometry length
+% geometry package paper size
 \setlength{\paperwidth}{\BlurbPaperWidth}
 \setlength{\paperheight}{\BlurbPaperHeight}
-
 
 % text area
 \setlength{\textwidth}{\BlurbContentWidth}
@@ -45,18 +45,13 @@
 \setlength{\topmargin}{-1in + \BlurbBleed + \BlurbMargin} % = 0mm -1in + 23.2mm
 \newlength{\innermargin}\setlength{\innermargin}{\BlurbBleed + \BlurbBinding}
 
-%\setlength{\bindingoffset}{1cm}
-%\setlength{\leftmargin}{-2in + \BlurbBleed + \BlurbBinding} % inner margin
-
 % left/right margin
-%\setlength{\leftmargin}{\innermargin}
-%\setlength{\evensidemargin}{\paperwidth-1in-\textwidth-(\BlurbBleed + \BlurbBinding)}
 \setlength{\oddsidemargin}{-1in + \innermargin}
 \setlength{\evensidemargin}{-1in + \innermargin-2\BlurbBleed}
-% no notes
-\setlength{\marginparwidth}{0mm} % remove notes
-\setlength{\marginparsep}{0mm} % remove notes
 
+% remove notes area
+\setlength{\marginparwidth}{0mm}
+\setlength{\marginparsep}{0mm}
 
 
 % RAW SHEET LAYOUT
@@ -92,37 +87,37 @@
 %\setlength{\unitlength}{1in}\fancyoval(7,9.5)}
 
 
-  \def\colbg{%
-    \tikz[overlay]{
-      \fill[yellow] (current page.north west) ++(\bgwidth,0) rectangle (current page.south west);
-    }
-  }
+%   \def\colbg{%
+%     \tikz[overlay]{
+%       \fill[yellow] (current page.north west) ++(\bgwidth,0) rectangle (current page.south west);
+%     }
+%   }
 
-\usepackage{ifthen}
+
 \usepackage[content={}]{background}
 
 \AddEverypageHook{%
 \ifthenelse{\isodd{\value{page}}}%
-{\backgroundsetup{scale=1.0,angle=0,position=current page.center,
+{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
 	contents={
 	\begin{tikzpicture}
 		% bleed frame
 		\draw [color=red,fill=none,thick] (0,0) rectangle (\BlurbPaperWidth,\BlurbPaperHeight);
 		% crop frame
-		\draw [color=black,fill=none,thick] (0,\BlurbBleed) rectangle (\BlurbPageWidth,\BlurbPageHeight+\BlurbBleed);
+		\draw [color=green,fill=none,thick] (0,\BlurbBleed) rectangle (\BlurbPageWidth,\BlurbPageHeight+\BlurbBleed);
 		% text frame
 		\draw [color=magenta,fill=gray!20,thick] (\BlurbBleed+\BlurbBinding,\BlurbBleed + \BlurbMargin) rectangle (\BlurbContentWidth + \BlurbBleed+\BlurbBinding,\BlurbContentHeight+\BlurbBleed+\BlurbMargin);
 	\end{tikzpicture}
 		}
 }%
 }%
-{\backgroundsetup{scale=1.0,angle=0,position=current page.center,
+{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
 	contents={
 	\begin{tikzpicture}
 		% bleed frame
 		\draw [color=red,fill=none,thick] (0,0) rectangle (\BlurbPaperWidth,\BlurbPaperHeight);
 		% crop frame
-		\draw [color=black,fill=none,thick] (\BlurbBleed,\BlurbBleed) rectangle (\BlurbPageWidth+\BlurbBleed,\BlurbPageHeight+\BlurbBleed);
+		\draw [color=green,fill=none,thick] (\BlurbBleed,\BlurbBleed) rectangle (\BlurbPageWidth+\BlurbBleed,\BlurbPageHeight+\BlurbBleed);
 		% text frame
 		\draw [color=magenta,fill=gray!20,thick] (\BlurbBleed+\BlurbMargin,\BlurbBleed + \BlurbMargin) rectangle (\BlurbContentWidth + \BlurbBleed+\BlurbMargin,\BlurbContentHeight+\BlurbBleed+\BlurbMargin);
 	\end{tikzpicture}
@@ -146,6 +141,11 @@
 
 % DOCUMENT
 \usepackage{kantlipsum}
+
+% For float/eq auto-extraction
+\usepackage[]{preview}
+\PreviewEnvironment{tabularx}
+
 \begin{document}
 
 \chapter{Mon premier chapitre}
@@ -168,6 +168,9 @@
 %;
 %\draw [yellow]
 %	(current page marginpar area.south west)
+
+
+
 %	rectangle
 %	(current page marginpar area.north east)
 %;
