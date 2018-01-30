@@ -633,6 +633,8 @@
 %%
 %%%%%
 
+\usepackage{textcomp} % € symbol
+
 % typo
 \newcommand{\telp}{\textellipsis{}}
 \newcommand{\belp}{\textelp{}} % bracket elipsis
