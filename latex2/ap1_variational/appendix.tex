@@ -8,7 +8,7 @@
 % --------------------------------------------------------------------------------------------
 \section{Introduction}
 % --------------------------------------------------------------------------------------------
-In this appendix we drawback essential mathematical concepts for the calculus of variations \cite{Abraham2002}.
+In this appendix we drawback essential mathematical concepts for the calculus of variations \citef{Abraham2002}.
 Recall how the notion of energy, gradients are extended to function spaces.
 
 
@@ -19,13 +19,13 @@ Recall how the notion of energy, gradients are extended to function spaces.
 
 \subsection{Normed space}
 % --------------------------------------------------------------------------------------------
-A \emph{normed space} $V(\mathbb{K})$ is a vector space $V$ over the scalar field $\mathbb{K}$ with a norm $\|.\|$.
+A \emph{normed space} $V(\vect{K})$ is a vector space $V$ over the scalar field $\vect{K}$ with a norm $\|.\|$.
 
-A \emph{norm} is a map $\| . \|~: V \times V \longmapsto \mathbb{K}$ which satisfies~:
+A \emph{norm} is a map $\| . \|~: V \times V \longmapsto \vect{K}$ which satisfies~:
 \begin{subequations}
 \begin{align}
-	&\forall x \in V, 							&& \|x\| = 0_\mathbb{K} \Rightarrow x = 0_V&&&\\
-	&\forall x \in V, \forall \lambda \in \mathbb{K}, 	&& \|\lambda x\| = |\lambda| \,\|x\|&&&\\
+	&\forall x \in V, 							&& \|x\| = 0_\vect{K} \Rightarrow x = 0_V&&&\\
+	&\forall x \in V, \forall \lambda \in \vect{K}, 	&& \|\lambda x\| = |\lambda| \,\|x\|&&&\\
 	&\forall (x,y) \in V^2, 						&& \|x + y\| \leqslant \|x\| + \|y\|&&&
 \end{align}
 \end{subequations}
@@ -33,16 +33,16 @@ A \emph{norm} is a map $\| . \|~: V \times V \longmapsto \mathbb{K}$ which satis
 
 \subsection{Inner product space}
 % --------------------------------------------------------------------------------------------
-A \emph{inner product space} or \emph{pre-hilbert space} $E(\mathbb{K})$ is a vector space $E$ over the scalar field $\mathbb{K}$ with an inner product.
+A \emph{inner product space} or \emph{pre-hilbert space} $E(\vect{K})$ is a vector space $E$ over the scalar field $\vect{K}$ with an inner product.
 
-An \emph{inner product} is a map $\langle \,; \rangle~: E \times E \longmapsto \mathbb{K}$ which is bilinear, symmetric and positive-definite~:
+An \emph{inner product} is a map $\langle \,; \rangle~: E \times E \longmapsto \vect{K}$ which is bilinear, symmetric and positive-definite~:
 \begin{subequations}
 \begin{align}
-	&\forall (x,y,z) \in E^3, \forall (\lambda,\mu) \in \mathbb{K}^2, 	&& \langle \lambda x\ + \mu y \,; z\rangle  = \lambda \langle  x \,; z\rangle + \mu \langle  y\,; z\rangle&&&\\
+	&\forall (x,y,z) \in E^3, \forall (\lambda,\mu) \in \vect{K}^2, 	&& \langle \lambda x\ + \mu y \,; z\rangle  = \lambda \langle  x \,; z\rangle + \mu \langle  y\,; z\rangle&&&\\
 	&												&& \langle x \,; \lambda y + \mu z \rangle  = \lambda \langle  x\,; y\rangle + \mu \langle  x \,; z\rangle&&&\notag\\
 	&\forall (x,y) \in E^2, 									&& \langle x\,; y\rangle = \langle y\,; x\rangle &&&\\
-	&\forall x \in E, 										&& \langle x\,; x\rangle \geqslant 0_\mathbb{K} &&&\\
-	&\forall x \in E, 										&& \langle x\,; x\rangle = 0_\mathbb{K} \Rightarrow x = 0_E &&&
+	&\forall x \in E, 										&& \langle x\,; x\rangle \geqslant 0_\vect{K} &&&\\
+	&\forall x \in E, 										&& \langle x\,; x\rangle = 0_\vect{K} \Rightarrow x = 0_E &&&
 \end{align}
 \end{subequations}
 Moreover, an inner product naturally induces a norm on $E$ defined by~:
@@ -53,7 +53,7 @@ Thus, an inner product vector space is also naturally a normed vector space.
 
 \subsection{Euclidean space}
 % --------------------------------------------------------------------------------------------
-An \emph{Euclidean space} $\mathcal{E}(\mathbb{R})$ is a finite-dimensional real vector space with an inner product.
+An \emph{Euclidean space} $\mathcal{E}(\vect{R})$ is a finite-dimensional real vector space with an inner product.
 Thus, distances and angles between vectors could be defined and measured regarding to the norm associated with the chosen inner product.
 
 An Euclidean space is nothing but a finite-dimensional real pre-hilbert space.
@@ -61,14 +61,14 @@ An Euclidean space is nothing but a finite-dimensional real pre-hilbert space.
 \subsection{Banach space}
 % --------------------------------------------------------------------------------------------
 
-A \emph{Banach space} $\mathcal{B}(\mathbb{K})$ is a complete normed vector space, which means that it is a normed vector space in which every Cauchy sequence of $\mathcal{B}$ converges in $\mathcal{B}$ for the given norm.
+A \emph{Banach space} $\mathcal{B}(\vect{K})$ is a complete normed vector space, which means that it is a normed vector space in which every Cauchy sequence of $\mathcal{B}$ converges in $\mathcal{B}$ for the given norm.
 
 Thus, a Banach space is a vector space with a metric that allows the computation of vector length and distance between vectors and is complete in the sense that a Cauchy sequence of vectors always converges to a well defined limit in that space.
 
 \subsection{Hilbert space}
 % --------------------------------------------------------------------------------------------
 
-A \emph{Hilbert space} is an inner product vector space $\mathcal{H}(\mathbb{K})$ such that the natural norm induced by the inner product turns $\mathcal{H}$ into a complete metric space (i.e.\ every Cauchy sequence of $\mathcal{H}$ converges in $\mathcal{H}$).
+A \emph{Hilbert space} is an inner product vector space $\mathcal{H}(\vect{K})$ such that the natural norm induced by the inner product turns $\mathcal{H}$ into a complete metric space (i.e.\ every Cauchy sequence of $\mathcal{H}$ converges in $\mathcal{H}$).
 
 The Hilbert space concept is a generalization of the Euclidean space concept.
 In physics it's common to encounter Hilbert spaces as infinite-dimensional function spaces.
@@ -82,12 +82,12 @@ Note that $\mathcal{L}^2$ is the only Hilbert space among the $\mathcal{L}^p$ sp
 \section{Derivative}
 % --------------------------------------------------------------------------------------------
 
-The well known notion of function derivative in $\mathbb{R}^\mathbb{R}$ can be extended to maps between Banach spaces.
+The well known notion of function derivative in $\vect{R}^\vect{R}$ can be extended to maps between Banach spaces.
 This is useful in physics when formulating problems as variational problems, usually in terms of energy minimization. Indeed, energy is generally defined over a functional vector space and not simply over the real line.
 
 In this case, the research of minimal values of a potential energy rests on the calculus of variations of the energy function compared to variations to other functions defining the problem (geometry, materials, boundary conditions, ...).
 
-Mathematical concepts extended well-known notions of derivative, jacobian and hessian in Euclidean spaces (typically $\mathbb{R}^2$ or $\mathbb{R}^3$) for Banach functional spaces.
+Mathematical concepts extended well-known notions of derivative, jacobian and hessian in Euclidean spaces (typically $\vect{R}^2$ or $\vect{R}^3$) for Banach functional spaces.
 
 \subsection{Fréchet derivative}
 % --------------------------------------------------------------------------------------------
@@ -208,18 +208,18 @@ If $f$ is differentiable, then the partial derivatives exist and satisfy for all
 \section{Gradient vector}
 
 Let $\mathcal{H}$ be a Hilbert space with the inner product denoted $\scalar{}{}$. Let $U \subset \mathcal{H}$ an open subset of $\mathcal{H}$.
-Let $\fonction{F}{u}{F(u)}$ be a scalar function of  $U^{\mathbb{R}}$.
+Let $\fonction{F}{u}{F(u)}$ be a scalar function of  $U^{\vect{R}}$.
 The \emph{gradient} of $F$ is the map $\fonction{\grad{F}}{x}{(\grad{F})(x)}$ of $U^{\mathcal{H}}$ such that~:
 \begin{equation}
 	\forall h \in \mathcal{H}, \quad  \scalar{(\grad{F})(x)}{h} = \diffof{F}{x}{h}
 \end{equation}
 Note that the gradient vector depends on the chosen inner product.
-For $\mathcal{H} = \mathbb{R}^{n}$ with the canonical inner product, one can recall the usual definition of the gradient vector and the corresponding linear approximation of $F$~:
+For $\mathcal{H} = \vect{R}^{n}$ with the canonical inner product, one can recall the usual definition of the gradient vector and the corresponding linear approximation of $F$~:
 \begin{equation}
 	\mat{F}_{x+h} = \mat{F}_{x} + (\grad{F})_{x}^T H + \mat{o}(H)
-	\quad , \quad \grad{F}_{x} = \left[\begin{array}{c}\frac{\partial F}{\partial x_1} \\ \vdots \\ \frac{\partial F}{\partial x_n}\end{array}\right] \in \mathbb{R}^n
+	\quad , \quad \grad{F}_{x} = \left[\begin{array}{c}\frac{\partial F}{\partial x_1} \\ \vdots \\ \frac{\partial F}{\partial x_n}\end{array}\right] \in \vect{R}^n
 \end{equation}
-Recall that the canonical inner product on $\mathbb{R}^{n}$ is such that $\scalar{x}{y} = X^{T}Y$ in a column vector representation. In this case it is common to denote $\grad{F} = \nabla{F}$.
+Recall that the canonical inner product on $\vect{R}^{n}$ is such that $\scalar{x}{y} = X^{T}Y$ in a column vector representation. In this case it is common to denote $\grad{F} = \nabla{F}$.
 
 For function spaces the usual definition of the gradient can be extended. For instance if $F$ is a scalar function on $\mathcal{L}^2$, the gradient of $F$ is the unique function (if it exists) from $\mathcal{L}^2$ which satisfies~:
 \begin{equation}
@@ -228,7 +228,7 @@ For function spaces the usual definition of the gradient can be extended. For in
 In this case it is common to denote $\grad{F} = \frac{\delta F}{\delta x}$. The gradient is also known as the \emph{functional derivative}. The existence and unicity of $\grad{F}$ is ensured by the \emph{Riesz representation theorem}.
 
 \section{Jacobian matrix}
-Let $f$ be a differentiable function from $\mathbb{R}^n$ to $\mathbb{R}^m$. The \emph{differential} or \emph{total derivative} of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^m$ which could be represented with the following matrix called the \emph{jacobian matrix}~:
+Let $f$ be a differentiable function from $\vect{R}^n$ to $\vect{R}^m$. The \emph{differential} or \emph{total derivative} of such a fonction is a linear application from $\vect{R}^n$ to $\vect{R}^m$ which could be represented with the following matrix called the \emph{jacobian matrix}~:
 \begin{align}
 	&\diff{f}{x} = \mat{J}_x = \frac{df}{dx} =
 	\begin{bmatrix}
@@ -239,7 +239,7 @@ Let $f$ be a differentiable function from $\mathbb{R}^n$ to $\mathbb{R}^m$. The 
 		\vdots & \ddots & \vdots \\
 		\frac{\partial f_m}{\partial x_1} & \cdots & \frac{\partial f_m}{\partial x_n}
 	\end{bmatrix}
-	\in\mathcal{M}_{m,n}(\mathbb{R})
+	\in\mathcal{M}_{m,n}(\vect{R})
 \end{align}
 Thus, with the matrix notation, the Taylor expansion takes the following form~:
 \begin{align}
@@ -254,7 +254,7 @@ In the cas $m=1$, the jacobian matrix of the functional $F$ is nothing but the g
 \end{align}
 
 \section{Hessian}
-Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$. The second order differential of such a fonction is a linear application from $\mathbb{R}^n$ to $\mathbb{R}^n$ which could be represented with the following matrix called the \emph{hessian matrix}~:
+Let $F$ be a differentiable scalar function from $\vect{R}^n$ to $\vect{R}$. The second order differential of such a fonction is a linear application from $\vect{R}^n$ to $\vect{R}^n$ which could be represented with the following matrix called the \emph{hessian matrix}~:
 \begin{equation}
 \renewcommand\arraystretch{1.5}
 \begin{aligned}
@@ -265,7 +265,7 @@ Let $F$ be a differentiable scalar function from $\mathbb{R}^n$ to $\mathbb{R}$.
 		\vdots & &\ddots & \vdots \\
 		\frac{\partial^2 F}{\partial x_n\partial x_1} & \frac{\partial^2 F}{\partial x_n\partial x_2}&\cdots & \frac{\partial^2 F}{\partial x_n^2}
 	\end{bmatrix}
-	\in\mathcal{M}_{n,n}(\mathbb{R})
+	\in\mathcal{M}_{n,n}(\vect{R})
 \end{aligned}
 \end{equation}
 Thus, with the matrix notation, the Taylor expansion takes the following form~:
@@ -276,4 +276,4 @@ Thus, with the matrix notation, the Taylor expansion takes the following form~:
 
 \section{Functional}
 % --------------------------------------------------------------------------------------------
-A \emph{functional} is a map from a vector space $E(\mathbb{K})$ into its underlying scalar field $\mathbb{K}$. Here $\mathcal{E}_p[\boldsymbol{x},\theta]$ is a functional depending over $\boldsymbol{x}$ and $\theta$.
+A \emph{functional} is a map from a vector space $E(\vect{K})$ into its underlying scalar field $\vect{K}$. Here $\mathcal{E}_p[\boldsymbol{x},\theta]$ is a functional depending over $\boldsymbol{x}$ and $\theta$.

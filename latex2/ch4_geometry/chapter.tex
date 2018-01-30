@@ -861,14 +861,14 @@ The study of these discrete equivalent notions belong to the recent field of \em
 
 Let $\Gamma$ be a discrete (or polygonal) space curve. $\Gamma$ is defined as an ordered sequence $\Gamma = (\vect{x}_0,  \vect{x}_1, \ldots, \vect{x}_n) \in \mathbb{R}^{3(n+1)}$ of $n+1$ pairwise disjoint \emph{vertices} (see \cref{fig:discrete_curve}). Consecutive pairs of vertices define $n$ straight segments $(\vect{e}_0,  \vect{e}_1, \ldots, \vect{e}_{n-1})$ called \emph{edges}, pointing from one vertex to the next one~: $\vect{e}_i = \vect{x}_{i+1} - \vect{x}_{i}$. The midpoint of $\vect{e}_i$ is a vertex denoted~: $\vect{x}_{i+1/2} = \vect{x}_{i} + \frac{1}{2}\vect{e}_{i}$.
 
-The length of $\vect{e}_i$ is denoted $l_i = \norm{\vect{e}_i}$. The total length of $\Gamma$ is denoted $L = \sum_{i=0}^{n-1} \norm{\vect{e}_i}$. Additionally, we define the vertex-based mean length \overbar{l_i} at vertex $\vect{x}_i$~: 
+The length of $\vect{e}_i$ is denoted $l_i = \norm{\vect{e}_i}$. The total length of $\Gamma$ is denoted $L = \sum_{i=0}^{n-1} \norm{\vect{e}_i}$. Additionally, we define the vertex-based mean length \rconf{l_i} at vertex $\vect{x}_i$~: 
 \begin{equation}
 %\setlength{\jot}{8pt}
 	\left\{
 	\begin{alignedat}{4}
-		\,	&\overbar{l_0} 		& = &\,	&& l_0					&\quad 	&i = 0		\\
-			&\overbar{l_i}		& = &	&& \frac{1}{2}(l_{i-1} + l_i)		&		&i \in \llbracket 1, n-1 \rrbracket	\\
-			&\overbar{l_n} 	\,	& = &	&& l_{n-1} 				&		&i = n		\\
+		\,	&\rconf{l_0} 		& = &\,	&& l_0					&\quad 	&i = 0		\\
+			&\rconf{l_i}		& = &	&& \frac{1}{2}(l_{i-1} + l_i)		&		&i \in \llbracket 1, n-1 \rrbracket	\\
+			&\rconf{l_n} 	\,	& = &	&& l_{n-1} 				&		&i = n		\\
 	\end{alignedat}
 	\right.
 \end{equation}
@@ -969,10 +969,10 @@ Curvature is defined from the osculating circle, which is the best approximation
 		\midrule
 		$\kappa_1 = \frac{2\, \sin(\varphi_i)}{\norm{\vect{e}_{i-1}+\vect{e}_i}}$ 	&  $\vect{x}_i$ 	&  $0$				&  $0, 2$					&  yes	&  space	&  clothoid			\\
 		$\kappa_2 = \frac{\tan(\varphi_i/2)+\tan(\varphi_{i+1}/2)}{l_i}$ 			&  $\vect{e}_i$ 	&  $0$				&  $\infty$					&  no		&  planar	&  circle			\\
- 		$\kappa_3 = \frac{2\, \tan(\varphi_i / 2)}{\overbar{l_i}} $				&  $\vect{x}_i$	&  $0$ 				&  $\infty$					&  no		&  space	&  circles			\\
+ 		$\kappa_3 = \frac{2\, \tan(\varphi_i / 2)}{\rconf{l_i}} $				&  $\vect{x}_i$	&  $0$ 				&  $\infty$					&  no		&  space	&  circles			\\
 		\midrule
-		$\kappa_4 = \frac{2\,\sin(\varphi_i / 2)}{\overbar{l_i}}$ 				&  $\vect{x}_i$	&  $0$				&  $0, 2$					&  no		&  space	&  clothoid  		\\
-		$\kappa_5 = \frac{\varphi_i}{\overbar{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\overbar{l_i}$			&  no		&  space	&  elastica  		\\
+		$\kappa_4 = \frac{2\,\sin(\varphi_i / 2)}{\rconf{l_i}}$ 				&  $\vect{x}_i$	&  $0$				&  $0, 2$					&  no		&  space	&  clothoid  		\\
+		$\kappa_5 = \frac{\varphi_i}{\rconf{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\rconf{l_i}$			&  no		&  space	&  elastica  		\\
 		\bottomrule
 		\end{tabularx}
 		\vspace{10pt}
@@ -1017,13 +1017,13 @@ However, it needs $\Gamma$ to be planar which is by far too restrictive regardin
 % mixed approach
 % ---------------------
 \subsubsection{Bitangent osculating circle (inscribed)} \label{sec=inscribed}
-Let $\Gamma$ be a discrete curve parametrized by arc length. Following~\cite{Vouga2014} we define the curvature regrading the mean length $\overbar{l_i}$ attached to $\vect{x}_{i}$ as~: \footnote{This definition is also presented in~\cite{Bobenko2015, Carroll2014} but in the more restrictive case of constant edge length discrete curves ($l_i = cst$).}
+Let $\Gamma$ be a discrete curve parametrized by arc length. Following~\cite{Vouga2014} we define the curvature regrading the mean length $\rconf{l_i}$ attached to $\vect{x}_{i}$ as~: \footnote{This definition is also presented in~\cite{Bobenko2015, Carroll2014} but in the more restrictive case of constant edge length discrete curves ($l_i = cst$).}
 \begin{equation}
-	\vect{\kappa b}_i = \frac{2}{\overbar{l_i}} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
+	\vect{\kappa b}_i = \frac{2}{\rconf{l_i}} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
 	\quad , \quad
-	\kappa_i = \norm{\vect{\kappa b}_i} = \frac{2}{\overbar{l_i}} \tan(\varphi_i/2)
+	\kappa_i = \norm{\vect{\kappa b}_i} = \frac{2}{\rconf{l_i}} \tan(\varphi_i/2)
 \end{equation}
-This other definition combines the good locality of the vertex-based approach (see \cref{eq:def_kb_vertex}) and the proper behavior at bounds of the edge-based approach (see \cref{eq:def_kb_edge}). Given two adjacent edges $\vect{e}_{i-1}$ and $\vect{e}_{i}$, there exists  an infinite number of circles that are tangent to both edges (see \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b} for two remarkable circles among them), which center points all lie on the $\varphi_i-\pi$ angle bisector line. The corresponding osculating circle, known as the \emph{inscribed} circle, is constructed to touch both $\vect{e}_{i-1}$ and $\vect{e}_{i}$ at distance $\overbar{l_i}/2$ from $\vect{x}_{i}$. In the case of a constant edge length discrete curve, this definition of the osculating circle merges to the circles proposed in \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b}.
+This other definition combines the good locality of the vertex-based approach (see \cref{eq:def_kb_vertex}) and the proper behavior at bounds of the edge-based approach (see \cref{eq:def_kb_edge}). Given two adjacent edges $\vect{e}_{i-1}$ and $\vect{e}_{i}$, there exists  an infinite number of circles that are tangent to both edges (see \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b} for two remarkable circles among them), which center points all lie on the $\varphi_i-\pi$ angle bisector line. The corresponding osculating circle, known as the \emph{inscribed} circle, is constructed to touch both $\vect{e}_{i-1}$ and $\vect{e}_{i}$ at distance $\rconf{l_i}/2$ from $\vect{x}_{i}$. In the case of a constant edge length discrete curve, this definition of the osculating circle merges to the circles proposed in \cref{fig:kb_mixed_a} and \cref{fig:kb_mixed_b}.
 
 However, this definition still exhibits some drawbacks. Firstly, remark that there is an infinity of possible inscribed circles (defined as a circle that is bitangent to two connected edges). Indeed, this circle is unique only if the distance between the common vertex and the points of tangency are prescribed. Although it could seem natural to take the middle of the edges as points of tangency if they have the same length ($\norm{\vect{e}_i} = \norm{\vect{e}_{i+1}}$), there is no obvious choice at all for this parameter (compare \cref{fig:kb_mixed_a} with \cref{fig:kb_mixed_b}). Moreover, the lack of a natural interpolation spline which passes through the vertices and that is in correlation to the osculating circle is also detrimental in the context of our application.
 
@@ -1099,6 +1099,7 @@ However, for the kind of structures we are studying here, those kind of configur
 \end{fullpage}
 \end{figure}
 \begin{figure}[p]
+\centering
 \pgfplotstableread{ch4_geometry/plot/4_bench_elastica/elastica_1.txt}	\TableA
 \pgfplotstableread{ch4_geometry/plot/4_bench_elastica/elastica_5.txt}	\TableB
 \pgfplotstableread{ch4_geometry/plot/4_bench_elastica/elastica_10.txt}	\TableC
@@ -1134,7 +1135,7 @@ In this section we compare, for three remarkable types of curves (line, semicirc
 	\begin{alignat}{5}
 	&\mathcal{E} &&= \int_0^L \kappa^2 ds
 	\\
-	&\mathcal{E}_i &&= \sum_i \overbar{l_i} \kappa_i^2
+	&\mathcal{E}_i &&= \sum_i \rconf{l_i} \kappa_i^2
 	\end{alignat}
 \end{subequations}
 % Straight line
@@ -1282,7 +1283,7 @@ Let $\vect{x}_i$ be a vertex in the current portion of $\Gamma$. The inscribed o
 \end{subequations}
 In this form, the expressions of $\vect{t}_i^-$ and $\vect{t}_i^+$ exhibit lots of trigonometric computations. Consequently, they will be more costly to evaluate (numerically) than the ones given for the circumscribed case that exhibit only simple addition, product and division operations.
 
-Though these points does not generally fall into mid-edge, the tangent vector can also be identified to $\vect{u}_{i-1}$ (resp. $\vect{u}_{i}$) at point $\tilde{\vect{x}}_i^- = \vect{x}_i - \frac{1}{2}\overbar{l_i} \vect{u}_{i-1}$ (resp. $\tilde{\vect{x}}_i^+ = \vect{x}_i + \frac{1}{2}\overbar{l_i} \vect{u}_{i}$)~:
+Though these points does not generally fall into mid-edge, the tangent vector can also be identified to $\vect{u}_{i-1}$ (resp. $\vect{u}_{i}$) at point $\tilde{\vect{x}}_i^- = \vect{x}_i - \frac{1}{2}\rconf{l_i} \vect{u}_{i-1}$ (resp. $\tilde{\vect{x}}_i^+ = \vect{x}_i + \frac{1}{2}\rconf{l_i} \vect{u}_{i}$)~:
 \begin{subequations}
 \setlength{\jot}{6pt}
 \begin{alignat}{4}
@@ -1293,14 +1294,14 @@ Though these points does not generally fall into mid-edge, the tangent vector ca
 \end{subequations}
 Similarly to the circumscribed case, one can remark that the curvature binormal vector at $\vect{x}_i$ can be computed in three different manners~:
 \begin{equation}
-	\vect{\kappa b}_i = \frac{2}{\overbar{l_i}} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
+	\vect{\kappa b}_i = \frac{2}{\rconf{l_i}} \left( \frac{\vect{e}_{i-1} \times \vect{e}_{i}}{\norm{\vect{e}_{i-1}} \norm{\vect{e}_{i}} + \vect{e}_{i-1} \cdot \vect{e}_{i}} \right)
 	=
 	\left \{
 	\begin{aligned}	
-		&  \frac{2}{\overbar{l_i}} \left(\frac{\vect{e}_{i-1} \times  \vect{t}_{i}}{\vect{e}_{i-1} \cdot \vect{t}_{i}}  \right) 
+		&  \frac{2}{\rconf{l_i}} \left(\frac{\vect{e}_{i-1} \times  \vect{t}_{i}}{\vect{e}_{i-1} \cdot \vect{t}_{i}}  \right) 
 %		= \frac{2}{\norm{\vect{e}_{i-1}}} \vect{t}_{i-1} \times  \vect{u}_{i-1}
 		\\[8pt]
-		&  \frac{2}{\overbar{l_i}} \left( \frac{\vect{t}_{i} \times  \vect{e}_{i} }{ \vect{t}_{i} \cdot \vect{e}_{i}} \right) 
+		&  \frac{2}{\rconf{l_i}} \left( \frac{\vect{t}_{i} \times  \vect{e}_{i} }{ \vect{t}_{i} \cdot \vect{e}_{i}} \right) 
 %		= \frac{2}{\norm{\vect{e}_{i}}} \vect{u}_{i} \times  \vect{t}_{i+1} 
 	\end{aligned}
 	\right.
@@ -1313,10 +1314,10 @@ Let $\vect{t}_i^*$ be an arbitrary tangent vector at $\vect{x}_i$. Following \cr
 \begin{subequations}
 \setlength{\jot}{8pt}
 \begin{alignat}{2}
-	&\vect{\kappa b}_{i}^-(\vect{t}_i^*) 	&&=  \frac{2}{\overbar{l_i}} \left(\frac{\vect{e}_{i-1} \times  \vect{t}_{i}^*}{\vect{e}_{i-1} \cdot \vect{t}_{i}^*} \right)
+	&\vect{\kappa b}_{i}^-(\vect{t}_i^*) 	&&=  \frac{2}{\rconf{l_i}} \left(\frac{\vect{e}_{i-1} \times  \vect{t}_{i}^*}{\vect{e}_{i-1} \cdot \vect{t}_{i}^*} \right)
 	\label{eq:ins_kb_m}
 	\\
-	&\vect{\kappa b}_{i}^+(\vect{t}_i^*)	&&= \frac{2}{\overbar{l_i}} \left( \frac{\vect{t}_{i}^* \times  \vect{e}_{i} }{ \vect{t}_{i}^* \cdot \vect{e}_{i}} \right)
+	&\vect{\kappa b}_{i}^+(\vect{t}_i^*)	&&= \frac{2}{\rconf{l_i}} \left( \frac{\vect{t}_{i}^* \times  \vect{e}_{i} }{ \vect{t}_{i}^* \cdot \vect{e}_{i}} \right)
 	\label{eq:ins_kb_p}
 \end{alignat}
 \end{subequations}

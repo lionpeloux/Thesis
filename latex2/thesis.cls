@@ -17,8 +17,13 @@
 \RequirePackage{etoolbox}
 \RequirePackage{ifthen}
 \RequirePackage{calc}
+\RequirePackage{xparse}
+\RequirePackage{refcount,lastpage}
 
-\RequirePackage[showframe]{geometry}			% page layout
+
+\RequirePackage[
+	% showframe
+	]{geometry}			% page layout
 \RequirePackage{background}			% add bakground material
 \RequirePackage{color}
 
@@ -29,6 +34,16 @@
 \RequirePackage[explicit]{titlesec}
 \usetikzlibrary{external,positioning}
 
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{bm}
+\RequirePackage{mathtools}
+
+\RequirePackage{bookmark} % manipulate bookmark level
+
+\RequirePackage{stmaryrd} % symbols for theoretical computer science
+\RequirePackage{pgfplots,pgfplotstable}
 
 % **************************************************
 % Options
@@ -303,7 +318,34 @@
 }
 \ifbool{opt@showrules}{\ShowLayoutRules{}}{}
 
+% --------------------------
+% Page count multiple of 4
+%
+% Add blank pages to the end of the book so that the total
+% number of pages is a multiple of 4 (print constraint)
+% help : https://tex.stackexchange.com/a/83498
+\patchcmd\mainmatter{\cleardoublepage}
+{%
+\clearpage\edef\@currentlabel{\number\numexpr\arabic{page}\ifodd\arabic{page}+1\fi\relax}%
+\label{LastFrontmatterPage}%
+\cleardoublepage
+}{}{}
 
+\ExplSyntaxOn
+\cs_new:Npn \egreg_int_coremainder:nn #1 #2
+ {
+  \int_mod:nn { #2 - \int_mod:nn { #1 } { #2 } } { #2 }
+ }
+\NewDocumentCommand{\checkmultipleoffour} { O{0} }
+ {
+  \prg_replicate:nn
+   {
+    \egreg_int_coremainder:nn { #1 + \getrefnumber{LastFrontmatterPage} + \getpagerefnumber{LastPage} } { 4 }
+   }
+   { \thispagestyle{empty}\null\clearpage }
+ }
+\ExplSyntaxOff
+\AtEndDocument{\checkmultipleoffour}
 
 % --------------------------
 % Font settings
@@ -560,3 +602,54 @@
 
 \typeout{***********************************************}
 \typeout{}
+
+% LDP Custom functions
+%--------------------------------------
+
+
+
+
+% typo
+\newcommand{\telp}{\textellipsis{}}
+\newcommand{\belp}{\textelp{}} % bracket elipsis
+\newcommand{\guil}[1]{\og#1\fg{}}
+\newcommand{\note}[1]{\color{blue}#1\color{black}}
+
+% fonction inline (SHORT)
+\newcommand{\fonction}[3]{#1 : #2 \longmapsto #3}
+
+% fonction 2 lines (LONG)
+\newcommand{\fonctionL}[5]{\begin{array}{lrcl}
+#1: & #2 & \longrightarrow & #3 \\
+    & #4 & \longmapsto & #5 \end{array}}
+
+% differential
+\newcommand{\diff}[2]{\boldsymbol{D}#1(#2)}
+\newcommand{\diffN}[3]{\boldsymbol{D}^#1#2(#3)}
+\newcommand{\diffof}[3]{\boldsymbol{D}#1(#2)\cdot#3}
+\newcommand{\diffNof}[4]{\boldsymbol{D}^#1#2(#3)\cdot#4}
+
+% partial differential
+\newcommand{\pdiff}[3]{\boldsymbol{D}_#1#2(#3)}
+\newcommand{\pdiffN}[4]{\boldsymbol{D}^#1_#2#3(#4)}
+\newcommand{\pdiffof}[4]{\boldsymbol{D}_#1#2(#3)\cdot#4}
+\newcommand{\pdiffNof}[5]{\boldsymbol{D}^#1_#2#3(#4)\cdot#5}
+
+% vector, matrix and tensor
+\newcommand{\vect}[1]{\boldsymbol{#1}} 
+\newcommand{\mat}[1]{\boldsymbol{\mathit{#1}}}
+\newcommand{\tens}[1]{\boldsymbol{\mathcal{#1}}}
+
+\newcommand{\scalar}[2]{\langle #1\,, #2\rangle}
+
+\newcommand{\grad}[1]{grad\;#1}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+\newcommand{\Tr}[1]{Tr(#1)} %trace operator
+
+\newcommand{\para}{{\mkern3mu\vphantom{\perp}\vrule depth 0pt\mkern2mu\vrule depth 0pt\mkern3mu}} % reduced heigth parallel symbol
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+ 

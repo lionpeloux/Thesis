@@ -1,0 +1,45 @@
+\documentclass{book}
+
+% ENCODING
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% LANGUAGES
+\usepackage[french,english]{babel}
+
+% FONTS
+\usepackage[scaled=0.85]{beraserif}
+\usepackage[scaled=0.85]{beramono}
+
+% Layout
+\usepackage[
+	top = 0.5cm,
+	outer = 2.0cm,
+	bottom = .0cm,
+	inner = 1.0cm,
+	binding = 3.0cm,
+	% showrules,
+	% showframe,
+	% booksize = a4,
+	% booksize = TB_6x9,
+	booksize = TB_8x10,
+	pagemodulo = 4,
+	]{blurb}
+\usepackage{kantlipsum}
+
+
+% DOCUMENT
+\begin{document}
+	\makeatletter
+
+	\makeatother
+	\chapter{Mon premier chapitre}
+	\section{Une section}
+	\kant[1-20]
+% 	\marginpar{The new section start point will be pointed out 
+% by an arrow}
+	\section{Une deuxième section}
+	\kant[1-2]
+	\section{Une troisième section}
+	\kant[1-2]
+\end{document}
