@@ -1,14 +1,7 @@
 % \documentclass[11pt,fleqn]{book}
-\documentclass[11pt,fleqn,
-	% showrules,
-	blurb
-	]{thesis}
+\documentclass[12pt,fleqn]{thesis}
 % ENCODING
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 
-% LANGUAGES
-\usepackage[french,english]{babel}
 
 
 % **************************************************
@@ -49,20 +42,20 @@
 
 % nomenclature of symbols
 % ---------------------------------
-\usepackage[intoc]{nomencl}
-\makenomenclature
-\renewcommand{\nomname}{Index of notation}
-\usepackage{etoolbox}
-\renewcommand\nomgroup[1]{%
-  \item[\bfseries
-  \ifstrequal{#1}{A}{\texttt{Geometry of smooth curves}}{%
-  \ifstrequal{#1}{B}{\texttt{Curve framing}}{%
-  \ifstrequal{#1}{C}{\texttt{Geometry of discrete curves}}{%
-  \ifstrequal{#1}{D}{\texttt{Motion of rods}}{%
-  \ifstrequal{#1}{E}{\texttt{Properties of rods}}{%
-  \ifstrequal{#1}{F}{\texttt{Mechanics of rods}}{%
-  \ifstrequal{#1}{G}{\texttt{Particle spring system}}{}}}}}}}%
-]\vspace{12pt}}
+% \usepackage[intoc]{nomencl}
+% \makenomenclature
+% \renewcommand{\nomname}{Index of notation}
+% % \usepackage{etoolbox}
+% \renewcommand\nomgroup[1]{%
+%   \item[\bfseries
+%   \ifstrequal{#1}{A}{\texttt{Geometry of smooth curves}}{%
+%   \ifstrequal{#1}{B}{\texttt{Curve framing}}{%
+%   \ifstrequal{#1}{C}{\texttt{Geometry of discrete curves}}{%
+%   \ifstrequal{#1}{D}{\texttt{Motion of rods}}{%
+%   \ifstrequal{#1}{E}{\texttt{Properties of rods}}{%
+%   \ifstrequal{#1}{F}{\texttt{Mechanics of rods}}{%
+%   \ifstrequal{#1}{G}{\texttt{Particle spring system}}{}}}}}}}%
+% ]\vspace{12pt}}
 
 
 
@@ -155,33 +148,33 @@
 % **************************************************
 % QUOTATIONS
 % **************************************************
-\usepackage{csquotes}
-\usepackage{epigraph} % incompatible avec nextpage
+% \usepackage{csquotes}
+% \usepackage{epigraph} % incompatible avec nextpage
 
 % typo
 % \newcommand{\telp}{\textellipsis{}}
 % \newcommand{\belp}{\textelp{}} % bracket elipsis
 % \newcommand{\guil}[1]{\og#1\fg{}}
 % \newcommand{\note}[1]{\color{blue}#1\color{black}}
-\newcommand{\Csharp}{{\settoheight{\dimen0}{C}C\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\textbf{\#}}}}}
-\newcommand{\rhino}{\emph{Rhinoceros}}
-\newcommand{\grasshopper}{\emph{Grasshopper}}
+% \newcommand{\Csharp}{{\settoheight{\dimen0}{C}C\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\textbf{\#}}}}}
+% \newcommand{\rhino}{\emph{Rhinoceros}}
+% \newcommand{\grasshopper}{\emph{Grasshopper}}
 
-\newcommand{\dofs}[1]{%
-	\ifstrempty{#1}{DOFs}{%
-		\ifnumequal{#1}{1}{1\,-DOF}{%
-			#1\,-DOFs%
-		}%
-	}%
-}
+% \newcommand{\dofs}[1]{%
+% 	\ifstrempty{#1}{DOFs}{%
+% 		\ifnumequal{#1}{1}{1\,-DOF}{%
+% 			#1\,-DOFs%
+% 		}%
+% 	}%
+% }
 
-\newcommand{\dt}{h} % timestep
+% \newcommand{\dt}{h} % timestep
 
 
 % **************************************************
 % SI UNITS
 % **************************************************
-\usepackage{siunitx}
+% \usepackage{siunitx}
 
 % **************************************************
 % COLORS
@@ -211,170 +204,22 @@
 % HYPERREF
 % **************************************************
 % HYP REF LINK IN PDF ( attention, doit être chargé en dernier sinon bug dans les liens footnote)
-\usepackage{hyperxmp} % pdf metadada (LDP)
-%%\usepackage[a-1b]{pdfx}
-\usepackage{hyperref} % pdf metadada (LDP)
-\hypersetup{pdfborder={0 0 0},
-	colorlinks=true,
-	linktoc=page,
-	linkcolor=Tblue,
-	citecolor=Tblue,
-	urlcolor=Tblue} 
-\urlstyle{same}
+% \usepackage{hyperxmp} % pdf metadada (LDP)
+% %%\usepackage[a-1b]{pdfx}
+% \usepackage{hyperref} % pdf metadada (LDP)
+% \hypersetup{pdfborder={0 0 0},
+% 	colorlinks=true,
+% 	linktoc=page,
+% 	linkcolor=Tblue,
+% 	citecolor=Tblue,
+% 	urlcolor=Tblue} 
+% \urlstyle{same}
 
 % **************************************************
 % CROSS REF
 % **************************************************
-\usepackage[nameinlink, noabbrev]{cleveref} % attention a loader apres hypperef (use nameinlink or noabbrev options)
+% \usepackage[nameinlink, noabbrev]{cleveref} % attention a loader apres hypperef (use nameinlink or noabbrev options)
 
-% **************************************************
-% BIBLATEX
-% **************************************************
-\usepackage[
-backend=biber, 
-natbib=true,
-bibstyle=ieee,
-citestyle=numeric,
-dashed=false,
-sorting=none,
-doi=false, isbn=false, url=false,
-mincitenames=1,
-maxcitenames=2, maxbibnames=100,
-firstinits=true,
-useprefix=true,
-]{biblatex} 
-\addbibresource{library.bib}
-\defbibheading{subbibliography}[\refname]{\section{#1}}
-\renewcommand*{\multicitedelim}{\addcomma\space}
-\newcommand{\citef}[2][]{\citeauthor{#2} \citeyear{#2} \cite[#1]{#2}} % custom full cite
-
-% No quotes or italics in titles, except books and collections in italics.
-%\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1\isdot}
-%\DeclareFieldFormat[book,collection]{title}{\emph{#1}}
-\renewcommand*{\multinamedelim}{\addcomma\addspace} % separator mark between authors
-\renewcommand*{\finalnamedelim}{\addspace and \addspace} % separator mark between authors
-\renewcommand{\labelnamepunct}{\addcomma\addspace}
-
-% -- resolve espacing latex characters in url field when exporting from Mendeley
-% source : https://tex.stackexchange.com/a/309995
-\DeclareSourcemap{
-    \maps{
-        \map{ % Replaces '{\_}', '{_}' or '\_' with just '_'
-            \step[fieldsource=url,
-                  match=\regexp{\{\\\_\}|\{\_\}|\\\_},
-                  replace=\regexp{\_}]
-        }
-        \map{ % Replaces '{'$\sim$'}', '$\sim$' or '{~}' with just '~'
-            \step[fieldsource=url,
-                  match=\regexp{\{\$\\sim\$\}|\{\~\}|\$\\sim\$},
-                  replace=\regexp{\~}]
-        }
-    }
-}
-
-\DeclareFieldFormat[misc]{title}{\mkbibquote{#1}}
-% --  clear url field but for wepages
-%\AtEveryBibitem{%
-%  \ifentrytype{misc}{%
-%  }{%
-%    \clearfield{url}%
-%    \clearfield{urldate}%
-%  }%
-%}
-
-% -- href icon for url or doi
-\usepackage{fontawesome}
-\renewcommand{\finentrypunct}{\addperiod~\icohref{}}
-\newcommand{\icohref}{%
-\ifboolexpr{%
-	test {\ifhyperref}
-	and
-	not test {\iftoggle{bbx:url}}
-	and
-	not test {\iftoggle{bbx:doi}}
- }{%true
-  \iffieldundef{doi}{%true
-  	\iffieldundef{url}{%true
-	}{%false
-		\href{\strfield{url}}{\small\faExternalLink}
-	}
-  }{%false
-  	\href{http://dx.doi.org/\strfield{doi}}{\small\faExternalLink}%sec:\therefsection %seg:\therefsegment name:\refname chap:\thechapter
-  }
-}}
-
-% -- CV style for personnal biblio
-\defbibenvironment{cvbib}
-{\list
-{\iffieldequals{year}{\bibyear}%
-{\phantom{\printfield[1cm]{year}}}%
-{\printfield[1cm]{year}\savefield{year}{\bibyear}}%
-}
-{\setlength{\labelwidth}{\labelnumberwidth}%
-\setlength{\leftmargin}{\labelwidth}%
-\setlength{\labelsep}{\biblabelsep}%
-\addtolength{\leftmargin}{\labelsep}%
-\setlength{\itemsep}{2\bibitemsep}%
-\setlength{\parsep}{\bibparsep}}%
-\renewcommand*{\makelabel}[1]{\hss##1}}
-{\endlist}
-{\item}
-
-\DeclareSourcemap{
-	\maps[datatype=bibtex]{
-	% -- filter for personnal bib entry
-	% https://tex.stackexchange.com/questions/125744/how-to-print-a-bibliography-for-a-particular-author-only
-	\map[overwrite=true]{
-		\pernottype{misc}
-		\step[fieldsource=author, match={du Peloux}, final]
-		\step[fieldset=keywords, fieldvalue={, own}, append]
-	}
-	% -- replace m2 with a supersript m^2
-	\map{
-	\step[fieldsource=title, match=\regexp{m2}, replace=\regexp{m\\textsuperscript\{2\}}]
-	}
-  	}
-}
-
-% with this macro you can chose to link the citation labels to local subbib (anchorsegments=true) or to global bib (anchorsegments=false)
-% local links does not work if chapter has no subbib, because there is not subib to point to !
-% https://tex.stackexchange.com/questions/142632/multiple-bibliographies-with-local-links-global-labels-also-global-bibliograph/142720
-\newbool{anchorsegments}\boolfalse{anchorsegments}
-\makeatletter
-\AtBeginDocument{%
-  \ifbool{anchorsegments}
-    {\long\def\blx@bibhyperref[#1]#2{%
-       \blx@sfsave\hyper@natlinkstart{\the\c@refsection @\the\c@refsegment @#1}%
-       \blx@sfrest
-       #2%
-       \blx@sfsave\hyper@natlinkend\blx@sfrest}%
-     \protected\long\def\blx@imc@bibhyperlink#1#2{%
-       \blx@sfsave\hyper@natlinkstart{\the\c@refsection:\the\c@refsegment:#1}%
-       \blx@sfrest
-       #2%
-       \blx@sfsave\hyper@natlinkend\blx@sfrest}%
-     \protected\long\def\blx@imc@bibhypertarget#1#2{%
-       \blx@sfsave\hyper@natanchorstart{\the\c@refsection:\the\c@refsegment:#1}%
-       \blx@sfrest
-       #2%
-       \blx@sfsave\hyper@natanchorend\blx@sfrest}%
-     \protected\def\blx@anchor{%
-       \xifinlist
-         {\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}
-         {\blx@anchors}
-         {}
-         {\listxadd
-            {\blx@anchors}
-            {\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
-          \hyper@natanchorstart{%
-            \the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
-          \hyper@natanchorend}}%
-     \defbibheading{subbibliography}{\section{\refname}}}
-    {\defbibheading{subbibliography}{%
-       \AtNextBibliography{\let\blx@anchor\relax}%
-       \section{\refname}}}}
-\makeatother
-\defbibheading{subbibliography}[\refname]{\chapter*{\bibname}}
 
 
 \usepackage{kantlipsum}
@@ -383,7 +228,7 @@ useprefix=true,
 % DOCUMENT
 % **************************************************
 \graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
-
+\addbibresource{library.bib}
 \begin{document}
 
 % --------------------------
@@ -394,15 +239,15 @@ useprefix=true,
 % preamble
 \setlength{\parskip}{1em}
 
-\newgeometry{
-	paperwidth=\PaperWidth,
-	paperheight=\PaperHeight,
-	inner=\BleedInnerMargin+\SafeContentInnerMargin,
-	outer=\BleedOuterMargin+\SafeContentOuterMargin, 
-	bottom=\SafeContentBottomMargin+\BleedBottomMargin,
-	top=\SafeContentTopMargin+\BleedTopMargin,
-	bindingoffset=0mm,
-}
+% \newgeometry{
+% 	paperwidth=\@PaperWidth,
+% 	paperheight=\@PaperHeight,
+% 	inner=\@BleedInnerMargin+\SafeContentInnerMargin,
+% 	outer=\@BleedOuterMargin+\SafeContentOuterMargin, 
+% 	bottom=\SafeContentBottomMargin+\BleedBottomMargin,
+% 	top=\SafeContentTopMargin+\BleedTopMargin,
+% 	bindingoffset=0mm,
+% }
 \input{head/titlepage.tex}
 \restoregeometry
 \include{_dedication}
@@ -427,16 +272,26 @@ useprefix=true,
 
 	\include{ch1_introduction/chapter}
 
-	\part{Elastic gridshells}\label{part=1}
-	% \include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
-	\part{Rich Kirchhoff beam model}\label{part=2}
-	\include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch8_conclusion/chapter}
+	% \part{Fake}
+	% \chapter{Mon premier chapitre Linel}
+	% \section{Une section}
+	% \kant[1-10]
+	% \subsection{Une section}
+	% \kant[1-10]
+	% \subsection{Une section}
+	% \kant[1-10]
+	% \subsection{Une section}
+	% \kant[1-10]
+
+	% \section{Une section}
+	% \kant[1-10]
+	% \subsection{Une section}
+	% \kant[1-10]
+	% \subsection{Une section}
+	% \kant[1-10]
+	% \subsection{Une section}
+	% \kant[1-10]
 
 	% \part{Fake}
 	% \chapter{Mon premier chapitre Linel}
@@ -446,11 +301,37 @@ useprefix=true,
 	% \kant[1-2]
 	% \section{Une troisième section}
 	% \kant[1-2]
+	% \chapter{Mon premier chapitre Linel}
+	% \section{Une section}
+	% \kant[1-10]
+	% \section{Une deuxième section}
+	% \kant[1-2]
+	% \section{Une troisième section}
+	% \kant[1-2]
+	% \chapter{Mon premier chapitre Linel}
+	% \section{Une section}
+	% \kant[1-10]
+	% \section{Une deuxième section}
+	% \kant[1-2]
+	% \section{Une troisième section}
+	% \kant[1-2]
+
+	\part{Elastic gridshells}\label{part=1}
+	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+
+	% \part{Rich Kirchhoff beam model}\label{part=2}
+	% \include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch8_conclusion/chapter}
+
 
 % APPENDINX MATTER
 \part{Appendix}	\label{part=3}
 \appendix
-	\include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	\include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 

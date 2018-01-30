@@ -48,22 +48,22 @@
 % **************************************************
 
 % paper size
-\newlength{\@PaperWidth}					% paper width 
+\newlength{\@PaperWidth}				% paper width 
 \newlength{\@PaperHeight}				% paper height 
 
 % bleed margins
 \newlength{\@BleedInnerMargin}			% inner bleed margin
 \newlength{\@BleedOuterMargin}			% outer bleed margin
 \newlength{\@BleedBottomMargin}			% bottom bleed margin
-\newlength{\@BleedTopMargin}				% top margin bleed margin
+\newlength{\@BleedTopMargin}			% top margin bleed margin
 
 % page size
 \newlength{\@PageWidth}					% page width without bleed margins (when paper is trimmed)
-\newlength{\@PageHeight}					% page height without bleed margins (when paper is trimmed)
+\newlength{\@PageHeight}				% page height without bleed margins (when paper is trimmed)
 
 % safe content area margins
-\newlength{\@SafeContentInnerMargin}		% inner margin of safe content area
-\newlength{\@SafeContentOuterMargin}		% outer margin of safe content area
+\newlength{\@SafeContentInnerMargin}	% inner margin of safe content area
+\newlength{\@SafeContentOuterMargin}	% outer margin of safe content area
 \newlength{\@SafeContentBottomMargin}	% bottom margin of safe content area
 \newlength{\@SafeContentTopMargin}		% top margin of safe content area
 \newlength{\@SafeContentWidth}			% width of the content body
@@ -71,17 +71,17 @@
 
 % content area margin
 \newlength{\@ContentTopMargin}			% top margin from the content body
-\newlength{\@ContentOuterMargin}			% outer margin from the content body
+\newlength{\@ContentOuterMargin}		% outer margin from the content body
 \newlength{\@ContentBottomMargin}		% bottom margin from the content body
-\newlength{\@ContentInnerMargin}			% inner margin from the content body
+\newlength{\@ContentInnerMargin}		% inner margin from the content body
 \newlength{\@ContentBindingOffset}		% additionnal inner margin for the binding
 \newlength{\@ContentWidth}				% width of the content body
 \newlength{\@ContentHeight}				% height of the content body
 
 %% set default parameters
-\setlength{\marginparwidth}{0mm}	% no notes
-\setlength{\marginparsep}{0mm}		% no notes
-\setlength{\headheight}{14pt}		% increase headheight (default to 12pt)
+\setlength{\marginparwidth}{0mm}		% no notes
+\setlength{\marginparsep}{0mm}			% no notes
+\setlength{\headheight}{14pt}			% increase headheight (default to 12pt)
 
 % get content margins relative to safe area borders
 \setlength{\@ContentTopMargin}{\opt@top}
@@ -90,20 +90,9 @@
 \setlength{\@ContentInnerMargin}{\opt@inner}
 \setlength{\@ContentBindingOffset}{\opt@binding}
 
-\typeout{\opt@top}
-\typeout{\opt@outer}
-\typeout{\opt@bottom}
-\typeout{\opt@inner}
-\typeout{\opt@binding}
-
-
 % **************************************************
 % Commands
 % **************************************************
-
-% --------------------------
-% Page layout parameters
-% --------------------------
 
 % \SetBleedMargins{top}{right/outer}{bottom}{left/inner}
 \DeclareRobustCommand{\@SetBleedMargins}[4]{
@@ -141,7 +130,7 @@
 
 
 % --------------------------
-% Generic page layout
+% Page layouts
 % --------------------------
 
 % \SetStandardPaperLayout{width}{height}
@@ -180,12 +169,6 @@
 		includeall
 		}
 }
-
-
-
-% --------------------------
-% Blurb page layout
-% --------------------------
 
 % \SetBlurbPageLayout{finalwidth}{finalheight}{bleed}{margin}{binding}
 \DeclareRobustCommand{\@SetBlurbPageLayout}[5]{
@@ -238,51 +221,50 @@
 			}
 }
 
-% --------------------------
-% Display page layout rules
-% --------------------------
+% Display layout rules
 \DeclareRobustCommand{\@ShowLayoutRules}{
-\AddEverypageHook{
-\ifthenelse{\isodd{\value{page}}}
-{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
-	contents={
-	\begin{tikzpicture}
-		% bleed frame
-		\draw [color=red,fill=lightgray,thick] 
-		(0,0) rectangle (\@PaperWidth,\@PaperHeight);
-		% crop frame
-		\draw [color=green,fill=white,thick] 
-		(\@BleedInnerMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin,\@PaperHeight-\@BleedTopMargin);
-		% safe content frame
-		\draw [color=blue,thick] 
-		(\@BleedInnerMargin+\@SafeContentInnerMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin-\@SafeContentOuterMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
-		% binding edge
-		\draw[black,thick,dashed] (\@BleedInnerMargin+\@ContentBindingOffset,0) -- (\@BleedInnerMargin+\@ContentBindingOffset,\@PaperHeight);
-		% content frame
-		\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
-		(\@BleedInnerMargin+\@ContentBindingOffset+\@ContentInnerMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@ContentBindingOffset+\@ContentInnerMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
-	\end{tikzpicture}
-}}}
-{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
-	contents={
-	\begin{tikzpicture}
-		% bleed frame
-		\draw [color=red,fill=lightgray,thick] 
-		(0,0) rectangle (\@PaperWidth,\@PaperHeight);
-		% crop frame
-		\draw [color=green,fill=white,thick] 
-		(\@BleedOuterMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin,\@PaperHeight-\@BleedTopMargin);
-		% safe content frame
-		\draw [color=blue,thick] 
-		(\@BleedOuterMargin+\@SafeContentOuterMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin-\@SafeContentInnerMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
-		% binding edge
-		\draw[black,thick,dashed] (\@PaperWidth-\@BleedInnerMargin-\@ContentBindingOffset,0) -- (\@PaperWidth-\@BleedInnerMargin-\@ContentBindingOffset,\@PaperHeight);
-		% text frame
-		\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
-		(\@BleedOuterMargin+\@ContentOuterMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@BleedOuterMargin+\@ContentOuterMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
-	\end{tikzpicture}
-}}}
-\BgMaterial}
+	\AddEverypageHook{
+		\ifthenelse{\isodd{\value{page}}}
+		{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
+			contents={
+			\begin{tikzpicture}
+				% bleed frame
+				\draw [color=red,fill=lightgray,thick] 
+				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
+				% crop frame
+				\draw [color=green,fill=white,thick] 
+				(\@BleedInnerMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin,\@PaperHeight-\@BleedTopMargin);
+				% safe content frame
+				\draw [color=blue,thick] 
+				(\@BleedInnerMargin+\@SafeContentInnerMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin-\@SafeContentOuterMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
+				% binding edge
+				\draw[black,thick,dashed] (\@BleedInnerMargin+\@ContentBindingOffset,0) -- (\@BleedInnerMargin+\@ContentBindingOffset,\@PaperHeight);
+				% content frame
+				\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
+				(\@BleedInnerMargin+\@ContentBindingOffset+\@ContentInnerMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@ContentBindingOffset+\@ContentInnerMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
+			\end{tikzpicture}
+		}}}
+		{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
+			contents={
+			\begin{tikzpicture}
+				% bleed frame
+				\draw [color=red,fill=lightgray,thick] 
+				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
+				% crop frame
+				\draw [color=green,fill=white,thick] 
+				(\@BleedOuterMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin,\@PaperHeight-\@BleedTopMargin);
+				% safe content frame
+				\draw [color=blue,thick] 
+				(\@BleedOuterMargin+\@SafeContentOuterMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin-\@SafeContentInnerMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
+				% binding edge
+				\draw[black,thick,dashed] (\@PaperWidth-\@BleedInnerMargin-\@ContentBindingOffset,0) -- (\@PaperWidth-\@BleedInnerMargin-\@ContentBindingOffset,\@PaperHeight);
+				% text frame
+				\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
+				(\@BleedOuterMargin+\@ContentOuterMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@BleedOuterMargin+\@ContentOuterMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
+			\end{tikzpicture}
+		}}}
+		\BgMaterial
+	}
 }
 
 
@@ -304,7 +286,7 @@
 \cs_new:Npn \egreg_int_coremainder:nn #1 #2
  {
   \int_mod:nn { #2 - \int_mod:nn { #1 } { #2 } } { #2 }
- }
+}
 \NewDocumentCommand{\@PageCountMultipleOfFour} { O{0} }
 {
 	\prg_replicate:nn
@@ -351,27 +333,3 @@
 \ifdefstring{\opt@pagemodulo}{4}{\AtEndDocument{\@PageCountMultipleOfFour}}{}
 
 
-
-% --------------------------
-% Fancy Header
-% --------------------------
-% Even / Odd / Left / Center / Right / Header / Footer
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0pt}
-\fancyhead[OR]{\ttfamily \nouppercase{\rightmark}}
-\fancyhead[EL]{\ttfamily \nouppercase{\leftmark}}
-\fancyfoot[EL,OR]{\ttfamily\thepage}
-\fancypagestyle{plain}{
-	\fancyhf{}
-	\renewcommand{\headrulewidth}{0pt}
-	\renewcommand{\footrulewidth}{0pt}
-	\fancyfoot[EL,OR]{\ttfamily\thepage} % \ttfamily\large\scshape\bfseries
-}
-\fancypagestyle{addpagenumbersforpdfimports}{
-	\fancyhead{}
-	\renewcommand{\headrulewidth}{0pt}
-	\fancyfoot{}
-	\fancyfoot[RO,LE]{\thepage}
-}
