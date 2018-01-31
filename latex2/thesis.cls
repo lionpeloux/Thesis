@@ -27,21 +27,22 @@
 \RequirePackage{calc}
 \RequirePackage{xparse}
 \RequirePackage{refcount,lastpage}
-
+% \RequirePackage{adjustbox}
+% \RequirePackage{eso-pic}
+\RequirePackage[showboxes,absolute,overlay]{textpos} % absolute positionning
 \RequirePackage[
 	top = 5mm,
 	outer = 10mm,
 	bottom = 5mm,
 	inner = 10mm,
 	binding = 5mm,
-	% showrules,
-	% showframe,
+	showrules,
+	showframe,
 	% booksize = a4,
 	% booksize = TB_6x9,
 	booksize = TB_8x10,
 	pagemodulo = 4,
 	]{blurb}
-
 
 
 % LANGUAGES
@@ -94,12 +95,39 @@
 % Page layout parameters
 % --------------------------
 
-\setlength{\@fptop}{0pt}  % for aligning all floating figures/tables etc... to the top margin
+% float placement
+
+
+
+
+% help : http://www.tex.ac.uk/FAQ-vertposfp.html
+% \setlength{\@fptop}{0pt-\headsep-\headheight} 	% align to header top
+% \setlength{\@fptop}{0pt} 						% align to body top 
+% \setlength{\@fpbot}{0pt} 						% align to body bottom 
+% \setlength{\@fpbot}{0pt-\footskip} 			% align to footer bottom
+
+
+
+\newcommand{\MediaWidthRatio}{1.0} % in percent
+\newcommand{\MediaGutterRatio}{0.04} % in percent
 
 \newlength{\MediaWidth}
-\setlength{\MediaWidth}{0.7\@ContentWidth}
+\newlength{\MediaGutterWidth}
+\newlength{\TwoMediaWidth}
 
+\setlength{\MediaWidth}{\MediaWidthRatio \@ContentWidth}
+\setlength{\MediaGutterWidth}{\MediaGutterRatio \MediaWidth}
+\setlength{\TwoMediaWidth}{0.5\MediaWidth - 0.5\MediaGutterWidth}
 
+\typeout{}
+\typeout{}
+\typeout{**************************}
+\typeout{media width : '\MediaWidth'}
+\typeout{media gutter width : \MediaGutterWidth}
+\typeout{two media width : \TwoMediaWidth}
+\typeout{**************************}
+\typeout{}
+\typeout{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% FONT SETTINGS
@@ -109,6 +137,7 @@
 %% paragraph
 %% --------------------------
 \renewcommand{\familydefault}{\rmdefault}
+\setlength{\parskip}{1em}
 \setlength{\parindent}{0pt}
 \setstretch{1.1}
 
@@ -154,9 +183,13 @@
 %% caption
 %% --------------------------
 \usepackage[font=small,textfont={normalfont},labelfont={bf,tt}]{caption}
+\usepackage[]{subcaption} % better than subfig and subfigures
+
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
-\captionsetup[subfloat]{captionskip=10pt}
+\captionsetup[sub]{skip=5pt}		% subcpation	
+
+\newcommand{\subfigskip}{\par\bigskip\medskip}
 
 %% heading indentation
 %% --------------------------
@@ -178,6 +211,8 @@
 \setcounter{tocdepth}{2}
 \setcounter{lofdepth}{2}
 \setcounter{lotdepth}{2}
+
+\setlength{\cftparskip}{0em}
 
 %% toc
 %% --------------------------
@@ -258,15 +293,21 @@
 %%%%%
 
 %% Even / Odd / Left / Center / Right / Header / Footer
- 
+
+%% font styles (rm, sf, tt)
+\DeclareRobustCommand{\HdrFontStyle}{\ttfamily}
+
 % default style
 \pagestyle{fancy}
 \fancyhf{}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0pt}
-\fancyhead[OR]{\ttfamily \nouppercase{\rightmark}}
-\fancyhead[EL]{\ttfamily \nouppercase{\leftmark}}
-\fancyfoot[EL,OR]{\ttfamily\thepage}
+% \iffloatpage{0.0pt}{0.4pt}
+% \newgeometry{⟨options⟩} and \restoregeometry
+% \renewcommand{\headheight}{\iffloatpage{\protect\setlength{\headheight}{0pt}}{\protect\setlength{\headheight}{14pt}}}
+\renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{0.4pt}}
+\renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
+\fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\nouppercase{\rightmark}}}
+\fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\nouppercase{\leftmark}}}
+\fancyfoot[EL,OR]{\HdrFontStyle\thepage}
 
 % plain style
 \fancypagestyle{plain}{
@@ -300,6 +341,8 @@
     \newpage
 	\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
+%% help box
+\newcommand*{\tfbox}[1]{{\fboxsep-\fboxrule\fbox{#1}}}
 
 %% Fancy page : chapter
 %% --------------------------
@@ -308,13 +351,17 @@
 \newlength{\ChapterBoxYOffset}
 \newlength{\ChapterBoxWidth}
 \newlength{\ChapterBoxHeight}
-\newlength{\ChapterBoxTextMargin}
+\newlength{\ChapterBoxTextYMargin}
+\newlength{\ChapterBoxTextXMargin}
+\newlength{\ChapterBoxTextWidth}
 
 %% set parameters
 \setlength{\ChapterBoxWidth}{\@BleedInnerMargin + \@ContentBindingOffset + \@ContentInnerMargin}
 \setlength{\ChapterBoxYOffset}{8.0cm}
 \setlength{\ChapterBoxHeight}{15mm}
-\setlength{\ChapterBoxTextMargin}{6pt}
+\setlength{\ChapterBoxTextYMargin}{4pt}
+\setlength{\ChapterBoxTextXMargin}{8pt}
+\setlength{\ChapterBoxTextWidth}{\@ContentWidth -\ChapterBoxTextXMargin}
 
 %% commands
 \renewcommand{\thechapter}{\arabic{chapter}}
@@ -331,12 +378,12 @@
 	\node[yshift=-\ChapterBoxYOffset] at (current page.north west){
 	\begin{tikzpicture}[remember picture, overlay]
 		\draw[draw=Tblue, fill=Tblue] (0,0) rectangle (\ChapterBoxWidth,\ChapterBoxHeight); % color box
-		\node[anchor=base east, inner sep=0mm, xshift=-\ChapterBoxTextMargin] at (\ChapterBoxWidth,\ChapterBoxTextMargin){
+		\node[anchor=base east, inner sep=0mm, xshift=-\ChapterBoxTextYMargin] at (\ChapterBoxWidth,\ChapterBoxTextYMargin){
 			\raggedleft\color{white}\chapterlabel
 			% \fbox{\raggedleft\color{white}1000}
 		};
-		\node[anchor=base west, inner sep=0mm, xshift=\ChapterBoxTextMargin] at (\ChapterBoxWidth,\ChapterBoxTextMargin){
-			\raggedright\color{black}#1
+		\node[anchor=base west, inner sep=0mm, xshift=\ChapterBoxTextXMargin, text width=\ChapterBoxTextWidth, align=left] at (\ChapterBoxWidth,\ChapterBoxTextYMargin){
+			\color{black}#1
 			% \fbox{\raggedright\color{black}#1}
 		};
 	\end{tikzpicture}
@@ -353,13 +400,20 @@
 \newlength{\PartBoxYOffset}
 \newlength{\PartBoxWidth}
 \newlength{\PartBoxHeight}
-\newlength{\PartBoxTextMargin}
+\newlength{\PartBoxTextXMargin}
+\newlength{\PartBoxTextWidth}
 
 %% set parameters
 \setlength{\PartBoxYOffset}{8.0cm}
 \setlength{\PartBoxWidth}{60mm}
 \setlength{\PartBoxHeight}{20mm}
-\setlength{\PartBoxTextMargin}{12pt}
+\setlength{\PartBoxTextXMargin}{12pt}
+\setlength{\PartBoxTextWidth}{\@BleedOuterMargin + \@ContentOuterMargin + \@ContentWidth - \PartBoxWidth - \PartBoxTextXMargin}
+
+% Vertical Adjutement of part title
+% help : https://tex.stackexchange.com/a/41014
+\newlength{\PartYAdjust}
+\setlength{\PartYAdjust}{\totalheightof{\PartFont Part I}/2 - \depthof{\PartFont Part I}}
 
 %% commands
 \renewcommand{\thepart}{\Roman{part}}
@@ -378,13 +432,13 @@
 	\node[xshift=-\PartBoxWidth, yshift=-\PartBoxYOffset-\value{PartCount}*\PartBoxHeight] at (current page.north east){
 		\begin{tikzpicture}[remember picture, overlay, inner sep=0]
 		\draw[draw=Tblue, fill=Tblue] (0,0) rectangle (\PartBoxWidth,\PartBoxHeight); % color box
-		% \filldraw  (0,0) circle (2pt);
-		\node[anchor=base west, xshift=\PartBoxTextMargin] at (0,\PartBoxTextMargin){
-			\raggedright\color{white}Part \partlabel
+		% \filldraw  (0,\PartBoxHeight/2) circle (2pt);
+		\node[anchor=west, xshift=\PartBoxTextXMargin] (ref) at (0,\PartBoxHeight/2){
+			\raggedright\color{white}Part~\partlabel
 			% \fbox{\raggedright\color{white}Part \partlabel}
 		};
-		\node[anchor=base east, xshift=-\PartBoxTextMargin] at (0,\PartBoxTextMargin){
-			\raggedleft\color{black}#1
+		\node[anchor=base east, yshift=-\PartYAdjust, xshift=-\PartBoxTextXMargin,text width=\PartBoxTextWidth, align=right] at (0,\PartBoxHeight/2){
+			\color{black}#1
 			% \fbox{\raggedleft\color{black}#1}
 		};
 		\end{tikzpicture}
@@ -551,6 +605,10 @@
 \defbibheading{subbibliography}[\refname]{\section{#1}}
 \defbibheading{subbibliography}[\refname]{\chapter*{\bibname}}
 
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% QUOTATIONS
@@ -558,6 +616,9 @@
 %%%%%
 \usepackage{csquotes}
 \usepackage{epigraph} % incompatible avec nextpage
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -570,6 +631,10 @@
   \hrule \@width 2in \kern 2.6\p@} % the \hrule is .4pt high
 \setlength{\skip\footins}{5mm}
 
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% SI UNITS
@@ -578,12 +643,25 @@
 \usepackage{siunitx}
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% ALGORITHM
+%%
+%%%%%
+\usepackage[linesnumbered,lined,ruled,commentsnumbered]{algorithm2e}
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% INDEX
 %%
 %%%%%
-
 \usepackage[intoc]{nomencl}
 \makenomenclature
 \renewcommand{\nomname}{Index of notation}
@@ -597,6 +675,10 @@
   \ifstrequal{#1}{F}{\texttt{Mechanics of rods}}{%
   \ifstrequal{#1}{G}{\texttt{Particle spring system}}{}}}}}}}%
 ]\vspace{12pt}}
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -632,6 +714,14 @@
 %% Custom functions
 %%
 %%%%%
+
+% get ratio of length
+% https://tex.stackexchange.com/a/6424
+\newcommand*{\DivideLengths}[2]{%
+  \strip@pt\dimexpr\number\numexpr\number\dimexpr#1\relax*65536/\number\dimexpr#2\relax\relax sp\relax
+}
+\newcommand{\GetX}[1]{\DivideLengths{#1}{\@PaperWidth}}
+\newcommand{\GetY}[1]{\DivideLengths{#1}{\@PaperHeight}}
 
 \usepackage{textcomp} % € symbol
 
