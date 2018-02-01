@@ -31,13 +31,13 @@
 % \RequirePackage{eso-pic}
 \RequirePackage[showboxes,absolute,overlay]{textpos} % absolute positionning
 \RequirePackage[
-	top = 5mm,
-	outer = 10mm,
-	bottom = 5mm,
-	inner = 10mm,
-	binding = 5mm,
-	showrules,
-	showframe,
+	top = 14mm,
+	outer = 14mm,
+	bottom = 7mm,
+	inner = 14mm,
+	binding = 0mm,
+	% showrules,
+	% showframe,
 	% booksize = a4,
 	% booksize = TB_6x9,
 	booksize = TB_8x10,
@@ -340,6 +340,19 @@
     \thispagestyle{empty}
     \newpage
 	\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+%% clear to left
+\newcommand*{\cleartoleftpage}{%
+  \clearpage
+    \if@twoside
+    \ifodd\c@page
+      \hbox{}\newpage
+      \if@twocolumn
+        \hbox{}\newpage
+      \fi
+    \fi
+  \fi
+}
 
 %% help box
 \newcommand*{\tfbox}[1]{{\fboxsep-\fboxrule\fbox{#1}}}

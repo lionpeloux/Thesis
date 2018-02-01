@@ -2137,28 +2137,6 @@
     <bcf:datasource type="file" datatype="bibtex">library.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="1">
-    <bcf:citekey order="1">Happold1975</bcf:citekey>
-    <bcf:citekey order="2">Douthe2010a</bcf:citekey>
-    <bcf:citekey order="3">Harris2003</bcf:citekey>
-    <bcf:citekey order="4">IL10</bcf:citekey>
-    <bcf:citekey order="5">Burton1998</bcf:citekey>
-    <bcf:citekey order="6">Harris2003</bcf:citekey>
-    <bcf:citekey order="7">Harris2003</bcf:citekey>
-    <bcf:citekey order="8">Harris2003</bcf:citekey>
-    <bcf:citekey order="9">IL10</bcf:citekey>
-    <bcf:citekey order="10">IL13</bcf:citekey>
-    <bcf:citekey order="11">IL10</bcf:citekey>
-    <bcf:citekey order="12">IL10</bcf:citekey>
-    <bcf:citekey order="13">Ban2006</bcf:citekey>
-    <bcf:citekey order="14">Harris2002</bcf:citekey>
-    <bcf:citekey order="15">Harris2003</bcf:citekey>
-    <bcf:citekey order="16">Harris2003</bcf:citekey>
-    <bcf:citekey order="17">Harris2003</bcf:citekey>
-    <bcf:citekey order="18">Lowenstein2002</bcf:citekey>
-    <bcf:citekey order="19">bdonline2002</bcf:citekey>
-    <bcf:citekey order="20">bdonline2002</bcf:citekey>
-    <bcf:citekey order="21">Lowenstein2004</bcf:citekey>
-    <bcf:citekey order="22">FourthDoor2003</bcf:citekey>
   </bcf:section>
   <!-- SECTION 0 (cont.) -->
   <bcf:section number="0">
