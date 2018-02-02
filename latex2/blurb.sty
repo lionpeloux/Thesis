@@ -1,20 +1,35 @@
 
+% Lionel du Peloux (2018)
 % https://fr.sharelatex.com/learn/Writing_your_own_class#Preliminary_declarations
 
-% **************************************************
-% Identification
-% **************************************************
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% IDENTIFICATION
+%%
+%%%%%
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{blurb}[2017/12/20 Lionel du Peloux]
 
-% **************************************************
-% Preliminary declarations
-% **************************************************
-\RequirePackage{kvoptions}  		% key-value options
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% PRELIMINARY DECLARATIONS
+%%
+%%%%%
+
+\RequirePackage{kvoptions}  		% key-value options for package
+\RequirePackage{xkeyval}  			% key-value options for macros
 \RequirePackage{etoolbox}
 \RequirePackage{ifthen}
 \RequirePackage{calc}
 \RequirePackage{xparse}
+\RequirePackage{xargs}				% commands with optional arguments
 \RequirePackage{refcount}
 \RequirePackage{lastpage}
 \RequirePackage{geometry}			% page layout
@@ -22,15 +37,29 @@
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
 \RequirePackage{tikzpagenodes}
-\RequirePackage{fancyhdr}
 
 \backgroundsetup{contents={}}
-\usetikzlibrary{external,positioning}
+% \usetikzlibrary{external,positioning}
+
+\RequirePackage[]{graphicx}
+
+% \RequirePackage[
+% 	% showboxes,
+% 	absolute,overlay]{textpos} % absolute positionning
+% textpos value
+% \setlength{\TPHorizModule}{1mm}
+% \setlength{\TPVertModule}{1mm}
 
 
-% **************************************************
-% Declare Options
-% **************************************************
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% DECLARE OPTIONS
+%%
+%%%%%
+
 \SetupKeyvalOptions{family=blurb,prefix=opt@} 
 \DeclareStringOption[]{booksize}[TB_8x10]
 \DeclareStringOption[0mm]{top}[0mm]
@@ -38,14 +67,22 @@
 \DeclareStringOption[0mm]{bottom}[0mm]
 \DeclareStringOption[0mm]{inner}[0mm]
 \DeclareStringOption[0mm]{binding}[0mm]
-\DeclareStringOption[]{pagemodulo}[2]
+\DeclareStringOption[2]{pagemodulo}[2]
+\DeclareStringOption[no]{cover}[hard]
+\DeclareStringOption[20mm]{gutter}[20mm]
 \DeclareBoolOption[false]{showrules}
 \DeclareBoolOption[false]{showframe}
 \ProcessKeyvalOptions*
 
-% **************************************************
-% Fields
-% **************************************************
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% PARAMETER FIELDS
+%%
+%%%%%
 
 % paper size
 \newlength{\@PaperWidth}				% paper width 
@@ -82,6 +119,8 @@
 \setlength{\marginparwidth}{0mm}		% no notes
 \setlength{\marginparsep}{0mm}			% no notes
 \setlength{\headheight}{14pt}			% increase headheight (default to 12pt)
+\setlength{\headsep}{25pt}				
+\setlength{\footskip}{25pt}	
 
 % get content margins relative to safe area borders
 \setlength{\@ContentTopMargin}{\opt@top}
@@ -90,35 +129,56 @@
 \setlength{\@ContentInnerMargin}{\opt@inner}
 \setlength{\@ContentBindingOffset}{\opt@binding}
 
-% public access to specific length
 
 
-% **************************************************
-% Commands
-% **************************************************
-\DeclareRobustCommand{\ContentBindingOffset}{\@ContentBindingOffset}
-\DeclareRobustCommand{\ContentInnerMargin}{\@ContentInnerMargin}
-\DeclareRobustCommand{\BleedInnerMargin}{\@BleedInnerMargin}
 
 
-% \SetBleedMargins{top}{right/outer}{bottom}{left/inner}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% PAGE LAYOUT / GEOMETRY
+%%
+%%%%%
+
 \DeclareRobustCommand{\@SetBleedMargins}[4]{
+	%
+	% [#1] : set length of bleed top margin
+	% [#2] : set length of bleed outer margin
+	% [#3] : set length of bleed bottom margin
+	% [#4] : set length of bleed inner margin
+	%
+	% \SetBleedMargins{top}{right/outer}{bottom}{left/inner}
+	%
 	\setlength{\@BleedTopMargin}{#1}
 	\setlength{\@BleedOuterMargin}{#2}
 	\setlength{\@BleedBottomMargin}{#3}
 	\setlength{\@BleedInnerMargin}{#4}
 }
 
-% \SetSafeContentMargins{top}{right/outer}{bottom}{left/inner}
 \DeclareRobustCommand{\@SetSafeContentMargins}[4]{
+	%
+	% [#1] : set length of safe content top margin
+	% [#2] : set length of safe content outer margin
+	% [#3] : set length of safe content bottom margin
+	% [#4] : set length of safe content inner margin
+	%
+	% \SetSafeContentMargins{top}{right/outer}{bottom}{left/inner}
+	%
 	\setlength{\@SafeContentTopMargin}{#1}
 	\setlength{\@SafeContentOuterMargin}{#2}
 	\setlength{\@SafeContentBottomMargin}{#3}
 	\setlength{\@SafeContentInnerMargin}{#4}
 }
 
-% \SetContentMargins{top}{right/outer}{bottom}{left/inner}{binding}
 \DeclareRobustCommand{\@SetContentMargins}[5]{
+	%
+	% [#1] : set length of current content top margin
+	% [#2] : set length of current content outer margin
+	% [#3] : set length of current content bottom margin
+	% [#4] : set length of current content inner margin
+	% [#5] : set length of current content binding margin
+	%
+	% \SetContentMargins{top}{right/outer}{bottom}{left/inner}{binding}
+	%
 	\setlength{\@ContentTopMargin}{#1}
 	\setlength{\@ContentOuterMargin}{#2}
 	\setlength{\@ContentBottomMargin}{#3}
@@ -126,8 +186,16 @@
 	\setlength{\@ContentBindingOffset}{#5}
 }
 
-% \AddContentMargins{top}{right/outer}{bottom}{left/inner}{binding}
 \DeclareRobustCommand{\@AddContentMargins}[5]{
+	%
+	% [#1] : addlength to current content top margin
+	% [#2] : addlength to current content outer margin
+	% [#3] : addlength to current content bottom margin
+	% [#4] : addlength to current content inner margin
+	% [#5] : addlength to current content binding margin
+	%
+	% \AddContentMargins{top}{right/outer}{bottom}{left/inner}{binding}
+	%
 	\setlength{\@ContentTopMargin}{\@ContentTopMargin + #1}
 	\setlength{\@ContentOuterMargin}{\@ContentOuterMargin + #2}
 	\setlength{\@ContentBottomMargin}{\@ContentBottomMargin + #3}
@@ -135,14 +203,13 @@
 	\setlength{\@ContentBindingOffset}{\@ContentBindingOffset + #5}
 }
 
-
-
-% --------------------------
-% Page layouts
-% --------------------------
-
-% \SetStandardPaperLayout{width}{height}
 \DeclareRobustCommand{\@SetGenericPageLayout}[2]{
+	%
+	% [#1] : final paper width (PDF export)
+	% [#2] : final paper height (PDF export)
+	%
+	% \SetGenericPageLayout{width}{height}
+	%
 
 	% paper size
 	\setlength{\@PaperWidth}{#1}
@@ -178,9 +245,16 @@
 		}
 }
 
-% \SetBlurbPageLayout{finalwidth}{finalheight}{bleed}{margin}{binding}
 \DeclareRobustCommand{\@SetBlurbPageLayout}[5]{
-
+	%
+	% [#1] : blurb final paper width (PDF export)
+	% [#2] : blurb final paper height (PDF export)
+	% [#3] : blurb bleed (Top, Bottom, Outside Edge)
+	% [#4] : blurb inset for margins / safe boundary (Top, Bottom, Outside Edge)
+	% [#5] : blurb inset for margins / safe boundary (Inner or Binding Edge)
+	%
+	% \SetBlurbPageLayout{finalwidth}{finalheight}{bleed}{margin}{binding}
+	%
 	\newlength{\@BlurbPageWidth}
 	\newlength{\@BlurbPageHeight}
 	\newlength{\@BlurbBleed}
@@ -229,8 +303,11 @@
 			}
 }
 
-% Display layout rules
-\DeclareRobustCommand{\@ShowLayoutRules}{
+\DeclareRobustCommand{\@ShowPageLayoutRules}{
+	%
+	% Display the page layout rules (bleed, margins, content area, binding, ...)
+	% on the page
+	%
 	\AddEverypageHook{
 		\ifthenelse{\isodd{\value{page}}}
 		{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
@@ -275,14 +352,145 @@
 	}
 }
 
+\DeclareRobustCommand{\@SetBlurbCoverLayout}[5]{
+	%
+	% [#1] : blurb final paper width (PDF export)
+	% [#2] : blurb final paper height (PDF export)
+	% [#3] : blurb bleed (all Edges)
+	% [#4] : blurb gutter width
+	% [#5] : blurb inset for margins / safe boundary (Top, Bottom, Outside Edge)
+	%
+	% \SetBlurbCoverLayout{finalwidth}{finalheight}{bleed}{margin}{binding}
+	%
+	\newlength{\@BlurbPageWidth}
+	\newlength{\@BlurbPageHeight}
+	\newlength{\@BlurbBleed}
+	\newlength{\@BlurbMargin}
+	\newlength{\@BlurbGutterWidth}
+
+	\setlength{\@BlurbPageWidth}{#1}     % page width
+	\setlength{\@BlurbPageHeight}{#2}    % page height
+	\setlength{\@BlurbBleed}{#3}         % bleed (top, bottom and outside edges)
+	\setlength{\@BlurbGutterWidth}{#4}   % inset for margins / safe boundary (top, bottom, outside edges)
+	\setlength{\@BlurbMargin}{#5}        % inset for margins / safe boundary (top, bottom, outside edges)
+
+	% page size
+	\setlength{\@PageWidth}{2\@BlurbPageWidth+\@BlurbGutterWidth}
+	\setlength{\@PageHeight}{\@BlurbPageHeight}
+
+	% page bleed margins
+	\@SetBleedMargins{\@BlurbBleed}{\@BlurbBleed}{\@BlurbBleed}{\@BlurbBleed}
+
+	% paper size
+	\setlength{\@PaperWidth}{\@PageWidth + \@BleedInnerMargin + \@BleedOuterMargin}
+	\setlength{\@PaperHeight}{\@PageHeight + \@BleedBottomMargin + \@BleedTopMargin}
+
+	% safe content margins
+	\@SetSafeContentMargins{\@BlurbMargin}{\@BlurbMargin}{\@BlurbMargin}{\@BlurbMargin+\@BlurbGutterWidth/2}
+	
+	% content margins (user-defined content margin + safe content margin)
+	\@AddContentMargins{\@SafeContentTopMargin}{\@SafeContentOuterMargin}{\@SafeContentBottomMargin}{\@SafeContentInnerMargin}{0mm}
+	
+	% content size
+	\setlength{\@ContentWidth}{\@PageWidth - \@BlurbGutterWidth - \@ContentInnerMargin - \@ContentOuterMargin}
+	\setlength{\@ContentHeight}{\@PageHeight - \@ContentTopMargin - \@ContentBottomMargin}
+
+	\geometry{
+			paperwidth=\@PaperWidth,
+			paperheight=\@PaperHeight,
+			inner=\@ContentInnerMargin+\@BleedInnerMargin,
+			outer=\@ContentOuterMargin+\@BleedOuterMargin, 
+			bottom=\@ContentBottomMargin+\@BleedBottomMargin,
+			top=\@ContentTopMargin+\@BleedTopMargin,
+			bindingoffset=0mm,
+			includeall
+			}
+}
+
+\DeclareRobustCommand{\@ShowCoverLayoutRules}{
+	%
+	% Display the cover layout rules (bleed, margins, content area, binding, ...)
+	% on the page
+	%
+	\AddEverypageHook{
+		\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
+			contents={
+			\begin{tikzpicture}
+				% bleed frame
+				\draw [color=red,fill=lightgray,thick] 
+				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
+				% crop frame
+				\draw [color=green,fill=white,thick] 
+				(\@BleedOuterMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin,\@PaperHeight-\@BleedTopMargin);
+				% safe content frame
+				\draw [color=blue,thick] 
+				(\@BleedOuterMargin+\@SafeContentOuterMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth/2-\@SafeContentInnerMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
+				\draw [color=blue,thick] 
+				(\@PaperWidth/2+\@SafeContentInnerMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin-\@SafeContentOuterMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
+				% (\@PaperWidth/2+\@BlurbGutterWidth/2+\@SafeContentInnerMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth/2-\@BlurbGutterWidth/2-\@SafeContentInnerMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
+				% spline
+				\draw[black,thick,dashed] (\@PaperWidth/2-\@BlurbGutterWidth/2,0) -- (\@PaperWidth/2-\@BlurbGutterWidth/2,\@PaperHeight);
+				\draw[black,thick,dashed] (\@PaperWidth/2+\@BlurbGutterWidth/2,0) -- (\@PaperWidth/2+\@BlurbGutterWidth/2,\@PaperHeight);
+				% text frame
+				% \draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
+				% (\@BleedOuterMargin+\@ContentOuterMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@BleedOuterMargin+\@ContentOuterMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
+			\end{tikzpicture}
+		}}
+		\BgMaterial
+	}
+}
+
+% Build the layout from package options
+\ifdefempty{\opt@booksize}{
+	\@SetGenericPageLayout{210mm}{297mm}
+}{
+	\ifdefstring{\opt@cover}{no}{
+		% Generic Book Size
+		\ifdefstring{\opt@booksize}{a4}{
+			\@SetGenericPageLayout{210mm}{297mm}
+		}{}
+		% Blurb Book Size
+		\ifdefstring{\opt@booksize}{TB_5x8}{ %Trade Book 5x8 inches
+			\@SetBlurbPageLayout{12.700cm}{20.321cm}{0.317cm}{0.635cm}{1.270cm}
+		}{}
+		\ifdefstring{\opt@booksize}{TB_6x9}{ % Trade Book 6x9 inches
+			\@SetBlurbPageLayout{15.240cm}{22.861cm}{0.317cm}{0.635cm}{1.270cm}
+		}{}
+		\ifdefstring{\opt@booksize}{TB_8x10}{ % Trade Book 8x10 inches
+			\@SetBlurbPageLayout{20.320cm}{25.401cm}{0.317cm}{0.635cm}{1.270cm}
+		}{}
+		\ifbool{opt@showrules}{\@ShowPageLayoutRules{}}{}
+		\ifdefstring{\opt@pagemodulo}{2}{\AtEndDocument{\@PageCountMultipleOfTwo}}{}
+		\ifdefstring{\opt@pagemodulo}{4}{\AtEndDocument{\@PageCountMultipleOfFour}}{}
+	}{
+		\ifdefstring{\opt@booksize}{TB_8x10}{ % Trade Book 8x10 inches
+			\@SetBlurbCoverLayout{20.320cm}{25.401cm}{0.776cm}{\opt@gutter}{0.635cm}
+			% \@SetBlurbCoverLayout{20.320cm}{25.401cm}{0.317cm}{\opt@gutter}{0.635cm}
+		}{}
+		% \ifdefstring{\opt@cover}{hard}{
+
+		% }{}
+		% \ifdefstring{\opt@cover}{soft}{
+		% }{}
+		\ifbool{opt@showrules}{\@ShowCoverLayoutRules{}}{}
+	}
+}
+
+\ifbool{opt@showframe}{\geometry{showframe}}{}
 
 
-% --------------------------
-% Page count multiple of 4
-% --------------------------
-% Add blank pages to the end of the book so that the total
-% number of pages is a multiple of 4 (print constraint)
-% help : https://tex.stackexchange.com/a/83498
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% BOOK TOTAL PAGE COUNT
+%%
+%% Add blank pages to the end of the book so that the total number of pages 
+%% is a multiple of 2 or 4 (print constraint).
+%%
+%% help : https://tex.stackexchange.com/a/83498
+%%
+%%%%%
+
 \patchcmd\mainmatter{\cleardoublepage}
 {%
 \clearpage\edef\@currentlabel{\number\numexpr\arabic{page}\ifodd\arabic{page}+1\fi\relax}%
@@ -314,30 +522,133 @@
 \ExplSyntaxOff
 
 
-% --------------------------
-% Build Layout
-% --------------------------
-\ifdefempty{\opt@booksize}{
-	\@SetGenericPageLayout{210mm}{297mm}
-}{
-	% Generic Book Size
-	\ifdefstring{\opt@booksize}{a4}{
-		\@SetGenericPageLayout{210mm}{297mm}
-	}{}
-	% Blurb Book Size
-	\ifdefstring{\opt@booksize}{TB_5x8}{ %Trade Book 5x8 inches
-		\@SetBlurbPageLayout{12.700cm}{20.321cm}{0.317cm}{0.635cm}{1.270cm}
-	}{}
-	\ifdefstring{\opt@booksize}{TB_6x9}{ % Trade Book 6x9 inches
-		\@SetBlurbPageLayout{15.240cm}{22.861cm}{0.317cm}{0.635cm}{1.270cm}
-	}{}
-	\ifdefstring{\opt@booksize}{TB_8x10}{ % Trade Book 8x10 inches
-		\@SetBlurbPageLayout{20.320cm}{25.401cm}{0.317cm}{0.635cm}{1.270cm}
-	}{}
-}
-\ifbool{opt@showrules}{\@ShowLayoutRules{}}{}
-\ifbool{opt@showframe}{\geometry{showframe}}{}
-\ifdefstring{\opt@pagemodulo}{2}{\AtEndDocument{\@PageCountMultipleOfTwo}}{}
-\ifdefstring{\opt@pagemodulo}{4}{\AtEndDocument{\@PageCountMultipleOfFour}}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% PHOTO LAYOUT
+%%
+%%%%%
 
+\renewcommand{\cleardoublepage}{%
+\clearpage
+\if@twoside 
+	\ifodd\c@page
+	\else
+		\hbox{}
+		\thispagestyle{empty}
+		\newpage
+		\if@twocolumn
+			\hbox{}\newpage
+		\fi
+	\fi
+\fi
+}
+
+\newcommand*{\cleartoleftpage}{%	
+\clearpage
+\if@twoside
+	\ifodd\c@page
+		\hbox{}\newpage
+		\if@twocolumn
+			\hbox{}\newpage
+		\fi
+	\fi
+\fi
+}
+
+
+% helper
+\newcommand{\TikzAnchor}[2]{#1 #2}
+\def\@PSAnchor#1#2{#1 #2}
+\newlength{\PhotoWidth}
+\newlength{\PhotoHeight}
+\newlength{\@TextBoxWidth}
+\newlength{\@XShiftLeft}
+\newlength{\@XShiftRight}
+\newlength{\@YShift}
+
+
+% declare keys
+\define@choicekey*{CL}{keyc}[\mybin]{alpha,beta,gamma,epsilon}[alpha]{}
+\define@key{kvps}{yanchor}{\def\@PSYAnchor{#1}} % north | south
+\define@key{kvps}{xanchor}{\def\@PSXAnchor{#1}} % west | east
+\define@key{kvps}{width}{\def\@PSWidth{#1}}		
+\define@key{kvps}{xshift}{\def\@PSXShift{#1}}
+\define@key{kvps}{yshift}{\def\@PSYShift{#1}}
+\define@key{kvps}{lpstyle}{\def\@PSLeftPageStyle{#1}}
+\define@key{kvps}{rpstyle}{\def\@PSRightPageStyle{#1}}
+\define@key{kvps}{lpcode}{\def\@PSLeftPageCode{#1}}
+\define@key{kvps}{rpcode}{\def\@PSRightPageCode{#1}}
+\define@key{kvps}{boxcode}{\def\@PSBoxCode{#1}}
+% preset keys
+\savekeys{kvps}{yanchor,xanchor,width,xshift,yshift,lpstyle,rpstyle,lpcode,rpcode,boxcode}
+\presetkeys{kvps}%
+{yanchor=north,xanchor=west,width=2\paperwidth,xshift=0cm,yshift=0cm,lpstyle=empty,rpstyle=empty,lpcode={},rpcode={},boxcode={}}%
+{}
+% command
+\newcommand\PhotoSpread[2][]{
+	%
+	% [#1] : path to image file (mandatory)
+	% [#2] : xanchor	= north | south
+	%		 yanchor	= west  | east
+	%		 width 		= image width (default to 2\paperwidth)
+	%		 xshift		= image shift along x (0mm)
+	%		 yshift		= image shift along y (0mm)
+	%		 lpstyle	= fancyhdr left page style (empty)
+	%        rpstyle	= fancyhdr right page style (empty)
+	%		 lpcode		= code to execute on the left page ({})
+	%        rpcode		= code to execute on the right page ({})
+	%
+
+\setkeys{kvps}{#1}%
+{
+\def\@PSAnchor{\TikzAnchor{\@PSYAnchor}{\@PSXAnchor}}
+
+% correction of half pgflinewidth
+\ifdefstring{\@PSYAnchor}{north}%
+{\setlength{\@YShift}{\@PSYShift+0.5\pgflinewidth}}%
+{\setlength{\@YShift}{\@PSYShift-0.5\pgflinewidth}}%
+
+% correction of half pgflinewidth
+\ifdefstring{\@PSXAnchor}{west}%
+{
+	\setlength{\@XShiftLeft}{\@PSXShift-0.5\pgflinewidth}
+	\setlength{\@XShiftRight}{\@PSXShift-0.5\pgflinewidth-\paperwidth}
+}{
+	\setlength{\@XShiftLeft}{\@PSXShift+0.5\pgflinewidth+\paperwidth}
+	\setlength{\@XShiftRight}{\@PSXShift+0.5\pgflinewidth}
+}%
+
+\settoheight{\PhotoHeight}{\includegraphics[width=\@PSWidth]{#2}}
+
+\cleartoleftpage
+\thispagestyle{\@PSLeftPageStyle}
+\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
+	\node[anchor=\@PSAnchor, xshift=\@XShiftLeft, yshift=\@YShift] at (current page.\@PSAnchor){
+		\includegraphics[width=\@PSWidth]{#2}};
+\end{tikzpicture}
+\@PSLeftPageCode
+%
+%
+\clearpage
+\thispagestyle{\@PSRightPageStyle}
+\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
+	\node[anchor=\@PSAnchor, xshift=\@XShiftRight, yshift=\@YShift] at (current page.\@PSAnchor){
+	\includegraphics[width=\@PSWidth]{#2}};
+\end{tikzpicture}
+\ifdefstring{\@PSXAnchor}{west}{
+	\setlength{\@TextBoxWidth}{\paperwidth - (\@PSWidth+\@XShiftRight+0.5\pgflinewidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
+	\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+		\node [anchor=north east, xshift=-(\@BleedOuterMargin + \@SafeContentOuterMargin), yshift=\@YShift]  at (current page.north east) {%
+		\parbox[t]{\@TextBoxWidth-1cm}{\hrule height 1pt\medskip \textbf{John Doe}\\
+		\textit{Director of something}}
+		};
+	\end{tikzpicture}
+	% \begin{textblock*}{5cm}(\paperwidth-1cm,-1cm)
+	% 	\raggedright
+	% 	\kant[1-20]
+	% 	\LARGE\bfseries\color{white}\captionof{figure}{sdsdksdmskdms\label{fig:twospread}}
+	% \end{textblock*}
+}{}
+\@PSRightPageCode
+}}
 

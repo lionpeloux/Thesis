@@ -11,7 +11,14 @@
 % **************************************************
 % Preliminary declarations
 % **************************************************
-\LoadClass[fleqn]{book}
+\LoadClass[
+	11pt,		% base fontsize
+	openright,	% chapter start on even page (default)
+	fleqn,		% equations are left aligned
+	]{book}
+
+\PassOptionsToPackage{cover}{blurb}
+\PassOptionsToPackage{gutter}{blurb}
 
 % fonts management
 \RequirePackage[T1]{fontenc}
@@ -29,19 +36,19 @@
 \RequirePackage{refcount,lastpage}
 % \RequirePackage{adjustbox}
 % \RequirePackage{eso-pic}
-\RequirePackage[showboxes,absolute,overlay]{textpos} % absolute positionning
 \RequirePackage[
-	top = 14mm,
+	top = 10mm,
 	outer = 14mm,
-	bottom = 7mm,
-	inner = 14mm,
+	bottom = 6mm,
+	inner = 16mm,
 	binding = 0mm,
-	% showrules,
+	showrules,
 	% showframe,
 	% booksize = a4,
 	% booksize = TB_6x9,
 	booksize = TB_8x10,
 	pagemodulo = 4,
+	gutter=2.399cm,
 	]{blurb}
 
 
@@ -49,12 +56,9 @@
 \usepackage[french,english]{babel}
 
 \RequirePackage{color}
-
 \RequirePackage{tikz}
 \RequirePackage{tikzpagenodes}
-
-
-\usetikzlibrary{external,positioning}
+\usetikzlibrary{external} % for chapter and part special pages
 
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
@@ -147,7 +151,7 @@
 
 	% font styles (rm, sf, tt)
 	
-	\DeclareRobustCommand{\HeadingFontStyle}{\ttfamily}
+	\DeclareRobustCommand{\HeadingFontStyle}{\sffamily}
 	\DeclareRobustCommand{\TocFontStyle}{\ttfamily}
 
 	% font weight
@@ -176,7 +180,7 @@
 }
 
 % switch between preset fonts
-\newcommand{\FontSwitchValue}{3}
+\newcommand{\FontSwitchValue}{2}
 \FontSwitch{\FontSwitchValue}
 
 
@@ -295,7 +299,7 @@
 %% Even / Odd / Left / Center / Right / Header / Footer
 
 %% font styles (rm, sf, tt)
-\DeclareRobustCommand{\HdrFontStyle}{\ttfamily}
+\DeclareRobustCommand{\HdrFontStyle}{\sffamily}
 
 % default style
 \pagestyle{fancy}
@@ -303,7 +307,7 @@
 % \iffloatpage{0.0pt}{0.4pt}
 % \newgeometry{⟨options⟩} and \restoregeometry
 % \renewcommand{\headheight}{\iffloatpage{\protect\setlength{\headheight}{0pt}}{\protect\setlength{\headheight}{14pt}}}
-\renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{0.4pt}}
+\renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
 \renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
 \fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\nouppercase{\rightmark}}}
 \fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\nouppercase{\leftmark}}}
@@ -333,26 +337,6 @@
 %% Fancy Pages : Parts and Chapters
 %%
 %%%%%
-
-%% double page clear (utile ?)
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
-    \hbox{}
-    \thispagestyle{empty}
-    \newpage
-	\if@twocolumn\hbox{}\newpage\fi\fi\fi}
-
-%% clear to left
-\newcommand*{\cleartoleftpage}{%
-  \clearpage
-    \if@twoside
-    \ifodd\c@page
-      \hbox{}\newpage
-      \if@twocolumn
-        \hbox{}\newpage
-      \fi
-    \fi
-  \fi
-}
 
 %% help box
 \newcommand*{\tfbox}[1]{{\fboxsep-\fboxrule\fbox{#1}}}
@@ -720,6 +704,34 @@
 \Crefname{table}{Tab.}{Tabs.}
 \crefname{equation}{eq.}{eqs.}
 \Crefname{equation}{Eq.}{Eqs.}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% COLORS
+%%
+%%%%%
+\definecolor{Tblue}{RGB}{104, 135, 255}
+\definecolor{Tred}{RGB}{255, 110, 103}
+\definecolor{Tgreen}{RGB}{147, 250, 103}
+\definecolor{Tgray}{RGB}{184, 184, 184}
+\definecolor{Tdarkgray}{RGB}{56, 56, 56}
+
+\definecolor{gray2}{cmyk}{0,0,0,0.2}
+\definecolor{gray4}{cmyk}{0,0,0,0.4}
+\definecolor{gray6}{cmyk}{0,0,0,0.6}
+\definecolor{gray8}{cmyk}{0,0,0,0.9}
+
+\definecolor{gray1}{cmyk}{0,0,0,0.1}
+\definecolor{gray3}{cmyk}{0,0,0,0.3}
+\definecolor{gray5}{cmyk}{0,0,0,0.5}
+\definecolor{gray7}{cmyk}{0,0,0,0.7}
+\definecolor{gray9}{cmyk}{0,0,0,0.9}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
