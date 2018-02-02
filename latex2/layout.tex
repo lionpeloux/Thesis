@@ -1,4 +1,5 @@
-% \documentclass[11pt,fleqn]{book}
+% \PassOptionsToPackage{showrules}{blurb}
+% \PassOptionsToPackage{showframe}{blurb}
 \documentclass[12pt,fleqn]{thesis}
 % ENCODING
 
@@ -203,7 +204,7 @@
 \include{_abstracts}
 
 % tocloft
-% \setlength{\parskip}{0em}
+\setlength{\parskip}{0em}
 % \addtocontents{toc}{\protect\addvspace{1em}}
 \tableofcontents
 \listoffigures
@@ -217,24 +218,22 @@
 
 	\newrefsection
 
-	\include{ch2_gridshell/twospread}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch2_gridshell/test}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch2_gridshell/twospread}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% % \include{ch2_gridshell/test}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
+	% \part{Fake}
+	% \part{Fake}
+	% \part{Fake}
 
-
-	\part{Fake}
-	\part{Fake}
-	\part{Fake}
-
-	\part{This is a very very very very very smldkqsmldkqs long part title}
-	\chapter{With a very veru very very lonnnnnnngg premier chapitre Linel}
-	\section{Une section}
-	\kant[1-10]
+	% \part{This is a very long part title}
+	% \chapter{With a very veru very very lonnnnnnngg premier chapitre Linel}
+	% \section{Une section}
+	% \kant[1-10]
 
 	
-	\chapter{Mon premier chapitre Linel}
-	\section{Une section}
-	\kant[1-10]
+	% \chapter{Mon premier chapitre Linel}
+	% \section{Une section}
+	% \kant[1-10]
 	
 	% \subsection{Une section}
 	% \kant[1-10]
@@ -277,11 +276,11 @@
 
 
 
-	% \include{ch1_introduction/chapter}
+	\include{ch1_introduction/chapter}
 	
 
-	% \part{Elastic gridshells}\label{part=1}
-	% \include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\part{Elastic gridshells}\label{part=1}
+	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 	% \part{Rich Kirchhoff beam model}\label{part=2}

@@ -508,9 +508,9 @@ INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/lm/ot1lmtt.fd
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/lm/rm-lmtt10.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
-INPUT /usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT ./ch2_gridshell/img/savill_a.jpg
+INPUT ./ch2_gridshell/img/savill_a.jpg
+INPUT ./ch2_gridshell/img/savill_a.jpg
 INPUT cover.aux
 INPUT cover.run.xml
 OUTPUT cover.run.xml
-INPUT /usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
-INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmr10.pfb

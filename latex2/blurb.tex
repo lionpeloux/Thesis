@@ -1,3 +1,5 @@
+% \PassOptionsToPackage{showrules}{blurb}
+% \PassOptionsToPackage{showframe}{blurb}
 \documentclass[fleqn]{thesis}
 
 % DOCUMENT
@@ -43,12 +45,94 @@
 	% full spread
 	\cleartoleftpage
 	\kant[1-2]	
+	
+	\begin{figure}[t]
+		% (%) required at end of lines to prevent extra space
+		\hrule
+		%
+		\begin{subfigure}[b]{\TwoMediaWidth}
+			\includegraphics[width=\textwidth]{mannheim_erection_1.jpg}
+			\caption{Almost flat grid}
+			\label{fig:erec_1}
+		\end{subfigure}%
+		\hspace{\MediaGutterWidth}%
+		\begin{subfigure}[b]{\TwoMediaWidth}
+			\includegraphics[width=\textwidth]{mannheim_erection_2.jpg}
+			\caption{Deformed grid}
+			\label{fig:erec_2}
+		\end{subfigure}
+		\caption[Forming process of the timber lattice of Mannheim, Germany]{Forming process of the timber lattice of Mannheim, Germany.}
+		\label{fig:multihalle}
+		% \hrule
+	\end{figure}
+
+	\clearpage
+page 1
+	\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
+		\node[anchor=north east, xshift=-2cm, yshift=-2cm] at (current page.north east){
+		\includegraphics[width=.5\paperwidth]{mannheim_erection_1.jpg}};
+		\node[anchor=north east, xshift=-2cm, yshift=-12cm] at (current page.north east){
+		\includegraphics[width=.5\paperwidth]{mannheim_erection_2.jpg}
+		};
+	\end{tikzpicture}
+
+
+	\clearpage
+page 2
+	\begin{textblock*}{5cm}(8cm,2cm)%
+		\setlength{\parskip}{0pt}
+		\includegraphics[width=.5\paperwidth]{mannheim_erection_1.jpg}
+		\captionof{subfigure}{Mannheim\label{fig:m1}}
+	\end{textblock*}
+	\begin{textblock*}{5cm}(8cm,12cm)%
+		\setlength{\parskip}{0pt}
+		\includegraphics[width=.5\paperwidth]{mannheim_erection_2.jpg}
+		\captionof{subfigure}{Mannheim\label{fig:m2}}
+	\end{textblock*}
+
+
+
+	\clearpage
+
+	\begin{textblock*}{10cm}(0cm,0cm)%
+		\setlength{\parskip}{0pt}
+		\includegraphics[width=.25\paperwidth]{mannheim_erection_2.jpg}
+		\captionof{figure}{Mannheim\label{fig:twospread}}
+	\end{textblock*}
+
+	\begin{textblock*}{10cm}(0cm,14cm)%
+		\setlength{\parskip}{0pt}
+		\begin{figure}[t]
+			\begin{subfigure}[b]{\TwoMediaWidth}
+				\includegraphics[width=\textwidth]{mannheim_erection_1.jpg}
+				\caption{Almost flat grid}
+				\label{fig:erec_1}
+			\end{subfigure}%
+			\hspace{\MediaGutterWidth}%
+			\begin{subfigure}[b]{\TwoMediaWidth}
+				\includegraphics[width=\textwidth]{mannheim_erection_2.jpg}
+				\caption{Deformed grid}
+				\label{fig:erec_2}
+			\end{subfigure}
+			\caption[Forming process of the timber lattice of Mannheim, Germany]{Forming process of the timber lattice of Mannheim, Germany.}
+			\label{fig:multihalle}
+		\end{figure}
+	\end{textblock*}
+
+	% \clearpage
+	% \begin{textblock*}{10cm}(10cm,16cm)%
+	% 	\setlength{\parskip}{0pt}
+	% 	\includegraphics[width=.25\paperwidth]{mannheim_erection_2.jpg}
+	% 	\captionof{figure}{Mannheim\label{fig:twospread}}
+	% \end{textblock*}
+
+	\cleartoleftpage
 	\PhotoSpread[lpcode=\mycap]{savill_a.jpg}
 
 	% north west
 	\cleartoleftpage
 	\kant[1-2]	
-	\PhotoSpread[width=1.5\paperwidth,xshift=1cm,yshift=-1cm,lpcode=\mycap]{savill_a.jpg}
+	\PhotoSpread[width=1.33\paperwidth,xshift=1cm,yshift=-1cm,lpcode=\mycap]{savill_a.jpg}
 
 	% south west
 	\cleartoleftpage

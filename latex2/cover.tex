@@ -1,4 +1,5 @@
-\documentclass[fleqn,cover]{thesis}
+\PassOptionsToPackage{cover}{blurb}
+\documentclass[fleqn]{thesis}
 
 % DOCUMENT
 \usepackage{kantlipsum}
@@ -8,7 +9,11 @@
 
 \begin{document}
 \thispagestyle{empty}
-sdsd
+\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
+	\node[anchor=north east, xshift=-2cm, yshift=-2cm] at (current page.north east){
+	\includegraphics[width=.75\paperwidth]{savill_a.jpg}};
+\end{tikzpicture}
+
 	% south east
 	% \cleartoleftpage
 	% \kant[1-2]	

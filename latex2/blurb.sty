@@ -37,7 +37,10 @@
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
 \RequirePackage{tikzpagenodes}
-
+\RequirePackage{rotating}
+\RequirePackage[absolute,overlay,
+	showboxes,
+	]{textpos}
 \backgroundsetup{contents={}}
 % \usetikzlibrary{external,positioning}
 
@@ -313,30 +316,45 @@
 		{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
 			contents={
 			\begin{tikzpicture}
+				% bleed area
+				\fill [gray] 
+				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
+				% crop area
+				\fill [white] 
+				(\@BleedInnerMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin,\@PaperHeight-\@BleedTopMargin);
+				\ifbool{opt@showrules}{
 				% bleed frame
-				\draw [color=red,fill=lightgray,thick] 
+				\draw [red,thick] 
 				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
 				% crop frame
-				\draw [color=green,fill=white,thick] 
+				\draw [green,thick] 
 				(\@BleedInnerMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin,\@PaperHeight-\@BleedTopMargin);
 				% safe content frame
-				\draw [color=blue,thick] 
+				\draw [blue,thick] 
 				(\@BleedInnerMargin+\@SafeContentInnerMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin-\@SafeContentOuterMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
 				% binding edge
 				\draw[black,thick,dashed] (\@BleedInnerMargin+\@ContentBindingOffset,0) -- (\@BleedInnerMargin+\@ContentBindingOffset,\@PaperHeight);
 				% content frame
 				\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
 				(\@BleedInnerMargin+\@ContentBindingOffset+\@ContentInnerMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@ContentBindingOffset+\@ContentInnerMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
+				}{}
 			\end{tikzpicture}
 		}}}
 		{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
 			contents={
 			\begin{tikzpicture}
+				% bleed area
+				\fill [gray] 
+				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
+				% crop area
+				\fill [white] 
+				(\@BleedOuterMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin,\@PaperHeight-\@BleedTopMargin);			
+				\ifbool{opt@showrules}{
 				% bleed frame
-				\draw [color=red,fill=lightgray,thick] 
+				\draw [red,thick] 
 				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
 				% crop frame
-				\draw [color=green,fill=white,thick] 
+				\draw [green,thick] 
 				(\@BleedOuterMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin,\@PaperHeight-\@BleedTopMargin);
 				% safe content frame
 				\draw [color=blue,thick] 
@@ -346,6 +364,7 @@
 				% text frame
 				\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
 				(\@BleedOuterMargin+\@ContentOuterMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@BleedOuterMargin+\@ContentOuterMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
+				}{}
 			\end{tikzpicture}
 		}}}
 		\BgMaterial
@@ -459,7 +478,7 @@
 		\ifdefstring{\opt@booksize}{TB_8x10}{ % Trade Book 8x10 inches
 			\@SetBlurbPageLayout{20.320cm}{25.401cm}{0.317cm}{0.635cm}{1.270cm}
 		}{}
-		\ifbool{opt@showrules}{\@ShowPageLayoutRules{}}{}
+		\@ShowPageLayoutRules{}
 		\ifdefstring{\opt@pagemodulo}{2}{\AtEndDocument{\@PageCountMultipleOfTwo}}{}
 		\ifdefstring{\opt@pagemodulo}{4}{\AtEndDocument{\@PageCountMultipleOfFour}}{}
 	}{
@@ -639,15 +658,14 @@
 	\setlength{\@TextBoxWidth}{\paperwidth - (\@PSWidth+\@XShiftRight+0.5\pgflinewidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
 	\begin{tikzpicture}[remember picture, overlay, inner sep=0]
 		\node [anchor=north east, xshift=-(\@BleedOuterMargin + \@SafeContentOuterMargin), yshift=\@YShift]  at (current page.north east) {%
-		\parbox[t]{\@TextBoxWidth-1cm}{\hrule height 1pt\medskip \textbf{John Doe}\\
-		\textit{Director of something}}
-		};
+		\rotatebox{0}{\parbox[t]{\@TextBoxWidth-1cm}{%
+			% \hrule height 1pt \bigskip
+			{\color{Tblue}\sffamily\bfseries\large\uppercase{Savill Building}}\\[0pt]
+			{\sffamily\bfseries\uppercase{Gleen Howell Architects}}\\[8pt]
+			{\color{gray}\sffamily\small The larch and oak structure is the end-result of much refinement, combining complex engineering and craft skills and is one of the few true shell roofs in existence.
+			}
+		}}};
 	\end{tikzpicture}
-	% \begin{textblock*}{5cm}(\paperwidth-1cm,-1cm)
-	% 	\raggedright
-	% 	\kant[1-20]
-	% 	\LARGE\bfseries\color{white}\captionof{figure}{sdsdksdmskdms\label{fig:twospread}}
-	% \end{textblock*}
 }{}
 \@PSRightPageCode
 }}

@@ -17,9 +17,6 @@
 	fleqn,		% equations are left aligned
 	]{book}
 
-\PassOptionsToPackage{cover}{blurb}
-\PassOptionsToPackage{gutter}{blurb}
-
 % fonts management
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
@@ -42,8 +39,6 @@
 	bottom = 6mm,
 	inner = 16mm,
 	binding = 0mm,
-	showrules,
-	% showframe,
 	% booksize = a4,
 	% booksize = TB_6x9,
 	booksize = TB_8x10,
@@ -150,9 +145,7 @@
 \DeclareRobustCommand{\FontSwitch}[1]{
 
 	% font styles (rm, sf, tt)
-	
 	\DeclareRobustCommand{\HeadingFontStyle}{\sffamily}
-	\DeclareRobustCommand{\TocFontStyle}{\ttfamily}
 
 	% font weight
 	\DeclareRobustCommand{\HeadingFontWeight}{\bfseries}
@@ -186,9 +179,8 @@
 
 %% caption
 %% --------------------------
-\usepackage[font=small,textfont={normalfont},labelfont={bf,tt}]{caption}
 \usepackage[]{subcaption} % better than subfig and subfigures
-
+\usepackage[justification=raggedright,font=small,textfont={normalfont},labelfont={bf,tt}]{caption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[sub]{skip=5pt}		% subcpation	
@@ -222,7 +214,7 @@
 %% --------------------------
 
 %% font styles (rm, sf, tt)
-\DeclareRobustCommand{\TocFontStyle}{\ttfamily} % \scshape
+\DeclareRobustCommand{\TocFontStyle}{\sffamily} % \scshape
 \DeclareRobustCommand{\TocPartFont}{\TocFontStyle\LARGE\bfseries}
 \DeclareRobustCommand{\TocChapFont}{\TocFontStyle\large\bfseries}
 \DeclareRobustCommand{\TocChapFontFrontBack}{\TocFontStyle\large}
