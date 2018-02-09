@@ -618,55 +618,55 @@
 	%        rpcode		= code to execute on the right page ({})
 	%
 
-\setkeys{kvps}{#1}%
-{
-\def\@PSAnchor{\TikzAnchor{\@PSYAnchor}{\@PSXAnchor}}
+	\setkeys{kvps}{#1}%
+	{
+	\def\@PSAnchor{\TikzAnchor{\@PSYAnchor}{\@PSXAnchor}}
 
-% correction of half pgflinewidth
-\ifdefstring{\@PSYAnchor}{north}%
-{\setlength{\@YShift}{\@PSYShift+0.5\pgflinewidth}}%
-{\setlength{\@YShift}{\@PSYShift-0.5\pgflinewidth}}%
+	% correction of half pgflinewidth (Y)
+	\ifdefstring{\@PSYAnchor}{north}%
+	{\setlength{\@YShift}{\@PSYShift+0.5\pgflinewidth}}%
+	{\setlength{\@YShift}{\@PSYShift-0.5\pgflinewidth}}%
 
-% correction of half pgflinewidth
-\ifdefstring{\@PSXAnchor}{west}%
-{
-	\setlength{\@XShiftLeft}{\@PSXShift-0.5\pgflinewidth}
-	\setlength{\@XShiftRight}{\@PSXShift-0.5\pgflinewidth-\paperwidth}
-}{
-	\setlength{\@XShiftLeft}{\@PSXShift+0.5\pgflinewidth+\paperwidth}
-	\setlength{\@XShiftRight}{\@PSXShift+0.5\pgflinewidth}
-}%
+	% correction of half pgflinewidth (X)
+	\ifdefstring{\@PSXAnchor}{west}%
+	{
+		\setlength{\@XShiftLeft}{\@PSXShift-0.5\pgflinewidth}
+		\setlength{\@XShiftRight}{\@PSXShift-0.5\pgflinewidth-\paperwidth}
+	}{
+		\setlength{\@XShiftLeft}{\@PSXShift+0.5\pgflinewidth+\paperwidth}
+		\setlength{\@XShiftRight}{\@PSXShift+0.5\pgflinewidth}
+	}%
 
-\settoheight{\PhotoHeight}{\includegraphics[width=\@PSWidth]{#2}}
+	\settoheight{\PhotoHeight}{\includegraphics[width=\@PSWidth]{#2}}
 
-\cleartoleftpage
-\thispagestyle{\@PSLeftPageStyle}
-\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
-	\node[anchor=\@PSAnchor, xshift=\@XShiftLeft, yshift=\@YShift] at (current page.\@PSAnchor){
-		\includegraphics[width=\@PSWidth]{#2}};
-\end{tikzpicture}
-\@PSLeftPageCode
-%
-%
-\clearpage
-\thispagestyle{\@PSRightPageStyle}
-\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
-	\node[anchor=\@PSAnchor, xshift=\@XShiftRight, yshift=\@YShift] at (current page.\@PSAnchor){
-	\includegraphics[width=\@PSWidth]{#2}};
-\end{tikzpicture}
-\ifdefstring{\@PSXAnchor}{west}{
-	\setlength{\@TextBoxWidth}{\paperwidth - (\@PSWidth+\@XShiftRight+0.5\pgflinewidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
-	\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-		\node [anchor=north east, xshift=-(\@BleedOuterMargin + \@SafeContentOuterMargin), yshift=\@YShift]  at (current page.north east) {%
-		\rotatebox{0}{\parbox[t]{\@TextBoxWidth-1cm}{%
-			% \hrule height 1pt \bigskip
-			{\color{Tblue}\sffamily\bfseries\large\uppercase{Savill Building}}\\[0pt]
-			{\sffamily\bfseries\uppercase{Gleen Howell Architects}}\\[8pt]
-			{\color{gray}\sffamily\small The larch and oak structure is the end-result of much refinement, combining complex engineering and craft skills and is one of the few true shell roofs in existence.
-			}
-		}}};
+	\cleartoleftpage
+	\thispagestyle{\@PSLeftPageStyle}
+	\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
+		\node[anchor=\@PSAnchor, xshift=\@XShiftLeft, yshift=\@YShift] at (current page.\@PSAnchor){
+			\includegraphics[width=\@PSWidth]{#2}};
 	\end{tikzpicture}
-}{}
-\@PSRightPageCode
-}}
+	\@PSLeftPageCode
+	%
+	%
+	\clearpage
+	\thispagestyle{\@PSRightPageStyle}
+	\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
+		\node[anchor=\@PSAnchor, xshift=\@XShiftRight, yshift=\@YShift] at (current page.\@PSAnchor){
+		\includegraphics[width=\@PSWidth]{#2}};
+	\end{tikzpicture}
+	\ifdefstring{\@PSXAnchor}{west}{
+		\setlength{\@TextBoxWidth}{\paperwidth - (\@PSWidth+\@XShiftRight+0.5\pgflinewidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
+		\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+			\node [anchor=north east, xshift=-(\@BleedOuterMargin + \@SafeContentOuterMargin), yshift=\@YShift]  at (current page.north east) {%
+			\rotatebox{0}{\parbox[t]{\@TextBoxWidth-1cm}{%
+				% \hrule height 1pt \bigskip
+				{\color{Tblue}\sffamily\bfseries\large\uppercase{Savill Building}}\\[0pt]
+				{\sffamily\bfseries\uppercase{Gleen Howell Architects}}\\[8pt]
+				{\color{gray}\sffamily\small The larch and oak structure is the end-result of much refinement, combining complex engineering and craft skills and is one of the few true shell roofs in existence.
+				}
+			}}};
+		\end{tikzpicture}
+	}{}
+	\@PSRightPageCode}
+}
 
