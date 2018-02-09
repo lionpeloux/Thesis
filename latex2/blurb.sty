@@ -43,7 +43,7 @@
 	]{textpos}
 \backgroundsetup{contents={}}
 % \usetikzlibrary{external,positioning}
-
+\usetikzlibrary{backgrounds}
 \RequirePackage[]{graphicx}
 
 % \RequirePackage[
@@ -548,30 +548,30 @@
 %%%%%
 
 \renewcommand{\cleardoublepage}{%
-\clearpage
-\if@twoside 
-	\ifodd\c@page
-	\else
-		\hbox{}
-		\thispagestyle{empty}
-		\newpage
-		\if@twocolumn
-			\hbox{}\newpage
+	\clearpage
+	\if@twoside 
+		\ifodd\c@page
+		\else
+			\hbox{}
+			\thispagestyle{empty}
+			\newpage
+			\if@twocolumn
+				\hbox{}\newpage
+			\fi
 		\fi
 	\fi
-\fi
 }
 
 \newcommand*{\cleartoleftpage}{%	
-\clearpage
-\if@twoside
-	\ifodd\c@page
-		\hbox{}\newpage
-		\if@twocolumn
+	\clearpage
+	\if@twoside
+		\ifodd\c@page
 			\hbox{}\newpage
+			\if@twocolumn
+				\hbox{}\newpage
+			\fi
 		\fi
 	\fi
-\fi
 }
 
 
@@ -581,27 +581,40 @@
 \newlength{\PhotoWidth}
 \newlength{\PhotoHeight}
 \newlength{\@TextBoxWidth}
+\newlength{\@TextBoxMaxWidth}
+\newlength{\@TextBoxXMargin}
+\newlength{\@TextBoxYMargin}
 \newlength{\@XShiftLeft}
 \newlength{\@XShiftRight}
 \newlength{\@YShift}
 
+\newlength{\@radius}
+\renewcommand{\fboxsep}{0pt}
+\setlength{\fboxrule}{0pt}
+\setlength{\@radius}{0mm}
+
+\setlength{\@TextBoxWidth}{80mm}
+\setlength{\@TextBoxXMargin}{5mm}
+\setlength{\@TextBoxYMargin}{0mm}
 
 % declare keys
 \define@choicekey*{CL}{keyc}[\mybin]{alpha,beta,gamma,epsilon}[alpha]{}
 \define@key{kvps}{yanchor}{\def\@PSYAnchor{#1}} % north | south
 \define@key{kvps}{xanchor}{\def\@PSXAnchor{#1}} % west | east
-\define@key{kvps}{width}{\def\@PSWidth{#1}}		
+\define@key{kvps}{width}{\def\@PSWidth{#1}}
+\define@key{kvps}{height}{\def\@PSHeight{#1}}	
 \define@key{kvps}{xshift}{\def\@PSXShift{#1}}
 \define@key{kvps}{yshift}{\def\@PSYShift{#1}}
 \define@key{kvps}{lpstyle}{\def\@PSLeftPageStyle{#1}}
 \define@key{kvps}{rpstyle}{\def\@PSRightPageStyle{#1}}
 \define@key{kvps}{lpcode}{\def\@PSLeftPageCode{#1}}
 \define@key{kvps}{rpcode}{\def\@PSRightPageCode{#1}}
-\define@key{kvps}{boxcode}{\def\@PSBoxCode{#1}}
+\define@key{kvps}{boxcode}{\def\@PSTextBoxCode{#1}}
+\define@key{kvps}{boxvpos}{\def\@PSTextBoxPosition{#1}}
 % preset keys
-\savekeys{kvps}{yanchor,xanchor,width,xshift,yshift,lpstyle,rpstyle,lpcode,rpcode,boxcode}
+\savekeys{kvps}{yanchor,xanchor,width,xshift,yshift,lpstyle,rpstyle,lpcode,rpcode,boxcode,boxvpos}
 \presetkeys{kvps}%
-{yanchor=north,xanchor=west,width=2\paperwidth,xshift=0cm,yshift=0cm,lpstyle=empty,rpstyle=empty,lpcode={},rpcode={},boxcode={}}%
+{yanchor=north,xanchor=west,width=2\paperwidth,xshift=0cm,yshift=0cm,lpstyle=empty,rpstyle=empty,lpcode={},rpcode={},boxcode={},boxvpos=top}%
 {}
 % command
 \newcommand\PhotoSpread[2][]{
@@ -616,11 +629,14 @@
 	%        rpstyle	= fancyhdr right page style (empty)
 	%		 lpcode		= code to execute on the left page ({})
 	%        rpcode		= code to execute on the right page ({})
-	%
+	%        boxcode	= code to put in the textbox ({})
+	%        boxvpos	= top | bottom
 
-	\setkeys{kvps}{#1}%
-	{
-	\def\@PSAnchor{\TikzAnchor{\@PSYAnchor}{\@PSXAnchor}}
+	\setkeys{kvps}{#1}{\def\@PSAnchor{\TikzAnchor{\@PSYAnchor}{\@PSXAnchor}}
+	
+	% height and width of the image
+	\settoheight{\PhotoHeight}{\includegraphics[width=\@PSWidth]{#2}}
+	\settowidth{\PhotoWidth}{\includegraphics[width=\@PSWidth]{#2}}
 
 	% correction of half pgflinewidth (Y)
 	\ifdefstring{\@PSYAnchor}{north}%
@@ -637,36 +653,76 @@
 		\setlength{\@XShiftRight}{\@PSXShift+0.5\pgflinewidth}
 	}%
 
-	\settoheight{\PhotoHeight}{\includegraphics[width=\@PSWidth]{#2}}
-
+	% ==========
+	% Left page
+	% ==========
 	\cleartoleftpage
 	\thispagestyle{\@PSLeftPageStyle}
-	\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
+	\begin{tikzpicture}[remember picture, inner sep=0pt]
+		% \coordinate NL_tl ($ ( A) + (0 ,\a) $);
 		\node[anchor=\@PSAnchor, xshift=\@XShiftLeft, yshift=\@YShift] at (current page.\@PSAnchor){
 			\includegraphics[width=\@PSWidth]{#2}};
+		\node (NL_tl) at (current bounding box.north west) {}; % top-left corner
+		\node (NL_bl) at (current bounding box.south west) {}; % bottom-left corner
+		\pgfresetboundingbox
+		\path[use as bounding box] (0,0);
+		\filldraw[red] (NL_tl) circle [radius=\@radius];
+		\filldraw[red] (NL_bl) circle [radius=\@radius];
 	\end{tikzpicture}
+	% if the picture is east aligned, the caption goes to the left page
+	\ifdefstring{\@PSXAnchor}{east}{
+		\setlength{\@TextBoxMaxWidth}{2\paperwidth - (-\@PSXShift+\@PSWidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
+		\setlength{\@TextBoxWidth}{\minof{\@TextBoxWidth}{\@TextBoxMaxWidth}}
+		% \setlength{\@TextBoxWidth}{80mm}
+		\ifdefstring{\@PSTextBoxPosition}{top}{
+			\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+				\node [anchor=north east, xshift=-\@TextBoxXMargin, yshift=-\@TextBoxYMargin]  
+					at (NL_tl) {%
+				\rotatebox{0}{\fbox{\parbox[t]{\@TextBoxWidth-\@TextBoxXMargin}{\flushright\@PSTextBoxCode}}}};
+			\end{tikzpicture}
+		}{}
+		\ifdefstring{\@PSTextBoxPosition}{bottom}{
+			\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+				\node [anchor=south east, xshift=-\@TextBoxXMargin, yshift=\@TextBoxYMargin] 
+					at (NL_bl) {%
+				\rotatebox{0}{\fbox{\parbox[b]{\@TextBoxWidth-\@TextBoxXMargin}{\flushright\@PSTextBoxCode}}}};
+			\end{tikzpicture}
+		}{}
+	}{}
 	\@PSLeftPageCode
-	%
-	%
+	% ==========
+	% Right page
+	% ==========
 	\clearpage
 	\thispagestyle{\@PSRightPageStyle}
-	\begin{tikzpicture}[remember picture,overlay, inner sep=0pt]
-		\node[anchor=\@PSAnchor, xshift=\@XShiftRight, yshift=\@YShift] at (current page.\@PSAnchor){
-		\includegraphics[width=\@PSWidth]{#2}};
+	\begin{tikzpicture}[remember picture, inner sep=0pt]
+		\node[anchor=\@PSAnchor, xshift=\@XShiftRight, yshift=\@YShift] (NR_tl) at (current page.\@PSAnchor){
+			\includegraphics[width=\@PSWidth]{#2}};
+		\node (NR_tr) at (current bounding box.north east) {}; % top-right corner
+		\node (NR_br) at (current bounding box.south east) {}; % bottom-right corner
+		\pgfresetboundingbox
+		\path[use as bounding box] (0,0);
+		\filldraw[red] (NR_tr) circle [radius=\@radius];
+		\filldraw[red] (NR_br) circle [radius=\@radius];
 	\end{tikzpicture}
+	% if the picture is west aligned, the caption goes to the right page
 	\ifdefstring{\@PSXAnchor}{west}{
-		\setlength{\@TextBoxWidth}{\paperwidth - (\@PSWidth+\@XShiftRight+0.5\pgflinewidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
-		\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-			\node [anchor=north east, xshift=-(\@BleedOuterMargin + \@SafeContentOuterMargin), yshift=\@YShift]  at (current page.north east) {%
-			\rotatebox{0}{\parbox[t]{\@TextBoxWidth-1cm}{%
-				% \hrule height 1pt \bigskip
-				{\color{Tblue}\sffamily\bfseries\large\uppercase{Savill Building}}\\[0pt]
-				{\sffamily\bfseries\uppercase{Gleen Howell Architects}}\\[8pt]
-				{\color{gray}\sffamily\small The larch and oak structure is the end-result of much refinement, combining complex engineering and craft skills and is one of the few true shell roofs in existence.
-				}
-			}}};
-		\end{tikzpicture}
+		\setlength{\@TextBoxMaxWidth}{2\paperwidth - (\@PSXShift+\@PSWidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
+		\setlength{\@TextBoxWidth}{\minof{\@TextBoxWidth}{\@TextBoxMaxWidth}}
+		\ifdefstring{\@PSTextBoxPosition}{top}{
+			\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+				\node [anchor=north west, xshift=\@TextBoxXMargin, yshift=-\@TextBoxYMargin]  
+					at (NR_tr) {%
+				\rotatebox{0}{\fbox{\parbox[t]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
+			\end{tikzpicture}
+		}{}
+		\ifdefstring{\@PSTextBoxPosition}{bottom}{
+			\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+				\node [anchor=south west, xshift=\@TextBoxXMargin, yshift=\@TextBoxYMargin] 
+					at (NR_br) {%
+				\rotatebox{0}{\fbox{\parbox[b]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
+			\end{tikzpicture}
+		}{}
 	}{}
 	\@PSRightPageCode}
 }
-
