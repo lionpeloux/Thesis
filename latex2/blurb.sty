@@ -45,7 +45,8 @@
 % \usetikzlibrary{external,positioning}
 \usetikzlibrary{backgrounds}
 \RequirePackage[]{graphicx}
-
+\RequirePackage{afterpage}
+\RequirePackage[strict]{changepage}
 % \RequirePackage[
 % 	% showboxes,
 % 	absolute,overlay]{textpos} % absolute positionning
@@ -510,28 +511,24 @@
 %%
 %%%%%
 
-\patchcmd\mainmatter{\cleardoublepage}
-{%
-\clearpage\edef\@currentlabel{\number\numexpr\arabic{page}\ifodd\arabic{page}+1\fi\relax}%
-\label{LastFrontmatterPage}%
-\cleardoublepage
+\patchcmd\mainmatter{\cleardoublepage}{%
+	\clearpage\edef\@currentlabel{\number\numexpr\arabic{page}\ifodd\arabic{page}+1\fi\relax}%
+	\label{LastFrontmatterPage}%
+	\cleardoublepage
 }{}{}
 
 \ExplSyntaxOn
-\cs_new:Npn \egreg_int_coremainder:nn #1 #2
- {
+\cs_new:Npn \egreg_int_coremainder:nn #1 #2{%
   \int_mod:nn { #2 - \int_mod:nn { #1 } { #2 } } { #2 }
 }
-\NewDocumentCommand{\@PageCountMultipleOfFour} { O{0} }
-{
+\NewDocumentCommand{\@PageCountMultipleOfFour} { O{0} }{%
 	\prg_replicate:nn
 	{
 		\egreg_int_coremainder:nn { #1 + \getrefnumber{LastFrontmatterPage} + \getpagerefnumber{LastPage} } { 4 }
 	}
 	{ \thispagestyle{empty}\null\clearpage }
 }
-\NewDocumentCommand{\@PageCountMultipleOfTwo} { O{0} }
-{
+\NewDocumentCommand{\@PageCountMultipleOfTwo} { O{0} }{%
 	\prg_replicate:nn
 	{
 		\egreg_int_coremainder:nn { #1 + \getrefnumber{LastFrontmatterPage} + \getpagerefnumber{LastPage} } { 2 }
@@ -574,7 +571,6 @@
 	\fi
 }
 
-
 % helper
 \newcommand{\TikzAnchor}[2]{#1 #2}
 \def\@PSAnchor#1#2{#1 #2}
@@ -590,15 +586,14 @@
 
 \newlength{\@radius}
 \renewcommand{\fboxsep}{0pt}
-\setlength{\fboxrule}{0pt}
-\setlength{\@radius}{0mm}
+\setlength{\fboxrule}{1pt}
+\setlength{\@radius}{0.5mm}
 
 \setlength{\@TextBoxWidth}{80mm}
-\setlength{\@TextBoxXMargin}{5mm}
+\setlength{\@TextBoxXMargin}{10mm}
 \setlength{\@TextBoxYMargin}{0mm}
 
 % declare keys
-\define@choicekey*{CL}{keyc}[\mybin]{alpha,beta,gamma,epsilon}[alpha]{}
 \define@key{kvps}{yanchor}{\def\@PSYAnchor{#1}} % north | south
 \define@key{kvps}{xanchor}{\def\@PSXAnchor{#1}} % west | east
 \define@key{kvps}{width}{\def\@PSWidth{#1}}
@@ -631,98 +626,233 @@
 	%        rpcode		= code to execute on the right page ({})
 	%        boxcode	= code to put in the textbox ({})
 	%        boxvpos	= top | bottom
+	% 
+	% help : https://tex.stackexchange.com/a/23865
+	% help : https://tex.stackexchange.com/a/55656
+	%
 
-	\setkeys{kvps}{#1}{\def\@PSAnchor{\TikzAnchor{\@PSYAnchor}{\@PSXAnchor}}
+	% make sure to start on a left page
+	% but do not break text flow around the double page
+	\afterpage{%
+    \clearpage% flush all other floats
+    \ifodd\value{page}
+    % \else% uncomment this else to get odd/even instead of even/odd
+        \expandafter\afterpage% put it on the next page if this one is odd
+    \fi
+    {%
+		\setkeys{kvps}{#1}{\def\@PSAnchor{\TikzAnchor{\@PSYAnchor}{\@PSXAnchor}}
 	
-	% height and width of the image
-	\settoheight{\PhotoHeight}{\includegraphics[width=\@PSWidth]{#2}}
-	\settowidth{\PhotoWidth}{\includegraphics[width=\@PSWidth]{#2}}
+		% height and width of the image
+		\settoheight{\PhotoHeight}{\includegraphics[width=\@PSWidth]{#2}}
+		\settowidth{\PhotoWidth}{\includegraphics[width=\@PSWidth]{#2}}
 
-	% correction of half pgflinewidth (Y)
-	\ifdefstring{\@PSYAnchor}{north}%
-	{\setlength{\@YShift}{\@PSYShift+0.5\pgflinewidth}}%
-	{\setlength{\@YShift}{\@PSYShift-0.5\pgflinewidth}}%
+		% correction of half pgflinewidth (Y)
+		\ifdefstring{\@PSYAnchor}{north}%
+		{\setlength{\@YShift}{\@PSYShift+0.5\pgflinewidth}}%
+		{\setlength{\@YShift}{\@PSYShift-0.5\pgflinewidth}}%
 
-	% correction of half pgflinewidth (X)
-	\ifdefstring{\@PSXAnchor}{west}%
-	{
-		\setlength{\@XShiftLeft}{\@PSXShift-0.5\pgflinewidth}
-		\setlength{\@XShiftRight}{\@PSXShift-0.5\pgflinewidth-\paperwidth}
-	}{
-		\setlength{\@XShiftLeft}{\@PSXShift+0.5\pgflinewidth+\paperwidth}
-		\setlength{\@XShiftRight}{\@PSXShift+0.5\pgflinewidth}
-	}%
+		% correction of half pgflinewidth (X)
+		\ifdefstring{\@PSXAnchor}{west}%
+		{
+			\setlength{\@XShiftLeft}{\@PSXShift-0.5\pgflinewidth}
+			\setlength{\@XShiftRight}{\@PSXShift-0.5\pgflinewidth-\paperwidth}
+		}{
+			\setlength{\@XShiftLeft}{\@PSXShift+0.5\pgflinewidth+\paperwidth}
+			\setlength{\@XShiftRight}{\@PSXShift+0.5\pgflinewidth}
+		}%
 
-	% ==========
-	% Left page
-	% ==========
-	\cleartoleftpage
-	\thispagestyle{\@PSLeftPageStyle}
-	\begin{tikzpicture}[remember picture, inner sep=0pt]
-		% \coordinate NL_tl ($ ( A) + (0 ,\a) $);
-		\node[anchor=\@PSAnchor, xshift=\@XShiftLeft, yshift=\@YShift] at (current page.\@PSAnchor){
-			\includegraphics[width=\@PSWidth]{#2}};
-		\node (NL_tl) at (current bounding box.north west) {}; % top-left corner
-		\node (NL_bl) at (current bounding box.south west) {}; % bottom-left corner
-		\pgfresetboundingbox
-		\path[use as bounding box] (0,0);
-		\filldraw[red] (NL_tl) circle [radius=\@radius];
-		\filldraw[red] (NL_bl) circle [radius=\@radius];
-	\end{tikzpicture}
-	% if the picture is east aligned, the caption goes to the left page
-	\ifdefstring{\@PSXAnchor}{east}{
-		\setlength{\@TextBoxMaxWidth}{2\paperwidth - (-\@PSXShift+\@PSWidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
-		\setlength{\@TextBoxWidth}{\minof{\@TextBoxWidth}{\@TextBoxMaxWidth}}
-		% \setlength{\@TextBoxWidth}{80mm}
-		\ifdefstring{\@PSTextBoxPosition}{top}{
-			\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-				\node [anchor=north east, xshift=-\@TextBoxXMargin, yshift=-\@TextBoxYMargin]  
-					at (NL_tl) {%
-				\rotatebox{0}{\fbox{\parbox[t]{\@TextBoxWidth-\@TextBoxXMargin}{\flushright\@PSTextBoxCode}}}};
-			\end{tikzpicture}
+		% ==========
+		% Left page
+		% ==========
+		% \cleartoleftpage
+		\thispagestyle{\@PSLeftPageStyle}
+		\begin{tikzpicture}[remember picture, inner sep=0pt]
+			% \coordinate NL_tl ($ ( A) + (0 ,\a) $);
+			\node[anchor=\@PSAnchor, xshift=\@XShiftLeft, yshift=\@YShift] at (current page.\@PSAnchor){
+				\includegraphics[width=\@PSWidth]{#2}};
+			\coordinate[xshift=0.0\pgflinewidth] (TL) at (current bounding box.north west) {}; % top-left corner
+			\coordinate[xshift=0.0\pgflinewidth] (BL) at (current bounding box.south west) {}; % bottom-left corner
+			\pgfresetboundingbox
+			\path[use as bounding box] (0,0);
+			\filldraw[red] (TL) circle [radius=\@radius];
+			\filldraw[red] (BL) circle [radius=\@radius];
+		\end{tikzpicture}
+		% if the picture is east aligned, the caption goes to the left page
+		\ifdefstring{\@PSXAnchor}{east}{
+			\setlength{\@TextBoxMaxWidth}{2\paperwidth - (-\@PSXShift+\@PSWidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
+			\setlength{\@TextBoxWidth}{\minof{\@TextBoxWidth}{\@TextBoxMaxWidth}}
+			% \setlength{\@TextBoxWidth}{80mm}
+			\ifdefstring{\@PSTextBoxPosition}{top}{
+				\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+					\node [anchor=north east, xshift=-\@TextBoxXMargin, yshift=-\@TextBoxYMargin]  
+						at (TL) {%
+					\rotatebox{0}{\fbox{\parbox[t]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
+				\end{tikzpicture}
+			}{}
+			\ifdefstring{\@PSTextBoxPosition}{bottom}{
+				\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+					\node [anchor=south east, xshift=-\@TextBoxXMargin, yshift=\@TextBoxYMargin] 
+						at (BL) {%
+					\rotatebox{0}{\fbox{\parbox[b]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
+				\end{tikzpicture}
+			}{}
 		}{}
-		\ifdefstring{\@PSTextBoxPosition}{bottom}{
-			\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-				\node [anchor=south east, xshift=-\@TextBoxXMargin, yshift=\@TextBoxYMargin] 
-					at (NL_bl) {%
-				\rotatebox{0}{\fbox{\parbox[b]{\@TextBoxWidth-\@TextBoxXMargin}{\flushright\@PSTextBoxCode}}}};
-			\end{tikzpicture}
+		\@PSLeftPageCode
+		% ==========
+		% Right page
+		% ==========
+		\clearpage
+		\thispagestyle{\@PSRightPageStyle}
+		\begin{tikzpicture}[remember picture, inner sep=0pt]
+			\node[anchor=\@PSAnchor, xshift=\@XShiftRight, yshift=\@YShift] at (current page.\@PSAnchor){
+				\includegraphics[width=\@PSWidth]{#2}};
+			\coordinate[xshift=0.25\pgflinewidth] (TR) at (current bounding box.north east) {}; % top-left corner
+			\coordinate[xshift=0.25\pgflinewidth] (BR) at (current bounding box.south east) {}; % bottom-left corner
+			\pgfresetboundingbox
+			\path[use as bounding box] (0,0);
+			\filldraw[red] (TR) circle [radius=\@radius];
+			\filldraw[red] (BR) circle [radius=\@radius];
+			% \draw[red] (BL) rectangle (TR); 
+		\end{tikzpicture}
+		% if the picture is west aligned, the caption goes to the right page
+		\ifdefstring{\@PSXAnchor}{west}{
+			\setlength{\@TextBoxMaxWidth}{2\paperwidth - (\@PSXShift+\@PSWidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
+			\setlength{\@TextBoxWidth}{\minof{\@TextBoxWidth}{\@TextBoxMaxWidth}}
+			\ifdefstring{\@PSTextBoxPosition}{top}{
+				\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+					\node [anchor=north west, xshift=\@TextBoxXMargin, yshift=-\@TextBoxYMargin]  
+						at (TR) {%
+					\rotatebox{0}{\fbox{\parbox[t]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
+				\end{tikzpicture}
+			}{}
+			\ifdefstring{\@PSTextBoxPosition}{bottom}{
+				\begin{tikzpicture}[remember picture, overlay, inner sep=0]
+					\node [anchor=south west, xshift=\@TextBoxXMargin, yshift=\@TextBoxYMargin] 
+						at (BR) {%
+					\rotatebox{0}{\fbox{\parbox[b]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
+				\end{tikzpicture}
+			}{}
 		}{}
-	}{}
-	\@PSLeftPageCode
-	% ==========
-	% Right page
-	% ==========
-	\clearpage
-	\thispagestyle{\@PSRightPageStyle}
-	\begin{tikzpicture}[remember picture, inner sep=0pt]
-		\node[anchor=\@PSAnchor, xshift=\@XShiftRight, yshift=\@YShift] (NR_tl) at (current page.\@PSAnchor){
-			\includegraphics[width=\@PSWidth]{#2}};
-		\node (NR_tr) at (current bounding box.north east) {}; % top-right corner
-		\node (NR_br) at (current bounding box.south east) {}; % bottom-right corner
-		\pgfresetboundingbox
-		\path[use as bounding box] (0,0);
-		\filldraw[red] (NR_tr) circle [radius=\@radius];
-		\filldraw[red] (NR_br) circle [radius=\@radius];
-	\end{tikzpicture}
-	% if the picture is west aligned, the caption goes to the right page
-	\ifdefstring{\@PSXAnchor}{west}{
-		\setlength{\@TextBoxMaxWidth}{2\paperwidth - (\@PSXShift+\@PSWidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
-		\setlength{\@TextBoxWidth}{\minof{\@TextBoxWidth}{\@TextBoxMaxWidth}}
-		\ifdefstring{\@PSTextBoxPosition}{top}{
-			\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-				\node [anchor=north west, xshift=\@TextBoxXMargin, yshift=-\@TextBoxYMargin]  
-					at (NR_tr) {%
-				\rotatebox{0}{\fbox{\parbox[t]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
-			\end{tikzpicture}
-		}{}
-		\ifdefstring{\@PSTextBoxPosition}{bottom}{
-			\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-				\node [anchor=south west, xshift=\@TextBoxXMargin, yshift=\@TextBoxYMargin] 
-					at (NR_br) {%
-				\rotatebox{0}{\fbox{\parbox[b]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
-			\end{tikzpicture}
-		}{}
-	}{}
-	\@PSRightPageCode}
+		\@PSRightPageCode\clearpage}
+    }%
+	}
+}
+
+
+% declare keys
+\define@key{kvpa}{yanchor}{\def\@PSYAnchor{#1}} % north | south
+\define@key{kvpa}{xanchor}{\def\@PSXAnchor{#1}} % west | east
+\define@key{kvpa}{pictnode}{\def\@PSPictureNode{#1}} % grab another node
+\define@key{kvpa}{width}{\def\@PSWidth{#1}}
+\define@key{kvpa}{height}{\def\@PSHeight{#1}}	
+\define@key{kvpa}{xshift}{\def\@PSXShift{#1}}
+\define@key{kvpa}{yshift}{\def\@PSYShift{#1}}
+\define@key{kvpa}{code}{\def\@PSLeftPageCode{#1}}
+\define@key{kvpa}{boxnode}{\def\@PSBoxNode{#1}}
+\define@key{kvpa}{boxanchor}{\def\@PSBoxAnchor{#1}}
+\define@key{kvpa}{boxtext}{\def\@PSBoxText{#1}}
+% preset keys
+\savekeys{kvpa}{yanchor,xanchor,width,xshift,yshift,code,photonode,boxtext,boxanchor,boxnode}
+\presetkeys{kvpa}%
+{yanchor=north,xanchor=west,width=2\paperwidth,xshift=0cm,yshift=0cm,code={},boxtext={},boxanchor=south west,boxnode=BR}%
+{}
+\newcommand\PhotoAbsolute[2][]{
+	%
+	% [#1] : path to image file (mandatory)
+	% [#2] : xanchor	= north | south
+	%		 yanchor	= west  | east
+	%		 width 		= image width (default to 2\paperwidth)
+	%		 xshift		= image shift along x (0mm)
+	%		 yshift		= image shift along y (0mm)
+	%		 pcode		= code to execute on the left page ({})
+	%		 labelpos	= tl | tr | bl | br
+	% 
+	\setkeys{kvpa}{#1}{\def\@PSAnchor{\TikzAnchor{\@PSYAnchor}{\@PSXAnchor}}
+	
+		% height and width of the image
+		\settoheight{\PhotoHeight}{\includegraphics[width=\@PSWidth]{#2}}
+		\settowidth{\PhotoWidth}{\includegraphics[width=\@PSWidth]{#2}}
+
+		% correction of half pgflinewidth (Y)
+		\ifdefstring{\@PSYAnchor}{north}%
+		{\setlength{\@YShift}{\@PSYShift+0.5\pgflinewidth}}%
+		{\setlength{\@YShift}{\@PSYShift-0.5\pgflinewidth}}%
+
+		% correction of half pgflinewidth (X)
+		\ifdefstring{\@PSXAnchor}{west}%
+		{
+			\setlength{\@XShiftLeft}{\@PSXShift-0.5\pgflinewidth}
+			\setlength{\@XShiftRight}{\@PSXShift-0.5\pgflinewidth-\paperwidth}
+		}{
+			\setlength{\@XShiftLeft}{\@PSXShift+0.5\pgflinewidth+\paperwidth}
+			\setlength{\@XShiftRight}{\@PSXShift+0.5\pgflinewidth}
+		}%
+
+		\thispagestyle{\@PSLeftPageStyle}
+		\begin{tikzpicture}[remember picture, inner sep=0pt]
+			% \coordinate NL_tl ($ ( A) + (0 ,\a) $);
+			\node[anchor=\@PSAnchor, xshift=\@XShiftLeft, yshift=\@YShift] 
+				at (\@PSPictureNode){%current page.\@PSAnchor
+				\includegraphics[width=\@PSWidth]{#2}};
+			\coordinate (TL) at (current bounding box.north west) {}; % top-left corner
+			\coordinate (BL) at (current bounding box.south west) {}; % bottom-left corner
+			\coordinate (TR) at (current bounding box.north east) {}; % top-left corner
+			\coordinate (BR) at (current bounding box.south east) {}; % bottom-left corner
+			\node[anchor=\@PSBoxAnchor] at (\@PSBoxNode) {\@PSBoxText};
+			\pgfresetboundingbox
+			\path[use as bounding box] (0,0);
+			\filldraw[red] (TL) circle [radius=\@radius];
+			\filldraw[red] (BL) circle [radius=\@radius];
+			\filldraw[red] (TR) circle [radius=\@radius];
+			\filldraw[red] (BR) circle [radius=\@radius];
+		\end{tikzpicture}
+		\@PSLeftPageCode
+	}
+}
+
+
+% declare keys
+\define@key{kvpc}{origin}{\def\@PSCaptionOrigin{#1}} 	% insertion point
+\define@key{kvpc}{anchor}{\def\@PSCaptionAnchor{#1}} 	% anchor
+\define@key{kvpc}{title}{\def\@PSCaptionTitle{#1}}		% caption title
+\define@key{kvpc}{style}{\def\@PSCaptionStyle{#1}}		% caption style
+\define@key{kvpc}{xshift}{\def\@PSCaptionXShift{#1}}
+\define@key{kvpc}{yshift}{\def\@PSCaptionYShift{#1}}
+% preset keys
+\savekeys{kvpc}{origin, anchor, title, style, xshift, yshift}
+\presetkeys{kvpc}%
+{origin=BR, anchor=south west, title={}, style=default,xshift=0mm, yshift=0mm}%
+{}
+\newcommand\PhotoCaption[2][]{
+	%
+	% [#1] : subcaption title
+	% [#2] : xanchor	= north | south
+	%		 yanchor	= west  | east
+	%		 width 		= image width (default to 2\paperwidth)
+	%		 xshift		= image shift along x (0mm)
+	%		 yshift		= image shift along y (0mm)
+	%		 pcode		= code to execute on the left page ({})
+	%		 labelpos	= tl | tr | bl | br
+	% 
+	\setkeys{kvpc}{#1}{
+		\newsavebox{\mybox}
+		\newlength{\CaptionYAdjust}
+		\savebox{\mybox}{\parbox[t]{5cm}{#2}}
+		% \settoheight{\CaptionYAdjust}{\depthof{#2}}
+		\begin{tikzpicture}[remember picture, inner sep=0pt]
+			\node[anchor=\@PSCaptionAnchor, xshift=\@PSCaptionXShift, yshift=\@PSCaptionYShift+\CaptionYAdjust] at (\@PSCaptionOrigin){%
+				% %
+				% \usebox{\mybox}
+				\fbox{\parbox[t]{5cm}{#2}}
+				% \protect#2
+				% \parbox[t]{5cm}{\captionof{figure}{pqopsdiug}}
+				% \makebox{\captionof{figure}{pqopsdiug}}
+				% \parbox[t]{5cm}{sdsdmul poiahqoiud ,klq,sd mlqkdopqkdpazk}
+				};
+			\pgfresetboundingbox
+			\path[use as bounding box] (0,0);
+			\filldraw[red] (\@PSCaptionOrigin) circle [radius=\@radius];
+		\end{tikzpicture}
+		\@PSLeftPageCode
+	}
 }

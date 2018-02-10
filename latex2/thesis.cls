@@ -51,6 +51,7 @@
 \usepackage[french,english]{babel}
 
 \RequirePackage{color}
+\RequirePackage{textcase} % text case
 \RequirePackage{tikz}
 \RequirePackage{tikzpagenodes}
 \usetikzlibrary{external} % for chapter and part special pages
@@ -113,10 +114,12 @@
 \newlength{\MediaWidth}
 \newlength{\MediaGutterWidth}
 \newlength{\TwoMediaWidth}
+\newlength{\PhotoMargin}
 
 \setlength{\MediaWidth}{\MediaWidthRatio \@ContentWidth}
 \setlength{\MediaGutterWidth}{\MediaGutterRatio \MediaWidth}
 \setlength{\TwoMediaWidth}{0.5\MediaWidth - 0.5\MediaGutterWidth}
+\setlength{\PhotoMargin}{10mm + \@BleedOuterMargin}
 
 \typeout{}
 \typeout{}
@@ -180,10 +183,53 @@
 %% caption
 %% --------------------------
 \usepackage[]{subcaption} % better than subfig and subfigures
-\usepackage[justification=raggedright,font=small,textfont={normalfont},labelfont={bf,tt}]{caption}
+\usepackage[justification=raggedright,font=small,textfont={normalfont},labelfont={bf,sf}]{caption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[sub]{skip=5pt}		% subcpation	
+
+
+
+\DeclareCaptionLabelFormat{PS}{#2}
+\DeclareCaptionFormat{PS}{\uppercase#3}
+\DeclareCaptionStyle{PS}[]{
+	labelformat=PS,
+	format=PS,
+	labelsep=space,
+	font={sf,Large,bf,color=black},
+}
+\newcommand{\PhotoSpreadCaption}[4]{%
+	%
+	% [#1] : caption title
+	% [#2] : caption subtitle
+	% [#3] : paragraph
+	% [#4] : label
+	%
+	\captionsetup{style=PS}
+	\captionof{figure}[#1]{#1}
+	\label{#4}
+	{\sffamily\it\scshape#2}\\[6pt]
+	{\color{gray}\sffamily\small#3}
+}
+
+\DeclareCaptionLabelFormat{PC}{(#2)}
+\DeclareCaptionFormat{PC}{#1#2#3}
+\DeclareCaptionStyle{PC}[]{
+	labelformat=PC,
+	format=PC,
+	labelsep=space,
+	font={sf,small,bf,color=black},
+	skip=0pt
+}
+\newcommand{\PhotoSubCaption}[2]{%
+	%
+	% [#1] : subcaption title
+	% [#2] : label
+	%
+	\captionsetup{style=PC}
+	\captionof{subfigure}[#1]{#1}\label{#2}
+}
+
 
 \newcommand{\subfigskip}{\par\bigskip\medskip}
 
@@ -310,7 +356,7 @@
 	\fancyhf{}
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
-	\fancyfoot[EL,OR]{\ttfamily\thepage} % \ttfamily\large\scshape\bfseries
+	\fancyfoot[EL,OR]{\HdrFontStyle\thepage} % \ttfamily\large\scshape\bfseries
 }
 
 % which style ??
@@ -318,7 +364,7 @@
 	\fancyhead{}
 	\renewcommand{\headrulewidth}{0pt}
 	\fancyfoot{}
-	\fancyfoot[RO,LE]{\thepage}
+	\fancyfoot[RO,LE]{\HdrFontStyle\thepage}
 }
 
 
