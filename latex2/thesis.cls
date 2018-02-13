@@ -66,8 +66,7 @@
 
 \RequirePackage{stmaryrd} % symbols for theoretical computer science
 \RequirePackage{pgfplots,pgfplotstable}
-
-
+\RequirePackage{enumerate}
 % **************************************************
 % Options
 % **************************************************
@@ -179,25 +178,24 @@
 \newcommand{\FontSwitchValue}{2}
 \FontSwitch{\FontSwitchValue}
 
-
 %% caption
 %% --------------------------
-\usepackage[]{subcaption} % better than subfig and subfigures
-\usepackage[justification=raggedright,font=small,textfont={normalfont},labelfont={bf,sf}]{caption}
+\usepackage[]{caption,subcaption} % better than subfig and subfigures
+\usepackage[font=small,textfont={normalfont},labelfont={bf,sf}]{caption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[sub]{skip=5pt}		% subcpation	
 
 
 
+% Photo Spread Caption Style
 \DeclareCaptionLabelFormat{PS}{#2}
 \DeclareCaptionFormat{PS}{\uppercase#3}
 \DeclareCaptionStyle{PS}[]{
 	labelformat=PS,
 	format=PS,
 	labelsep=space,
-	font={sf,Large,bf,color=black},
-}
+	font={sf,Large,bf,color=black}}
 \newcommand{\PhotoSpreadCaption}[4]{%
 	%
 	% [#1] : caption title
@@ -206,29 +204,39 @@
 	% [#4] : label
 	%
 	\captionsetup{style=PS}
-	\captionof{figure}[#1]{#1}
+	\captionof{figure}[#1]{#1 \rule[-0.5ex]{1pt}{2.6ex} \thefigure}
 	\label{#4}
 	{\sffamily\it\scshape#2}\\[6pt]
-	{\color{gray}\sffamily\small#3}
-}
+	{\color{gray}\sffamily\small#3}}
 
-\DeclareCaptionLabelFormat{PC}{(#2)}
+
+% Photo Spread Subcaption Style
+\DeclareCaptionLabelFormat{PC}{#2} %\thefigure
 \DeclareCaptionFormat{PC}{#1#2#3}
 \DeclareCaptionStyle{PC}[]{
+	hypcap=false,
 	labelformat=PC,
 	format=PC,
 	labelsep=space,
-	font={sf,small,bf,color=black},
-	skip=0pt
+	textfont={sf,small},
+	labelfont={sf,bf,color=black}, % Tblue
+	singlelinecheck=true,
+	aboveskip=0pt,
+	belowskip=0pt,
+	justification=centering,
+	strut=off, % must be off !!! to get proper baseline alignment
 }
+
 \newcommand{\PhotoSubCaption}[2]{%
 	%
 	% [#1] : subcaption title
 	% [#2] : label
 	%
 	\captionsetup{style=PC}
-	\captionof{subfigure}[#1]{#1}\label{#2}
+	\captionof{subfigure}[#1]{}\label{#2}
 }
+
+
 
 
 \newcommand{\subfigskip}{\par\bigskip\medskip}
@@ -339,8 +347,12 @@
 %% font styles (rm, sf, tt)
 \DeclareRobustCommand{\HdrFontStyle}{\sffamily}
 
+
+
 % default style
 \pagestyle{fancy}
+%% running header without chapter prefix
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \fancyhf{}
 % \iffloatpage{0.0pt}{0.4pt}
 % \newgeometry{⟨options⟩} and \restoregeometry
