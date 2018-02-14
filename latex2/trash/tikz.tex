@@ -1,0 +1,15 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc,backgrounds,positioning}
+
+\begin{document}
+\begin{tikzpicture}
+\coordinate (a) at (0,0);
+\coordinate (b) at (3,1);
+\draw[opacity=0.0] (a |- b) node (e){};
+ \filldraw[red] (a) circle [radius=0.01];
+  \filldraw[red] (b) circle [radius=0.01];
+   \filldraw[blue] (e) circle [radius=0.01];
+\draw (a) |- (b);
+\end{tikzpicture}
+\end{document}

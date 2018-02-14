@@ -180,12 +180,12 @@
 
 %% caption
 %% --------------------------
-\usepackage[]{caption,subcaption} % better than subfig and subfigures
+\usepackage{caption}
+\usepackage[list=on]{subcaption} % better than subfig and subfigures
 \usepackage[font=small,textfont={normalfont},labelfont={bf,sf}]{caption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
-\captionsetup[sub]{skip=5pt}		% subcpation	
-
+\captionsetup[subfigure]{skip=5pt}		% subcpation	
 
 
 % Photo Spread Caption Style
@@ -195,7 +195,15 @@
 	labelformat=PS,
 	format=PS,
 	labelsep=space,
-	font={sf,Large,bf,color=black}}
+	textfont={sf,large,bf,color=Tblue},
+	labelfont={bf,large},
+	singlelinecheck=true,
+	aboveskip=0pt,
+	belowskip=0pt,
+	skip=0pt,
+	justification=centering,
+	strut=off, % must be off !!! to get proper baseline alignment
+}
 \newcommand{\PhotoSpreadCaption}[4]{%
 	%
 	% [#1] : caption title
@@ -211,30 +219,31 @@
 
 
 % Photo Spread Subcaption Style
-\DeclareCaptionLabelFormat{PC}{#2} %\thefigure
+\DeclareCaptionLabelFormat{PC}{\thefigure#2} %\thefigure
 \DeclareCaptionFormat{PC}{#1#2#3}
 \DeclareCaptionStyle{PC}[]{
-	hypcap=false,
+	% hypcap=false,
 	labelformat=PC,
 	format=PC,
 	labelsep=space,
 	textfont={sf,small},
-	labelfont={sf,bf,color=black}, % Tblue
+	labelfont={sf,bf,scriptsize,color=black}, % Tblue
 	singlelinecheck=true,
 	aboveskip=0pt,
 	belowskip=0pt,
+	skip=0pt,
 	justification=centering,
 	strut=off, % must be off !!! to get proper baseline alignment
 }
 
-\newcommand{\PhotoSubCaption}[2]{%
-	%
-	% [#1] : subcaption title
-	% [#2] : label
-	%
-	\captionsetup{style=PC}
-	\captionof{subfigure}[#1]{}\label{#2}
-}
+% \newcommand{\PhotoSubCaption}[2]{%
+% 	%
+% 	% [#1] : subcaption title
+% 	% [#2] : label
+% 	%
+% 	\captionsetup{style=PC}
+% 	\captionof{subfigure}[#1]{}\label{#2}
+% }
 
 
 
@@ -327,6 +336,12 @@
 \renewcommand{\cftfigfont}{\LoftFont}
 \renewcommand{\cftfigpagefont}{\LoftFont}
 
+%% SUBFIGURE
+% \setlength{\cftsubfigindent}{0em}
+% \setlength{\cftfignumwidth}{\cftsubsecnumwidth}
+% \renewcommand{\cftfigfont}{\LoftFont}
+% \renewcommand{\cftfigpagefont}{\LoftFont}
+
 %% TABLE
 \setlength{\cfttabindent}{0em}
 \setlength{\cftfignumwidth}{\cftsubsecnumwidth}
@@ -352,16 +367,16 @@
 % default style
 \pagestyle{fancy}
 %% running header without chapter prefix
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\chaptermark}[1]{\uppercase{\markboth{#1}{}}}
 \fancyhf{}
 % \iffloatpage{0.0pt}{0.4pt}
 % \newgeometry{⟨options⟩} and \restoregeometry
 % \renewcommand{\headheight}{\iffloatpage{\protect\setlength{\headheight}{0pt}}{\protect\setlength{\headheight}{14pt}}}
 \renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
 \renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
-\fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\nouppercase{\rightmark}}}
-\fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\nouppercase{\leftmark}}}
-\fancyfoot[EL,OR]{\HdrFontStyle\thepage}
+\fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\nouppercase{\small\rightmark}}} 	% \nouppercase
+\fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\uppercase{\small\leftmark}}} 	% \nouppercase
+\fancyfoot[EL,OR]{\HdrFontStyle\footnotesize\thepage}
 
 % plain style
 \fancypagestyle{plain}{
