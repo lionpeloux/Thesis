@@ -39,15 +39,12 @@
 \RequirePackage{tikzpagenodes}
 \RequirePackage{rotating}
 \RequirePackage{adjustbox}
-\RequirePackage[absolute,overlay,
-	showboxes,
-	]{textpos}
 \backgroundsetup{contents={}}
 % \usetikzlibrary{external,positioning}
 \usetikzlibrary{calc,backgrounds,positioning}
 \RequirePackage[]{graphicx}
 \RequirePackage{afterpage}
-\RequirePackage[strict]{changepage}
+\RequirePackage[]{changepage}
 % \RequirePackage[
 % 	% showboxes,
 % 	absolute,overlay]{textpos} % absolute positionning
@@ -587,6 +584,32 @@
 		\expandafter\afterpage%
 	\fi
 	{\blankpage{#1}}
+}
+\newcommand{\doubleblankpage}[3][l]{
+	%
+	%  #2  : code for the first blank page
+	%  #3  : code for the second blank page
+	% [#1] : r | l (first page starts on a left or right page)
+
+	\if#1r  % start on a right page
+		\rightblankpage{
+			#2
+			\leftblankpage{#3}
+		}
+	\else	% start on a left page
+		\leftblankpage{
+			#2
+			\rightblankpage{#3}
+		}	
+	\fi
+}
+
+\newcommand{\changemargin}[2][l]{
+	\if#1r
+		\changetext{}{-#2}{#2}{}{}
+	\else
+		\changetext{}{-#2}{}{#2}{}
+	\fi
 }
 
 % helper

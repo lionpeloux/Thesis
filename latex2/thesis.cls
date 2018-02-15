@@ -180,13 +180,14 @@
 
 %% caption
 %% --------------------------
-\usepackage{caption}
-\usepackage[list=on]{subcaption} % better than subfig and subfigures
 \usepackage[font=small,textfont={normalfont},labelfont={bf,sf}]{caption}
+\usepackage[]{subcaption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[subfigure]{skip=5pt}		% subcpation	
 
+% subcaption list format
+\DeclareCaptionListFormat{lsubcap}{#2)}
 
 % Photo Spread Caption Style
 \DeclareCaptionLabelFormat{PS}{#2}
@@ -223,6 +224,7 @@
 \DeclareCaptionFormat{PC}{#1#2#3}
 \DeclareCaptionStyle{PC}[]{
 	% hypcap=false,
+	listformat=lsubcap,
 	labelformat=PC,
 	format=PC,
 	labelsep=space,
@@ -266,7 +268,13 @@
 %%%%%
 
 % \usepackage[]{tocbibind}
-\usepackage[titles]{tocloft}
+\usepackage[titles,subfigure]{tocloft}
+
+% these counter are supposed to be defined either by the subfig or tocloft package
+% but here we cheat as we need subfigure usage within tocloft but with the subcaption package  
+\newcounter{lofdepth}
+\newcounter{lotdepth}
+
 \setcounter{tocdepth}{2}
 \setcounter{lofdepth}{2}
 \setcounter{lotdepth}{2}
@@ -332,21 +340,23 @@
 
 %% FIGURE
 \setlength{\cftfigindent}{0em}
-\setlength{\cftfignumwidth}{\cftsubsecnumwidth}
+\setlength{\cftfignumwidth}{2.5em}
 \renewcommand{\cftfigfont}{\LoftFont}
 \renewcommand{\cftfigpagefont}{\LoftFont}
 
-%% SUBFIGURE
-% \setlength{\cftsubfigindent}{0em}
-% \setlength{\cftfignumwidth}{\cftsubsecnumwidth}
-% \renewcommand{\cftfigfont}{\LoftFont}
-% \renewcommand{\cftfigpagefont}{\LoftFont}
-
 %% TABLE
-\setlength{\cfttabindent}{0em}
-\setlength{\cftfignumwidth}{\cftsubsecnumwidth}
-\renewcommand{\cfttabfont}{\LoftFont}
-\renewcommand{\cfttabpagefont}{\LoftFont}
+\setlength{\cfttabindent}{\cftfigindent}
+\setlength{\cfttabnumwidth}{\cftfignumwidth}
+\renewcommand{\cfttabfont}{\cftfigfont}
+\renewcommand{\cfttabpagefont}{\cftfigpagefont}
+
+%% SUBFIGURE
+\setlength{\cftsubfigindent}{\cftfignumwidth}
+\setlength{\cftsubfignumwidth}{1.25em}
+\renewcommand{\cftsubfigfont}{\LoftFont}
+\renewcommand{\cftsubfigpagefont}{\LoftFont}
+
+
 
 
 

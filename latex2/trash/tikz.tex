@@ -1,15 +1,22 @@
-\documentclass{standalone}
-\usepackage{tikz}
-\usetikzlibrary{calc,backgrounds,positioning}
+\documentclass{scrlttr2}%
+\usepackage[english]{babel}
+\usepackage{lipsum,afterpage}%
+\setlength{\textwidth}{125mm}%
+\firstfoot{%
+  \afterpage{%
+    \global\setlength{\textwidth}{17cm}%
+    \global\setlength{\columnwidth}{\textwidth}%
+    \global\setlength{\hsize}{\columnwidth}%
+    \global\setlength{\linewidth}{\hsize}}%
+}
 
 \begin{document}
-\begin{tikzpicture}
-\coordinate (a) at (0,0);
-\coordinate (b) at (3,1);
-\draw[opacity=0.0] (a |- b) node (e){};
- \filldraw[red] (a) circle [radius=0.01];
-  \filldraw[red] (b) circle [radius=0.01];
-   \filldraw[blue] (e) circle [radius=0.01];
-\draw (a) |- (b);
-\end{tikzpicture}
+\begin{letter}{Receipient}
+  \opening{Dear receipient,}
+  \lipsum[1-2]
+  \pagebreak % enfore the page break, otherwise afterpage will take
+  % effect too late, i.e. after first broken paragraph on page 2.
+  \lipsum[3-12]
+  \closing{Yours}
+\end{letter}
 \end{document}
