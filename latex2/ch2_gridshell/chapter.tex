@@ -25,68 +25,85 @@ We naturally begin this chapter by defining the notion of elastic gridshell and 
 The invention of the \emph{elastic gridshell} concept is commonly attributed to Frei Otto, a German architect who devoted several years to gridshells. In 1975 he achieved the famous \emph{Mannheim Multihalle} \cite{Happold1975}, a wooden shell of 7500~m\textsuperscript{2}, in collaboration with the engineer Edmund Happold (Arup).
 Literally, the word \textquote{gridshell} refers to grids behaving like shells~: from a mechanical point of view that means stresses acting on the structure are mainly transmitted through compression and tension. These structures can cross large-span with very little material.
 
-However, according to the historic evolution of the concept, to characterise a gridshell as the combination of a structural concept (a grid behaving like a shell, see \cref{sec=def_topo}) and a specific construction process (see \cref{sec=def_erec}) using the bending flexibility of the material (see \cref{sec=def_flexibility}) seems to be more accurate. The project of Mannheim -- in which a wooden regular and planar grid, lacking shear stiffness, is elastically deformed up to a targeted shape with the help of stays, and then braced and covered -- is regarded as the starting point of this new concept (see \cref{fig:multihalle}).
+However, according to the historic evolution of the concept, to characterise a gridshell as the combination of a structural concept (a grid behaving like a shell, see \cref{sec=def_topo}) and a specific construction process (see \cref{sec=def_erec}) using the bending flexibility of the material (see \cref{sec=def_flexibility}) seems to be more accurate. The project of Mannheim -- in which a wooden regular and planar grid, lacking shear stiffness, is elastically deformed up to a targeted shape with the help of stays, and then braced and covered -- is regarded as the starting point of this new concept (see \cref{fig:erec}).
 
 The project of Mannheim is regarded as the starting point of this new concept for which a wooden regular and planar grid, lacking shear stiffness, is elastically deformed up to a targeted shape with the help of stays, and then braced and covered. This type of gridshell, known as elastic gridshell, offers a very elegant manner to materialise freeform shapes from an initially flat and regular grid, which obviously has many practical benefits~: planar initial geometry, standard connection nodes, standard profiles and so on.
 
 Note that the term \emph{rigid gridshell} is often opposed to the term \emph{elastic gridshell} to indicate reticulated structures that behave like shells but are not formed in an active-bending process.
 
-
-
 \subsection{Structural typology}\label{sec=def_topo}
 % ------------------------------------------
 Their mechanical behaviour is very similar to the one of real shells even if the material is discrete and located in a grid more or less open. Moreover, gridshells benefit from the same advantages as the ones showed by an eggshell : they can cross large span using a low amount of material. Their stiffness is mainly linked to their double-curved shape.
 
+\afterpage{%
+\AddToShipoutPictureBG*{% 
+	% required to avoid mess up between tikz overlay and page vertical blank space
+	\Photo[
+		node=current page.south west,
+		anchor=south west,
+		xshift=-\PhotoSkip,
+		gopt={width=8.5cm},
+		]{mannheim_erection_2.jpg}%
+	\savenodes{C}
+	\Photo[
+		node=Ctl,
+		anchor=south west,
+		yshift=\PhotoBigSkip,
+		gopt={width=8.5cm},
+		]{mannheim_erection_1.jpg}%
+	\savenodes{B}
+	\Photo[
+		node=Btl,
+		anchor=south west,
+		yshift=\PhotoBigSkip,
+		gopt={width=8.5cm},
+		]{mannheim_erection_0.jpg}%%
+	\savenodes{A}
+	\PhotoCaption[
+		node=Cbr,
+		anchor=south west,
+		yshift=\BleedBottomMargin+\ContentBottomMargin,
+		xshift=\PhotoBigSkip,
+		style=PS,
+		ltitle={Steel gridshell built in 1962 in Berkeley, USA},
+		title={1975 \vsep Mannheim Multihalle},
+		subtitle=Construction Stages,
+		text={%
+			\mk[t]{grid assembly}\\ 
+			\mk[l]{elastic deformation of the grid}\\ 
+			\mk[b]{final shape}}
+		]{fig:erec}%
+	\PhotoCaptionRef[
+		node=Atr, 
+		anchor=south east, 
+		yshift=\PhotoRefSkip,
+		ltitle=Steel lattice,
+		]{fig:erec_2}
+	\PhotoCaptionRef[
+		node=Btr, 
+		anchor=south east, 
+		yshift=\PhotoRefSkip,
+		ltitle=Steel lattice,
+		]{fig:erec_1}
+	\PhotoCaptionRef[
+		node=Ctr, 
+		anchor=south east, 
+		yshift=\PhotoRefSkip,
+		ltitle=grid,
+		]{fig:erec_0}
+}}
+
 \pagebreak
-% \changetext{}{-6cm}{}{6cm}{}
-\changemargin[l]{6cm}
+\addtomargin[l]{6cm}
+\afterpage{\restoremargin}
 
 \subsection{Material flexibility for structural rigidity}\label{sec=def_flexibility}
 % ------------------------------------------
 In this field of application, composite materials like glass fibre reinforced polymer (GFRP) could favourably replace wood, where both resistance and bending ability of the material is sought \cite{Douthe2010a}. The stiffness of the structure does not derive from the intrinsic material rigidity but principally from its geometric curvature. Ideally, the composite profiles are produced by pultrusion, an economic continuous moulded process. The standardisation of the process guaranties very stable material and mechanical properties. It frees designers from the painful problematic of wood joining and wood durability. The characterisation of this material is presented further in the thesis (see \cref{sec=design_gfrp}).
 
-
 \subsection{Erection process}\label{sec=def_erec}
 % ------------------------------------------
-Usually, the grid morphology is not trivial and leads to design numerous costly and complex joints. To overcome this issue, an original and innovative erection process was developed that takes advantage of the flexibility inherent to slender elements. A regular planar grid made of long continuous linear members is built on the ground (see \cref{fig:erec_1}). The elements are pinned together so the grid has no in-plane shear stiffness and can accommodate large-scale deformations during erection. Then, the grid is bent elastically to its final shape (see \cref{fig:erec_2}). Finally, the grid is frozen in the desired shape with a third layer of bracing members and the structure becomes a shell. This process is illustrated and detailed in the next chapter (see \cref{sec=construction_process}).
-
-\Photo[
-	node=current page.south west,
-	anchor=south west,
-	xshift=-\PhotoSkip,
-	gopt={width=8.5cm},
-	]{mannheim_erection_2.jpg}
-\savenodes{A}
-%
-\Photo[
-	node=Atl,
-	anchor=south west,
-	yshift=\PhotoBigSkip,
-	gopt={width=8.5cm},
-	]{mannheim_erection_1.jpg}
-\savenodes{B}
-%
-% \Photo[
-% 	node=Btl,
-% 	anchor=south west,
-% 	yshift=\PhotoBigSkip,
-% 	gopt={width=8.5cm},
-% 	]{mannheim_erection_2.jpg}
-% %
-\PhotoCaption[
-	node=Abr,
-	anchor=south west,
-	yshift=4\PhotoBigSkip,
-	xshift=\PhotoBigSkip,
-	style=PS,
-	ltitle={Steel gridshell built in 1962 in Berkeley, USA},
-	title={1962 \vsep Berkeley Workshop},
-	subtitle=Frei Otto,
-	text={\mk[t]{knot detail} \\ \mk[r]{steel lattice}}
-	]{fig:multihalle}
-
-
-% \changetext{}{5cm}{}{-5cm}{}
+Usually, the grid morphology is not trivial and leads to design numerous costly and complex joints. To overcome this issue, an original and innovative erection process was developed that takes advantage of the flexibility inherent to slender elements. A regular planar grid made of long continuous linear members is built on the ground (see \cref{fig:erec_0}). The elements are pinned together so the grid has no in-plane shear stiffness and can accommodate large-scale deformations during erection. Then, the grid is bent elastically to its final shape (see \cref{fig:erec_1,fig:erec_2}). Finally, the grid is frozen in the desired shape with a third layer of bracing members and the structure becomes a shell. This process is illustrated and detailed in the next chapter (see \cref{sec=construction_process}).
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
@@ -104,25 +121,7 @@ Usually, the grid morphology is not trivial and leads to design numerous costly 
 % 	\label{fig:multihalle}
 % \end{figure}
 
-
-% \PhotoCaptionRef[
-% 	node=Btl, 
-% 	anchor=north east, 
-% 	xshift=-\PhotoRefSkip,
-% 	ltitle=Knot detail,
-% 	]{fig:berkeley_a}
-% \PhotoCaptionRef[
-% 	node=Abr, 
-% 	anchor=north east,
-% 	xshift=0mm,
-% 	yshift=-\PhotoRefSkip,
-% 	ltitle=Steel lattice,
-% 	]{fig:berkeley_b}
-%
-
-
 \pagebreak
-\changemargin[l]{-6cm}
 \section{Built elastic gridshells : a review}\label{sec=review_project}
 
 No thorough historic review is available about executed projects of elastic gridshells although some partial reviews have been done time to time on the occasion of scientific works or construction projects. This review aims at filling this gap by giving an overview of the development of the concept from the very beginning to the very last experiments. Only known built projects have been identified and reported here. The only condition for a project to belong to this review is to comply with the definition of what an elastic gridshell is (see \cref{sec=gsdef}), independently to any other consideration (material, fabrication, size, cladding,~\telp{}).
@@ -136,62 +135,24 @@ The books edited by the \emph{Institut für leichte Flächentragwerke} are of gr
 		node={current page.center},
 		anchor=center,
 		yshift=10mm,
-		boxnode=B,
-		boxanchor=north,
-		boxtext={
-			\parbox[t]{\textwidth}{%
-				\vspace*{\abovecaptionskip}% 
-				\captionof{figure}[Known elastic gridshells built by the past.]{Known elastic gridshells built by the past. The surface of the bubbles is proportional to the covered area. Colour indicates the material employed for the rods.}
-			\label{fig:projectsbymaterial}}
-		}
 		]{ch2_gridshell/plot/1_projects/build.pdf}
+	\savenodes{A}
+	\PhotoCaption[
+		node=current page.south west,
+		anchor=south west,
+		yshift=\BleedBottomMargin+\SafeContentBottomMargin,
+		xshift=\BleedInnerMargin+\SafeContentInnerMargin,
+		width=10cm,
+		style=PS,
+		ltitle={Known elastic gridshells built by the past},
+		subtitle={Figure~\thefigure},
+		title=\capitalisewords{Elastic gridshells built by the past},
+		text={The surface of the bubbles is proportional to the covered area. Colour indicates the material employed for the rods.}
+		]{fig:erec}%
 }
 
 \subsection{The beginnings : from the first prototype to the German Pavilion}
 Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and completed his doctorate on tensile structures in 1953. This first work was published and translated later in the 60's. He then began to work in the field of lightweight structures using physical models such as soap films or hanging nets, and photographic measurements.\footnote{In the 19\textsuperscript{th} and 20\textsuperscript{th} centuries model testing was at the heart of structural innovation \cite{Addis2013}. Analog models were employed successfully by well-known architects and engineers to go beyond the limits of existing knowledge (A. Gaudi, H. Isler, F. Candela, F. Otto, \telp{}) and are still employed today where numeric models failed to represent accurately some physical phenomenons (for instance in wind analysis for high rise towers and bridges).}\textsuperscript{,}\footnote{\blockcquote[p.~56]{IL10}{Photography is the medium through which the form and content of a model are communicated. It is one of our most important tools in that it provides the basis for documentation and information, supplements our creative potential \belp{} }} These tools were essentials for his exploration of forms and structures as there were no computers at that time.
-
-
-
-%%%%%%%%%%%%%
-
-\def\mycap{\PhotoSpreadCaption{Savill Building}{Gleen Howell Architects}{%
-	The larch and oak structure is the end-result of much refinement, combining complex engineering and craft skills and is one of the few true shell roofs in existence.\\
-	\begin{enumerate}[a.]
-		\setlength{\itemsep}{0pt}
-		\item exterior view
-		\item interior view
-		\item wooden panel system
-	\end{enumerate}
-	}{ffig}
-}
-
-\def\code{%
-	\PhotoCaptionRef[
-		node=BR, 
-		anchor=south west,
-		label=fig:a]{exterior view}
-	\Photo[
-		node=BR,
-		anchor=south west,
-		xshift=10mm, 
-		gopt={width=6cm},
-		boxnode=BR,
-		boxanchor=south west,
-		boxtext={}]{savill_b.jpg}
-	\PhotoCaptionRef[node=BR,anchor=south west,label=fig:b]{the timber roof}
-	\Photo[
-		node=TL, 
-		anchor=south west,
-		yshift=5mm, 
-		gopt={width=6cm},
-		boxnode=BR,
-		boxanchor=south west,
-		boxtext={}]{savill_b.jpg}
-	\PhotoCaptionRef[node=BR, anchor=south west,label=fig:c]{the timber roof}
-}
-% \PhotoSpread[width=1.3\paperwidth,xshift=1.5cm,yshift=-1.5cm,boxcode=\mycap,rpcode={\code}]{savill_a.jpg}
-
-%%%%%%%%%
 
 \subsubsection{Steel Gridshell, Berkeley, USA, 1962}
 Simultaneously, he became interested by the study of lightweight shells and the way they were form-found. One of his very first elastic gridshell was built in 1962 with students at Berkeley, USA \cite[p.~270]{IL10}. It is funny to remark that this first gridshell was not a timber gridshell but a steel gridshell made out of twin steel rods linked in a grid fashion by bolts with clamping plates (see \cref{fig:berkeley_a}). This first experiment demonstrated at small scale the ability to bend a regular grid with no shear rigidity into a curved shape  (see \cref{fig:berkeley_b}). The grid was loosely braced and shell effects were not investigated.
@@ -247,7 +208,8 @@ The same year he designed and built a first timber gridshell in Essen, Germany \
 % 	\label{fig:montreal}
 % \end{figure}
 
-\doubleblankpage[r]{%
+% berkley and essen
+\rightblankpage{%
 	\Photo[
 		node=current page.north east,
 		anchor=north east,
@@ -334,17 +296,50 @@ The same year he designed and built a first timber gridshell in Essen, Germany \
 		xshift=-\PhotoRefSkip,
 		ltitle=Timber lattice,
 		]{fig:essen_a}
-}{
-	\changetext{}{-4cm}{}{4cm}{}
-	\kant[1]
+	\afterpage{%
+		\thispagestyle{empty}
+		\vspace*{8cm}
+		\AddToShipoutPictureBG*{%
+		\Photo[
+			node=current page.north west,
+			anchor=north west,
+			yshift=-\BleedTopMargin-\PhotoBigSkip,
+			gopt={width=12cm},
+			]{montreal_lift.jpg}
+		\savenodes{A}
+		\PhotoCaption[
+			node=Abr,
+			anchor=south west,
+			xshift=\PhotoBigSkip,
+			yshift=0\PhotoBigSkip,
+			style=PS,
+			ltitle={Timber gridshell built in 1967 in Montreal, Canada},
+			title={1967 \vsep Montreal Pavilion},
+			subtitle={Frei Otto},
+			text={\mk[t]{grid erection} \\ \mk[r]{interior view}}
+		]{fig:montreal}
+		\PhotoCaptionRef[
+			node=Abl, 
+			anchor=north west,
+			xshift=0mm,
+			xshift=\BleedOuterMargin+\ContentOuterMargin,
+			yshift=-\PhotoRefSkip,
+			ltitle={grid erection},
+			]{fig:montreal_a}
+	}}
 }
 
-
-
-% \begin{adjustwidth}{0cm}{4cm}
-
-
-
+% \begin{figure}[t]
+% 	\begin{subfigure}[b]{\TwoMediaWidth}
+% 		\includegraphics[width=\textwidth]{montreal_lift.jpg}
+% 		\caption{Grid erection}
+% 		\label{fig:montreal_a}
+% 	\end{subfigure}%
+% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
+% 	\begin{subfigure}[b]{\TwoMediaWidth}
+% 		\includegraphics[width=\textwidth]{montreal_int.jpg}
+% 		\caption{Interior view}
+% 		\label{fig:montreal_b}
 
 
 \subsubsection{German Pavilion Auditoria, Montreal, Canada, 1967}
@@ -355,6 +350,24 @@ The pavilion required two auditoria and these were designed using the principle 
 The two gridshells built in Montreal mark a significant step in the maturation process of the technique leading to the major realisation of Mannheim in 1976~: a methodology has emerged to progress \blockcquote[p.~179]{IL10}{from the inverted form to the gridshell} ; main construction details have been validated ; various erection methods have been tested ; mid-scale buildings have been built to host public. However, due to the over complexity of these structures, lots of unknowns remained unsolved at this stage and the behaviour of the structures could not be fully predicted.\footnote{\blockcquote[p.~219]{IL10}{Snow accumulations in the throat of the common edge beam probably caused one of the two grid shells of project Montreal to buckle in a relatively flat region. The diameter of the buckled area was about 3 meters. Neither grid rod was broken, i.e. the buckling progressed elastically. It might have been possible to press the buckled area back into shape.}}
 
 It is worthwhile to mention that several unexecuted large-scale projects were studied by Frei Otto between 1967 and 1973 at the \emph{IL} or at the \emph{Atelier Warmbronn}.\footnote{Atelier Warmbronn is the architectural studio founded by Frei Otto in 1969.} These projects are basically documented in \cite[pp.~278 - 288]{IL10} and reveal that he was training his capacity to master large-scale projects with the technique of elastic gridshells for more conventional building projects (wave pool, swimming hall, multi-purpose hall, auditorium, \telp{}).
+
+\blankpage{%
+	\Photo[
+		node=current page.north east,
+		anchor=north east,
+		yshift=-\BleedTopMargin-\PhotoBigSkip,
+		gopt={width=\paperwidth-\BleedInnerMargin-2\PhotoBigSkip},
+		]{montreal_int.jpg}
+	\savenodes{B}
+	\PhotoCaptionRef[
+		node=Bbr, 
+		anchor=north west,
+		xshift=0mm,
+		xshift=-\BleedOuterMargin-\ContentOuterMargin,
+		yshift=-\PhotoRefSkip,
+		ltitle=Interior view,
+	]{fig:montreal_b}
+}
 
 \subsection{Mannheim Multihalle : the completion of a decade of research}
 The project of the Multihalle started in 1970, when the decision was made that Mannheim, Germany, would hold the Bundesgartenschau in 1975.\footnote{The Bundesgartenschau is a national horticultural exhibition that takes place every two years in Germany.} The architects of the project, \emph{Carl Mutschler \& Partners}, consulted Frei Otto at \emph{Atelier Warmbronn} as he was starting to get known in the filed of innovative lightweight structures. This is how the idea of the gridshell was introduced in the project \cite{Liddell2015}.
@@ -803,64 +816,3 @@ These projects definitely trailed the technique in England and initiated the ren
 % \citef{Mesnil2015a} compare the linear buckling of non braced quadrangular gridshells and kagome gridshells.
 
 % \citet{Lefevre2015} explore the buckling of triangulated single-layer elastic gridshells with a dome-like shape. In their analysis they take into account the eccentricity that exists between layers and the anisotropy of the grid. They propose a simplified formula to evaluate the buckling load of such gridshells.
-
-% \subsubsection{Form-structure interaction}
-
-% \citef{Malek2012} study how corrugation in shapes affect the mechanics of gridshells.
-
-% \citef{Jensen2013} propose to interconnect several gridshells to form a stronger structure. \citef{Filz2015} also investigate the properties of interconnected gridshells but for the purpose of kinematic effects.
-
-% \subsubsection{Robustness}
-
-% \citet{Tayeb2013} study how the high level of redundancy in a gridshell enhance its resistance to collapse. They show that because of the redundancy, a pseudo ductile behaviour of the structure is still observable when a brittle material is used (such as GFRP).
-
-% \subsubsection{Implementation}
-
-% \citef{Douthe2007}, \citef{Toussaint2007}, \citef{Olsson2012}, \citef{Poulsen2015} discuss the implementation details of the dedicated form-finding algorithm they have built.
-
-% \subsection{Geometry}
-
-% \subsubsection{Generation of Chebychev nets}
-
-% In \citetitle{IL10}, \citef[]{IL10} study the uniform mesh net with square cells. They propose a classification for suspended nets (pp.~68-69) and give an inventory of common problems such as overlapping and singularities. They explain how to build valuable physical models for hanging nets (pp.~50-55) and how to measure them with either close-range stereo-photogrammetry, a simple measuring table or the parallel light measurement technique (pp.~130-134). Finally, they propose a geometric method to find Chebyshev meshes from a given curved shape called the \emph{compass method} (pp.~140-141).
-
-% \citef{Bouhaya2009} propose an alternative to the compass method for finding gridshell meshes on an imposed surface. This method consists in numerically dropping a grid onto a fixed shape. The simulation is achieved with a dynamic explicit finite element solver. Therefore, the proposed method can take into account the real mechanics of the grid, which is not possible with the compass method.
-
-% \citef{Bouhaya2014} implement the compass method in a geometry software. For a fixed mesh pitch and starting point they parametrically generate a large number of discrete guidelines on the surface. The generation of a guideline is controlled by a vector of angles controlling the expansion on the surface. The method is then coupled with a genetic algorithm to find meshes where the curvature of the elements is minimised.
-
-% \citef{Lafuente2012} propose a variational approach to find grids that minimize the curvature of the elements. This is done by introducing penalty energies. Consequently, the mesh is allowed to move away from the imposed shape and the bars are allowed to dilate from their initial length.
-
-% \citef{DuPeloux2011} implement the compass method in \grasshopper{}. They use it to design two large-scale gridshells in composite material in 2011 \cite{Baverel2012} and 2013 \Cite{DuPeloux2016}.
-
-% \citef{Lefevre2015} propose an extended compass method that take into account the eccentricity between the layers of rods. This gap is generally due to the connection system.
-
-% \citef{Masson2017} prove the existence of a global smooth Chebyshev net on complete, simply connected surfaces when the total absolute curvature is bounded by $2\pi$. In his thesis, \citef{Masson2017b} study the conditions of existence of Chebyshev nets with singularities and give methods to construct them.
-
-% \citef{Pone2016} propose a tool similar to the ones developed by \citef{DuPeloux2011} and \citef{Bouhaya2014}.
-
-% \subsubsection{Morphogenesis}
-
-% \citef{Douthe2016} propose a reverse approach. Instead of trying to fit a mesh on an imposed surface, they construct discrete surfaces that embed the required properties. They show that the dual mesh of an isoradial mesh is a Chebyshev net. They give a method to construct such nets.
-
-% \citef{Mesnil2017} propose various methods to generate construction-aware discrete surfaces. Some of them are applicable to gridshells, for instance to produce twist-free grids of grids with planar quadrangular panels.
-
-% \subsection{Material}
-
-% \citef{Douthe2010a} look for new materials that could surpass wood when building elastic gridshells. They use Ashby's selection method to show that composite materials in glass fibre reinforced polymers are good candidates. \citef{Douthe2006} build the first structure of this kind.
-
-% \citef{Kotelnikova2013} extend the previous approach to draw some recommendations for the selection of materials for actively-bent structures.
-
-% \citef{Kotelnikova2012} studies the long term behaviour of pultruded GFRP rods subject to permanent combined bending and torsion stresses.
-
-% \subsection{Technology}
-
-% \subsubsection{Erection}
-% In \citetitle{IL10}, \citef{IL10} propose various methods for erecting elastic gridshells.
-% \citef{Quinn2014} review several gridshell projects and their erection methods. They question the potential of air-inflated membrane cushions for the erection of strained gridshells. \citef{Quinn2016} investigate the benefits of pneumatic falsework to erect strained gridshells.
-
-% \citef{Liuti2016} present an inflatable membrane technology for the erection of post-formed timber gridshells. They test it on a small-scale structure.
-
-% \subsubsection{Cladding}
-% \citef{Lafuente2014} try to further improve the efficiency of deployable gridshells by using the cladding membrane to brace the structure. Although this solution is less stiff than the usual ones, it does enhance the deployability and reduce the work spent in the bracing stage.
-
-% \citef{Cuvilliers2017} develop a concept of a hybrid structural skin, that is an elastic gridshell in composite material braced by a thin fibre reinforced concrete skin. The gridshell serves as a formwork to the concrete skin and the concrete skin is pored directly on the deformed grid. The connection enable a tight collaboration between the structural grid an the concrete, so that the skin is bracing the gridshell.

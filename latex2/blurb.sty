@@ -27,24 +27,25 @@
 \RequirePackage{xkeyval}  			% key-value options for macros
 \RequirePackage{etoolbox}
 \RequirePackage{ifthen}
+\RequirePackage{xstring}
 \RequirePackage{calc}
 \RequirePackage{xparse}
 \RequirePackage{xargs}				% commands with optional arguments
 \RequirePackage{refcount}
 \RequirePackage{lastpage}
-\RequirePackage{geometry}			% page layout
-\RequirePackage{background}			% add bakground material
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
 \RequirePackage{tikzpagenodes}
 \RequirePackage{rotating}
 \RequirePackage{adjustbox}
-\backgroundsetup{contents={}}
-% \usetikzlibrary{external,positioning}
 \usetikzlibrary{calc,backgrounds,positioning}
-\RequirePackage[]{graphicx}
+\RequirePackage{graphicx}
 \RequirePackage{afterpage}
-\RequirePackage[]{changepage}
+
+\RequirePackage{eso-pic}
+
+% \RequirePackage[strict]{changepage}
+
 % \RequirePackage[
 % 	% showboxes,
 % 	absolute,overlay]{textpos} % absolute positionning
@@ -52,6 +53,7 @@
 % \setlength{\TPHorizModule}{1mm}
 % \setlength{\TPVertModule}{1mm}
 
+\RequirePackage{geometry}			% page layout
 
 
 
@@ -74,6 +76,7 @@
 \DeclareStringOption[20mm]{gutter}[20mm]
 \DeclareBoolOption[false]{showrules}
 \DeclareBoolOption[false]{showframe}
+\DeclareBoolOption[false]{showbleed}
 \ProcessKeyvalOptions*
 
 
@@ -310,17 +313,27 @@
 	% Display the page layout rules (bleed, margins, content area, binding, ...)
 	% on the page
 	%
-	\AddEverypageHook{
+	\AddToShipoutPictureFG{\AtPageLowerLeft{%
 		\ifthenelse{\isodd{\value{page}}}
-		{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
-			contents={
-			\begin{tikzpicture}
-				% bleed area
-				\fill [gray] 
-				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
-				% crop area
-				\fill [white] 
-				(\@BleedInnerMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin,\@PaperHeight-\@BleedTopMargin);
+		{%
+			\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
+				\ifbool{opt@showbleed}{}{
+					\coordinate (BLEED_a) at (current page.north west);
+					\coordinate (BLEED_b) at (current page.north east);
+					\coordinate (BLEED_c) at (current page.south east);
+					\coordinate (BLEED_d) at (current page.south west);
+					\coordinate[yshift=\@BleedBottomMargin] (BLEED_e) at (BLEED_d);
+					\coordinate[xshift=-\@BleedOuterMargin, yshift=\@BleedBottomMargin] (BLEED_f) at (BLEED_c);
+					\coordinate[xshift=-\@BleedOuterMargin, yshift=-\@BleedBottomMargin] (BLEED_g) at (BLEED_b);
+					\coordinate[yshift=-\@BleedBottomMargin] (BLEED_h) at (BLEED_a);
+					\path[fill, gray] (BLEED_a) -- (BLEED_b) -- (BLEED_c) -- (BLEED_d) -- (BLEED_e) -- (BLEED_f) -- (BLEED_g) -- (BLEED_h) -- (BLEED_a);
+					% % bleed area
+					% \fill [gray] 
+					% (0,0) rectangle (\@PaperWidth,\@PaperHeight);
+					% % crop area
+					% \fill [white] 
+					% (\@BleedInnerMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin,\@PaperHeight-\@BleedTopMargin);
+				}
 				\ifbool{opt@showrules}{
 				% bleed frame
 				\draw [red,thick] 
@@ -338,16 +351,19 @@
 				(\@BleedInnerMargin+\@ContentBindingOffset+\@ContentInnerMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@ContentBindingOffset+\@ContentInnerMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
 				}{}
 			\end{tikzpicture}
-		}}}
-		{\backgroundsetup{scale=1.0,angle=0,opacity=1.0,position=current page.center,
-			contents={
-			\begin{tikzpicture}
-				% bleed area
-				\fill [gray] 
-				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
-				% crop area
-				\fill [white] 
-				(\@BleedOuterMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin,\@PaperHeight-\@BleedTopMargin);			
+		}{%
+			\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
+				\ifbool{opt@showbleed}{}{
+					\coordinate (BLEED_a) at (current page.north east);
+					\coordinate (BLEED_b) at (current page.north west);
+					\coordinate (BLEED_c) at (current page.south west);
+					\coordinate (BLEED_d) at (current page.south east);
+					\coordinate[yshift=\@BleedBottomMargin] (BLEED_e) at (BLEED_d);
+					\coordinate[xshift=\@BleedOuterMargin, yshift=\@BleedBottomMargin] (BLEED_f) at (BLEED_c);
+					\coordinate[xshift=\@BleedOuterMargin, yshift=-\@BleedBottomMargin] (BLEED_g) at (BLEED_b);
+					\coordinate[yshift=-\@BleedBottomMargin] (BLEED_h) at (BLEED_a);
+					\path[fill, gray] (BLEED_a) -- (BLEED_b) -- (BLEED_c) -- (BLEED_d) -- (BLEED_e) -- (BLEED_f) -- (BLEED_g) -- (BLEED_h) -- (BLEED_a);
+				}
 				\ifbool{opt@showrules}{
 				% bleed frame
 				\draw [red,thick] 
@@ -365,9 +381,8 @@
 				(\@BleedOuterMargin+\@ContentOuterMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@BleedOuterMargin+\@ContentOuterMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
 				}{}
 			\end{tikzpicture}
-		}}}
-		\BgMaterial
-	}
+		}
+	}}
 }
 
 \DeclareRobustCommand{\@SetBlurbCoverLayout}[5]{
@@ -496,8 +511,6 @@
 
 \ifbool{opt@showframe}{\geometry{showframe}}{}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% BOOK TOTAL PAGE COUNT
@@ -506,7 +519,8 @@
 %% is a multiple of 2 or 4 (print constraint).
 %%
 %% help : https://tex.stackexchange.com/a/83498
-%%
+%% help : tikz overlay create blank space 
+%% https://tex.stackexchange.com/q/22873/154815
 %%%%%
 
 \patchcmd\mainmatter{\cleardoublepage}{%
@@ -604,12 +618,41 @@
 	\fi
 }
 
-\newcommand{\changemargin}[2][l]{
-	\if#1r
-		\changetext{}{-#2}{#2}{}{}
+\newlength\save@textwidth
+\newlength\save@hsize
+\newlength\save@oddsidemargin
+\newlength\save@evensidemargin
+\newcommand{\addtomargin}[2][l]{%
+	% textwidth : \the\textwidth\\
+	% hsize : \the\hsize\\
+	% oddsidemargin : \the\oddsidemargin\\
+	% evensidemargin : \the\evensidemargin\\
+	% backup actual page geometry
+	\setlength{\save@textwidth}{\textwidth}
+	\setlength{\save@hsize}{\hsize}
+	\setlength{\save@oddsidemargin}{\oddsidemargin}
+	\setlength{\save@evensidemargin}{\evensidemargin}
+	% change actual page geometry
+	\if#1l		
+		\setlength{\hsize}{\save@hsize-#2}
+		\setlength{\headwidth}{\hsize}
+		\setlength{\hsize}{\save@hsize-#2}
+		\setlength{\textwidth}{\save@textwidth-#2}
+		\setlength{\oddsidemargin}{\save@oddsidemargin+#2}
 	\else
-		\changetext{}{-#2}{}{#2}{}
+		\setlength{\hsize}{\save@hsize-#2}
+		\setlength{\headwidth}{\hsize}
+		\setlength{\hsize}{\save@hsize-#2}
+		\setlength{\textwidth}{\save@textwidth-#2}
+		\setlength{\evensidemargin}{\save@evensidemargin+#2}
 	\fi
+}
+\newcommand{\restoremargin}{%
+	\global\textwidth=\save@textwidth
+	\global\hsize=\save@hsize
+	\global\headwidth=\save@hsize
+	\global\oddsidemargin=\save@oddsidemargin
+	\global\evensidemargin=\save@evensidemargin
 }
 
 % helper
@@ -792,14 +835,10 @@
 \define@key{kvpa}{gopt}{\def\@PSGraphicOptions{#1}}
 \define@key{kvpa}{xshift}{\def\@PSXShift{#1}}
 \define@key{kvpa}{yshift}{\def\@PSYShift{#1}}
-\define@key{kvpa}{boxnode}{\def\@PSBoxNode{#1}}
-\define@key{kvpa}{boxanchor}{\def\@PSBoxAnchor{#1}}
-\define@key{kvpa}{boxtext}{\def\@PSBoxText{#1}}
-\define@key{kvpa}{pcode}{\def\@PSPageCode{#1}}
 % preset keys
-\savekeys{kvpa}{node, anchor, gopt, xshift, yshift, code, boxnode, boxanchor, boxtext}
+\savekeys{kvpa}{node, anchor, gopt, xshift, yshift}
 \presetkeys{kvpa}%
-{node={current page.center}, anchor=center, gopt={}, xshift=0cm, yshift=0cm, pcode={}, boxnode=B, boxanchor=north, boxtext={}}
+{node={current page.center}, anchor=center, gopt={}, xshift=0cm, yshift=0cm}
 {}
 
 \newcommand\Photo[2][]{
@@ -810,10 +849,6 @@
 	%		 xshift		= image shift along x (0mm)
 	%		 yshift		= image shift along y (0mm)
 	%		 gopt 		= a list of graphic options passed to includegrapic (eg. {width=3cm} ...)
-	%		 boxnode	= tikz coords of box insertion (current pag.center | BR ...)
-	%		 boxanchor	= tikz anchor for the box (eg. north east | south west ...)
-	%		 boxtext	= text content of the box
-	%		 pcode		= code to expand at the end ({})
 	% 
 	% help : https://tex.stackexchange.com/a/127926/154815
 	%
@@ -834,11 +869,13 @@
 		\IfSubStr{\@PSAnchor}{west}{\setlength{\@XShift}{\@PSXShift-0.5\pgflinewidth}}{}
 		\IfSubStr{\@PSAnchor}{east}{\setlength{\@XShiftRight}{\@PSXShift+0.5\pgflinewidth}}{}
 
+		% \makebox[0pt][c]{%
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
 			% \coordinate NL_tl ($ ( A) + (0 ,\a) $);
 			\node[anchor=\@PSAnchor, xshift=\@XShift, yshift=\@YShift] 
 				at (\@PSNode){%current page.\@PSAnchor
-				\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}};
+				\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}%
+			};
 			% store points of interest
 			\coordinate (TL) at (current bounding box.north west); 	% top-left corner
 			\coordinate (BL) at (current bounding box.south west); 	% bottom-left corner
@@ -857,15 +894,12 @@
 			\filldraw[blue] (B) circle [radius=\@radius];
 			\filldraw[blue] (L) circle [radius=\@radius];
 			\filldraw[blue] (R) circle [radius=\@radius];
-			% expand boxtext
-			\node[anchor=\@PSBoxAnchor] at (\@PSBoxNode) {\@PSBoxText};
 			% reset the bounding box 
 			% this is equivalent to the overlay option but it does not 
 			% disable the bounding box which is required for computing points of interest
 			\pgfresetboundingbox
 			\path[use as bounding box] (0,0);
 		\end{tikzpicture}
-		\@PSPageCode
 	}
 }
 
@@ -883,9 +917,8 @@
 {node=BR, anchor=south west, ltitle={}, title={}, xshift=0mm, yshift=0mm}%
 {}
 
-\RequirePackage{xstring}
+
 \newsavebox{\@PCBox}
-\newlength{\@PCYAdjust}
 \newcommand\PhotoCaptionRef[2][]{
 	%
 	% [#1] : title 		= subcaption heading = list entry
@@ -912,9 +945,8 @@
 				\captionof{subfigure}[\@PCListTitle]{\@PCTitle}\label{#2}
 			}
 		}}}
-		\setlength{\@PCYAdjust}{0pt}
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
-			\node[anchor=\@PCAnchor, xshift=\@PCXShift, yshift=\@PCYShift+\@PCYAdjust] 
+			\node[anchor=\@PCAnchor, xshift=\@PCXShift, yshift=\@PCYShift] 
 				at (\@PCNode){%
 					\usebox{\@PCBox}
 			};
@@ -983,28 +1015,27 @@
 			\def\@PCRAlign{\hspace*{\fill}}
 		}{}
 		
-		
 		\savebox{\@PCBox}{\fbox{\parbox[b]{\@PCWidth}{%
 			% ~\rule[-0.5ex]{1pt}{2.6ex} \thefigure
-			\captionof{figure}[\@PCListeTitle]{\@PCTitle}%
+			\captionof{figure}[\@PCListeTitle]{\@PCTitle}% capitalisewords, titlecase
 			\label{#2}%
 			\vspace*{6pt}%
-			{\@PCLAlign{\sffamily\it\scshape\@PCSubTitle}\@PCRAlign}\\[6pt]
-			{\color{gray}\sffamily\small\@PCText}
+			{\@PCLAlign{\sffamily\small\it\scshape\@PCSubTitle}\@PCRAlign}\\[6pt]%
+			{\color{gray}\sffamily\small\@PCText}%
 		}}}
 		
-
+		\makebox[0pt][c]{%
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
 			\node[anchor=\@PCAnchor, xshift=\@PCXShift, yshift=\@PCYShift] 
 				at (\@PCNode){%
-					\usebox{\@PCBox}
+					\usebox{\@PCBox}%
 			};
 			\coordinate[xshift=\@PCXShift, yshift=\@PCYShift] (A) at (\@PCNode);
 			\filldraw[red] (\@PCNode) circle [radius=\@radius];
 			\filldraw[blue] (A) circle [radius=\@radius];
 			\pgfresetboundingbox
 			\path[use as bounding box] (0,0);
-		\end{tikzpicture}
+		\end{tikzpicture}}
 	}
 }
 
@@ -1041,20 +1072,26 @@
 }
 \newcommand{\intersectnode}[2]{
 	\begin{tikzpicture}[remember picture, inner sep=0pt]
-		\draw[opacity=0.0] (#1) node (#2){};
+		\path (#1) node (#2){};
 	\end{tikzpicture}
 }
 
+% made available publicly
+
 \let\BleedInnerMargin\@BleedInnerMargin
 \let\BleedOuterMargin\@BleedOuterMargin
-\let\BleedBottomMargin\@BleedBottomMargin
 \let\BleedTopMargin\@BleedTopMargin
+\let\BleedBottomMargin\@BleedBottomMargin
 
+\let\SafeContentInnerMargin\@SafeContentInnerMargin
+\let\SafeContentOuterMargin\@SafeContentOuterMargin
+\let\SafeContentTopMargin\@SafeContentTopMargin
+\let\SafeContentBottomMargin\@SafeContentBottomMargin
 
-\def\mkr{\make\rotatebox[origin=c]{0}{\mk}\;}
-\def\mkd{\rotatebox[origin=c]{-90}{\mk}\;}
-\def\mkl{\rotatebox[origin=c]{180}{\mk}\;}
-\def\mku{\rotatebox[origin=c]{90}{\mk}\;}
+\let\ContentInnerMargin\@ContentInnerMargin
+\let\ContentOuterMargin\@ContentOuterMargin
+\let\SafeContentTopMargin\@ContentTopMargin
+\let\ContentBottomMargin\@ContentBottomMargin
 
 
 \newlength{\mkwidth}

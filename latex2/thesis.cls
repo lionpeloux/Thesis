@@ -24,6 +24,7 @@
 \RequirePackage{setspace}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage{fancyhdr}
+\RequirePackage{mfirstuc}
 
 % \RequirePackage{kvoptions}  		% key-value options
 \RequirePackage{etoolbox}
@@ -191,13 +192,13 @@
 
 % Photo Spread Caption Style
 \DeclareCaptionLabelFormat{PS}{#2}
-\DeclareCaptionFormat{PS}{\uppercase#3}
+\DeclareCaptionFormat{PS}{#3}
 \DeclareCaptionStyle{PS}[]{
 	labelformat=PS,
 	format=PS,
 	labelsep=space,
-	textfont={sf,large,bf,color=Tblue},
-	labelfont={bf,large},
+	textfont={sf,bf,color=Tblue},
+	labelfont={bf},
 	singlelinecheck=true,
 	aboveskip=0pt,
 	belowskip=0pt,
@@ -205,19 +206,6 @@
 	justification=centering,
 	strut=off, % must be off !!! to get proper baseline alignment
 }
-\newcommand{\PhotoSpreadCaption}[4]{%
-	%
-	% [#1] : caption title
-	% [#2] : caption subtitle
-	% [#3] : paragraph
-	% [#4] : label
-	%
-	\captionsetup{style=PS}
-	\captionof{figure}[#1]{#1 \rule[-0.5ex]{1pt}{2.6ex} \thefigure}
-	\label{#4}
-	{\sffamily\it\scshape#2}\\[6pt]
-	{\color{gray}\sffamily\small#3}}
-
 
 % Photo Spread Subcaption Style
 \DeclareCaptionLabelFormat{PC}{\thefigure#2} %\thefigure
@@ -397,12 +385,12 @@
 }
 
 % which style ??
-\fancypagestyle{addpagenumbersforpdfimports}{
-	\fancyhead{}
-	\renewcommand{\headrulewidth}{0pt}
-	\fancyfoot{}
-	\fancyfoot[RO,LE]{\HdrFontStyle\thepage}
-}
+% \fancypagestyle{addpagenumbersforpdfimports}{
+% 	\fancyhead{}
+% 	\renewcommand{\headrulewidth}{0pt}
+% 	\fancyfoot{}
+% 	\fancyfoot[RO,LE]{\HdrFontStyle\thepage}
+% }
 
 
 
