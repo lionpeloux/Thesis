@@ -45,6 +45,7 @@
 	booksize = TB_8x10,
 	pagemodulo = 4,
 	gutter=2.399cm,
+	% nobleed,
 	]{blurb}
 \RequirePackage{photo}
 

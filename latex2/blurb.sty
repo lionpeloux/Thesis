@@ -4,6 +4,7 @@
 
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% IDENTIFICATION
@@ -12,7 +13,6 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{blurb}[2017/12/20 Lionel du Peloux]
-
 
 
 
@@ -34,26 +34,14 @@
 \RequirePackage{refcount}
 \RequirePackage{lastpage}
 \RequirePackage{xcolor}
-\RequirePackage{tikz}
-\RequirePackage{tikzpagenodes}
+\RequirePackage{tikz,tikzpagenodes}
+\usetikzlibrary{calc,backgrounds,positioning}
 \RequirePackage{rotating}
 \RequirePackage{adjustbox}
-\usetikzlibrary{calc,backgrounds,positioning}
 \RequirePackage{graphicx}
 \RequirePackage{afterpage}
-
 \RequirePackage{eso-pic}
-
-% \RequirePackage[strict]{changepage}
-
-% \RequirePackage[
-% 	% showboxes,
-% 	absolute,overlay]{textpos} % absolute positionning
-% textpos value
-% \setlength{\TPHorizModule}{1mm}
-% \setlength{\TPVertModule}{1mm}
-
-\RequirePackage{geometry}			% page layout
+\RequirePackage{geometry}
 
 
 
@@ -77,6 +65,7 @@
 \DeclareBoolOption[false]{showrules}
 \DeclareBoolOption[false]{showframe}
 \DeclareBoolOption[false]{showbleed}
+\DeclareBoolOption[false]{nobleed}
 \ProcessKeyvalOptions*
 
 
@@ -278,7 +267,7 @@
 
 	% page bleed margins
 	\@SetBleedMargins{\@BlurbBleed}{\@BlurbBleed}{\@BlurbBleed}{0mm}
-
+	
 	% paper size
 	\setlength{\@PaperWidth}{\@PageWidth + \@BleedInnerMargin + \@BleedOuterMargin}
 	\setlength{\@PaperHeight}{\@PageHeight + \@BleedBottomMargin + \@BleedTopMargin}
@@ -296,7 +285,20 @@
 	\setlength{\@ContentWidth}{\@PageWidth - \@ContentBindingOffset - \@ContentInnerMargin - \@ContentOuterMargin}
 	\setlength{\@ContentHeight}{\@PageHeight - \@ContentTopMargin - \@ContentBottomMargin}
 
-	\geometry{
+	% if nobleed nullify bleed margins to compute paper
+	\ifbool{opt@nobleed}{
+		\geometry{
+			paperwidth=\@PaperWidth-\@BleedInnerMargin-\@BleedOuterMargin,
+			paperheight=\@PaperHeight-\@BleedTopMargin-\@BleedBottomMargin,
+			inner=\@ContentInnerMargin,
+			outer=\@ContentOuterMargin, 
+			bottom=\@ContentBottomMargin,
+			top=\@ContentTopMargin,
+			bindingoffset=\@ContentBindingOffset,
+			includeall
+			}
+	}{
+		\geometry{
 			paperwidth=\@PaperWidth,
 			paperheight=\@PaperHeight,
 			inner=\@ContentInnerMargin+\@BleedInnerMargin,
@@ -306,6 +308,7 @@
 			bindingoffset=\@ContentBindingOffset,
 			includeall
 			}
+	}	
 }
 
 \DeclareRobustCommand{\@ShowPageLayoutRules}{
@@ -314,74 +317,101 @@
 	% on the page
 	%
 	\AddToShipoutPictureFG{\AtPageLowerLeft{%
-		\ifthenelse{\isodd{\value{page}}}
-		{%
-			\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
-				\ifbool{opt@showbleed}{}{
-					\coordinate (BLEED_a) at (current page.north west);
-					\coordinate (BLEED_b) at (current page.north east);
-					\coordinate (BLEED_c) at (current page.south east);
-					\coordinate (BLEED_d) at (current page.south west);
-					\coordinate[yshift=\@BleedBottomMargin] (BLEED_e) at (BLEED_d);
-					\coordinate[xshift=-\@BleedOuterMargin, yshift=\@BleedBottomMargin] (BLEED_f) at (BLEED_c);
-					\coordinate[xshift=-\@BleedOuterMargin, yshift=-\@BleedBottomMargin] (BLEED_g) at (BLEED_b);
-					\coordinate[yshift=-\@BleedBottomMargin] (BLEED_h) at (BLEED_a);
-					\path[fill, gray] (BLEED_a) -- (BLEED_b) -- (BLEED_c) -- (BLEED_d) -- (BLEED_e) -- (BLEED_f) -- (BLEED_g) -- (BLEED_h) -- (BLEED_a);
-					% % bleed area
-					% \fill [gray] 
-					% (0,0) rectangle (\@PaperWidth,\@PaperHeight);
-					% % crop area
-					% \fill [white] 
-					% (\@BleedInnerMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin,\@PaperHeight-\@BleedTopMargin);
-				}
-				\ifbool{opt@showrules}{
-				% bleed frame
-				\draw [red,thick] 
-				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
-				% crop frame
-				\draw [green,thick] 
-				(\@BleedInnerMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin,\@PaperHeight-\@BleedTopMargin);
-				% safe content frame
-				\draw [blue,thick] 
-				(\@BleedInnerMargin+\@SafeContentInnerMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth-\@BleedOuterMargin-\@SafeContentOuterMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
-				% binding edge
-				\draw[black,thick,dashed] (\@BleedInnerMargin+\@ContentBindingOffset,0) -- (\@BleedInnerMargin+\@ContentBindingOffset,\@PaperHeight);
-				% content frame
-				\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
-				(\@BleedInnerMargin+\@ContentBindingOffset+\@ContentInnerMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@ContentBindingOffset+\@ContentInnerMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
-				}{}
-			\end{tikzpicture}
-		}{%
-			\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
-				\ifbool{opt@showbleed}{}{
-					\coordinate (BLEED_a) at (current page.north east);
-					\coordinate (BLEED_b) at (current page.north west);
-					\coordinate (BLEED_c) at (current page.south west);
-					\coordinate (BLEED_d) at (current page.south east);
-					\coordinate[yshift=\@BleedBottomMargin] (BLEED_e) at (BLEED_d);
-					\coordinate[xshift=\@BleedOuterMargin, yshift=\@BleedBottomMargin] (BLEED_f) at (BLEED_c);
-					\coordinate[xshift=\@BleedOuterMargin, yshift=-\@BleedBottomMargin] (BLEED_g) at (BLEED_b);
-					\coordinate[yshift=-\@BleedBottomMargin] (BLEED_h) at (BLEED_a);
-					\path[fill, gray] (BLEED_a) -- (BLEED_b) -- (BLEED_c) -- (BLEED_d) -- (BLEED_e) -- (BLEED_f) -- (BLEED_g) -- (BLEED_h) -- (BLEED_a);
-				}
-				\ifbool{opt@showrules}{
-				% bleed frame
-				\draw [red,thick] 
-				(0,0) rectangle (\@PaperWidth,\@PaperHeight);
-				% crop frame
-				\draw [green,thick] 
-				(\@BleedOuterMargin,\@BleedBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin,\@PaperHeight-\@BleedTopMargin);
-				% safe content frame
-				\draw [color=blue,thick] 
-				(\@BleedOuterMargin+\@SafeContentOuterMargin, \@BleedBottomMargin+\@SafeContentBottomMargin) rectangle (\@PaperWidth-\@BleedInnerMargin-\@SafeContentInnerMargin, \@PaperHeight-\@BleedTopMargin-\@SafeContentTopMargin);
-				% binding edge
-				\draw[black,thick,dashed] (\@PaperWidth-\@BleedInnerMargin-\@ContentBindingOffset,0) -- (\@PaperWidth-\@BleedInnerMargin-\@ContentBindingOffset,\@PaperHeight);
-				% text frame
-				\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick] 
-				(\@BleedOuterMargin+\@ContentOuterMargin, \@BleedBottomMargin+\@ContentBottomMargin) rectangle (\@BleedOuterMargin+\@ContentOuterMargin+\@ContentWidth,\@BleedBottomMargin+\@ContentBottomMargin+\@ContentHeight);
-				}{}
-			\end{tikzpicture}
+	\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
+		\ifthenelse{\isodd{\value{page}}} 
+		{% right page
+			\ifbool{opt@nobleed}{
+				% page coords (PG) (after trim bleed)
+				\coordinate (PGtl) at (current page.north west);
+				\coordinate (PGtr) at (current page.north east);
+				\coordinate (PGbr) at (current page.south east);
+				\coordinate (PGbl) at (current page.south west);
+				% paper coords (PP)
+				\coordinate[xshift=-\@BleedInnerMargin, yshift=\@BleedTopMargin] (PPtl) at (PGtl);
+				\coordinate[xshift=\@BleedOuterMargin, yshift=\@BleedTopMargin] (PPtr) at (PGtr);
+				\coordinate[xshift=\@BleedOuterMargin, yshift=-\@BleedBottomMargin] (PPbr) at (PGbr);
+				\coordinate[xshift=-\@BleedInnerMargin, yshift=-\@BleedBottomMargin] (PPbl) at (PGbl);
+			}{
+				% paper coords (PP)
+				\coordinate (PPtl) at (current page.north west);
+				\coordinate (PPtr) at (current page.north east);
+				\coordinate (PPbr) at (current page.south east);
+				\coordinate (PPbl) at (current page.south west);
+				% page coords (PG after trim bleed)
+				\coordinate[xshift=\@BleedInnerMargin, yshift=-\@BleedTopMargin] (PGtl) at (PPtl);
+				\coordinate[xshift=-\@BleedOuterMargin, yshift=-\@BleedTopMargin] (PGtr) at (PPtr);
+				\coordinate[xshift=-\@BleedOuterMargin, yshift=\@BleedBottomMargin] (PGbr) at (PPbr);
+				\coordinate[xshift=\@BleedInnerMargin, yshift=\@BleedBottomMargin] (PGbl) at (PPbl);	
+			}
+			% safe content (SC)
+			\coordinate[xshift=\@SafeContentInnerMargin, yshift=-\@SafeContentTopMargin] (SCtl) at (PGtl);
+			\coordinate[xshift=-\@SafeContentOuterMargin, yshift=-\@SafeContentTopMargin] (SCtr) at (PGtr);
+			\coordinate[xshift=-\@SafeContentOuterMargin, yshift=\@SafeContentBottomMargin] (SCbr) at (PGbr);
+			\coordinate[xshift=\@SafeContentInnerMargin, yshift=\@SafeContentBottomMargin] (SCbl) at (PGbl);	
+			% content area (CA)
+			\coordinate[xshift=\@ContentInnerMargin+\@ContentBindingOffset, yshift=-\@ContentTopMargin] (CAtl) at (PGtl);
+			\coordinate[xshift=-\@ContentOuterMargin, yshift=-\@ContentTopMargin] (CAtr) at (PGtr);
+			\coordinate[xshift=-\@ContentOuterMargin, yshift=\@ContentBottomMargin] (CAbr) at (PGbr);
+			\coordinate[xshift=\@ContentInnerMargin+\@ContentBindingOffset, yshift=\@ContentBottomMargin] (CAbl) at (PGbl);	
+			% binding line (BL)
+			\coordinate[xshift=\@ContentBindingOffset] (BLt) at (PGtl);
+			\coordinate[xshift=\@ContentBindingOffset] (BLb) at (PGbl);
+		}{% left page
+			\ifbool{opt@nobleed}{
+				% page coords (PG) (after trim bleed)
+				\coordinate (PGtl) at (current page.north west);
+				\coordinate (PGtr) at (current page.north east);
+				\coordinate (PGbr) at (current page.south east);
+				\coordinate (PGbl) at (current page.south west);
+				% paper coords (PP)
+				\coordinate[xshift=-\@BleedOuterMargin, yshift=\@BleedTopMargin] (PPtl) at (PGtl);
+				\coordinate[xshift=\@BleedInnerMargin, yshift=\@BleedTopMargin] (PPtr) at (PGtr);
+				\coordinate[xshift=\@BleedInnerMargin, yshift=-\@BleedBottomMargin] (PPbr) at (PGbr);
+				\coordinate[xshift=-\@BleedOuterMargin, yshift=-\@BleedBottomMargin] (PPbl) at (PGbl);
+			}{
+				% paper coords (PP)
+				\coordinate (PPtl) at (current page.north west);
+				\coordinate (PPtr) at (current page.north east);
+				\coordinate (PPbr) at (current page.south east);
+				\coordinate (PPbl) at (current page.south west);
+				% page coords (PG after trim bleed)
+				\coordinate[xshift=\@BleedOuterMargin, yshift=-\@BleedTopMargin] (PGtl) at (PPtl);
+				\coordinate[xshift=-\@BleedInnerMargin, yshift=-\@BleedTopMargin] (PGtr) at (PPtr);
+				\coordinate[xshift=-\@BleedInnerMargin, yshift=\@BleedBottomMargin] (PGbr) at (PPbr);
+				\coordinate[xshift=\@BleedOuterMargin, yshift=\@BleedBottomMargin] (PGbl) at (PPbl);	
+			}
+			% safe content (SC)
+			\coordinate[xshift=\@SafeContentOuterMargin, yshift=-\@SafeContentTopMargin] (SCtl) at (PGtl);
+			\coordinate[xshift=-\@SafeContentInnerMargin, yshift=-\@SafeContentTopMargin] (SCtr) at (PGtr);
+			\coordinate[xshift=-\@SafeContentInnerMargin, yshift=\@SafeContentBottomMargin] (SCbr) at (PGbr);
+			\coordinate[xshift=\@SafeContentOuterMargin, yshift=\@SafeContentBottomMargin] (SCbl) at (PGbl);
+			% content area (CA)
+			\coordinate[xshift=\@ContentOuterMargin, yshift=-\@ContentTopMargin] (CAtl) at (PGtl);
+			\coordinate[xshift=-\@ContentInnerMargin-\@ContentBindingOffset, yshift=-\@ContentTopMargin] (CAtr) at (PGtr);
+			\coordinate[xshift=-\@ContentInnerMargin-\@ContentBindingOffset, yshift=\@ContentBottomMargin] (CAbr) at (PGbr);
+			\coordinate[xshift=\@ContentOuterMargin, yshift=\@ContentBottomMargin] (CAbl) at (PGbl);
+			% binding line (BL)
+			\coordinate[xshift=-\@ContentBindingOffset] (BLt) at (PGtr);
+			\coordinate[xshift=-\@ContentBindingOffset] (BLb) at (PGbr);	
 		}
+		\ifbool{opt@showbleed}{}{
+			\ifthenelse{\isodd{\value{page}}}
+			{\path[fill, gray] (PPtl) -- (PPtr) -- (PPbr) -- (PPbl) -- (PGbl) -- (PGbr) -- (PGtr) -- (PGtl) -- (PPtl);}
+			{\path[fill, gray] (PPtr) -- (PPtl) -- (PPbl) -- (PPbr) -- (PGbr) -- (PGbl) -- (PGtl) -- (PGtr) -- (PPtr);}
+		}
+		\ifbool{opt@showrules}{
+			% paper frame
+			\draw [red,thick] (PPbl) rectangle (PPtr);
+			% page frame
+			\draw [green,thick] (PGbl) rectangle (PGtr);
+			% safe content
+			\draw [color=blue,thick]  (SCbl) rectangle (SCtr);
+			% full content
+			\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick]  (CAbl) rectangle (CAtr);
+			% binding line
+			\draw[black,thick,dashed] (BLb) -- (BLt);
+		}{}
+	\end{tikzpicture}
 	}}
 }
 
