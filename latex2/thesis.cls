@@ -46,7 +46,7 @@
 	pagemodulo = 4,
 	gutter=2.399cm,
 	]{blurb}
-
+\RequirePackage{photo}
 
 % LANGUAGES
 \usepackage[french,english]{babel}
