@@ -34,11 +34,31 @@
 \RequirePackage{refcount,lastpage}
 % \RequirePackage{adjustbox}
 % \RequirePackage{eso-pic}
+
+
+
+
+% \RequirePackage[
+% 	top = 12mm-6.35mm,
+% 	outer = 36mm-6.35mm,
+% 	bottom = 36mm-6.35mm,
+% 	% inner = 12mm-0.317mm-12.70mm,
+% 	inner = 0mm,
+% 	binding = 0mm,
+% 	% booksize = a4,
+% 	% booksize = TB_6x9,
+% 	booksize = TB_8x10,
+% 	pagemodulo = 4,
+% 	gutter=2.399cm,
+% 	% nobleed,
+% 	]{blurb}
+
 \RequirePackage[
-	top = 10mm,
-	outer = 14mm,
-	bottom = 6mm,
-	inner = 16mm,
+	top = 22.19mm-6.35mm,
+	outer = 35.45mm-6.35mm,
+	bottom = 44.31mm-6.35mm,
+	% inner = 12mm-0.317mm-12.70mm,
+	inner = 1.89mm,
 	binding = 0mm,
 	% booksize = a4,
 	% booksize = TB_6x9,
@@ -52,7 +72,7 @@
 % LANGUAGES
 \usepackage[french,english]{babel}
 
-\RequirePackage{color}
+% \RequirePackage{color}
 \RequirePackage{textcase} % text case
 \RequirePackage{tikz}
 \RequirePackage{tikzpagenodes}
@@ -139,17 +159,46 @@
 
 %% paragraph
 %% --------------------------
-\renewcommand{\familydefault}{\rmdefault}
-\setlength{\parskip}{1em}
-\setlength{\parindent}{0pt}
-\setstretch{1.1}
+\RequirePackage{lmodern}
+\renewcommand{\familydefault}{\sffamily}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{1em}
+% \renewcommand{\baselinestretch}{1.2}
+% \setstretch{1.1}
+
+% \RequirePackage{baskervillef}
+% \RequirePackage[varqu,varl,var0]{inconsolata}
+% \RequirePackage[scale=.95,type1]{cabin}
+% \RequirePackage[baskerville,vvarbb]{newtxmath}
+% \RequirePackage[cal=boondoxo]{mathalfa}
 
 %% headings
 %% --------------------------
 \DeclareRobustCommand{\FontSwitch}[1]{
 
+	% 1 : full computer modern
+	% \ifdefstring{#1}{1}{
+	% }{}
+	% % 2 : full latin modern
+	% \ifdefstring{#1}{2}{
+	% 	\RequirePackage{lmodern}
+	% }{}
+	% % 3 : beraserif + beramono
+	% \ifdefstring{#1}{3}{
+	% 	\RequirePackage[scaled=0.85]{beraserif}
+	% 	\RequirePackage[scaled=0.85]{beramono}
+	% }{}
+	% \ifdefstring{#1}{4}{
+	% 	\RequirePackage{baskervillef}
+	% 	\RequirePackage[varqu,varl,var0]{inconsolata}
+	% 	\RequirePackage[scale=.95,type1]{cabin}
+	% 	\RequirePackage[baskerville,vvarbb]{newtxmath}
+	% 	\RequirePackage[cal=boondoxo]{mathalfa}
+	% }{}
+	
 	% font styles (rm, sf, tt)
-	\DeclareRobustCommand{\HeadingFontStyle}{\sffamily}
+	% \renewcommand{\familydefault}{\rmfamily}
+	\DeclareRobustCommand{\HeadingFontStyle}{\familydefault}
 
 	% font weight
 	\DeclareRobustCommand{\HeadingFontWeight}{\bfseries}
@@ -157,18 +206,6 @@
 	% font size (tiny, small, large, Large, LARGE, huge, Huge)
 	\DeclareRobustCommand{\HeadingFontSize}{\Huge}
 
-	% 1 : full computer modern
-	\ifdefstring{#1}{1}{
-	}{}
-	% 2 : full latin modern
-	\ifdefstring{#1}{2}{
-		\RequirePackage{lmodern}
-	}{}
-	% 3 : beraserif + beramono
-	\ifdefstring{#1}{3}{
-		\RequirePackage[scaled=0.85]{beraserif}
-		\RequirePackage[scaled=0.85]{beramono}
-	}{}
 
 	\DeclareRobustCommand{\PartFont}{\HeadingFontStyle\HeadingFontWeight\HeadingFontSize}
 	\DeclareRobustCommand{\ChapterFont}{\HeadingFontStyle\HeadingFontWeight\HeadingFontSize}
@@ -359,39 +396,55 @@
 %% Even / Odd / Left / Center / Right / Header / Footer
 
 %% font styles (rm, sf, tt)
-\DeclareRobustCommand{\HdrFontStyle}{\sffamily}
+\DeclareRobustCommand{\HdrFontStyle}{\rmfamily\small\nouppercase}%\small\scshape\nouppercase
 
 
 
 % default style
 \pagestyle{fancy}
 %% running header without chapter prefix
-\renewcommand{\chaptermark}[1]{\uppercase{\markboth{#1}{}}}
+\renewcommand{\chaptermark}[1]{{\markboth{{#1}}{}}}
+\renewcommand{\sectionmark}[1]{\markright{#1}} % \thesection
 \fancyhf{}
 % \iffloatpage{0.0pt}{0.4pt}
 % \newgeometry{⟨options⟩} and \restoregeometry
 % \renewcommand{\headheight}{\iffloatpage{\protect\setlength{\headheight}{0pt}}{\protect\setlength{\headheight}{14pt}}}
 \renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
 \renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
-\fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\nouppercase{\small\rightmark}}} 	% \nouppercase
-\fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\uppercase{\small\leftmark}}} 	% \nouppercase
-\fancyfoot[EL,OR]{\HdrFontStyle\footnotesize\thepage}
+% first style
+% \fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\nouppercase{\small\rightmark}}} 	% \nouppercase
+% \fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\nouppercase{\small\leftmark}}} 	% \nouppercase
+% \fancyfoot[EL,OR]{\HdrFontStyle\footnotesize\thepage}
+% second style
+\fancyhead[EL]{\iffloatpage{}{%
+	\hspace*{-1pt}\hspace*{-1cm}\parbox[b]{1cm}{\raggedleft\HdrFontStyle\MakeUppercase{\thepage}\hspace*{6pt}}%
+	\rule[-1pt]{2pt}{8pt}\hspace*{6pt}%
+	\HdrFontStyle\MakeUppercase{\leftmark}%
+}}
+\fancyhead[OR]{\iffloatpage{}{%
+	\HdrFontStyle\MakeUppercase{\rightmark}%
+	\hspace*{6pt}%
+	\rule[-1pt]{2pt}{8pt}%
+	\parbox[b]{1cm}{\raggedright\hspace*{6pt}\HdrFontStyle\MakeUppercase{\thepage}}\hspace*{-1cm}\hspace*{-1pt}%
+	% 
+}}
+\fancyfoot[EL,OR]{}
 
 % plain style
 \fancypagestyle{plain}{
 	\fancyhf{}
 	\renewcommand{\headrulewidth}{0pt}
 	\renewcommand{\footrulewidth}{0pt}
-	\fancyfoot[EL,OR]{\HdrFontStyle\thepage} % \ttfamily\large\scshape\bfseries
+	% \fancyfoot[EL,OR]{\HdrFontStyle\footnotesize\thepage} % \ttfamily\large\scshape\bfseries
 }
 
-% which style ??
-% \fancypagestyle{addpagenumbersforpdfimports}{
-% 	\fancyhead{}
-% 	\renewcommand{\headrulewidth}{0pt}
-% 	\fancyfoot{}
-% 	\fancyfoot[RO,LE]{\HdrFontStyle\thepage}
-% }
+% which style ?? part
+\fancypagestyle{addpagenumbersforpdfimports}{
+	\fancyhead{}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot{}
+	\fancyfoot[RO,LE]{\HdrFontStyle\thepage}
+}
 
 
 
@@ -686,11 +739,21 @@
 %%
 %% FOOTNOTES
 %%
+%% help : https://tex.stackexchange.com/a/21917/154815
+%%
 %%%%%
+\usepackage[bottom]{footmisc}
+\setlength{\skip\footins}{22pt}
 
-\def\footnoterule{\kern-3\p@
-  \hrule \@width 2in \kern 2.6\p@} % the \hrule is .4pt high
-\setlength{\skip\footins}{5mm}
+\renewcommand{\footnoterule}{%
+  \kern -10pt % -3 + 1 + 2 = 0pt
+  \hrule width 0.25\textwidth height 2pt
+  \kern 8pt
+}
+
+% \def\footnoterule{\kern-3\p@
+%   \hrule \@width 2in \kern 2.6\p@} % the \hrule is .4pt high
+
 
 
 
@@ -753,9 +816,9 @@
 \hypersetup{pdfborder={0 0 0},
 	colorlinks=true,
 	linktoc=page,
-	linkcolor=Tblue,
-	citecolor=Tblue,
-	urlcolor=Tblue} 
+	linkcolor=linkcolor,
+	citecolor=citecolor,
+	urlcolor=urlcolor} 
 \urlstyle{same}
 
 % attention a loader apres hypperef (use nameinlink or noabbrev options)
@@ -777,6 +840,8 @@
 %% COLORS
 %%
 %%%%%
+\RequirePackage{xcolor}
+
 \definecolor{Tblue}{RGB}{104, 135, 255}
 \definecolor{Tred}{RGB}{255, 110, 103}
 \definecolor{Tgreen}{RGB}{147, 250, 103}
@@ -794,7 +859,20 @@
 \definecolor{gray7}{cmyk}{0,0,0,0.7}
 \definecolor{gray9}{cmyk}{0,0,0,0.9}
 
+\newtoggle{print}
 
+\toggletrue{print}
+\iftoggle{print}{
+	\colorlet{urlcolor}{black}
+	\colorlet{citecolor}{black}
+	\colorlet{linkcolor}{black}
+	\colorlet{txtcolor}{Tblue}
+}{
+	\colorlet{urlcolor}{Tblue}
+	\colorlet{citecolor}{Tblue}
+	\colorlet{linkcolor}{Tblue}
+	\colorlet{txtcolor}{Tblue}
+}
 
 
 

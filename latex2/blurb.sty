@@ -112,9 +112,9 @@
 %% set default parameters
 \setlength{\marginparwidth}{0mm}		% no notes
 \setlength{\marginparsep}{0mm}			% no notes
-\setlength{\headheight}{14pt}			% increase headheight (default to 12pt)
-\setlength{\headsep}{25pt}				
-\setlength{\footskip}{25pt}	
+\setlength{\headheight}{12pt}			% increase headheight (default to 12pt)
+\setlength{\headsep}{12pt}				
+\setlength{\footskip}{48pt}	
 
 % get content margins relative to safe area borders
 \setlength{\@ContentTopMargin}{\opt@top}
@@ -122,8 +122,6 @@
 \setlength{\@ContentBottomMargin}{\opt@bottom}
 \setlength{\@ContentInnerMargin}{\opt@inner}
 \setlength{\@ContentBindingOffset}{\opt@binding}
-
-
 
 
 
@@ -295,7 +293,7 @@
 			bottom=\@ContentBottomMargin,
 			top=\@ContentTopMargin,
 			bindingoffset=\@ContentBindingOffset,
-			includeall
+			% includeall
 			}
 	}{
 		\geometry{
@@ -306,17 +304,13 @@
 			bottom=\@ContentBottomMargin+\@BleedBottomMargin,
 			top=\@ContentTopMargin+\@BleedTopMargin,
 			bindingoffset=\@ContentBindingOffset,
-			includeall
+			% includeall
 			}
 	}	
 }
 
-\DeclareRobustCommand{\@ShowPageLayoutRules}{
-	%
-	% Display the page layout rules (bleed, margins, content area, binding, ...)
-	% on the page
-	%
-	\AddToShipoutPictureFG{\AtPageLowerLeft{%
+
+\DeclareRobustCommand{\GetPageLayoutNodes}{
 	\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
 		\ifthenelse{\isodd{\value{page}}} 
 		{% right page
@@ -394,25 +388,79 @@
 			\coordinate[xshift=-\@ContentBindingOffset] (BLt) at (PGtr);
 			\coordinate[xshift=-\@ContentBindingOffset] (BLb) at (PGbr);	
 		}
-		\ifbool{opt@showbleed}{}{
-			\ifthenelse{\isodd{\value{page}}}
-			{\path[fill, gray] (PPtl) -- (PPtr) -- (PPbr) -- (PPbl) -- (PGbl) -- (PGbr) -- (PGtr) -- (PGtl) -- (PPtl);}
-			{\path[fill, gray] (PPtr) -- (PPtl) -- (PPbl) -- (PPbr) -- (PGbr) -- (PGbl) -- (PGtl) -- (PGtr) -- (PPtr);}
-		}
-		\ifbool{opt@showrules}{
-			% paper frame
-			\draw [red,thick] (PPbl) rectangle (PPtr);
-			% page frame
-			\draw [green,thick] (PGbl) rectangle (PGtr);
-			% safe content
-			\draw [color=blue,thick]  (SCbl) rectangle (SCtr);
-			% full content
-			\draw [color=cyan,fill=gray!20,fill opacity=0.2, thick]  (CAbl) rectangle (CAtr);
-			% binding line
-			\draw[black,thick,dashed] (BLb) -- (BLt);
-		}{}
+		% center nodes
+		\path (PPbl) -- (PPtr) coordinate[midway] (PPc);
+		\path (PGbl) -- (PGtr) coordinate[midway] (PGc);
+		\path (SCbl) -- (SCtr) coordinate[midway] (SCc);
+		\path (CAbl) -- (CAtr) coordinate[midway] (CAc);
+		% 
+		\path (PGbl) -- (PGbr) coordinate[midway] (PGb);
+		\path (PGtl) -- (PGtr) coordinate[midway] (PGt);
+		\path (PGtl) -- (PGbl) coordinate[midway] (PGl);
+		\path (PGtr) -- (PGbr) coordinate[midway] (PGr);
 	\end{tikzpicture}
-	}}
+}
+
+\DeclareRobustCommand{\@ShowPageLayoutRules}{
+	%
+	% Display the page layout rules (bleed, margins, content area, binding, ...)
+	% on the page
+	%
+	\AddToShipoutPictureBG{%
+		% place the page layout nodes in the shipout BG register
+		% so they will ba accessible in \AddToShipoutPictureBG
+		\GetPageLayoutNodes
+		% full content
+		\ifbool{opt@showrules}{
+			\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
+				\path[fill=gray!20,fill opacity=0.4]  (CAbl) rectangle (CAtr);
+			\end{tikzpicture}
+		}{}
+	}
+	\AddToShipoutPictureFG{
+		% place the page layout nodes in the shipout FG register
+		% so they will ba accessible in \AddToShipoutPictureFG
+		\GetPageLayoutNodes
+		\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
+			\ifbool{opt@showbleed}{}{
+				\ifthenelse{\isodd{\value{page}}}
+				{\path[fill,gray,opacity=0.9] (PPtl) -- (PPtr) -- (PPbr) -- (PPbl) -- (PGbl) -- (PGbr) -- (PGtr) -- (PGtl) -- (PPtl);}
+				{\path[fill,gray,opacity=0.9] (PPtr) -- (PPtl) -- (PPbl) -- (PPbr) -- (PGbr) -- (PGbl) -- (PGtl) -- (PGtr) -- (PPtr);}
+			}
+			\ifbool{opt@showrules}{
+				% paper frame
+				\draw [red,thick] (PPbl) rectangle (PPtr);
+				% page frame
+				\draw [green,thick] (PGbl) rectangle (PGtr);
+				% safe content
+				\draw [color=blue,thick]  (SCbl) rectangle (SCtr);
+				% full content
+				\draw [color=cyan,thick]  (CAbl) rectangle (CAtr);
+				% binding line
+				\draw[black,thick,dashed] (BLb) -- (BLt);
+				% paper nodes
+				% \filldraw[yellow] (PPbl) circle [radius=0.5mm];
+				% \filldraw[yellow] (PPbr) circle [radius=0.5mm];
+				% \filldraw[yellow] (PPtl) circle [radius=0.5mm];
+				% \filldraw[yellow] (PPtr) circle [radius=0.5mm];
+			}{}
+			% \draw [color=cyan,thick]  (CAbl) rectangle (CAtr);
+			% % \draw[black,thick,dashed] (BLb) -- (BLt);
+			% % % \filldraw[yellow] (PGc) circle [radius=2mm];
+			% % % \filldraw[yellow] (PGt) circle [radius=2mm];
+			% % % \filldraw[yellow] (PGb) circle [radius=2mm];
+			% % % \filldraw[yellow] (PGr) circle [radius=2mm];
+			% % % \filldraw[yellow] (PGl) circle [radius=2mm];
+			% \ifthenelse{\isodd{\value{page}}}%
+			% {
+			% 	\draw[red,thin,dashed] (PGtl) -- (PGbr);
+			% 	\draw[red,thin,dashed] (PGl) -- (PGtr);
+			% }{
+			% 	\draw[red,thin,dashed] (PGbl) -- (PGtr);
+			% 	\draw[red,thin,dashed] (PGtl) -- (PGr);
+			% }%
+		\end{tikzpicture}
+	}
 }
 
 \DeclareRobustCommand{\@SetBlurbCoverLayout}[5]{

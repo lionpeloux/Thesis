@@ -209,16 +209,31 @@ Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of th
 \item and only \dofs{1} for the orientation of the cross-sections.
 \end{itemize}
 \begin{figure}[t]
-%	\begin{fullpage}
-     		\centering
-		\subfloat[][bending strains]{\includegraphics{curve_angle_a.pdf}\label{fig:curve_angle_a}}
-		\hspace{2.5cm}
-		\subfloat[][angular deviation]{\includegraphics{curve_angle_b.pdf}\label{fig:curve_angle_b}} \\
-		\vspace{10pt}
-		\captionof{figure}[Curve-angle representation of the rod]{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}
-		\label{fig:curve_angle}
-%	\end{fullpage}
+	\begin{subfigure}[b]{\TwoMediaWidth}
+		\includegraphics[width=\textwidth]{curve_angle_a.pdf}
+		\caption{bending strains}
+		\label{fig:curve_angle_a}
+	\end{subfigure}%
+	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
+	\begin{subfigure}[b]{\TwoMediaWidth}
+		\includegraphics[width=\textwidth]{curve_angle_b.pdf}
+		\caption{angular deviation}
+		\label{fig:curve_angle_b}
+	\end{subfigure}
+	\caption[Curve-angle representation of the rod]{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}
+	\label{fig:curve_angle}
 \end{figure}
+% \begin{figure}[t]
+% %	\begin{fullpage}
+%      		\centering
+% 		\subfloat[][bending strains]{\includegraphics{curve_angle_a.pdf}\label{fig:curve_angle_a}}
+% 		\hspace{2.5cm}
+% 		\subfloat[][angular deviation]{\includegraphics{curve_angle_b.pdf}\label{fig:curve_angle_b}} \\
+% 		\vspace{10pt}
+% 		\captionof{figure}[Curve-angle representation of the rod]{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}
+% 		\label{fig:curve_angle}
+% %	\end{fullpage}
+% \end{figure}
 
 \subsection{Definition of the representation}
 This reduction of the number of \dofs{} relies on the choice of a suitable reference frame, namely a Bishop (or zero-twisting) frame denoted $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$. Recall from \cref{sec=bishop} in \cref{chp=curve} that this reference frame is adapted to the centerline and exhibits a null angular velocity around the centerline's tangent vector (see \cref{eq:null_velocity}), which means~:

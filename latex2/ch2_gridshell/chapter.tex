@@ -35,66 +35,69 @@ Note that the term \emph{rigid gridshell} is often opposed to the term \emph{ela
 % ------------------------------------------
 Their mechanical behaviour is very similar to the one of real shells even if the material is discrete and located in a grid more or less open. Moreover, gridshells benefit from the same advantages as the ones showed by an eggshell : they can cross large span using a low amount of material. Their stiffness is mainly linked to their double-curved shape.
 
-\afterpage{%
-\AddToShipoutPictureBG*{% 
-	% required to avoid mess up between tikz overlay and page vertical blank space
-	\Photo[
-		node=PPbl,
-		anchor=south west,
-		gopt={width=8.5cm},
-		]{mannheim_erection_2.jpg}%
-	\savenodes{C}
-	\Photo[
-		node=Ctl,
-		anchor=south west,
-		yshift=\PhotoBigSkip,
-		gopt={width=8.5cm},
-		]{mannheim_erection_1.jpg}%
-	\savenodes{B}
-	\Photo[
-		node=Btl,
-		anchor=south west,
-		yshift=\PhotoBigSkip,
-		gopt={width=8.5cm},
-		]{mannheim_erection_0.jpg}%%
-	\savenodes{A}
-	\PhotoCaption[
-		node=Cbr,
-		anchor=south west,
-		yshift=\BleedBottomMargin+\ContentBottomMargin,
-		xshift=\PhotoBigSkip,
-		style=PS,
-		ltitle={Steel gridshell built in 1962 in Berkeley, USA},
-		title={1975 \vsep Mannheim Multihalle},
-		subtitle=Construction Stages,
-		text={%
-			\mk[t]{grid assembly}\\ 
-			\mk[l]{elastic deformation of the grid}\\ 
-			\mk[b]{final shape}}
-		]{fig:erec}%
-	\PhotoCaptionRef[
-		node=Atr, 
-		anchor=south east, 
-		yshift=\PhotoRefSkip,
-		ltitle=Steel lattice,
-		]{fig:erec_2}
-	\PhotoCaptionRef[
-		node=Btr, 
-		anchor=south east, 
-		yshift=\PhotoRefSkip,
-		ltitle=Steel lattice,
-		]{fig:erec_1}
-	\PhotoCaptionRef[
-		node=Ctr, 
-		anchor=south east, 
-		yshift=\PhotoRefSkip,
-		ltitle=grid,
-		]{fig:erec_0}
-}}
+% \addtomargin[l]{54mm}
 
-\pagebreak
-\addtomargin[l]{6cm}
-\afterpage{\restoremargin}
+% \afterpage{%
+% \AddToShipoutPictureBG*{% 
+% 	% \GetLayoutNodes
+
+% 	% required to avoid mess up between tikz overlay and page vertical blank space
+% 	\Photo[
+% 		node=PPbl,
+% 		anchor=south west,
+% 		gopt={width=7.5cm},
+% 		]{mannheim_erection_2.jpg}%
+% 	\savenodes{C}
+% 	\Photo[
+% 		node=Ctl,
+% 		anchor=south west,
+% 		yshift=\PhotoBigSkip,
+% 		gopt={width=7.5cm},
+% 		]{mannheim_erection_1.jpg}%
+% 	\savenodes{B}
+% 	\Photo[
+% 		node=Btl,
+% 		anchor=south west,
+% 		yshift=\PhotoBigSkip,
+% 		gopt={width=7.5cm},
+% 		]{mannheim_erection_0.jpg}%%
+% 	\savenodes{A}
+% 	\PhotoCaption[
+% 		node=Cbr,
+% 		anchor=south west,
+% 		yshift=\BleedBottomMargin+\ContentBottomMargin,
+% 		xshift=\PhotoBigSkip,
+% 		style=PS,
+% 		ltitle={Steel gridshell built in 1962 in Berkeley, USA},
+% 		title={1975 \vsep Mannheim Multihalle},
+% 		subtitle=Construction Stages,
+% 		text={%
+% 			\mk[t]{grid assembly}\\ 
+% 			\mk[l]{elastic deformation of the grid}\\ 
+% 			\mk[b]{final shape}}
+% 		]{fig:erec}%
+% 	\PhotoCaptionRef[
+% 		node=Atr, 
+% 		anchor=south east, 
+% 		yshift=\PhotoRefSkip,
+% 		ltitle=Steel lattice,
+% 		]{fig:erec_2}
+% 	\PhotoCaptionRef[
+% 		node=Btr, 
+% 		anchor=south east, 
+% 		yshift=\PhotoRefSkip,
+% 		ltitle=Steel lattice,
+% 		]{fig:erec_1}
+% 	\PhotoCaptionRef[
+% 		node=Ctr, 
+% 		anchor=south east, 
+% 		yshift=\PhotoRefSkip,
+% 		ltitle=grid,
+% 		]{fig:erec_0}
+% }}
+
+
+% \afterpage{\restoremargin}
 
 \subsection{Material flexibility for structural rigidity}\label{sec=def_flexibility}
 % ------------------------------------------
