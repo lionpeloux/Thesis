@@ -210,13 +210,13 @@ Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of th
 \end{itemize}
 \begin{figure}[t]
 	\begin{subfigure}[b]{\TwoMediaWidth}
-		\includegraphics[width=\textwidth]{curve_angle_a.pdf}
+		\includegraphics{curve_angle_a.pdf}
 		\caption{bending strains}
 		\label{fig:curve_angle_a}
 	\end{subfigure}%
 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
 	\begin{subfigure}[b]{\TwoMediaWidth}
-		\includegraphics[width=\textwidth]{curve_angle_b.pdf}
+		\includegraphics[]{curve_angle_b.pdf}
 		\caption{angular deviation}
 		\label{fig:curve_angle_b}
 	\end{subfigure}
@@ -376,7 +376,7 @@ for the computation of $\vect{f}$.
 
 This assumption is not mandatory -- for instance it is not made by \citef{Nabaei2014} -- but was found to lead to simpler and faster computations.
 
-\section{Energy gradient with respect to $\theta$~: twisting moment}\label{sec=dE_dtheta}
+\section{Energy gradient with respect to $\theta$ : twisting moment}\label{sec=dE_dtheta}
 
 For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed throughout this section are defined and where the main results are reminded.
 
@@ -508,11 +508,11 @@ or equivalently~:
 \end{equation}
 
 
-\section{Energy gradient with respect to $x$~: internal forces}\label{sec=dE_dx}
+\section{Energy gradient with respect to $\vect{x}$~: internal forces}\label{sec=dE_dx}
 
 For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed throughout this section are defined and where main results are reminded.
 
-\subsection{Derivative of material directors with respect to $x$}
+\subsection{Derivative of material directors with respect to $\vect{x}$}
 A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation of the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame. Let us denote~:
 \begin{itemize}
 \item
@@ -702,7 +702,7 @@ Which can be rearranged in~:
 \end{alignat}
 \end{subequations}
 
-\subsubsection{Variation of the Bishop frame with respect to $x$}
+\subsubsection{Variation of the Bishop frame with respect to $\vect{x}$}
 Finally, one can express $F_\epsilon$ on the basis $F$ as the composition of two rotations~:
 \begin{subequations}
 	\begin{gather}
@@ -780,7 +780,7 @@ Which leads according to the previous equations to~:
 		\end{alignat}
 \end{subequations}
 
-\subsection{Derivative of the vector of material curvatures with respect to $x$}
+\subsection{Derivative of the vector of material curvatures with respect to $\vect{x}$}
 
 It is now straightforward from the previous section to express the variation of the material curvatures with respect to a variation $\vect{\epsilon} =\lambda \vect{h}_x$ of $\vect{x}$ while $\theta$ remains unchanged~:
 \begin{subequations}
@@ -843,7 +843,7 @@ The distributed internal forces acting on the centerline are given by the functi
 \label{eq:dEdx_def}
 \end{equation}
 
-\subsubsection{Derivative of the torsion energy with respect to $x$}
+\subsubsection{Derivative of the torsion energy with respect to $\vect{x}$}
 
 Recall that the torsion energy only depends on $\theta$ which is independent of $x$. Thus $\mathcal{E}_t$ is independent of $x$ and~:
 \begin{equation}
@@ -852,7 +852,7 @@ Recall that the torsion energy only depends on $\theta$ which is independent of 
 \label{eq:dEtdx}
 \end{equation}
 
-\subsubsection{Derivative of the bending energy with respect to $x$}
+\subsubsection{Derivative of the bending energy with respect to $\vect{x}$}
 To compute the partial derivative of $\mathcal{E}_b$ with respect to $\vect{x}$ we first calculate the derivative of $\mathcal{E}_b$ with respect to $\vect{\omega}$~:
 \begin{equation}
 	\pdiffof{\omega}{\mathcal{E}_b[\vect{\omega}]}{s}{\vect{h}_\omega}

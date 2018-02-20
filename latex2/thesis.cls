@@ -70,8 +70,7 @@
 
 
 
-% LANGUAGES
-\usepackage[french,english]{babel}
+
 
 % \RequirePackage{color}
 \RequirePackage{textcase} % text case
@@ -79,9 +78,6 @@
 \RequirePackage{tikzpagenodes}
 \usetikzlibrary{external} % for chapter and part special pages
 
-\RequirePackage{amssymb}
-\RequirePackage{amsmath}
-\RequirePackage{amsthm}
 \RequirePackage{bm}
 \RequirePackage{mathtools}
 
@@ -156,6 +152,8 @@
 %%
 %% FONT SETTINGS
 %%
+%% https://tex.stackexchange.com/a/3000/154815
+%%
 %%%%%
 
 %% paragraph
@@ -163,7 +161,7 @@
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{0em}
 % \renewcommand{\baselinestretch}{1.2}
-\setstretch{1.2}
+\setstretch{1.15}
 
 % \RequirePackage{baskervillef}
 % \RequirePackage[varqu,varl,var0]{inconsolata}
@@ -171,49 +169,53 @@
 % \RequirePackage[baskerville,vvarbb]{newtxmath}
 % \RequirePackage[cal=boondoxo]{mathalfa}
 
+% LANGUAGES
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguage{french}
+
 %% headings
 %% --------------------------
 \DeclareRobustCommand{\FontSwitch}[1]{
 
 	% XETEX
-	% \usepackage{fontspec} 
+	\RequirePackage{fontspec} 
+
+	% math fonts
+	\RequirePackage{amsmath} % if desired
+	\RequirePackage{amssymb} % if desired
+	\RequirePackage[math-style=ISO]{unicode-math}
+	\setmathfont{latinmodern-math.otf}
+	% \setoperatorfont\mathsf
+
+	% \setmathfont{Asana-Math.otf}
+	% \renewcommand{\theta}{\mittheta}
+	% \setmathfont{texgyrepagella-math.otf}
+
+	% text fonts
+	% The fontspec package must also be loaded after any maths font packages (e.g., euler) to be successful
 	
-	% fonts management (TEX)
-	\RequirePackage[T1]{fontenc}
-	\RequirePackage[utf8]{inputenc}
+	\setmainfont{GillSans-Light}
+	\newfontfamily\font@head{FuturaLT-Book}[Scale = MatchUppercase]
+	\newfontfamily\font@sec{FuturaLT-Book}[Scale = MatchUppercase]
+	\newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
+	\newfontfamily\font@subsubsec{FuturaLT}[Scale = MatchUppercase]
+	\newfontfamily\font@label{FuturaLT-Book}[Scale = MatchUppercase]
+	\newfontfamily\tf@chap{Futura-CondensedExtraBold}[Scale = MatchUppercase]
+	\newfontfamily\tf@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
 
-	% 1 : full computer modern
-	\ifdefstring{#1}{1}{
-	}{}
-	% 2 : full latin modern
-	\ifdefstring{#1}{2}{
-		\RequirePackage{lmodern}
-	}{}
-	% 3 : beraserif + beramono
-	\ifdefstring{#1}{3}{
-		\RequirePackage[scaled=0.85]{beraserif}
-		\RequirePackage[scaled=0.85]{beramono}
-	}{}
-	% 4 : baskerville
-	\ifdefstring{#1}{4}{
-		\RequirePackage{baskervillef}
-		\RequirePackage[varqu,varl,var0]{inconsolata}
-		\RequirePackage[scale=.95,type1]{cabin}
-		\RequirePackage[baskerville,vvarbb]{newtxmath}
-		\RequirePackage[cal=boondoxo]{mathalfa}
-	}{}
-
+	% relax interline skip to ensure better flushbottom
+	\flushbottom
+	\baselineskip\the\baselineskip plus0.5pt minus0.5pt\relax
 }
 
 
 
 % switch between preset fonts
-\newcommand{\FontSwitchValue}{1}
-\FontSwitch{\FontSwitchValue}
+\FontSwitch{1}
 
 % font styles (rm, sf, tt)
-\renewcommand{\familydefault}{\rmdefault}
-\DeclareRobustCommand{\HeadingFontStyle}{\sffamily}
+\DeclareRobustCommand{\HeadingFontStyle}{\font@head}
 
 % font weight
 \DeclareRobustCommand{\HeadingFontWeight}{\bfseries}
@@ -221,9 +223,20 @@
 % font size (tiny, small, large, Large, LARGE, huge, Huge)
 \DeclareRobustCommand{\HeadingFontSize}{\Huge}
 
-\DeclareRobustCommand{\PartFont}{\HeadingFontStyle\HeadingFontWeight\HeadingFontSize}
-\DeclareRobustCommand{\ChapterFont}{\HeadingFontStyle\HeadingFontWeight\HeadingFontSize}
-\DeclareRobustCommand{\SectionFont}{\HeadingFontStyle\bfseries}
+\DeclareRobustCommand{\PartFont}{\tf@part\HeadingFontWeight\HeadingFontSize}
+\DeclareRobustCommand{\ChapterFont}{\tf@chap\HeadingFontWeight\HeadingFontSize}
+
+% typeface
+\DeclareRobustCommand{\tf@sec}{\font@sec\bfseries}
+\DeclareRobustCommand{\tf@subsec}{\font@subsec\bfseries}
+\DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\bfseries}
+
+% equation label font
+\setlength{\mathindent}{1em}
+\DeclareRobustCommand{\tf@eqtag}{\font@label\mdseries}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+\renewcommand\tagform@[1]{\maketag@@@{\tf@eqtag\footnotesize\ignorespaces#1\unskip\@@italiccorr}}
+
 
 %% heading format
 %% --------------------------
@@ -233,17 +246,17 @@
 \colorlet{titlelabel}{black}
 % \colorlet{titlelabel}{accent}
 
-\titleformat{\section}[hang]{\SectionFont}
+\titleformat{\section}[hang]{\tf@sec}
 {\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesection\hspace*{8pt}}}
-{0pt}{\large\MakeUppercase{#1}}
+{0pt}{\Large\MakeUppercase{#1}}
 
-\titleformat{\subsection}[hang]{\SectionFont}
+\titleformat{\subsection}[hang]{\tf@subsec}
 {\hspace*{-1.5cm}\fbox{\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesubsection\hspace*{8pt}}}}
-{0pt}{\small\MakeUppercase{#1}}
+{0pt}{\MakeUppercase{#1}}
 
-\titleformat{\subsubsection}[hang]{\SectionFont}
+\titleformat{\subsubsection}[hang]{\tf@subsubsec}
 {\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesubsubsection\hspace*{8pt}}}
-{0pt}{\scriptsize\MakeUppercase{#1}}
+{0pt}{\footnotesize\MakeUppercase{#1}}
 
 
 %% heading indentation
@@ -251,9 +264,9 @@
 
 %  \titlespacing*{⟨command⟩}{⟨left⟩}{⟨before-sep⟩}{⟨after-sep⟩}[⟨right-sep⟩]
 \titlespacing*{\chapter}{0pt}{50pt}{80pt} 
-\titlespacing*{\section}{0pt}{12pt}{*0}
-\titlespacing*{\subsection}{0pt}{12pt}{*0}
-\titlespacing*{\subsubsection}{0pt}{12pt}{*0}
+\titlespacing*{\section}{0pt}{24pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{3pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{0pt}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -262,7 +275,7 @@
 %%
 %%%%%
 \RequirePackage{enumitem}
-\setlist[itemize]{label=\rule{2pt}{2pt},leftmargin=0pt,labelsep*=8pt}
+\setlist[itemize]{label=\rule{4pt}{4pt},leftmargin=0pt,labelsep*=8pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -641,6 +654,12 @@
 \renewcommand*{\finalnamedelim}{\addspace and \addspace} % separator mark between authors
 \renewcommand{\labelnamepunct}{\addcomma\addspace}
 
+
+% \setlength{\bibhang}{-10pt}
+\setlength{\biblabelsep}{1em}
+
+
+
 % put title of misc entry bitween quotes
 \DeclareFieldFormat[misc]{title}{\mkbibquote{#1}} 
 
@@ -796,7 +815,7 @@
 
 \renewcommand{\footnoterule}{%
   \kern -10pt % -3 + 1 + 2 = 0pt
-  \hrule width 0.25\textwidth height 2pt
+  \hrule width 0.333\textwidth height 2pt
   \kern 8pt
 }
 
@@ -866,8 +885,9 @@
 \usepackage{hyperxmp} % pdf metadada (LDP)
 %%\usepackage[a-1b]{pdfx}
 
-\usepackage{hyperref}
-\hypersetup{pdfborder={0 0 0},
+\usepackage{hyperref} % 
+\hypersetup{unicode,psdextra, % https://tex.stackexchange.com/a/69354/154815
+	pdfborder={0 0 0},
 	colorlinks=true,
 	linktoc=page,
 	linkcolor=linkcolor,
@@ -962,21 +982,21 @@
     & #4 & \longmapsto & #5 \end{array}}
 
 % differential
-\newcommand{\diff}[2]{\boldsymbol{D}#1(#2)}
-\newcommand{\diffN}[3]{\boldsymbol{D}^#1#2(#3)}
-\newcommand{\diffof}[3]{\boldsymbol{D}#1(#2)\cdot#3}
-\newcommand{\diffNof}[4]{\boldsymbol{D}^#1#2(#3)\cdot#4}
+\newcommand{\diff}[2]{\symbf{D}#1(#2)}
+\newcommand{\diffN}[3]{\symbf{D}^#1#2(#3)}
+\newcommand{\diffof}[3]{\symbf{D}#1(#2)\cdot#3}
+\newcommand{\diffNof}[4]{\symbf{D}^#1#2(#3)\cdot#4}
 
 % partial differential
-\newcommand{\pdiff}[3]{\boldsymbol{D}_#1#2(#3)}
-\newcommand{\pdiffN}[4]{\boldsymbol{D}^#1_#2#3(#4)}
-\newcommand{\pdiffof}[4]{\boldsymbol{D}_#1#2(#3)\cdot#4}
-\newcommand{\pdiffNof}[5]{\boldsymbol{D}^#1_#2#3(#4)\cdot#5}
+\newcommand{\pdiff}[3]{\symbf{D}_#1#2(#3)}
+\newcommand{\pdiffN}[4]{\symbf{D}^#1_#2#3(#4)}
+\newcommand{\pdiffof}[4]{\symbf{D}_#1#2(#3)\cdot#4}
+\newcommand{\pdiffNof}[5]{\symbf{D}^#1_#2#3(#4)\cdot#5}
 
 % vector, matrix and tensor
-\newcommand{\vect}[1]{\boldsymbol{#1}} 
-\newcommand{\mat}[1]{\boldsymbol{\mathit{#1}}}
-\newcommand{\tens}[1]{\boldsymbol{\mathcal{#1}}}
+\newcommand{\vect}[1]{\symbf{#1}} 
+\newcommand{\mat}[1]{\symbf{\mathit{#1}}}
+\newcommand{\tens}[1]{\symbf{\mathcal{#1}}}
 
 \newcommand{\scalar}[2]{\langle #1\,, #2\rangle}
 
