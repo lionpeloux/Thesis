@@ -17,12 +17,10 @@
 	fleqn,		% equations are left aligned
 	]{book}
 
-% fonts management
-\RequirePackage[T1]{fontenc}
-\RequirePackage[utf8]{inputenc}
-\RequirePackage{sectsty} 
+
+% \RequirePackage{sectsty} 
 \RequirePackage{setspace}
-\RequirePackage[explicit]{titlesec}
+
 \RequirePackage{fancyhdr}
 \RequirePackage{mfirstuc}
 
@@ -36,7 +34,7 @@
 % \RequirePackage{eso-pic}
 
 
-
+\RequirePackage[explicit]{titlesec}
 
 % \RequirePackage[
 % 	top = 12mm-6.35mm,
@@ -53,10 +51,11 @@
 % 	% nobleed,
 % 	]{blurb}
 
+% golden section
 \RequirePackage[
 	top = 22.19mm-6.35mm,
 	outer = 35.45mm-6.35mm,
-	bottom = 44.31mm-6.35mm,
+	bottom = 44.31mm-6.35mm-0mm,
 	% inner = 12mm-0.317mm-12.70mm,
 	inner = 1.89mm,
 	binding = 0mm,
@@ -68,6 +67,8 @@
 	% nobleed,
 	]{blurb}
 \RequirePackage{photo}
+
+
 
 % LANGUAGES
 \usepackage[french,english]{babel}
@@ -159,12 +160,10 @@
 
 %% paragraph
 %% --------------------------
-\RequirePackage{lmodern}
-\renewcommand{\familydefault}{\sffamily}
 \setlength{\parskip}{0pt}
-\setlength{\parindent}{1em}
+\setlength{\parindent}{0em}
 % \renewcommand{\baselinestretch}{1.2}
-% \setstretch{1.1}
+\setstretch{1.2}
 
 % \RequirePackage{baskervillef}
 % \RequirePackage[varqu,varl,var0]{inconsolata}
@@ -176,46 +175,100 @@
 %% --------------------------
 \DeclareRobustCommand{\FontSwitch}[1]{
 
-	% 1 : full computer modern
-	% \ifdefstring{#1}{1}{
-	% }{}
-	% % 2 : full latin modern
-	% \ifdefstring{#1}{2}{
-	% 	\RequirePackage{lmodern}
-	% }{}
-	% % 3 : beraserif + beramono
-	% \ifdefstring{#1}{3}{
-	% 	\RequirePackage[scaled=0.85]{beraserif}
-	% 	\RequirePackage[scaled=0.85]{beramono}
-	% }{}
-	% \ifdefstring{#1}{4}{
-	% 	\RequirePackage{baskervillef}
-	% 	\RequirePackage[varqu,varl,var0]{inconsolata}
-	% 	\RequirePackage[scale=.95,type1]{cabin}
-	% 	\RequirePackage[baskerville,vvarbb]{newtxmath}
-	% 	\RequirePackage[cal=boondoxo]{mathalfa}
-	% }{}
+	% XETEX
+	% \usepackage{fontspec} 
 	
-	% font styles (rm, sf, tt)
-	% \renewcommand{\familydefault}{\rmfamily}
-	\DeclareRobustCommand{\HeadingFontStyle}{\familydefault}
+	% fonts management (TEX)
+	\RequirePackage[T1]{fontenc}
+	\RequirePackage[utf8]{inputenc}
 
-	% font weight
-	\DeclareRobustCommand{\HeadingFontWeight}{\bfseries}
+	% 1 : full computer modern
+	\ifdefstring{#1}{1}{
+	}{}
+	% 2 : full latin modern
+	\ifdefstring{#1}{2}{
+		\RequirePackage{lmodern}
+	}{}
+	% 3 : beraserif + beramono
+	\ifdefstring{#1}{3}{
+		\RequirePackage[scaled=0.85]{beraserif}
+		\RequirePackage[scaled=0.85]{beramono}
+	}{}
+	% 4 : baskerville
+	\ifdefstring{#1}{4}{
+		\RequirePackage{baskervillef}
+		\RequirePackage[varqu,varl,var0]{inconsolata}
+		\RequirePackage[scale=.95,type1]{cabin}
+		\RequirePackage[baskerville,vvarbb]{newtxmath}
+		\RequirePackage[cal=boondoxo]{mathalfa}
+	}{}
 
-	% font size (tiny, small, large, Large, LARGE, huge, Huge)
-	\DeclareRobustCommand{\HeadingFontSize}{\Huge}
-
-
-	\DeclareRobustCommand{\PartFont}{\HeadingFontStyle\HeadingFontWeight\HeadingFontSize}
-	\DeclareRobustCommand{\ChapterFont}{\HeadingFontStyle\HeadingFontWeight\HeadingFontSize}
-	\DeclareRobustCommand{\SectionFont}{\HeadingFontStyle}
-	\allsectionsfont{\SectionFont}
 }
 
+
+
 % switch between preset fonts
-\newcommand{\FontSwitchValue}{2}
+\newcommand{\FontSwitchValue}{1}
 \FontSwitch{\FontSwitchValue}
+
+% font styles (rm, sf, tt)
+\renewcommand{\familydefault}{\rmdefault}
+\DeclareRobustCommand{\HeadingFontStyle}{\sffamily}
+
+% font weight
+\DeclareRobustCommand{\HeadingFontWeight}{\bfseries}
+
+% font size (tiny, small, large, Large, LARGE, huge, Huge)
+\DeclareRobustCommand{\HeadingFontSize}{\Huge}
+
+\DeclareRobustCommand{\PartFont}{\HeadingFontStyle\HeadingFontWeight\HeadingFontSize}
+\DeclareRobustCommand{\ChapterFont}{\HeadingFontStyle\HeadingFontWeight\HeadingFontSize}
+\DeclareRobustCommand{\SectionFont}{\HeadingFontStyle\bfseries}
+
+%% heading format
+%% --------------------------
+
+% \titleformat{⟨command⟩}[⟨shape⟩]{⟨format⟩}{⟨label⟩}{⟨sep⟩}{⟨before-code⟩}[⟨after-code⟩]
+
+\colorlet{titlelabel}{black}
+% \colorlet{titlelabel}{accent}
+
+\titleformat{\section}[hang]{\SectionFont}
+{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesection\hspace*{8pt}}}
+{0pt}{\large\MakeUppercase{#1}}
+
+\titleformat{\subsection}[hang]{\SectionFont}
+{\hspace*{-1.5cm}\fbox{\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesubsection\hspace*{8pt}}}}
+{0pt}{\small\MakeUppercase{#1}}
+
+\titleformat{\subsubsection}[hang]{\SectionFont}
+{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesubsubsection\hspace*{8pt}}}
+{0pt}{\scriptsize\MakeUppercase{#1}}
+
+
+%% heading indentation
+%% --------------------------
+
+%  \titlespacing*{⟨command⟩}{⟨left⟩}{⟨before-sep⟩}{⟨after-sep⟩}[⟨right-sep⟩]
+\titlespacing*{\chapter}{0pt}{50pt}{80pt} 
+\titlespacing*{\section}{0pt}{12pt}{*0}
+\titlespacing*{\subsection}{0pt}{12pt}{*0}
+\titlespacing*{\subsubsection}{0pt}{12pt}{*0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% ENUM ITEM STYLES
+%%
+%%%%%
+\RequirePackage{enumitem}
+\setlist[itemize]{label=\rule{2pt}{2pt},leftmargin=0pt,labelsep*=8pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% CAPTION STYLES
+%%
+%%%%%
 
 %% caption
 %% --------------------------
@@ -278,12 +331,7 @@
 
 \newcommand{\subfigskip}{\par\bigskip\medskip}
 
-%% heading indentation
-%% --------------------------
-\titlespacing*{\chapter}{0pt}{50pt}{80pt} 		% LDP : change 30pt to 80pt after margin to avoid collision for not numbered chapters
-\titlespacing*{\section}{0pt}{13.2pt}{*0}  		% 13.2pt is line spacing for a text with 11pt font size
-\titlespacing*{\subsection}{0pt}{13.2pt}{*0}
-\titlespacing*{\subsubsection}{0pt}{13.2pt}{*0}
+
 
 
 
@@ -396,8 +444,7 @@
 %% Even / Odd / Left / Center / Right / Header / Footer
 
 %% font styles (rm, sf, tt)
-\DeclareRobustCommand{\HdrFontStyle}{\rmfamily\small\nouppercase}%\small\scshape\nouppercase
-
+\DeclareRobustCommand{\HdrFontStyle}{\sffamily\scriptsize\bfseries}%\small\scshape\nouppercase
 
 
 % default style
@@ -409,26 +456,28 @@
 % \iffloatpage{0.0pt}{0.4pt}
 % \newgeometry{⟨options⟩} and \restoregeometry
 % \renewcommand{\headheight}{\iffloatpage{\protect\setlength{\headheight}{0pt}}{\protect\setlength{\headheight}{14pt}}}
-\renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
-\renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
+
 % first style
-% \fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\nouppercase{\small\rightmark}}} 	% \nouppercase
-% \fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\nouppercase{\small\leftmark}}} 	% \nouppercase
-% \fancyfoot[EL,OR]{\HdrFontStyle\footnotesize\thepage}
+\renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{4.0pt}}
+\renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
+\fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\MakeUppercase{\rightmark}}} 	% \nouppercase
+\fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\MakeUppercase{\leftmark}}} 	% \nouppercase
+\fancyfoot[EL,OR]{\HdrFontStyle\footnotesize\thepage}
+
 % second style
-\fancyhead[EL]{\iffloatpage{}{%
-	\hspace*{-1pt}\hspace*{-1cm}\parbox[b]{1cm}{\raggedleft\HdrFontStyle\MakeUppercase{\thepage}\hspace*{6pt}}%
-	\rule[-1pt]{2pt}{8pt}\hspace*{6pt}%
-	\HdrFontStyle\MakeUppercase{\leftmark}%
-}}
-\fancyhead[OR]{\iffloatpage{}{%
-	\HdrFontStyle\MakeUppercase{\rightmark}%
-	\hspace*{6pt}%
-	\rule[-1pt]{2pt}{8pt}%
-	\parbox[b]{1cm}{\raggedright\hspace*{6pt}\HdrFontStyle\MakeUppercase{\thepage}}\hspace*{-1cm}\hspace*{-1pt}%
-	% 
-}}
-\fancyfoot[EL,OR]{}
+% \fancyhead[EL]{\iffloatpage{}{%
+% 	\hspace*{-1pt}\hspace*{-1cm}\parbox[b]{1cm}{\raggedleft\HdrFontStyle\MakeUppercase{\thepage}\hspace*{6pt}}%
+% 	\rule[-1pt]{2pt}{8pt}\hspace*{6pt}%
+% 	\HdrFontStyle\MakeUppercase{\leftmark}%
+% }}
+% \fancyhead[OR]{\iffloatpage{}{%
+% 	\HdrFontStyle\MakeUppercase{\rightmark}%
+% 	\hspace*{6pt}%
+% 	\rule[-1pt]{2pt}{8pt}%
+% 	\parbox[b]{1cm}{\raggedright\hspace*{6pt}\HdrFontStyle\MakeUppercase{\thepage}}\hspace*{-1cm}\hspace*{-1pt}%
+% 	% 
+% }}
+% \fancyfoot[EL,OR]{}
 
 % plain style
 \fancypagestyle{plain}{
@@ -751,8 +800,13 @@
   \kern 8pt
 }
 
-% \def\footnoterule{\kern-3\p@
-%   \hrule \@width 2in \kern 2.6\p@} % the \hrule is .4pt high
+% footnote text at the bottom of page
+\renewcommand\@makefntext[1]{%
+    \noindent{\HdrFontStyle\thefootnote.}\hspace*{3pt}#1}
+
+% footnote mark in the text  
+\renewcommand\@makefnmark{\hbox{\@textsuperscript{\HdrFontStyle\@thefnmark}}}
+
 
 
 
@@ -860,6 +914,7 @@
 \definecolor{gray9}{cmyk}{0,0,0,0.9}
 
 \newtoggle{print}
+\colorlet{accent}{Tblue}
 
 \toggletrue{print}
 \iftoggle{print}{
