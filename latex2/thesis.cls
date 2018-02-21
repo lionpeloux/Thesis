@@ -204,7 +204,7 @@
 	\newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
 	\newfontfamily\font@subsubsec{FuturaLT-Condensed}[Scale = MatchUppercase]
 	\newfontfamily\font@label{FuturaLT-Book}[Scale = MatchUppercase]
-	
+	\newfontfamily\font@cap{GaramondPremrPro-Capt}[Scale = MatchUppercase]
 	
 
 
@@ -222,11 +222,11 @@
 \DeclareRobustCommand{\tf@chap}{\font@chap\bfseries\Huge}
 \DeclareRobustCommand{\tf@sec}{\font@sec\bfseries\Large}
 \DeclareRobustCommand{\tf@subsec}{\font@subsec\bfseries\normalsize}
-\DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\normalsize}
+\DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\large}
 \DeclareRobustCommand{\tf@seclabel}{\font@label\scriptsize\color{titlelabel}}
 \DeclareRobustCommand{\tf@fntxt}{\font@body\footnotesize}
 \DeclareRobustCommand{\tf@fnmk}{\font@label\bfseries\tiny}
-
+\DeclareRobustCommand{\tf@cap}{\font@cap\small}
 % equation label font
 \setlength{\mathindent}{1em}
 \DeclareRobustCommand{\tf@eqtag}{\font@label\mdseries}
@@ -281,11 +281,14 @@
 
 %% caption
 %% --------------------------
-\usepackage[font=small,textfont={normalfont},labelfont={bf,sf}]{caption}
+\usepackage[]{caption}
 \usepackage[]{subcaption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[subfigure]{skip=5pt}		% subcpation	
+
+\DeclareCaptionFormat{plain}{\tf@cap{\bfseries#1}#2#3\par}
+
 
 % subcaption list format
 \DeclareCaptionListFormat{lsubcap}{#2)}
@@ -469,8 +472,8 @@
 % first style
 \renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{4.0pt}}
 \renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
-\fancyhead[OR]{\iffloatpage{}{\tf@hdr\MakeUppercase{\rightmark}}} 	% \nouppercase
-\fancyhead[EL]{\iffloatpage{}{\tf@hdr\MakeUppercase{\leftmark}}} 	% \nouppercase
+\fancyhead[OR]{\iffloatpage{}{\tf@hdr\MakeUppercase{\rightmark}\vspace{0.25pt}}} 	% \nouppercase
+\fancyhead[EL]{\iffloatpage{}{\tf@hdr\MakeUppercase{\leftmark}\vspace{0.25pt}}} 	% \nouppercase
 \fancyfoot[EL,OR]{\tf@hdr\thepage}
 
 % second style
