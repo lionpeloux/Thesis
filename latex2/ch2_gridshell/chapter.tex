@@ -20,6 +20,7 @@ We naturally begin this chapter by defining the notion of elastic gridshell and 
 \item We establish an up-to-date review of the existing scientific literature, crossing multiple fields of research (geometry, mechanics, material, \telp{}).
 \end{itemize}
 
+\pagebreak
 \section{Definition}\label{sec=gsdef}
 
 The invention of the \emph{elastic gridshell} concept is commonly attributed to Frei Otto, a German architect who devoted several years to gridshells. In 1975 he achieved the famous \emph{Mannheim Multihalle} \cite{Happold1975}, a wooden shell of 7500~m\textsuperscript{2}, in collaboration with the engineer Edmund Happold (Arup).
@@ -61,7 +62,7 @@ Their mechanical behaviour is very similar to the one of real shells even if the
 		anchor=south west,
 		xshift=\PhotoSkip,
 		gopt={width=\tmpwidth},
-		]{mannheim_erection_2.jpg}%
+		]{mannheim_erection_3.jpg}%
 	\savenodes{D}
 	\Photo[
 		node=Ctr,
@@ -422,8 +423,23 @@ The same year he designed and built a first timber gridshell in Essen, Germany \
 			]{fig:berkeley}
 		\PhotoCaptionRef[
 			type=subfigure,
+			node=Abr, 
+			anchor=south west,
+			xshift=\PhotoRefSkip,
+			ltitle=Interior view,
+		]{fig:montreal_b}
+		\PhotoCaptionRef[
+			type=subfigure,
+			node=Bbr, 
+			anchor=south west,
+			xshift=\PhotoRefSkip,
+			ltitle=Interior view,
+		]{fig:montreal_b}
+		\intersectnode{Cbl -| Atl}{Pt}
+		\PhotoCaptionRef[
+			type=figure,
 			node=Pt, 
-			anchor=north east,
+			anchor=north west,
 			yshift=-\PhotoRefSkip,
 			ltitle=Interior view,
 		]{fig:montreal_b}
@@ -468,6 +484,46 @@ The project of the Multihalle started in 1970, when the decision was made that M
 
 A thorough report on the project is available in \cite{IL13}.  A more condensed but still precise description of the engineering problematics related to this project are available in the excellent papers from \citet{Happold1975, Liddell2015}.
 
+\afterpage{%
+	% \thispagestyle{empty}
+	\AddToShipoutPictureBG*{
+	\Photo[
+		node=CAtl,
+		anchor=north west,
+		gopt={width=\textwidth},
+		]{mannheim_sky.jpg}
+	\savenodes{A}
+	\global\PhotoHeight=\PhotoHeight
+	}
+	\settoheight{\PhotoHeight}{\includegraphics[width=\textwidth]{mannheim_sky.jpg}}
+	\addtolength{\PhotoHeight}{\PhotoBigSkip}
+	\hbox{\vspace{\PhotoHeight}}
+	% \showthe\PhotoHeight
+
+	\afterpage{%
+		\doubleblankpage[l]{%
+		\hbox{}
+		\PhotoSpread[
+			node=CAtl,
+			anchor=north west,
+			gopt={height=\textheight}
+		]{mannheim_inside.jpg}
+		}{%
+			\hbox{}\thispagestyle{empty}
+			\PhotoTextBox[
+				node=BR,
+				anchor=south west,
+				xshift=\PhotoRefSkip,
+			]{%
+				\figurecaption{fig:erec_1}{eretion 1}
+				\figurecaption{fig:erec_2}{eretion 2}%
+			}
+		}
+	}
+}
+
+
+
 \subsubsection{Multihalle, Mannheim, Germany, 1975}
 Mannheim is an unprecedented realisation because it is more than twenty times larger than the previously built gridshells in Montreal and is meant to last many years and not only for the duration of a short-term exhibition. The timber lattice, still existing in 2017,  covers an area of \SI{7400}{m^2} (see \cref{fig:mannheim_b}). It is composed of two interconnected domes, one for the multi-purpose hall (span : \SI{60}{m} | height : \SI{20}{m}) and one for the restaurant (span : \SI{50}{m} | height : \SI{18}{m}).
 
@@ -476,24 +532,21 @@ Although the constructive system deployed in Mannheim clearly inherited from the
 The double-layer system was introduced to tackle two issues~: the grid needed some flexibility to be bent into the desired shape, but once erected it should provide sufficient bending stiffness to resist disturbing loads and avoid a buckling collapse.\footnote{Theoretically, self-weight loads would produce only compression in the members because the (funicular) form of the grid resulted from the inversion of a hanging chain model in pure tension.} Once erected, the two grids, one sliding on top of the other one, were connected together to form a single grid with much higher ladder profiles (from \SI{50}{mm} to \SI{150}{mm}), increasing their bending stiffness by a factor of about 26 (see \cref{fig:mannheim_a}).
 
 
-% \end{adjustwidth}
-
-
-\begin{figure}[t]
-	\begin{subfigure}[b]{\TwoMediaWidth}
-		\includegraphics[width=\textwidth]{mannheim_int.jpg}
-		\caption{Interior view}
-		\label{fig:mannheim_a}
-	\end{subfigure}%
-	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-	\begin{subfigure}[b]{\TwoMediaWidth}
-		\includegraphics[width=\textwidth]{mannheim_sky.jpg}
-		\caption{Sky view}
-		\label{fig:mannheim_b}
-	\end{subfigure}
-	\caption[Timber gridshell built in 1962 in Essen, Germany]{Timber gridshell built in 1975 in Mannheim, Germany.}
-	\label{fig:mannheim}
-\end{figure}
+% \begin{figure}[t]
+% 	\begin{subfigure}[b]{\TwoMediaWidth}
+% 		\includegraphics[width=\textwidth]{mannheim_int.jpg}
+% 		\caption{Interior view}
+% 		\label{fig:mannheim_a}
+% 	\end{subfigure}%
+% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
+% 	\begin{subfigure}[b]{\TwoMediaWidth}
+% 		\includegraphics[width=\textwidth]{mannheim_sky.jpg}
+% 		\caption{Sky view}
+% 		\label{fig:mannheim_b}
+% 	\end{subfigure}
+% 	\caption[Timber gridshell built in 1962 in Essen, Germany]{Timber gridshell built in 1975 in Mannheim, Germany.}
+% 	\label{fig:mannheim}
+% \end{figure}
 
 Because the in-plane stiffness of the grid also plays a major role in the resistance to buckling, this question was considered with care. The bracing of the grid was first achieved by preventing the nodes to turn once the grid was erected. This was done by creating some friction in the nodes when tightening the bolts linking the laths, after the grid was erected. Then, additional bracing cables were put in the grid.
 
@@ -553,18 +606,18 @@ These projects definitely trailed the technique in England and initiated the ren
 % \end{figure}
 
 
-% \subsection{The renewal : Hannover, Downland and Savill}
-% \label{sec=renewal}
+\subsection{The renewal : Hannover, Downland and Savill}
+\label{sec=renewal}
 
-% What was missing for elastic gridshells to re-emerge after the major experiment of Mannheim was probably the development of modern numeric tools to ease and speed up the design process.\footnote{\blockcquote[]{Harris2003}{The key to the modern use of timber gridshells is the development of computer methods in modelling complex three-dimensional shell structures. For the Mannheim structure, the primary method of form finding was the use of physical models. The Earth Centre structures were small and easily modelled using wire mesh, but when Buro Happold was commissioned to design the Japanese Pavilion for Expo 2000 in Hannover (Architect Shigeru Ban), it was apparent that much more sophisticated computer form finding and analysis would be necessary.}} Amongst those tools we should identify two main categories~: geometry processing softwares and structural analysis softwares. Recall that in the 70's, geometry processing was done through physical models and photographic measurements \cite[pp.~130-135]{IL10} while structural analysis was conducted through a compound of physical model testing with scaling techniques \cite[pp.~130-135]{IL13}, hand calculations and the very first numerical form-finding calculations \cite[pp.~184-193]{IL10} and finite element calculations \cite[pp.~210-217]{IL10}. In the late 90's, the rise in importance of computer methods offered new possibilities.
+What was missing for elastic gridshells to re-emerge after the major experiment of Mannheim was probably the development of modern numeric tools to ease and speed up the design process.\footnote{\blockcquote[]{Harris2003}{The key to the modern use of timber gridshells is the development of computer methods in modelling complex three-dimensional shell structures. For the Mannheim structure, the primary method of form finding was the use of physical models. The Earth Centre structures were small and easily modelled using wire mesh, but when Buro Happold was commissioned to design the Japanese Pavilion for Expo 2000 in Hannover (Architect Shigeru Ban), it was apparent that much more sophisticated computer form finding and analysis would be necessary.}} Amongst those tools we should identify two main categories~: geometry processing softwares and structural analysis softwares. Recall that in the 70's, geometry processing was done through physical models and photographic measurements \cite[pp.~130-135]{IL10} while structural analysis was conducted through a compound of physical model testing with scaling techniques \cite[pp.~130-135]{IL13}, hand calculations and the very first numerical form-finding calculations \cite[pp.~184-193]{IL10} and finite element calculations \cite[pp.~210-217]{IL10}. In the late 90's, the rise in importance of computer methods offered new possibilities.
 
-% \subsubsection{Japan Pavilion, Hannover, Germany, 2000}
-% In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happold to design the \emph{Japan Pavilion} for \emph{Expo 2000} in Hannover, Germany \cite{Ban2006}. This pavilion was a large-scale corrugated gridshell made out of cardboard tubes, about 75 meters long and 25 meters wide. Corrugations bring curvature, and therefore enhance the strength of the shell. The tubes were tied together with a fabric tape, a very low-tech joint (see \cref{fig:hannover_a}). The structure was covered with a paper membrane specially developed for the project to meet the requirements of the German fire regulations (see \cref{fig:hannover_b}). For the occasion, a new erection method was set up in which the grid was laid out not at the ground level but at a higher level on a hydraulic scaffold platform. From there, the grid was pushed up into position using the platform's jacks. It was found late that the cardboard tubes were subject to a high level of creep. This required the introduction of new timber arches to reinforce the gridshell and to enlarge the existing timber rafters intended to brace the grid and support the paper membrane (see \cref{fig:hannover_a}).
+\subsubsection{Japan Pavilion, Hannover, Germany, 2000}
+In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happold to design the \emph{Japan Pavilion} for \emph{Expo 2000} in Hannover, Germany \cite{Ban2006}. This pavilion was a large-scale corrugated gridshell made out of cardboard tubes, about 75 meters long and 25 meters wide. Corrugations bring curvature, and therefore enhance the strength of the shell. The tubes were tied together with a fabric tape, a very low-tech joint (see \cref{fig:hannover_a}). The structure was covered with a paper membrane specially developed for the project to meet the requirements of the German fire regulations (see \cref{fig:hannover_b}). For the occasion, a new erection method was set up in which the grid was laid out not at the ground level but at a higher level on a hydraulic scaffold platform. From there, the grid was pushed up into position using the platform's jacks. It was found late that the cardboard tubes were subject to a high level of creep. This required the introduction of new timber arches to reinforce the gridshell and to enlarge the existing timber rafters intended to brace the grid and support the paper membrane (see \cref{fig:hannover_a}).
 
-% \subsubsection{Weald and Downland, Singelton, England, 2002}
-% The design of the \emph{Downland} gridshell began right after the completion of the Westminster Lodge (see \cref{sec=signs}) where architects from E. Cullinan Studio became acquainted with the engineers from Buro Happold. At Downland, the project team truly revived the technique of large-scale timber gridshells while bringing lots of improvements to the system. The building opened to the public in 2002. Its corrugated shape recalls the one of the Japan Pavilion from which it was inspired (see \cref{fig:downland_b}).
+\subsubsection{Weald and Downland, Singelton, England, 2002}
+The design of the \emph{Downland} gridshell began right after the completion of the Westminster Lodge (see \cref{sec=signs}) where architects from E. Cullinan Studio became acquainted with the engineers from Buro Happold. At Downland, the project team truly revived the technique of large-scale timber gridshells while bringing lots of improvements to the system. The building opened to the public in 2002. Its corrugated shape recalls the one of the Japan Pavilion from which it was inspired (see \cref{fig:downland_b}).
 
-% The building is 50 meters long and 12.5 to 16 meters wide, covering an area of about \SI{675}{m^2} for a height varying from 7 to 9.5 meters \cite{Harris2002}. The structure is a double-layer gridshell made of rectangular oak laths of cross-section \SI{50}{mm} x \SI{35}{mm} (see \cref{fig:downland_a}). To produce high grade timber elements, the continuous laths were re-formed from small carefully selected wood pieces, finger-jointed every \SI{60}{cm} in \SI{6.0}{m} length pieces. These pieces of lath were then scarf-jointed on site every \SI{6}{m} to obtained the desired length, up to \SI{50}{m}.
+The building is 50 meters long and 12.5 to 16 meters wide, covering an area of about \SI{675}{m^2} for a height varying from 7 to 9.5 meters \cite{Harris2002}. The structure is a double-layer gridshell made of rectangular oak laths of cross-section \SI{50}{mm} x \SI{35}{mm} (see \cref{fig:downland_a}). To produce high grade timber elements, the continuous laths were re-formed from small carefully selected wood pieces, finger-jointed every \SI{60}{cm} in \SI{6.0}{m} length pieces. These pieces of lath were then scarf-jointed on site every \SI{6}{m} to obtained the desired length, up to \SI{50}{m}.
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{2\TwoMediaWidth/3}
@@ -598,21 +651,21 @@ These projects definitely trailed the technique in England and initiated the ren
 % 	\label{fig:downland}
 % \end{figure}
 
-% The grid pitch is \SI{1.0}{m} except in weaker areas where it is \SI{0.5}{m}. There, the grid is twice denser to achieve the required buckling resistance \cite{Harris2003}. Rib-lath bracing was preferred to steel cable bracing as ribs were deemed to offer a more convenient support for the cladding and to reduce the complexity of the connection. A new connection system was developed to avoid the cost of drilling thousands of slotted holes that would, in addition, reduce the cross-section area, while maintaining the required scissor behaviour for the deformation of the timber lattice.\footnote{This detail was \href{https://patents.google.com/patent/GB2361504A/en?q=\%22A+coupling+and+a+method+of+constructing+grid+shell+buildings+using+such+a+coupling\%22&country=GB}{patented} by the design team and the client.}
+The grid pitch is \SI{1.0}{m} except in weaker areas where it is \SI{0.5}{m}. There, the grid is twice denser to achieve the required buckling resistance \cite{Harris2003}. Rib-lath bracing was preferred to steel cable bracing as ribs were deemed to offer a more convenient support for the cladding and to reduce the complexity of the connection. A new connection system was developed to avoid the cost of drilling thousands of slotted holes that would, in addition, reduce the cross-section area, while maintaining the required scissor behaviour for the deformation of the timber lattice.\footnote{This detail was \href{https://patents.google.com/patent/GB2361504A/en?q=\%22A+coupling+and+a+method+of+constructing+grid+shell+buildings+using+such+a+coupling\%22&country=GB}{patented} by the design team and the client.}
 
-% The flat lattice was laid out on a scaffold platform. Unlike the Japan Pavilion, the lattice was progressively lowered down into position. This stage took 6 weeks. Once deformed, the shear blocks were introduced in the grid and bracing rib-laths were installed, giving its full strength to the shell. Finally the gridshell was cladded with a mix of polycarbonate plates (to let the light in) and timber boards on top of insulation panels and a rain screen.
+The flat lattice was laid out on a scaffold platform. Unlike the Japan Pavilion, the lattice was progressively lowered down into position. This stage took 6 weeks. Once deformed, the shear blocks were introduced in the grid and bracing rib-laths were installed, giving its full strength to the shell. Finally the gridshell was cladded with a mix of polycarbonate plates (to let the light in) and timber boards on top of insulation panels and a rain screen.
 
-% It is worthwhile to mention that for the first time the form was not found by inverting some sort of hanging chain model that would produce a pure funicular shape where only compression occurred. Instead, the shape was the result of a numerical computation that took into account the bending behaviour of the laths.\footnote{This software was developed under the supervision of Chris Williams of the university of Bath.} \citet{Harris2003} argued that computer models enabled some interactivity in the form-finding process that would not be possible with physical models, leading to a better synergy between architectural and structural requirements. They also argued that physical models contributed invaluably to the development of a creative and efficient design throughout the project.
+It is worthwhile to mention that for the first time the form was not found by inverting some sort of hanging chain model that would produce a pure funicular shape where only compression occurred. Instead, the shape was the result of a numerical computation that took into account the bending behaviour of the laths.\footnote{This software was developed under the supervision of Chris Williams of the university of Bath.} \citet{Harris2003} argued that computer models enabled some interactivity in the form-finding process that would not be possible with physical models, leading to a better synergy between architectural and structural requirements. They also argued that physical models contributed invaluably to the development of a creative and efficient design throughout the project.
 
-% \subsubsection{Lothian Gridshell, Pishwanton, Scotland, 2002}
-% This project deserves some attention because the developed approach was completely different from the projects exposed until now~: \blockcquote[]{Lowenstein2002}{Previous projects have portrayed the method as a highly technical use of a low-tech resources. This, however, needs not be the case as we see with this project \belp{}}. The structure was the result of \blockcquote[]{bdonline2002}{\belp{} an unusual collaboration between sole practitioner Christopher Day, engineer David Tasker, a crowd of local volunteers and (more unusually) the philosophies of Rudolf Steiner and Johann Wolfgang Goethe}.\footnote{From the online paper \textquote{The other gridshell} : \url{http://www.bdonline.co.uk/the-other-gridshell/1020435.article}}
+\subsubsection{Lothian Gridshell, Pishwanton, Scotland, 2002}
+This project deserves some attention because the developed approach was completely different from the projects exposed until now~: \blockcquote[]{Lowenstein2002}{Previous projects have portrayed the method as a highly technical use of a low-tech resources. This, however, needs not be the case as we see with this project \belp{}}. The structure was the result of \blockcquote[]{bdonline2002}{\belp{} an unusual collaboration between sole practitioner Christopher Day, engineer David Tasker, a crowd of local volunteers and (more unusually) the philosophies of Rudolf Steiner and Johann Wolfgang Goethe}.\footnote{From the online paper \textquote{The other gridshell} : \url{http://www.bdonline.co.uk/the-other-gridshell/1020435.article}}
 
-% The single-layer gridshell was made out of local larch. Once erected by hands, the dome-like shape covered about \SI{80}{m^2} and spanned 10 meters. The grid was braced with timber boards (see \cref{fig:pishwanton_a}) and covered with a planted turf roof (see \cref{fig:pishwanton_b}). Some calculations were made but in the end, it had to carry load testing to prove its safety and gain its regulation approval.\footnote{\blockcquote[]{bdonline2002}{There were a lot of calculations but no computer-generated models to show they all added up. In fact, the form was previously established with scale models. When it came to gaining Building Regulations approval, the team needed to prove that the building would be strong enough. So Tasker arranged for the unfinished structure to be loaded with about 18 tonnes of sand from a local quarry – equivalent to the maximum predicted snow load, plus a safety factor.}}
+The single-layer gridshell was made out of local larch. Once erected by hands, the dome-like shape covered about \SI{80}{m^2} and spanned 10 meters. The grid was braced with timber boards (see \cref{fig:pishwanton_a}) and covered with a planted turf roof (see \cref{fig:pishwanton_b}). Some calculations were made but in the end, it had to carry load testing to prove its safety and gain its regulation approval.\footnote{\blockcquote[]{bdonline2002}{There were a lot of calculations but no computer-generated models to show they all added up. In fact, the form was previously established with scale models. When it came to gaining Building Regulations approval, the team needed to prove that the building would be strong enough. So Tasker arranged for the unfinished structure to be loaded with about 18 tonnes of sand from a local quarry – equivalent to the maximum predicted snow load, plus a safety factor.}}
 
-% \subsubsection{Woodland Centre, Filmwell, England, 2003}
-% The gridshell of the Woodland Centre was built 7 years after the project had started (see \cref{fig:flimwell_a}).\footnote{More to be found at : \href{http://www.fourthdoor.org/annular/?page_id=441}{Growing and making Flimwell’s chestnut gridshell}.} The building was designed by architect Feilden Clegg and engineers from Atelier One. It was part of a larger research and development project that aimed at developing chestnut -- a low grad wood -- as a construction material.\footnote{This projet was conducted by the \href{http://www.bre.co.uk/}{Building Research Establishment}.}
+\subsubsection{Woodland Centre, Filmwell, England, 2003}
+The gridshell of the Woodland Centre was built 7 years after the project had started (see \cref{fig:flimwell_a}).\footnote{More to be found at : \href{http://www.fourthdoor.org/annular/?page_id=441}{Growing and making Flimwell’s chestnut gridshell}.} The building was designed by architect Feilden Clegg and engineers from Atelier One. It was part of a larger research and development project that aimed at developing chestnut -- a low grad wood -- as a construction material.\footnote{This projet was conducted by the \href{http://www.bre.co.uk/}{Building Research Establishment}.}
 
-% The building, still existing, is composed of 5 barrel vaults spanning 12 meters and about 5 meters wide (see \cref{fig:flimwell_b}). It covers about \SI{300}{m^2} \cite{Lowenstein2004}. Each vault module is a transportable unit composed of two curved arches. A single layer gridshell was then applied to this primary frame and braced with chestnut panels. The grid was made of laths with~\SI{75}{mm} x \SI{25}{mm} rectangular cross-section, assembled with simple bolts. On top of that, insulation materials and a membrane as rainscreen \cite{FourthDoor2003}.
+The building, still existing, is composed of 5 barrel vaults spanning 12 meters and about 5 meters wide (see \cref{fig:flimwell_b}). It covers about \SI{300}{m^2} \cite{Lowenstein2004}. Each vault module is a transportable unit composed of two curved arches. A single layer gridshell was then applied to this primary frame and braced with chestnut panels. The grid was made of laths with~\SI{75}{mm} x \SI{25}{mm} rectangular cross-section, assembled with simple bolts. On top of that, insulation materials and a membrane as rainscreen \cite{FourthDoor2003}.
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
@@ -663,22 +716,22 @@ These projects definitely trailed the technique in England and initiated the ren
 % \end{figure}
 
 
-% \subsubsection{Savill Garden, Englefield Green, England, 2006}
+\subsubsection{Savill Garden, Englefield Green, England, 2006}
 
-% This project saw the light of day thanks to the reputation of the gridshell built in Downland. Again, Buro Happold did the structural design while Green Oak Carpentry realised it. But this time, the architect was Glenn Howells.
+This project saw the light of day thanks to the reputation of the gridshell built in Downland. Again, Buro Happold did the structural design while Green Oak Carpentry realised it. But this time, the architect was Glenn Howells.
 
-% The \emph{Savill} gridshell is 90 meters long and 25 meters wide. It covers an area of about \SI{2000}{m^2}, and is therefore almost three times larger than the gridshell in Downland. Once again, the corrugated shape was defined by a parametric equation ($z = f(x,y)$) to enable interactivity between architects and engineers during the form-finding process (see \cref{fig:savill_b}). Chris Williams was responsible for this job \cite{Harris2008}.
+The \emph{Savill} gridshell is 90 meters long and 25 meters wide. It covers an area of about \SI{2000}{m^2}, and is therefore almost three times larger than the gridshell in Downland. Once again, the corrugated shape was defined by a parametric equation ($z = f(x,y)$) to enable interactivity between architects and engineers during the form-finding process (see \cref{fig:savill_b}). Chris Williams was responsible for this job \cite{Harris2008}.
 
-% In Savill, the forming strategy was quite different than those employed in Mannheim, Hannover or Downland \cite{Harris2008}. Firstly, a single layer gridshell -- constituted by the bottom two laths jointed with simple bolts -- was deformed into the target shape. Secondly, the shear blocks were screwed on these laths. Thirdly, the upper two laths were positioned and screwed on top of the shear blocks to re-form a double-layer gridshell. Finally, the grid was braced with two alternate layers of plywood boards, \SI{12}{mm} thick each. Bracing the grid with continuous panels instead of cables or diagonal members was a major architectural choice (see \cref{fig:savill_a}). Moreover, it gave a well-defined surface for the cladding composed of \SI{160}{mm} of insulation, covered by a waterproof aluminium layer made with standing-seam profiles supporting the oak boards \cite{Trada2006}.
+In Savill, the forming strategy was quite different than those employed in Mannheim, Hannover or Downland \cite{Harris2008}. Firstly, a single layer gridshell -- constituted by the bottom two laths jointed with simple bolts -- was deformed into the target shape. Secondly, the shear blocks were screwed on these laths. Thirdly, the upper two laths were positioned and screwed on top of the shear blocks to re-form a double-layer gridshell. Finally, the grid was braced with two alternate layers of plywood boards, \SI{12}{mm} thick each. Bracing the grid with continuous panels instead of cables or diagonal members was a major architectural choice (see \cref{fig:savill_a}). Moreover, it gave a well-defined surface for the cladding composed of \SI{160}{mm} of insulation, covered by a waterproof aluminium layer made with standing-seam profiles supporting the oak boards \cite{Trada2006}.
 
-% Another consequence of this forming process was the drastic simplification of the connexion. The system developed for Downland was of no utility in that case and only simple bolts and screws were required. In this project, the pitch of this grid is \SI{1.0}{m}. The \SI{20}{kms} of laths are made from larch and have a \SI{80}{mm} x \SI{50}{mm} rectangular cross-section. They are spaced from \SI{100}{mm} to \SI{150}{mm} by the shear blocks.
+Another consequence of this forming process was the drastic simplification of the connexion. The system developed for Downland was of no utility in that case and only simple bolts and screws were required. In this project, the pitch of this grid is \SI{1.0}{m}. The \SI{20}{kms} of laths are made from larch and have a \SI{80}{mm} x \SI{50}{mm} rectangular cross-section. They are spaced from \SI{100}{mm} to \SI{150}{mm} by the shear blocks.
 
-% Of course, the steel perimeter is a major component of the project but is not in the scope of this thesis. For further details the reader is invited to refer to \citet{Harris2008} and \citet{Trada2006}.
+Of course, the steel perimeter is a major component of the project but is not in the scope of this thesis. For further details the reader is invited to refer to \citet{Harris2008} and \citet{Trada2006}.
 
-% \subsubsection{Chiddingstone Castle Orangery, Kent, England, 2007}
-% The gridshell covering the orangery of Chiddingstone Castle is a very small one. Built in 2007, it is 12 meters long, 5 meters wide and covers about \SI{50}{m^2} (see \cref{fig:kent_b}). The structural system is derived from the one employed in Downland and is, once again, developed by Buro Happold and the Green Oak Carpentry. But this time the architect is Peter Hulbert.
+\subsubsection{Chiddingstone Castle Orangery, Kent, England, 2007}
+The gridshell covering the orangery of Chiddingstone Castle is a very small one. Built in 2007, it is 12 meters long, 5 meters wide and covers about \SI{50}{m^2} (see \cref{fig:kent_b}). The structural system is derived from the one employed in Downland and is, once again, developed by Buro Happold and the Green Oak Carpentry. But this time the architect is Peter Hulbert.
 
-% However this project embed some interesting innovations. Indeed, this time the gridshell is braced with a bidirectional cable network. Twin cables are employed to facilitate clamping on the node connection, which has been adapted from the previous version developed in Downland. This connection is now equipped with an additional threaded hole which can receive the clamping supports for the glazing (see \cref{fig:kent_a}). The timber shell is then glazed with triangular panels. Note that the quadrangles of the mesh are not planar any more in the deformed configuration and therefore triangulation of the (flat) glass panels is mandatory.
+However this project embed some interesting innovations. Indeed, this time the gridshell is braced with a bidirectional cable network. Twin cables are employed to facilitate clamping on the node connection, which has been adapted from the previous version developed in Downland. This connection is now equipped with an additional threaded hole which can receive the clamping supports for the glazing (see \cref{fig:kent_a}). The timber shell is then glazed with triangular panels. Note that the quadrangles of the mesh are not planar any more in the deformed configuration and therefore triangulation of the (flat) glass panels is mandatory.
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
@@ -696,23 +749,23 @@ These projects definitely trailed the technique in England and initiated the ren
 % 	\label{fig:kent}
 % \end{figure}
 
-% \subsection{Gridshell in composite materials : a new perpective}
-% Since 2002, the laboratoire \href{http://navier.enpc.fr}{Navier} at the Ecole des Ponts ParisTech develops a research program on elastic gridshells that is still ongoing. It focuses on both the use of new materials such as composite materials and the development of modern computer design methods for the generation of complex shapes, their form-finding and their structural analysis.
+\subsection{Gridshell in composite materials : a new perpective}
+Since 2002, the laboratoire \href{http://navier.enpc.fr}{Navier} at the Ecole des Ponts ParisTech develops a research program on elastic gridshells that is still ongoing. It focuses on both the use of new materials such as composite materials and the development of modern computer design methods for the generation of complex shapes, their form-finding and their structural analysis.
 
-% \citet{Douthe2010a} proved that composite materials in glass fibre reinforced polymers (GFRP) are very suitable for this type of structures where both flexibility and strength of the profiles are required. On the level of mechanical behaviour GFRP surpass wood. They are easy and cheap to produce in long length when they are manufactured by pultrusion, thus avoiding complex jointing issues.\footnote{Video explaining the pultrusion process~: \url{https://www.youtube.com/watch?v=4MoHNZB5b_Y}}
+\citet{Douthe2010a} proved that composite materials in glass fibre reinforced polymers (GFRP) are very suitable for this type of structures where both flexibility and strength of the profiles are required. On the level of mechanical behaviour GFRP surpass wood. They are easy and cheap to produce in long length when they are manufactured by pultrusion, thus avoiding complex jointing issues.\footnote{Video explaining the pultrusion process~: \url{https://www.youtube.com/watch?v=4MoHNZB5b_Y}}
 
-% \subsubsection{The first gridshells in composte material, Champs-sur-Marne, France, 2006}
-% \label{sec=proto}
-% These developments have been validated by the construction of two prototypes in 2006 (see \cref{fig:proto_a}) and in 2007 (see \ref{fig:proto_b}) \cite{Douthe2006}. These structures were left outside for about 7 years. They covered about \SI{150}{m^2} each, spanning around 13 meters. The structures were single-layer gridshells made with pultruded GFRP tubes (\O \SI{41.7}{mm} x \SI{3.5}{mm}) assembled with a standard scaffold swivel connector. The grid was braced with a third layer of tubes and covered with a PVC coated fabric membrane providing full waterproofness.
+\subsubsection{The first gridshells in composte material, Champs-sur-Marne, France, 2006}
+\label{sec=proto}
+These developments have been validated by the construction of two prototypes in 2006 (see \cref{fig:proto_a}) and in 2007 (see \ref{fig:proto_b}) \cite{Douthe2006}. These structures were left outside for about 7 years. They covered about \SI{150}{m^2} each, spanning around 13 meters. The structures were single-layer gridshells made with pultruded GFRP tubes (\O \SI{41.7}{mm} x \SI{3.5}{mm}) assembled with a standard scaffold swivel connector. The grid was braced with a third layer of tubes and covered with a PVC coated fabric membrane providing full waterproofness.
 
-% Here, the performance of composite materials is of real benefit. A single--layer gridshell is enough for this span. The hollow circular cross-section make optimal use of the material. Tubes are provided in 12 meters length and therefore no joints are required for this span. In the end, all these benefits make the constructive system a lot more lighter, simpler and efficient than what a timber gridshell would offer.
+Here, the performance of composite materials is of real benefit. A single--layer gridshell is enough for this span. The hollow circular cross-section make optimal use of the material. Tubes are provided in 12 meters length and therefore no joints are required for this span. In the end, all these benefits make the constructive system a lot more lighter, simpler and efficient than what a timber gridshell would offer.
 
-% Note that the first prototype was manually pushed-up in its deformed shape while the second prototype was assembled member after member on top of an existing blower, similarly to the method employed in Dorset (see \cref{fig:dorset}).
+Note that the first prototype was manually pushed-up in its deformed shape while the second prototype was assembled member after member on top of an existing blower, similarly to the method employed in Dorset (see \cref{fig:dorset}).
 
-% \subsubsection{Solidays, Champs sur Marne, France, 2011}
-% In 2011, \href{http://navier.enpc.fr}{Navier} (L. du Peloux, O. Baverel, J-F. Caron, F. Tayeb) used its knowledge to design with a team of students a temporary pavilion for a music festival in Paris, France (see \cref{fig:solidays_b}).\footnote{Photos and videos of the construction process at: \url{ http://thinkshell.fr/gridshell-solidays-2011/}} Although the constructive system was similar to the one employed for the two prototypes, the size and the span were more than twice larger \cite{Baverel2012}. In addition, it was the first gridshell in composite material that hosted some public and therefore had to comply with strict building regulations.
+\subsubsection{Solidays, Champs sur Marne, France, 2011}
+In 2011, \href{http://navier.enpc.fr}{Navier} (L. du Peloux, O. Baverel, J-F. Caron, F. Tayeb) used its knowledge to design with a team of students a temporary pavilion for a music festival in Paris, France (see \cref{fig:solidays_b}).\footnote{Photos and videos of the construction process at: \url{ http://thinkshell.fr/gridshell-solidays-2011/}} Although the constructive system was similar to the one employed for the two prototypes, the size and the span were more than twice larger \cite{Baverel2012}. In addition, it was the first gridshell in composite material that hosted some public and therefore had to comply with strict building regulations.
 
-% To our knowledge, it is also the first gridshell that was designed using the compass method \cite{IL10}, thus providing an inverse method to design the structure directly from the shape given by the architect. The single-layer gridshell covered about \SI{280}{m^2} and was erected by two mobile cranes (see \cref{fig:solidays_a}).
+To our knowledge, it is also the first gridshell that was designed using the compass method \cite{IL10}, thus providing an inverse method to design the structure directly from the shape given by the architect. The single-layer gridshell covered about \SI{280}{m^2} and was erected by two mobile cranes (see \cref{fig:solidays_a}).
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
@@ -763,26 +816,26 @@ These projects definitely trailed the technique in England and initiated the ren
 % \end{figure}
 
 
-% \subsubsection{Ephemeral Cathedral, Créteil, France, 2013}
-% The \emph{Ephemeral Cathedral} of Créteil is the last achievement of this kind \cite{DuPeloux2016}.\footnote{Photos and videos of the construction process at : \url{http://thinkshell.fr/gridshell-cathedral-2013/}} It was designed by \href{http://www.tess.fr}{T/E/S/S} (L. du Peloux, B. Vaudeville, T. Gray, S. Aubry) with the assistance of \href{http://navier.enpc.fr}{Navier} (F. Tayeb, J-F. Caron, O. Baverel, A. Tamaint).\footnote{For this project, I was in charge of the project development for T/E/S/S, including structural and technical design, detailing, doors, membrane, drawing production, fabrication and erection with the help of the parishioners, regulations, \telp{}}. This time, the structure is a real building meant to last a decade and is still in activity since its construction in 2013. A complete review of this project is given in the next chapter of this thesis (see \cref{chp=creteil}).
+\subsubsection{Ephemeral Cathedral, Créteil, France, 2013}
+The \emph{Ephemeral Cathedral} of Créteil is the last achievement of this kind \cite{DuPeloux2016}.\footnote{Photos and videos of the construction process at : \url{http://thinkshell.fr/gridshell-cathedral-2013/}} It was designed by \href{http://www.tess.fr}{T/E/S/S} (L. du Peloux, B. Vaudeville, T. Gray, S. Aubry) with the assistance of \href{http://navier.enpc.fr}{Navier} (F. Tayeb, J-F. Caron, O. Baverel, A. Tamaint).\footnote{For this project, I was in charge of the project development for T/E/S/S, including structural and technical design, detailing, doors, membrane, drawing production, fabrication and erection with the help of the parishioners, regulations, \telp{}}. This time, the structure is a real building meant to last a decade and is still in activity since its construction in 2013. A complete review of this project is given in the next chapter of this thesis (see \cref{chp=creteil}).
 
-% The single-layer gridshell covers about \SI{350}{m^2} and spans 17 meters (see \cref{fig:creteil_a}). It is covered by a PVC coated fabric membrane (see \cref{fig:creteil_b}). It was erected by two mobile cranes.
+The single-layer gridshell covers about \SI{350}{m^2} and spans 17 meters (see \cref{fig:creteil_a}). It is covered by a PVC coated fabric membrane (see \cref{fig:creteil_b}). It was erected by two mobile cranes.
 
 
-% \subsection{Flourishing timber gridshell pavilions}
-% Since 2010, about 20 timber gridshell pavilions were built around the world, mainly during workshops. Here, we do not review all of these pavilions in detail because they are quite similar although each one has its specificities.
+\subsection{Flourishing timber gridshell pavilions}
+Since 2010, about 20 timber gridshell pavilions were built around the world, mainly during workshops. Here, we do not review all of these pavilions in detail because they are quite similar although each one has its specificities.
 
-% \subsubsection{The impetus given by gridshell.it}
-% Around 2010, a research group gathering architectural and engineering skills appeared under the name \href{http://www.gridshell.it}{gridshell.it} in Italy. Inspired by the work of Frei Otto, they revisited the structural system developed at Mannheim and adapted it to a range of small-scale timber pavilions.
+\subsubsection{The impetus given by gridshell.it}
+Around 2010, a research group gathering architectural and engineering skills appeared under the name \href{http://www.gridshell.it}{gridshell.it} in Italy. Inspired by the work of Frei Otto, they revisited the structural system developed at Mannheim and adapted it to a range of small-scale timber pavilions.
 
-% These pavilions have in common to be double-layer timber gridshells. The structural system is always composed of laths with rectangular cross-section. The laths come in short length  from the sawmill (about 3 to 4 meters). They do not try to re-form long-length laths with complex jointing techniques. Instead, they use a simple splice system. Although it is not well architecturally resolved, it is efficient enough for this kind of project. As the laths are short, this detail is repeated frequently in the grid, but the splice system enable a higher level of prefabrication of the grid. Thus, small modules of the size of the laths can be preassembled and connected with the splice system to re-form the full grid. These gridshells are braced either with cables or with individual diagonal members in each cell.
+These pavilions have in common to be double-layer timber gridshells. The structural system is always composed of laths with rectangular cross-section. The laths come in short length  from the sawmill (about 3 to 4 meters). They do not try to re-form long-length laths with complex jointing techniques. Instead, they use a simple splice system. Although it is not well architecturally resolved, it is efficient enough for this kind of project. As the laths are short, this detail is repeated frequently in the grid, but the splice system enable a higher level of prefabrication of the grid. Thus, small modules of the size of the laths can be preassembled and connected with the splice system to re-form the full grid. These gridshells are braced either with cables or with individual diagonal members in each cell.
 
-% These structures were never meant to provide full waterproofness although some were an occasion to experiment different types of cladding with boards (Lecce 2010, Toledo 2012, Milano 2013) or with textile membranes (Lecce 2009).
+These structures were never meant to provide full waterproofness although some were an occasion to experiment different types of cladding with boards (Lecce 2010, Toledo 2012, Milano 2013) or with textile membranes (Lecce 2009).
 
-% One of their first pavilion was built in 2010 in Lecce, Italy (see \cref{fig:lecce}). Their most known project is probably the Toledo pavilion built in 2012 in Naples, Italy.  A new pavilion called Toledo 2.0 was built in 2014 in Naples, Italy (see \cref{fig:toledo2}). Although it seems that their initial approach focused more on the architectural aspects and the construction process, they rapidly tried to develop dedicated computer design methods \cite{DAmico2014} and did significant wood testing \cite{DAmico2015a}.
+One of their first pavilion was built in 2010 in Lecce, Italy (see \cref{fig:lecce}). Their most known project is probably the Toledo pavilion built in 2012 in Naples, Italy.  A new pavilion called Toledo 2.0 was built in 2014 in Naples, Italy (see \cref{fig:toledo2}). Although it seems that their initial approach focused more on the architectural aspects and the construction process, they rapidly tried to develop dedicated computer design methods \cite{DAmico2014} and did significant wood testing \cite{DAmico2015a}.
 
-% \subsubsection{Other similar timber pavilions}
-% The ideas of the \emph{gridshell.it} group spread rapidly and similar projects were achieved outside of Italy. Amongst them, we can point out the ZA pavilion built in 2013 in Cluj, Romania \cite{Naicu2014}; the F\textsuperscript{2} pavilion built in 2014 in San Antonio, USA, with an interesting folding skin (see \cref{fig:sanantonio1,fig:sanantonio2}) and the pavilion built in 2016 in Trondheim, Norway, which is made of very short length laths spliced every two cells \cite{Mork2016,Labonnote2016}.
+\subsubsection{Other similar timber pavilions}
+The ideas of the \emph{gridshell.it} group spread rapidly and similar projects were achieved outside of Italy. Amongst them, we can point out the ZA pavilion built in 2013 in Cluj, Romania \cite{Naicu2014}; the F\textsuperscript{2} pavilion built in 2014 in San Antonio, USA, with an interesting folding skin (see \cref{fig:sanantonio1,fig:sanantonio2}) and the pavilion built in 2016 in Trondheim, Norway, which is made of very short length laths spliced every two cells \cite{Mork2016,Labonnote2016}.
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
@@ -834,14 +887,6 @@ These projects definitely trailed the technique in England and initiated the ren
 % \end{figure}
 
 
-% \subsubsection{Specific inputs from the laboratory Navier}
-% In that vein, L. du Peloux from \href{http://navier.enpc.fr}{Navier} and G. Laurent from \href{http://terrellgroup.net/index.php}{Terrell} helped two students (S. Hulin and G. Sudres) resp. from the \href{http://www.grenoble.archi.fr/en/school/educational-innovation.php}{ENSA Grenoble} and \href{http://www.toulouse.archi.fr/fr/index.html}{ENSA Toulouse} to design a modular pavilion system for their final year project (2016). These pavilions were designed similarly to the pavilions of gridshell.it but improvements were made. Firstly, a new cable bracing system was developed. It was embedded in the grid and tensioned with spacer plates once the grid was erected (see \cref{fig:tensioner}). This system proved its efficiency on site compared to bracing with diagonal members. Secondly, the grid was designed and fabricated so it could be dismantled and reassembled in a different shape. And indeed, a first pavilion was erected in Toulouse the 3\textsuperscript{rd} of June, dismantled, reconfigured, and re-erected in Montpellier the 15\textsuperscript{th} of June. The pavilions shared the same standard grid modules (\SI{2.40}{m} x \SI{2.40}{m}), and dedicated modules were used to adapt the change in shape.\footnote{For these projects, I did the shape analysis, the meshing with the compass method, the form-finding with my own dynamic relaxation software, wood testing and specification, grid system detailing (nodes, cross-sections, grid pitch, bracing, slotted holes, shear block, \telp{}) and provided a valuable assistance all along the project.}
-
-% \subsection{Latest experiments}
-
-% In 2016, a one-week workshop called \href{http://thinkshell.fr/freeform-wooden-gridshell-2016/}{Building Freeform 2016} was held at the Ecole des Ponts ParisTech, France. The brief was to explore some innovative methods, including the generation of forms which allow the coverage by flat panels as well as the automation of some production tasks with the use of a robot arm (see \cref{fig:clc}). The draft studies were conducted upstream of the week, so that students can focus on design issues, implementation and practical achievement.\footnote{The co-development of this week was part of my research work. In particular, I provided the form-finding and structural analysis tools and developed the upstream software to generate the fabrication informations required by the milling station. This software was largely parametric so students can truly implement their own design. I was also involved in the planing of the week.}
-
-% The second experiment is a hybrid structure (see \cref{fig:booby}). It is part of our reflexion at \href{http://navier.enpc.fr}{Navier} on how to brace and clad gridshells. Indeed, the bracing of the grid in its final form remains a time consuming step with a lot of manual work. The lack of alternatives to membrane covering is also an important limitation to the development of such technology. The proposed experiment tries to tackle both issues through a novel concept of a hybrid structural skin made of an elastic gridshell braced with a concrete envelope. The idea is to use the gridshell as a formwork for the concrete and to guarantee a mechanical connection between the thin concrete skin and the main grid, so that the concrete ensures the bracing of the grid and that the thickness of the concrete is reduced to a minimum. To demonstrate the feasibility and interest of this structural concept, a \SI{10}{m^2} prototype was built at the Ecole des Ponts ParisTech, France (see \cref{fig:booby1,fig:booby2}). The main aspects of the design and of the realisation of the prototype are presented by \citef{Cuvilliers2017}.
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
@@ -876,21 +921,21 @@ These projects definitely trailed the technique in England and initiated the ren
 % \end{figure}
 
 % \clearpage
-% \section{Research works on elastic gridshells : a review}\label{sec=review_research}
-% In this section we depict the research works that are related to elastic gridshells. Several topics have been identified to organise the review.
+\section{Research works on elastic gridshells : a review}\label{sec=review_research}
+In this section we depict the research works that are related to elastic gridshells. Several topics have been identified to organise the review.
 
-% \subsection{Mechanics}
+\subsection{Mechanics}
 
-% \subsubsection{Form-finding}
+\subsubsection{Form-finding}
 
-% \citef{Adriaenssens2000} propose a 6-DOF discrete beam element that integrates in a dynamic relaxation solver. This element is meant for the numerical analysis of bent elements in cable net and gridshell structures.
+\citef{Adriaenssens2000} propose a 6-DOF discrete beam element that integrates in a dynamic relaxation solver. This element is meant for the numerical analysis of bent elements in cable net and gridshell structures.
 
-% \citef{Adriaenssens1999} present a 3-DOF discrete beam element for the form-finding of elastic rods. This element is valid only for rods that are straight in their rest configuration and that have an isotropic cross-section. \citef{Barnes1999} integrates this element for numerical analysis based on dynamic relaxation. \citef{Adriaenssens2001} observe a better stability of this element compare to their previous 6-DOF element.
+\citef{Adriaenssens1999} present a 3-DOF discrete beam element for the form-finding of elastic rods. This element is valid only for rods that are straight in their rest configuration and that have an isotropic cross-section. \citef{Barnes1999} integrates this element for numerical analysis based on dynamic relaxation. \citef{Adriaenssens2001} observe a better stability of this element compare to their previous 6-DOF element.
 
-% \citef{Barnes2013} try to take account for torsional behaviour in slender rods with anisotropic cross-section. They do not resort to any additional degree of freedom. Instead, they monitor the (geometric) torsion of a discrete space curve by computing the rotation rate between two consecutive osculating planes. This is valid only in rare specific cases where geometric torsion and mechanical torsion agree and is of little practical use.
+\citef{Barnes2013} try to take account for torsional behaviour in slender rods with anisotropic cross-section. They do not resort to any additional degree of freedom. Instead, they monitor the (geometric) torsion of a discrete space curve by computing the rotation rate between two consecutive osculating planes. This is valid only in rare specific cases where geometric torsion and mechanical torsion agree and is of little practical use.
 
-% \citef{DAmico2014} and later \citef{Poulsen2015} implement the 6-DOF beam element developed earlier by \citef{Adriaenssens2000} and use it for the form-finding of gridshells.
+\citef{DAmico2014} and later \citef{Poulsen2015} implement the 6-DOF beam element developed earlier by \citef{Adriaenssens2000} and use it for the form-finding of gridshells.
 
-% \citef{DuPeloux2015} and \citef{Lefevre2017} propose a new 4-DOF element that takes account for both bending and torsion behaviours of slender rods. It relies on the Bishop frame and the notion of parallel transport. It is based on a circular spline interpolation. This element is valid for rods with anisotropic cross-section as well as for rod that are not straight in their rest configuration. They also formulate an elastic joint for the modeling of grids of interconnected beams.
+\citef{DuPeloux2015} and \citef{Lefevre2017} propose a new 4-DOF element that takes account for both bending and torsion behaviours of slender rods. It relies on the Bishop frame and the notion of parallel transport. It is based on a circular spline interpolation. This element is valid for rods with anisotropic cross-section as well as for rod that are not straight in their rest configuration. They also formulate an elastic joint for the modeling of grids of interconnected beams.
 
-% \citef{DAmico2016} propose a similar approach but use a Catmull-Rom spline interpolation. However, dealing with boundary conditions is harder with this interpolation as it requires an additional node.
+\citef{DAmico2016} propose a similar approach but use a Catmull-Rom spline interpolation. However, dealing with boundary conditions is harder with this interpolation as it requires an additional node.

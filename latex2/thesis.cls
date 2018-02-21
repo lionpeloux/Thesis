@@ -30,6 +30,7 @@
 \RequirePackage{calc}
 \RequirePackage{xparse}
 \RequirePackage{refcount,lastpage}
+\RequirePackage{printlen}
 % \RequirePackage{adjustbox}
 % \RequirePackage{eso-pic}
 
@@ -928,6 +929,21 @@
 \crefname{equation}{eq.}{eqs.}
 \Crefname{equation}{Eq.}{Eqs.}
 
+
+% photo legend
+\newcommand{\figurecaption}[2]{%
+	%
+	% typset a caption from a label outside captionof command
+	% ideally #3 should be retrieved automaticaly from the value defined by \captionof
+	% [#1] : figure, subfigure, table, subtable, ... 
+	% 
+	%
+	\crefname{figure}{}{}
+	{{\tf@cap\cref{#1} - #2}}% double brace needed to make font change local
+	% restore parameters (copy/past)
+	\crefname{figure}{fig.}{figs.}
+
+}
 
 
 
