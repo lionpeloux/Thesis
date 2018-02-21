@@ -168,7 +168,7 @@
 	
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{0em}
-\setstretch{1.1}
+\setstretch{1.125}
 
 % relax interline skip to ensure better flushbottom
 \baselineskip\the\baselineskip plus0.5pt minus0.5pt\relax 
@@ -195,7 +195,9 @@
 	% text fonts
 	% The fontspec package must also be loaded after any maths font packages (e.g., euler) to be successful
 	
-	\setmainfont{GillSans-Light}
+	% \setmainfont{SabonLTStd-Roman}
+	\setmainfont{LMRoman17-Regular}
+	% \setmainfont{GaramondPremrPro-LtDisp}
 	\newfontfamily\font@body{GillSans-Light}[Scale = MatchUppercase]
 	\newfontfamily\font@hdr{FuturaLT-Book}[Scale = MatchUppercase]
 	\newfontfamily\font@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
@@ -204,10 +206,7 @@
 	\newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
 	\newfontfamily\font@subsubsec{FuturaLT-Condensed}[Scale = MatchUppercase]
 	\newfontfamily\font@label{FuturaLT-Book}[Scale = MatchUppercase]
-	\newfontfamily\font@cap{GaramondPremrPro-Capt}[Scale = MatchUppercase]
-	
-
-
+	\newfontfamily\font@cap{FuturaLT}[Scale = MatchUppercase]
 }
 
 
@@ -217,7 +216,7 @@
 
 
 % typeface
-\DeclareRobustCommand{\tf@hdr}{\font@hdr\bfseries\large}
+\DeclareRobustCommand{\tf@hdr}{\font@hdr\bfseries}
 \DeclareRobustCommand{\tf@part}{\font@part\bfseries\Huge}
 \DeclareRobustCommand{\tf@chap}{\font@chap\bfseries\Huge}
 \DeclareRobustCommand{\tf@sec}{\font@sec\bfseries\Large}
@@ -262,7 +261,7 @@
 \titlespacing*{\chapter}{0pt}{50pt}{80pt} 
 \titlespacing*{\section}{0pt}{24pt}{6pt}
 \titlespacing*{\subsection}{0pt}{12pt}{3pt}
-\titlespacing*{\subsubsection}{0pt}{12pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{3pt}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -290,8 +289,8 @@
 \DeclareCaptionFormat{plain}{\tf@cap{\bfseries#1}#2#3\par}
 
 
-% subcaption list format
-\DeclareCaptionListFormat{lsubcap}{#2)}
+% subcaption entry format in LOF
+\DeclareCaptionListFormat{pcr}{#2)}
 
 % Photo Spread Caption Style
 \DeclareCaptionLabelFormat{PS}{#2}
@@ -310,17 +309,17 @@
 	strut=off, % must be off !!! to get proper baseline alignment
 }
 
-% Photo Spread Subcaption Style
-\DeclareCaptionLabelFormat{PC}{\thefigure#2} %\thefigure
-\DeclareCaptionFormat{PC}{#1#2#3}
-\DeclareCaptionStyle{PC}[]{
+% Style for PhotoCaptionRef label
+\DeclareCaptionLabelFormat{pcr}{\thefigure\bothIfSecond{}{\thesubfigure}} %\thefigure
+\DeclareCaptionFormat{pcr}{\tf@seclabel#1#2#3}
+\DeclareCaptionStyle{pcr}[]{
 	% hypcap=false,
-	listformat=lsubcap,
-	labelformat=PC,
-	format=PC,
+	listformat=pcr,
+	labelformat=pcr,
+	format=pcr,
 	labelsep=space,
-	textfont={sf,small},
-	labelfont={sf,bf,scriptsize,color=black}, % Tblue
+	% textfont={sf,small},
+	% labelfont={sf,bf,scriptsize,color=black}, % Tblue
 	singlelinecheck=true,
 	aboveskip=0pt,
 	belowskip=0pt,
@@ -457,7 +456,6 @@
 
 %% font styles (rm, sf, tt)
 \DeclareRobustCommand{\HdrFontStyle}{\sffamily\scriptsize\bfseries}%\small\scshape\nouppercase
-\DeclareRobustCommand{\tf@hdr}{\font@hdr\bfseries\footnotesize}
 
 % default style
 \pagestyle{fancy}
@@ -708,7 +706,8 @@
 % href icon for url or doi
 % \usepackage{fontawesome}
 % \newcommand{\ico}{\small\faExternalLink}%
-\newcommand{\ico}{\rule{4pt}{4pt}\phantom{LINK}}
+\newcommand{\ico}{\parbox{4pt}{\rule{4pt}{4pt}}}
+\renewcommand{\ico}{\adjustbox{width=4pt}{$\blacksquare$}}
 \newcommand{\icohref}{%
 \ifboolexpr{%
 	test {\ifhyperref}
@@ -805,9 +804,9 @@
      \defbibheading{subbibliography}{\section{\refname}}}
     {\defbibheading{subbibliography}{%
        \AtNextBibliography{\let\blx@anchor\relax}%
-	   \section{\refname}}}
+	   \section*{\refname}}}
 }
-\defbibheading{subbibliography}[\refname]{\section{#1}}
+% \defbibheading{subbibliography}[\refname]{\section*{#1}}
 \defbibheading{subbibliography}[\refname]{\chapter*{\bibname}}
 
 

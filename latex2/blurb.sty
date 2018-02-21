@@ -745,8 +745,14 @@
 	\global\evensidemargin=\save@evensidemargin
 }
 
-
-
+\newlength\save@textheight
+\newcommand{\addtotextheigth}[1]{
+	\setlength{\save@textheight}{\textheight}
+	\setlength{\textheight}{\save@textheight+#1}
+}
+\newcommand{\restoretexteheight}{%
+	\global\textheight=\save@textheight
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -803,7 +809,7 @@
 \newcommand{\intersectnode}[2]{
 	%
 	% helping macro to store the result of a tikz intersection in a coords register
-	% example : \intersectnode{(BR) -| (TL)}{TMPNode}
+	% example : \intersectnode{BR -| TL}{TMPNode}
 	%
 	% [#1] : tikz intersect expression
 	% [#2] : name of register to store the resulting node

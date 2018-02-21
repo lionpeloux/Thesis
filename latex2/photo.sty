@@ -107,8 +107,8 @@
 \newlength{\@YShift}
 
 \setlength{\PhotoRefSkip}{3pt}
-\setlength{\PhotoBigSkip}{6mm}
-\setlength{\PhotoSkip}{2mm}
+\setlength{\PhotoBigSkip}{16pt}
+\setlength{\PhotoSkip}{8pt}
 
 \setlength{\@TextBoxWidth}{80mm}
 \setlength{\@TextBoxXMargin}{10mm}
@@ -362,14 +362,15 @@
 % declare keys
 \define@key{kvpsc}{node}{\def\@PCNode{#1}}
 \define@key{kvpsc}{anchor}{\def\@PCAnchor{#1}}
+\define@key{kvpsc}{type}{\def\@PCType{#1}}
 \define@key{kvpsc}{ltitle}{\def\@PCListTitle{#1}}
 \define@key{kvpsc}{title}{\def\@PCTitle{#1}}
 \define@key{kvpsc}{xshift}{\def\@PCXShift{#1}}
 \define@key{kvpsc}{yshift}{\def\@PCYShift{#1}}
 % preset keys
-\savekeys{kvpsc}{node, anchor, ltitle, title, xshift, yshift}
+\savekeys{kvpsc}{node, anchor, type, ltitle, title, xshift, yshift}
 \presetkeys{kvpsc}%
-{node=BR, anchor=south west, ltitle={}, title={}, xshift=0mm, yshift=0mm}%
+{node=BR, anchor=south west, type=figure, ltitle={}, title={}, xshift=0mm, yshift=0mm}%
 {}
 % command
 \newsavebox{\@PCBox}
@@ -378,25 +379,26 @@
 	% [#1] : title 		= subcaption heading = list entry
 	% [#2] : node		= insertion point as tikz node 
 	%		 anchor		= tikz anchor (eg. north west | south east ...)
+	%		 type		= caption type (figure, subfigure, table, subtable, ...)
 	%		 label		= label name for xref (eg. fig:name)
 	%		 xshift		= image shift along x (0mm)
 	%		 yshift		= image shift along y (0mm)
 	% 
 	\setkeys{kvpsc}{#1}{
 
-		\captionsetup[subfigure]{style=PC,justification=centering}
+		\captionsetup[\@PCType]{style=pcr,justification=centering}
 		\IfSubStr{\@PCAnchor}{east}{
-			\captionsetup[subfigure]{style=PC,justification=raggedleft}
+			\captionsetup[\@PCType]{style=pcr,justification=raggedleft}
 		}{}
 		\IfSubStr{\@PCAnchor}{west}{
-			\captionsetup[subfigure]{style=PC,justification=raggedright}
+			\captionsetup[\@PCType]{style=pcr,justification=raggedright}
 		}{}
 		
 		\savebox{\@PCBox}{\fbox{\parbox[b]{10mm}{%
 			\ifdefempty{\@PCTitle}{
-				\captionof{subfigure}[\@PCListTitle]{}\label{#2}
+				\captionof{\@PCType}[\@PCListTitle]{}\label{#2}
 			}{
-				\captionof{subfigure}[\@PCListTitle]{\@PCTitle}\label{#2}
+				\captionof{\@PCType}[\@PCListTitle]{\@PCTitle}\label{#2}
 			}
 		}}}
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
@@ -437,7 +439,7 @@
 % preset keys
 \savekeys{kvpc}{node, anchor, width, xshift, yshift, style, ltitle, title, subtitle, text}
 \presetkeys{kvpc}%
-{node=BR, anchor=south west, width=6cm, xshift=0mm, yshift=0mm, style=default, ltitle={}, title={}, subtitle={}, text={}}%
+{node=BR, anchor=south west, width=6cm, xshift=0mm, yshift=0mm, style=PS, ltitle={}, title={}, subtitle={}, text={}}%
 {}
 % command
 \newcommand\PhotoCaption[2][]{
