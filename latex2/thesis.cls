@@ -148,6 +148,13 @@
 \typeout{**************************}
 \typeout{}
 \typeout{}
+
+
+% LANGUAGES
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguage{french}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% FONT SETTINGS
@@ -158,21 +165,14 @@
 
 %% paragraph
 %% --------------------------
+	
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{0em}
-% \renewcommand{\baselinestretch}{1.2}
-\setstretch{1.15}
+\setstretch{1.1}
 
-% \RequirePackage{baskervillef}
-% \RequirePackage[varqu,varl,var0]{inconsolata}
-% \RequirePackage[scale=.95,type1]{cabin}
-% \RequirePackage[baskerville,vvarbb]{newtxmath}
-% \RequirePackage[cal=boondoxo]{mathalfa}
-
-% LANGUAGES
-\usepackage{polyglossia}
-\setdefaultlanguage{english}
-\setotherlanguage{french}
+% relax interline skip to ensure better flushbottom
+\baselineskip\the\baselineskip plus0.5pt minus0.5pt\relax 
+\flushbottom
 
 %% headings
 %% --------------------------
@@ -196,17 +196,18 @@
 	% The fontspec package must also be loaded after any maths font packages (e.g., euler) to be successful
 	
 	\setmainfont{GillSans-Light}
-	\newfontfamily\font@head{FuturaLT-Book}[Scale = MatchUppercase]
+	\newfontfamily\font@body{GillSans-Light}[Scale = MatchUppercase]
+	\newfontfamily\font@hdr{FuturaLT-Book}[Scale = MatchUppercase]
+	\newfontfamily\font@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
+	\newfontfamily\font@chap{Futura-CondensedExtraBold}[Scale = MatchUppercase]
 	\newfontfamily\font@sec{FuturaLT-Book}[Scale = MatchUppercase]
 	\newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
-	\newfontfamily\font@subsubsec{FuturaLT}[Scale = MatchUppercase]
+	\newfontfamily\font@subsubsec{FuturaLT-Condensed}[Scale = MatchUppercase]
 	\newfontfamily\font@label{FuturaLT-Book}[Scale = MatchUppercase]
-	\newfontfamily\tf@chap{Futura-CondensedExtraBold}[Scale = MatchUppercase]
-	\newfontfamily\tf@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
+	
+	
 
-	% relax interline skip to ensure better flushbottom
-	\flushbottom
-	\baselineskip\the\baselineskip plus0.5pt minus0.5pt\relax
+
 }
 
 
@@ -214,22 +215,17 @@
 % switch between preset fonts
 \FontSwitch{1}
 
-% font styles (rm, sf, tt)
-\DeclareRobustCommand{\HeadingFontStyle}{\font@head}
-
-% font weight
-\DeclareRobustCommand{\HeadingFontWeight}{\bfseries}
-
-% font size (tiny, small, large, Large, LARGE, huge, Huge)
-\DeclareRobustCommand{\HeadingFontSize}{\Huge}
-
-\DeclareRobustCommand{\PartFont}{\tf@part\HeadingFontWeight\HeadingFontSize}
-\DeclareRobustCommand{\ChapterFont}{\tf@chap\HeadingFontWeight\HeadingFontSize}
 
 % typeface
-\DeclareRobustCommand{\tf@sec}{\font@sec\bfseries}
-\DeclareRobustCommand{\tf@subsec}{\font@subsec\bfseries}
-\DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\bfseries}
+\DeclareRobustCommand{\tf@hdr}{\font@hdr\bfseries\large}
+\DeclareRobustCommand{\tf@part}{\font@part\bfseries\Huge}
+\DeclareRobustCommand{\tf@chap}{\font@chap\bfseries\Huge}
+\DeclareRobustCommand{\tf@sec}{\font@sec\bfseries\Large}
+\DeclareRobustCommand{\tf@subsec}{\font@subsec\bfseries\normalsize}
+\DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\normalsize}
+\DeclareRobustCommand{\tf@seclabel}{\font@label\scriptsize\color{titlelabel}}
+\DeclareRobustCommand{\tf@fntxt}{\font@body\footnotesize}
+\DeclareRobustCommand{\tf@fnmk}{\font@label\bfseries\tiny}
 
 % equation label font
 \setlength{\mathindent}{1em}
@@ -246,17 +242,17 @@
 \colorlet{titlelabel}{black}
 % \colorlet{titlelabel}{accent}
 
-\titleformat{\section}[hang]{\tf@sec}
-{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesection\hspace*{8pt}}}
-{0pt}{\Large\MakeUppercase{#1}}
+\titleformat{\section}[hang]{}
+{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesection\hspace*{6pt}}}
+{0pt}{\tf@sec\MakeUppercase{#1}}
 
-\titleformat{\subsection}[hang]{\tf@subsec}
-{\hspace*{-1.5cm}\fbox{\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesubsection\hspace*{8pt}}}}
-{0pt}{\MakeUppercase{#1}}
+\titleformat{\subsection}[hang]{}
+{\hspace*{-1.5cm}\fbox{\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesubsection\hspace*{6pt}}}}
+{0pt}{\tf@subsec\MakeUppercase{#1}}
 
-\titleformat{\subsubsection}[hang]{\tf@subsubsec}
-{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\scriptsize\color{titlelabel}\thesubsubsection\hspace*{8pt}}}
-{0pt}{\footnotesize\MakeUppercase{#1}}
+\titleformat{\subsubsection}[hang]{}
+{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesubsubsection\hspace*{6pt}}}
+{0pt}{\tf@subsubsec{#1}}
 
 
 %% heading indentation
@@ -458,7 +454,7 @@
 
 %% font styles (rm, sf, tt)
 \DeclareRobustCommand{\HdrFontStyle}{\sffamily\scriptsize\bfseries}%\small\scshape\nouppercase
-
+\DeclareRobustCommand{\tf@hdr}{\font@hdr\bfseries\footnotesize}
 
 % default style
 \pagestyle{fancy}
@@ -473,9 +469,9 @@
 % first style
 \renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{4.0pt}}
 \renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
-\fancyhead[OR]{\iffloatpage{}{\HdrFontStyle\MakeUppercase{\rightmark}}} 	% \nouppercase
-\fancyhead[EL]{\iffloatpage{}{\HdrFontStyle\MakeUppercase{\leftmark}}} 	% \nouppercase
-\fancyfoot[EL,OR]{\HdrFontStyle\footnotesize\thepage}
+\fancyhead[OR]{\iffloatpage{}{\tf@hdr\MakeUppercase{\rightmark}}} 	% \nouppercase
+\fancyhead[EL]{\iffloatpage{}{\tf@hdr\MakeUppercase{\leftmark}}} 	% \nouppercase
+\fancyfoot[EL,OR]{\tf@hdr\thepage}
 
 % second style
 % \fancyhead[EL]{\iffloatpage{}{%
@@ -505,7 +501,7 @@
 	\fancyhead{}
 	\renewcommand{\headrulewidth}{0pt}
 	\fancyfoot{}
-	\fancyfoot[RO,LE]{\HdrFontStyle\thepage}
+	\fancyfoot[RO,LE]{\tf@hdr\thepage}
 }
 
 
@@ -545,7 +541,7 @@
 
 %% Chapter
 \titleformat{\chapter}[display]  			% type (section,chapter,etc...) to vary
-{\ChapterFont} 								% format of the chapter
+{\tf@chap} 									% format of the chapter
 {\gdef\chapterlabel{\thechapter\ }}     	% the label
 {0pt} 										% separation between label and chapter-title
 {											% code before the title body
@@ -589,7 +585,7 @@
 % Vertical Adjutement of part title
 % help : https://tex.stackexchange.com/a/41014
 \newlength{\PartYAdjust}
-\setlength{\PartYAdjust}{\totalheightof{\PartFont Part I}/2 - \depthof{\PartFont Part I}}
+\setlength{\PartYAdjust}{\totalheightof{\tf@part Part I}/2 - \depthof{\tf@part Part I}}
 
 %% commands
 \renewcommand{\thepart}{\Roman{part}}
@@ -598,7 +594,7 @@
 %% Part
 \newcounter{PartCount}						% store part count to apply offset
 \titleformat{\part}[display]  				% type (section,chapter,etc...) to vary
-{\PartFont} 								% format of the part
+{\tf@part} 								% format of the part
 {\gdef\partlabel{\thepart\ }}     			% the label
 {0pt} 										% separation between label and chapter-title
 {											% code before the title body
@@ -655,13 +651,35 @@
 \renewcommand{\labelnamepunct}{\addcomma\addspace}
 
 
-% \setlength{\bibhang}{-10pt}
-\setlength{\biblabelsep}{1em}
-
-
-
 % put title of misc entry bitween quotes
-\DeclareFieldFormat[misc]{title}{\mkbibquote{#1}} 
+\DeclareFieldFormat[misc]{title}{\mkbibquote{#1}}
+
+
+% custom bibliography style and alignment 
+\setlength{\bibhang}{0em}
+\setlength{\biblabelsep}{6pt}
+\setlength{\bibitemsep}{0em}
+\setlength{\bibparsep}{0em}
+
+\DeclareFieldFormat{labelnumberwidth}{\font@label\footnotesize\mkbibbold{#1}}
+
+\defbibenvironment{bibliography}
+  {\list
+{\printfield[labelnumberwidth]{labelnumber}}
+{\setlength{\labelwidth}{\labelnumberwidth}%
+ \setlength{\leftmargin}{\labelwidth}%
+ \setlength{\labelsep}{\biblabelsep}%
+ \addtolength{\leftmargin}{\labelsep}%
+ \addtolength{\leftmargin}{-\labelwidth-\labelsep}% LDP add this xshift
+ \setlength{\itemsep}{\bibitemsep}%
+\setlength{\parsep}{\bibparsep}}%
+    \renewcommand*{\makelabel}[1]{\hss##1}}
+{\endlist}
+{\item}
+
+
+% custom style for citation mark in text
+% \appto{\citesetup}{\font@label}
 
 
 %% Favicon DOI Link 
@@ -685,7 +703,9 @@
 }
 
 % href icon for url or doi
-\usepackage{fontawesome}
+% \usepackage{fontawesome}
+% \newcommand{\ico}{\small\faExternalLink}%
+\newcommand{\ico}{\rule{4pt}{4pt}\phantom{LINK}}
 \newcommand{\icohref}{%
 \ifboolexpr{%
 	test {\ifhyperref}
@@ -697,10 +717,10 @@
   \iffieldundef{doi}{%true
   	\iffieldundef{url}{%true
 	}{%false
-		\href{\strfield{url}}{\small\faExternalLink}
+		\href{\strfield{url}}{\ico}
 	}
   }{%false
-  	\href{http://dx.doi.org/\strfield{doi}}{\small\faExternalLink}%sec:\therefsection %seg:\therefsegment name:\refname chap:\thechapter
+  	\href{http://dx.doi.org/\strfield{doi}}{\ico}%sec:\therefsection %seg:\therefsegment name:\refname chap:\thechapter
   }
 }}
 
@@ -821,10 +841,10 @@
 
 % footnote text at the bottom of page
 \renewcommand\@makefntext[1]{%
-    \noindent{\HdrFontStyle\thefootnote.}\hspace*{3pt}#1}
+    \noindent\tf@fntxt{\bfseries\thefootnote.}\hspace*{3pt}#1}
 
 % footnote mark in the text  
-\renewcommand\@makefnmark{\hbox{\@textsuperscript{\HdrFontStyle\@thefnmark}}}
+\renewcommand\@makefnmark{\hbox{\@textsuperscript{\tf@fnmk\@thefnmark}}}
 
 
 

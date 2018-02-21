@@ -659,8 +659,8 @@
 	\fi
 }
 
-\newcommand{\blankpage}[1]{%
-	\afterpage{\thispagestyle{empty}#1\clearpage}
+\newcommand{\blankpage}[2][fancy]{%
+	\afterpage{\thispagestyle{#1}#2\clearpage}
 }
 
 \newcommand{\rightblankpage}[1]{%
