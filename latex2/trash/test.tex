@@ -101,4 +101,33 @@
     \path[use as bounding box] (0,0);
 \end{tikzpicture}
 
+
+% THIRD PAGE
+% auto caption with \captionof
+\clearpage
+\mypict
+
+\captionsetup{skip=0pt, textfont={sf,small}, labelfont={sf,small,bf},strut=off}
+
+
+\newsavebox{\mybox}
+\savebox{\mybox}{\parbox[b]{5cm}{\rawcaptionof{figure}[list entry]{This is my first custom caption and the baseline is correctly aligned with the picture gqp.}}}
+
+\begin{tikzpicture}[remember picture, inner sep=0pt]
+    \node[anchor=base west,yshift=-\ht\mybox] at (BR){%
+            \fbox{\usebox{\mybox}}
+    };
+    \pgfresetboundingbox
+    \path[use as bounding box] (0,0);
+\end{tikzpicture}
+
+\begin{tikzpicture}[remember picture, inner sep=0pt]
+    \node[anchor=base east,yshift=-\dp\mybox] at (BL){%
+            \fbox{\usebox{\mybox}}
+    };
+    \pgfresetboundingbox
+    \path[use as bounding box] (0,0);
+\end{tikzpicture}
+
+
 \end{document}

@@ -37,6 +37,7 @@
 
 \RequirePackage[explicit]{titlesec}
 
+
 % \RequirePackage[
 % 	top = 12mm-6.35mm,
 % 	outer = 36mm-6.35mm,
@@ -225,6 +226,7 @@
 \DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\large}
 \DeclareRobustCommand{\tf@seclabel}{\font@label\scriptsize\color{titlelabel}}
 \DeclareRobustCommand{\tf@fntxt}{\font@body\footnotesize}
+\DeclareRobustCommand{\tf@fnnum}{\font@body\bfseries\scriptsize}
 \DeclareRobustCommand{\tf@fnmk}{\font@label\bfseries\tiny}
 \DeclareRobustCommand{\tf@cap}{\font@cap\small}
 % equation label font
@@ -281,8 +283,8 @@
 
 %% caption
 %% --------------------------
-\usepackage[]{caption}
-\usepackage[]{subcaption}
+\RequirePackage[]{caption}
+\RequirePackage[]{subcaption}
 \captionsetup[table]{skip=10pt}
 \captionsetup[figure]{skip=10pt}
 \captionsetup[subfigure]{skip=5pt}		% subcpation	
@@ -844,7 +846,7 @@
 
 % footnote text at the bottom of page
 \renewcommand\@makefntext[1]{%
-    \noindent\tf@fntxt{\bfseries\thefootnote.}\hspace*{3pt}#1}
+    \noindent{\tf@fnnum\thefootnote.}\hspace*{3pt}{\tf@fntxt#1}}
 
 % footnote mark in the text  
 \renewcommand\@makefnmark{\hbox{\@textsuperscript{\tf@fnmk\@thefnmark}}}
@@ -939,11 +941,43 @@
 	% 
 	%
 	\crefname{figure}{}{}
-	{{\tf@cap\cref{#1} - #2}}% double brace needed to make font change local
+	{{{\tf@fnmk\cref{#1}} - {\tf@fntxt#2}}}% double brace needed to make font change local
 	% restore parameters (copy/past)
 	\crefname{figure}{fig.}{figs.}
 
 }
+
+\RequirePackage{zref-user,zref-descref} % needs to be loaded after subcaption
+
+% % section / caption description (or long title)
+% \def\ZREF@NewPropDesc{%
+% 	\gdef\zref@descref@current{}%
+% 	\zref@newprop{desc}{\zref@descref@current}%
+% 	\global\let\ZREF@NewPropDesc\relax
+% }
+
+% \ZREF@NewPropDesc
+% \zref@addprop\ZREF@mainlist{desc}
+
+% \ZREF@IfDefinable\zdescref\def{% 
+% 	{\zref@wrapper@babel\ZREF@descref}%
+% }% 
+% \def\ZREF@descref#1{%
+% 	\begingroup 
+% 		\zref@refused{#1}% 
+% 		\let\label\ltx@gobble
+% 		\zref@extract{#1}{desc}%
+% 	\endgroup 
+% }%
+
+% \AtBeginDocument{% 
+% 	\ZREF@patch{@caption}{%
+% 		\long\def\@caption#1[#2]{% 
+% 			\zref@descref@setcurrent{#1}% 
+% 			\ZREF@org@@caption{#1}[{#2}]%
+% 		}%
+% 	}%
+% }%
 
 
 

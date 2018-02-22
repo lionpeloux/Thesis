@@ -87,7 +87,7 @@
 
 % display paramteres for anchors (when showanchors=true)
 \newlength{\@radius}
-\setlength{\@radius}{0.9mm}
+\setlength{\@radius}{0.2mm}
 \setlength{\fboxsep}{0pt}
 \setlength{\fboxrule}{0.0pt}
 
@@ -618,17 +618,17 @@
 %% Text Box
 %%
 %%%%%
-\define@key{kvtb}{node}{\def\@PCNode{#1}}
-\define@key{kvtb}{anchor}{\def\@PCAnchor{#1}}
-\define@key{kvtb}{width}{\def\@PCWidth{#1}}
-\define@key{kvtb}{xshift}{\def\@PCXShift{#1}}
-\define@key{kvtb}{yshift}{\def\@PCYShift{#1}}
+\newlength\@TBHeight
+\define@key{kvtb}{node}{\def\@TBNode{#1}}
+\define@key{kvtb}{anchor}{\def\@TBAnchor{#1}}
+\define@key{kvtb}{width}{\def\@TBWidth{#1}}
+\define@key{kvtb}{xshift}{\def\@TBXShift{#1}}
+\define@key{kvtb}{yshift}{\def\@TBYShift{#1}}
 % preset keys
 \savekeys{kvtb}{node, anchor, width, xshift, yshift}
 \presetkeys{kvtb}%
 {node=BR, anchor=south west, width=\textwidth/3, xshift=0mm, yshift=0mm}%
 {}
-\newlength\@MyTBWidth
 \newcommand\PhotoTextBox[2][]{
 	%
 	% [#2] : text 		= caption label for xref
@@ -641,30 +641,24 @@
 	% 
 	\setkeys{kvtb}{#1}{
 
-		\def\@PCLAlign{}
-		\def\@PCRAlign{}
-		\global\@MyTBWidth=\@PCWidth
+		% \global\@MyTBWidth=\@TBWidth
 		
-		% \IfSubStr{\@PCAnchor}{east}{
-		% 	\def\@PCLAlign{\hspace*{\fill}}
-		% }{}
-		% \IfSubStr{\@PCAnchor}{west}{
-		% 	\captionsetup[figure]{justification=raggedright}
-		% 	\def\@PCTextAlignment{\raggedright}
-		% 	\def\@PCRAlign{\hspace*{\fill}}
-		% }{}
-		
-		\AddToShipoutPictureBG*{%
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
-			\node[anchor=\@PCAnchor, xshift=\@PCXShift, yshift=\@PCYShift] 
-				at (\@PCNode){%
-					\parbox[b]{\@MyTBWidth}{#2}%
+			\node[anchor=\@TBAnchor, xshift=\@TBXShift, yshift=\@TBYShift] 
+				at (\@TBNode){%
+					\parbox[b]{\@TBWidth}{#2}%	
 			};
-			\coordinate[xshift=\@PCXShift, yshift=\@PCYShift] (A) at (\@PCNode);
-			\filldraw[blue] (A) circle [radius=\@radius];
+			% store points of interest
+			\coordinate (@TL) at (current bounding box.north west); 	% top-left corner
+			\coordinate (@BL) at (current bounding box.south west); 	% bottom-left corner
+			\coordinate (@TR) at (current bounding box.north east); 	% top-left corner
+			\coordinate (@BR) at (current bounding box.south east); 	% bottom-left corner
+			% \draw[line width=0pt] ([xshift=-\PhotoRefSkip]@TL) -- ([xshift=-\PhotoRefSkip]@BL);
+			\coordinate[xshift=\@TBXShift, yshift=\@TBYShift] (TB) at (\@TBNode);
+			% \filldraw[blue] (TB) circle [radius=\@radius];
 			\pgfresetboundingbox
 			\path[use as bounding box] (0,0);
-		\end{tikzpicture}}
+		\end{tikzpicture}
 	}
 }
 
@@ -693,3 +687,5 @@
 }
 
 \def\vsep{\raisebox{0.2ex}{| }}
+
+

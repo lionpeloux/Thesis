@@ -462,7 +462,16 @@ The same year he designed and built a first timber gridshell in Essen, Germany \
 			yshift=-\PhotoRefSkip,
 			ltitle=Interior view,
 		]{fig:montreal_b}
-	}\hbox{}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			]{%
+				\setstretch{0.8}
+				\figurecaption{fig:erec_1}{eretion 1}
+				\figurecaption{fig:erec_2}{eretion 2}%
+			}
+	}
+	\hbox{}
 }
 
 % \blankpage[empty]{
@@ -920,9 +929,35 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 % 	\label{fig:booby}
 % \end{figure}
 
+\begin{figure}[t]
+	\begin{subfigure}[b]{\TwoMediaWidth}
+		\includegraphics[width=\textwidth]{booby2.jpg}
+		\caption{Interior view}
+		\label{fa}\zlabel{fa}
+	\end{subfigure}%
+	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
+	\begin{subfigure}[b]{\TwoMediaWidth}
+		\includegraphics[width=\textwidth]{booby.jpg}
+		\caption{Exterior view}
+		\label{fb}\zlabel{fb}
+	\end{subfigure}
+	\captionof{figure}[Hybrid structural skin]{Hybrid structural skin built in 2016 in Champs-sur-Marne, France.}
+	\label{f}\zlabel{f}
+\end{figure}
+
+
 % \clearpage
-\section{Research works on elastic gridshells : a review}\label{sec=review_research}
+\section{Research works on elastic gridshells : a review}\zlabel{sec}
+\label{sec=review_research}
 In this section we depict the research works that are related to elastic gridshells. Several topics have been identified to organise the review.
+
+\ztitlerefsetup{title=pouet}
+\ztitleref{fa}\\
+\ztitleref{fb}\\
+\ztitleref{f}\\
+\zdescref{f}\\
+\ztitleref{sec}\\
+\cref{sec=review_research}\\
 
 \subsection{Mechanics}
 
