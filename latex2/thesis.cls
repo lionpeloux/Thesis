@@ -25,7 +25,7 @@
 \RequirePackage{mfirstuc}
 
 % \RequirePackage{kvoptions}  		% key-value options
-\RequirePackage{etoolbox}
+\RequirePackage{etoolbox,xpatch}
 \RequirePackage{ifthen}
 \RequirePackage{calc}
 \RequirePackage{xparse}
@@ -947,39 +947,15 @@
 
 }
 
-\RequirePackage{zref-user,zref-descref} % needs to be loaded after subcaption
+\RequirePackage{zref-user,zref-titleref,zref-descref} % needs to be loaded after subcaption
+% zref-descref is my custom upgrade of zref-titleref
+% it adds the \zdescref{ref} to get the caption longtitle/desc by ref
 
-% % section / caption description (or long title)
-% \def\ZREF@NewPropDesc{%
-% 	\gdef\zref@descref@current{}%
-% 	\zref@newprop{desc}{\zref@descref@current}%
-% 	\global\let\ZREF@NewPropDesc\relax
-% }
-
-% \ZREF@NewPropDesc
-% \zref@addprop\ZREF@mainlist{desc}
-
-% \ZREF@IfDefinable\zdescref\def{% 
-% 	{\zref@wrapper@babel\ZREF@descref}%
-% }% 
-% \def\ZREF@descref#1{%
-% 	\begingroup 
-% 		\zref@refused{#1}% 
-% 		\let\label\ltx@gobble
-% 		\zref@extract{#1}{desc}%
-% 	\endgroup 
-% }%
-
-% \AtBeginDocument{% 
-% 	\ZREF@patch{@caption}{%
-% 		\long\def\@caption#1[#2]{% 
-% 			\zref@descref@setcurrent{#1}% 
-% 			\ZREF@org@@caption{#1}[{#2}]%
-% 		}%
-% 	}%
-% }%
-
-
+% auto add a zlabel after each label
+\AtBeginDocument{%
+	\let\oldlabel\label
+	\renewcommand{\label}[1]{\oldlabel{#1}\zlabel{#1}}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
