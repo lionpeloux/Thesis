@@ -13,6 +13,7 @@
 % **************************************************
 \LoadClass[
 	11pt,		% base fontsize
+	twoside,
 	openright,	% chapter start on even page (default)
 	fleqn,		% equations are left aligned
 	]{book}
@@ -173,8 +174,10 @@
 \setstretch{1.125}
 
 % relax interline skip to ensure better flushbottom
-\baselineskip\the\baselineskip plus0.5pt minus0.5pt\relax 
+\baselineskip\the\baselineskip plus1.0pt minus0.5pt\relax
 \flushbottom
+
+% \pretocmd{\normalsize}{\baselineskip\the\baselineskip plus1.5pt minus0.5pt\relax}{}{}
 
 %% headings
 %% --------------------------
@@ -219,6 +222,7 @@
 
 % typeface
 \DeclareRobustCommand{\tf@hdr}{\font@hdr\bfseries}
+\DeclareRobustCommand{\tf@pagenum}{\tf@hdr\footnotesize}
 \DeclareRobustCommand{\tf@part}{\font@part\bfseries\Huge}
 \DeclareRobustCommand{\tf@chap}{\font@chap\bfseries\Huge}
 \DeclareRobustCommand{\tf@sec}{\font@sec\bfseries\Large}
@@ -328,6 +332,23 @@
 	belowskip=0pt,
 	skip=0pt,
 	justification=centering,
+	strut=off, % must be off !!! to get proper baseline alignment
+}
+
+% Style for PhotoCaptionRef label
+\DeclareCaptionListFormat{phantom}{#2)}
+\DeclareCaptionLabelFormat{phantom}{\thefigure\bothIfSecond{}{\thesubfigure}}
+\DeclareCaptionFormat{phantom}{#1#2#3}
+\DeclareCaptionStyle{phantom}[]{
+	% hypcap=false,
+	listformat=phantom,
+	labelformat=phantom,
+	format=phantom,
+	labelsep=none,
+	singlelinecheck=true,
+	aboveskip=0pt,
+	belowskip=0pt,
+	skip=0pt,
 	strut=off, % must be off !!! to get proper baseline alignment
 }
 
@@ -475,7 +496,7 @@
 \renewcommand{\footrulewidth}{\iffloatpage{0.0pt}{0.0pt}}
 \fancyhead[OR]{\iffloatpage{}{\tf@hdr\MakeUppercase{\rightmark}\vspace{0.25pt}}} 	% \nouppercase
 \fancyhead[EL]{\iffloatpage{}{\tf@hdr\MakeUppercase{\leftmark}\vspace{0.25pt}}} 	% \nouppercase
-\fancyfoot[EL,OR]{\tf@hdr\thepage}
+\fancyfoot[EL,OR]{\tf@pagenum\thepage}
 
 % second style
 % \fancyhead[EL]{\iffloatpage{}{%
@@ -505,7 +526,7 @@
 	\fancyhead{}
 	\renewcommand{\headrulewidth}{0pt}
 	\fancyfoot{}
-	\fancyfoot[RO,LE]{\tf@hdr\thepage}
+	\fancyfoot[RO,LE]{\tf@pagenum\thepage}
 }
 
 
@@ -933,18 +954,41 @@
 
 
 % photo legend
-\newcommand{\figurecaption}[2]{%
+\newlength\tmpshift
+\newcommand{\figurecaption}[2][]{%
 	%
 	% typset a caption from a label outside captionof command
-	% ideally #3 should be retrieved automaticaly from the value defined by \captionof
-	% [#1] : figure, subfigure, table, subtable, ... 
-	% 
+	% apparently this can be called only once per ref
+	% [#2] : (mandatory) the reference label (fig:inside)
+	% [#1] : (optional) override title
 	%
 	\crefname{figure}{}{}
-	{{{\tf@fnmk\cref{#1}} - {\tf@fntxt#2}}}% double brace needed to make font change local
-	% restore parameters (copy/past)
-	\crefname{figure}{fig.}{figs.}
 
+	% \let\oldcrefformat\crefformat
+	% \crefformat{figure}{#2#1#3}
+	
+	\settowidth{\tmpshift}{\space} % correction there is a space from cref between the label and the number}
+	\ifstrempty{#1}
+	{%
+		% double brace needed to make font change local
+		\fbox{\makebox[24pt][l]{\fbox{\hspace{-\tmpshift}\tf@fnnum\cref{#2}}}\tf@fntxt\ztitleref{#2}}%
+	}{%
+	% double brace needed to make font change local
+		\fbox{\makebox[24pt][l]{\fbox{\hspace{-\tmpshift}\tf@fnnum\cref{#2}}}\tf@fntxt#2}%
+	}
+	% \ifstrempty{#1}
+	% {%
+	% 	{{{\tf@fnnum\cref{#2}} - {\tf@fntxt\ztitleref{#2}}}}% double brace needed to make font change local
+	% }{%
+	% 	{{{\tf@fnnum\cref{#2}} - {\tf@fntxt#1}}}% double brace needed to make font change local
+	% }
+	% \ifdefempty{#1}{%
+	% }{%
+	% 	{{{\tf@fnmk\cref{#2}} - {\tf@fntxt#1}}}% double brace needed to make font change local
+	% }
+	% restore parameters (copy/past)
+	% \let\crefformat\oldcrefformat
+	\crefname{figure}{fig.}{figs.}
 }
 
 \RequirePackage{zref-user,zref-titleref,zref-descref} % needs to be loaded after subcaption

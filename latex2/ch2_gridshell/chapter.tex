@@ -26,114 +26,103 @@ We naturally begin this chapter by defining the notion of elastic gridshell and 
 The invention of the \emph{elastic gridshell} concept is commonly attributed to Frei Otto, a German architect who devoted several years to gridshells. In 1975 he achieved the famous \emph{Mannheim Multihalle} \cite{Happold1975}, a wooden shell of 7500~m\textsuperscript{2}, in collaboration with the engineer Edmund Happold (Arup).
 Literally, the word \textquote{gridshell} refers to grids behaving like shells~: from a mechanical point of view that means stresses acting on the structure are mainly transmitted through compression and tension. These structures can cross large-span with very little material.
 
-However, according to the historic evolution of the concept, to characterise a gridshell as the combination of a structural concept (a grid behaving like a shell, see \cref{sec=def_topo}) and a specific construction process (see \cref{sec=def_erec}) using the bending flexibility of the material (see \cref{sec=def_flexibility}) seems to be more accurate. The project of Mannheim -- in which a wooden regular and planar grid, lacking shear stiffness, is elastically deformed up to a targeted shape with the help of stays, and then braced and covered -- is regarded as the starting point of this new concept (see \cref{fig:erec}).
+However, according to the historic evolution of the concept, to characterise a gridshell as the combination of a structural concept (a grid behaving like a shell, see \cref{sec=def_topo}) and a specific construction process (see \cref{sec=def_erec}) using the bending flexibility of the material (see \cref{sec=def_flexibility}) seems to be more accurate. The project of Mannheim -- in which a wooden regular and planar grid, lacking shear stiffness, is elastically deformed up to a targeted shape with the help of stays, and then braced and covered -- is regarded as the starting point of this new concept (see \cref{fig:erec_0,fig:erec_1,fig:erec_2,fig:erec_3}).
 
 This type of gridshell, known as elastic gridshell, offers a very elegant manner to materialise freeform shapes from an initially flat and regular grid, which obviously has many practical benefits~: planar initial geometry, standard connection nodes, standard profiles and so on.
 
 Note that the term \emph{rigid gridshell} is often opposed to the term \emph{elastic gridshell} to indicate reticulated structures that behave like shells but are not formed in an active-bending process.
 
-\subsection{Structural typology}\label{sec=def_topo}
-% ------------------------------------------
-Their mechanical behaviour is very similar to the one of real shells even if the material is discrete and located in a grid more or less open. Moreover, gridshells benefit from the same advantages as the ones showed by an eggshell : they can cross large span using a low amount of material. Their stiffness is mainly linked to their double-curved shape.
-
-% \addtomargin[l]{54mm}
-
-\afterpage{%
-\enlargethispage{-16cm}
-% \addtotextheigth{-10cm}
-% \afterpage{\restoretexteheight}
-% \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
-% 	\node[anchor=south west] at (CAbl){%
-% 		\fbox{\parbox{\textwidth}{\vspace{10cm}}}
-% 	};
-% \end{tikzpicture}
-\AddToShipoutPictureBG*{% 
-	% \GetLayoutNodes
-	\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
-	% required to avoid mess up between tikz overlay and page vertical blank space
-	\Photo[
-		node=CAbl,
-		anchor=south west,
-		gopt={width=\tmpwidth},
-		]{mannheim_erection_2.jpg}%%
-	\savenodes{C}
-	\Photo[
-		node=Cbr,
-		anchor=south west,
-		xshift=\PhotoSkip,
-		gopt={width=\tmpwidth},
-		]{mannheim_erection_3.jpg}%
-	\savenodes{D}
-	\Photo[
-		node=Ctr,
-		anchor=south west,
-		xshift=\PhotoSkip,
-		yshift=\PhotoBigSkip,
-		gopt={width=\tmpwidth},
-		]{mannheim_erection_1.jpg}%
-	\savenodes{B}
-	\Photo[
-		node=Ctl,
-		anchor=south west,
-		xshift=0mm,
-		yshift=\PhotoBigSkip,
-		gopt={width=\tmpwidth},
-		]{mannheim_erection_0.jpg}%
-	\savenodes{A}
-	\intersectnode{Atl -| CAbr}{Pt}
-	\PhotoCaption[
-		node=Pt,
-		anchor=south east,
-		yshift=2\PhotoSkip,
-		style=PS,
-		ltitle={Steel gridshell built in 1962 in Berkeley, USA},
-		% title={1975 \vsep Mannheim Multihalle},
-		% subtitle=Construction Stages,
-		% text={%
-		% 	\mk[t]{grid assembly}\\ 
-		% 	\mk[l]{elastic deformation of the grid}\\ 
-		% 	\mk[b]{final shape}}
-		]{fig:erec}%
-	\PhotoCaptionRef[
-		type=subfigure,
-		node=Atl, 
-		anchor=south west, 
-		yshift=\PhotoRefSkip,
-		ltitle=Steel lattice,
-		]{fig:erec_2}
-	\PhotoCaptionRef[
-		type=subfigure,
-		node=Btl, 
-		anchor=south west, 
-		yshift=\PhotoRefSkip,
-		ltitle=Steel lattice,
-		]{fig:erec_1}
-	\PhotoCaptionRef[
-		type=subfigure,
-		node=Cbl, 
-		anchor=north west, 
-		yshift=-\PhotoRefSkip,
-		ltitle=grid,
-		]{fig:erec_0}
-	\PhotoCaptionRef[
-		type=subfigure,
-		node=Dbl, 
-		anchor=north west, 
-		yshift=-\PhotoRefSkip,
-		ltitle=grid,
-		]{fig:erec_0}
-}}
-
-
-% \afterpage{\restoremargin}
-
-\subsection{Material flexibility for structural rigidity}\label{sec=def_flexibility}
-% ------------------------------------------
-In this field of application, composite materials like glass fibre reinforced polymer (GFRP) could favourably replace wood, where both resistance and bending ability of the material is sought \cite{Douthe2010a}. The stiffness of the structure does not derive from the intrinsic material rigidity but principally from its geometric curvature. Ideally, the composite profiles are produced by pultrusion, an economic continuous moulded process. The standardisation of the process guaranties very stable material and mechanical properties. It frees designers from the painful problematic of wood joining and wood durability. The characterisation of this material is presented further in the thesis (see \cref{sec=design_gfrp}).
-
 \subsection{Erection process}\label{sec=def_erec}
 % ------------------------------------------
 Usually, the grid morphology is not trivial and leads to design numerous costly and complex joints. To overcome this issue, an original and innovative erection process was developed that takes advantage of the flexibility inherent to slender elements. A regular planar grid made of long continuous linear members is built on the ground (see \cref{fig:erec_0}). The elements are pinned together so the grid has no in-plane shear stiffness and can accommodate large-scale deformations during erection. Then, the grid is bent elastically to its final shape (see \cref{fig:erec_1,fig:erec_2}). Finally, the grid is frozen in the desired shape with a third layer of bracing members and the structure becomes a shell. This process is illustrated and detailed in the next chapter (see \cref{sec=construction_process}).
+
+\blankpage{%
+	% \enlargethispage{-16cm}
+	% \addtotextheigth{-10cm}
+	% \afterpage{\restoretexteheight}
+	% \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+	% 	\node[anchor=south west] at (CAbl){%
+	% 		\fbox{\parbox{\textwidth}{\vspace{10cm}}}
+	% 	};
+	% \end{tikzpicture}
+	\thispagestyle{empty}
+	\hbox{}
+	\AddToShipoutPictureBG*{% 
+		% \GetLayoutNodes
+		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
+		% required to avoid mess up between tikz overlay and page vertical blank space
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			xshift=0mm,
+			gopt={width=\tmpwidth},
+			]{mannheim_erection_0.jpg}%
+		\savenodes{A}
+		\Photo[
+			node=Atr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			gopt={width=\tmpwidth},
+			]{mannheim_erection_1.jpg}%
+		\savenodes{B}
+		\Photo[
+			node=Abl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{mannheim_erection_2.jpg}%%
+		\savenodes{C}
+		\Photo[
+			node=Bbl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{mannheim_erection_3.jpg}%
+		\savenodes{D}
+		\PhotoCaptionRef[
+			node=Atl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{Forming process of the gridshell of Mannheim, Germany}{fig:erec}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Assembly of the timber grid}{fig:erec_0}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Deformation of the grid}{fig:erec_1}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Cbl, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Final shape of the lattice}{fig:erec_2}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Dbl, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Roofing with a membrane}{fig:erec_3}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:erec}\par
+				\figurecaption{fig:erec_0}\par
+				\figurecaption{fig:erec_1}\par
+				\figurecaption{fig:erec_2}\par
+				\figurecaption{fig:erec_3}\par
+			}
+	}
+}
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
@@ -151,13 +140,17 @@ Usually, the grid morphology is not trivial and leads to design numerous costly 
 % 	\label{fig:multihalle}
 % \end{figure}
 
+
+\subsection{Structural typology}\label{sec=def_topo}
+% ------------------------------------------
+Their mechanical behaviour is very similar to the one of real shells even if the material is discrete and located in a grid more or less open. Moreover, gridshells benefit from the same advantages as the ones showed by an eggshell : they can cross large span using a low amount of material. Their stiffness is mainly linked to their double-curved shape.
+
+\subsection{Material flexibility for structural rigidity}\label{sec=def_flexibility}
+% ------------------------------------------
+In this field of application, composite materials like glass fibre reinforced polymer (GFRP) could favourably replace wood, where both resistance and bending ability of the material is sought \cite{Douthe2010a}. The stiffness of the structure does not derive from the intrinsic material rigidity but principally from its geometric curvature. Ideally, the composite profiles are produced by pultrusion, an economic continuous moulded process. The standardisation of the process guaranties very stable material and mechanical properties. It frees designers from the painful problematic of wood joining and wood durability. The characterisation of this material is presented further in the thesis (see \cref{sec=design_gfrp}).
+
+
 \section{Built elastic gridshells : a review}\label{sec=review_project}
-
-No thorough historic review is available about executed projects of elastic gridshells although some partial reviews have been done time to time on the occasion of scientific works or construction projects. This review aims at filling this gap by giving an overview of the development of the concept from the very beginning to the very last experiments. Only known built projects have been identified and reported here. The only condition for a project to belong to this review is to comply with the definition of what an elastic gridshell is (see \cref{sec=gsdef}), independently to any other consideration (material, fabrication, size, cladding,~\telp{}).
-
-The informations collected during this research work are given in table format in appendix (see \cref{app:review}). A synthetic presentation of these datas is proposed to the reader in \cref{fig:projectsbymaterial}, where projects are ordered by date, span, covered area and material.
-
-The books edited by the \emph{Institut für leichte Flächentragwerke} are of great interest to understand the beginnings. \citetitle{IL10} \cite{IL10} has a precise inventory of the first experiments from 1962 to 1976, while \citetitle{IL13} \cite{IL13} focuses on the construction of the Multihalle in Mannheim. \citetitle{Chilton2017} \cite{Chilton2017} is a significant effort but focuses exclusively on medium to large scale projects in timber. A small but general partial review is also available in \cite{Collins2016}. An interesting review is also given by \citet{Quinn2014} as part of their research work on new erection methods. A review of bracing and cladding systems is done in \cite{Cuvilliers2017}. A review of form-finding methods is done in \cite{Vaulot2016}. Finally, various valuable reviews are available in the thesis of \citet{Douthe2007,Bouhaya2010,Tayeb2015a,Lafuente2015}.
 
 \blankpage{%
 	\AddToShipoutPictureBG*{%
@@ -166,32 +159,113 @@ The books edited by the \emph{Institut für leichte Flächentragwerke} are of gr
 		anchor=center,
 		yshift=15mm,
 		]{ch2_gridshell/plot/1_projects/build.pdf}
-	\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
-		\node[anchor=south west] at (CAbl){%
-			\parbox{7cm}{%
-				\setstretch{0.9}
-				% \raggedright
-				{\fontspec{FuturaLT-Book}[Scale = MatchUppercase]\selectfont\small Known elastic gridshells built by the past}\\[6pt]%
-				{\footnotesize The surface of the bubbles is proportional to the covered area. Colour indicates the material employed for the rods.}%
-			}
-		};
-	\end{tikzpicture}
-	% \PhotoCaption[
-	% 	node=CAbl,
-	% 	anchor=south west,
-	% 	width=8cm,
-	% 	style=PS,
-	% 	ltitle={Known elastic gridshells built by the past},
-	% 	subtitle={Figure~\thefigure},
-	% 	title={Elastic gridshells built by the past},
-	% 	text={The surface of the bubbles is proportional to the covered area. Colour indicates the material employed for the rods.}
-	% 	]{fig:erec}%
-	}
-	\hbox{}
+	\PhotoCaptionRef[
+		node=BL, 
+		anchor=north west, 
+		yshift=-\PhotoRefSkip,
+		phantom=true,
+		]{figure}{}{Known elastic gridshells built by the past}{fig:projectsbymaterial}
+	\PhotoTextBox[
+		node=CAbl,
+		anchor=south west,
+		width=10cm,
+		border=false,
+		]{%
+			\figurecaption{fig:projectsbymaterial}\par\medskip
+			The surface of the bubbles is proportional to the covered area. Colour indicates the material employed for the rods.
+		}
+	}\hbox{}
 }
+
+No thorough historic review is available about executed projects of elastic gridshells although some partial reviews have been done time to time on the occasion of scientific works or construction projects. This review aims at filling this gap by giving an overview of the development of the concept from the very beginning to the very last experiments. Only known built projects have been identified and reported here. The only condition for a project to belong to this review is to comply with the definition of what an elastic gridshell is (see \cref{sec=gsdef}), independently to any other consideration (material, fabrication, size, cladding,~\telp{}).
+
+The informations collected during this research work are given in table format in appendix (see \cref{app:review}). A synthetic presentation of these datas is proposed to the reader in \cref{fig:projectsbymaterial}, where projects are ordered by date, span, covered area and material.
+
+The books edited by the \emph{Institut für leichte Flächentragwerke} are of great interest to understand the beginnings. \citetitle{IL10} \cite{IL10} has a precise inventory of the first experiments from 1962 to 1976, while \citetitle{IL13} \cite{IL13} focuses on the construction of the Multihalle in Mannheim. \citetitle{Chilton2017} \cite{Chilton2017} is a significant effort but focuses exclusively on medium to large scale projects in timber. A small but general partial review is also available in \cite{Collins2016}. An interesting review is also given by \citet{Quinn2014} as part of their research work on new erection methods. A review of bracing and cladding systems is done in \cite{Cuvilliers2017}. A review of form-finding methods is done in \cite{Vaulot2016}. Finally, various valuable reviews are available in the thesis of \citet{Douthe2007,Bouhaya2010,Tayeb2015a,Lafuente2015}.
+
 
 \subsection{The beginnings : from the first prototype to the German Pavilion}
 Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and completed his doctorate on tensile structures in 1953. This first work was published and translated later in the 60's. He then began to work in the field of lightweight structures using physical models such as soap films or hanging nets, and photographic measurements.\footnote{In the 19\textsuperscript{th} and 20\textsuperscript{th} centuries model testing was at the heart of structural innovation \cite{Addis2013}. Analog models were employed successfully by well-known architects and engineers to go beyond the limits of existing knowledge (A. Gaudi, H. Isler, F. Candela, F. Otto, \telp{}) and are still employed today where numeric models failed to represent accurately some physical phenomenons (for instance in wind analysis for high rise towers and bridges).}\textsuperscript{,}\footnote{\blockcquote[p.~56]{IL10}{Photography is the medium through which the form and content of a model are communicated. It is one of our most important tools in that it provides the basis for documentation and information, supplements our creative potential \belp{} }} These tools were essentials for his exploration of forms and structures as there were no computers at that time.
+
+\doubleblankpage[r]{
+	\thispagestyle{empty}
+	\AddToShipoutPictureBG*{%
+		\def\tmpwidth{\textwidth+\ContentOuterMargin+\BleedOuterMargin}
+		\intersectnode{PPtl |- CAtl}{Pt}
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			gopt={width=2\textwidth/3},
+			]{berkeley_gs.jpg}
+		\savenodes{A}
+		\intersectnode{PPtl |- CAtl}{Pt}
+		\Photo[
+			node=Atr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			gopt={width=\textwidth/4},
+			]{berkeley_detail.jpg}
+		\savenodes{B}
+		\intersectnode{Abr -| PGtl}{Pt}
+		\Photo[
+			node=Pt,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\paperwidth},
+			]{essen_foil_full.jpg}
+		\savenodes{C}
+		\PhotoCaptionRef[
+			node=Atl, 
+			anchor=north west,
+			phantom=true,
+		]{figure}{}{Steel gridshell built in 1962 in Berkeley, USA}{fig:berkeley}
+		\PhotoCaptionRef[
+			node=Abr, 
+			anchor=base west,
+			xshift=\PhotoRefSkip,
+		]{subfigure}{}{Steel lattice}{fig:berkeley_a}
+		\PhotoCaptionRef[
+			node=Bbr, 
+			anchor=base west,
+			xshift=\PhotoRefSkip,
+		]{subfigure}{}{Knot detail}{fig:berkeley_b}
+		\intersectnode{Cbl -| Atl}{Pt}
+		\PhotoCaptionRef[
+			node=Pt, 
+			anchor=north west,
+			yshift=-\PhotoRefSkip,
+		]{figure}{}{Timber gridshell built in 1962 in Essen, Germany}{fig:essen}
+	}\hbox{}
+}{
+	\thispagestyle{empty}
+	\AddToShipoutPictureBG*{%
+		\def\tmpwidth{\textwidth+\ContentOuterMargin+\BleedOuterMargin}
+		\Photo[
+			node=CAtr,
+			anchor=north east,
+			gopt={width=\tmpwidth},
+			]{montreal_int.jpg}
+		\savenodes{A}
+		\intersectnode{Abl -| CAtr}{Pt}
+		\PhotoCaptionRef[
+			node=Pt, 
+			anchor=north east,
+			yshift=-\PhotoRefSkip,
+		]{figure}{}{Timber gridshell built in 1967 in Montreal, Canada}{fig:montreal}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=base west,
+			width=\textwidth/2,
+			]{%
+				\figurecaption{fig:montreal}
+				\figurecaption{fig:essen}\par
+				\figurecaption{fig:berkeley}\par
+				\figurecaption{fig:berkeley_a}\par
+				\figurecaption{fig:berkeley_b}
+			}
+	}
+	\hbox{}
+}
 
 \subsubsection{Steel Gridshell, Berkeley, USA, 1962}
 Simultaneously, he became interested by the study of lightweight shells and the way they were form-found. One of his very first elastic gridshell was built in 1962 with students at Berkeley, USA \cite[p.~270]{IL10}. It is funny to remark that this first gridshell was not a timber gridshell but a steel gridshell made out of twin steel rods linked in a grid fashion by bolts with clamping plates (see \cref{fig:berkeley_a}). This first experiment demonstrated at small scale the ability to bend a regular grid with no shear rigidity into a curved shape  (see \cref{fig:berkeley_b}). The grid was loosely braced and shell effects were not investigated.
@@ -247,130 +321,6 @@ The same year he designed and built a first timber gridshell in Essen, Germany \
 % 	\label{fig:montreal}
 % \end{figure}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% berkley and essen
-% \rightblankpage{%
-% 	\Photo[
-% 		node=current page.north east,
-% 		anchor=north east,
-% 		xshift=-\PhotoBigSkip-\BleedOuterMargin,
-% 		yshift=-\PhotoBigSkip-\BleedTopMargin,
-% 		gopt={width=11cm},
-% 		]{berkeley_gs.jpg}
-% 	\savenodes{A}
-% 	%
-% 	\Photo[
-% 		node=Atl,
-% 		anchor=north east,
-% 		xshift=-\PhotoSkip,
-% 		gopt={width=7cm},
-% 		]{berkeley_detail.jpg}
-% 	\savenodes{B}
-% 	%
-% 	\Photo[
-% 		node=current page.west,
-% 		anchor=north west,
-% 		yshift=2cm,
-% 		gopt={trim={0.75cm 0.5cm 0 2cm},clip,width=\paperwidth},
-% 		]{essen_foil_full.jpg}
-% 	\savenodes{C}
-% 	%
-% 	\intersectnode{Atl |- current page.south}{E}
-% 	\Photo[
-% 		node=current page.south west,
-% 		anchor=south west,
-% 		xshift=\PhotoBigSkip+\BleedInnerMargin+5cm,
-% 		yshift=\PhotoBigSkip+\BleedBottomMargin,
-% 		gopt={width=7cm},
-% 		]{essen_gs_full.jpg}
-% 	\savenodes{D}
-% 	% captions
-% 	\PhotoCaption[
-% 		node=Bbl,
-% 		anchor=north west,
-% 		yshift=-\PhotoBigSkip,
-% 		style=PS,
-% 		ltitle={Steel gridshell built in 1962 in Berkeley, USA},
-% 		title={1962 \vsep Berkeley Workshop},
-% 		subtitle=Frei Otto,
-% 		text={\mk[t]{knot detail} \\ \mk[r]{steel lattice}}
-% 		]{fig:berkeley}
-% 	\PhotoCaptionRef[
-% 		node=Btl, 
-% 		anchor=north east, 
-% 		xshift=-\PhotoRefSkip,
-% 		ltitle=Knot detail,
-% 		]{fig:berkeley_a}
-% 	\PhotoCaptionRef[
-% 		node=Abr, 
-% 		anchor=north east,
-% 		xshift=0mm,
-% 		yshift=-\PhotoRefSkip,
-% 		ltitle=Steel lattice,
-% 		]{fig:berkeley_b}
-% 	%
-% 	\intersectnode{Dbl -| Atr}{E}
-% 	\PhotoCaption[
-% 		node=Dtr,
-% 		anchor=north west,
-% 		xshift=\PhotoBigSkip,
-% 		yshift=-\PhotoBigSkip,
-% 		style=PS,
-% 		ltitle={Timber gridshell built in 1962 in Essen, Germany},
-% 		title={1962 \vsep Essen Gridshell},
-% 		subtitle={Frei Otto},
-% 		text={\mk[t]{plastic foil} \\ \mk[l]{timber lattice}}
-% 		]{fig:essen}
-% 	\intersectnode{Btl |- Cbl}{F}
-% 	\PhotoCaptionRef[
-% 		node=F, 
-% 		anchor=north west,
-% 		xshift=0mm,
-% 		yshift=-\PhotoRefSkip,
-% 		ltitle={Plastic foil},
-% 		]{fig:essen_b}
-% 	\PhotoCaptionRef[
-% 		node=Dbl, 
-% 		anchor=south east,
-% 		xshift=0mm,
-% 		xshift=-\PhotoRefSkip,
-% 		ltitle=Timber lattice,
-% 		]{fig:essen_a}
-% 	\afterpage{%
-% 		\thispagestyle{empty}
-% 		\vspace*{8cm}
-% 		\AddToShipoutPictureBG*{%
-% 		\Photo[
-% 			node=current page.north west,
-% 			anchor=north west,
-% 			yshift=-\BleedTopMargin-\PhotoBigSkip,
-% 			gopt={width=12cm},
-% 			]{montreal_lift.jpg}
-% 		\savenodes{A}
-% 		\PhotoCaption[
-% 			node=Abr,
-% 			anchor=south west,
-% 			xshift=\PhotoBigSkip,
-% 			yshift=0\PhotoBigSkip,
-% 			style=PS,
-% 			ltitle={Timber gridshell built in 1967 in Montreal, Canada},
-% 			title={1967 \vsep Montreal Pavilion},
-% 			subtitle={Frei Otto},
-% 			text={\mk[t]{grid erection} \\ \mk[r]{interior view}}
-% 		]{fig:montreal}
-% 		\PhotoCaptionRef[
-% 			node=Abl, 
-% 			anchor=north west,
-% 			xshift=0mm,
-% 			xshift=\BleedOuterMargin+\ContentOuterMargin,
-% 			yshift=-\PhotoRefSkip,
-% 			ltitle={grid erection},
-% 			]{fig:montreal_a}
-% 	}}
-% }
-
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
 % 		\includegraphics[width=\textwidth]{montreal_lift.jpg}
@@ -383,99 +333,6 @@ The same year he designed and built a first timber gridshell in Essen, Germany \
 % 		\caption{Interior view}
 % 		\label{fig:montreal_b}
 
-
-\doubleblankpage[r]{
-	\thispagestyle{empty}
-	\AddToShipoutPictureBG*{%
-		\def\tmpwidth{\textwidth+\ContentOuterMargin+\BleedOuterMargin}
-		\intersectnode{PPtl |- CAtl}{Pt}
-		\Photo[
-			node=CAtl,
-			anchor=north west,
-			gopt={width=2\textwidth/3},
-			]{berkeley_gs.jpg}
-		\savenodes{A}
-		\intersectnode{PPtl |- CAtl}{Pt}
-		\Photo[
-			node=Atr,
-			anchor=north west,
-			xshift=\PhotoSkip,
-			gopt={width=\textwidth/4},
-			]{berkeley_detail.jpg}
-		\savenodes{B}
-		\intersectnode{Abr -| PGtl}{Pt}
-		\Photo[
-			node=Pt,
-			anchor=north west,
-			yshift=-\PhotoBigSkip,
-			gopt={width=\paperwidth},
-			]{essen_foil_full.jpg}
-		\savenodes{C}
-		\PhotoCaption[
-			node=Abr,
-			anchor=south west,
-			yshift=-\PhotoBigSkip,
-			style=PS,
-			ltitle={Steel gridshell built in 1962 in Berkeley, USA},
-			% title={1962 \vsep Berkeley Workshop},
-			% subtitle=Frei Otto,
-			% text={\mk[t]{knot detail} \\ \mk[r]{steel lattice}}
-			]{fig:berkeley}
-		\PhotoCaptionRef[
-			type=subfigure,
-			node=Abr, 
-			anchor=south west,
-			xshift=\PhotoRefSkip,
-			ltitle=Interior view,
-		]{fig:montreal_b}
-		\PhotoCaptionRef[
-			type=subfigure,
-			node=Bbr, 
-			anchor=south west,
-			xshift=\PhotoRefSkip,
-			ltitle=Interior view,
-		]{fig:montreal_b}
-		\intersectnode{Cbl -| Atl}{Pt}
-		\PhotoCaptionRef[
-			type=figure,
-			node=Pt, 
-			anchor=north west,
-			yshift=-\PhotoRefSkip,
-			ltitle=Interior view,
-		]{fig:montreal_b}
-	}\hbox{}
-}{
-	\thispagestyle{empty}
-	\AddToShipoutPictureBG*{%
-		\def\tmpwidth{\textwidth+\ContentOuterMargin+\BleedOuterMargin}
-		\Photo[
-			node=CAtr,
-			anchor=north east,
-			gopt={width=\tmpwidth},
-			]{montreal_int.jpg}
-		\savenodes{A}
-		\intersectnode{Abl -| CAtr}{Pt}
-		\PhotoCaptionRef[
-			type=figure,
-			node=Pt, 
-			anchor=north east,
-			yshift=-\PhotoRefSkip,
-			ltitle=Interior view,
-		]{fig:montreal_b}
-		\PhotoTextBox[
-			node=CAbl,
-			anchor=south west,
-			]{%
-				\setstretch{0.8}
-				\figurecaption{fig:erec_1}{eretion 1}
-				\figurecaption{fig:erec_2}{eretion 2}%
-			}
-	}
-	\hbox{}
-}
-
-% \blankpage[empty]{
-% }
 
 \subsubsection{German Pavilion Auditoria, Montreal, Canada, 1967}
 Five years later, on the occasion of the \emph{1967 International and Universal Exposition} in Montreal, Canada, Frei Otto was appointed to design the German Pavilion~: a large cable net tent prefiguring the realisation of the olympic stadium of Munich, Germany, in 1972.\footnote{Actually, Frei Otto became the director of the newly founded \emph{Institute for Lightweight Structures} (Institut für Leichte Flächentragwerke or IL) at the University of Stuttgart in 1964. It was the IL that was commissioned by the German government to conduct research in connection with the planning of the German pavilion for the exposition in Montreal.}\textsuperscript{,}\footnote{Video of the construction of the German pavilion~: \url{https://www.youtube.com/watch?v=Z0mtFMoseUk}.}
@@ -496,42 +353,58 @@ A thorough report on the project is available in \cite{IL13}.  A more condensed 
 \afterpage{%
 	% \thispagestyle{empty}
 	\AddToShipoutPictureBG*{
-	\Photo[
-		node=CAtl,
-		anchor=north west,
-		gopt={width=\textwidth},
-		]{mannheim_sky.jpg}
-	\savenodes{A}
-	\global\PhotoHeight=\PhotoHeight
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			gopt={width=\textwidth},
+			]{mannheim_sky.jpg}
+		\savenodes{A}
+		\intersectnode{CAtl |- Abl}{Pt}
+		\PhotoCaptionRef[
+			node=Atl, 
+			anchor=north west, 
+			phantom=true,
+		]{figure}{}{Timber gridshell built in 1975 in Mannheim, Germany}{fig:mannheim}
+		\PhotoCaptionRef[
+			node=Pt, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+		]{subfigure}{}{Sky view}{fig:mannheim_b}
+		\global\PhotoHeight=\PhotoHeight
 	}
 	\settoheight{\PhotoHeight}{\includegraphics[width=\textwidth]{mannheim_sky.jpg}}
 	\addtolength{\PhotoHeight}{\PhotoBigSkip}
 	\hbox{\vspace{\PhotoHeight}}
-	% \showthe\PhotoHeight
-
-	\afterpage{%
-		\doubleblankpage[l]{%
+	%
+	\doubleblankpage[l]{%
 		\hbox{}
 		\PhotoSpread[
 			node=CAtl,
 			anchor=north west,
 			gopt={height=\textheight}
 		]{mannheim_inside.jpg}
-		}{%
-			\hbox{}\thispagestyle{empty}
+		\AddToShipoutPictureBG*{
+			\PhotoCaptionRef[
+			node=BL, 
+			anchor=north west,
+			yshift=-\PhotoRefSkip,
+		]{subfigure}{}{Interior view}{fig:mannheim_a}}
+	}{%
+		\hbox{}\thispagestyle{empty}
+		\AddToShipoutPictureBG*{
 			\PhotoTextBox[
-				node=BR,
-				anchor=south west,
-				xshift=\PhotoRefSkip,
-			]{%
-				\figurecaption{fig:erec_1}{eretion 1}
-				\figurecaption{fig:erec_2}{eretion 2}%
-			}
-		}
+			node=BR,
+			anchor=south west,
+			xshift=\PhotoRefSkip,
+			width=10cm,
+			border=false,
+		]{%
+			\figurecaption{fig:mannheim}\par
+			\figurecaption{fig:mannheim_b}\par
+			\figurecaption{fig:mannheim_a}
+		}}
 	}
 }
-
-
 
 \subsubsection{Multihalle, Mannheim, Germany, 1975}
 Mannheim is an unprecedented realisation because it is more than twenty times larger than the previously built gridshells in Montreal and is meant to last many years and not only for the duration of a short-term exhibition. The timber lattice, still existing in 2017,  covers an area of \SI{7400}{m^2} (see \cref{fig:mannheim_b}). It is composed of two interconnected domes, one for the multi-purpose hall (span : \SI{60}{m} | height : \SI{20}{m}) and one for the restaurant (span : \SI{50}{m} | height : \SI{18}{m}).

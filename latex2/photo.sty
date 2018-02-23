@@ -331,6 +331,8 @@
 				\path (@Abl -| PGtr) node (@Abr){};  % without bleed
 				\path (@Atl -| PPtr) node (@AAtr){}; % with bleed
 				\path (@Abl -| PPtr) node (@AAbr){}; % with bleed
+				\coordinate (TL) at (@Atl); 	% top-left corner
+				\coordinate (BL) at (@Abl); 	% bottom-left corner
 				\filldraw[red] (@Atl) circle [radius=\@radius];
 				\filldraw[red] (@Abl) circle [radius=\@radius];
 				\filldraw[red] (@Atr) circle [radius=\@radius];
@@ -356,8 +358,6 @@
 				\coordinate (@Btr) at (current bounding box.north east) {}; % top-left corner
 				\coordinate (@Bbr) at (current bounding box.south east) {}; % bottom-left corner
 				% store points of interest
-				\coordinate (TL) at (@Atl); 	% top-left corner
-				\coordinate (BL) at (@Abl); 	% bottom-left corner
 				\coordinate (TR) at (@Btr); 	% top-left corner
 				\coordinate (BR) at (@Bbr); 	% bottom-left corner
 				\filldraw[red] (@Atl) circle [radius=\@radius];
@@ -475,55 +475,60 @@
 %%%%%
 
 % declare keys
-\define@key{kvpsc}{node}{\def\@PCNode{#1}}
-\define@key{kvpsc}{anchor}{\def\@PCAnchor{#1}}
-\define@key{kvpsc}{type}{\def\@PCType{#1}}
-\define@key{kvpsc}{ltitle}{\def\@PCListTitle{#1}}
-\define@key{kvpsc}{title}{\def\@PCTitle{#1}}
-\define@key{kvpsc}{xshift}{\def\@PCXShift{#1}}
-\define@key{kvpsc}{yshift}{\def\@PCYShift{#1}}
+\define@key{kvpcr}{node}{\def\@PCRNode{#1}}
+\define@key{kvpcr}{hrefnode}{\def\@PCRHrefNode{#1}}  % node for hypperlink
+\define@key{kvpcr}{anchor}{\def\@PCRAnchor{#1}}
+\define@key{kvpcr}{width}{\def\@PCRWidth{#1}}
+\define@key{kvpcr}{phantom}{\def\@PCRPhantom{#1}}
+\define@key{kvpcr}{xshift}{\def\@PCRXShift{#1}}
+\define@key{kvpcr}{yshift}{\def\@PCRYShift{#1}}
 % preset keys
-\savekeys{kvpsc}{node, anchor, type, ltitle, title, xshift, yshift}
-\presetkeys{kvpsc}%
-{node=BR, anchor=south west, type=figure, ltitle={}, title={}, xshift=0mm, yshift=0mm}%
+\savekeys{kvpcr}{node, anchor, width, xshift, yshift, phantom, hrefnode}
+\presetkeys{kvpcr}%
+{node=BR, anchor=south west, width=\textwidth/3,xshift=0mm, yshift=0mm, phantom=false, hrefnode={}}%
 {}
 % command
-\newsavebox{\@PCBox}
-\newcommand\PhotoCaptionRef[2][]{
+\newsavebox{\@PCRBox}
+\def\@PCRHrefYShift{1em}
+\newcommand\PhotoCaptionRef[5][]{
 	%
-	% [#1] : title 		= subcaption heading = list entry
-	% [#2] : node		= insertion point as tikz node 
+	% [#5] : label 		= caption label
+	% [#4] : title 		= caption title/desc
+	% [#3] : ltitle 	= caption title for LOF
+	% [#2] : type 		= type of captionof (figure, subfigure, ...)
+	% [#1] : node		= insertion point as tikz node 
+	% 		 hrefnode	= where the phantom caption is positioned on the page 
 	%		 anchor		= tikz anchor (eg. north west | south east ...)
 	%		 type		= caption type (figure, subfigure, table, subtable, ...)
 	%		 label		= label name for xref (eg. fig:name)
 	%		 xshift		= image shift along x (0mm)
 	%		 yshift		= image shift along y (0mm)
 	% 
-	\setkeys{kvpsc}{#1}{
-
-		\captionsetup[\@PCType]{style=pcr,justification=centering}
-		\IfSubStr{\@PCAnchor}{east}{
-			\captionsetup[\@PCType]{style=pcr,justification=raggedleft}
-		}{}
-		\IfSubStr{\@PCAnchor}{west}{
-			\captionsetup[\@PCType]{style=pcr,justification=raggedright}
-		}{}
-		
-		\savebox{\@PCBox}{\fbox{\parbox[b]{10mm}{%
-			\ifdefempty{\@PCTitle}{
-				\captionof{\@PCType}[\@PCListTitle]{}\label{#2}
-			}{
-				\captionof{\@PCType}[\@PCListTitle]{\@PCTitle}\label{#2}
-			}
-		}}}
+	\setkeys{kvpcr}{#1}{
+		\ifdefempty{\@PCRHrefNode}{\let\@PCRHrefNode\@PCRNode}{}
+		\captionsetup[#2]{style=phantom}
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
-			\node[anchor=\@PCAnchor, xshift=\@PCXShift, yshift=\@PCYShift] 
-				at (\@PCNode){%
-					\usebox{\@PCBox}
+			% phantom caption (opacity = 0) to get ref entries + hyperref target
+			\node[anchor=north west, yshift=\@PCRHrefYShift, opacity=0.0] 
+				at (\@PCRHrefNode){%
+					\parbox[t]{\textwidth/3}{\captionof{#2}{#4}\label{#5}}
 			};
-			\filldraw[red] (\@PCNode) circle [radius=\@radius];
-			\coordinate[xshift=\@PCXShift, yshift=0mm] (A) at (\@PCNode);
-			\filldraw[blue] (A) circle [radius=\@radius];
+			% put custom output (label + description) to get proper baseline alignment
+			\node[anchor=\@PCRAnchor, xshift=\@PCRXShift, yshift=\@PCRYShift, opacity=1.0] 
+				at (\@PCRNode){%
+					\ifdefstring{\@PCRPhantom}{false}{%
+					\parbox[b]{\@PCRWidth}{%
+						% \IfSubStr{\@PCRAnchor}{east}{\raggedleft}{}%
+						\ifstrempty{\thesubfigure}{%
+							\tf@seclabel\thefigure%
+						}{%
+							\tf@seclabel\fbox{\thefigure}\fbox{\thesubfigure}%
+						}%
+					}%
+					}{}%
+			};
+			\coordinate[xshift=\@PCRXShift, yshift=0mm] (A) at (\@PCRNode);
+			\filldraw[cyan] (A) circle [radius=\@radius];
 			\pgfresetboundingbox
 			\path[use as bounding box] (0,0);
 		\end{tikzpicture}
@@ -556,6 +561,7 @@
 {node=BR, anchor=south west, width=6cm, xshift=0mm, yshift=0mm, style=PS, ltitle={}, title={}, subtitle={}, text={}}%
 {}
 % command
+\newsavebox{\@PCBox}
 \newcommand\PhotoCaption[2][]{
 	%
 	% [#2] : label 		= caption label for xref
@@ -624,10 +630,11 @@
 \define@key{kvtb}{width}{\def\@TBWidth{#1}}
 \define@key{kvtb}{xshift}{\def\@TBXShift{#1}}
 \define@key{kvtb}{yshift}{\def\@TBYShift{#1}}
+\define@key{kvtb}{border}{\def\@TBHasBorder{#1}}
 % preset keys
-\savekeys{kvtb}{node, anchor, width, xshift, yshift}
+\savekeys{kvtb}{node, anchor, width, xshift, yshift, border}
 \presetkeys{kvtb}%
-{node=BR, anchor=south west, width=\textwidth/3, xshift=0mm, yshift=0mm}%
+{node=BR, anchor=south west, width=\textwidth/3, xshift=0mm, yshift=0mm, border=false}%
 {}
 \newcommand\PhotoTextBox[2][]{
 	%
@@ -642,18 +649,23 @@
 	\setkeys{kvtb}{#1}{
 
 		% \global\@MyTBWidth=\@TBWidth
-		
+		\def\@TBBorderWidth{2pt}
+		\ifdefstring{\@TBHasBorder}{false}{\def\@TBBorderShift{0pt}}{\def\@TBBorderShift{2\PhotoRefSkip+\@TBBorderWidth/2}}
+		% \showthe\@TBHasBorder
+		% \showthe\@TBBorderShift
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
-			\node[anchor=\@TBAnchor, xshift=\@TBXShift, yshift=\@TBYShift] 
+			\node[anchor=\@TBAnchor, xshift=\@TBXShift+\@TBBorderShift, yshift=\@TBYShift] 
 				at (\@TBNode){%
-					\parbox[b]{\@TBWidth}{#2}%	
+					\fbox{\parbox[b]{\@TBWidth}{\setstretch{0.9}\tf@fntxt#2}}%	
 			};
 			% store points of interest
 			\coordinate (@TL) at (current bounding box.north west); 	% top-left corner
 			\coordinate (@BL) at (current bounding box.south west); 	% bottom-left corner
 			\coordinate (@TR) at (current bounding box.north east); 	% top-left corner
 			\coordinate (@BR) at (current bounding box.south east); 	% bottom-left corner
-			% \draw[line width=0pt] ([xshift=-\PhotoRefSkip]@TL) -- ([xshift=-\PhotoRefSkip]@BL);
+			\ifdefstring{\@TBHasBorder}{false}{}{%
+				\draw[line width=\@TBBorderWidth] ([xshift=-2\PhotoRefSkip]@TL) -- ([xshift=-2\PhotoRefSkip]@BL);
+			}
 			\coordinate[xshift=\@TBXShift, yshift=\@TBYShift] (TB) at (\@TBNode);
 			% \filldraw[blue] (TB) circle [radius=\@radius];
 			\pgfresetboundingbox

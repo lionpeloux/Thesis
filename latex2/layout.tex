@@ -2,7 +2,7 @@
 % \PassOptionsToPackage{showframe}{blurb}
 % \PassOptionsToPackage{showbleed}{blurb}
 % \PassOptionsToPackage{showcanon}{blurb}
-% \PassOptionsToPackage{nobleed}{blurb}
+\PassOptionsToPackage{nobleed}{blurb}
 
 \documentclass[12pt,fleqn]{thesis}
 % ENCODING
@@ -181,16 +181,16 @@
 % }
 \input{head/titlepage.tex}
 \restoregeometry
-% \include{_dedication}
-% \include{_preface}
-% \include{_abstracts}
+\include{_dedication}
+\include{_preface}
+\include{_abstracts}
 
 % tocloft
 \setlength{\parskip}{0em}
-% \addtocontents{toc}{\protect\addvspace{1em}}
-% \tableofcontents
+\addtocontents{toc}{\protect\addvspace{1em}}
+\tableofcontents
 \listoffigures
-% \listoftables
+\listoftables
 
 % --------------------------
 % Main matter
@@ -279,8 +279,8 @@
 % 	\include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 % 	\include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
-% % BACK MATTER
-% \backmatter
+% BACK MATTER
+\backmatter
 
 % 	% go back to root for bookmarks
 % 	\bookmarksetup{startatroot}
@@ -288,8 +288,8 @@
 % 	% list of notations
 % 	\include{_notations}
 
-% 	% general bibliography
-% 	\printbibliography[heading=bibintoc]
+	% general bibliography
+	\printbibliography[heading=bibintoc]
 
 % 	% personal publications
 % 	\newrefsection
