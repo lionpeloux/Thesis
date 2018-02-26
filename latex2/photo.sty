@@ -87,7 +87,7 @@
 
 % display paramteres for anchors (when showanchors=true)
 \newlength{\@radius}
-\setlength{\@radius}{0.2mm}
+\setlength{\@radius}{0.5mm}
 \setlength{\fboxsep}{0pt}
 \setlength{\fboxrule}{0.0pt}
 
@@ -322,9 +322,10 @@
 		% \cleartoleftpage
 		\thispagestyle{\@PSLeftPageStyle}
 		\AddToShipoutPictureBG*{%
+			\@PSLeftPageCode
 			\begin{tikzpicture}[remember picture, inner sep=0pt]
 				\node[anchor=\@PSAnchor, xshift=\@PSXShiftLeft, yshift=\@YShift] at (\@PSNode){
-					\includegraphics[width=\@MyPSWidth]{#2}};
+					\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}};
 				\coordinate (@Atl) at (current bounding box.north west) {}; % top-left corner
 				\coordinate (@Abl) at (current bounding box.south west) {}; % bottom-left corner
 				\path (@Atl -| PGtr) node (@Atr){};  % without bleed
@@ -340,7 +341,6 @@
 				\pgfresetboundingbox
 				\path[use as bounding box] (0,0);
 			\end{tikzpicture}
-			\@PSLeftPageCode
 		}
 		% ==========
 		% Right Piece
@@ -348,13 +348,14 @@
 		\afterpage{%
 			\thispagestyle{\@PSRightPageStyle}
 			\AddToShipoutPictureBG*{%
+			\@PSRightPageCode
 			\begin{tikzpicture}[remember picture, inner sep=0pt]
 				\path (@Atl -| PPtl) node (@BBtl){}; % with bleed
 				\path (@Abl -| PPtl) node (@BBbl){}; % with bleed
 				\path (@Atl -| PGtl) node (@Btl){};  % without bleed
 				\path (@Abl -| PGtl) node (@Bbl){};  % without bleed
 				\node[anchor=north west] at ($(@Btl)+(@Atl)-(@Atr)$) {
-					\includegraphics[width=\@MyPSWidth]{#2}};
+					\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}};
 				\coordinate (@Btr) at (current bounding box.north east) {}; % top-left corner
 				\coordinate (@Bbr) at (current bounding box.south east) {}; % bottom-left corner
 				% store points of interest
@@ -371,9 +372,7 @@
 				\pgfresetboundingbox
 				\path[use as bounding box] (0,0);
 			\end{tikzpicture}
-			\@PSRightPageCode
 		}}
-		
 	}{}
 	\IfSubStr{\@PSAnchor}{east}{% reverse way
 			% more complex ... to be done
@@ -518,7 +517,7 @@
 				at (\@PCRNode){%
 					\ifdefstring{\@PCRPhantom}{false}{%
 					\parbox[b]{\@PCRWidth}{%
-						% \IfSubStr{\@PCRAnchor}{east}{\raggedleft}{}%
+						\IfSubStr{\@PCRAnchor}{east}{\raggedleft}{}%
 						\ifstrempty{\thesubfigure}{%
 							\tf@seclabel\thefigure%
 						}{%

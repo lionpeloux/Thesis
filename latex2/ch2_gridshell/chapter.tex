@@ -257,11 +257,11 @@ Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and co
 			anchor=base west,
 			width=\textwidth/2,
 			]{%
-				\figurecaption{fig:montreal}
-				\figurecaption{fig:essen}\par
 				\figurecaption{fig:berkeley}\par
 				\figurecaption{fig:berkeley_a}\par
-				\figurecaption{fig:berkeley_b}
+				\figurecaption{fig:berkeley_b}\par\smallskip
+				\figurecaption{fig:montreal}\par
+				\figurecaption{fig:essen}
 			}
 	}
 	\hbox{}
@@ -413,7 +413,6 @@ Although the constructive system deployed in Mannheim clearly inherited from the
 
 The double-layer system was introduced to tackle two issues~: the grid needed some flexibility to be bent into the desired shape, but once erected it should provide sufficient bending stiffness to resist disturbing loads and avoid a buckling collapse.\footnote{Theoretically, self-weight loads would produce only compression in the members because the (funicular) form of the grid resulted from the inversion of a hanging chain model in pure tension.} Once erected, the two grids, one sliding on top of the other one, were connected together to form a single grid with much higher ladder profiles (from \SI{50}{mm} to \SI{150}{mm}), increasing their bending stiffness by a factor of about 26 (see \cref{fig:mannheim_a}).
 
-
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}
 % 		\includegraphics[width=\textwidth]{mannheim_int.jpg}
@@ -448,6 +447,103 @@ It is only 20 years later that gridshells started to reappear, in the late 90's 
 
 \subsubsection{Westminster Lodge, Dorset, England, 1995}
 In 1995, a small student residence named \emph{Westminster Lodge} was built in Dorset, England. This dwelling was part of a larger project -- Hooke Park -- aiming at investigating how the local forest resources, in particular immature roundwood thinnings, could be better utilised. The project was lead by ABK, Frei Otto, Buro Happold and Cullinan Studio. Unlike Mannheim, the timber shell was bent and weaved rod by rod on a scaffold platform. But the structural system exhibited a double-layer gridshell pattern very similar to the one employed for the Multihalle (see \cref{fig:dorset_a}). The rods were made out of splice-jointed roundwood to form long-length poles of diameter \SI{200}{mm}. The development of this jointing technique, which could be produced directly in the forest, was part of the project's investigations \cite{Burton1998}. The grid was braced by a layer of diagonal boards nailed to the roundwood. The structure was finally cladded with a planted turf roof (see \cref{fig:dorset_b}).
+
+\blankpage{%
+	% \enlargethispage{-16cm}
+	% \addtotextheigth{-10cm}
+	% \afterpage{\restoretexteheight}
+	% \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+	% 	\node[anchor=south west] at (CAbl){%
+	% 		\fbox{\parbox{\textwidth}{\vspace{10cm}}}
+	% 	};
+	% \end{tikzpicture}
+	\thispagestyle{empty}
+	\hbox{}
+	\AddToShipoutPictureBG*{% 
+		% \GetLayoutNodes
+		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
+		% required to avoid mess up between tikz overlay and page vertical blank space
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			xshift=0mm,
+			gopt={width=\tmpwidth},
+			]{dorset_int.jpg}%
+		\savenodes{A}
+		\Photo[
+			node=Atr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			gopt={width=\tmpwidth},
+			]{dorset_ext.jpg}%
+		\savenodes{B}
+		\Photo[
+			node=Abl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{doncaster_int.jpg}%%
+		\savenodes{C}
+		\Photo[
+			node=Bbl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{doncaster_ext.jpg}%
+		\savenodes{D}
+		\PhotoCaptionRef[
+			node=Atl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{Roundwood gridshell built in 1995 in Dorset, England}{fig:dorset}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Interior view}{fig:dorset_a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Exterior view}{fig:dorset_b}
+		%%
+		\PhotoCaptionRef[
+			node=Ctl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{Timber gridshells built in 1998 in Doncaster, England}{fig:doncaster}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Cbl, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Interior view}{fig:doncaster_a}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Dbl, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Exterior view}{fig:doncaster_b}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:dorset}\par
+				\figurecaption{fig:dorset_a}\par
+				\figurecaption{fig:dorset_b}\par\smallskip
+				\figurecaption{fig:doncaster}\par
+				\figurecaption{fig:doncaster_a}\par
+				\figurecaption{fig:doncaster_b}\par
+			}
+	}
+}
+
 
 \subsubsection{Earth Center, Doncaster, England, 1998}
 At the same time, a project with a similar spirit arose for the \emph{Earth Center} in Doncaster, England.\footnote{\textquote{\href{http://grant-associates.uk.com/approach/earth-centre-forest-garden-grid-shells/}{The Earth Centre Forest Garden} was intended to demonstrate how managed woodland could supply the vast majority of all natural resources needed for human survival.}} The project planning started in 1994 and a series of small timber gridshells were designed by Buro Happold and then built in 1998. The landscape structures were single-layer timber gridshells made with oak laths. Once erected with a crane, the grids were braced with crossing diagonal stainless steel cables (see \cref{fig:doncaster_a}). Openings were possibly reinforced with curved timber frames (see \cref{fig:doncaster_b}).
@@ -493,13 +589,215 @@ These projects definitely trailed the technique in England and initiated the ren
 
 What was missing for elastic gridshells to re-emerge after the major experiment of Mannheim was probably the development of modern numeric tools to ease and speed up the design process.\footnote{\blockcquote[]{Harris2003}{The key to the modern use of timber gridshells is the development of computer methods in modelling complex three-dimensional shell structures. For the Mannheim structure, the primary method of form finding was the use of physical models. The Earth Centre structures were small and easily modelled using wire mesh, but when Buro Happold was commissioned to design the Japanese Pavilion for Expo 2000 in Hannover (Architect Shigeru Ban), it was apparent that much more sophisticated computer form finding and analysis would be necessary.}} Amongst those tools we should identify two main categories~: geometry processing softwares and structural analysis softwares. Recall that in the 70's, geometry processing was done through physical models and photographic measurements \cite[pp.~130-135]{IL10} while structural analysis was conducted through a compound of physical model testing with scaling techniques \cite[pp.~130-135]{IL13}, hand calculations and the very first numerical form-finding calculations \cite[pp.~184-193]{IL10} and finite element calculations \cite[pp.~210-217]{IL10}. In the late 90's, the rise in importance of computer methods offered new possibilities.
 
+\afterpage{%
+	% \thispagestyle{empty}
+	\AddToShipoutPictureBG*{
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			gopt={width=\textwidth},
+			]{hannover_sky.jpg}
+		\savenodes{A}
+		\Photo[
+			node=Abl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\textwidth/3},
+			]{hannover_int.jpg}
+		\savenodes{B}
+		% \intersectnode{CAtl |- Btr}{Pt}
+		\Photo[
+			node=Btr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			gopt={height=0.8\PhotoHeight},
+			]{hannover_detail.jpg}
+		\savenodes{C}
+		%%
+		\PhotoCaptionRef[
+			node=Atl, 
+			anchor=north west, 
+			phantom=true,
+		]{figure}{}{Cardboard gridshell built in 2000 in Hannover, Germany}{fig:hannover}
+		\PhotoCaptionRef[
+			node=Abr, 
+			anchor=north east, 
+			yshift=-\PhotoRefSkip,
+		]{subfigure}{}{Sky view}{fig:hannover_a}
+		\PhotoCaptionRef[
+			node=Btr, 
+			anchor=south east, 
+			yshift=\PhotoRefSkip,
+		]{subfigure}{}{Interior view}{fig:hannover_b}
+		\PhotoCaptionRef[
+			node=Ctr, 
+			anchor=north west, 
+			xshift=\PhotoRefSkip,
+		]{subfigure}{}{Node detail}{fig:hannover_c}
+		\intersectnode{CAtl |- Bbr}{Pt}
+		\PhotoTextBox[
+			node=Bbr,
+			anchor=south west,
+			xshift=\PhotoSkip,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:hannover}\par
+				\figurecaption{fig:hannover_b}\par
+				\figurecaption{fig:hannover_a}\par
+				\figurecaption{fig:hannover_c}\par
+			}
+	}
+	% \settoheight{\PhotoHeight}{\includegraphics[width=\textwidth]{hannover_sky.jpg}}
+	% \addtolength{\PhotoHeight}{\PhotoBigSkip}
+	% \addtolength{\PhotoHeight}{\PhotoBigSkip}
+	% \addtolength{\myheight}{\PhotoHeight}
+	\newlength\ha
+	\newlength\hb
+	\newlength\myh
+	\newlength\myw
+	\settoheight{\ha}{\includegraphics[width=\textwidth]{hannover_sky.jpg}}
+	\settoheight{\hb}{\includegraphics[width=\textwidth/3]{hannover_int.jpg}}
+	\setlength{\myh}{2\PhotoBigSkip+\ha+\hb}
+	\hbox{\vspace{\myh}}
+}
+
 \subsubsection{Japan Pavilion, Hannover, Germany, 2000}
 In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happold to design the \emph{Japan Pavilion} for \emph{Expo 2000} in Hannover, Germany \cite{Ban2006}. This pavilion was a large-scale corrugated gridshell made out of cardboard tubes, about 75 meters long and 25 meters wide. Corrugations bring curvature, and therefore enhance the strength of the shell. The tubes were tied together with a fabric tape, a very low-tech joint (see \cref{fig:hannover_a}). The structure was covered with a paper membrane specially developed for the project to meet the requirements of the German fire regulations (see \cref{fig:hannover_b}). For the occasion, a new erection method was set up in which the grid was laid out not at the ground level but at a higher level on a hydraulic scaffold platform. From there, the grid was pushed up into position using the platform's jacks. It was found late that the cardboard tubes were subject to a high level of creep. This required the introduction of new timber arches to reinforce the gridshell and to enlarge the existing timber rafters intended to brace the grid and support the paper membrane (see \cref{fig:hannover_a}).
 
 \subsubsection{Weald and Downland, Singelton, England, 2002}
+
+{\afterpage{%	
+	\doubleblankpage[l]{%
+	\thispagestyle{empty}\hbox{}
+	\settoheight{\myh}{\includegraphics[height=5cm]{downland_e1.jpg}}
+	\settowidth{\myw}{\includegraphics[height=5cm]{downland_e1.jpg}}
+	\gdef\mycode{\intersectnode{CAtr |- CAbl}{PSA}}
+	\PhotoSpread[
+		lpcode=\mycode,
+		node=PSA,
+		anchor=south west,
+		xshift={-\PaperWidth+2\myw+2\PhotoSkip},
+		gopt={height=5cm},
+		]{downland_e3.jpg}
+	\AddToShipoutPictureBG*{
+		\Photo[
+			node=BL,
+			anchor=south east,
+			xshift=-\PhotoSkip,
+			gopt={height=5cm},
+			]{downland_e2.jpg}
+		\Photo[
+			node=BL,
+			anchor=south east,
+			xshift=-\PhotoSkip,
+			gopt={height=5cm},
+			]{downland_e1.jpg}
+		% \Photo[
+		% 	node=CAtl,
+		% 	anchor=north west,
+		% 	% xshift=-\PhotoSkip,
+		% 	gopt={width=15cm},
+		% 	]{downland_int.jpg}
+		% \savenodes{EA}
+		% \Photo[
+		% 	node=EBbr,
+		% 	anchor=south west,
+		% 	xshift=\PhotoBigSkip,
+		% 	gopt={height=\myw},
+		% 	]{downland_e2.jpg}
+		% \savenodes{A}
+		% \global\EA=\EA
+	}
+	}{%
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{
+		\Photo[
+			node=BR,
+			anchor=south west,
+			xshift=\PhotoSkip,
+			gopt={height=5cm},
+			]{downland_e4.jpg}
+		\savenodes{EA}
+		\PhotoTextBox[
+			node=CAtl,
+			anchor=north west,
+			width=10cm,
+			border=false,
+		]{%
+			\figurecaption{fig:mannheim}\par
+			\figurecaption{fig:mannheim_b}\par
+			\figurecaption{fig:mannheim_a}
+		}}
+	}
+}}
+
 The design of the \emph{Downland} gridshell began right after the completion of the Westminster Lodge (see \cref{sec=signs}) where architects from E. Cullinan Studio became acquainted with the engineers from Buro Happold. At Downland, the project team truly revived the technique of large-scale timber gridshells while bringing lots of improvements to the system. The building opened to the public in 2002. Its corrugated shape recalls the one of the Japan Pavilion from which it was inspired (see \cref{fig:downland_b}).
 
 The building is 50 meters long and 12.5 to 16 meters wide, covering an area of about \SI{675}{m^2} for a height varying from 7 to 9.5 meters \cite{Harris2002}. The structure is a double-layer gridshell made of rectangular oak laths of cross-section \SI{50}{mm} x \SI{35}{mm} (see \cref{fig:downland_a}). To produce high grade timber elements, the continuous laths were re-formed from small carefully selected wood pieces, finger-jointed every \SI{60}{cm} in \SI{6.0}{m} length pieces. These pieces of lath were then scarf-jointed on site every \SI{6}{m} to obtained the desired length, up to \SI{50}{m}.
+
+
+\blankpage{%
+	% \enlargethispage{-16cm}
+	% \addtotextheigth{-10cm}
+	% \afterpage{\restoretexteheight}
+	% \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+	% 	\node[anchor=south west] at (CAbl){%
+	% 		\fbox{\parbox{\textwidth}{\vspace{10cm}}}
+	% 	};
+	% \end{tikzpicture}
+	\thispagestyle{empty}
+	\hbox{}
+	\AddToShipoutPictureBG*{% 
+		% \GetLayoutNodes
+		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
+		% required to avoid mess up between tikz overlay and page vertical blank space
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			xshift=0mm,
+			gopt={width=\textwidth},
+			]{downland_int.jpg}%
+		\savenodes{A}
+		\Photo[
+			node=Abl,
+			anchor=north west,
+			xshift=0mm,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\textwidth},
+			]{downland_int.jpg}%
+		\savenodes{B}
+		\PhotoCaptionRef[
+			node=Atl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{Timber gridshell built in 2002 in Pishwanton, England}{fig:pishwanton}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Interior view}{fig:pishwanton_a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Exterior view}{fig:pishwanton_b}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:pishwanton}\par
+				\figurecaption{fig:pishwanton_a}\par
+				\figurecaption{fig:pishwanton_b}
+			}
+	}
+}
+
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{2\TwoMediaWidth/3}
@@ -539,6 +837,202 @@ The flat lattice was laid out on a scaffold platform. Unlike the Japan Pavilion,
 
 It is worthwhile to mention that for the first time the form was not found by inverting some sort of hanging chain model that would produce a pure funicular shape where only compression occurred. Instead, the shape was the result of a numerical computation that took into account the bending behaviour of the laths.\footnote{This software was developed under the supervision of Chris Williams of the university of Bath.} \citet{Harris2003} argued that computer models enabled some interactivity in the form-finding process that would not be possible with physical models, leading to a better synergy between architectural and structural requirements. They also argued that physical models contributed invaluably to the development of a creative and efficient design throughout the project.
 
+
+\blankpage{%
+	% \enlargethispage{-16cm}
+	% \addtotextheigth{-10cm}
+	% \afterpage{\restoretexteheight}
+	% \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+	% 	\node[anchor=south west] at (CAbl){%
+	% 		\fbox{\parbox{\textwidth}{\vspace{10cm}}}
+	% 	};
+	% \end{tikzpicture}
+	\thispagestyle{empty}
+	\hbox{}
+	\AddToShipoutPictureBG*{% 
+		% \GetLayoutNodes
+		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
+		% required to avoid mess up between tikz overlay and page vertical blank space
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			xshift=0mm,
+			gopt={width=\tmpwidth},
+			]{pishwanton_int.jpg}%
+		\savenodes{A}
+		\Photo[
+			node=Atr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			gopt={width=\tmpwidth},
+			]{pishwanton_ext.jpg}%
+		\savenodes{B}
+		\Photo[
+			node=Abl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{flimwell_int.jpg}%%
+		\savenodes{C}
+		\Photo[
+			node=Bbl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{flimwell_ext.jpg}%
+		\savenodes{D}
+		\PhotoCaptionRef[
+			node=Atl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{Timber gridshell built in 2002 in Pishwanton, England}{fig:pishwanton}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Interior view}{fig:pishwanton_a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Exterior view}{fig:pishwanton_b}
+		%%
+		\PhotoCaptionRef[
+			node=Ctl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{Timber gridshells built in 1998 in Doncaster, England}{fig:flimwell}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Cbl, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Interior view}{fig:flimwell_a}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Dbl, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Exterior view}{fig:flimwell_b}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:pishwanton}\par
+				\figurecaption{fig:pishwanton_a}\par
+				\figurecaption{fig:pishwanton_b}\par\smallskip
+				\figurecaption{fig:flimwell}\par
+				\figurecaption{fig:flimwell_a}\par
+				\figurecaption{fig:flimwell_b}\par
+			}
+	}
+}
+
+
+
+\blankpage{%
+	% \enlargethispage{-16cm}
+	% \addtotextheigth{-10cm}
+	% \afterpage{\restoretexteheight}
+	% \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+	% 	\node[anchor=south west] at (CAbl){%
+	% 		\fbox{\parbox{\textwidth}{\vspace{10cm}}}
+	% 	};
+	% \end{tikzpicture}
+	\thispagestyle{empty}
+	\hbox{}
+	\AddToShipoutPictureBG*{% 
+		% \GetLayoutNodes
+		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
+		% required to avoid mess up between tikz overlay and page vertical blank space
+		\intersectnode{CAtl -| PPtl}{Pt}
+		\Photo[
+			node=Pt,
+			anchor=north west,
+			xshift=0mm,
+			gopt={width=\tmpwidth},
+			]{savill_b.jpg}%
+		\savenodes{A}
+		\Photo[
+			node=Atr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			gopt={width=\tmpwidth},
+			]{savill_a.jpg}%
+		\savenodes{B}
+		\Photo[
+			node=Abl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{kent_grid.jpg}%%
+		\savenodes{C}
+		\Photo[
+			node=Bbl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{kent_ext.jpg}%
+		\savenodes{D}
+		\PhotoCaptionRef[
+			node=Atl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{Timber gridshell built in 2006 in Savill, England}{fig:savill}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atr, 
+			anchor=south east, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Interior view}{fig:savill_a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btr, 
+			anchor=south east, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Exterior view}{fig:savill_b}
+		%%
+		\PhotoCaptionRef[
+			node=Ctl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{xxx}{fig:kent}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Cbr, 
+			anchor=north east, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Glazing support}{fig:kent_a}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Dbr, 
+			anchor=north east, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Exterior view}{fig:kent_b}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:savill}\par
+				\figurecaption{fig:savill_a}\par
+				\figurecaption{fig:savill_b}\par\smallskip
+				\figurecaption{fig:kent}\par
+				\figurecaption{fig:kent_a}\par
+				\figurecaption{fig:kent_b}\par
+			}
+	}
+}
+
 \subsubsection{Lothian Gridshell, Pishwanton, Scotland, 2002}
 This project deserves some attention because the developed approach was completely different from the projects exposed until now~: \blockcquote[]{Lowenstein2002}{Previous projects have portrayed the method as a highly technical use of a low-tech resources. This, however, needs not be the case as we see with this project \belp{}}. The structure was the result of \blockcquote[]{bdonline2002}{\belp{} an unusual collaboration between sole practitioner Christopher Day, engineer David Tasker, a crowd of local volunteers and (more unusually) the philosophies of Rudolf Steiner and Johann Wolfgang Goethe}.\footnote{From the online paper \textquote{The other gridshell} : \url{http://www.bdonline.co.uk/the-other-gridshell/1020435.article}}
 
@@ -548,6 +1042,8 @@ The single-layer gridshell was made out of local larch. Once erected by hands, t
 The gridshell of the Woodland Centre was built 7 years after the project had started (see \cref{fig:flimwell_a}).\footnote{More to be found at : \href{http://www.fourthdoor.org/annular/?page_id=441}{Growing and making Flimwell’s chestnut gridshell}.} The building was designed by architect Feilden Clegg and engineers from Atelier One. It was part of a larger research and development project that aimed at developing chestnut -- a low grad wood -- as a construction material.\footnote{This projet was conducted by the \href{http://www.bre.co.uk/}{Building Research Establishment}.}
 
 The building, still existing, is composed of 5 barrel vaults spanning 12 meters and about 5 meters wide (see \cref{fig:flimwell_b}). It covers about \SI{300}{m^2} \cite{Lowenstein2004}. Each vault module is a transportable unit composed of two curved arches. A single layer gridshell was then applied to this primary frame and braced with chestnut panels. The grid was made of laths with~\SI{75}{mm} x \SI{25}{mm} rectangular cross-section, assembled with simple bolts. On top of that, insulation materials and a membrane as rainscreen \cite{FourthDoor2003}.
+
+
 
 % \begin{figure}[t]
 % 	\begin{subfigure}[b]{\TwoMediaWidth}

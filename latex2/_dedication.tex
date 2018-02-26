@@ -17,4 +17,17 @@
 \end{center}
 }
 \cleartoleftpage
-\PhotoSpread[]{cover.jpg}
+\doubleblankpage[l]{%
+		\hbox{}\thispagestyle{empty}
+		\PhotoSpread[
+			node=PPtl,
+			anchor=north west,
+			gopt={width=2\PaperWidth}
+		]{cover.jpg}
+	}{%
+		\hbox{}\thispagestyle{empty}
+	}
+
+%
+%\cleartoleftpage
+%\PhotoSpread[]{cover.jpg}
