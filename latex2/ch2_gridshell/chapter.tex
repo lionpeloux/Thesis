@@ -680,6 +680,7 @@ In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happ
 		xshift={-\PaperWidth+2\myw+2\PhotoSkip},
 		gopt={height=5cm},
 		]{downland_e3.jpg}
+	\savenodes{C}
 	\AddToShipoutPictureBG*{
 		\Photo[
 			node=BL,
@@ -687,47 +688,79 @@ In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happ
 			xshift=-\PhotoSkip,
 			gopt={height=5cm},
 			]{downland_e2.jpg}
+		\savenodes{B}
 		\Photo[
 			node=BL,
 			anchor=south east,
 			xshift=-\PhotoSkip,
 			gopt={height=5cm},
 			]{downland_e1.jpg}
-		% \Photo[
-		% 	node=CAtl,
-		% 	anchor=north west,
-		% 	% xshift=-\PhotoSkip,
-		% 	gopt={width=15cm},
-		% 	]{downland_int.jpg}
-		% \savenodes{EA}
-		% \Photo[
-		% 	node=EBbr,
-		% 	anchor=south west,
-		% 	xshift=\PhotoBigSkip,
-		% 	gopt={height=\myw},
-		% 	]{downland_e2.jpg}
-		% \savenodes{A}
-		% \global\EA=\EA
+		\savenodes{A}
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			gopt={height=10cm},
+			]{downland_detail_a.jpg}
+		\savenodes{DA}
+		\Photo[
+			node=DAbr,
+			anchor=south west,
+			xshift=\PhotoSkip,
+			gopt={height=5cm},
+			]{downland_dwg.jpg}
+		\savenodes{DB}
+		%%
+		\PhotoCaptionRef[
+			node=Atl,
+			anchor=south west,
+			phantom=true,
+			]{figure}{}{Timber gridshell built in 2002 in Downland, England}{fig:downland_e}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Abr, 
+			anchor=north east, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{EA}{fig:downland_e1}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Bbr, 
+			anchor=north east, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{EB}{fig:downland_e2}
 	}
 	}{%
 	\hbox{}\thispagestyle{empty}
 	\AddToShipoutPictureBG*{
+		\PhotoCaptionRef[
+			hrefnode=TL,
+			node=BR, 
+			anchor=north east, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{C}{fig:downland_e3}
 		\Photo[
 			node=BR,
 			anchor=south west,
 			xshift=\PhotoSkip,
 			gopt={height=5cm},
 			]{downland_e4.jpg}
-		\savenodes{EA}
+		\savenodes{D}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Dbr, 
+			anchor=north east, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{D}{fig:downland_e4}
 		\PhotoTextBox[
 			node=CAtl,
 			anchor=north west,
 			width=10cm,
 			border=false,
 		]{%
-			\figurecaption{fig:mannheim}\par
-			\figurecaption{fig:mannheim_b}\par
-			\figurecaption{fig:mannheim_a}
+			\figurecaption{fig:downland_e}\par		
+			\figurecaption{fig:downland_e1}\par
+			\figurecaption{fig:downland_e2}\par
+			\figurecaption{fig:downland_e3}\par
+			\figurecaption{fig:downland_e4}
 		}}
 	}
 }}
@@ -764,36 +797,36 @@ The building is 50 meters long and 12.5 to 16 meters wide, covering an area of a
 			anchor=north west,
 			xshift=0mm,
 			yshift=-\PhotoBigSkip,
-			gopt={width=\textwidth},
-			]{downland_int.jpg}%
+			gopt={trim=0 1.75cm 0 0, clip, width=\textwidth},
+			]{downland_a.jpg}%
 		\savenodes{B}
 		\PhotoCaptionRef[
 			node=Atl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
 			phantom=true,
-			]{figure}{}{Timber gridshell built in 2002 in Pishwanton, England}{fig:pishwanton}
+			]{figure}{}{Timber gridshell built in 2002 in Downland, England}{fig:downland}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
 			node=Atl, 
 			anchor=south west, 
 			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Interior view}{fig:pishwanton_a}
+			]{subfigure}{}{Interior view}{fig:downland_a}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
 			node=Btl, 
 			anchor=south west, 
 			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Exterior view}{fig:pishwanton_b}
+			]{subfigure}{}{Exterior view}{fig:downland_b}
 		\PhotoTextBox[
 			node=CAbl,
 			anchor=south west,
 			width=10cm,
 			border=false,
 			]{%
-				\figurecaption{fig:pishwanton}\par
-				\figurecaption{fig:pishwanton_a}\par
-				\figurecaption{fig:pishwanton_b}
+				\figurecaption{fig:downland}\par
+				\figurecaption{fig:downland_a}\par
+				\figurecaption{fig:downland_b}
 			}
 	}
 }
