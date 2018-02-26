@@ -206,7 +206,7 @@
 	\newfontfamily\font@body{GillSans-Light}[Scale = MatchUppercase]
 	\newfontfamily\font@hdr{FuturaLT-Book}[Scale = MatchUppercase]
 	\newfontfamily\font@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
-	\newfontfamily\font@chap{Futura-CondensedExtraBold}[Scale = MatchUppercase]
+	\newfontfamily\font@chap{FuturaLT}[Scale = MatchUppercase]
 	\newfontfamily\font@sec{FuturaLT-Book}[Scale = MatchUppercase]
 	\newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
 	\newfontfamily\font@subsubsec{FuturaLT-Condensed}[Scale = MatchUppercase]
@@ -221,14 +221,15 @@
 
 
 % typeface
-\DeclareRobustCommand{\tf@hdr}{\font@hdr\bfseries}
+\DeclareRobustCommand{\tf@hdr}{\font@hdr}
 \DeclareRobustCommand{\tf@pagenum}{\tf@hdr\footnotesize}
 \DeclareRobustCommand{\tf@part}{\font@part\bfseries\Huge}
-\DeclareRobustCommand{\tf@chap}{\font@chap\bfseries\Huge}
+\DeclareRobustCommand{\tf@chap}{\font@chap\fontsize{36pt}{32pt}\selectfont}
 \DeclareRobustCommand{\tf@sec}{\font@sec\bfseries\Large}
 \DeclareRobustCommand{\tf@subsec}{\font@subsec\bfseries\normalsize}
 \DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\large}
-\DeclareRobustCommand{\tf@seclabel}{\font@label\scriptsize\color{titlelabel}}
+\DeclareRobustCommand{\tf@seclabel}{\font@label\scriptsize\color{secondary}}
+\DeclareRobustCommand{\tf@piclabel}{\font@label\scriptsize\color{black}}
 \DeclareRobustCommand{\tf@fntxt}{\font@body\footnotesize}
 \DeclareRobustCommand{\tf@fnnum}{\font@body\bfseries\scriptsize}
 \DeclareRobustCommand{\tf@fnmk}{\font@label\bfseries\tiny}
@@ -265,7 +266,7 @@
 %% --------------------------
 
 %  \titlespacing*{⟨command⟩}{⟨left⟩}{⟨before-sep⟩}{⟨after-sep⟩}[⟨right-sep⟩]
-\titlespacing*{\chapter}{0pt}{50pt}{80pt} 
+\titlespacing*{\chapter}{0pt}{0pt}{0pt} 
 \titlespacing*{\section}{0pt}{24pt}{6pt}
 \titlespacing*{\subsection}{0pt}{12pt}{3pt}
 \titlespacing*{\subsubsection}{0pt}{12pt}{3pt}
@@ -553,11 +554,11 @@
 \newlength{\ChapterBoxTextWidth}
 
 %% set parameters
-\setlength{\ChapterBoxWidth}{\@BleedInnerMargin + \@ContentBindingOffset + \@ContentInnerMargin}
-\setlength{\ChapterBoxYOffset}{8.0cm}
+\setlength{\ChapterBoxWidth}{\@BleedInnerMargin + \@ContentBindingOffset + \@ContentInnerMargin-6pt}
+\setlength{\ChapterBoxYOffset}{7cm}
 \setlength{\ChapterBoxHeight}{15mm}
-\setlength{\ChapterBoxTextYMargin}{4pt}
-\setlength{\ChapterBoxTextXMargin}{8pt}
+\setlength{\ChapterBoxTextYMargin}{0pt}
+\setlength{\ChapterBoxTextXMargin}{3pt}
 \setlength{\ChapterBoxTextWidth}{\@ContentWidth -\ChapterBoxTextXMargin}
 
 %% commands
@@ -567,27 +568,60 @@
 %% Chapter
 \titleformat{\chapter}[display]  			% type (section,chapter,etc...) to vary
 {\tf@chap} 									% format of the chapter
-{\gdef\chapterlabel{\thechapter\ }}     	% the label
+{\gdef\chapterlabel{\thechapter}}     	% the label
 {0pt} 										% separation between label and chapter-title
 {											% code before the title body
-\tikzset{external/export next=false} % LDP
-\begin{tikzpicture}[remember picture,overlay]
-	\node[yshift=-\ChapterBoxYOffset] at (current page.north west){
-	\begin{tikzpicture}[remember picture, overlay]
-		\draw[draw=Tblue, fill=Tblue] (0,0) rectangle (\ChapterBoxWidth,\ChapterBoxHeight); % color box
-		\node[anchor=base east, inner sep=0mm, xshift=-\ChapterBoxTextYMargin] at (\ChapterBoxWidth,\ChapterBoxTextYMargin){
-			\raggedleft\color{white}\chapterlabel
-			% \fbox{\raggedleft\color{white}1000}
-		};
-		\node[anchor=base west, inner sep=0mm, xshift=\ChapterBoxTextXMargin, text width=\ChapterBoxTextWidth, align=left] at (\ChapterBoxWidth,\ChapterBoxTextYMargin){
-			\color{black}#1
-			% \fbox{\raggedright\color{black}#1}
-		};
-	\end{tikzpicture}
+% \tikzset{external/export next=false} % LDP
+% \begin{tikzpicture}[remember picture,overlay]
+% 	\node[yshift=-\ChapterBoxYOffset] at (current page.north west){
+% 	\begin{tikzpicture}[remember picture, overlay]
+% 		\path[fill=black] (0,0) rectangle (\ChapterBoxWidth,\ChapterBoxHeight); % color box
+% 		\node[anchor=base east, inner sep=0mm, xshift=-\ChapterBoxTextYMargin] at (\ChapterBoxWidth,\ChapterBoxTextYMargin){
+% 			\raggedleft\color{white}\chapterlabel
+% 			% \fbox{\raggedleft\color{white}1000}
+% 		};
+% 		\node[anchor=base west, inner sep=0mm, xshift=\ChapterBoxTextXMargin, text width=\ChapterBoxTextWidth, align=left] at (\ChapterBoxWidth,\ChapterBoxTextYMargin){
+% 			\color{black}#1
+% 			% \fbox{\raggedright\color{black}#1}
+% 		};
+% 	\end{tikzpicture}
+% 	};
+% \end{tikzpicture}
+\GetPageLayoutNodes
+\begin{tikzpicture}[remember picture, inner sep=0mm]
+	\coordinate[yshift=-0\ChapterBoxYOffset/2] (Ftl) at (PGtl);
+	\coordinate[xshift=\ChapterBoxWidth, yshift=-\ChapterBoxYOffset-\ChapterBoxHeight] (Fbr) at (PGtl);
+	% \node[anchor=north east, xshift=-0pt] at (CAtr){
+	% 	\fbox{\hbox{\raggedright\color{black}\chapterlabel{}}}
+	% 	% \fbox{\raggedright\color{black}#1}
+	% };
+	% \coordinate[xshift=4pt+8pt] (@CHAPtr) at (current bounding box.north east) {}; % top-left corner
+	% \coordinate[xshift=4pt+8pt] (@CHAPbr) at (current bounding box.south east) {}; % bottom-left corner
+	% \draw[black,line width=16pt] (@CHAPtr) -- (@CHAPbr);
+	% \path (@CHAPtr |- PPbl) node (@LINEb) {};
+	% \draw[black,line width=0.5pt] ([xshift=-8pt]@CHAPtr) -- ([xshift=-8pt]@LINEb);
+	% \coordinate[yshift=-6pt] (@CHAPbl) at (current bounding box.south west) {}; % top-left corner
+	% \coordinate[yshift=-6pt] (@CHAPbr) at (current bounding box.south east) {}; % bottom-left corner
+	% \draw[black,line width=4pt] (@CHAPbl) -- (@CHAPbr);
+	%
+	\path (CAtl |- Fbr) node (Tbl) {};
+	\path[fill=secondary] (Ftl) rectangle (Fbr);
+	\node[anchor=base west] at (Tbl){
+		\parbox[b]{\ChapterBoxTextWidth}{\raggedright{\scshape\chaptername~\chapterlabel{}}\\[8pt]\color{secondary}\MakeUppercase{#1}}
+		% \fbox{\raggedright\color{black}#1}
 	};
+	% \filldraw[green] (CAtl) circle [radius=1mm];
+	% \filldraw[green] (CAtr) circle [radius=1mm];
+	% \filldraw[green] (CAbl) circle [radius=1mm];
+	% \filldraw[green] (CAbr) circle [radius=1mm];
+	% \filldraw[black] (Fbr) circle [radius=1mm];
+	% \filldraw[blue] (Tbl) circle [radius=1mm];
+	\pgfresetboundingbox
+	\path[use as bounding box] (0,0);
 \end{tikzpicture}
 \gdef\chapterlabel{}
-} 
+}
+[\hbox{\vspace*{4cm}}] 
 
 
 %% Fancy page : part
@@ -645,7 +679,13 @@
 }
 
 
+\newcommand{\currentpart}{}
+\let\oldpart\part
+\renewcommand{\part}[1]{\oldpart{#1}\renewcommand{\currentpart}{#1}}
 
+% \newcommand{\currentchapter}{}
+% \let\oldchapter\chapter
+% \renewcommand{\chapter}[1]{\oldchapter{#1}\renewcommand{\currentchapter}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -1027,6 +1067,7 @@
 
 \newtoggle{print}
 \colorlet{accent}{Tblue}
+\definecolor{secondary}{RGB}{244, 35, 0}
 
 \toggletrue{print}
 \iftoggle{print}{
