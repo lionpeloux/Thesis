@@ -971,10 +971,10 @@
 	\ifstrempty{#1}
 	{%
 		% double brace needed to make font change local
-		\fbox{\makebox[24pt][l]{\fbox{\hspace{-\tmpshift}\tf@fnnum\cref{#2}}}\tf@fntxt\ztitleref{#2}}%
+		\fbox{\makebox[26pt][l]{\fbox{\hspace{-\tmpshift}\tf@fnnum\cref{#2}}}\tf@fntxt\ztitleref{#2}}%
 	}{%
 	% double brace needed to make font change local
-		\fbox{\makebox[24pt][l]{\fbox{\hspace{-\tmpshift}\tf@fnnum\cref{#2}}}\tf@fntxt#2}%
+		\fbox{\makebox[26pt][l]{\fbox{\hspace{-\tmpshift}\tf@fnnum\cref{#2}}}\tf@fntxt#2}%
 	}
 	% \ifstrempty{#1}
 	% {%
