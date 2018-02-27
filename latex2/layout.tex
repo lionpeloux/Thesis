@@ -189,7 +189,7 @@
 \setlength{\parskip}{0em}
 \addtocontents{toc}{\protect\addvspace{1em}}
 % \tableofcontents
-% \listoffigures
+\listoffigures
 % \listoftables
 
 % --------------------------
@@ -268,7 +268,12 @@
 	% \kant[1-10]
 	% \section{Une deuxième section}
 
-	% \chapter{Elastic gridshells and geometry}
+	% \chapter*{Elastic gridshells}
+	% \section{Une section}
+	% \kant[1-10]
+	% \section{Une deuxième section}
+
+	% \chapter{EPHEMERAL CATHEDRAL : THE FIRST GFRP GRIDSHELL BUILDING}
 	% \section{Une section}
 	% \kant[1-10]
 	% \section{Une deuxième section}
@@ -283,8 +288,8 @@
 	% \kant[1-10]
 	% \section{Une deuxième section}
 
-	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 	\part{Rich Kirchhoff beam model}\label{part=2}
 	% \include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]

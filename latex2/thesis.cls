@@ -108,6 +108,9 @@
 % \errmessage{Break}
 
 
+% temporary registers
+\newlength\tmpwidth
+\newlength\tmpheight
 % **************************************************
 % Commands
 % **************************************************
@@ -337,10 +340,11 @@
 }
 
 % Style for PhotoCaptionRef label
-\DeclareCaptionListFormat{phantom}{#2)}
+\DeclareCaptionListFormat{phantom}{#2}
+\DeclareCaptionListFormat{phantomsub}{#2)}
 \DeclareCaptionLabelFormat{phantom}{\thefigure\bothIfSecond{}{\thesubfigure}}
 \DeclareCaptionFormat{phantom}{#1#2#3}
-\DeclareCaptionStyle{phantom}[]{
+\DeclareCaptionStyle{phantom}{
 	% hypcap=false,
 	listformat=phantom,
 	labelformat=phantom,
@@ -352,6 +356,7 @@
 	skip=0pt,
 	strut=off, % must be off !!! to get proper baseline alignment
 }
+
 
 % \newcommand{\PhotoSubCaption}[2]{%
 % 	%
@@ -566,50 +571,23 @@
 \newcommand*\chapterlabel{}
 
 %% Chapter
-\titleformat{\chapter}[display]  			% type (section,chapter,etc...) to vary
+\titleformat{\chapter}[block]  			% type (section,chapter,etc...) to vary
 {\tf@chap} 									% format of the chapter
 {\gdef\chapterlabel{\thechapter}}     	% the label
 {0pt} 										% separation between label and chapter-title
 {											% code before the title body
-% \tikzset{external/export next=false} % LDP
-% \begin{tikzpicture}[remember picture,overlay]
-% 	\node[yshift=-\ChapterBoxYOffset] at (current page.north west){
-% 	\begin{tikzpicture}[remember picture, overlay]
-% 		\path[fill=black] (0,0) rectangle (\ChapterBoxWidth,\ChapterBoxHeight); % color box
-% 		\node[anchor=base east, inner sep=0mm, xshift=-\ChapterBoxTextYMargin] at (\ChapterBoxWidth,\ChapterBoxTextYMargin){
-% 			\raggedleft\color{white}\chapterlabel
-% 			% \fbox{\raggedleft\color{white}1000}
-% 		};
-% 		\node[anchor=base west, inner sep=0mm, xshift=\ChapterBoxTextXMargin, text width=\ChapterBoxTextWidth, align=left] at (\ChapterBoxWidth,\ChapterBoxTextYMargin){
-% 			\color{black}#1
-% 			% \fbox{\raggedright\color{black}#1}
-% 		};
-% 	\end{tikzpicture}
-% 	};
-% \end{tikzpicture}
 \GetPageLayoutNodes
 \begin{tikzpicture}[remember picture, inner sep=0mm]
 	\coordinate[yshift=-0\ChapterBoxYOffset/2] (Ftl) at (PGtl);
 	\coordinate[xshift=\ChapterBoxWidth, yshift=-\ChapterBoxYOffset-\ChapterBoxHeight] (Fbr) at (PGtl);
-	% \node[anchor=north east, xshift=-0pt] at (CAtr){
-	% 	\fbox{\hbox{\raggedright\color{black}\chapterlabel{}}}
-	% 	% \fbox{\raggedright\color{black}#1}
-	% };
-	% \coordinate[xshift=4pt+8pt] (@CHAPtr) at (current bounding box.north east) {}; % top-left corner
-	% \coordinate[xshift=4pt+8pt] (@CHAPbr) at (current bounding box.south east) {}; % bottom-left corner
-	% \draw[black,line width=16pt] (@CHAPtr) -- (@CHAPbr);
-	% \path (@CHAPtr |- PPbl) node (@LINEb) {};
-	% \draw[black,line width=0.5pt] ([xshift=-8pt]@CHAPtr) -- ([xshift=-8pt]@LINEb);
-	% \coordinate[yshift=-6pt] (@CHAPbl) at (current bounding box.south west) {}; % top-left corner
-	% \coordinate[yshift=-6pt] (@CHAPbr) at (current bounding box.south east) {}; % bottom-left corner
-	% \draw[black,line width=4pt] (@CHAPbl) -- (@CHAPbr);
-	%
 	\path (CAtl |- Fbr) node (Tbl) {};
 	\path[fill=secondary] (Ftl) rectangle (Fbr);
 	\node[anchor=base west] at (Tbl){
 		\parbox[b]{\ChapterBoxTextWidth}{\raggedright{\scshape\chaptername~\chapterlabel{}}\\[8pt]\color{secondary}\MakeUppercase{#1}}
 		% \fbox{\raggedright\color{black}#1}
 	};
+	\path (Fbr -| PPtr) node (@BLANKtr) {};
+	% \path[fill=black,opacity=0.2] ([yshift=-7cm]Fbr) rectangle (@BLANKtr);
 	% \filldraw[green] (CAtl) circle [radius=1mm];
 	% \filldraw[green] (CAtr) circle [radius=1mm];
 	% \filldraw[green] (CAbl) circle [radius=1mm];
@@ -619,9 +597,9 @@
 	\pgfresetboundingbox
 	\path[use as bounding box] (0,0);
 \end{tikzpicture}
-\gdef\chapterlabel{}
+\gdef\chapterlabel{}%
 }
-[\hbox{\vspace*{4cm}}] 
+[\hbox{\vspace*{8cm}}] 
 
 
 %% Fancy page : part
@@ -1000,34 +978,19 @@
 	% typset a caption from a label outside captionof command
 	% apparently this can be called only once per ref
 	% [#2] : (mandatory) the reference label (fig:inside)
-	% [#1] : (optional) override title
+	% [#1] : (optional) description
 	%
 	\crefname{figure}{}{}
 
-	% \let\oldcrefformat\crefformat
-	% \crefformat{figure}{#2#1#3}
-	
-	\settowidth{\tmpshift}{\space} % correction there is a space from cref between the label and the number}
-	\ifstrempty{#1}
-	{%
-		% double brace needed to make font change local
-		\fbox{\makebox[26pt][l]{\fbox{\hspace{-\tmpshift}\tf@fnnum\cref{#2}}}\tf@fntxt\ztitleref{#2}}%
-	}{%
-	% double brace needed to make font change local
-		\fbox{\makebox[26pt][l]{\fbox{\hspace{-\tmpshift}\tf@fnnum\cref{#2}}}\tf@fntxt#2}%
+	% get figure label from ref 
+	\def\fig@label{}
+	\cref@getlabel{#2}{\fig@label}
+	\parbox[b]{18pt}{\raggedright\tf@fnnum\fig@label}
+	{\tf@fntxt\zdescref{#2}}
+	% add caption title / optional title
+	\ifstrempty{#1}{}{%
+		{\par\smallskip\tf@fntxt#1}%
 	}
-	% \ifstrempty{#1}
-	% {%
-	% 	{{{\tf@fnnum\cref{#2}} - {\tf@fntxt\ztitleref{#2}}}}% double brace needed to make font change local
-	% }{%
-	% 	{{{\tf@fnnum\cref{#2}} - {\tf@fntxt#1}}}% double brace needed to make font change local
-	% }
-	% \ifdefempty{#1}{%
-	% }{%
-	% 	{{{\tf@fnmk\cref{#2}} - {\tf@fntxt#1}}}% double brace needed to make font change local
-	% }
-	% restore parameters (copy/past)
-	% \let\crefformat\oldcrefformat
 	\crefname{figure}{fig.}{figs.}
 }
 

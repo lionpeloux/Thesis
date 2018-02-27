@@ -505,12 +505,20 @@
 	% 
 	\setkeys{kvpcr}{#1}{
 		\ifdefempty{\@PCRHrefNode}{\let\@PCRHrefNode\@PCRNode}{}
-		\captionsetup[#2]{style=phantom}
+		\ifstrequal{#2}{figure}{
+			\captionsetup[#2]{style=phantom}
+		}{
+			\captionsetup[#2]{style=phantom,listformat=phantomsub}
+		}
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
 			% phantom caption (opacity = 0) to get ref entries + hyperref target
 			\node[anchor=north west, yshift=\@PCRHrefYShift, opacity=0.0] 
 				at (\@PCRHrefNode){%
+				\ifstrempty{#3}{
 					\parbox[t]{\textwidth/3}{\captionof{#2}{#4}\label{#5}}
+				}{
+					\parbox[t]{\textwidth/3}{\captionof{#2}[#3]{#4}\label{#5}}
+				}	
 			};
 			% put custom output (label + description) to get proper baseline alignment
 			\node[anchor=\@PCRAnchor, xshift=\@PCRXShift, yshift=\@PCRYShift, opacity=1.0] 
