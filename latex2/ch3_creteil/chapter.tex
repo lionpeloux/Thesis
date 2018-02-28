@@ -48,27 +48,46 @@ This project was at the heart of the motivations for this thesis as it acted as 
 			gopt={width=\tmpwidth},
 			]{situation_map}%
 		\savenodes{A}
+		\Photo[
+			node=CAbr,
+			anchor=south east,
+			xshift=-2\PhotoBigSkip,
+			% yshift=\PhotoSkip,
+			gopt={height=3.75cm},
+			]{form}%
+		\savenodes{B}
 		\intersectnode{CAtl |- Abr}{Pt}
-		\intersectnode{CAtl |- Abr}{Pt}
+		%%
 		\PhotoCaptionRef[
 			hrefnode=Atl,
 			node=Atr,
 			anchor=south east,
 			yshift=\PhotoRefSkip,
+			phantom=true,
 			]{figure}{Situation map}{Situation map of the cathedrale}{fig:situation_map}
 		\PhotoTextBox[
-			node=CAbl,
-			anchor=south west,
-			% yshift=-\PhotoSkip,
+			node=Pt,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
 			% width=6cm,
 			border=false,
 			]{%
 				\figurecaption[The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.]{fig:situation_map}
-				% \par\medskip
-				% \figurecaption[]{fig:sub}
-				% \cref{fig:situation_map}
-				% Situation map. The temporary gridshell (1) was built very close to the permanent cathedral (2). Remark that  the two buildings cover a quite similar projected area.
-				% \parbox[b]{10cm}{\kant[1]}
+			}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Bbr,
+			anchor=north east,
+			yshift=-\PhotoRefSkip,
+			phantom=true,
+			]{figure}{Architectural sketch}{Architectural sketch (T. Gray)}{fig:form}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			border=false,
+			]{%
+				\figurecaption[\raggedright Major and minor volumes are agglomerated into one volume. Here, the morphological register allowed by elastic gridshells appears to be relevant.]{fig:form}
 			}
 	}
 }
@@ -93,36 +112,6 @@ Creteil is a city of 90.000 inhabitants in the southeast suburb of Paris. Its ur
 The origin of this building form was driven by two objectives, that is, to provide a variety of appropriate internal spaces within which the community could assemble, and to provide an externally welcoming and visually interesting form. According to the architect Tom Gray, today, the internal organization of a roman catholic church is in large part driven by the post Vatican II vision of a religious celebration being a collective gathering of the community around the Eucharist, center of spiritual life. A circular seating arrangement is often considered the most convivial form to create a sense of belonging while minimizing a sense of hierarchy. However the community is not only using the building for religious celebration but also for encounters on a more informal manner, for example spontaneous gatherings after religious ceremonies. In the early Roman church, such gathering of the community was facilitated by the presence of an anti-space to the main space called a \emph{narthex}, through which one passed on entering the church. It was therefore felt appropriate that the formal freedom which the gridshell system offered would be used to explore forms composed of an agglomeration of major and a minor volumes which contain the two functions~: formal and informal gatherings (see item 1 and 2 in \cref{fig:form}).
 
 Formal explorations were undertaken using modeling clay. The final form is based loosely on two adjacent semi spherical volumes of different size, which are merged into one complex form. Externally the fear of the design team was that the totally convex blob form could look intimidating. It was therefore decided that the two spherical virtual forms, which would be joined to make the final form, would be arranged not in a symmetrical axial manner, but in an asymmetrical curved composition. The resulting form seen in plan is convex on one side and concave on the other. The concave form in plan allows for double curvature to be introduced into what would be otherwise a simpler blob and gives sensuality and visual interest to the building.
-
-
-\afterpage{%
-	% \thispagestyle{empty}
-	\AddToShipoutPictureBG*{
-		\Photo[
-			node=CAtr,
-			anchor=north east,
-			gopt={height=5cm},
-			]{form}
-		\savenodes{A}
-		%%
-		\PhotoCaptionRef[
-			hrefnode=Atl,
-			node=Abr,
-			anchor=north east,
-			yshift=-\PhotoRefSkip,
-			]{figure}{Architectural sketch}{Architectural sketch (T. Gray)}{fig:form}
-		\PhotoTextBox[
-			node=CAtl,
-			anchor=north west,
-			border=false,
-			]{%
-				\figurecaption[\raggedright Major and minor volumes are agglomerated into one volume. Here, the morphological register allowed by elastic gridshells appears to be relevant.]{fig:form}
-			}
-	}
-	\settoheight{\tmpheight}{\includegraphics[height=5cm]{form}}
-	\setlength{\tmpheight}{\tmpheight+\PhotoBigSkip}
-	\hbox{\vspace{\tmpheight}}
-}
 
 % \begin{figure}[t]
 % 	\centering
@@ -196,26 +185,13 @@ It is formally quite difficult to integrate doors, which must be verticals, into
 			gopt={width=\tmpwidth},
 			]{gs_ext.jpg}%
 		\savenodes{A}
-		% \Photo[
-		% 	node=Abr,
-		% 	anchor=north east,
-		% 	yshift=-\PhotoSkip,
-		% 	gopt={height=4cm},
-		% 	]{door_ext.jpg}%
-		% \savenodes{B}
-		% \Photo[
-		% 	node=Btl,
-		% 	anchor=north east,
-		% 	xshift=-\PhotoSkip,
-		% 	gopt={height=4cm},
-		% 	]{door_int.jpg}%
-		% \savenodes{C}
 		\intersectnode{CAtl |- Abr}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
 			node=Atr,
 			anchor=south east,
 			yshift=\PhotoRefSkip,
+			phantom=true,
 			]{figure}{}{Exterior view}{fig:gs_ext}
 		\intersectnode{CAtl |- Abr}{Pt}
 		\PhotoTextBox[
@@ -241,6 +217,7 @@ It is formally quite difficult to integrate doors, which must be verticals, into
 				node=BL, 
 				anchor=north west,
 				yshift=-\PhotoRefSkip,
+				phantom=true,
 			]{figure}{}{Interior view}{fig:gs_int}}
 	}{%
 		\hbox{}\thispagestyle{empty}
@@ -316,98 +293,76 @@ The gridshell is covered by a PVC membrane, which is opaque. How to introduce da
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
-		% \Photo[
-		% 	node=CAtl,
-		% 	anchor=north west,
-		% 	xshift=0mm,
-		% 	gopt={width=\tmpwidth},
-		% 	]{door_ext.jpg}%
-		% \savenodes{A}
-		% \Photo[
-		% 	node=Atr,
-		% 	anchor=north west,
-		% 	xshift=\PhotoSkip,
-		% 	gopt={width=\tmpwidth},
-		% 	]{door_int.jpg}%
-		% \savenodes{B}
-		%
 		\Photo[
 			node=CAtl,
 			anchor=north west,
 			xshift=0mm,
 			gopt={width=\tmpwidth},
-			]{anchorage.jpg}%
+			]{swivel.jpg}%
 		\savenodes{A}
 		\Photo[
 			node=Atr,
 			anchor=north west,
 			xshift=\PhotoSkip,
 			gopt={width=\tmpwidth},
-			]{edge.jpg}%
+			]{sleeve.jpg}%
 		\savenodes{B}
 		\Photo[
 			node=Abl,
 			anchor=north west,
 			yshift=-\PhotoBigSkip,
 			gopt={width=\tmpwidth},
-			]{swivel.jpg}%%
+			]{anchorage.jpg}%%
 		\savenodes{C}
 		\Photo[
 			node=Bbl,
 			anchor=north west,
 			yshift=-\PhotoBigSkip,
 			gopt={width=\tmpwidth},
-			]{sleeve.jpg}%
+			]{edge.jpg}%
 		\savenodes{D}
+		%%
 		\PhotoCaptionRef[
 			node=Atl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
 			phantom=true,
-			]{figure}{}{Timber gridshells built by gridshell.it in Italy}{fig:gsit}
+			]{figure}{}{Key elements of the structural system}{fig:parts}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
 			node=Atl, 
 			anchor=south west, 
 			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Interior view}{fig:lecce}
+			]{subfigure}{}{Swivel coupler}{fig:swivel}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
 			node=Btl, 
 			anchor=south west, 
 			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Exterior view}{fig:toledo2}
-		%%
-		\PhotoCaptionRef[
-			node=Ctl,
-			anchor=south west,
-			yshift=-\PhotoSkip,
-			phantom=true,
-			]{figure}{}{Timber gridshell built in 2013 in San Antonio, USA}{fig:sanantonio}
+			]{subfigure}{}{Sleeve system}{fig:sleeve}
 		\PhotoCaptionRef[
 			hrefnode=Ctl,
 			node=Cbl, 
 			anchor=north west, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{Folding skin}{fig:sanantonio2}
+			]{subfigure}{}{Ground anchorage}{fig:anchorage}
 		\PhotoCaptionRef[
 			hrefnode=Dtl,
 			node=Dbl, 
 			anchor=north west, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{Pavilion}{fig:sanantonio1}
+			]{subfigure}{}{Lacing rod}{fig:edge}
 		\PhotoTextBox[
 			node=CAbl,
 			anchor=south west,
 			width=10cm,
 			border=false,
 			]{%
-				\figurecaption{fig:gsit}\par
-				\figurecaption{fig:lecce}\par
-				\figurecaption{fig:toledo2}\par\smallskip
-				\figurecaption{fig:sanantonio}\par
-				\figurecaption{fig:sanantonio2}\par
-				\figurecaption{fig:sanantonio1}\par
+				\figurecaption{fig:parts}\par
+				\figurecaption{fig:swivel}\par
+				\figurecaption{fig:sleeve}\par
+				\figurecaption{fig:anchorage}\par
+				\figurecaption{fig:edge}
 			}
 	}
 }
@@ -418,78 +373,47 @@ The structure is anchored to a concrete strip footing with a special anchorage s
 
 A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers the structure. The transparent portion of the structure allows daylight inside the gridshell. The fabric is stretched on the peripheral edge of a dedicated beam with a double-lacing system (halyard and strap, see \cref{fig:edge}). At the ground level, the lacing edge of the beam is made of a bent composite rod nailed to the concrete slab. At the grid–door junction, a steel arch is welded to the doorframe (see \cref{fig:door_ext}). The PVC fabric is waterproof and, since it is a continuous membrane, has no joints except at the perimeter. At the perimeter, a continuous strip of membrane is prefixed to the internal surface of the membrane and fixed to the ground slab. At the doors, a flexible strip of the membrane is riveted to the doorframe.
 
+\blankpage{
+	\vspace*{\fill}
+	\centering
+	\ra{0.95}
+	\begin{tabular}{@{}lllrr@{}}
+		\toprule
+		Category	 & Item 						& Unit 						& Quantity\\
+		\midrule
+		Public  	& seating  						& p							& 360 \\
+					& standing 						& p							& 500 \\
+		\midrule
+	%	\addlinespace[0.5cm]
+		Dimensions  &  length						& m 						& 29	\\
+					&  width 						& m							& 17	\\
+					&  height 						& m							& 7	\\
+					& contour 	 					& lm						& 75\\
+					& area							& m\textsuperscript{2}		& 350\\
+					&  volume						& m\textsuperscript{3}		& 1600 \\
+		\midrule
+	%	\addlinespace[0.5cm]
+		Gridshell   &  tubes (x176)					& lm						& 1775 \\
+					&  connections					& 							& 1130 \\
+					&  sleeves						& 							& 125 \\
+					& anchorages 					& 							& 127 \\
+					& \quad \emph{ground (single)} 	& 							& 77 \\
+					& \quad \emph{ground (double)} 	& 							& 16 \\
+					& \quad \emph{door (single)} 	& 							& 18 \\
+					& weight  						& kg/m\textsuperscript{2} 	& 5 \\
+		\midrule
+	%	\addlinespace[0.5cm]
+		Fabric   	& opaque						& m\textsuperscript{2}	 	& 530 \\
+					& transparent					& m\textsuperscript{2}		& 12 \\
+					& lacing rod					& lm 				 		& 67 \\
+					& weight						& kg/m\textsuperscript{2}	& 1 \\
+		\bottomrule
+	\end{tabular}
+	\captionof{table}[Key figures]{Key figures.}
+	\vspace*{\fill}
+}
 
-
-\vspace{0.4cm}
-\begin{table}[h]
-\centering
-\ra{0.95}
- 	\begin{tabular}{@{}lllrr@{}}
-	\toprule
- 	Category	 	& Item 						& Unit 		& Quantity\\
-	\midrule
-	Public  		& seating  					& p					& 360 \\
-      				& standing 					& p					& 500 \\
-	\midrule
-%	\addlinespace[0.5cm]
-	Dimensions   	&  length						& m 					& 29	\\
-	   			&  width 						& m					& 17	\\
-				&  height 						& m					& 7	\\
-				& contour 	 					& lm					& 75\\
-				& area						& m\textsuperscript{2}	& 350\\
-				&  volume						& m\textsuperscript{3}	& 1600 \\
-	\midrule
-%	\addlinespace[0.5cm]
-	Gridshell   	&  tubes (x176)					& lm					& 1775 \\
-	   			&  connections					& 					& 1130 \\
-				&  sleeves						& 					& 125 \\
-				& anchorages 					& 					& 127 \\
-				& \quad \emph{ground (single)} 	& 					& 77 \\
-				& \quad \emph{ground (double)} 	& 					& 16 \\
-				& \quad \emph{door (single)} 		& 					& 18 \\
-				& weight  						& kg/m\textsuperscript{2} 	& 5 \\
-	\midrule
-%	\addlinespace[0.5cm]
-	Fabric   		& opaque						& m\textsuperscript{2}	 & 530 \\
-	   			& transparent					& m\textsuperscript{2}	& 12 \\
-				& lacing rod					& lm 				 	& 67 \\
-				& weight						& kg/m\textsuperscript{2}	& 1 \\
-	\bottomrule
- 	\end{tabular}
-\captionof{table}[Key figures]{Key figures.}
-\end{table}
-
-\doubleblankpage[r]{
-	\thispagestyle{empty}
-	\hbox{}
-	\AddToShipoutPictureBG*{% 
-		\setlength{\tmpwidth}{\textwidth+\ContentInnerMargin+\BleedInnerMargin+\ContentBindingOffset}
-		\intersectnode{PPtl |- CAbl}{Pt}
-		\Photo[
-			node=Pt,
-			anchor=south west,
-			% yshift=-\PhotoBigSkip,
-			gopt={width=\tmpwidth},
-			]{section_view}%
-		\savenodes{B}
-		\PhotoCaptionRef[
-			node=Atl,
-			anchor=south west,
-			yshift=-\PhotoSkip,
-			phantom=true,
-			]{figure}{}{Timber gridshells built by gridshell.it in Italy}{fig:gsit}
-		\PhotoTextBox[
-			node=CAbl,
-			anchor=south west,
-			width=10cm,
-			border=false,
-			]{%
-				\figurecaption{fig:gsit}\par
-				\figurecaption{fig:lecce}\par
-				\figurecaption{fig:toledo2}
-			}
-	}
-}{%
+\blankpage{
 	\thispagestyle{empty}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
@@ -499,27 +423,98 @@ A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers
 			node=Pt,
 			anchor=north west,
 			xshift=0mm,
-			gopt={width=\tmpwidth},
-			]{plan_view}%
+			gopt={width=\PaperWidth},
+			]{plan_view2}%
 		\savenodes{A}
 		\PhotoCaptionRef[
 			node=Atl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
 			phantom=true,
-			]{figure}{}{Timber gridshells built by gridshell.it in Italy}{fig:gsit}
+			]{figure}{}{Top view of the building}{fig:plan_view}
 		\PhotoTextBox[
 			node=CAbl,
 			anchor=south west,
-			width=10cm,
+			width=8cm,
 			border=false,
 			]{%
-				\figurecaption{fig:gsit}\par
-				\figurecaption{fig:lecce}\par
-				\figurecaption{fig:toledo2}
+				\figurecaption[The interior space is composed of a choir (1), a place of assembly (2) and a narthex (3). The main entrance overlook the parvis (4). The shell spans about 29~m in the longitudinal direction and about 17~m in the transversal direction. The covered area is about 350~m\textsuperscript{2}. The space can accommodate 360 seating people or 500 standing people.]{fig:plan_view}\par
 			}
 	}
+
+	\doubleblankpage{%
+		\hbox{}
+		\intersectnode{PPtl |- CAbl}{Pt}
+		\PhotoSpread[
+			node=Pt,
+			anchor=south west,
+			yshift=-5cm,
+			gopt={width=2\PaperWidth}
+		]{section_view2}
+		\AddToShipoutPictureBG*{
+			\PhotoCaptionRef[
+				hrefnode=TL,
+				node=BL, 
+				anchor=north west,
+				yshift=-\PhotoRefSkip,
+				phantom=true,
+			]{figure}{}{Transversal section of the building}{fig:sec}
+			\PhotoTextBox[
+				node=CAtl,
+				anchor=north west,
+				xshift=\PhotoBigSkip,
+				border=false,
+			]{%
+				\figurecaption[Observe how the grid gets denser at the choir. Two doors give access to the building. The height at the pinnacle is about 7~m.]{fig:sec}
+			}
+		}
+	}{%
+		\hbox{}\thispagestyle{empty}
+		\AddToShipoutPictureBG*{
+		\Photo[
+			node=CAtr,
+			anchor=north east,
+			xshift=0mm,
+			gopt={width=5cm},
+			]{section_view_detail}%
+		\savenodes{A}	
+	}}
 }
+
+
+
+% \doubleblankpage[l]{
+% 	\thispagestyle{empty}
+% 	\hbox{}
+% 	\AddToShipoutPictureBG*{% 
+% 		\setlength{\tmpwidth}{\textwidth+\ContentInnerMargin+\BleedInnerMargin+\ContentBindingOffset}
+% 		\intersectnode{PPtl |- CAbl}{Pt}
+% 		\Photo[
+% 			node=Pt,
+% 			anchor=south west,
+% 			% yshift=-\PhotoBigSkip,
+% 			gopt={width=\tmpwidth},
+% 			]{section_view}%
+% 		\savenodes{B}
+% 		\PhotoCaptionRef[
+% 			node=Atl,
+% 			anchor=south west,
+% 			yshift=-\PhotoSkip,
+% 			phantom=true,
+% 			]{figure}{}{Transversal section of the building}{fig:sec}
+% 		\PhotoTextBox[
+% 			node=CAtl,
+% 			anchor=north west,
+% 			% width=10cm,
+% 			border=false,
+% 			]{%
+% 				\figurecaption[Observe how the grid gets denser at the choir. Two doors give access to the building. The height at the pinnacle is about 7~m.]{fig:sec}
+% 			}
+% 	}
+% }{%
+% 	\thispagestyle{empty}
+% 	\hbox{}
+% }
 
 % \begin{figure}[p]
 % 	\captionsetup[subfloat]{captionskip=20pt}
@@ -548,8 +543,142 @@ The first two directions of tubes were assembled perpendicularly on the ground w
 \subsection{Deformation of the grid}
 The next stage consisted in lifting the grid simultaneously with two mobile cranes (35t). Once lifted up, the grid took nearly its final form (see \cref{fig:cp_2}). The structure was slowly moved above the slab until tube endings faced at best their respective anchor points. Then, tube after tube, the workers pined the grid to the ground anchorages (see \cref{fig:cp_3}). This stage is tricky, especially at the beginning because only few tubes are connected to the ground. If the grid moves it can easily break these few tubes. The action of pinning a tube is done with a single bolt. The end of each composite tube is equipped with a rotating steel clevis. Similarly, each ground anchorage is composed of a steel plate fixed to the concrete slab and a rotating clevis. To pin a tube to an anchorage, their clevis are aligned one to each other and a pin is positioned in their central hole (see \cref{fig:anchorage}). When all the tubes were pinned to their anchorage, the grid was stable and secured and the cranes were removed (see \cref{fig:cp_4}). This stage lasted one full day.
 
+\intersectnode{PPtr |- CAtr}{Pt}
+% \PhotoSpread[
+% 	node=Pt,
+% 	xshift=-4\PhotoBigSkip,
+% 	anchor=north west,
+% 	gopt={height=7cm}
+% ]{cp_1.jpg}
+
+\afterpage{
+	\thispagestyle{empty}
+	\hbox{\vspace*{15cm}}
+	\AddToShipoutPictureBG*{% 
+		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
+		\intersectnode{PPtl |- CAtl}{Pt}
+		\def\tmpheight{(\textheight-2\PhotoBigSkip)/3}
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			xshift=0mm,
+			gopt={height=\tmpheight},
+			]{cp_1.jpg}%
+		\savenodes{A}
+		\Photo[
+			node=Abr,
+			anchor=north east,
+			yshift=-\PhotoBigSkip,
+			gopt={height=\tmpheight},
+			]{cp_2.jpg}%
+		\savenodes{B}
+		\Photo[
+			node=Bbr,
+			anchor=north east,
+			yshift=-\PhotoBigSkip,
+			gopt={height=\tmpheight},
+			]{cp_3.jpg}%%
+		\savenodes{C}
+		% \Photo[
+		% 	node=TR,
+		% 	anchor=north west,
+		% 	xshift=\PhotoSkip,
+		% 	gopt={height=7cm},
+		% 	]{cp_2.jpg}%
+		% \savenodes{A}
+		% \Photo[
+		% 	node=Atr,
+		% 	anchor=north west,
+		% 	xshift=\PhotoSkip,
+		% 	gopt={width=\tmpwidth},
+		% 	]{cp_2.jpg}%
+		% \savenodes{B}
+	}
+}
+
 \subsection{Bracing of the grid}
 Once the primary grid was deformed into the final shape, it was braced by a third direction of tubes called the \emph{triangulation}. The triangulation tubes split the quadrangular mesh of the primary grid into triangles (see \cref{fig:cp_5}). This work was tedious as it required working at height in aerial buckets. Tubes were hand-conveyed in the structure and attached to the tubes of the second layer with an additional swivel coupler. Each node of the structure would then be composed of two connections (see \cref{fig:swivel_dwg}). Once triangulated the structure behaves like a shell and its stiffness increases largely.
+
+
+\blankpage{%
+	\thispagestyle{empty}
+	\hbox{}
+	\AddToShipoutPictureBG*{% 
+		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
+		\def\tmpheight{(\textheight-2\PhotoBigSkip)/3}
+		\Photo[
+			node=CAtr,
+			anchor=north east,
+			xshift=0mm,
+			gopt={height=\tmpheight},
+			]{cp_1.jpg}%
+		\savenodes{A}
+		\Photo[
+			node=Abr,
+			anchor=north east,
+			yshift=-\PhotoSkip,
+			gopt={height=\tmpheight},
+			]{cp_2.jpg}%
+		\savenodes{B}
+		\Photo[
+			node=Bbr,
+			anchor=north east,
+			yshift=-\PhotoSkip,
+			gopt={height=\tmpheight},
+			]{cp_3.jpg}%%
+		\savenodes{C}
+		\Photo[
+			node=Bbl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{cp_4.jpg}%
+		\savenodes{D}
+		%%
+		\PhotoCaptionRef[
+			node=Atl,
+			anchor=south west,
+			yshift=-\PhotoSkip,
+			phantom=true,
+			]{figure}{}{Key elements of the structural system}{fig:parts}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Swivel coupler}{fig:swivel}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Sleeve system}{fig:sleeve}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Cbl, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Ground anchorage}{fig:anchorage}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Dbl, 
+			anchor=north west, 
+			yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Lacing rod}{fig:edge}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:parts}\par
+				\figurecaption{fig:swivel}\par
+				\figurecaption{fig:sleeve}\par
+				\figurecaption{fig:anchorage}\par
+				\figurecaption{fig:edge}
+			}
+	}
+}
 
 % \begin{figure}[p]
 % 	%
@@ -612,58 +741,58 @@ where $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radiu
 
 Ideally, the shape is controlled by few key parameters. Thus, it is easier to adapt and optimize the shape through an iterative process towards the above criterion \cref{eq:crit_1}.
 
-% \begin{figure}[t]
-% \centering
-% %\begin{fullpage}
-% \includegraphics[width=\textwidth]{curvature_analysis}
-% \caption[Benchmarking shapes regarding their curvature]{Benchmarking shapes regarding their minimum principal curvature.}
-% \label{fig:shape_bench}
-% %\end{fullpage}
-% \end{figure}
+\begin{figure}[t]
+\centering
+%\begin{fullpage}
+\includegraphics[width=\textwidth]{curvature_analysis}
+\caption[Benchmarking shapes regarding their curvature]{Benchmarking shapes regarding their minimum principal curvature.}
+\label{fig:shape_bench}
+%\end{fullpage}
+\end{figure}
 
-% \subsection{Meshing the surface}
-% %------------------------------------------
-% During the second step, the candidate surface is meshed and the mechanical potential of the resulting grid is evaluated. At this stage, the probability of a given mesh leading to the generation of a viable gridshell structure is estimated. Simultaneously, meshes are compared according to their architectural relevance.
+\subsection{Meshing the surface}
+%------------------------------------------
+During the second step, the candidate surface is meshed and the mechanical potential of the resulting grid is evaluated. At this stage, the probability of a given mesh leading to the generation of a viable gridshell structure is estimated. Simultaneously, meshes are compared according to their architectural relevance.
 
-% In this step, the geometric curvature of the polylines drawn on the surface is an appropriate criterion to characterize the mechanical potential of the grid. Unlike the previous step, this criterion takes into account the curvature of the studied mesh and not the minimum principal curvature. In particular, it has to be ensured that the following condition is satisfied everywhere~:
-% \begin{equation}
-% 	\mathrm{E} \cdot   \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
-% 	\label{eq:crit_2}
-% \end{equation}
-% where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see below), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. I implemented this method, proposed by \citet{IL10}, for the Solidays gridshell in 2011 \cite{DuPeloux2011}.\footnote{This method was also used at the laboratoire Navier by \citef{Bouhaya2014} and more recently by \citef{Masson2017b}.} The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec=swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The goal of the method is to identify at least one grid which satisfies both the architectural and the structural requirements.
+In this step, the geometric curvature of the polylines drawn on the surface is an appropriate criterion to characterize the mechanical potential of the grid. Unlike the previous step, this criterion takes into account the curvature of the studied mesh and not the minimum principal curvature. In particular, it has to be ensured that the following condition is satisfied everywhere~:
+\begin{equation}
+	\mathrm{E} \cdot   \frac{r}{R_{spline}}  <   \frac{\sigma_{k,flex}}{\gamma_{lt}}
+	\label{eq:crit_2}
+\end{equation}
+where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see below), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. I implemented this method, proposed by \citet{IL10}, for the Solidays gridshell in 2011 \cite{DuPeloux2011}.\footnote{This method was also used at the laboratoire Navier by \citef{Bouhaya2014} and more recently by \citef{Masson2017b}.} The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec=swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The goal of the method is to identify at least one grid which satisfies both the architectural and the structural requirements.
 
-% \begin{figure}[t]
-%      	\centering
-% %	\begin{fullpage}
-% 		\includegraphics[width=0.8\textwidth]{compass_method.png}
-% 		\caption[How the compass method works]{How the compass method works.}
-% 		\label{fig:compass_method}
-% 		%
-% 		\vspace{0.75cm}
-% 		%
-% 		\includegraphics[width=1\textwidth]{canevas.png}
-% 		\caption{Meshing software as a plugin for \emph{Grasshopper}.}
-% 		\label{fig:canevas}
-% %	\end{fullpage}
-% \end{figure}
+\begin{figure}[t]
+     	\centering
+%	\begin{fullpage}
+		\includegraphics[width=0.8\textwidth]{compass_method.png}
+		\caption[How the compass method works]{How the compass method works.}
+		\label{fig:compass_method}
+		%
+		\vspace{0.75cm}
+		%
+		\includegraphics[width=1\textwidth]{canevas.png}
+		\caption{Meshing software as a plugin for \emph{Grasshopper}.}
+		\label{fig:canevas}
+%	\end{fullpage}
+\end{figure}
 
-% %\begin{figure}[h]
-% %	\centering
-% %	\includegraphics[width=0.8\textwidth]{compass_method.png}
-% %	\caption[How the compass method works]{How the compass method works.}
-% %	\label{fig:compass_method}
-% %	%
-% %%	\includegraphics[width=1\textwidth]{canevas.png}
-% %%	\caption[Grasshopper canevas]{Meshing software as a plugin for \emph{Grasshopper}.}
-% %%	\label{fig:canevas}
-% %\end{figure}
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{compass_method.png}
+%	\caption[How the compass method works]{How the compass method works.}
+%	\label{fig:compass_method}
+%	%
+%%	\includegraphics[width=1\textwidth]{canevas.png}
+%%	\caption[Grasshopper canevas]{Meshing software as a plugin for \emph{Grasshopper}.}
+%%	\label{fig:canevas}
+%\end{figure}
 
-% \subsubsection{Compass method}\label{sec=compass}
-% This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quadrants. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.
+\subsubsection{Compass method}\label{sec=compass}
+This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quadrants. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.
 
-% The compass method does not allow to spread the mesh everywhere on a given surface because it stops when a directrix reaches the boundary of the surface. Only a portion of the surface can be meshed and the covered area varies according to the chosen set of directrices. To overcome this difficulty, we consider the gridshell surface (see \cref{fig:compass_a}) as a part of a larger domain surface (see \cref{fig:compass_c}). Trimmed by a plane, this domain surface should give back the intended shape to build (see \cref{fig:compass_b}). Therefore, it is possible to mesh the domain surface (see \cref{fig:compass_d}) and to retrieve a Chebyshev net (that is an equilateral mesh) that cover completely the initial surface (see \cref{fig:compass_f}).
+The compass method does not allow to spread the mesh everywhere on a given surface because it stops when a directrix reaches the boundary of the surface. Only a portion of the surface can be meshed and the covered area varies according to the chosen set of directrices. To overcome this difficulty, we consider the gridshell surface (see \cref{fig:compass_a}) as a part of a larger domain surface (see \cref{fig:compass_c}). Trimmed by a plane, this domain surface should give back the intended shape to build (see \cref{fig:compass_b}). Therefore, it is possible to mesh the domain surface (see \cref{fig:compass_d}) and to retrieve a Chebyshev net (that is an equilateral mesh) that cover completely the initial surface (see \cref{fig:compass_f}).
 
-% The method is easily extended to meshes with variable pitch. This idea was explored to find optimal grids with genetic algorithm by \citet{Bouhaya2014}. It is worthwhile to mention an attempt to extend this method for multilayer Chebyshev grids by \citet{Lefevre2015}.
+The method is easily extended to meshes with variable pitch. This idea was explored to find optimal grids with genetic algorithm by \citet{Bouhaya2014}. It is worthwhile to mention an attempt to extend this method for multilayer Chebyshev grids by \citet{Lefevre2015}.
 
 % \begin{figure}[p]
 % 	%

@@ -206,15 +206,14 @@
 	% \setmainfont{SabonLTStd-Roman}
 	\setmainfont{LMRoman17-Regular}
 	% \setmainfont{GaramondPremrPro-LtDisp}
-	\newfontfamily\font@body{GillSans-Light}[Scale = MatchUppercase]
 	\newfontfamily\font@hdr{FuturaLT-Book}[Scale = MatchUppercase]
 	\newfontfamily\font@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
 	\newfontfamily\font@chap{FuturaLT}[Scale = MatchUppercase]
 	\newfontfamily\font@sec{FuturaLT-Book}[Scale = MatchUppercase]
 	\newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
 	\newfontfamily\font@subsubsec{FuturaLT-Condensed}[Scale = MatchUppercase]
+	\newfontfamily\font@alt{GillSans-Light}[Scale = MatchUppercase]
 	\newfontfamily\font@label{FuturaLT-Book}[Scale = MatchUppercase]
-	\newfontfamily\font@cap{FuturaLT}[Scale = MatchUppercase]
 }
 
 
@@ -233,9 +232,15 @@
 \DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\large}
 \DeclareRobustCommand{\tf@seclabel}{\font@label\scriptsize\color{secondary}}
 \DeclareRobustCommand{\tf@piclabel}{\font@label\scriptsize\color{black}}
-\DeclareRobustCommand{\tf@fntxt}{\font@body\footnotesize}
-\DeclareRobustCommand{\tf@fnnum}{\font@body\bfseries\scriptsize}
+% footnote
+\DeclareRobustCommand{\tf@fntxt}{\font@alt\footnotesize}
+\DeclareRobustCommand{\tf@fnnum}{\font@alt\bfseries\scriptsize}
 \DeclareRobustCommand{\tf@fnmk}{\font@label\bfseries\tiny}
+% caption
+\DeclareRobustCommand{\tf@captxt}{\font@alt\footnotesize}
+\DeclareRobustCommand{\tf@capnum}{\font@label\bfseries\scriptsize\color{black}}
+% \DeclareRobustCommand{\tf@capmk}{\font@label\bfseries\tiny}
+
 \DeclareRobustCommand{\tf@cap}{\font@cap\small}
 % equation label font
 \setlength{\mathindent}{1em}
@@ -297,8 +302,7 @@
 \captionsetup[figure]{skip=10pt}
 \captionsetup[subfigure]{skip=5pt}		% subcpation	
 
-\DeclareCaptionFormat{plain}{\tf@cap{\bfseries#1}#2#3\par}
-
+\DeclareCaptionFormat{plain}{{\tf@capnum#1}{\tf@captxt#2#3\par}}
 
 % subcaption entry format in LOF
 \DeclareCaptionListFormat{pcr}{#2)}

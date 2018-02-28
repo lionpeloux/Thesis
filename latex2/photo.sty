@@ -87,7 +87,7 @@
 
 % display paramteres for anchors (when showanchors=true)
 \newlength{\@radius}
-% \setlength{\@radius}{0.5mm}
+% \setlength{\@radius}{0.1mm}
 \setlength{\fboxsep}{0pt}
 \setlength{\fboxrule}{0.0pt}
 
@@ -161,135 +161,6 @@
 	% help : https://tex.stackexchange.com/a/55656
 	%
 
-	% make sure to start on a left page
-	% but do not break text flow around the double page
-	\afterpage{%
-    \clearpage% flush all other floats
-    \ifodd\value{page}
-    % \else% uncomment this else to get odd/even instead of even/odd
-        \expandafter\afterpage% put it on the next page if this one is odd
-    \fi
-    {%
-		\setkeys{kvps}{#1}{
-
-		% height and width of the image
-		\settoheight{\PhotoHeight}{\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}}
-		\settowidth{\PhotoWidth}{\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}}
-
-		\global\PhotoHeight=\PhotoHeight
-		\global\PhotoWidth=\PhotoWidth
-		\def\@PSWidth{\PhotoWidth}
-		
-		% correction of half pgflinewidth (Y)
-		\IfSubStr{\@PSAnchor}{north}{\setlength{\@YShift}{\@PSYShift+0.5\pgflinewidth}}{}%
-		\IfSubStr{\@PSAnchor}{south}{\setlength{\@YShift}{\@PSYShift-0.5\pgflinewidth}}{}%
-
-		% % correction of half pgflinewidth (X)
-		\IfSubStr{\@PSAnchor}{west}{%
-			\setlength{\@PSXShiftLeft}{\@PSXShift-0.5\pgflinewidth}
-			\setlength{\@PSXShiftRight}{\@PSXShift-0.5\pgflinewidth-\paperwidth}
-		}{}
-		\IfSubStr{\@PSAnchor}{east}{%
-			\setlength{\@PSXShiftLeft}{\@PSXShift+0.5\pgflinewidth+\paperwidth}
-			\setlength{\@PSXShiftRight}{\@PSXShift+0.5\pgflinewidth}
-		}{}
-
-		% ==========
-		% Left page
-		% ==========
-		% \cleartoleftpage
-		\thispagestyle{\@PSLeftPageStyle}
-		\begin{tikzpicture}[remember picture, inner sep=0pt]
-			% \coordinate NL_tl ($ ( A) + (0 ,\a) $);
-			\node[anchor=\@PSAnchor, xshift=\@PSXShiftLeft, yshift=\@YShift] at (current page.\@PSAnchor){
-				\includegraphics[width=\@PSWidth]{#2}};
-			\coordinate[xshift=0.0\pgflinewidth] (TL) at (current bounding box.north west) {}; % top-left corner
-			\coordinate[xshift=0.0\pgflinewidth] (BL) at (current bounding box.south west) {}; % bottom-left corner
-			\pgfresetboundingbox
-			\path[use as bounding box] (0,0);
-			\filldraw[red] (TL) circle [radius=\@radius];
-			\filldraw[red] (BL) circle [radius=\@radius];
-		\end{tikzpicture}
-		% if the picture is east aligned, the caption goes to the left page
-		\IfSubStr{\@PSAnchor}{east}{
-			\setlength{\@TextBoxMaxWidth}{2\paperwidth - (-\@PSXShift+\@PSWidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
-			\setlength{\@TextBoxWidth}{\minof{\@TextBoxWidth}{\@TextBoxMaxWidth}}
-			% \setlength{\@TextBoxWidth}{80mm}
-			\ifdefstring{\@PSTextBoxPosition}{top}{
-				\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-					\node [anchor=north east, xshift=-\@TextBoxXMargin, yshift=-\@TextBoxYMargin]  
-						at (TL) {%
-					\rotatebox{0}{\fbox{\parbox[t]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
-				\end{tikzpicture}
-			}{}
-			\ifdefstring{\@PSTextBoxPosition}{bottom}{
-				\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-					\node [anchor=south east, xshift=-\@TextBoxXMargin, yshift=\@TextBoxYMargin] 
-						at (BL) {%
-					\rotatebox{0}{\fbox{\parbox[b]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
-				\end{tikzpicture}
-			}{}
-		}{}
-		\@PSLeftPageCode
-		% ==========
-		% Right page
-		% ==========
-		\clearpage
-		\thispagestyle{\@PSRightPageStyle}
-		\begin{tikzpicture}[remember picture, inner sep=0pt]
-			\node[anchor=\@PSAnchor, xshift=\@PSXShiftRight, yshift=\@YShift] at (current page.\@PSAnchor){
-				\includegraphics[width=\@PSWidth]{#2}};
-			\coordinate[xshift=0.25\pgflinewidth] (TR) at (current bounding box.north east) {}; % top-left corner
-			\coordinate[xshift=0.25\pgflinewidth] (BR) at (current bounding box.south east) {}; % bottom-left corner
-			\pgfresetboundingbox
-			\path[use as bounding box] (0,0);
-			\filldraw[red] (TR) circle [radius=\@radius];
-			\filldraw[red] (BR) circle [radius=\@radius];
-			% \draw[red] (BL) rectangle (TR); 
-		\end{tikzpicture}
-		% if the picture is west aligned, the caption goes to the right page
-		\IfSubStr{\@PSAnchor}{west}{
-			\setlength{\@TextBoxMaxWidth}{2\paperwidth - (\@PSXShift+\@PSWidth) - (\@BleedOuterMargin + \@SafeContentOuterMargin)}
-			\setlength{\@TextBoxWidth}{\minof{\@TextBoxWidth}{\@TextBoxMaxWidth}}
-			\ifdefstring{\@PSTextBoxPosition}{top}{
-				\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-					\node [anchor=north west, xshift=\@TextBoxXMargin, yshift=-\@TextBoxYMargin]  
-						at (TR) {%
-					\rotatebox{0}{\fbox{\parbox[t]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
-				\end{tikzpicture}
-			}{}
-			\ifdefstring{\@PSTextBoxPosition}{bottom}{
-				\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-					\node [anchor=south west, xshift=\@TextBoxXMargin, yshift=\@TextBoxYMargin] 
-						at (BR) {%
-					\rotatebox{0}{\fbox{\parbox[b]{\@TextBoxWidth-\@TextBoxXMargin}{\@PSTextBoxCode}}}};
-				\end{tikzpicture}
-			}{}
-		}{}
-		\@PSRightPageCode\clearpage}
-    }%
-	}
-}
-
-
-\renewcommand\PhotoSpread[2][]{
-	%
-	% [#1] : path to image file (mandatory)
-	% [#2] : anchor	= north | south
-	%		 width 		= image width (default to 2\paperwidth)
-	%		 xshift		= image shift along x (0mm)
-	%		 yshift		= image shift along y (0mm)
-	%		 lpstyle	= fancyhdr left page style (empty)
-	%        rpstyle	= fancyhdr right page style (empty)
-	%		 lpcode		= code to execute on the left page ({})
-	%        rpcode		= code to execute on the right page ({})
-	%        boxcode	= code to put in the textbox ({})
-	%        boxvpos	= top | bottom
-	% 
-	% help : https://tex.stackexchange.com/a/23865
-	% help : https://tex.stackexchange.com/a/55656
-	%
-
 	
 	\setkeys{kvps}{#1}{
 
@@ -300,7 +171,7 @@
 	\global\PhotoHeight=\PhotoHeight
 	\global\PhotoWidth=\PhotoWidth
 	\global\@MyPSWidth=\PhotoWidth
-	
+	% \showthe\@PSXShift
 	% correction of half pgflinewidth (Y)
 	\IfSubStr{\@PSAnchor}{north}{\setlength{\@YShift}{\@PSYShift+0.5\pgflinewidth}}{}%
 	\IfSubStr{\@PSAnchor}{south}{\setlength{\@YShift}{\@PSYShift-0.5\pgflinewidth}}{}%
@@ -314,12 +185,19 @@
 		\setlength{\@PSXShiftLeft}{\@PSXShift+0.5\pgflinewidth+\paperwidth}
 		\setlength{\@PSXShiftRight}{\@PSXShift+0.5\pgflinewidth}
 	}{}
-
+	%
+	% make sure length registers get visible  
+	% in the scope of \AddToShipoutPictureBG 
+	%
+	\global\@YShift=\@YShift
+	\global\@PSXShiftLeft=\@PSXShiftLeft
+	\global\@PSXShiftRight=\@PSXShiftRight
+	%
 	\IfSubStr{\@PSAnchor}{west}{% normal way from left to right part
 		% ==========
 		% Left Piece
 		% ==========
-		% \cleartoleftpage
+		%
 		\thispagestyle{\@PSLeftPageStyle}
 		\AddToShipoutPictureBG*{%
 			\@PSLeftPageCode
@@ -328,6 +206,7 @@
 					\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}};
 				\coordinate (@Atl) at (current bounding box.north west) {}; % top-left corner
 				\coordinate (@Abl) at (current bounding box.south west) {}; % bottom-left corner
+				% \draw[line width=0.05mm] (current bounding box.south west) rectangle (current bounding box.north east);
 				\path (@Atl -| PGtr) node (@Atr){};  % without bleed
 				\path (@Abl -| PGtr) node (@Abr){};  % without bleed
 				\path (@Atl -| PPtr) node (@AAtr){}; % with bleed
@@ -354,8 +233,10 @@
 				\path (@Abl -| PPtl) node (@BBbl){}; % with bleed
 				\path (@Atl -| PGtl) node (@Btl){};  % without bleed
 				\path (@Abl -| PGtl) node (@Bbl){};  % without bleed
-				\node[anchor=north west] at ($(@Btl)+(@Atl)-(@Atr)$) {
+				\pgfresetboundingbox % required to compute the boundingbox of the picture.
+				\node[anchor=north west, xshift=-0.5\pgflinewidth, yshift=0.5\pgflinewidth, inner sep=0pt] at ($(@Btl)+(@Atl)-(@Atr)$) {
 					\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}};
+				% \draw[line width=0.05mm] (current bounding box.south west) rectangle (current bounding box.north east);
 				\coordinate (@Btr) at (current bounding box.north east) {}; % top-left corner
 				\coordinate (@Bbr) at (current bounding box.south east) {}; % bottom-left corner
 				% store points of interest
@@ -663,7 +544,7 @@
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
 			\node[anchor=\@TBAnchor, xshift=\@TBXShift+\@TBBorderShift, yshift=\@TBYShift] 
 				at (\@TBNode){%
-					\fbox{\parbox[b]{\@TBWidth}{\setstretch{0.9}\tf@fntxt#2}}%	
+					\fbox{\parbox[b]{\@TBWidth}{\setstretch{0.95}\tf@fntxt#2}}%	
 			};
 			% store points of interest
 			\coordinate (@TL) at (current bounding box.north west); 	% top-left corner
