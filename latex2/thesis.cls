@@ -984,18 +984,18 @@
 	% [#2] : (mandatory) the reference label (fig:inside)
 	% [#1] : (optional) description
 	%
-	\crefname{figure}{}{}
+	% \crefname{figure}{}{}
 
 	% get figure label from ref 
 	\def\fig@label{}
 	\cref@getlabel{#2}{\fig@label}
-	\parbox[b]{18pt}{\raggedright\tf@fnnum\fig@label}
+	\parbox[b]{24pt}{\raggedright\tf@fnnum\fig@label}
 	{\tf@fntxt\zdescref{#2}}
 	% add caption title / optional title
 	\ifstrempty{#1}{}{%
 		{\par\smallskip\tf@fntxt#1}%
 	}
-	\crefname{figure}{fig.}{figs.}
+	% \crefname{figure}{fig.}{figs.}
 }
 
 \RequirePackage{zref-user,zref-titleref,zref-descref} % needs to be loaded after subcaption

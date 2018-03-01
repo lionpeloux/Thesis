@@ -399,6 +399,12 @@
 		\path (PGtl) -- (PGtr) coordinate[midway] (PGt);
 		\path (PGtl) -- (PGbl) coordinate[midway] (PGl);
 		\path (PGtr) -- (PGbr) coordinate[midway] (PGr);
+		%
+		% mid nodes
+		\path (CAtl) -- (CAtr) coordinate[midway] (CAt);
+		\path (CAbl) -- (CAbr) coordinate[midway] (CAb);
+		\path (CAtl) -- (CAbl) coordinate[midway] (CAl);
+		\path (CAtr) -- (CAbr) coordinate[midway] (CAr);
 	\end{tikzpicture}
 }
 
@@ -659,8 +665,8 @@
 	\fi
 }
 
-\newcommand{\blankpage}[2][fancy]{%
-	\afterpage{\thispagestyle{#1}#2\clearpage}
+\newcommand{\blankpage}[1]{%
+	\afterpage{#1\clearpage}
 }
 
 \newcommand{\rightblankpage}[1]{%

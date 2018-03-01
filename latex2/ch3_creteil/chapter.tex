@@ -205,7 +205,7 @@ It is formally quite difficult to integrate doors, which must be verticals, into
 			}
 	}
 	\doubleblankpage[l]{%
-		\hbox{}
+		\hbox{}\thispagestyle{empty}
 		\PhotoSpread[
 			node=CAtl,
 			anchor=north west,
@@ -374,6 +374,7 @@ The structure is anchored to a concrete strip footing with a special anchorage s
 A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers the structure. The transparent portion of the structure allows daylight inside the gridshell. The fabric is stretched on the peripheral edge of a dedicated beam with a double-lacing system (halyard and strap, see \cref{fig:edge}). At the ground level, the lacing edge of the beam is made of a bent composite rod nailed to the concrete slab. At the grid–door junction, a steel arch is welded to the doorframe (see \cref{fig:door_ext}). The PVC fabric is waterproof and, since it is a continuous membrane, has no joints except at the perimeter. At the perimeter, a continuous strip of membrane is prefixed to the internal surface of the membrane and fixed to the ground slab. At the doors, a flexible strip of the membrane is riveted to the doorframe.
 
 \blankpage{
+	\thispagestyle{empty}
 	\vspace*{\fill}
 	\centering
 	\ra{0.95}
@@ -443,12 +444,14 @@ A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers
 	}
 
 	\doubleblankpage{%
-		\hbox{}
+		\hbox{}\thispagestyle{empty}
 		\intersectnode{PPtl |- CAbl}{Pt}
 		\PhotoSpread[
 			node=Pt,
 			anchor=south west,
 			yshift=-5cm,
+			% lpcode={\thispagestyle{empty}},
+			% rpcode={\thispagestyle{fancy}},
 			gopt={width=2\PaperWidth}
 		]{section_view2}
 		\AddToShipoutPictureBG*{
@@ -543,56 +546,247 @@ The first two directions of tubes were assembled perpendicularly on the ground w
 \subsection{Deformation of the grid}
 The next stage consisted in lifting the grid simultaneously with two mobile cranes (35t). Once lifted up, the grid took nearly its final form (see \cref{fig:cp_2}). The structure was slowly moved above the slab until tube endings faced at best their respective anchor points. Then, tube after tube, the workers pined the grid to the ground anchorages (see \cref{fig:cp_3}). This stage is tricky, especially at the beginning because only few tubes are connected to the ground. If the grid moves it can easily break these few tubes. The action of pinning a tube is done with a single bolt. The end of each composite tube is equipped with a rotating steel clevis. Similarly, each ground anchorage is composed of a steel plate fixed to the concrete slab and a rotating clevis. To pin a tube to an anchorage, their clevis are aligned one to each other and a pin is positioned in their central hole (see \cref{fig:anchorage}). When all the tubes were pinned to their anchorage, the grid was stable and secured and the cranes were removed (see \cref{fig:cp_4}). This stage lasted one full day.
 
+\setlength{\tmpheight}{(\textheight-2\PhotoBigSkip)/3}
 \intersectnode{PPtr |- CAtr}{Pt}
-% \PhotoSpread[
-% 	node=Pt,
-% 	xshift=-4\PhotoBigSkip,
-% 	anchor=north west,
-% 	gopt={height=7cm}
-% ]{cp_1.jpg}
+\PhotoSpread[
+	node=Pt,
+	anchor=north west,
+	xshift=-2\PhotoBigSkip,
+	gopt={height=\tmpheight},
+	rpcode={\savenodes{AA}},
+	]{erec_1a.jpg}%
 
 \afterpage{
 	\thispagestyle{empty}
-	\hbox{\vspace*{15cm}}
+	\hbox{\vspace{\textheight}}
+	% \hbox{\vspace*{1cm}}
 	\AddToShipoutPictureBG*{% 
-		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
 		\intersectnode{PPtl |- CAtl}{Pt}
-		\def\tmpheight{(\textheight-2\PhotoBigSkip)/3}
+		% \def\tmpheight{(\textheight-2\PhotoBigSkip)/3}
 		\Photo[
-			node=CAtl,
+			node=AAtr,
 			anchor=north west,
-			xshift=0mm,
+			xshift=\PhotoSkip,
 			gopt={height=\tmpheight},
-			]{cp_1.jpg}%
-		\savenodes{A}
+			]{erec_1b.jpg}%	
+			\savenodes{AB}
+		\intersectnode{CAtl |- AAtr}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=CAtl,
+			node=CAtl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Assembly of the grid}{fig:erec_1}
+		\PhotoCaptionRef[
+			hrefnode=CAtl,
+			node=CAtl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+		]{subfigure}{}{GFRP tubes with swivel couplers}{fig:erec_1a}
+		\PhotoCaptionRef[
+			hrefnode=ABtl,
+			node=ABtl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Primary grid}{fig:erec_1b}
+	}
+	\PhotoSpread[
+		node=ABtr,
+		anchor=north west,
+		xshift=\PhotoWidth+\PhotoBigSkip,
+		gopt={height=\tmpheight},
+		]{erec_1c.jpg}%
+	% \savenodes{AC}
+	\AddToShipoutPictureBG*{%
+		\PhotoCaptionRef[
+			hrefnode=PStl,
+			node=PStl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Cranes ready to lift the grid}{fig:erec_1c}
+		\intersectnode{PPtl |- AAbr}{Pt}
 		\Photo[
-			node=Abr,
-			anchor=north east,
+			node=Pt,
+			anchor=north west,
+			% xshift=\PhotoSkip,
 			yshift=-\PhotoBigSkip,
 			gopt={height=\tmpheight},
-			]{cp_2.jpg}%
-		\savenodes{B}
+			]{erec_2a.jpg}%	
+			\savenodes{BA}
 		\Photo[
-			node=Bbr,
-			anchor=north east,
+			node=BAtr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			% yshift=-\PhotoBigSkip,
+			gopt={height=\tmpheight},
+			]{erec_2b.jpg}%	
+			\savenodes{BB}
+		\Photo[
+			node=BAbl,
+			anchor=north west,
+			xshift=2\PhotoBigSkip,
 			yshift=-\PhotoBigSkip,
 			gopt={height=\tmpheight},
-			]{cp_3.jpg}%%
-		\savenodes{C}
-		% \Photo[
-		% 	node=TR,
-		% 	anchor=north west,
-		% 	xshift=\PhotoSkip,
-		% 	gopt={height=7cm},
-		% 	]{cp_2.jpg}%
-		% \savenodes{A}
-		% \Photo[
-		% 	node=Atr,
-		% 	anchor=north west,
-		% 	xshift=\PhotoSkip,
-		% 	gopt={width=\tmpwidth},
-		% 	]{cp_2.jpg}%
-		% \savenodes{B}
+			]{erec_3a.jpg}%
+		\savenodes{BC}
+		%%
+		\intersectnode{CAtl |- BBtr}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Pt,
+			node=Pt, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Deformation of the grid}{fig:erec_2}
+		\PhotoCaptionRef[
+			hrefnode=Pt,
+			node=Pt, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+		]{subfigure}{}{GFRP tubes with swivel couplers}{fig:erec_2a}
+		\PhotoCaptionRef[
+			hrefnode=BBtl,
+			node=BBtl, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Primary grid}{fig:erec_2b}
+		\intersectnode{CAtl |- BCtr}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Pt,
+			node=Pt, 
+			anchor=south west, 
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Primary grid}{fig:erec_2c}
+		\PhotoTextBox[
+			node=BCbr,
+			anchor=south west,
+			xshift=\PhotoBigSkip,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:erec_1}\par
+				\figurecaption{fig:erec_1a}\par
+				\figurecaption{fig:erec_1b}\par
+				\figurecaption{fig:erec_1c}\par\medskip
+				\figurecaption{fig:erec_2}\par
+				\figurecaption{fig:erec_2a}\par
+				\figurecaption{fig:erec_2b}\par
+				\figurecaption{fig:erec_2c}
+			}
+	}
+	%%
+	\blankpage{%
+		\thispagestyle{empty}
+		\hbox{}
+		\AddToShipoutPictureBG*{% 
+			\intersectnode{PGtl |- AAbr}{Pt}
+			\Photo[
+				node=Pt,
+				anchor=north west,
+				xshift=2\PhotoBigSkip,
+				yshift=-\PhotoBigSkip,
+				gopt={height=\tmpheight},
+				]{erec_4a.jpg}%
+			\savenodes{DA}
+			\Photo[
+				node=DAtr,
+				anchor=north west,
+				xshift=\PhotoSkip,
+				% yshift=-\PhotoBigSkip,
+				gopt={height=\tmpheight},
+				]{erec_4b.jpg}%
+			\savenodes{DB}
+			%%
+			\intersectnode{PPtl |- DBbr}{Pt}
+			\Photo[
+				node=Pt,
+				anchor=north west,
+				% xshift=2\PhotoBigSkip,
+				yshift=-\PhotoBigSkip,
+				gopt={height=\tmpheight},
+				]{erec_5a.jpg}%
+			\savenodes{EA}
+			\Photo[
+				node=EAtr,
+				anchor=north west,
+				xshift=\PhotoSkip,
+				% yshift=-\PhotoBigSkip,
+				gopt={height=\tmpheight},
+				]{erec_5b.jpg}%
+			\savenodes{EB}
+			\Photo[
+				node=EBtr,
+				anchor=north west,
+				xshift=\PhotoSkip,
+				% yshift=-\PhotoBigSkip,
+				gopt={height=\tmpheight},
+				]{erec_5c.jpg}%
+			\savenodes{EC}
+			%%%%
+			\intersectnode{CAtl |- BBtr}{Pt}
+			\PhotoCaptionRef[
+				hrefnode=DAtl,
+				node=DAtl, 
+				anchor=south west, 
+				yshift=\PhotoRefSkip,
+				phantom=true,
+				]{figure}{}{Deformation of the grid}{fig:erec_3}
+			\PhotoCaptionRef[
+				hrefnode=DAtl,
+				node=DAtl, 
+				anchor=south west, 
+				yshift=\PhotoRefSkip,
+			]{subfigure}{}{GFRP tubes with swivel couplers}{fig:erec_3a}
+			\PhotoCaptionRef[
+				hrefnode=DBtl,
+				node=DBtl, 
+				anchor=south west, 
+				yshift=\PhotoRefSkip,
+				]{subfigure}{}{Primary grid}{fig:erec_3b}
+			%%%
+			\intersectnode{DAtl |- EAtr}{Pt}
+			\PhotoCaptionRef[
+				hrefnode=Pt,
+				node=Pt, 
+				anchor=south west, 
+				yshift=\PhotoRefSkip,
+				phantom=true,
+				]{figure}{}{Deformation of the grid}{fig:erec_4}
+			\PhotoCaptionRef[
+				hrefnode=Pt,
+				node=Pt, 
+				anchor=south west, 
+				yshift=\PhotoRefSkip,
+			]{subfigure}{}{GFRP tubes with swivel couplers}{fig:erec_4a}
+			\PhotoCaptionRef[
+				hrefnode=EBtl,
+				node=EBtl, 
+				anchor=south west, 
+				yshift=\PhotoRefSkip,
+				]{subfigure}{}{Primary grid}{fig:erec_4b}
+			\PhotoCaptionRef[
+				hrefnode=ECtl,
+				node=ECtl, 
+				anchor=south west, 
+				yshift=\PhotoRefSkip,
+				]{subfigure}{}{Primary grid}{fig:erec_4c}
+			\PhotoTextBox[
+				node=AAtr,
+				anchor=north west,
+				xshift=\PhotoBigSkip,
+				width=10cm,
+				border=false,
+				]{%
+					\figurecaption{fig:erec_3}\par
+					\figurecaption{fig:erec_3a}\par
+					\figurecaption{fig:erec_3b}\par\medskip
+					\figurecaption{fig:erec_4}\par
+					\figurecaption{fig:erec_4a}\par
+					\figurecaption{fig:erec_4b}\par
+					\figurecaption{fig:erec_4c}
+				}
+		}
 	}
 }
 
@@ -600,85 +794,7 @@ The next stage consisted in lifting the grid simultaneously with two mobile cran
 Once the primary grid was deformed into the final shape, it was braced by a third direction of tubes called the \emph{triangulation}. The triangulation tubes split the quadrangular mesh of the primary grid into triangles (see \cref{fig:cp_5}). This work was tedious as it required working at height in aerial buckets. Tubes were hand-conveyed in the structure and attached to the tubes of the second layer with an additional swivel coupler. Each node of the structure would then be composed of two connections (see \cref{fig:swivel_dwg}). Once triangulated the structure behaves like a shell and its stiffness increases largely.
 
 
-\blankpage{%
-	\thispagestyle{empty}
-	\hbox{}
-	\AddToShipoutPictureBG*{% 
-		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
-		\def\tmpheight{(\textheight-2\PhotoBigSkip)/3}
-		\Photo[
-			node=CAtr,
-			anchor=north east,
-			xshift=0mm,
-			gopt={height=\tmpheight},
-			]{cp_1.jpg}%
-		\savenodes{A}
-		\Photo[
-			node=Abr,
-			anchor=north east,
-			yshift=-\PhotoSkip,
-			gopt={height=\tmpheight},
-			]{cp_2.jpg}%
-		\savenodes{B}
-		\Photo[
-			node=Bbr,
-			anchor=north east,
-			yshift=-\PhotoSkip,
-			gopt={height=\tmpheight},
-			]{cp_3.jpg}%%
-		\savenodes{C}
-		\Photo[
-			node=Bbl,
-			anchor=north west,
-			yshift=-\PhotoBigSkip,
-			gopt={width=\tmpwidth},
-			]{cp_4.jpg}%
-		\savenodes{D}
-		%%
-		\PhotoCaptionRef[
-			node=Atl,
-			anchor=south west,
-			yshift=-\PhotoSkip,
-			phantom=true,
-			]{figure}{}{Key elements of the structural system}{fig:parts}
-		\PhotoCaptionRef[
-			hrefnode=Atl,
-			node=Atl, 
-			anchor=south west, 
-			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Swivel coupler}{fig:swivel}
-		\PhotoCaptionRef[
-			hrefnode=Btl,
-			node=Btl, 
-			anchor=south west, 
-			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Sleeve system}{fig:sleeve}
-		\PhotoCaptionRef[
-			hrefnode=Ctl,
-			node=Cbl, 
-			anchor=north west, 
-			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{Ground anchorage}{fig:anchorage}
-		\PhotoCaptionRef[
-			hrefnode=Dtl,
-			node=Dbl, 
-			anchor=north west, 
-			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{Lacing rod}{fig:edge}
-		\PhotoTextBox[
-			node=CAbl,
-			anchor=south west,
-			width=10cm,
-			border=false,
-			]{%
-				\figurecaption{fig:parts}\par
-				\figurecaption{fig:swivel}\par
-				\figurecaption{fig:sleeve}\par
-				\figurecaption{fig:anchorage}\par
-				\figurecaption{fig:edge}
-			}
-	}
-}
+
 
 % \begin{figure}[p]
 % 	%
@@ -741,14 +857,46 @@ where $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radiu
 
 Ideally, the shape is controlled by few key parameters. Thus, it is easier to adapt and optimize the shape through an iterative process towards the above criterion \cref{eq:crit_1}.
 
-\begin{figure}[t]
-\centering
-%\begin{fullpage}
-\includegraphics[width=\textwidth]{curvature_analysis}
-\caption[Benchmarking shapes regarding their curvature]{Benchmarking shapes regarding their minimum principal curvature.}
-\label{fig:shape_bench}
-%\end{fullpage}
-\end{figure}
+\afterpage{%
+	\AddToShipoutPictureBG*{% 
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			xshift=0mm,
+			gopt={width=\textwidth},
+			]{curvature_analysis.jpg}%
+		\savenodes{A}
+		\intersectnode{CAtl |- Abr}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atr,
+			anchor=south east,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Benchmarking shapes regarding their curvature}{fig:shape_bench}
+		\PhotoTextBox[
+			node=Pt,
+			anchor=north west,
+			yshift=-\PhotoSkip,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:shape_bench}
+			}
+	}
+	\setlength{\tmpheight}{\PhotoHeight+\PhotoBigSkip}
+	% \addtolength{\tmpheight}{\PhotoBigSkip}
+	\hbox{\vspace{\tmpheight}}
+}
+
+% \begin{figure}[t]
+% \centering
+% %\begin{fullpage}
+% \includegraphics[width=\textwidth]{curvature_analysis}
+% \caption[Benchmarking shapes regarding their curvature]{Benchmarking shapes regarding their minimum principal curvature.}
+% \label{fig:shape_bench}
+% %\end{fullpage}
+% \end{figure}
 
 \subsection{Meshing the surface}
 %------------------------------------------
@@ -761,31 +909,20 @@ In this step, the geometric curvature of the polylines drawn on the surface is a
 \end{equation}
 where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see below), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. I implemented this method, proposed by \citet{IL10}, for the Solidays gridshell in 2011 \cite{DuPeloux2011}.\footnote{This method was also used at the laboratoire Navier by \citef{Bouhaya2014} and more recently by \citef{Masson2017b}.} The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec=swivel}). For a given shape, there are an infinite number of possible meshes (see \cref{fig:grid_diff}). The goal of the method is to identify at least one grid which satisfies both the architectural and the structural requirements.
 
-\begin{figure}[t]
-     	\centering
-%	\begin{fullpage}
-		\includegraphics[width=0.8\textwidth]{compass_method.png}
-		\caption[How the compass method works]{How the compass method works.}
-		\label{fig:compass_method}
-		%
-		\vspace{0.75cm}
-		%
-		\includegraphics[width=1\textwidth]{canevas.png}
-		\caption{Meshing software as a plugin for \emph{Grasshopper}.}
-		\label{fig:canevas}
-%	\end{fullpage}
-\end{figure}
-
-%\begin{figure}[h]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{compass_method.png}
-%	\caption[How the compass method works]{How the compass method works.}
-%	\label{fig:compass_method}
-%	%
-%%	\includegraphics[width=1\textwidth]{canevas.png}
-%%	\caption[Grasshopper canevas]{Meshing software as a plugin for \emph{Grasshopper}.}
-%%	\label{fig:canevas}
-%\end{figure}
+% \begin{figure}[t]
+%      	\centering
+% %	\begin{fullpage}
+% 		\includegraphics[width=0.8\textwidth]{compass_method.png}
+% 		\caption[How the compass method works]{How the compass method works.}
+% 		\label{fig:compass_method}
+% 		%
+% 		\vspace{0.75cm}
+% 		%
+% 		\includegraphics[width=1\textwidth]{canevas.png}
+% 		\caption{Meshing software as a plugin for \emph{Grasshopper}.}
+% 		\label{fig:canevas}
+% %	\end{fullpage}
+% \end{figure}
 
 \subsubsection{Compass method}\label{sec=compass}
 This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quadrants. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.
@@ -794,93 +931,267 @@ The compass method does not allow to spread the mesh everywhere on a given surfa
 
 The method is easily extended to meshes with variable pitch. This idea was explored to find optimal grids with genetic algorithm by \citet{Bouhaya2014}. It is worthwhile to mention an attempt to extend this method for multilayer Chebyshev grids by \citet{Lefevre2015}.
 
-% \begin{figure}[p]
-% 	%
-%      	\centering
-% 	\begin{leftfullpage}
-% 		\subfloat[][Target shape]{\includegraphics[width=0.48\textwidth]{compass_1.png}\label{fig:compass_a}}
-% 		\hspace*{\fill}
-% 		\subfloat[][Domain and trimming surfaces]{\includegraphics[width=0.48\textwidth]{compass_2.png}\label{fig:compass_b}} \\
-% 		%
-% 		\subfloat[][Secant directrices]{\includegraphics[width=0.48\textwidth]{compass_3.png}\label{fig:compass_c}}
-% 		\hspace*{\fill}
-% 		\subfloat[][Resulting mesh]{\includegraphics[width=0.48\textwidth]{compass_4.png}\label{fig:compass_d}} \\
-% 		%
-% 		\subfloat[][Trimmed mesh]{\includegraphics[width=0.48\textwidth]{compass_5.png}\label{fig:compass_e}}
-% 		\hspace*{\fill}
-% 		\subfloat[][Final grid]{\includegraphics[width=0.48\textwidth]{compass_6.png}\label{fig:compass_f}} \\
-% 		%
-% 		\vspace{0.5cm}
-% 		\caption[The compass method step by step]{The compass method step by step.}
-% 		\label{fig:stepbystep}
-% 	\end{leftfullpage}
-% \end{figure}
-% \begin{figure}[p]
-% 	%
-%      	\centering
-% 	\begin{fullpage}
-% %		\includegraphics[width=0.7\textwidth]{compass_method.png}
-% %		\caption{The compass method.}
-% %		\label{fig:compass_method}
-% 		%
-% 		\subfloat[][First set of directrices]{\includegraphics[width=0.48\textwidth]{mesh_s1.pdf}\label{fig:mesh_s1}}
-% 		\hspace*{\fill}
-% 		\subfloat[][First grid]{\includegraphics[width=0.48\textwidth]{mesh_g1.pdf}\label{fig:mesh_g1}} \\
-% 		%
-% 		\subfloat[][First set of directrices]{\includegraphics[width=0.48\textwidth]{mesh_s2.pdf}\label{fig:mesh_s2}}
-% 		\hspace*{\fill}
-% 		\subfloat[][Second grid]{\includegraphics[width=0.48\textwidth]{mesh_g2.pdf}\label{fig:mesh_g2}} \\
-% 		%
-% 		\vspace{1cm}
-% 		\caption{Each set of directrices leads to a different grid.}
-% 		\label{fig:grid_diff}
-% 	\end{fullpage}
-% \end{figure}
+\blankpage{
+	\hbox{}\thispagestyle{empty}
+	\setlength{\tmpwidth}{6cm}
+	\AddToShipoutPictureBG*{%
+		%%
+		\intersectnode{PPtr |- CAtl}{Pt}
+		\Photo[
+			node=Pt,
+			anchor=north east,
+			gopt={width=\tmpwidth},
+			]{compass_3.png}%
+		\savenodes{C}
+		\Photo[
+			node=Ctl,
+			anchor=north east,
+			xshift=-\PhotoSkip,
+			% yshift=\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{compass_2.png}%
+		\savenodes{B}
+		\Photo[
+			node=Btl,
+			anchor=north east,
+			xshift=-\PhotoSkip,
+			gopt={width=\tmpwidth},
+			]{compass_1.png}%
+		\savenodes{A}
+		%%
+		\intersectnode{PPtl |- Abr}{Pt}
+		\Photo[
+			node=Pt,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{compass_4.png}%
+		\savenodes{D}
+		\Photo[
+			node=Dtr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			% yshift=\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{compass_5.png}%
+		\savenodes{E}
+		\Photo[
+			node=Etr,
+			anchor=north west,
+			xshift=\PhotoSkip,
+			% yshift=\PhotoBigSkip,
+			gopt={width=\tmpwidth},
+			]{compass_6.png}%
+		\savenodes{F}
+		\intersectnode{Ftr |- CAbl}{Pt}
+		\Photo[
+			node=Pt,
+			anchor=south east,
+			xshift=0mm,
+			yshift=\PhotoBigSkip,
+			gopt={width=0.6\textwidth},
+			]{compass_method.png}%
+		\savenodes{G}
+		%%%%%%
+		\PhotoCaptionRef[
+			hrefnode=CAtl,
+			node=Atl,
+			anchor=south west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{The compass method step by step}{fig:stepbystep}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=south west,
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Target shape}{fig:compass_a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btl,
+			anchor=south west,
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Domain and trimming surfaces}{fig:compass_b}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Ctl,
+			anchor=south west,
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Secant directrices}{fig:compass_c}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Dtr,
+			anchor=south east,
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Resulting mesh}{fig:compass_d}
+		\PhotoCaptionRef[
+			hrefnode=Etl,
+			node=Etr,
+			anchor=south east,
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Trimmed mesh}{fig:compass_e}
+		\PhotoCaptionRef[
+			hrefnode=Ftl,
+			node=Ftr,
+			anchor=south east,
+			yshift=\PhotoRefSkip,
+			]{subfigure}{}{Final grid}{fig:compass_f}
+		\intersectnode{Atl |- Fbr}{Pt}
+		\PhotoTextBox[
+			node=Pt,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:stepbystep}\par
+				\figurecaption{fig:compass_a}\par
+				\figurecaption{fig:compass_b}\par
+				\figurecaption{fig:compass_c}\par
+				\figurecaption{fig:compass_d}\par
+				\figurecaption{fig:compass_e}\par
+				\figurecaption{fig:compass_f}
+			}
+		%%%
+		\intersectnode{Gtl |- CAbr}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Pt,
+			node=Pt,
+			anchor=south west,
+			% yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Principle of the compass method}{fig:compass_method}
+		\PhotoTextBox[
+			node=Pt,
+			anchor=south west,
+			% yshift=-\PhotoSkip,
+			width=10cm,
+			border=false,
+			]{%
+				\figurecaption{fig:compass_method}
+			}
+	}
+}
 
+\subsubsection{Numerical tool}
+Here, a specific program developed by \citet{DuPeloux2011} for \rhino{} and \grasshopper{} allows the generation of this kind of mesh on any non-uniform rational B-spline surface (NURBS). It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to build programmatically the analysis model and then perform the form-finding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult in conventional analysis softwares for freeform structures. However, the tool does not provide any computation facilities itself and this is exactly the goal of the second part of this thesis.
 
-% \subsubsection{Numerical tool}
-% Here, a specific program developed by \citet{DuPeloux2011} for \rhino{} and \grasshopper{} allows the generation of this kind of mesh on any non-uniform rational B-spline surface (NURBS). It performs the following elementary operations~: surface meshing with the compass method, trimming, control of the geometry’s integrity and flattening of the grid (see \cref{fig:stepbystep,fig:grid_diff}). The tool also generates automatically a text file, which can be imported into a structural analysis software, containing all the required information to build programmatically the analysis model and then perform the form-finding of the structure (see \cref{fig:canevas}). In particular, an add-on feature facilitates loads application of various complexities (snow, wind, etc.), which is otherwise difficult in conventional analysis softwares for freeform structures. However, the tool does not provide any computation facilities itself and this is exactly the goal of the second part of this thesis.
-% %\begin{figure}[h]
-% %	\centering
-% %	\includegraphics[width=1\textwidth]{canevas.png}
-% %	\caption{Meshing software as a plugin for \emph{Grasshopper}.}
-% %	\label{fig:canevas}
-% %\end{figure}
+\subsection{Form-finding and bending prestress}\label{sec=form-finding}
+%------------------------------------------
+In the previous steps, the initial form was optimized and promising meshes for the materialization of the future gridshell were identified. However, the produced meshes do not take into account any of the mechanical reality, because only geometrical rules were used in their generation. The form-finding step consists precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses. The calculation is performed numerically thanks to a dynamic relaxation algorithm with kinetic damping and comprise the following steps~:
+\begin{itemize}
+\item The grid is bent by a set of applied displacements from its resting position to the compass position.
+\item The grid is then relaxed until it falls in its mechanical equilibrium.
+\item Bending stresses of the triangulation are calculated relative to the geometry of the equilibrium.
+\item Geometry and bending stresses of the triangulation are re-injected into the model in step~2.
+\end{itemize}
 
-% \subsection{Form-finding and bending prestress}\label{sec=form-finding}
-% %------------------------------------------
-% In the previous steps, the initial form was optimized and promising meshes for the materialization of the future gridshell were identified. However, the produced meshes do not take into account any of the mechanical reality, because only geometrical rules were used in their generation. The form-finding step consists precisely in finding the geometry of the grid at mechanical equilibrium, and the corresponding permanent bending stresses. The calculation is performed numerically thanks to a dynamic relaxation algorithm with kinetic damping and comprise the following steps~:
-% \begin{enumerate}
-% \item The grid is bent by a set of applied displacements from its resting position to the compass position.
-% \item The grid is then relaxed until it falls in its mechanical equilibrium.
-% \item Bending stresses of the triangulation are calculated relative to the geometry of the equilibrium.
-% \item Geometry and bending stresses of the triangulation are re-injected into the model in step 2.
-% \end{enumerate}
+\blankpage{
+	\hbox{}\thispagestyle{empty}
+	\setlength{\tmpwidth}{6cm}
+	\AddToShipoutPictureBG*{%
+		%%
+		\intersectnode{PPtr |- CAtl}{Pt}
+		\Photo[
+			node=CAc,
+			anchor=center,
+			gopt={width=0.9\textheight, angle=90},
+			]{gsa.png}%
+		\savenodes{A}
+		\Photo[
+			node=CAtr,
+			anchor=north east,
+			xshift=2\PhotoBigSkip,
+			gopt={width=3cm, angle=0},
+			]{gsa_scale.png}%
+		\savenodes{B}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north east,
+			phantom=true,
+			% yshift=\PhotoRefSkip,
+			]{figure}{}{Permanent bending stresses in the structure under self-weight}{fig:gsa}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			border=false,
+			]{%
+				\figurecaption{fig:gsa}
+			}
+	}
+	\afterpage{%
+		
+		\AddToShipoutPictureBG*{% 
+			\setlength{\tmpwidth}{(\textwidth-3\PhotoBigSkip)/2}
+			\Photo[
+				node=CAt,
+				anchor=north east,
+				xshift=-\PhotoBigSkip/2,
+				gopt={width=\tmpwidth},
+				]{eccentricity_1.png}%
+			\savenodes{A}
+			\Photo[
+				node=CAt,
+				anchor=north west,
+				xshift=\PhotoBigSkip/2,
+				gopt={width=\tmpwidth},
+				]{eccentricity_2.png}%
+			\savenodes{B}
+			%%
+			\PhotoCaptionRef[
+				hrefnode=Atl,
+				node=Atl,
+				anchor=south east,
+				yshift=\PhotoRefSkip,
+				phantom=true,
+				]{figure}{}{Reconstruction of the full 3D geometry}{fig:eccentricity}
+			\PhotoCaptionRef[
+				hrefnode=Atl,
+				node=Atr,
+				anchor=north east,
+				% yshift=\PhotoRefSkip,
+				]{subfigure}{}{Wire frame}{fig:eccentricity_a}
+			\PhotoCaptionRef[
+				hrefnode=Btl,
+				node=Btr,
+				anchor=north east,
+				% yshift=\PhotoRefSkip,
+				]{subfigure}{}{Full 3D}{fig:eccentricity_b}
+			\intersectnode{CAtl |- Abr}{Pt}
+			\PhotoTextBox[
+				node=Pt,
+				anchor=north west,
+				yshift=-\PhotoSkip,
+				width=10cm,
+				border=false,
+				]{%
+					\figurecaption{fig:eccentricity}\par
+					\figurecaption{fig:eccentricity_a}\par
+					\figurecaption{fig:eccentricity_b}\par
+				}
+		}
+		\setlength{\tmpheight}{\PhotoHeight}
+		\addtolength{\tmpheight}{4\PhotoBigSkip}
+		\hbox{\vspace{\tmpheight}}
+	}
+}
 
-% Two analysis models were built during this process to study the structure with and without bracing tubes.
+Two analysis models were built during this process to study the structure with and without bracing tubes.
 
-% The computations were realized with the form-finding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such as the one introduced in \citeyear{Adriaenssens2000} by \citet{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task, highlighting the necessity of a dedicated form-finding tool with a higher level of interactivity. Moreover, coupling between rotational and translational degrees of freedom can cause ill-conditioning problems, which was already noticed by \citet{Adriaenssens2001}. In the same paper, they proposed a 3-DOF element valid for torsion-free cases. Simpler and faster, it is also a lot more stable. This element was reused and extended later for the form-finding of elastic gridshells in composite materials with complex connections by \citet{Douthe2007}.
+The computations were realized with the form-finding module of the software Oasys GSA.\footnote{\url{http://www.oasys-software.com/products/engineering/gsa-suite.html}} It relies on a 6-DOF dynamic relaxation algorithm with either viscous or kinetic damping such as the one introduced in \citeyear{Adriaenssens2000} by \citet{Adriaenssens2000}. In practice, making the computations to converge was a really difficult and time-consuming task, highlighting the necessity of a dedicated form-finding tool with a higher level of interactivity. Moreover, coupling between rotational and translational degrees of freedom can cause ill-conditioning problems, which was already noticed by \citet{Adriaenssens2001}. In the same paper, they proposed a 3-DOF element valid for torsion-free cases. Simpler and faster, it is also a lot more stable. This element was reused and extended later for the form-finding of elastic gridshells in composite materials with complex connections by \citet{Douthe2007}. To tackle numeric instabilities the model had to be simplified~:
+\begin{itemize}
+\item Connections between elements were modeled as rotation-free joints, enforcing only position constrains with out taking into account the eccentricity between the tubes. This becomes a problem when it comes to evaluating the stability of the gridshell as eccentricity can plays a major role \cite{Lefevre2015}. This is also problematic when determining the production length of the tubes and the position of the anchorages (see \cref{sec=asbuilt}).
+\item The triangulation could not be embedded from the start in the model and had to be treated separately and re-injected later on.
+\end{itemize}
 
-% To tackle numeric instabilities the model had to be simplified~:
-% \begin{itemize}
-% \item Connections between elements were modeled as rotation-free joints, enforcing only position constrains with out taking into account the eccentricity between the tubes. This becomes a problem when it comes to evaluating the stability of the gridshell as eccentricity can plays a major role \cite{Lefevre2015}. This is also problematic when determining the production length of the tubes and the position of the anchorages (see \cref{sec=asbuilt}).
-% \item The triangulation could not be embedded from the start in the model and had to be treated separately and re-injected later on.
-% \end{itemize}
+The form-finding process should not be regarded as a pure computational stage were only the equilibrium shape has to be found while all other design parameters are fixed. Indeed, as the goal is to find a suitable geometry with the most relaxed permanent bending stresses in the structure, this process could itself be employed to explore optimal geometries that will lead to more relaxed static equilibriums. In the present project the supports were allowed to move slightly around their target position by the mean of spring supports with orthotropic stiffness. This allowed to decrease the overall level of permanent bending stress in the tubes while granting very minor changes in the geometry.
 
-% %\begin{figure}[p]
-% %	\centering
-% %	\includegraphics[width=1\textwidth]{gsa.png}
-% %	\caption[Permanent bending stresses in the structure under selfweight]{Permanent bending stresses in the structure under selfweight (red tubes : \SI{130}{MPa}).}
-% %	\label{fig:gsa}
-% %\end{figure}
+Finally the process converges when the shape and the pattern drawn by the mesh are suitable for the architect while the permanent bending stresses are acceptable for the tubes (see \cref{sec=safety}). The end results for this stage are presented in \cref{fig:gsa}. Note the smoothness of the mesh and the convergence of the tubes near the altar. Bending stresses are well distributed and inferior to the maximum design stress allowed (\SI{133}{MPa} in that case). Only few tubes are heavy loaded, in the areas where the curvature is the highest.
 
-% The form-finding process should not be regarded as a pure computational stage were only the equilibrium shape has to be found while all other design parameters are fixed. Indeed, as the goal is to find a suitable geometry with the most relaxed permanent bending stresses in the structure, this process could itself be employed to explore optimal geometries that will lead to more relaxed static equilibriums. In the present project the supports were allowed to move slightly around their target position by the mean of spring supports with orthotropic stiffness. This allowed to decrease the overall level of permanent bending stress in the tubes while granting very minor changes in the geometry.
-
-% Finally the process converges when the shape and the pattern drawn by the mesh are suitable for the architect while the permanent bending stresses are acceptable for the tubes (see \cref{sec=safety}). The end results for this stage are presented in \cref{fig:gsa}. Note the smoothness of the mesh and the convergence of the tubes near the altar. Bending stresses are well distributed and inferior to the maximum design stress allowed (\SI{133}{MPa} in that case). Only few tubes are heavy loaded, in the areas where the curvature is the highest.
-
-% \subsection{As-built geometry}\label{sec=asbuilt}
-%  %-------------------------------------
-% Although, the eccentricity ($e = \SI{136}{\mm}$) remains small compared with the span of the shell ($l =\SI{17}{m}$), it is not negligible compared with the mesh size ($w = \SI{1.0}{m}$). Thus, the tube lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assesses that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding is performed only with those two layers. Connection axes has to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by $-e/2$, the green by $+e/2$ and the blue by $+3e/2$ along the surface normal (see \cref{fig:eccentricity}).
+\subsection{As-built geometry}\label{sec=asbuilt}
+ %-------------------------------------
+Although, the eccentricity ($e = \SI{136}{\mm}$) remains small compared with the span of the shell ($l =\SI{17}{m}$), it is not negligible compared with the mesh size ($w = \SI{1.0}{m}$). Thus, the tube lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assesses that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding is performed only with those two layers. Connection axes has to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by $-e/2$, the green by $+e/2$ and the blue by $+3e/2$ along the surface normal (see \cref{fig:eccentricity}).
 % \begin{figure}[p]
 %      	\centering
 % 	\begin{fullpage}
@@ -898,95 +1209,95 @@ The method is easily extended to meshes with variable pitch. This idea was explo
 % 		\label{fig:eccentricity}
 % 	\end{fullpage}
 % \end{figure}
-% \subsection{Structural analysis}
-% %------------------------------------------
-% A full structural analysis is finally performed on the gridshell, using the two mechanical models created previously during the form-finding stage.
-% The non-braced model is used to check the grid’s behavior during the construction stages. In particular, it must be verified that the primary grid - the one with no triangulation tubes - has no risk of buckling, both for obvious safety reasons and to ensure the accuracy of the final geometry. Indeed, the more the form is likely to buckle, the more it can be triangulated in a buckled geometry different to the targeted geometry. The model with the triangulated grid is used to confirm the gridshell complies with all the structural requirements during its lifetime. Its behavior under standard loadings is evaluated.
+\subsection{Structural analysis}
+%------------------------------------------
+A full structural analysis is finally performed on the gridshell, using the two mechanical models created previously during the form-finding stage.
+The non-braced model is used to check the grid’s behavior during the construction stages. In particular, it must be verified that the primary grid - the one with no triangulation tubes - has no risk of buckling, both for obvious safety reasons and to ensure the accuracy of the final geometry. Indeed, the more the form is likely to buckle, the more it can be triangulated in a buckled geometry different to the targeted geometry. The model with the triangulated grid is used to confirm the gridshell complies with all the structural requirements during its lifetime. Its behavior under standard loadings is evaluated.
 
 % %\newpage \phantom{abc}
 % \clearpage
-% \section{Designing with GFRP materials}\label{sec=design_gfrp}
-% %------------------------------------------
-% This section focuses on the GFRP tubes employed for the structure. We present how we managed to deal with this composite material in the eyes of the existing regulatory framework although there is no applicable norms for composite materials (see \cref{sec=codes}). Beyond the administrative strategy, we present how their flexural strength was evaluated (see \cref{sec=flex}) and how the corresponding partial safety factors were detremined (see \cref{sec=safety}).
+\section{Designing with GFRP materials}\label{sec=design_gfrp}
+%------------------------------------------
+This section focuses on the GFRP tubes employed for the structure. We present how we managed to deal with this composite material in the eyes of the existing regulatory framework although there is no applicable norms for composite materials (see \cref{sec=codes}). Beyond the administrative strategy, we present how their flexural strength was evaluated (see \cref{sec=flex}) and how the corresponding partial safety factors were detremined (see \cref{sec=safety}).
 
-% \subsection{Properties of the tubes}\label{sec=gfrp}
-% % -------------------------------------------------------
-% The technical properties of the tube employed for this project are given in \cref{tab:tube}. Although these data were provided by the manufacturer at the time of the project, a test campaign was done to verify the flexural resistance of the tubes taking into account the influence of the swivel couplers clamped on the tubes (see \cref{sec=flex}).
-% %The characterization of this material is presented in detail in this paper \cite{Kotelnikova2012}.
-% \begin{table}[p]
-% \begin{fullpage}
-% \centering
-% 	\ra{1.1}
-%  	\begin{tabular}{@{}l l r @{}}
-% 	\toprule
-% 	Item 							& Standard	 	& Polyester Mat-Roving-Mat \\
-% 	\midrule
-% 	External diameter 				&				& \SI{41.7}{\mm} \\
-% 	Internal diameter 				& 				& \SI{34.7}{\mm} \\
-% 	Wall thickness					& 				& \SI{3.5}{\mm} \\
-% 	Section area					& 				& \SI{4.20e-2}{m^2} \\
-% 	Section moment of inertia			&				& \SI{7.7259e-4}{m^4} \\
-% 	Torsion constant				&				& \SI{15.4518e-4}{m^4} \\
-% 	\midrule
-% 	Shipping length 				& 				& \SI{12.0}{\m} \\
-% 	Glass content by weight 			& ISO 1172		& \SI{60}{\percent}\\
-% 	Specic weight					& ASTM D792		& \SI{1.75}{\kg/m^3}\\
-% 	Linear weight					& 				& \SI{0.735}{\kg/lm}\\
-% 	Coefficient of thermal expansion	& ASTM D696		& \SI{11e-6}{K^{-1}}\\
-% 	\midrule
-% 	Tensile strength					& ASTM D638		& \SI{400}{MPa}\\
-% 	Tensile modulus				& ASTM D638		& \SI{26}{GPa}\\
-% 	Flexural strength				& ASTM D790		& \SI{400}{MPa}\\
-% 	Flexural modulus				& full bending		& \SI{25}{GPa}\\
-% 	Compressive strength			& ASTM D695		& \SI{220}{MPa}\\
-% 	Compressive modulus			& ASTM D695		& \SI{20}{GPa}\\
-% 	\bottomrule
-% 	\end{tabular}
-% 	\caption{Technical properties of the tube.}
-% 	\label{tab:tube}
-% 	%
-% 	\vspace{1.25cm}
-% 	%
-%  	\begin{tabular}{@{}l l r @{}}
-% 	\toprule
-% 	Item 							& Standard 				& Précontraint 702 Opaque Alu  \\
-% 	\midrule
-% 	Yarn 							& 						& 1100 dtex PES HT \\
-% 	Weight 						& EN ISO 2286-2			& \SI{830}{g/m^2} \\
-% 	Width 						& 						& \SI{267}{cm} \\
-% 	Standard jumbo roll				& 						& \SI{50}{lm} or \SI{300}{lm}  \\
-% 	Finish						& 						& 2-face acrylic varnish \\
-% 	\midrule
-% 	Tensile strength (warp/weft)		& EN ISO  1421			& \SI{280/280}{daN/ \SI{5}{\cm}} \\
-% 	Tear strength (warp/weft)			& DIN 53.363				& \SI{30/28}{daN} \\
-% 	Elongation under load (warp/weft)	& NF EN 15619				& < \SI{1}{\percent} / < \SI{1}{\percent} \\
-% 	Adhesion						& EN ISO  2411			& \SI{10}{daN/ \SI{5}{\cm}} \\
-% 	Solar transmission				& NFP 38511				& \SI{13.5}{\percent}  \\
-% 	\midrule
-% 	Flame retardancy				& NFP 92-507 				& M2 \\
-% 								& DIN 4102-1 				& B1 \\
-% 	Euroclass						& EN 13501-1 				& B-s2, d0 \\
-% 	\midrule
-% 	Cold resistance					& IS0 4675 				& \SI{-30}{\celsius} \\
-% 	Heat resistance					& DIN 4102-1 				& \SI{+70}{\celsius} \\
-% 	\bottomrule
-% 	\end{tabular}
-% 	\caption{Technical properties of the membrane.}
-% 	\label{tab:membrane}
-% \end{fullpage}
-% \end{table}
+\subsection{Properties of the tubes}\label{sec=gfrp}
+% -------------------------------------------------------
+The technical properties of the tube employed for this project are given in \cref{tab:tube}. Although these data were provided by the manufacturer at the time of the project, a test campaign was done to verify the flexural resistance of the tubes taking into account the influence of the swivel couplers clamped on the tubes (see \cref{sec=flex}).
+%The characterization of this material is presented in detail in this paper \cite{Kotelnikova2012}.
+\begin{table}[p]
+\begin{fullpage}
+\centering
+	\ra{1.1}
+ 	\begin{tabular}{@{}l l r @{}}
+	\toprule
+	Item 							& Standard	 	& Polyester Mat-Roving-Mat \\
+	\midrule
+	External diameter 				&				& \SI{41.7}{\mm} \\
+	Internal diameter 				& 				& \SI{34.7}{\mm} \\
+	Wall thickness					& 				& \SI{3.5}{\mm} \\
+	Section area					& 				& \SI{4.20e-2}{m^2} \\
+	Section moment of inertia			&				& \SI{7.7259e-4}{m^4} \\
+	Torsion constant				&				& \SI{15.4518e-4}{m^4} \\
+	\midrule
+	Shipping length 				& 				& \SI{12.0}{\m} \\
+	Glass content by weight 			& ISO 1172		& \SI{60}{\percent}\\
+	Specic weight					& ASTM D792		& \SI{1.75}{\kg/m^3}\\
+	Linear weight					& 				& \SI{0.735}{\kg/lm}\\
+	Coefficient of thermal expansion	& ASTM D696		& \SI{11e-6}{K^{-1}}\\
+	\midrule
+	Tensile strength					& ASTM D638		& \SI{400}{MPa}\\
+	Tensile modulus				& ASTM D638		& \SI{26}{GPa}\\
+	Flexural strength				& ASTM D790		& \SI{400}{MPa}\\
+	Flexural modulus				& full bending		& \SI{25}{GPa}\\
+	Compressive strength			& ASTM D695		& \SI{220}{MPa}\\
+	Compressive modulus			& ASTM D695		& \SI{20}{GPa}\\
+	\bottomrule
+	\end{tabular}
+	\caption{Technical properties of the tube.}
+	\label{tab:tube}
+	%
+	\vspace{1.25cm}
+	%
+ 	\begin{tabular}{@{}l l r @{}}
+	\toprule
+	Item 							& Standard 				& Précontraint 702 Opaque Alu  \\
+	\midrule
+	Yarn 							& 						& 1100 dtex PES HT \\
+	Weight 						& EN ISO 2286-2			& \SI{830}{g/m^2} \\
+	Width 						& 						& \SI{267}{cm} \\
+	Standard jumbo roll				& 						& \SI{50}{lm} or \SI{300}{lm}  \\
+	Finish						& 						& 2-face acrylic varnish \\
+	\midrule
+	Tensile strength (warp/weft)		& EN ISO  1421			& \SI{280/280}{daN/ \SI{5}{\cm}} \\
+	Tear strength (warp/weft)			& DIN 53.363				& \SI{30/28}{daN} \\
+	Elongation under load (warp/weft)	& NF EN 15619				& < \SI{1}{\percent} / < \SI{1}{\percent} \\
+	Adhesion						& EN ISO  2411			& \SI{10}{daN/ \SI{5}{\cm}} \\
+	Solar transmission				& NFP 38511				& \SI{13.5}{\percent}  \\
+	\midrule
+	Flame retardancy				& NFP 92-507 				& M2 \\
+								& DIN 4102-1 				& B1 \\
+	Euroclass						& EN 13501-1 				& B-s2, d0 \\
+	\midrule
+	Cold resistance					& IS0 4675 				& \SI{-30}{\celsius} \\
+	Heat resistance					& DIN 4102-1 				& \SI{+70}{\celsius} \\
+	\bottomrule
+	\end{tabular}
+	\caption{Technical properties of the membrane.}
+	\label{tab:membrane}
+\end{fullpage}
+\end{table}
 
-% \subsection{Codes for composite materials}\label{sec=codes}
-% Beyond the technical difficulties related to both design and structural analysis of the shell, the regulatory framework was a vital issue for the success of the project. As it was the first time a structure of this kind was going to host a large number of people for over two years, the question of its reliability over time was a major issue. In order to be built, the gridshell had to comply with existing standards, which do not take into account such an innovative edifice, all in composite material. The strategy adopted to bypass this obstacle is presented herafter.
+\subsection{Codes for composite materials}\label{sec=codes}
+Beyond the technical difficulties related to both design and structural analysis of the shell, the regulatory framework was a vital issue for the success of the project. As it was the first time a structure of this kind was going to host a large number of people for over two years, the question of its reliability over time was a major issue. In order to be built, the gridshell had to comply with existing standards, which do not take into account such an innovative edifice, all in composite material. The strategy adopted to bypass this obstacle is presented herafter.
 
-% \subsubsection{First level~: administrative classification of the building}
-% The first level, administrative, consisted of obtaining from the French authorities an appropriate classification for the building, taking into
-% consideration the project’s real-time requirement~: a light-weight structure with a short lifespan. As expected, the structure was classified as a \textquote{building open to the public} (EPR in French) from the category \textquote{big tops and tents} (CTS in french) \cite{SiteSecurite}. In this classification, construction procedures and regulations are adapted to the short lifespan of buildings.
+\subsubsection{First level~: administrative classification of the building}
+The first level, administrative, consisted of obtaining from the French authorities an appropriate classification for the building, taking into
+consideration the project’s real-time requirement~: a light-weight structure with a short lifespan. As expected, the structure was classified as a \textquote{building open to the public} (EPR in French) from the category \textquote{big tops and tents} (CTS in french) \cite{SiteSecurite}. In this classification, construction procedures and regulations are adapted to the short lifespan of buildings.
 
-% \subsubsection{Second level~: compliance with existing standards}
-% The second level, normative, consisted of ensuring that most of the existing regulatory framework justified the compliance of a structure that would not, at first sight, be considered by standards that do not include composite materials.
+\subsubsection{Second level~: compliance with existing standards}
+The second level, normative, consisted of ensuring that most of the existing regulatory framework justified the compliance of a structure that would not, at first sight, be considered by standards that do not include composite materials.
 
-% As far as possible, the design was made in compliance with the Eurocode, where the structural design is done according to the limit states under normalized loadings (self-weight, snow, wind, etc.). Although, the Eurocodes do not directly take into account composite materials, they propose some probabilistic methods to introduce new materials (EN1990, Annexe D). The mechanical properties of the GFRP pipe were determined as far as possible by tests in conformance with these methods. Alternatively, values were taken according from the Eurocomp \cite{Clarke2003}.\footnote{The Eurocomp is a kind of pre-standard intended for the structural design of buildings and civil engineering works using GFRP composites, consistent with the Eurocode approach. It is considered as the reference design code for GFRP materials.} In some cases, such as for the sleeve, the construction design also benefited from this approach.
+As far as possible, the design was made in compliance with the Eurocode, where the structural design is done according to the limit states under normalized loadings (self-weight, snow, wind, etc.). Although, the Eurocodes do not directly take into account composite materials, they propose some probabilistic methods to introduce new materials (EN1990, Annexe D). The mechanical properties of the GFRP pipe were determined as far as possible by tests in conformance with these methods. Alternatively, values were taken according from the Eurocomp \cite{Clarke2003}.\footnote{The Eurocomp is a kind of pre-standard intended for the structural design of buildings and civil engineering works using GFRP composites, consistent with the Eurocode approach. It is considered as the reference design code for GFRP materials.} In some cases, such as for the sleeve, the construction design also benefited from this approach.
 
 % \subsection{Flexural strength of the tubes}\label{sec=flex}
 % %------------------------------------------
@@ -1009,156 +1320,3 @@ The method is easily extended to meshes with variable pitch. This idea was explo
 % 	\bottomrule
 % 	\end{tabular}
 % 	\captionof{table}[Flexural tests of the GFRP tubes]{Flexural tests of the GFRP tubes (\SI{}{\mega\pascal}).}
-% 	\label{tab:sigma}
-% \end{table}
-
-% \begin{figure}[p]
-% \centering
-% \begin{fullpage}
-% 	\includegraphics[]{ch3_creteil/plot/4_gfrp_tube/build.pdf}
-% 	\caption[Flexural test of the GFRP tubes]{Flexural test of the GFRP tubes. Results from \cite{Tayeb2015a}.}
-% 	\label{plot:gfrp_tubes}
-% 	%
-% 	\vspace{1.5cm}
-% 	%
-% %	\ra{1.1}
-% % 	\begin{tabular}{@{}l r r r r r r @{}}
-% %	\toprule
-% %	Connection & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ & $\sigma_4$ & $\sigma_5$ & \tablebf{$\sigma_{k}$} \\
-% %	\midrule
-% %	Without & 456 & 441 & 445 & 460 & 477 & \tablebf{430} \\
-% %	With (20\,Nm) & 444 & 478 & 434 & 479 & 427 & \tablebf{408} \\
-% %	\bottomrule
-% %	\end{tabular}\label{tab:sigma}
-% %	\captionof{table}{Three-point flexural tests of the GFRP tubes (\SI{}{\mega\pascal}).}
-% 	%
-% %	\vspace{1.5cm}
-% %	%
-% %	 \begin{tabular}{@{}l r r @{}}
-% %	\toprule
-% %	Time scale 	& $\gamma$		& $\sigma_{d}$\\
-% %	\midrule
-% %	Short-term 	& $ 2.0$ 			& 200 \\
-% %	Long-term 	& $ 3.0$ 			& 133 \\
-% %	\bottomrule
-% %	\end{tabular}\label{tab:gamma}
-% %	\captionof{table}{Short-term and long-term values for material resistance in MPa. $\gamma$ is the partial coefficient for safety factor. $\sigma_{d}$ is the flexural design strength.}
-% \end{fullpage}
-% \end{figure}
-
-% \subsection{Partial safety factors}\label{sec=safety}
-% %------------------------------------------
-% The partial coefficients of material resistance (see \cref{tab:gamma}) used in the project were calculated according to the Eurocomp. The short-term coefficient proposed in Eurocomp ($\gamma_{st} = 1.3$) was increased to consider the critical stage of erection, where the deformations could not be controlled accurately.
-% When dealing with long-term effects in permanently loaded, pultruded composite materials subjected to creeping and relaxation designers should be careful  \cite{Kotelnikova2012,Bank2006}. In this project, this was reflected in the high partial coefficient for long-term effects.
-% \bigskip
-% \begin{table}[h]
-% \centering
-% 	\ra{1.1}
-%  	\begin{tabular}{@{}l r r @{}}
-% 	\toprule
-% 	Time scale 	& $\gamma$		& $\sigma_{d}$\\
-% 	\midrule
-% 	Short-term 	& $ 2.0$ 			& 200 \\
-% 	Long-term 	& $ 3.0$ 			& 133 \\
-% 	\bottomrule
-% 	\end{tabular}
-% 	\caption[Short-term and long-term values for material resistance]{Short-term and long-term values for material resistance. $\gamma$ is the partial coefficient for safety factor. $\sigma_{d}$ is the flexural design strength.}
-% 	\label{tab:gamma}
-% \end{table}
-
-
-
-
-% \section{Construction details}\label{sec=construction_details}
-% % ====================
-% In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (see \cref{fig:swivel}) ; the steel sleeve for connecting several composite tubes to obtain long members from initially short pieces of tubes (see \cref{fig:sleeve}) ; the ground anchorages for fixing the structure to the concrete slab (see \cref{fig:anchorage}) and the lacing edge beam of the fabric (see \autoref{fig:edge}). The challenging issue of connecting the steel and composite parts was solved similarly for sleeve and anchorage details.
-
-% \subsection{The swivel coupler}\label{sec=swivel}
-% % -------------------------------------------------------
-% Tubes are connected together with scaffold swivel couplers (see \cref{fig:swivel}). Each connection is composed of two collars (\O\;\SI{42}{\mm} and \SI{38}{\mm} wide) linked by a steel axis (see \cref{fig:swivel_dwg}). Thus the collars can freely rotate around the axis of the connection. This degree of freedom is responsible for the lack of in-plane shear stiffness of the primary grid and this is precisely this mechanism that allows the flat grid to deform into a free form surface. Each collar is itself composed of two hemicylindrical parts so that it can be opened to easily engage a tube. A M12 nut and a swivel T-bolt allow to lock the tube in the collar using friction. Collars are positioned over a \SI{1.5}{\mm} thick epdm ribbon wrapped around the tubes (see \cref{fig:swivel_dwg}). Once clamped in the connection, the tubes are spaced by a \SI{68}{\mm} distance from axis to axis. Although the mechanical consequences of this eccentricity could be neglected to a first-order approximation, this is not the case for the geometric consequences it induces as explained in \cref{sec=asbuilt}.
-
-% \begin{figure}[t]
-% 	\centering
-% 	\includegraphics[width=0.8\textwidth]{swivel.pdf}
-% 	\caption[Technical drawing of the swivel coupler]{Technical drawing of the swivel coupler. GFRP tubes (1, 2, 3). Swivel couplers (5, 8). EPDM layer (6). M12 swivel T-bolt (7). M12 nut (4) and plastic cap (9).}
-% 	\label{fig:swivel_dwg}
-% \end{figure}
-
-% \subsubsection{Interface layer}
-% This coupler is made to assemble two scaffold steel tubes together. Workers should tight strongly the collars of the coupler to ensure that the steel tubes won't slide in their collar. Here, it is clearly impossible to do that. Indeed the GFRP tube is too thin (only \SI{3.5}{\mm} thick) and tightening the collars to the maximum would damage it or even make it collapse. However, preventing the connections to slide along the tubes is critical to maintain the in-plane shear degree of freedom of the grid. If connections would slide, the grid would probably not deploy in space as intended, because its deployability relies on the fact that the mesh is equilateral. The grid kinematic would be blocked at some points, developing high stresses that would lead to breakages. To maintain a sufficient level of sliding resistance while preserving the material integrity it was decided to introduce an interface layer to~:
-% \begin{itemize}
-% \item Increase the poor friction coefficient between the steel collar and the GFRP tube.
-% \item Improve the distribution of stresses generated by the transverse compression of the collar over the tube, thus allowing a stronger clamping of the collar.
-% \end{itemize}
-
-% Several materials were tested in different thickness. Some of the results are presented in \cref{plot:layer_benchmark}. A \SI{1.5}{\mm} thick EPDM ribbon was found to be suitable for the design requirements of the project. This layer improves significantly the sliding resistance from about \SI{300}{\newton} to about \SI{1200}{\newton}. Once the interface layer had been chosen, further tests were conducted to determine the appropriate clamping for the connections. The aim was to maximize the clamping to get the best sliding resistance (see \cref{plot:tightening}) while preserving the  integrity of the tubes. It was found that a tightening torque between \SI{15}{Nm} to \SI{20}{Nm} was the optimal solution \cite{Tayeb2015a}.
-
-% Finally, the ribbons were ordered with a double sided tape (DST) face to facilitate their placement on the tubes. The influence of the temperature regarding the presence of the adhesive has been investigated. The results show that after \SI{40}{\celsius} the scotch creeps and a loss of resistance occurs (see \cref{plot:epdm_temperature}). A recent thermal study of the structure has demonstrated that with no cooling system the temperature inside the building could rise up to \SI{70}{\celsius} (see \cref{sec=temperature,plot:T_3,plot:T_4}).
-
-
-
-% \subsubsection{Benefits and drawbacks}
-% This connection has the advantage to be available almost every where, to be really cheap and indestructible compare to the GFRP members. However, there are some drawbacks as it is not tailor-made for this application :
-% \begin{itemize}
-% \item The weight of this part is \SI{1.16}{\kg}, which is very heavy compare to the lightness of the system. In this project, the weight of the swivel couplers represents one third of the overall weight of the structure. This could easily be reduced with a dedicated design.
-% \item The actual design is not adapted to resist sliding. This is critical as explained previously. This problem occurred locally during the lifting of the grid and it was a pain to finish the deployment of the structure.
-% \item  Although the clamping of the collars enhance the resistance to sliding of the couplers, they also activate the ability to transfer some torsion to the tubes. Unfortunately, the tubes are very weak regarding this type of sollicitation (see \cref{tab:tube}). A better design would propose a kinematics that allow the rotation of each collar around the axis of the connection and the axis of the tube.
-% \item  As the number of connections is quite large, the clamping process should be at the heart of the design. The later has to guarantee that the workers will not damage unintentionally the structural members. If clamping would be found to be the way to go -- which indeed might be a relevant option -- the structural elements will have to be stronger to resist both clamping and torsion.
-% \end{itemize}
-
-% Furthermore, other design criterion should be taken into account such as the fact that the connection must not damage the membrane. This was resolved in the project thanks to plastic caps (see \cref{fig:sleeve_dwg}). It is worthwhile to mention that the problematic of the connection should be treated in symbiosis with the difficult question of the bracing and the covering as it interacts with all the key parts of the system : grid, bracing and membrane. Some propositions to this complex problem were designed and tested during this thesis through the realization of three timber gridshells (see \cref{fig:jpofav,fig:clc2016}) and one hybrid structure (see \cref{fig:booby}). A noticeable design attempt was proposed for the roof of Chiddingstone's orangery \cref{fig:kent}.
-
-% \begin{figure}[p]
-% \centering
-% \begin{fullpage}
-% 	\includegraphics[]{ch3_creteil/plot/1_layer_benchmark/build.pdf}
-% 	\caption[Influence of the interface layer on the sliding resistance]{Influence of the interface layer on the sliding resistance (torque set to \SI{5}{Nm}). Results from \cite{Tayeb2015a}.}
-% 	\label{plot:layer_benchmark}
-% \end{fullpage}
-% \end{figure}
-
-% \begin{figure}[p]
-% \centering
-% \begin{fullpage}
-% 	\includegraphics[]{ch3_creteil/plot/3_tightening/build.pdf}
-% 	\caption[Influence of the tightening on the sliding resistance]{Influence of the tightening on the sliding resistance for a \SI{1.5}{\mm} EPDM layer. Results from \cite{Tayeb2015a}.}
-% 	\label{plot:tightening}
-% \end{fullpage}
-% \end{figure}
-
-% \begin{figure}[p]
-% \centering
-% \begin{fullpage}
-% 	\includegraphics[]{ch3_creteil/plot/2_epdm_temperature/build.pdf}
-% 	\caption[Influence of the temperature on the sliding resistance]{Influence of the temperature on the sliding resistance for a \SI{1.5}{\mm} EPDM layer. Results from \cite{Tayeb2015a}.}
-% 	\label{plot:epdm_temperature}
-% \end{fullpage}
-% \end{figure}
-
-
-% \clearpage
-% \subsection{The sleeve system}
-% %------------------------------------------
-
-% Sleeves are major components in the structural system. The presented design is an important innovation compared with the composite gridshells built previously, where members were simply interrupted or overlapped (see \cref{fig:sleeve_a}). By establishing mechanical and architectural continuities between tubes, the new sleeve system brought the real behavior of the shell closer to its theoretical behavior (see \cref{fig:sleeve_b}).
-
-% The sleeve is a steel system that provides mechanical continuity between two adjacent composite tubes for both tension and bending. It is made of three parts~: two connectors linked by a threaded rod (see \cref{fig:sleeve_dwg}). Each connector is a 48.3 × \SI{2.9}{mm} steel tube, slightly larger than the composite tubes it connects, with a welded M20 nut at one end. The connector is pinned to the composite tube with three 10 mm bolts. Some structural adhesive was also employed to fill the gaps and to guarantee good rigidity of the assembly. However, the sleeve is designed to ignore the contribution of the adhesive to the mechanical strength of the system. A M20 threaded rod links the two connectors. It allows tension forces and bending moments to pass from one tube to the other. It does not transfer any torsion.
-
-% \begin{figure}[ht]
-% 	\centering
-% 	\includegraphics[]{sleeve.pdf}
-% 	\caption{Technical drawing of the sleeve system.}
-% 	\label{fig:sleeve_dwg}
-% \end{figure}
-
-% \subsubsection{Mechanical behaviour}
-% Tension forces are transferred from the composite tube to the connector through shear in the pins. Owing to a lower bearing resistance in the composite than in the steel, each of the three pins could be gradually loaded. When loading the system, initially, only one of the three pins is in contact with both the steel tube and the composite tube, because of inevitable minor manufacturing gaps. When the axial load is increased, this pin starts to “eat” into the composite tube until the second pin also comes in contact. Thus, the axial load is transferred equally between the two pins. This scheme can work with more pins until another failure mode occurs.
-% For this mode of composite failure, which prevailed in this case, the total bearing capacity of the assembly is thus three times the capacity of a single pin. This total bearing capacity can be calculated from the compressive strength, the composite thickness and the pin diameter~:
-% \begin{equation}
-% 	F = 3 \times f_{u,c}\cdot d \cdot t = \SI{3150}{daN}
-% \end{equation}
-% In the next section, tests carried out at the Navier laboratory to confirm the predicted value are presented.
-% Bending moments were transferred through the threaded rod of the sleeve. This part was designed to reach the two following qualitative criterions simultaneously~:
-% \begin{itemize}
-% \item
-% Firstly, the bending stiffness of the rod should be roughly equivalent to the composite bending stiffness to preserve the curvature’s continuity along the system  (see \cref{fig:sleeve_c}). This continuity was of prime importance from an architectural point of view.

@@ -198,9 +198,9 @@
 		% Left Piece
 		% ==========
 		%
-		\thispagestyle{\@PSLeftPageStyle}
+		% \thispagestyle{\@PSLeftPageStyle}
+		% \thispagestyle{empty}
 		\AddToShipoutPictureBG*{%
-			\@PSLeftPageCode
 			\begin{tikzpicture}[remember picture, inner sep=0pt]
 				\node[anchor=\@PSAnchor, xshift=\@PSXShiftLeft, yshift=\@YShift] at (\@PSNode){
 					\expandafter\includegraphics\expandafter[\@PSGraphicOptions]{#2}};
@@ -220,14 +220,15 @@
 				\pgfresetboundingbox
 				\path[use as bounding box] (0,0);
 			\end{tikzpicture}
+			\savenodes{PS}
+			\@PSLeftPageCode
 		}
 		% ==========
 		% Right Piece
 		% ==========
 		\afterpage{%
-			\thispagestyle{\@PSRightPageStyle}
+			% \thispagestyle{\@PSRightPageStyle}
 			\AddToShipoutPictureBG*{%
-			\@PSRightPageCode
 			\begin{tikzpicture}[remember picture, inner sep=0pt]
 				\path (@Atl -| PPtl) node (@BBtl){}; % with bleed
 				\path (@Abl -| PPtl) node (@BBbl){}; % with bleed
@@ -253,6 +254,8 @@
 				\pgfresetboundingbox
 				\path[use as bounding box] (0,0);
 			\end{tikzpicture}
+			\savenodes{PS}
+			\@PSRightPageCode
 		}}
 	}{}
 	\IfSubStr{\@PSAnchor}{east}{% reverse way
