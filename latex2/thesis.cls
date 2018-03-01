@@ -975,8 +975,7 @@
 \Crefname{equation}{Eq.}{Eqs.}
 
 
-% photo legend
-\newlength\tmpshift
+% figure legend
 \newcommand{\figurecaption}[2][]{%
 	%
 	% typset a caption from a label outside captionof command
@@ -984,8 +983,6 @@
 	% [#2] : (mandatory) the reference label (fig:inside)
 	% [#1] : (optional) description
 	%
-	% \crefname{figure}{}{}
-
 	% get figure label from ref 
 	\def\fig@label{}
 	\cref@getlabel{#2}{\fig@label}
@@ -995,7 +992,25 @@
 	\ifstrempty{#1}{}{%
 		{\par\smallskip\tf@fntxt#1}%
 	}
-	% \crefname{figure}{fig.}{figs.}
+}
+
+% table legend
+\newcommand{\tablecaption}[2][]{%
+	%
+	% typset a caption from a label outside captionof command
+	% apparently this can be called only once per ref
+	% [#2] : (mandatory) the reference label (fig:inside)
+	% [#1] : (optional) description
+	%
+	% get figure label from ref 
+	\def\table@label{}
+	\cref@getlabel{#2}{\table@label}
+	{\raggedright \tf@fnnum Table\hspace*{2pt}\table@label\hspace*{4pt}}%
+	{\tf@fntxt\zdescref{#2}}
+	% add caption title / optional title
+	\ifstrempty{#1}{}{%
+		{\par\smallskip\tf@fntxt#1}%
+	}
 }
 
 \RequirePackage{zref-user,zref-titleref,zref-descref} % needs to be loaded after subcaption
