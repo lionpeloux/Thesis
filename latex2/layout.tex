@@ -45,6 +45,13 @@
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \newcommand{\tablebf}{\fontseries{b}\selectfont} % bold font that does not get wider to keep bold numbers aligned
 
+\AtBeginEnvironment{tabular}{\ra{0.9}\footnotesize}
+\AtBeginEnvironment{tabularx}{\ra{0.9}\footnotesize}
+
+\heavyrulewidth=2pt %.08em
+\lightrulewidth=1pt %.05em
+\cmidrulewidth=1pt  %.03em
+
 % nomenclature of symbols
 % ---------------------------------
 % \usepackage[intoc]{nomencl}

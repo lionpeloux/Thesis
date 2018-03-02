@@ -111,6 +111,8 @@
 % temporary registers
 \newlength\tmpwidth
 \newlength\tmpheight
+\newlength\plotYadjust
+\setlength{\plotYadjust}{1cm}
 % **************************************************
 % Commands
 % **************************************************
