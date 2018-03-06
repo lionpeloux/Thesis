@@ -208,21 +208,76 @@ Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of th
 \item \dofs{3} for the position of the centerline,
 \item and only \dofs{1} for the orientation of the cross-sections.
 \end{itemize}
-\begin{figure}[t]
-	\begin{subfigure}[b]{\TwoMediaWidth}
-		\includegraphics{curve_angle_a.pdf}
-		\caption{bending strains}
-		\label{fig:curve_angle_a}
-	\end{subfigure}%
-	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-	\begin{subfigure}[b]{\TwoMediaWidth}
-		\includegraphics[]{curve_angle_b.pdf}
-		\caption{angular deviation}
-		\label{fig:curve_angle_b}
-	\end{subfigure}
-	\caption[Curve-angle representation of the rod]{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}
-	\label{fig:curve_angle}
-\end{figure}
+
+
+\afterpage{%
+	\AddToShipoutPictureBG*{% 
+		\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+		\Photo[
+			node=CAt,
+			anchor=north east,
+			xshift=-1cm,
+			]{curve_angle_a.pdf}%
+		\savenodes{A}
+		\Photo[
+			node=CAt,
+			anchor=north west,
+			xshift=1cm,
+			]{curve_angle_b.pdf}%
+		\savenodes{B}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{Curve-angle representation of the rod}{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}{fig:curve_angle}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Abr,
+			anchor=north east,
+			yshift=\PhotoBigSkip,
+			]{subfigure}{}{Bending strains}{fig:curve_angle_a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Bbr,
+			anchor=north east,
+			yshift=\PhotoBigSkip,
+			]{subfigure}{}{Angular deviation}{fig:curve_angle_b}
+		\intersectnode{CAtl |- Abr}{Pt}
+		\PhotoTextBox[
+			node=Pt,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			% width=\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:curve_angle}\par\medskip
+				\figurecaption{fig:curve_angle_a}\par
+				\figurecaption{fig:curve_angle_b}
+			}
+	}
+	\setlength{\tmpheight}{8cm + 2\PhotoBigSkip}
+	\hbox{\vspace{\tmpheight}}
+}
+
+
+% \begin{figure}[t]
+% 	\begin{subfigure}[b]{\TwoMediaWidth}
+% 		\includegraphics{curve_angle_a.pdf}
+% 		\caption{bending strains}
+% 		\label{fig:curve_angle_a}
+% 	\end{subfigure}%
+% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
+% 	\begin{subfigure}[b]{\TwoMediaWidth}
+% 		\includegraphics[]{curve_angle_b.pdf}
+% 		\caption{angular deviation}
+% 		\label{fig:curve_angle_b}
+% 	\end{subfigure}
+% 	\caption[Curve-angle representation of the rod]{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}
+% 	\label{fig:curve_angle}
+% \end{figure}
 % \begin{figure}[t]
 % %	\begin{fullpage}
 %      		\centering
@@ -307,6 +362,39 @@ We introduce the vector of material curvatures ($\vect{\omega}$) as the 2-dimens
 \section{Definition of the variational problem}\label{sec=varpb}
 We now have all the ingredients to build the variational problem that will lead us to the determination of the internal forces ($\vect{f}$) and the internal twisting moment ($\vect{m}$) acting on the centerline. Indeed, the quasi-static out-of-balance internal forces and twisting moment acting on the beam are calculated by differentiating the elastic energy of the system with respect to the 4 \dofs{} of the system, namely $\vect{x}$ and $\theta$.
 
+
+\afterpage{%
+	\AddToShipoutPictureBG*{% 
+		\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+		\Photo[
+			node=CAt,
+			anchor=north,
+			yshift=-0.5cm,
+			]{degrees_of_freedom.pdf}%
+		\savenodes{A}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Succession of the degrees of freedom}{fig:dofs}
+		\intersectnode{CAtl |- Abr}{Pt}
+		\PhotoTextBox[
+			node=Pt,
+			anchor=north west,
+			yshift=-1\PhotoBigSkip,
+			% width=\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:dofs}
+			}
+	}
+	\setlength{\tmpheight}{3.5cm}
+	\hbox{\vspace{\tmpheight}}
+}
+
 \subsection{Calculus of variations}
 Differentiating $\mathcal{E}$ with respect to $\vect{x}$ will yield the linear resultant of the internal forces ($\vect{f}$, see \cref{sec=dE_dtheta}), while differentiating $\mathcal{E}$ with respect to $\theta$ will yield the linear resultant of the internal twisting moment ($\vect{m}$, see \cref{sec=dE_dx}). Main results for the calculus of variations are reminded in \cref{chp=variation}.
 
@@ -341,14 +429,18 @@ It is important to notice that as the rod is supposed to be inextensible, the el
 
 \subsection{Prerequisite for the computation of energy gradients}\label{sec=dofchain}
 To compute the energy gradients with respect to the degrees of freedom of the rod it is primordial to understand how these \dofs{} are chained (see \cref{fig:dofs})~:
-\begin{figure}[h]
-     		\centering
-     		\includegraphics{degrees_of_freedom.pdf}
-%		\vspace{10pt}
-		\captionof{figure}[Succession of the degrees of freedom]{Succession of the degrees of freedom.}
-%		\vspace{10pt}
-		\label{fig:dofs}
-\end{figure}
+
+
+
+
+% \begin{figure}[h]
+%      		\centering
+%      		\includegraphics{degrees_of_freedom.pdf}
+% %		\vspace{10pt}
+% 		\captionof{figure}[Succession of the degrees of freedom]{Succession of the degrees of freedom.}
+% %		\vspace{10pt}
+% 		\label{fig:dofs}
+% \end{figure}
 \begin{itemize}
 \item
 $\vect{x}$ leads to the determination of the curvature binormal ($\vect{\kappa b}$) and to the determination of the reference Bishop frame $\{\vect{t},\vect{u},\vect{v}\}$.
@@ -512,6 +604,99 @@ or equivalently~:
 
 For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed throughout this section are defined and where main results are reminded.
 
+\blankpage{%
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{% 
+		\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+		\Photo[
+			node=CAc,
+			anchor=center,
+			% yshift=-0.5cm,
+			]{writhe.pdf}%
+		\savenodes{A}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Variation of the Bishop frame for a perturbation of the centerline}{fig:varbishop}
+		\intersectnode{CAtl |- Abr}{Pt}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			% width=0.6\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:varbishop}
+			}
+	}
+	\afterpage{%
+		\AddToShipoutPictureBG*{% 
+			\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+			\Photo[
+				node=CAt,
+				anchor=north,
+				% yshift=-0.5cm,
+				]{rotation_B.pdf}%
+			\savenodes{A}
+			%%
+			\PhotoCaptionRef[
+				hrefnode=Atl,
+				node=Atl,
+				anchor=north west,
+				yshift=\PhotoRefSkip,
+				phantom=true,
+				]{figure}{Measuring the variation of parallel transport : rotation of angle $\alpha_\epsilon$.}{Measuring the variation of parallel transport ($\alpha_\epsilon$). $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around the axis $\vect{b} = \vect{t}_\epsilon \times \vect{t}$ by an angle $\alpha_\epsilon$.}{fig:rot_a}
+			\intersectnode{CAtl |- Abr}{Pt}
+			\PhotoTextBox[
+				node=Pt,
+				anchor=north west,
+				yshift=-1.5\PhotoBigSkip,
+				width=0.6\textwidth,
+				border=false,
+				]{%
+					\figurecaption{fig:rot_a}
+				}
+		}
+		\setlength{\tmpheight}{12.25cm}
+		\hbox{\vspace{\tmpheight}}
+		%%
+		\afterpage{%
+			\AddToShipoutPictureBG*{% 
+				\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+				\Photo[
+					node=CAt,
+					anchor=north,
+					% yshift=-0.5cm,
+					]{rotation_A.pdf}%
+				\savenodes{A}
+				%%
+				\PhotoCaptionRef[
+					hrefnode=Atl,
+					node=Atl,
+					anchor=north west,
+					yshift=\PhotoRefSkip,
+					phantom=true,
+					]{figure}{Measuring the variation of parallel transport : rotation of angle $\Psi_\epsilon$.}{Measuring the variation of parallel transport ($\Psi_\epsilon$). $F$ is obtained by rotating $\tilde{F}_\epsilon$ around $\vect{t}$ by an angle $\Psi_\epsilon$.}{fig:rot_b}
+				\intersectnode{CAtl |- Abr}{Pt}
+				\PhotoTextBox[
+					node=Pt,
+					anchor=north west,
+					yshift=-1.5\PhotoBigSkip,
+					width=0.6\textwidth,
+					border=false,
+					]{%
+						\figurecaption{fig:rot_b}
+					}
+			}
+			\setlength{\tmpheight}{12.25cm}
+			\hbox{\vspace{\tmpheight}}
+		}
+	}	
+}
+
 \subsection{Derivative of material directors with respect to $\vect{x}$}
 A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation of the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame. Let us denote~:
 \begin{itemize}
@@ -522,14 +707,16 @@ $F = \{\vect{t}, \vect{u},\vect{v}\}$~: the Bishop frame in the reference config
  \item
 $\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$~: the frame obtained by parallel transporting $F_\epsilon$ back on $F$.
 \end{itemize}
-\begin{figure}[p]
-\begin{fullpage}
-\centering
-\includegraphics[width=\linewidth]{writhe.pdf}
-\captionof{figure}[Variation of the Bishop frame for a perturbation of the centerline]{Variation of the Bishop frame for a perturbation of the centerline.}
-\label{fig:varbishop}
-\end{fullpage}
-\end{figure}
+
+
+% \begin{figure}[p]
+% \begin{fullpage}
+% \centering
+% \includegraphics[width=\linewidth]{writhe.pdf}
+% \captionof{figure}[Variation of the Bishop frame for a perturbation of the centerline]{Variation of the Bishop frame for a perturbation of the centerline.}
+% \label{fig:varbishop}
+% \end{fullpage}
+% \end{figure}
 From \cref{fig:varbishop} we start with an (arbitrary) initial reference frame defined in the rest configuration and denoted $F(0)$, positioned at arc length parameter $s=0$~:
 \begin{itemize}
 \item
@@ -553,16 +740,16 @@ Firstly, let's decompose $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsil
 
 \subsubsection{Calculation of $\Psi_\epsilon$}
 
-\begin{figure}[p]
-\centering
-	\includegraphics[width=\textwidth]{rotation_B.pdf}
-	\captionof{figure}[Measuring the variation of parallel transport : rotation of angle $\alpha_\epsilon$.]{Measuring the variation of parallel transport ($\alpha_\epsilon$). $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around the axis $\vect{b} = \vect{t}_\epsilon \times \vect{t}$ by an angle $\alpha_\epsilon$.}
-	\label{fig:rot_a}
-%
-	\includegraphics[width=\textwidth]{rotation_A.pdf}
-	\captionof{figure}[Measuring the variation of parallel transport : rotation of angle $\Psi_\epsilon$.]{Measuring the variation of parallel transport ($\Psi_\epsilon$). $F$ is obtained by rotating $\tilde{F}_\epsilon$ around $\vect{t}$ by an angle $\Psi_\epsilon$.}
-	\label{fig:rot_b}
-\end{figure}
+% \begin{figure}[p]
+% \centering
+% 	\includegraphics[width=\textwidth]{rotation_B.pdf}
+% 	\captionof{figure}[Measuring the variation of parallel transport : rotation of angle $\alpha_\epsilon$.]{Measuring the variation of parallel transport ($\alpha_\epsilon$). $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around the axis $\vect{b} = \vect{t}_\epsilon \times \vect{t}$ by an angle $\alpha_\epsilon$.}
+% 	\label{fig:rot_a}
+% %
+% 	\includegraphics[width=\textwidth]{rotation_A.pdf}
+% 	\captionof{figure}[Measuring the variation of parallel transport : rotation of angle $\Psi_\epsilon$.]{Measuring the variation of parallel transport ($\Psi_\epsilon$). $F$ is obtained by rotating $\tilde{F}_\epsilon$ around $\vect{t}$ by an angle $\Psi_\epsilon$.}
+% 	\label{fig:rot_b}
+% \end{figure}
 
 This variation is closely related to the writhe of closed curves. As explained by \citef{Fuller1978} when parallel transporting an adapted frame around a closed curve it might not realigned with itself after one complete loop. This \textquote{lack of alignement} is directly measured by the change of writhe which can be computed with Fuller's Formula~\cite{Fuller1978}.
 
@@ -813,7 +1000,7 @@ Which finally leads to~:
 			\vect{h}_x''\cdot\vect{d}_1\\
 		\end{bmatrix*} + o(\lambda)
 \end{equation}
-Reminding the expression of $\Psi_\epsilon$ computed in \cref{eq:psi}, one can express the derivative of the vector of material curvatures with respect to $\vect{x}$ as~:
+Reminding the expression of $\Psi_\epsilon$ computed in \cref{eq:psi}, one can express the derivative of the vector of material curvatures with respect to $\vect{x}$ as~:~\footnote{Here, we have introduced a condensed matrix notation to write $\begin{bmatrix*}[r] -{\vect{d}_2}^T\\ {\vect{d}_1}^T\\ \end{bmatrix*}$ as a 2x3 matrix.}
 \begin{equation}
 			\pdiffof{x}{\vect{\omega}}{s}{\vect{h}_x}
 	= 	\left(\int_0^L \left(\left(\delta_s-\delta_0\right)\vect{\kappa b} - (1-H_s)\vect{\kappa b}'\right)\cdot  \vect{h}_x \,dt\right)\mat{J}\vect{\omega}+
@@ -823,7 +1010,7 @@ Reminding the expression of $\Psi_\epsilon$ computed in \cref{eq:psi}, one can e
 		\end{bmatrix*}\cdot \vect{h}_x''
 \label{eq:dwdx}
 \end{equation}
-Here, we have introduced a condensed matrix notation to write $\begin{bmatrix*}[r] -{\vect{d}_2}^T\\ {\vect{d}_1}^T\\ \end{bmatrix*}$ as a 2x3 matrix. The entries of the first line are $-{\vect{d}_2}^T = \begin{bmatrix} 0,\;0,\;-1 \end{bmatrix}$ while the entries of the second line are ${\vect{d}_1}^T = \begin{bmatrix} 0,\;1,\;0 \end{bmatrix}$. Thus, the matrix entries in the material frame coordinate system are given by~:
+The entries of the first line are $-{\vect{d}_2}^T = \begin{bmatrix} 0,\;0,\;-1 \end{bmatrix}$ while the entries of the second line are ${\vect{d}_1}^T = \begin{bmatrix} 0,\;1,\;0 \end{bmatrix}$. Thus, the matrix entries in the material frame coordinate system are given by~:
 \begin{equation}
 	\begin{bmatrix*}[r] -{\vect{d}_2}^T\\ {\vect{d}_1}^T \end{bmatrix*}
 	=
