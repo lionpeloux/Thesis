@@ -1239,22 +1239,22 @@ Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n 
 			node=Ab,
 			anchor=north,
 			% yshift=\PhotoRefSkip,
-			]{subfigure}{}{vertex-based}{fig:kb_vertex}
+			]{subfigure}{}{Vertex-based}{fig:kb_vertex}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
 			node=Bb,
 			anchor=north,
-			]{subfigure}{}{edge-based}{fig:kb_edge}
+			]{subfigure}{}{Edge-based}{fig:kb_edge}
 		\PhotoCaptionRef[
 			hrefnode=Ctl,
 			node=Cb,
 			anchor=north,
-			]{subfigure}{}{bitangent with $\norm{\vect{e}_{i-1}}$}{fig:kb_mixed_a}
+			]{subfigure}{}{Bitangent with $\norm{\vect{e}_{i-1}}$}{fig:kb_mixed_a}
 		\PhotoCaptionRef[
 			hrefnode=Dtl,
 			node=Db,
 			anchor=north,
-			]{subfigure}{}{bitangent with $\norm{\vect{e}_{i}}$}{fig:kb_mixed_b}
+			]{subfigure}{}{Bitangent with $\norm{\vect{e}_{i}}$}{fig:kb_mixed_b}
 		\PhotoTextBox[
 			node=CAbl,
 			anchor=south west,
@@ -1593,14 +1593,14 @@ However, for the kind of structures we are studying here, those kind of configur
 			]{figure}{Relative error in the estimation of the bending energy of a semicircle}{Relative error in the estimation of the bending energy of a semicircle ($\mathcal{E}$) by the discrete energies $\mathcal{E}_1$ and $\mathcal{E}_3$, regarding the sharpness of the discretization.}{fig:bench_semicircle}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
-			node=Ab,
-			anchor=north,
+			node=At,
+			anchor=south,
 			% yshift=\PhotoRefSkip,
 			]{subfigure}{}{$| 1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%}{plot:bench_semicircle_vertex}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
-			node=Bb,
-			anchor=north,
+			node=Bt,
+			anchor=south,
 			]{subfigure}{}{$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%}{plot:bench_semicircle_edge}
 		\PhotoTextBox[
 			node=CAbl,
@@ -1657,7 +1657,7 @@ However, for the kind of structures we are studying here, those kind of configur
 			% width=\textwidth,
 			border=false,
 			]{%
-				\figurecaption{fig:elastica}\par
+				\figurecaption{fig:elastica}\par\medskip
 				\figurecaption{fig:elastica_seq}\par
 				\figurecaption{fig:elastica_discretization}
 			}
@@ -1671,14 +1671,14 @@ However, for the kind of structures we are studying here, those kind of configur
 			anchor=east,
 			xshift=-\PhotoBigSkip/2,
 			% gopt={width=\tmpwidth},
-			]{ch4_geometry/plot/3_bench_semicircle/build_vertex.pdf}%
+			]{ch4_geometry/plot/4_bench_elastica/build_vertex.pdf}%
 		\savenodes{A}
 		\Photo[
 			node=CAc,
 			anchor=west,
 			xshift=\PhotoBigSkip/2,
 			% gopt={width=\tmpwidth},
-			]{ch4_geometry/plot/3_bench_semicircle/build_edge.pdf}%
+			]{ch4_geometry/plot/4_bench_elastica/build_edge.pdf}%
 		\savenodes{B}
 		%
 		\PhotoCaptionRef[
@@ -1687,27 +1687,27 @@ However, for the kind of structures we are studying here, those kind of configur
 			anchor=north west,
 			yshift=\PhotoRefSkip,
 			phantom=true,
-			]{figure}{Relative error in the estimation of the bending energy of a semicircle}{Relative error in the estimation of the bending energy of a semicircle ($\mathcal{E}$) by the discrete energies $\mathcal{E}_1$ and $\mathcal{E}_3$, regarding the sharpness of the discretization.}{fig:bench_semicircle}
+			]{figure}{Relative error in the estimation of the bending energy of an elastica}{Relative error in the estimation of the bending energy of an elastica ($\mathcal{E}$) by the discrete energies $\mathcal{E}_1$ and $\mathcal{E}_3$, regarding the sharpness of the discretization. The curves (1,5,10,15,20,25,30) are chosen from \cref{fig:elastica_seq}.}{fig:bench_elastica}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
-			node=Ab,
-			anchor=north,
+			node=At,
+			anchor=south,
 			% yshift=\PhotoRefSkip,
-			]{subfigure}{}{$| 1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%}{plot:bench_semicircle_vertex}
+			]{subfigure}{}{$| 1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%}{plot:bench_elastica_vertex}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
-			node=Bb,
-			anchor=north,
-			]{subfigure}{}{$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%}{plot:bench_semicircle_edge}
+			node=Bt,
+			anchor=south,
+			]{subfigure}{}{$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%}{plot:bench_elastica_vertex}
 		\PhotoTextBox[
 			node=CAbl,
 			anchor=south west,
 			% width=\textwidth,
 			border=false,
 			]{%
-				\figurecaption{fig:bench_semicircle}\par\medskip
-				\figurecaption{plot:bench_semicircle_vertex}\par
-				\figurecaption{plot:bench_semicircle_edge}
+				\figurecaption{fig:bench_elastica}\par\medskip
+				\figurecaption{plot:bench_elastica_vertex}\par
+				\figurecaption{plot:bench_elastica_vertex}
 			}
 	}
 }
@@ -1783,7 +1783,72 @@ The ability to define a unique tangent vector is very important to define the no
 
 \subsection{Circumscribed case}\label{sec=discrete_tangent_circumscribed}
 
-We consider the case where the curvature is defined according to the circumscribed osculating circle (see \cref{fig:kb_vertex_tangent_a}). 
+We consider the case where the curvature is defined according to the circumscribed osculating circle (see \cref{fig:kb_vertex_tangent_a}).
+
+
+\blankpage{%
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{%
+		\Photo[
+			node=CAt,
+			anchor=north,
+			yshift=2\PhotoBigSkip,
+			]{kb_vertex_tangent.pdf}%
+		\savenodes{A}
+		\intersectnode{Abr -| CAc}{Pt}
+		\Photo[
+			node=Pt,
+			anchor=north east,
+			xshift=-\PhotoBigSkip/2,
+			yshift=-1.5\PhotoBigSkip,
+			]{kb_vertex_start.pdf}%
+		\savenodes{B}
+		\Photo[
+			node=Pt,
+			anchor=north west,
+			xshift=\PhotoBigSkip/2,
+			yshift=-1.5\PhotoBigSkip,
+			]{kb_vertex_end.pdf}%
+		\savenodes{C}
+		%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{Definition of the tangent vector associated to the circumscribed curvature}{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the circumscribed curvature}{fig:kb_vertex_tangent}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atr,
+			anchor=north east,
+			yshift=-2\PhotoBigSkip,
+			]{subfigure}{}{Current portion}{fig:kb_vertex_tangent_a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			]{subfigure}{}{Start}{fig:kb_vertex_tangent_b}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Ctr,
+			anchor=north east,
+			yshift=-\PhotoBigSkip,
+			]{subfigure}{}{End}{fig:kb_vertex_tangent_c}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=0.6\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:kb_vertex_tangent}\par\medskip
+				\figurecaption{fig:kb_vertex_tangent_a}\par
+				\figurecaption{fig:kb_vertex_tangent_b}\par
+				\figurecaption{fig:kb_vertex_tangent_c}
+			}
+	}
+}
 
 \subsubsection{Current portion}
 
@@ -1816,16 +1881,17 @@ Note that $\vect{t}_i^-$ (resp. $\vect{t}_i^+$) is obtained by a reflection of $
 \end{equation}
 The first expression is interpreted as the unique circle passing through three points ($\vect{x}_{i-1}$, $\vect{x}_i$, $\vect{x}_{i+1}$) as explained in \cref{sec=circumscribed}. Equivalently, there exist a unique circle defined by two points and a tangent vector. Precisely, the last two expressions in \cref{eq:vertex_kbs} can be interpreted as the curvature binormal vector of the unique circle passing through $\vect{x}_{i-1}$, $\vect{x}_i$ (resp. $\vect{x}_{i}$, $\vect{x}_{i+1}$) and tangent to $\vect{t}_{i}$ at $\vect{x}_{i}$.
 
-\begin{figure}[p]
-	\captionsetup[subfloat]{captionskip=20pt}
-	\centering
-	\subfloat[][current portion]{\includegraphics{kb_vertex_tangent.pdf}\label{fig:kb_vertex_tangent_a}}\\
-	\subfloat[][start]{\includegraphics{kb_vertex_start.pdf}\label{fig:kb_vertex_tangent_b}}\hspace{5mm}
-	\subfloat[][end]{\includegraphics{kb_vertex_end.pdf}\label{fig:kb_vertex_tangent_c}}
-	\vspace{10pt}
-	\captionof{figure}[Definition of the tangent vector associated to the circumscribed curvature]{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the circumscribed curvature.}
-	\label{fig:kb_vertex_tangent}
-\end{figure}
+
+% \begin{figure}[p]
+% 	\captionsetup[subfloat]{captionskip=20pt}
+% 	\centering
+% 	\subfloat[][current portion]{\includegraphics{kb_vertex_tangent.pdf}\label{fig:kb_vertex_tangent_a}}\\
+% 	\subfloat[][start]{\includegraphics{kb_vertex_start.pdf}\label{fig:kb_vertex_tangent_b}}\hspace{5mm}
+% 	\subfloat[][end]{\includegraphics{kb_vertex_end.pdf}\label{fig:kb_vertex_tangent_c}}
+% 	\vspace{10pt}
+% 	\captionof{figure}[Definition of the tangent vector associated to the circumscribed curvature]{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the circumscribed curvature.}
+% 	\label{fig:kb_vertex_tangent}
+% \end{figure}
 
 \subsubsection{Discontinuity of curvature}
 Let $\vect{t}_i^*$ be an arbitrary tangent vector at $\vect{x}_i$. Following \cref{eq:vertex_kbs} we define the \emph{left-sided} (resp. \emph{right-sided}) discrete curvatures at $\vect{x}_i$ in the circumscribed case as~:
@@ -1860,16 +1926,81 @@ Note that, contrary to the current portion, curvatures at endings are subjected 
 
 We now consider the case where the curvature is defined according to the inscribed osculating circle (see \cref{fig:kb_edge_tangent_a}). Remark that inscribed and circumscribed osculating circles are concentric when $l_{i-1} = l_i$.
 
-\begin{figure}[p]
-	\captionsetup[subfloat]{captionskip=20pt}
-	\centering
-	\subfloat[][current portion]{\includegraphics{kb_edge_tangent.pdf}\label{fig:kb_edge_tangent_a}}\\
-	\subfloat[][start]{\includegraphics{kb_edge_start.pdf}\label{fig:kb_edge_tangent_b}}\hspace{5mm}
-	\subfloat[][end]{\includegraphics{kb_edge_end.pdf}\label{fig:kb_edge_tangent_c}}
-	\vspace{10pt}
-	\captionof{figure}[Definition of the tangent vector associated to the inscribed curvature]{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the inscribed curvature.}
-	\label{fig:kb_edge_tangent}
-\end{figure}
+\blankpage{%
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{%
+		\Photo[
+			node=CAt,
+			anchor=north,
+			yshift=2\PhotoBigSkip,
+			]{kb_edge_tangent.pdf}%
+		\savenodes{A}
+		\intersectnode{Abr -| CAc}{Pt}
+		\Photo[
+			node=Pt,
+			anchor=north east,
+			xshift=-\PhotoBigSkip/2,
+			yshift=-1.5\PhotoBigSkip,
+			]{kb_vertex_start.pdf}%
+		\savenodes{B}
+		\Photo[
+			node=Pt,
+			anchor=north west,
+			xshift=\PhotoBigSkip/2,
+			yshift=-1.5\PhotoBigSkip,
+			]{kb_vertex_end.pdf}%
+		\savenodes{C}
+		%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{Definition of the tangent vector associated to the inscribed curvature}{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the inscribed curvature}{fig:kb_edge_tangent}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atr,
+			anchor=north east,
+			yshift=-2\PhotoBigSkip,
+			]{subfigure}{}{Current portion}{fig:kb_edge_tangent_a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btl,
+			anchor=north west,
+			yshift=-\PhotoBigSkip,
+			]{subfigure}{}{Start}{fig:kb_edge_tangent_b}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Ctr,
+			anchor=north east,
+			yshift=-\PhotoBigSkip,
+			]{subfigure}{}{End}{fig:kb_edge_tangent_c}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=0.6\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:kb_edge_tangent}\par\medskip
+				\figurecaption{fig:kb_edge_tangent_a}\par
+				\figurecaption{fig:kb_edge_tangent_b}\par
+				\figurecaption{fig:kb_edge_tangent_c}
+			}
+	}
+}
+
+
+% \begin{figure}[p]
+% 	\captionsetup[subfloat]{captionskip=20pt}
+% 	\centering
+% 	\subfloat[][current portion]{\includegraphics{kb_edge_tangent.pdf}\label{fig:kb_edge_tangent_a}}\\
+% 	\subfloat[][start]{\includegraphics{kb_edge_start.pdf}\label{fig:kb_edge_tangent_b}}\hspace{5mm}
+% 	\subfloat[][end]{\includegraphics{kb_edge_end.pdf}\label{fig:kb_edge_tangent_c}}
+% 	\vspace{10pt}
+% 	\captionof{figure}[Definition of the tangent vector associated to the inscribed curvature]{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the inscribed curvature.}
+% 	\label{fig:kb_edge_tangent}
+% \end{figure}
 
 
 \subsubsection{Current portion}
@@ -1956,15 +2087,66 @@ Note that while these definitions of parallel transport are illustrated to trans
 
 The rotation method is given by \citef{Bloomenthal1990}. First, the frame at $\vect{x}_i$ is simply translated at vertex $\vect{x}_{i+1}$. Then, the translated frame is rotated so that $\vect{t}_i$ aligns with $\vect{t}_{i+1}$. The rotation axis is chosen to be $\vect{b} = \vect{t}_i \times \vect{t}_{i+1}$ and the angle of rotation is denoted $\alpha$ (see \cref{fig:pt_rotation}). This is analogous to the smooth case.
 
-\begin{figure}[!p]
-	\captionsetup[subfloat]{captionskip=10pt}
-	\centering
-	\subfloat[][rotation method]{\includegraphics{pt_rotation.pdf}\label{fig:pt_rotation}}\\
-	\subfloat[][double reflection method]{\includegraphics{pt_reflection.pdf}\label{fig:pt_reflection}}
-	\vspace{10pt}
-	\captionof{figure}[Two methods to parallel transport a vector]{Two methods to parallel transport a frame from $\{\vect{x}_i,\vect{t}_i\}$ to $\{\vect{x}_{i+1},\vect{t}_{i+1}\}$.}
-	\label{fig:pt}
-\end{figure}
+
+\blankpage{%
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{%
+		\Photo[
+			node=CAt,
+			anchor=north,
+			% yshift=2\PhotoBigSkip,
+			]{pt_rotation.pdf}%
+		\savenodes{A}
+		\Photo[
+			node=Ab,
+			anchor=north,
+			% yshift=\PhotoBigSkip,
+			]{pt_reflection.pdf}%
+		\savenodes{B}
+		%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{Two methods to parallel transport a vector}{Two methods to parallel transport a frame from $\{\vect{x}_i,\vect{t}_i\}$ to $\{\vect{x}_{i+1},\vect{t}_{i+1}\}$}{fig:pt}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=CAtr,
+			anchor=north east,
+			% yshift=-2\PhotoBigSkip,
+			]{subfigure}{}{Rotation method}{fig:pt_rotation}
+		\intersectnode{Btl -| CAtr}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Pt,
+			anchor=north east,
+			yshift=-2\PhotoBigSkip,
+			]{subfigure}{}{Double reflection method}{fig:pt_reflection}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:pt}\par
+				\figurecaption{fig:pt_rotation}\par
+				\figurecaption{fig:pt_reflection}\par
+			}
+	}
+}
+
+
+% \begin{figure}[!p]
+% 	\captionsetup[subfloat]{captionskip=10pt}
+% 	\centering
+% 	\subfloat[][rotation method]{\includegraphics{pt_rotation.pdf}\label{fig:pt_rotation}}\\
+% 	\subfloat[][double reflection method]{\includegraphics{pt_reflection.pdf}\label{fig:pt_reflection}}
+% 	\vspace{10pt}
+% 	\captionof{figure}[Two methods to parallel transport a vector]{Two methods to parallel transport a frame from $\{\vect{x}_i,\vect{t}_i\}$ to $\{\vect{x}_{i+1},\vect{t}_{i+1}\}$.}
+% 	\label{fig:pt}
+% \end{figure}
 
 \subsection{The double reflexion method}
 The double reflection method is given by \citef{Wang2008}. It is supposed to be of order $o(h^4)$ whereas the rotation method is only $o(h^2)$, where $h = \sup_{i\in \llbracket 0,n \rrbracket} \norm{\vect{e}_i}$ is the sharpness of the discretization. Though their computation cost is quite similar, the double reflection method is not subject to instability when $\vect{t}_i$ and $\vect{t}_{i+1}$ tend to be collinear, which is an obvious advantage.
