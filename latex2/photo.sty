@@ -220,7 +220,6 @@
 				\pgfresetboundingbox
 				\path[use as bounding box] (0,0);
 			\end{tikzpicture}
-			\savenodes{PS}
 			\@PSLeftPageCode
 		}
 		% ==========
@@ -254,7 +253,6 @@
 				\pgfresetboundingbox
 				\path[use as bounding box] (0,0);
 			\end{tikzpicture}
-			\savenodes{PS}
 			\@PSRightPageCode
 		}}
 	}{}
@@ -489,6 +487,10 @@
 			\coordinate (BL) at (current bounding box.south west); 	% bottom-left corner
 			\coordinate (TR) at (current bounding box.north east); 	% top-left corner
 			\coordinate (BR) at (current bounding box.south east); 	% bottom-left corner
+			\coordinate (T) at (current bounding box.north); 	% top-left corner
+			\coordinate (B) at (current bounding box.south); 	% bottom-left corner
+			\coordinate (R) at (current bounding box.east); 	% top-left corner
+			\coordinate (L) at (current bounding box.west); 	% bottom-left corner
 			\ifdefstring{\@TBHasBorder}{false}{}{%
 				\draw[line width=\@TBBorderWidth] ([xshift=-2\PhotoRefSkip]@TL) -- ([xshift=-2\PhotoRefSkip]@BL);
 			}
