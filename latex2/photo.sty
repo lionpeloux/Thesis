@@ -485,10 +485,10 @@
 					}}
 			};
 			% store points of interest
-			\coordinate (@TL) at (current bounding box.north west); 	% top-left corner
-			\coordinate (@BL) at (current bounding box.south west); 	% bottom-left corner
-			\coordinate (@TR) at (current bounding box.north east); 	% top-left corner
-			\coordinate (@BR) at (current bounding box.south east); 	% bottom-left corner
+			\coordinate (TL) at (current bounding box.north west); 	% top-left corner
+			\coordinate (BL) at (current bounding box.south west); 	% bottom-left corner
+			\coordinate (TR) at (current bounding box.north east); 	% top-left corner
+			\coordinate (BR) at (current bounding box.south east); 	% bottom-left corner
 			\ifdefstring{\@TBHasBorder}{false}{}{%
 				\draw[line width=\@TBBorderWidth] ([xshift=-2\PhotoRefSkip]@TL) -- ([xshift=-2\PhotoRefSkip]@BL);
 			}

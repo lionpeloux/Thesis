@@ -84,31 +84,69 @@ Let us introduce the discrete \emph{biarc} model to describe the configuration o
 
 Elements can either be closed or open. The relations between the corresponding number of vertices, edges and segments are reported in \cref{tab:count}.
 
-\begin{figure}[p]
-\begin{fullpage}
-	\captionsetup[subfloat]{captionskip=20pt}
-     	\centering
-     	\subfloat[][Centerline of the discrete biarc model]{\includegraphics{discrete_model.pdf}\label{fig:discrete_model}} \\
-	\vspace{30pt}
-	\subfloat[][Number of segments, edges and vertices whether the centerline is closed or open]{\label{tab:count}%
-		 \ra{1.2}
-		 \begin{tabularx}{0.45\textwidth}{@{} X l r  r@{}}
-		 \toprule
-		 		&			& \multicolumn{2}{c}{Centerline} \\ \cmidrule(l){3-4}
-		 Item 	&  Symbol 	& Open 	& Closed \\
-		 \midrule
-		segments & $n_s$ & $n_s$ & $n_s$ \\
-		edges & $n_e$ & $2 n_s$ & $2 n_s$ \\
-		vertices & $n$ & $2 n_s + 1$ & $2 n_s$ \\
-		ghosts & $n_g$ & $n_s$ & $n_s$ \\
-		handles & $n_h$ & $n_s+1$ & $n_s$ \\
-		\bottomrule
-		
-	\end{tabularx}}
-	\vspace{10pt}
-	\captionof{figure}[Biarc model for a discrete beam element]{Biarc model for a discrete beam element. The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a three-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.}
-\end{fullpage}
-\end{figure}
+\blankpage{
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{%
+		\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+		\Photo[
+			node=CAc,
+			anchor=center,
+			yshift=2cm,
+			]{discrete_model.pdf}%
+		\savenodes{A}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			phantom=true,
+			anchor=north west,
+			]{figure}{}{Centerline of the discrete biarc model}{fig:discrete_model}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=\tmpwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:discrete_model}\par\medskip
+				The centerline is divided into curved segments (grey solid hatch). Each segment is defined as a three-noded element with uniform material and section properties. It has two end vertices (white) called \emph{handle} as they are used to interact with the model, for instance to apply loads or restrains. It has one mid vertex (grey) called \emph{ghost} as it is used only to enrich the segment kinematics and is not accessible to the end user.
+			}
+		\PhotoTextBox[
+			node=CAbr,
+			anchor=south east,
+			width=0.9\tmpwidth,
+			border=false,
+			]{%
+				\tablecaption{tab:count}%
+			}
+		\savenodes{B}
+		\SBox[%
+			node=Btr,
+			anchor=south east,
+			yshift=\PhotoRefSkip,
+			]{%
+				\ra{1}%
+				\begin{tabularx}{0.9\tmpwidth}{@{} X l r  r@{}}
+					\toprule
+								&			& \multicolumn{2}{c}{Centerline} \\ \cmidrule(l){3-4}
+					Item 		&  Symbol 	& Open 			& Closed \\
+					\midrule
+				   	segments 	& $n_s$ 	& $n_s$ 		& $n_s$ \\
+				   	edges 		& $n_e$ 	& $2 n_s$ 		& $2 n_s$ \\
+				   	vertices 	& $n$ 		& $2 n_s + 1$ 	& $2 n_s$ \\
+				   	ghosts 		& $n_g$ 	& $n_s$ 		& $n_s$ \\
+				   	handles 	& $n_h$ 	& $n_s+1$ 		& $n_s$ \\
+				   	\bottomrule
+			   \end{tabularx}%
+			}
+		\savenodes{A}
+		\intersectnode{Abr -| CAtl}{Pt}
+		\PhotoCaptionRef[
+			node=Atl, 
+			anchor=north west, 
+			phantom=true,
+			]{table}{}{Number of segments, edges and vertices whether the centerline is closed or open}{tab:count}
+	}
+}
+
 
 \subsection{Description of the element}
 Here we present how we model all the required informations involved in the element representation~: its geometry (centerline, material frames, cross-sections), its materiality (elastic and shear modulus) and its mechanical state (internal forces and moments). An element is also subject to external loads (external forces and moments).
@@ -265,27 +303,6 @@ With the help of the matrix notation, the constitutive equations \cref{eq:consti
 	+ GJ (\varkappa_3 - \rconf{\varkappa}_3) \vect{d}_3
 \end{equation}
 
-%We also introduce the matrix notation for the derivatives of the internal forces and moments referring to the inertial frame of reference $\{\vect{x},\vect{y},\vect{z}\}$ and to the local frame $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. The (spatial) velocity of $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$ implies that~:
-%\begin{subequations}
-%	\begin{alignat}{3}
-%	&\vect{F}' = \vect{F}^{'|xyz} = \vect{F}^{'|123} + \vect{\varkappa} \times \vect{F}
-%	\\
-%	&\vect{M}' = \vect{M}^{'|xyz} = \vect{M}^{'|123} + \vect{\varkappa} \times \vect{M}
-%	\end{alignat}
-%\end{subequations}
-%where $\vect{F}_{xyz}'$ and $\vect{M}_{xyz}'$ denote the derivative with respect to $s$ in the inertial frame of reference $\{\vect{x},\vect{x},\vect{z}\}$ whereas $\vect{F}_{123}'$ and $\vect{M}_{123}'$ denote the derivative with respect to $s$ in the local material frame basis $\{\vect{d}_{1},\vect{d}_{2},\vect{d}_{3}\}$. Thus the matrix notation for $\vect{F}_{123}'$ and $\vect{M}_{123}'$ are given by :
-%\begin{subequations}
-%	\begin{alignat}{3}
-%	&\vect{F}^{'|123}
-%	&&= F_1' \vect{d}_1 +  F_2' \vect{d}_2 + N' \vect{d}_3
-%	= \begin{bmatrix} F_1' & F_2' & N' \end{bmatrix}^T
-%	\\
-%	&\vect{M}^{'|123}
-%	&&= M_1' \vect{d}_1 +  M_2' \vect{d}_2 + Q' \vect{d}_3
-%	= \begin{bmatrix} M_1' & M_2' & Q' \end{bmatrix}^T
-%	\end{alignat}
-%\end{subequations}
-
 % Discrete extension and axial force
 % --------------------------------------------
 \subsection{Discrete extension and axial force}
@@ -309,77 +326,182 @@ Remark the sign convention~: as expected, when edge $\vect{e}_i$ suffers a posit
 We assume that the internal bending moment and curvature are quadratic functions of the arc length parameter over $]\vect{x}_{2i},  \vect{x}_{2i+2}[$.
 Although they must be continuous over this interval, they might be discontinuous at handle vertices and be subjected to jump discontinuities in direction and magnitude.
 
-%\clearpage
-\def\tabularxcolumn#1{m{#1}} % vertical center in X column
-
 \subsubsection{Geometric curvature at ghost vertices}
 % --------------------------------------------------------
-For a given geometry of the centerline, the curvature binormal vector at ghost vertex  $\vect{x}_{2i-1}$ (resp. $\vect{x}_{2i+1}$) is computed considering the circumscribed osculating circle passing through the vertices ($\vect{x}_{2i-2}, \vect{x}_{2i-1},  \vect{x}_{2i}$) of the ($i-1$)th segment -- resp. through the vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) of the $i$th segment.
-
-\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
-	\includegraphics[]{E1.pdf}
-	&
-	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
-	\vect{\kappa b}_{2i-1} 	& =  \frac{2}{L_{i-1}} \vect{u}_{2i-2} \times \vect{u}_{2i-1}\\[0.5em]
-	\vect{\kappa b}_{2i+1} 	& =  \frac{2}{L_{i}} \vect{u}_{2i} \times \vect{u}_{2i+1}
-	\end{aligned}$
-\end{tabularx}
-
+For a given geometry of the centerline, the curvature binormal vector at ghost vertex  $\vect{x}_{2i-1}$ (resp. $\vect{x}_{2i+1}$) is computed considering the circumscribed osculating circle passing through the vertices ($\vect{x}_{2i-2}, \vect{x}_{2i-1},  \vect{x}_{2i}$) of the ($i-1$)th segment -- resp. through the vertices ($\vect{x}_{2i}, \vect{x}_{2i+1},  \vect{x}_{2i+2}$) of the $i$th segment (see \cref{fig:biarcparam_a}).
 
 \subsubsection{Unit tangent vector at ghost vertices}
 % ---------------------------------------------------------------------
-
-This definition of the curvature leads to a natural definition of the unit tangent vector at ghost vertex $\vect{x}_{2i-1}$ (resp. $\vect{x}_{2i+1}$), as the unit vector tangent to the osculating circle of the ($i-1$)th segment (resp. $i$th segment) at that point.
-
-\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
-	\includegraphics[]{E2.pdf}
-	&
-	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
-	\vect{t}_{2i-1}	&=  \frac{l_{2i-1}}{L_{i-1}} \vect{u}_{2i-2}	+ 	\frac{l_{2i-2}}{L_{i-1}} \vect{u}_{2i-1} 	\\[0.5em]
-	\vect{t}_{2i+1} 	&=  \frac{l_{2i+1}}{L_{i}} \vect{u}_{2i}		+ 	\frac{l_{2i}}{L_{i}} \vect{u}_{2i+1}
-	\end{aligned}$
-\end{tabularx}
+This definition of the curvature leads to a natural definition of the unit tangent vector at ghost vertex $\vect{x}_{2i-1}$ (resp. $\vect{x}_{2i+1}$), as the unit vector tangent to the osculating circle of the ($i-1$)th segment (resp. $i$th segment) at that point (see \cref{fig:biarcparam_b}).
 
 \subsubsection{Left/right unit tangent vector at handle vertices}
 % -----------------------------------------------------------------------------------
-Equivalently, the definition of the osculating circles of the ($i-1$)th and $i$th segments leads to a natural definition of the left ($\vect{t}_{2i}^-$) and right ($\vect{t}_{2i}^+$) unit tangent vectors at handle vertex $\vect{x}_{2i}$, for segments of uniform curvature. When both segments have the same curvature, left and right vectors agree.
-
-\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
-	\includegraphics[]{E3.pdf}
-	&
-	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
-	\vect{t}_{2i}^- 	&= 2 (\vect{t}_{2i-1} \cdot \vect{u}_{2i-1}) \vect{u}_{2i-1} - \vect{t}_{2i-1} \\[0.5em]
-	\vect{t}_{2i}^+ 	&= 2 (\vect{t}_{2i+1} \cdot \vect{u}_{2i}) \vect{u}_{2i} - \vect{t}_{2i+1}
-	\end{aligned}$
-\end{tabularx}
+Equivalently, the definition of the osculating circles of the ($i-1$)th and $i$th segments leads to a natural definition of the left ($\vect{t}_{2i}^-$) and right ($\vect{t}_{2i}^+$) unit tangent vectors at handle vertex $\vect{x}_{2i}$, for segments of uniform curvature. When both segments have the same curvature, left and right vectors agree (see \cref{fig:biarcparam_c}).
 
 \subsubsection{Unit tangent vector at handle vertices}
 % ----------------------------------------------------------------------
-The unit tangent vector $\vect{t}_{2i}$ (that is the cross-section normal) at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex.\footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.}
+The unit tangent vector $\vect{t}_{2i}$ (that is the cross-section normal) at handle vertex $\vect{x}_{2i}$ is chosen to be the mean of the left and right unit tangent vectors at that vertex (see \cref{fig:biarcparam_d}).\footnote{Consequently, this model assumes that the field of tangents along the centerline is continuous and is thus unable to model cases where the centerline is not at least $\mathcal{C}^1$. In such case the beam must be considered as two parts glued together.} This way, the determination of the tangent vectors (or equivalently the section normals) in the static equilibrium configuration will be done in the flow of the Dynamic Relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the cross-section normals.
 
-\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
-	\includegraphics[]{E4.pdf}
-	&
-	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
-	\vect{t}_{2i} 	&= \frac{\vect{t}_{2i}^- + \vect{t}_{2i}^+ }{\norm{\vect{t}_{2i}^- + \vect{t}_{2i}^+}}
-	\end{aligned}$
-\end{tabularx}
-
-This way, the determination of the tangent vectors (or equivalently the section normals) in the static equilibrium configuration will be done in the flow of the Dynamic Relaxation process, without the need of introducing any additional degrees of freedom (for instance the usual Euler angles). The position of the vertices rules the orientation of the cross-section normals.
+\blankpage{
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{%
+		\settoheight{\tmpheight}{\includegraphics[]{E1.pdf}}
+		\setlength{\tmpheight}{(\textheight-5\tmpheight)/4}
+		% \setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+		\Photo[
+			node=CAtl,
+			anchor=north west,
+			]{E1.pdf}%
+		\savenodes{A}
+		\Photo[
+			node=Abl,
+			anchor=north west,
+			yshift=-\tmpheight,
+			]{E2.pdf}%
+		\savenodes{B}
+		\Photo[
+			node=Bbl,
+			anchor=north west,
+			yshift=-\tmpheight,
+			]{E3.pdf}%
+		\savenodes{C}
+		\Photo[
+			node=Cbl,
+			anchor=north west,
+			yshift=-\tmpheight,
+			]{E4.pdf}%
+		\savenodes{D}
+		\Photo[
+			node=Dbl,
+			anchor=north west,
+			yshift=-\tmpheight,
+			]{E5.pdf}%
+		\savenodes{E}
+		%%
+		\PhotoTextBox[
+			node=Ar,
+			anchor=west,
+			xshift=4\PhotoBigSkip,
+			width=0.5\textwidth,
+			border=false,
+			]{%
+				$\begin{aligned}[t]
+					\vect{\kappa b}_{2i-1} 	& =  \frac{2}{L_{i-1}} \vect{u}_{2i-2} \times \vect{u}_{2i-1}\\[0.5em]
+					\vect{\kappa b}_{2i+1} 	& =  \frac{2}{L_{i}} \vect{u}_{2i} \times \vect{u}_{2i+1}
+				\end{aligned}$
+			}
+		\savenodes{TA}
+		\PhotoTextBox[
+			node=Br,
+			anchor=west,
+			xshift=4\PhotoBigSkip,
+			width=0.5\textwidth,
+			border=false,
+			]{%
+				$\begin{aligned}[t]
+					\vect{t}_{2i-1}	&=  \frac{l_{2i-1}}{L_{i-1}} \vect{u}_{2i-2}	+ 	\frac{l_{2i-2}}{L_{i-1}} \vect{u}_{2i-1} 	\\[0.5em]
+					\vect{t}_{2i+1} 	&=  \frac{l_{2i+1}}{L_{i}} \vect{u}_{2i}		+ 	\frac{l_{2i}}{L_{i}} \vect{u}_{2i+1}
+				\end{aligned}$
+			}
+		\savenodes{TB}
+		\PhotoTextBox[
+			node=Cr,
+			anchor=west,
+			xshift=4\PhotoBigSkip,
+			width=0.5\textwidth,
+			border=false,
+			]{%
+				$\begin{aligned}[t]
+					\vect{t}_{2i}^- 	&= 2 (\vect{t}_{2i-1} \cdot \vect{u}_{2i-1}) \vect{u}_{2i-1} - \vect{t}_{2i-1} \\[0.5em]
+					\vect{t}_{2i}^+ 	&= 2 (\vect{t}_{2i+1} \cdot \vect{u}_{2i}) \vect{u}_{2i} - \vect{t}_{2i+1}
+				\end{aligned}$
+			}
+		\savenodes{TC}
+		\PhotoTextBox[
+			node=Dr,
+			anchor=west,
+			xshift=4\PhotoBigSkip,
+			width=0.5\textwidth,
+			border=false,
+			]{%
+				$\begin{aligned}[t]
+					\vect{t}_{2i} 	&= \frac{\vect{t}_{2i}^- + \vect{t}_{2i}^+ }{\norm{\vect{t}_{2i}^- + \vect{t}_{2i}^+}}
+				\end{aligned}$
+			}
+		\savenodes{TD}
+		\PhotoTextBox[
+			node=Er,
+			anchor=west,
+			xshift=4\PhotoBigSkip,
+			width=0.5\textwidth,
+			border=false,
+			]{%
+				$\begin{aligned}[t]
+					\vect{\kappa b}_{2i}^- &=  \frac{2}{l_{2i-1}} \vect{u}_{2i-1} \times \vect{t}_{2i}
+					\\[0.5em]
+					\vect{\kappa b}_{2i}^+ &=  \frac{2}{l_{2i}} \vect{t}_{2i} \times \vect{u}_{2i}
+				\end{aligned}$
+			}
+		\savenodes{TE}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Calculation of the biarc parameters}{fig:biarcparam}
+		\intersectnode{CAtr |- Abl}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Pt,
+			anchor=south east,
+			% xshift=2\PhotoBigSkip,
+			]{subfigure}{}{Geometric curvature at ghost vertices}{fig:biarcparam_a}
+		\intersectnode{CAtr |- Bbl}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Pt,
+			anchor=south east,
+			% xshift=2\PhotoBigSkip,
+			]{subfigure}{}{Unit tangent vector at ghost vertices}{fig:biarcparam_b}
+		\intersectnode{CAtr |- Cbl}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Pt,
+			anchor=south east,
+			% xshift=2\PhotoBigSkip,
+			]{subfigure}{}{Left/right unit tangent vector at handle vertices}{fig:biarcparam_c}
+		\intersectnode{CAtr |- Dbl}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Pt,
+			anchor=south east,
+			% xshift=2\PhotoBigSkip,
+			]{subfigure}{}{Unit tangent vector at handle vertices}{fig:biarcparam_d}
+		\intersectnode{CAtr |- Ebl}{Pt}
+		\PhotoCaptionRef[
+			hrefnode=Etl,
+			node=Pt,
+			anchor=south east,
+			% xshift=2\PhotoBigSkip,
+			]{subfigure}{}{Left/right bending moment at handle vertices}{fig:biarcparam_e}
+	}
+}
 
 \subsubsection{Left/right bending moment at handle vertices}
 % ---------------------------------------------------------------------------------
-Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\kappa}_{2i}^-$) and right ($\vect{\kappa}_{2i}^+$) curvature at handle vertex $\vect{x}_{2i}$. The left curvature is initially evaluated from the left osculating circle, defined as the circle passing through $\vect{x}_{2i-1}$ and $\vect{x}_{2i}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$. The right curvature is initially evaluated from the right osculating circle, defined as the circle passing through $\vect{x}_{2i}$ and $\vect{x}_{2i+1}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$.\footnote{Remark that the centerline is now approximated with a biarc in the vicinity of $\vect{x}_{2i}$. This is the reason why this model is called the \textquote{biarc model}.}${}^,$\footnote{This model offers the ability to represent discontinuities in curvature -- thus in bending moment -- at handle vertices as the left and right curvatures does not necessarily agree. This is quite different from the classical 3-dof element~\cite{Barnes1999, Adriaenssens1999, Douthe2006} which assumes that the curvature -- thus the bending moment -- is $\mathcal{C}^0$ and can be evaluated at every vertices from the circumscribed osculating circle.}
+Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\kappa}_{2i}^-$) and right ($\vect{\kappa}_{2i}^+$) curvature at handle vertex $\vect{x}_{2i}$ (see \cref{fig:biarcparam_e}). The left curvature is initially evaluated from the left osculating circle, defined as the circle passing through $\vect{x}_{2i-1}$ and $\vect{x}_{2i}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$. The right curvature is initially evaluated from the right osculating circle, defined as the circle passing through $\vect{x}_{2i}$ and $\vect{x}_{2i+1}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$.\footnote{Remark that the centerline is now approximated with a biarc in the vicinity of $\vect{x}_{2i}$. This is the reason why this model is called the \textquote{biarc model}.}${}^,$\footnote{This model offers the ability to represent discontinuities in curvature -- thus in bending moment -- at handle vertices as the left and right curvatures does not necessarily agree. This is quite different from the classical 3-dof element~\cite{Barnes1999, Adriaenssens1999, Douthe2006} which assumes that the curvature -- thus the bending moment -- is $\mathcal{C}^0$ and can be evaluated at every vertices from the circumscribed osculating circle.}
 
-\begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
-	\includegraphics[]{E5.pdf}
-	&
-	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
-	\vect{\kappa b}_{2i}^- &=  \frac{2}{l_{2i-1}} \vect{u}_{2i-1} \times \vect{t}_{2i}
-	\\[0.5em]
-	\vect{\kappa b}_{2i}^+ &=  \frac{2}{l_{2i}} \vect{t}_{2i} \times \vect{u}_{2i}
-	\end{aligned}$
-\end{tabularx}
+% \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
+% 	\includegraphics[]{E5.pdf}
+% 	&
+% 	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
+% 	\vect{\kappa b}_{2i}^- &=  \frac{2}{l_{2i-1}} \vect{u}_{2i-1} \times \vect{t}_{2i}
+% 	\\[0.5em]
+% 	\vect{\kappa b}_{2i}^+ &=  \frac{2}{l_{2i}} \vect{t}_{2i} \times \vect{u}_{2i}
+% 	\end{aligned}$
+% \end{tabularx}
 
 However, this values need to be adjusted so that the static condition for rotational equilibrium is satisfied at all time ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$). Therefore, this condition will be satisfied in particular at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}^{\perp}$) for the internal bending moment as~:
 \begin{equation}
@@ -434,12 +556,12 @@ Thus, the material twist of the rod at mid edge is given by~:
 To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod is framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta(s)$ around $\vect{d}_3(s) =\vect{t}(s)$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
 
 In the discrete case, although it is possible to frame the whole curve with a Bishop frame to achieve the computation of the rate of twist \cite{Lefevre2017}, it is more convenient to measure $\Delta\theta_{i}$ step by step using the existing material frames at vertices $\vect{x}_i$ and $\vect{x}_{i+1}$. This is done in a two step process :
-\begin{enumerate}
+\begin{itemize}
 \item
 Parallel transport the material frame $\{\vect{d}_{1,i},\vect{d}_{2,i},\vect{d}_{3,i}\}$ at vertex $\vect{x}_i$ onto vertex $\vect{x}_{i+1}$. We call $\{\vect{d}_{1,i}^{\para}, \vect{d}_{2,i}^{\para},\vect{d}_{3,i}^{\para}\}$ the resulting frame positioned at $\vect{x}_{i+1}$ such that $\vect{d}_{3,i}^{\para} = \vect{d}_{3,i+1}$.
 \item
 Measure $\Delta\theta_{i} = \angle{(\vect{d}_{1,i}^{\para},\vect{d}_{1,i+1})} = \angle{(\vect{d}_{2,i}^{\para},\vect{d}_{2,i+1})}$ as the oriented angle needed to align $\vect{d}_{1,i}^{\para}$ with $\vect{d}_{1,i+1}$ (or $\vect{d}_{2,i}^{\para}$ with $\vect{d}_{2,i+1}$) by a rotation of angle $\Delta\theta_{i}$ around $\vect{d}_{3,i+1} = \vect{t}_{i+1}$.
-\end{enumerate}
+\end{itemize}
 Consequently, the twisting moment at mid span of each edge is computed directly with the appropriate constitutive equation :
 \begin{subequations}
 	\begin{alignat}{3}
@@ -845,6 +967,40 @@ Here, we have made the distinction between the translational part of the kinetic
 
 \subsubsection{Peak interpolation}
 When a peak is detected at time $t+\dt{} /2$, the simplest way to proceed is to froze the system in its actual position, at time $t$, and to release it from this position with no initial velocity. However, the peak of kinetic energy as occurred at time $t^*$ somewhere in between times $t-\dt{}/2$ and $t+\dt{}/2$. To maximise the effect of the kinetic damping the position of the peak could be guessed using a parabolic interpolation of the kinetic energy.
+
+
+\afterpage{%
+	\AddToShipoutPictureBG*{% 
+		\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+		\Photo[
+			node=CAt,
+			anchor=north,
+			]{kirchhoff_law.pdf}%
+		\savenodes{A}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Equilibrium of an infinitesimal slice of rod}{fig:rodslice}
+		\intersectnode{CAtl |- Abr}{Pt}
+		\PhotoTextBox[
+			node=Pt,
+			anchor=north west,
+			yshift=-2\PhotoBigSkip,
+			width=0.6\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:rodslice}\par\medskip
+				Internal forces ($\vect{F}$) and moments ($\vect{M}$) acting on an infinitesimal beam slice of length $ds$. The beam is also subject to distributed external forces ($\vect{f}$) and moments ($\vect{m}$). By convention, internal forces and moments are forces and moments applied by the right part to the left part of the beam.
+			}
+	}
+	\setlength{\tmpheight}{11cm}
+	\hbox{\vspace{\tmpheight}}
+}
+
 
 \begin{figure}[t]
 %\begin{fullpage}
@@ -1256,7 +1412,6 @@ then the optimization of the critical pieces of code can begin. To this end, two
 		cost	& 1 		& 1 		& 4 		& 10 		& 20	\\
 		\bottomrule
 	\end{tabularx}
-	\label{tab:count}
 	\vspace{10pt}
 	\captionof{table}[Simple cost model for arithmetic operations]{Simple cost model for arithmetic operations.}
 	\label{tab:costmodel}
