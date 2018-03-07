@@ -86,30 +86,215 @@ This paragraph gives a very brief overview of the \emph{special Cosserat theory 
 
 It has been largely employed in various fields~\cite{Shi1995, Bergou2010}.
 
-\begin{figure}[p]
-  	\begin{leftfullpage}
-		\centering
-     		\includegraphics{cosserat_motion_longi.pdf}
-		\captionof{figure}[Description of the motion for a Cosserat rod~: longitudinal section]{Description of the motion for a Cosserat rod. This is a typical longitudinal section of a rectangular beam deformed from a reference configuration (bottom) to an actual configuration (top) at time $t$. Cross-sections are defined in the reference configuration to be planar surfaces perpendicular to the beam axis ($\rconf{\mathcal{S}}$). A material point $\rconf{\vect{p}} \in \rconf{\mathcal{S}}(s)$ is located relatively to the cross-section centroid ($\rconf{\vect{x}}(s)$) thanks to its material coordinates ($X_1$, $X_2$, $s$). During the motion, this material point reaches a new position $\vect{p} \in \mathcal{S}(s)$. The deformed cross-section ${\mathcal{S}}(s)$ is no more planar. The material frame is no more aligned with the beam axis ($\vect{d}_3$ and $\vect{t}$ are not parallel any more). The actual position is measured from the centroid of the deformed cross-section ($\vect{x}(s)$) plus an in-plane component ($X_{\alpha}\vect{d}_{\alpha}$) and a deformation vector ($\vect{u}$). If the cross-sections deform in a rigid-body manner, then $\vect{u}$ is null everywhere.}
-		\label{fig:cosserat_1}
-	 \end{leftfullpage}
-\end{figure}
-\begin{figure}[p]
-	\begin{fullpage}
-		\captionsetup[subfloat]{captionskip=10pt}
-     		\centering
-     		\subfloat[][Deformed cross-section $\mathcal{S}(s)$]{\includegraphics{cosserat_motion_trans_def_a.pdf}\label{fig:cosserat_2a}}
-		\hspace{2.5cm}
-		\subfloat[][Deformed cross-section $\mathcal{S}(s+ds)$]{\includegraphics{cosserat_motion_trans_def_b.pdf}\label{fig:cosserat_2b}} \\
-		\vspace{20pt}
-		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s)$]{\includegraphics{cosserat_motion_trans_ref_a.pdf}\label{fig:cosserat_2c}}
-		\hspace{2.5cm}
-		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s+ds)$]{\includegraphics{cosserat_motion_trans_ref_b.pdf}\label{fig:cosserat_2d}}
-		\vspace{20pt}
-		\captionof{figure}[Description of the motion for a Cosserat rod~: transverse section]{Description of the motion for a Cosserat rod. These are the transverse sections from \cref{fig:cosserat_1}. However note that \cref{fig:cosserat_1} is drawn with $\varkappa_2 < 0$ while $\varkappa_2 > 0$ in \cref{fig:cosserat_2}. The section curve is drawn in a dashed blue fashion. Remark how the deformed material point is located through $\vect{x}$ and $\vect{r} = X_{\alpha}\vect{d}_{\alpha} + u_{k}\vect{d}_{k}$. Cross-sections are rotating around $\vect{d}_3$ at speed $\varkappa_3$. The beam is subjected to flexion ($\varkappa_1 > 0$, $\varkappa_2 > 0$), torsion ($\varkappa_3 > 0$) and extension ($\epsilon > 0$). Fibers that are compressed -- both directly by axial compression or indirectly by flexion -- are subjected to transverse expansion due to the Poisson effect (see up-right of \cref{fig:cosserat_2a,fig:cosserat_2b}). Reciprocally, fibers in tension -- both directly by axial tension or indirectly by flexion -- are subjected to transverse contraction (see bottom-left of \cref{fig:cosserat_2a,fig:cosserat_2b}).}
-		\label{fig:cosserat_2}
-	\end{fullpage}
-\end{figure}
+\blankpage{
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{% 
+		\Photo[
+			node=CAc,
+			anchor=center,
+			yshift=0.5cm,
+			]{cosserat_motion_longi.pdf}%
+		\savenodes{A}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Description of the motion for a Cosserat rod~: longitudinal section}{fig:cosserat_1}
+		\PhotoTextBox[
+			node=CAb,
+			anchor=south,
+			width=\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:cosserat_1}
+			}
+	}
+}
+
+\blankpage{
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{% 
+		\Photo[
+			node=CAc,
+			anchor=south east,
+			xshift=-1cm,
+			yshift=1.215cm + 0.5cm,
+			]{cosserat_motion_trans_def_a.pdf}%
+		\savenodes{A}
+		\Photo[
+			node=CAc,
+			anchor=south west,
+			xshift=1cm,
+			yshift=1.215cm + 0.5cm,
+			]{cosserat_motion_trans_def_b.pdf}%
+		\savenodes{B}
+		\intersectnode{CAt |- Abr}{Pt}
+		\Photo[
+			node=CAc,
+			anchor=north east,
+			xshift=-1cm,
+			yshift=-0.775cm + 0.5cm,
+			]{cosserat_motion_trans_ref_a.pdf}%
+		\savenodes{C}
+		\Photo[
+			node=CAc,
+			anchor=north west,
+			xshift=1cm,
+			yshift=-0.775cm + 0.5cm,
+			]{cosserat_motion_trans_ref_b.pdf}%
+		\savenodes{D}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Description of the motion for a Cosserat rod~: transverse section}{fig:cosserat_2}
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atr,
+			anchor=north east,
+			]{subfigure}{}{Deformed cross-section $\mathcal{S}(s)$}{fig:cosserat_2a}
+		\PhotoCaptionRef[
+			hrefnode=Btl,
+			node=Btr,
+			anchor=north east,
+			]{subfigure}{}{Deformed cross-section $\mathcal{S}(s+ds)$}{fig:cosserat_2b}
+		\PhotoCaptionRef[
+			hrefnode=Ctl,
+			node=Ctr,
+			anchor=north east,
+			]{subfigure}{}{Reference cross-section $\rconf{\mathcal{S}}(s)$}{fig:cosserat_2c}
+		\PhotoCaptionRef[
+			hrefnode=Dtl,
+			node=Dtr,
+			anchor=north east,
+			]{subfigure}{}{Reference cross-section $\rconf{\mathcal{S}}(s+ds)$}{fig:cosserat_2d}
+		\PhotoTextBox[
+			node=CAb,
+			anchor=south,
+			width=\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:cosserat_2}
+			}
+	}
+}
+
+\blankpage{
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{%
+		\SBox[%
+			node=CAt,
+			anchor=north,
+			]{%
+				\ra{1.25}%
+				\begin{tabularx}{0.7\textwidth}{@{} X c c @{}}
+					\toprule
+											& reference configuration			& actual configuration
+					\\ \midrule
+					arc length 				& $s = \Psi_t^{-1}(s_t)$ 			& $s_t = \Psi_t(s)$
+					\\
+					length 					& $L$ 								& $L_t$
+					\\
+					centerline				& $\rconf{\gamma}$ 					& $\gamma_t$
+					\\
+					position vector			& $\rconf{\vect{x}}$ 				& ${\vect{x}}$
+					\\
+					material frame			& $\{\rconf{\vect{d}_3},\rconf{\vect{d}_1},\rconf{\vect{d}_2}\}$ 	& $\{\vect{d}_3,\vect{d}_1,\vect{d}_2\}$
+					\\
+					material coordinates	& $(s, X_1, X_2)$ 					& $(s, X_1, X_2)$
+					\\
+					force strains 			& $\rconf{\vect{\eta}}$ 			& ${\vect{\eta}}$
+					\\
+					moment strains 			& $\rconf{\vect{\varkappa}}$ 		& ${\vect{\varkappa}}$
+					\\
+					spin vector 			& $\rconf{\vect{\omega}}$ 			& ${\vect{\omega}}$
+					\\
+					axial extension 		& $ \rconf{\epsilon} = 0$ 			& $\norm{\eta} = \Psi'_t(s) = 1 + \epsilon$
+					\\
+					arc length derivative 	& $ \frac{\partial}{\partial s} \cdot = (\cdot)'	$					& $\frac{\partial}{\partial s_t} \cdot = (1 + \epsilon)^{-1} (\cdot)'$
+					\\
+					time derivative 		& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$					& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$
+					\\
+					\bottomrule
+				\end{tabularx}
+			}
+		\savenodes{A}
+		\intersectnode{Abr -| CAtl}{Pt}
+		\PhotoCaptionRef[
+			node=TL, 
+			anchor=north west, 
+			% yshift=-\PhotoRefSkip,
+			phantom=true,
+			]{table}{}{Summary of the notations employed throughout this section}{tab:count}
+		\PhotoTextBox[
+			node=Abl,
+			anchor=north west,
+			yshift=-\PhotoRefSkip,
+			width=\textwidth,
+			border=false,
+			]{%
+				\tablecaption{tab:count}
+			}
+		\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=\tmpwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:cosserat_1}\par\medskip
+				This is a typical longitudinal section of a rectangular beam deformed from a reference configuration (bottom) to an actual configuration (top) at time $t$. Cross-sections are defined in the reference configuration to be planar surfaces perpendicular to the beam axis ($\rconf{\mathcal{S}}$). A material point $\rconf{\vect{p}} \in \rconf{\mathcal{S}}(s)$ is located relatively to the cross-section centroid ($\rconf{\vect{x}}(s)$) thanks to its material coordinates ($X_1$, $X_2$, $s$). During the motion, this material point reaches a new position $\vect{p} \in \mathcal{S}(s)$. The deformed cross-section ${\mathcal{S}}(s)$ is no more planar. The material frame is no more aligned with the beam axis ($\vect{d}_3$ and $\vect{t}$ are not parallel any more). The actual position is measured from the centroid of the deformed cross-section ($\vect{x}(s)$) plus an in-plane component ($X_{\alpha}\vect{d}_{\alpha}$) and a deformation vector ($\vect{u}$). If the cross-sections deform in a rigid-body manner, then $\vect{u}$ is null everywhere.
+			}
+		%%
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			xshift=\tmpwidth+\PhotoBigSkip,
+			width=\tmpwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:cosserat_2}\par\medskip
+				\figurecaption{fig:cosserat_2a}\par
+				\figurecaption{fig:cosserat_2b}\par
+				\figurecaption{fig:cosserat_2c}\par
+				\figurecaption{fig:cosserat_2d}\par\bigskip
+				These are the transverse sections from \cref{fig:cosserat_1}. However note that \cref{fig:cosserat_1} is drawn with $\varkappa_2 < 0$ while $\varkappa_2 > 0$ in \cref{fig:cosserat_2}. The section curve is drawn in a dashed blue fashion. Remark how the deformed material point is located through $\vect{x}$ and $\vect{r} = X_{\alpha}\vect{d}_{\alpha} + u_{k}\vect{d}_{k}$. Cross-sections are rotating around $\vect{d}_3$ at speed $\varkappa_3$. The beam is subjected to flexion ($\varkappa_1 > 0$, $\varkappa_2 > 0$), torsion ($\varkappa_3 > 0$) and extension ($\epsilon > 0$). Fibers that are compressed -- both directly by axial compression or indirectly by flexion -- are subjected to transverse expansion due to the Poisson effect (see up-right of \cref{fig:cosserat_2a,fig:cosserat_2b}). Reciprocally, fibers in tension -- both directly by axial tension or indirectly by flexion -- are subjected to transverse contraction (see bottom-left of \cref{fig:cosserat_2a,fig:cosserat_2b}).
+			}
+	}
+}
+
+
+
+% \begin{figure}[p]
+%   	\begin{leftfullpage}
+% 		\centering
+%      		\includegraphics{cosserat_motion_longi.pdf}
+% 		\captionof{figure}[Description of the motion for a Cosserat rod~: longitudinal section]{Description of the motion for a Cosserat rod. This is a typical longitudinal section of a rectangular beam deformed from a reference configuration (bottom) to an actual configuration (top) at time $t$. Cross-sections are defined in the reference configuration to be planar surfaces perpendicular to the beam axis ($\rconf{\mathcal{S}}$). A material point $\rconf{\vect{p}} \in \rconf{\mathcal{S}}(s)$ is located relatively to the cross-section centroid ($\rconf{\vect{x}}(s)$) thanks to its material coordinates ($X_1$, $X_2$, $s$). During the motion, this material point reaches a new position $\vect{p} \in \mathcal{S}(s)$. The deformed cross-section ${\mathcal{S}}(s)$ is no more planar. The material frame is no more aligned with the beam axis ($\vect{d}_3$ and $\vect{t}$ are not parallel any more). The actual position is measured from the centroid of the deformed cross-section ($\vect{x}(s)$) plus an in-plane component ($X_{\alpha}\vect{d}_{\alpha}$) and a deformation vector ($\vect{u}$). If the cross-sections deform in a rigid-body manner, then $\vect{u}$ is null everywhere.}
+% 		\label{fig:cosserat_1}
+% 	 \end{leftfullpage}
+% \end{figure}
+% \begin{figure}[p]
+% 	\begin{fullpage}
+% 		\captionsetup[subfloat]{captionskip=10pt}
+%      		\centering
+%      		\subfloat[][Deformed cross-section $\mathcal{S}(s)$]{\includegraphics{cosserat_motion_trans_def_a.pdf}\label{fig:cosserat_2a}}
+% 		\hspace{2.5cm}
+% 		\subfloat[][Deformed cross-section $\mathcal{S}(s+ds)$]{\includegraphics{cosserat_motion_trans_def_b.pdf}\label{fig:cosserat_2b}} \\
+% 		\vspace{20pt}
+% 		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s)$]{\includegraphics{cosserat_motion_trans_ref_a.pdf}\label{fig:cosserat_2c}}
+% 		\hspace{2.5cm}
+% 		\subfloat[][Reference cross-section $\rconf{\mathcal{S}}(s+ds)$]{\includegraphics{cosserat_motion_trans_ref_b.pdf}\label{fig:cosserat_2d}}
+% 		\vspace{20pt}
+% 		\captionof{figure}[Description of the motion for a Cosserat rod~: transverse section]{Description of the motion for a Cosserat rod. These are the transverse sections from \cref{fig:cosserat_1}. However note that \cref{fig:cosserat_1} is drawn with $\varkappa_2 < 0$ while $\varkappa_2 > 0$ in \cref{fig:cosserat_2}. The section curve is drawn in a dashed blue fashion. Remark how the deformed material point is located through $\vect{x}$ and $\vect{r} = X_{\alpha}\vect{d}_{\alpha} + u_{k}\vect{d}_{k}$. Cross-sections are rotating around $\vect{d}_3$ at speed $\varkappa_3$. The beam is subjected to flexion ($\varkappa_1 > 0$, $\varkappa_2 > 0$), torsion ($\varkappa_3 > 0$) and extension ($\epsilon > 0$). Fibers that are compressed -- both directly by axial compression or indirectly by flexion -- are subjected to transverse expansion due to the Poisson effect (see up-right of \cref{fig:cosserat_2a,fig:cosserat_2b}). Reciprocally, fibers in tension -- both directly by axial tension or indirectly by flexion -- are subjected to transverse contraction (see bottom-left of \cref{fig:cosserat_2a,fig:cosserat_2b}).}
+% 		\label{fig:cosserat_2}
+% 	\end{fullpage}
+% \end{figure}
 
 % Description of the motion
 % ----------------------------------
@@ -189,9 +374,6 @@ ${\mathcal{S}}(s)$ refers to the same set of points in all configurations. Hence
 \end{itemize}
 
 
-
-
-
 \subsection{Time evolution}
 The evolution in time of the rod is simply given by the velocity of its centerline ($\dot{\vect{x}}$) and the  \emph{angular velocity vector} or \emph{spin vector} ($\vect{\omega}$) of its material directors~:
 \begin{subequations}
@@ -222,10 +404,6 @@ Observe the symmetry of \cref{eq:velocity_a,eq:velocity_b} and \cref{eq:Fstrain,
 Here we have chosen to follow the denomination introduced by Reissner in \cite{Reissner1973}. This denomination is closed to the one employed by Antman in \cite[p.~284]{Antman2005} where the components of $\vect{\eta}$ are called the \emph{strains} (aka the force strains) and the components of $\vect{\varkappa}$ are called the strain rates (aka the moment strains).\footnote{For an extensible rod, the derivative with respect to $s$ and $s_t$ are not equivalent. The prime notation stands only for the derivation with respect to $s$, the arc length parameter of the rod in the reference configuration.}
 
 It is true that $\vect{\eta}$ and $\vect{\varkappa}$ expresse the geometric configuration of the rod with respect to the arc length of the reference configuration. This description is invariant under rigid body motions. Indeed, with $\vect{\eta}$ and $\vect{\varkappa}$ given, one can rebuilt the geometry of the rod by solving the differential system of equations formed by \cref{eq:Fstrain,eq:Mstrain}. However it seems a little improper to call them \emph{strain} as this denomination is usually reserved to the components of the strain tensor which measures how much a solid departs from its natural configuration and are dimensionless entries.
-
-\subsubsection{Material versus geometric curvature}
-
-It is worth to bring some lights in the notion of material versus geometric curvature.
 
 \subsection{Parametrization of the centerline}
 Recall that because the centerline of the reference configuration is parametrized by arc length, the unit tangent vector in this configuration is given by~:
@@ -281,47 +459,46 @@ The reader is invited to refer to~\cite{Antman2005} to get a deeper understandin
 %\end{figure}
 
 
-\begin{table}[p]
-\begin{fullpage}
-\center
-		\ra{1.5}
-		\begin{tabularx}{0.8\textwidth}{@{} X c c @{}}
-		\toprule
-		 				& reference configuration										& actual configuration
-		\\ \midrule
-		arc length 			& $s = \Psi_t^{-1}(s_t)$ 										& $s_t = \Psi_t(s)$
-		\\
-		length 			& $L$ 													& $L_t$
-		\\
-		centerline			& $\rconf{\gamma}$ 											& $\gamma_t$
-		\\
-		position vector		& $\rconf{\vect{x}}$ 											& ${\vect{x}}$
-		\\
-		material frame		& $\{\rconf{\vect{d}_3},\rconf{\vect{d}_1},\rconf{\vect{d}_2}\}$ 			& $\{\vect{d}_3,\vect{d}_1,\vect{d}_2\}$
-		\\
-		material coordinates	& $(s, X_1, X_2)$ 											& $(s, X_1, X_2)$
-		\\
-		force strains 		& $\rconf{\vect{\eta}}$ 										& ${\vect{\eta}}$
-		\\
-		moment strains 	& $\rconf{\vect{\varkappa}}$ 									& ${\vect{\varkappa}}$
-		\\
-		spin vector 		& $\rconf{\vect{\omega}}$ 									& ${\vect{\omega}}$
-		\\
-		axial extension 		& $ \rconf{\epsilon} = 0$ 									& $\norm{\eta} = \Psi'_t(s) = 1 + \epsilon$
-		\\
-		arc length derivative 	& $ \frac{\partial}{\partial s} \cdot = (\cdot)'	$						& $\frac{\partial}{\partial s_t} \cdot = (1 + \epsilon)^{-1} (\cdot)'$
-		\\
-		time derivative 		& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$						& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$
-		\\
-		\bottomrule
-	\end{tabularx}
-	\label{tab:count}
-	\vspace{10pt}
-	\caption[Summary of the notations]{Summary of the notations employed throughout this section.}
-\end{fullpage}
-\end{table}
+% \begin{table}[p]
+% \begin{fullpage}
+% \center
+% 		\ra{1.5}
+% 		\begin{tabularx}{0.8\textwidth}{@{} X c c @{}}
+% 		\toprule
+% 		 				& reference configuration										& actual configuration
+% 		\\ \midrule
+% 		arc length 			& $s = \Psi_t^{-1}(s_t)$ 										& $s_t = \Psi_t(s)$
+% 		\\
+% 		length 			& $L$ 													& $L_t$
+% 		\\
+% 		centerline			& $\rconf{\gamma}$ 											& $\gamma_t$
+% 		\\
+% 		position vector		& $\rconf{\vect{x}}$ 											& ${\vect{x}}$
+% 		\\
+% 		material frame		& $\{\rconf{\vect{d}_3},\rconf{\vect{d}_1},\rconf{\vect{d}_2}\}$ 			& $\{\vect{d}_3,\vect{d}_1,\vect{d}_2\}$
+% 		\\
+% 		material coordinates	& $(s, X_1, X_2)$ 											& $(s, X_1, X_2)$
+% 		\\
+% 		force strains 		& $\rconf{\vect{\eta}}$ 										& ${\vect{\eta}}$
+% 		\\
+% 		moment strains 	& $\rconf{\vect{\varkappa}}$ 									& ${\vect{\varkappa}}$
+% 		\\
+% 		spin vector 		& $\rconf{\vect{\omega}}$ 									& ${\vect{\omega}}$
+% 		\\
+% 		axial extension 		& $ \rconf{\epsilon} = 0$ 									& $\norm{\eta} = \Psi'_t(s) = 1 + \epsilon$
+% 		\\
+% 		arc length derivative 	& $ \frac{\partial}{\partial s} \cdot = (\cdot)'	$						& $\frac{\partial}{\partial s_t} \cdot = (1 + \epsilon)^{-1} (\cdot)'$
+% 		\\
+% 		time derivative 		& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$						& $ \frac{\partial}{\partial t} \cdot = \dot{(\cdot)}$
+% 		\\
+% 		\bottomrule
+% 	\end{tabularx}
+% 	\label{tab:count}
+% 	\vspace{10pt}
+% 	\caption[Summary of the notations]{Summary of the notations employed throughout this section.}
+% \end{fullpage}
+% \end{table}
 
-\clearpage
 \section{Kirchhoff theory of rods}\label{sec=kirchhoff_theory}
 
 In this section we recall the principles of Kirchhoff theory of rods and we treat its geometrical description with the framework presented in \cref{sec=cosserat_theory} from Cosserat's theory.\footnote{\blockcquote[p.~238]{Antman2005}{The classical elastic rod theory of Kirchhoff (1859), called the kinetic analogue, is a special case of our rod theory [\dots]}.} Kirchhoff's theory accounts for finite displacements but small strains, which means that only geometric nonlinearities can be modeled. We will show in \cref{sec=constit} that in the framework of 3D elasticity it is precisely the assumption of small strains that leads to the well-known material constitutive laws.
@@ -507,12 +684,14 @@ Often in the literature the flexural material curvatures are computed as the pro
 % Balance of momentum
 % ------------------------------
 \subsection{Balance of momentum}
-\begin{figure}[t]
-	\centering
-	\includegraphics[]{kirchhoff_law.pdf}
-	\captionof{figure}[Equilibrium of an infinitesimal slice of rod.]{Internal forces ($\vect{F}$) and moments ($\vect{M}$) acting on an infinitesimal beam slice of length $ds$. The beam is also subject to distributed external forces ($\vect{f}$) and moments ($\vect{m}$). By convention, internal forces and moments are forces and moments applied by the right part to the left part of the beam.}
-	\label{fig:rodslice}
-\end{figure}
+
+
+% \begin{figure}[t]
+% 	\centering
+% 	\includegraphics[]{kirchhoff_law.pdf}
+% 	\captionof{figure}[Equilibrium of an infinitesimal slice of rod.]{Internal forces ($\vect{F}$) and moments ($\vect{M}$) acting on an infinitesimal beam slice of length $ds$. The beam is also subject to distributed external forces ($\vect{f}$) and moments ($\vect{m}$). By convention, internal forces and moments are forces and moments applied by the right part to the left part of the beam.}
+% 	\label{fig:rodslice}
+% \end{figure}
 Let $\vect{\mathcal{P}}$ be the first \emph{Piola-Kirchhoff} stress tensor. $\vect{\mathcal{P}}$ expresses how contact forces are acting in a \emph{deformed} body, referring to its known \emph{reference} configuration. Let $\vect{dS} =  \vect{n}dS$ be an elementary oriented surface of the rod in the \emph{reference} configuration, of centroid $\vect{p}(s,X_1,X_2,t) \in \mathcal{S}(s)$.\footnote{$dS$ is the area and $\vect{n}$ is the unit normal of the elementary oriented surface $\vect{dS}$.} The contact forces exerted on $\vect{dS}$ are given by~:
 \begin{subequations}
 	\begin{alignat}{2}
@@ -551,6 +730,39 @@ At the cross-section $\mathcal{S}(s)$, the contact forces applied by the right p
 	\end{alignat}
 \end{subequations}
 $\vect{F}$ and $\vect{M}$ are commonly known as the \emph{internal forces} and the \emph{internal moments} of the rod.
+
+
+\afterpage{%
+	\AddToShipoutPictureBG*{% 
+		\setlength{\tmpwidth}{(\textwidth-\PhotoBigSkip)/2}
+		\Photo[
+			node=CAt,
+			anchor=north,
+			]{kirchhoff_law.pdf}%
+		\savenodes{A}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Equilibrium of an infinitesimal slice of rod}{fig:rodslice}
+		\intersectnode{CAtl |- Abr}{Pt}
+		\PhotoTextBox[
+			node=Pt,
+			anchor=north west,
+			yshift=-2\PhotoBigSkip,
+			width=0.6\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:rodslice}\par\medskip
+				Internal forces ($\vect{F}$) and moments ($\vect{M}$) acting on an infinitesimal beam slice of length $ds$. The beam is also subject to distributed external forces ($\vect{f}$) and moments ($\vect{m}$). By convention, internal forces and moments are forces and moments applied by the right part to the left part of the beam.
+			}
+	}
+	\setlength{\tmpheight}{11cm}
+	\hbox{\vspace{\tmpheight}}
+}
 
 \subsubsection{External forces and moments}
 We assume that the resultant of the contact forces on $\mathcal{L}_{12}$ and the body forces on $\mathcal{V}$ reduce to the following forms~:
@@ -751,14 +963,45 @@ where $\lambda$ and $\mu$ are known as the elastic coefficients of Lamé. This c
 A worthwhile presentation of the theory of elasticity in the specific context of elastic rods can be found in~\cite{Audoly2010}.
 
 \subsection{Deformation of cross-sections}
-\begin{figure}[p]
-	\begin{fullpage}
-	\centering
-	\includegraphics[]{kirchhoff_cross_section_deformation.pdf}
-	\captionof{figure}[Typical deformation modes of cross-sections in Kirchhoff's theory]{Typical deformation modes of cross-sections in Kirchhoff's theory. Flexion around $\vect{d}_1$ (resp. $\vect{d}_2$) is measured through the material curvature $\varkappa_1$ (resp. $\varkappa_2$) ; torsion around $\vect{d}_3$ is measured through the material twist $\varkappa_3$ ; and $\epsilon$ measures the axial extension. Remark that cross-sections are subjected to both in-plane deformations ($\varkappa_1$, $\varkappa_2$, $\epsilon$) and out-of-plane deformations ($\varkappa_3$).}
-	\label{fig:section_defo}
-	\end{fullpage}
-\end{figure}
+
+
+\rightblankpage{%
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{% 
+		\Photo[
+			node=CAc,
+			anchor=center,
+			]{kirchhoff_cross_section_deformation.pdf}%
+		\savenodes{A}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Typical deformation modes of cross-sections in Kirchhoff's theory}{fig:section_defo}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=0.6\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:section_defo}\par\medskip
+				Flexion around $\vect{d}_1$ (resp. $\vect{d}_2$) is measured through the material curvature $\varkappa_1$ (resp. $\varkappa_2$) ; torsion around $\vect{d}_3$ is measured through the material twist $\varkappa_3$ ; and $\epsilon$ measures the axial extension. Remark that cross-sections are subjected to both in-plane deformations ($\varkappa_1$, $\varkappa_2$, $\epsilon$) and out-of-plane deformations ($\varkappa_3$).
+			}
+	}
+}
+
+
+% \begin{figure}[p]
+% 	\begin{fullpage}
+% 	\centering
+% 	\includegraphics[]{kirchhoff_cross_section_deformation.pdf}
+% 	\captionof{figure}[Typical deformation modes of cross-sections in Kirchhoff's theory]{Typical deformation modes of cross-sections in Kirchhoff's theory. Flexion around $\vect{d}_1$ (resp. $\vect{d}_2$) is measured through the material curvature $\varkappa_1$ (resp. $\varkappa_2$) ; torsion around $\vect{d}_3$ is measured through the material twist $\varkappa_3$ ; and $\epsilon$ measures the axial extension. Remark that cross-sections are subjected to both in-plane deformations ($\varkappa_1$, $\varkappa_2$, $\epsilon$) and out-of-plane deformations ($\varkappa_3$).}
+% 	\label{fig:section_defo}
+% 	\end{fullpage}
+% \end{figure}
 In this paragraph, we simply recall the canonical form of the local displacement field ($\vect{u}$) for the cross-section $\mathcal{S}(s)$ in the context of Kirchhoff's approximation~: \footnote{Remark that the local displacement field results from the superposition of the three displacement fields obtained for pure and uniform extension, flexion and twist. For a detailed analysis of pure and uniform flexion and twist of rods refer to~\cite[ch.~3]{Audoly2010}.}
 \begin{subequations}
 	\begin{alignat}{1}
@@ -897,23 +1140,6 @@ Cross-sections are not assumed to be subject to rigid body motions but to deform
 Because of the chosen description of motion (see \cref{sec=kirchhoff_motion}), cross-sections are assumed to rotate around their center of mass. Hence, the model is only valid for sections where the shear center is located at the center of mass. This preclude thin walled open cross-sections. For further understanding of the warping of sections, refer to \cite{Alves2014}.
 
 
-%
-%It is mandatory to suppose that sections can wrapped
-%
-%Warping is supposed to happen freely.
-
-%
-%\item
-%There is a noticeable symmetry in the equations between the roles played by $F_1$, $F_2$ and $M_1$, $M_2$ and by the roles played by $F_3$ and $M_3$.
-%\item
-%Warping is supposed to happen freely.
-%\item
-%Going further with torsion : donner des citations
-%\item
-%Going further with shear and extension : \cite{Reissner1973}
-%\end{itemize}
-
-\clearpage
 \section{Summary of Kirchhoff theory}\label{sec=ksummary}
 Let us summarize the assumptions and results of Kirchhoff's theory of rods on which our discrete beam model (see \cref{chp=numerical_model}) will be based on.
 
@@ -1051,203 +1277,271 @@ The non-zero components of the stress tensor are given by~:
 	\end{alignat}
 \end{subequations}
 
-
-
-
-
-
-%\makebox[\textwidth]{} % necessaire pour le saut de page et le flush des floats
-%\newpage
+\pagebreak
 \section{Geometric interpretation of Kirchhoff's equations}\label{sec=geointerp}
+
+% \begin{figure}[p]
+%   \begin{fullpage}
+% 	\centering
+% 	\includegraphics[]{kirchhoff_geometry.pdf}
+% 	\captionof{figure}[Geometric interpretation of Kirchhoff's equations]{Geometric interpretation of Kirchhoff's equations. Flexion and torsion of an elementary slice of a Kirchhoff rod of length $ds$. Projections of the deformations are given in the material planes perpendicular to $\vect{d}_1$, $\vect{d}_2$ and $\vect{d}_3$. The element takes its curvature $\kappa$ in the plane perpendicular to $\vect{\kappa b}$ and represented by a gray triangle. On the figure, $\vect{\kappa b}$ is positioned at the peak of this triangle, which is the center of the osculating circle associated to it.}
+% 	\label{fig:slice}
+%  \end{fullpage}
+% \end{figure}
 
 The previous equations for the motion of the rod have been established expressing the fundamental principles of balance of linear and angular momentums (see \cref{eq:motion_1,eq:motion_2,eq:motion_3,eq:motion_4,eq:motion_5,eq:motion_6}). An alternative approach, leading to the same results, consists in differentiating the elastic energy of a given configuration of the rod -- assumed to be stationary -- with respect to the degrees of freedom of the mechanical system (principle of virtual work). This latter approach is the one developed throughout the previous chapter (see \cref{chp=energy}).\footnote{This is also the approach developed by \citef{Audoly2010} for strictly inextensible rods. It was yet employed by \citef{Reissner1973}.}
 
 However, the approach through equilibrium seems easier to understand as it is (almost) just a matter of balance between forces and moments acting on infinitesimal slices of the rod (see \cref{fig:slice}). This is of obvious pedagogical interest as it allows to understand how the geometry of the rod influences the distribution of the elastic energy between extension, flexion and torsion and how these forces are coupled together.
 
 To emphasis this, in this section we provide the proper drawings (see \cref{fig:kb,fig:d1,fig:d2}) and computations for the contribution of internal forces and moments to the balance of linear and angular momentums. This is what we call here the \textquote{geometric interpretation} of Kirchhoff equations.
-\begin{figure}[p]
-  \begin{fullpage}
-	\centering
-	\includegraphics[]{kirchhoff_geometry.pdf}
-	\captionof{figure}[Geometric interpretation of Kirchhoff's equations]{Geometric interpretation of Kirchhoff's equations. Flexion and torsion of an elementary slice of a Kirchhoff rod of length $ds$. Projections of the deformations are given in the material planes perpendicular to $\vect{d}_1$, $\vect{d}_2$ and $\vect{d}_3$. The element takes its curvature $\kappa$ in the plane perpendicular to $\vect{\kappa b}$ and represented by a gray triangle. On the figure, $\vect{\kappa b}$ is positioned at the peak of this triangle, which is the center of the osculating circle associated to it.}
-	\label{fig:slice}
- \end{fullpage}
-\end{figure}
-\begin{figure}[p]
-  \begin{leftfullpage}
-    \captionsetup[subfloat]{captionskip=10pt}
-     	\centering
-     	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_kb.pdf}\label{fig:kb_a}} \\
-	\vspace{30pt}
-	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_kb.pdf}\label{fig:kb_b}}
-	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_kb.pdf}\label{fig:kb_c}}
-	\vspace{30pt}
-	\captionof{figure}[Interpretation~: influence of the curvature ($\kappa$)]{Influence of the curvature ($\kappa$) in the deflection of internal forces and moments along the centerline. The osculating plane, perpendicular to $\vect{\kappa b}$, is represented in grey. $\vect{N}$ is the axial component of the internal force along $\vect{d}_3$. $\vect{Q}$ is the axial component of the internal moment, also known as the twisting moment along $\vect{d}_3$.}
-	\label{fig:kb}
- \end{leftfullpage}
-\end{figure}
-\begin{figure}[p]
-	\begin{fullpage}
-	\subsubsection{Contributions to the balance of forces}
-	\vspace{10pt}
-	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the rotation of angle $\kappa ds$ around $\vect{\kappa b}$ (\cref{fig:kb_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~:
-	\begin{equation*}
-		N(s+ds) \cos(\kappa ds) - N(s) = N'(s) ds + o(ds)
-	\end{equation*}
-	\vspace{10pt}
 
-	\subsubsection{Contributions to the balance of moments}
-	\vspace{10pt}
-	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the rotation of angle $\kappa ds$ around $\vect{\kappa b}$ (\cref{fig:kb_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is~:
-	\begin{equation*}
-		Q(s+ds) \cos(\kappa ds) - Q(s) = Q'(s) ds + o(ds)
-	\end{equation*}
-	  \end{fullpage}
-\end{figure}
 
-% ============
+\blankpage{%
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{% 
+		\Photo[
+			node=CAc,
+			anchor=center,
+			yshift=2cm,
+			]{kirchhoff_geometry.pdf}%
+		\savenodes{A}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Geometric interpretation of Kirchhoff's equations}{fig:slice}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=0.6\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:slice}\par\medskip
+				Flexion and torsion of an elementary slice of a Kirchhoff rod of length $ds$. Projections of the deformations are given in the material planes perpendicular to $\vect{d}_1$, $\vect{d}_2$ and $\vect{d}_3$. The element takes its curvature $\kappa$ in the plane perpendicular to $\vect{\kappa b}$ and represented by a gray triangle. On the figure, $\vect{\kappa b}$ is positioned at the peak of this triangle, which is the center of the osculating circle associated to it.
+			}
+	}
+}
 
-\begin{figure}[p]
-  \begin{leftfullpage}
-    \captionsetup[subfloat]{captionskip=10pt}
-     	\centering
-     	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_d1.pdf}\label{fig:d1_a}} \\
-	\vspace{30pt}
-	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_d1.pdf}\label{fig:d1_b}}
-	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_d1.pdf}\label{fig:d1_c}}
-	\vspace{30pt}
-	\captionof{figure}[Interpretation~: influence of the first material curvature ($\kappa_1$)]{Influence of the first material curvature ($\kappa_1$) in the deflection of internal forces and moments along the centerline. The plane perpendicular to $\vect{d}_1(s)$ is represented in grey. $\vect{F}_2$ is the transverse or shear component of the internal force along $\vect{d}_2$. $\vect{M}_2$ is the transverse or bending component of the internal moment along $\vect{d}_2$.}
-	\label{fig:d1}
- \end{leftfullpage}
-\end{figure}
-\begin{figure}[p]
-	\begin{fullpage}
-	\subsubsection{Contributions to the balance of forces}
-	\vspace{10pt}
 
-	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~:
-	\begin{equation*}
-		-F_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau F_2(s) ds + o(ds)
-	\end{equation*}
+\leftblankpage{%
+	\hbox{}\thispagestyle{empty}
+	\AddToShipoutPictureBG*{% 
+		\Photo[
+			node=CAc,
+			anchor=center,
+			yshift=2cm,
+			]{kirchhoff_geometry.pdf}%
+		\savenodes{A}
+		%%
+		\PhotoCaptionRef[
+			hrefnode=Atl,
+			node=Atl,
+			anchor=north west,
+			yshift=\PhotoRefSkip,
+			phantom=true,
+			]{figure}{}{Geometric interpretation of Kirchhoff's equations}{fig:slice}
+		\PhotoTextBox[
+			node=CAbl,
+			anchor=south west,
+			width=0.6\textwidth,
+			border=false,
+			]{%
+				\figurecaption{fig:slice}\par\medskip
+				Flexion and torsion of an elementary slice of a Kirchhoff rod of length $ds$. Projections of the deformations are given in the material planes perpendicular to $\vect{d}_1$, $\vect{d}_2$ and $\vect{d}_3$. The element takes its curvature $\kappa$ in the plane perpendicular to $\vect{\kappa b}$ and represented by a gray triangle. On the figure, $\vect{\kappa b}$ is positioned at the peak of this triangle, which is the center of the osculating circle associated to it.
+			}
+	}
+}
+\subsubsection{Contributions to the balance of forces}
+$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the rotation of angle $\kappa ds$ around $\vect{\kappa b}$ (\cref{fig:kb_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~:
+\begin{equation*}
+	N(s+ds) \cos(\kappa ds) - N(s) = N'(s) ds + o(ds)
+\end{equation*}
 
-	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~:
-	\begin{equation*}
-		-F_2(s) + F_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = F'_2 (s) ds + o(ds)
-	\end{equation*}
+\subsubsection{Contributions to the balance of moments}
+\vspace{10pt}
+$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the rotation of angle $\kappa ds$ around $\vect{\kappa b}$ (\cref{fig:kb_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is~:
+\begin{equation*}
+	Q(s+ds) \cos(\kappa ds) - Q(s) = Q'(s) ds + o(ds)
+\end{equation*}
 
-	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~:
-	\begin{equation*}
-		F_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 F_2(s) ds + o(ds)
-	\end{equation*}
+% \begin{figure}[p]
+%   \begin{leftfullpage}
+%     \captionsetup[subfloat]{captionskip=10pt}
+%      	\centering
+%      	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_kb.pdf}\label{fig:kb_a}} \\
+% 	\vspace{30pt}
+% 	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_kb.pdf}\label{fig:kb_b}}
+% 	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_kb.pdf}\label{fig:kb_c}}
+% 	\vspace{30pt}
+% 	\captionof{figure}[Interpretation~: influence of the curvature ($\kappa$)]{Influence of the curvature ($\kappa$) in the deflection of internal forces and moments along the centerline. The osculating plane, perpendicular to $\vect{\kappa b}$, is represented in grey. $\vect{N}$ is the axial component of the internal force along $\vect{d}_3$. $\vect{Q}$ is the axial component of the internal moment, also known as the twisting moment along $\vect{d}_3$.}
+% 	\label{fig:kb}
+%  \end{leftfullpage}
+% \end{figure}
+% \begin{figure}[p]
+% 	\begin{fullpage}
+% 	\subsubsection{Contributions to the balance of forces}
+% 	\vspace{10pt}
+% 	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the rotation of angle $\kappa ds$ around $\vect{\kappa b}$ (\cref{fig:kb_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~:
+% 	\begin{equation*}
+% 		N(s+ds) \cos(\kappa ds) - N(s) = N'(s) ds + o(ds)
+% 	\end{equation*}
+% 	\vspace{10pt}
 
-	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_2 ds$ around $\vect{d}_2$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~:
-	\begin{equation*}
-		-N(s+ds) \cos(\kappa_2 ds) \sin(\kappa_1 ds) = -\kappa_1 N(s) ds + o(ds)
-	\end{equation*}
-	\vspace{10pt}
+% 	\subsubsection{Contributions to the balance of moments}
+% 	\vspace{10pt}
+% 	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the rotation of angle $\kappa ds$ around $\vect{\kappa b}$ (\cref{fig:kb_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is~:
+% 	\begin{equation*}
+% 		Q(s+ds) \cos(\kappa ds) - Q(s) = Q'(s) ds + o(ds)
+% 	\end{equation*}
+% 	  \end{fullpage}
+% \end{figure}
 
-	\subsubsection{Contributions to the balance of moments}
-	\vspace{10pt}
+% % ============
 
-	$\vect{F}_2(s+ds)$ is deflected from the plane normal to $\vect{d}_1(s)$ by a rotation of angle $\tau ds$ around $\vect{d}_3$ (\cref{fig:d1_b}). It produces a moment around $\vect{d}_1$ with the lever arm $b =  \cos(\kappa_2 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~:
-	\begin{equation*}
-		-F_2(s+ds) \cos(\tau ds) (\cos(\kappa_2 ds) ds) = -F_2(s) ds + o(ds)
-	\end{equation*}
+% \begin{figure}[p]
+%   \begin{leftfullpage}
+%     \captionsetup[subfloat]{captionskip=10pt}
+%      	\centering
+%      	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_d1.pdf}\label{fig:d1_a}} \\
+% 	\vspace{30pt}
+% 	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_d1.pdf}\label{fig:d1_b}}
+% 	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_d1.pdf}\label{fig:d1_c}}
+% 	\vspace{30pt}
+% 	\captionof{figure}[Interpretation~: influence of the first material curvature ($\kappa_1$)]{Influence of the first material curvature ($\kappa_1$) in the deflection of internal forces and moments along the centerline. The plane perpendicular to $\vect{d}_1(s)$ is represented in grey. $\vect{F}_2$ is the transverse or shear component of the internal force along $\vect{d}_2$. $\vect{M}_2$ is the transverse or bending component of the internal moment along $\vect{d}_2$.}
+% 	\label{fig:d1}
+%  \end{leftfullpage}
+% \end{figure}
+% \begin{figure}[p]
+% 	\begin{fullpage}
+% 	\subsubsection{Contributions to the balance of forces}
+% 	\vspace{10pt}
 
-	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~:
-	\begin{equation*}
-		-M_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau M_2 (s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~:
+% 	\begin{equation*}
+% 		-F_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau F_2(s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~:
-	\begin{equation*}
-		-M_2(s) + M_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = M'_2 (s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~:
+% 	\begin{equation*}
+% 		-F_2(s) + F_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = F'_2 (s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is~:
-	\begin{equation*}
-		M_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 M_2 (s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{F}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~:
+% 	\begin{equation*}
+% 		F_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 F_2(s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_2 ds$ around $\vect{d}_2$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~:
-	\begin{equation*}
-		-Q(s+ds) \cos(\kappa_2 ds) \sin(\kappa_1 ds) = -\kappa_1 Q(s) ds + o(ds)
-	\end{equation*}
-	  \end{fullpage}
-\end{figure}
+% 	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_2 ds$ around $\vect{d}_2$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~:
+% 	\begin{equation*}
+% 		-N(s+ds) \cos(\kappa_2 ds) \sin(\kappa_1 ds) = -\kappa_1 N(s) ds + o(ds)
+% 	\end{equation*}
+% 	\vspace{10pt}
 
-% ============
+% 	\subsubsection{Contributions to the balance of moments}
+% 	\vspace{10pt}
 
-\begin{figure}[p]
-  \begin{leftfullpage}
-    \captionsetup[subfloat]{captionskip=10pt}
-     	\centering
-     	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_d2.pdf}\label{fig:d2_a}} \\
-	\vspace{30pt}
-	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_d2.pdf}\label{fig:d2_b}}
-	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_d2.pdf}\label{fig:d2_c}}
-	\vspace{30pt}
-	\captionof{figure}[Interpretation~: influence of the second material curvature ($\kappa_2$)]{Influence of the second material curvature ($\kappa_2$) in the deflection of internal forces and moments along the centerline. The plane perpendicular to $\vect{d}_2(s)$ is represented in grey. $\vect{F}_1$ is the transverse or shear component of the internal force along $\vect{d}_1$. $\vect{M}_1$ is the transverse or bending component of the internal moment along $\vect{d}_1$.}
-	\label{fig:d2}
- \end{leftfullpage}
-\end{figure}
-\begin{figure}[p]
-	\begin{fullpage}
-	\subsubsection{Contributions to the balance of forces}
-	\vspace{10pt}
+% 	$\vect{F}_2(s+ds)$ is deflected from the plane normal to $\vect{d}_1(s)$ by a rotation of angle $\tau ds$ around $\vect{d}_3$ (\cref{fig:d1_b}). It produces a moment around $\vect{d}_1$ with the lever arm $b =  \cos(\kappa_2 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~:
+% 	\begin{equation*}
+% 		-F_2(s+ds) \cos(\tau ds) (\cos(\kappa_2 ds) ds) = -F_2(s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~:
-	\begin{equation*}
-		-F_1(s) + F_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = F'_1 (s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~:
+% 	\begin{equation*}
+% 		-M_2(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = -\tau M_2 (s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~:
-	\begin{equation*}
-		F_1(s+ds) \sin(\tau ds) \cos(\kappa_1 ds) = \tau F_1 (s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~:
+% 	\begin{equation*}
+% 		-M_2(s) + M_2(s+ds) \cos(\tau ds) \cos(\kappa_1 ds) = M'_2 (s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~:
-	\begin{equation*}
-		-F_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = - \kappa_2 F_1(s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{M}_2(s+ds)$ is deflected from $\vect{d}_2(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is~:
+% 	\begin{equation*}
+% 		M_2(s+ds) \cos(\tau ds) \sin(\kappa_1 ds) = \kappa_1 M_2 (s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_1 ds$ around $\vect{d}_1$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~:
-	\begin{equation*}
-		N(s+ds) \cos(\kappa_1 ds) \sin(\kappa_2 ds) = \kappa_2 N(s) ds + o(ds)
-	\end{equation*}
-	\vspace{10pt}
+% 	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_2 ds$ around $\vect{d}_2$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d1_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~:
+% 	\begin{equation*}
+% 		-Q(s+ds) \cos(\kappa_2 ds) \sin(\kappa_1 ds) = -\kappa_1 Q(s) ds + o(ds)
+% 	\end{equation*}
+% 	  \end{fullpage}
+% \end{figure}
 
-	\subsubsection{Contributions to the balance of moments}
-	\vspace{10pt}
+% % ============
 
-		$\vect{F}_1(s+ds)$ is deflected from the plane normal to $\vect{d}_2(s)$ by the angle $\tau ds$ around $\vect{d}_3$ along $ds$ (\cref{fig:d2_b}). It produces a moment around $\vect{d}_2$ with the lever arm $b =  \cos(\kappa_1 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~:
-	\begin{equation*}
-		F_1(s+ds) \cos(\tau ds) (\cos(\kappa_1 ds) ds) = F_1(s) ds + o(ds)
-	\end{equation*}
+% \begin{figure}[p]
+%   \begin{leftfullpage}
+%     \captionsetup[subfloat]{captionskip=10pt}
+%      	\centering
+%      	\subfloat[][infinitesimal deformation]{\includegraphics{kirchhoff_geometry_d2.pdf}\label{fig:d2_a}} \\
+% 	\vspace{30pt}
+% 	\subfloat[][contributions of the internal forces]{\includegraphics{kirchhoff_balance_T_d2.pdf}\label{fig:d2_b}}
+% 	\subfloat[][contributions of the internal moments]{\includegraphics{kirchhoff_balance_M_d2.pdf}\label{fig:d2_c}}
+% 	\vspace{30pt}
+% 	\captionof{figure}[Interpretation~: influence of the second material curvature ($\kappa_2$)]{Influence of the second material curvature ($\kappa_2$) in the deflection of internal forces and moments along the centerline. The plane perpendicular to $\vect{d}_2(s)$ is represented in grey. $\vect{F}_1$ is the transverse or shear component of the internal force along $\vect{d}_1$. $\vect{M}_1$ is the transverse or bending component of the internal moment along $\vect{d}_1$.}
+% 	\label{fig:d2}
+%  \end{leftfullpage}
+% \end{figure}
+% \begin{figure}[p]
+% 	\begin{fullpage}
+% 	\subsubsection{Contributions to the balance of forces}
+% 	\vspace{10pt}
 
-	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~:
-	\begin{equation*}
-		-M_1(s) + M_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = M'_1 (s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~:
+% 	\begin{equation*}
+% 		-F_1(s) + F_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = F'_1 (s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~:
-	\begin{equation*}
-		M_1(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = \tau M_1 (s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_1 ds$ around $\vect{d}_1$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_2(s)$ is~:
+% 	\begin{equation*}
+% 		F_1(s+ds) \sin(\tau ds) \cos(\kappa_1 ds) = \tau F_1 (s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is~:
-	\begin{equation*}
-		-M_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = -\kappa_2 M_1 (s) ds + o(ds)
-	\end{equation*}
+% 	$\vect{F}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_3(s)$ is~:
+% 	\begin{equation*}
+% 		-F_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = - \kappa_2 F_1(s) ds + o(ds)
+% 	\end{equation*}
 
-	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_1 ds$ around $\vect{d}_1$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~:
-	\begin{equation*}
-		Q(s+ds) \cos(\kappa_1 ds) \sin(\kappa_2 ds) = \kappa_2 Q(s) ds + o(ds)
-	\end{equation*}
-	  \end{fullpage}
-\end{figure}
+% 	$\vect{N}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_1 ds$ around $\vect{d}_1$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_b}). Thus, its contribution to the balance of forces onto $\vect{d}_1(s)$ is~:
+% 	\begin{equation*}
+% 		N(s+ds) \cos(\kappa_1 ds) \sin(\kappa_2 ds) = \kappa_2 N(s) ds + o(ds)
+% 	\end{equation*}
+% 	\vspace{10pt}
 
-\clearpage
+% 	\subsubsection{Contributions to the balance of moments}
+% 	\vspace{10pt}
+
+% 		$\vect{F}_1(s+ds)$ is deflected from the plane normal to $\vect{d}_2(s)$ by the angle $\tau ds$ around $\vect{d}_3$ along $ds$ (\cref{fig:d2_b}). It produces a moment around $\vect{d}_2$ with the lever arm $b =  \cos(\kappa_1 ds) ds$. Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~:
+% 	\begin{equation*}
+% 		F_1(s+ds) \cos(\tau ds) (\cos(\kappa_1 ds) ds) = F_1(s) ds + o(ds)
+% 	\end{equation*}
+
+% 	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~:
+% 	\begin{equation*}
+% 		-M_1(s) + M_1(s+ds) \cos(\tau ds) \cos(\kappa_2 ds) = M'_1 (s) ds + o(ds)
+% 	\end{equation*}
+
+% 	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_2(s)$ is~:
+% 	\begin{equation*}
+% 		M_1(s+ds) \sin(\tau ds) \cos(\kappa_2 ds) = \tau M_1 (s) ds + o(ds)
+% 	\end{equation*}
+
+% 	$\vect{M}_1(s+ds)$ is deflected from $\vect{d}_1(s)$ by the combined rotations of angle $\tau ds$ around $\vect{d}_3$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_3(s)$ is~:
+% 	\begin{equation*}
+% 		-M_1(s+ds) \cos(\tau ds) \sin(\kappa_2 ds) = -\kappa_2 M_1 (s) ds + o(ds)
+% 	\end{equation*}
+
+% 	$\vect{Q}(s+ds)$ is deflected from $\vect{d}_3(s)$ by the combined rotations of angle $\kappa_1 ds$ around $\vect{d}_1$ and $\kappa_2 ds$ around $\vect{d}_2$ (\cref{fig:d2_c}). Thus, its contribution to the balance of moments onto $\vect{d}_1(s)$ is~:
+% 	\begin{equation*}
+% 		Q(s+ds) \cos(\kappa_1 ds) \sin(\kappa_2 ds) = \kappa_2 Q(s) ds + o(ds)
+% 	\end{equation*}
+% 	  \end{fullpage}
+% \end{figure}
+
+\pagebreak
 \section{Conclusion}
 The geometric configuration of a Kirchhoff rod has been described using a constrained Cosserat rod model, composed of a centerline curve and an orthonormal adapted frame. The assumptions upon which Kirchhoff theory for rods is built has been carefully reminded and the dynamical equations of a rod have been established. A pure geometric reasoning has been proposed to retrieve the static member of these equations, understood as first order balance laws between internal force and moment.
 

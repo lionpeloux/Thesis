@@ -475,7 +475,14 @@
 		\begin{tikzpicture}[remember picture, inner sep=0pt]
 			\node[anchor=\@TBAnchor, xshift=\@TBXShift+\@TBBorderShift, yshift=\@TBYShift] 
 				at (\@TBNode){%
-					\fbox{\parbox[b]{\@TBWidth}{\setstretch{0.95}\tf@fntxt#2}}%	
+					\fbox{\parbox[b]{\@TBWidth}{%
+						\ifboolexpr{%
+							test {\ifdefstring{\@TBAnchor}{north}} or test {\ifdefstring{\@TBAnchor}{south}}
+						}
+						{\centering}
+						{}
+						\setstretch{0.95}\tf@fntxt#2
+					}}
 			};
 			% store points of interest
 			\coordinate (@TL) at (current bounding box.north west); 	% top-left corner

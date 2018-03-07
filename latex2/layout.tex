@@ -44,9 +44,9 @@
 \usepackage{booktabs}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \newcommand{\tablebf}{\fontseries{b}\selectfont} % bold font that does not get wider to keep bold numbers aligned
-
-\AtBeginEnvironment{tabular}{\ra{0.9}\footnotesize}
-\AtBeginEnvironment{tabularx}{\ra{0.9}\footnotesize}
+% \ra{0.9}
+\AtBeginEnvironment{tabular}{\footnotesize}
+\AtBeginEnvironment{tabularx}{\footnotesize}
 
 \heavyrulewidth=2pt %.08em
 \lightrulewidth=1pt %.05em
@@ -300,8 +300,8 @@
 
 	\part{Rich Kirchhoff beam model}\label{part=2}
 	% \include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch8_conclusion/chapter}
 
