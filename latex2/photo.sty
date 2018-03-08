@@ -240,6 +240,8 @@
 				\coordinate (@Btr) at (current bounding box.north east) {}; % top-left corner
 				\coordinate (@Bbr) at (current bounding box.south east) {}; % bottom-left corner
 				% store points of interest
+				\coordinate (TL) at (@Atl); 	% top-left corner
+				\coordinate (BL) at (@Abl); 	% bottom-left corner
 				\coordinate (TR) at (@Btr); 	% top-left corner
 				\coordinate (BR) at (@Bbr); 	% bottom-left corner
 				\filldraw[red] (@Atl) circle [radius=\@radius];

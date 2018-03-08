@@ -33,15 +33,7 @@ Note that the term \emph{rigid gridshell} is often opposed to the term \emph{ela
 
 
 \blankpage{%
-	% \enlargethispage{-16cm}
-	% \addtotextheigth{-10cm}
-	% \afterpage{\restoretexteheight}
-	% \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
-	% 	\node[anchor=south west] at (CAbl){%
-	% 		\fbox{\parbox{\textwidth}{\vspace{10cm}}}
-	% 	};
-	% \end{tikzpicture}
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		% \GetLayoutNodes
@@ -76,6 +68,7 @@ Note that the term \emph{rigid gridshell} is often opposed to the term \emph{ela
 			]{mannheim_erection_3.jpg}%
 		\savenodes{D}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
@@ -124,24 +117,6 @@ Note that the term \emph{rigid gridshell} is often opposed to the term \emph{ela
 % ------------------------------------------
 Usually, the grid morphology is not trivial and leads to design numerous costly and complex joints. To overcome this issue, an original and innovative erection process was developed that takes advantage of the flexibility inherent to slender elements. A regular planar grid made of long continuous linear members is built on the ground (see \cref{fig:erec_0}). The elements are pinned together so the grid has no in-plane shear stiffness and can accommodate large-scale deformations during erection. Then, the grid is bent elastically to its final shape (see \cref{fig:erec_1,fig:erec_2}). Finally, the grid is frozen in the desired shape with a third layer of bracing members and the structure becomes a shell. This process is illustrated and detailed in the next chapter (see \cref{sec=construction_process}).
 
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{mannheim_erection_1.jpg}
-% 		\caption{Almost flat grid}
-% 		\label{fig:erec_1}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{mannheim_erection_2.jpg}
-% 		\caption{Deformed grid}
-% 		\label{fig:erec_2}
-% 	\end{subfigure}
-% 	\caption[Forming process of the timber lattice of Mannheim, Germany]{Forming process of the timber lattice of Mannheim, Germany.}
-% 	\label{fig:multihalle}
-% \end{figure}
-
-
 \subsection{Structural typology}\label{sec=def_topo}
 % ------------------------------------------
 Their mechanical behaviour is very similar to the one of real shells even if the material is discrete and located in a grid more or less open. Moreover, gridshells benefit from the same advantages as the ones showed by an eggshell : they can cross large span using a low amount of material. Their stiffness is mainly linked to their double-curved shape.
@@ -161,6 +136,7 @@ In this field of application, composite materials like glass fibre reinforced po
 		yshift=\plotYadjust,
 		]{ch2_gridshell/plot/1_projects/build.pdf}
 	\PhotoCaptionRef[
+		hrefnode=TL,
 		node=BL, 
 		anchor=north west, 
 		yshift=-\PhotoRefSkip,
@@ -172,7 +148,7 @@ In this field of application, composite materials like glass fibre reinforced po
 		width=10cm,
 		border=false,
 		]{%
-			\figurecaption{fig:projectsbymaterial}\par\medskip
+			\figurecaption{fig:projectsbymaterial}\par\smallskip
 			The surface of the bubbles is proportional to the covered area. Colour indicates the material employed for the rods.
 		}
 	}\hbox{}
@@ -189,7 +165,7 @@ The books edited by the \emph{Institut für leichte Flächentragwerke} are of gr
 Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and completed his doctorate on tensile structures in 1953. This first work was published and translated later in the 60's. He then began to work in the field of lightweight structures using physical models such as soap films or hanging nets, and photographic measurements.\footnote{In the 19\textsuperscript{th} and 20\textsuperscript{th} centuries model testing was at the heart of structural innovation \cite{Addis2013}. Analog models were employed successfully by well-known architects and engineers to go beyond the limits of existing knowledge (A. Gaudi, H. Isler, F. Candela, F. Otto, \telp{}) and are still employed today where numeric models failed to represent accurately some physical phenomenons (for instance in wind analysis for high rise towers and bridges).}\textsuperscript{,}\footnote{\blockcquote[p.~56]{IL10}{Photography is the medium through which the form and content of a model are communicated. It is one of our most important tools in that it provides the basis for documentation and information, supplements our creative potential \belp{} }} These tools were essentials for his exploration of forms and structures as there were no computers at that time.
 
 \doubleblankpage[r]{
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\AddToShipoutPictureBG*{%
 		\def\tmpwidth{\textwidth+\ContentOuterMargin+\BleedOuterMargin}
 		\intersectnode{PPtl |- CAtl}{Pt}
@@ -216,29 +192,33 @@ Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and co
 			]{essen_foil_full.jpg}
 		\savenodes{C}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl, 
 			anchor=north west,
 			phantom=true,
 		]{figure}{}{Steel gridshell built in 1962 in Berkeley, USA}{fig:berkeley}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Abr, 
 			anchor=base west,
 			xshift=\PhotoRefSkip,
 		]{subfigure}{}{Steel lattice}{fig:berkeley_a}
 		\PhotoCaptionRef[
+			hrefnode=Btl,
 			node=Bbr, 
 			anchor=base west,
 			xshift=\PhotoRefSkip,
 		]{subfigure}{}{Knot detail}{fig:berkeley_b}
 		\intersectnode{Cbl -| Atl}{Pt}
 		\PhotoCaptionRef[
+			hrefnode=Ctl,
 			node=Pt, 
 			anchor=north west,
 			yshift=-\PhotoRefSkip,
 		]{figure}{}{Timber gridshell built in 1962 in Essen, Germany}{fig:essen}
 	}\hbox{}
 }{
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\AddToShipoutPictureBG*{%
 		\def\tmpwidth{\textwidth+\ContentOuterMargin+\BleedOuterMargin}
 		\Photo[
@@ -249,6 +229,7 @@ Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and co
 		\savenodes{A}
 		\intersectnode{Abl -| CAtr}{Pt}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Pt, 
 			anchor=north east,
 			yshift=-\PhotoRefSkip,
@@ -260,7 +241,7 @@ Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and co
 			]{%
 				\figurecaption{fig:berkeley}\par
 				\figurecaption{fig:berkeley_a}\par
-				\figurecaption{fig:berkeley_b}\par\smallskip
+				\figurecaption{fig:berkeley_b}\par\medskip
 				\figurecaption{fig:essen}\par
 				\figurecaption{fig:montreal}
 			}
@@ -272,73 +253,12 @@ Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and co
 Simultaneously, he became interested by the study of lightweight shells and the way they were form-found. One of his very first elastic gridshell was built in 1962 with students at Berkeley, USA \cite[p.~270]{IL10}. It is funny to remark that this first gridshell was not a timber gridshell but a steel gridshell made out of twin steel rods linked in a grid fashion by bolts with clamping plates (see \cref{fig:berkeley_a}). This first experiment demonstrated at small scale the ability to bend a regular grid with no shear rigidity into a curved shape  (see \cref{fig:berkeley_b}). The grid was loosely braced and shell effects were not investigated.
 
 \subsubsection{Essen Gridshell, Essen, Germany, 1962}
-The same year he designed and built a first timber gridshell in Essen, Germany \cite[p.~272]{IL10}. The prototype~-- a single-layer gridshell spanning \SI{17}{m} and covering an area of \SI{198}{m^2} -- was made with 3-plies laminated timber profiles in hemlock pine (see \cref{fig:essen_a}). The cross-section of the profiles was rectangular (\SI{60}{mm} x \SI{40}{mm}) and the elements were assembled in a grid fashion with simple steel bolts. Once erected, nothing was specifically done to improve the in-plane shear stiffness of the grid and activate a shell behaviour. Finally, the structure was covered with a transparent plastic foil nailed directly on the grid's profiles (see \cref{fig:essen_b}).
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{berkeley_detail.jpg}
-% 		\caption{Knot detail}
-% 		\label{fig:berkeley_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{berkeley_gs.jpg}
-% 		\caption{Steel lattice}
-% 		\label{fig:berkeley_b}
-% 	\end{subfigure}
-% 	\caption[Steel gridshell built in 1962 in Berkeley, USA]{Steel gridshell built in 1962 in Berkeley, USA.}
-% 	\label{fig:berkeley}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{essen_gs.jpg}
-% 		\caption{Timber lattice}
-% 		\label{fig:essen_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{essen_foil.jpg}
-% 		\caption{Plastic foil}
-% 		\label{fig:essen_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 1962 in Essen, Germany]{Timber gridshell built in 1962 in Essen, Germany.}
-% 	\label{fig:essen}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{montreal_lift.jpg}
-% 		\caption{Grid erection}
-% 		\label{fig:montreal_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{montreal_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:montreal_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 1967 in Montreal, Canada]{Timber gridshell built in 1967 in Montreal, Canada.}
-% 	\label{fig:montreal}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{montreal_lift.jpg}
-% 		\caption{Grid erection}
-% 		\label{fig:montreal_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{montreal_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:montreal_b}
-
+The same year he designed and built a first timber gridshell in Essen, Germany \cite[p.~272]{IL10}. The prototype~-- a single-layer gridshell spanning \SI{17}{m} and covering an area of \SI{198}{m^2} -- was made with 3-plies laminated timber profiles in hemlock pine (see \cref{fig:essen}). The cross-section of the profiles was rectangular (\SI{60}{mm} x \SI{40}{mm}) and the elements were assembled in a grid fashion with simple steel bolts. Once erected, nothing was specifically done to improve the in-plane shear stiffness of the grid and activate a shell behaviour. Finally, the structure was covered with a transparent plastic foil nailed directly on the grid's profiles.
 
 \subsubsection{German Pavilion Auditoria, Montreal, Canada, 1967}
 Five years later, on the occasion of the \emph{1967 International and Universal Exposition} in Montreal, Canada, Frei Otto was appointed to design the German Pavilion~: a large cable net tent prefiguring the realisation of the olympic stadium of Munich, Germany, in 1972.\footnote{Actually, Frei Otto became the director of the newly founded \emph{Institute for Lightweight Structures} (Institut für Leichte Flächentragwerke or IL) at the University of Stuttgart in 1964. It was the IL that was commissioned by the German government to conduct research in connection with the planning of the German pavilion for the exposition in Montreal.}\textsuperscript{,}\footnote{Video of the construction of the German pavilion~: \url{https://www.youtube.com/watch?v=Z0mtFMoseUk}.}
 
-The pavilion required two auditoria and these were designed using the principle of elastic gridshell \cite[p.~274]{IL10}. All together, the auditoria covered and area of \SI{365}{m^2} and spanned \SI{17.5}{m}. The construction technique employed in Montreal was quite similar to the one developed in Essen, but this time the grid was fully braced with a layer of nailed plywood boards and offered a proper roofing made out of insulation panels covered with a PVC coated fabric (see \cref{fig:montreal_a,fig:montreal_b}).
+The pavilion required two auditoria and these were designed using the principle of elastic gridshell \cite[p.~274]{IL10}. All together, the auditoria covered and area of \SI{365}{m^2} and spanned \SI{17.5}{m}. The construction technique employed in Montreal was quite similar to the one developed in Essen, but this time the grid was fully braced with a layer of nailed plywood boards and offered a proper roofing made out of insulation panels covered with a PVC coated fabric (see \cref{fig:montreal}).
 
 The two gridshells built in Montreal mark a significant step in the maturation process of the technique leading to the major realisation of Mannheim in 1976~: a methodology has emerged to progress \blockcquote[p.~179]{IL10}{from the inverted form to the gridshell} ; main construction details have been validated ; various erection methods have been tested ; mid-scale buildings have been built to host public. However, due to the over complexity of these structures, lots of unknowns remained unsolved at this stage and the behaviour of the structures could not be fully predicted.\footnote{\blockcquote[p.~219]{IL10}{Snow accumulations in the throat of the common edge beam probably caused one of the two grid shells of project Montreal to buckle in a relatively flat region. The diameter of the buckled area was about 3 meters. Neither grid rod was broken, i.e. the buckling progressed elastically. It might have been possible to press the buckled area back into shape.}}
 
@@ -351,7 +271,7 @@ The project of the Multihalle started in 1970, when the decision was made that M
 A thorough report on the project is available in \cite{IL13}.  A more condensed but still precise description of the engineering problematics related to this project are available in the excellent papers from \citet{Happold1975, Liddell2015}.
 
 \afterpage{%
-	% \thispagestyle{empty}
+	% \thispagestyle{pageonly}
 	\AddToShipoutPictureBG*{
 		\Photo[
 			node=CAtl,
@@ -361,11 +281,13 @@ A thorough report on the project is available in \cite{IL13}.  A more condensed 
 		\savenodes{A}
 		\intersectnode{CAtl |- Abl}{Pt}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl, 
 			anchor=north west, 
 			phantom=true,
 		]{figure}{}{Timber gridshell built in 1975 in Mannheim, Germany}{fig:mannheim}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Pt, 
 			anchor=north west, 
 			yshift=-\PhotoRefSkip,
@@ -377,7 +299,7 @@ A thorough report on the project is available in \cite{IL13}.  A more condensed 
 	\hbox{\vspace{\PhotoHeight}}
 	%
 	\doubleblankpage[l]{%
-		\hbox{}
+		\hbox{}\thispagestyle{pageonly}
 		\PhotoSpread[
 			node=CAtl,
 			anchor=north west,
@@ -385,12 +307,13 @@ A thorough report on the project is available in \cite{IL13}.  A more condensed 
 		]{mannheim_inside.jpg}
 		\AddToShipoutPictureBG*{
 			\PhotoCaptionRef[
-			node=BL, 
-			anchor=north west,
-			yshift=-\PhotoRefSkip,
-		]{subfigure}{}{Interior view}{fig:mannheim_a}}
+				hrefnode=Atl,
+				node=BL, 
+				anchor=north west,
+				yshift=-\PhotoRefSkip,
+			]{subfigure}{}{Interior view}{fig:mannheim_a}}
 	}{%
-		\hbox{}\thispagestyle{empty}
+		\hbox{}\thispagestyle{pageonly}
 		\AddToShipoutPictureBG*{
 			\PhotoTextBox[
 				node=BR,
@@ -413,22 +336,6 @@ Although the constructive system deployed in Mannheim clearly inherited from the
 
 The double-layer system was introduced to tackle two issues~: the grid needed some flexibility to be bent into the desired shape, but once erected it should provide sufficient bending stiffness to resist disturbing loads and avoid a buckling collapse.\footnote{Theoretically, self-weight loads would produce only compression in the members because the (funicular) form of the grid resulted from the inversion of a hanging chain model in pure tension.} Once erected, the two grids, one sliding on top of the other one, were connected together to form a single grid with much higher ladder profiles (from \SI{50}{mm} to \SI{150}{mm}), increasing their bending stiffness by a factor of about 26 (see \cref{fig:mannheim_a}).
 
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{mannheim_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:mannheim_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{mannheim_sky.jpg}
-% 		\caption{Sky view}
-% 		\label{fig:mannheim_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 1962 in Essen, Germany]{Timber gridshell built in 1975 in Mannheim, Germany.}
-% 	\label{fig:mannheim}
-% \end{figure}
-
 Because the in-plane stiffness of the grid also plays a major role in the resistance to buckling, this question was considered with care. The bracing of the grid was first achieved by preventing the nodes to turn once the grid was erected. This was done by creating some friction in the nodes when tightening the bolts linking the laths, after the grid was erected. Then, additional bracing cables were put in the grid.
 
 Finally, the project of Mannheim was a key project in the development of modern lightweight structures. Great engineers were born in touch with Frei Otto, following his footsteps or collaborating with him. This heritage has irrigated for several decades the engineering of lightweight structures in Europe and gave birth, directly or indirectly, to several studios among which we can cite \emph{Buro Happold} and \emph{Schlaich Bergermann \& Partner}.
@@ -446,7 +353,7 @@ Note that around 1975 small workshop and experiments lead to the construction of
 It is only 20 years later that gridshells started to reappear, in the late 90's mainly in the United Kindom, and for projects that had interest in environmental problematics.
 
 \blankpage{%
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
@@ -479,6 +386,7 @@ It is only 20 years later that gridshells started to reappear, in the late 90's 
 			]{doncaster_ext.jpg}%
 		\savenodes{D}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
@@ -498,6 +406,7 @@ It is only 20 years later that gridshells started to reappear, in the late 90's 
 			]{subfigure}{}{Exterior view}{fig:dorset_b}
 		%%
 		\PhotoCaptionRef[
+			hrefnode=Ctl,
 			node=Ctl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
@@ -523,7 +432,7 @@ It is only 20 years later that gridshells started to reappear, in the late 90's 
 			]{%
 				\figurecaption{fig:dorset}\par
 				\figurecaption{fig:dorset_a}\par
-				\figurecaption{fig:dorset_b}\par\smallskip
+				\figurecaption{fig:dorset_b}\par\medskip
 				\figurecaption{fig:doncaster}\par
 				\figurecaption{fig:doncaster_a}\par
 				\figurecaption{fig:doncaster_b}\par
@@ -541,45 +450,12 @@ At the same time, a project with a similar spirit arose for the \emph{Earth Cent
 These projects definitely trailed the technique in England and initiated the renewal period (see \cref{sec=renewal}). Although they remained small-scale projects for which modelling was achieved through physical models, they trained and restored partially the operational ability of Buro Happold to design timber gridshells as pointed by \citet{Harris2003}.
 
 
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{dorset_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:dorset_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{dorset_ext.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:dorset_b}
-% 	\end{subfigure}
-% 	\caption[Roundwood gridshell built in 1995 in Dorset, England]{Roundwood gridshell built in 1995 in Dorset, England.}
-% 	\label{fig:dorset}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{doncaster_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:doncaster_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{doncaster_ext.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:doncaster_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshells built in 1998 in Doncaster, England]{Timber gridshells built in 1998 in Doncaster, England.}
-% 	\label{fig:doncaster}
-% \end{figure}
-
-
 \subsection{The renewal : Hannover, Downland and Savill}
 \label{sec=renewal}
 
 
 \afterpage{%
-	% \thispagestyle{empty}
+	% \thispagestyle{pageonly}
 	\AddToShipoutPictureBG*{
 		\Photo[
 			node=CAtl,
@@ -604,25 +480,29 @@ These projects definitely trailed the technique in England and initiated the ren
 		\savenodes{C}
 		%%
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl, 
 			anchor=north west, 
 			phantom=true,
 		]{figure}{}{Cardboard gridshell built in 2000 in Hannover, Germany}{fig:hannover}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Abr, 
 			anchor=north east, 
 			yshift=-\PhotoRefSkip,
 		]{subfigure}{}{Sky view}{fig:hannover_a}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Btr, 
 			anchor=south east, 
 			yshift=\PhotoRefSkip,
 		]{subfigure}{}{Interior view}{fig:hannover_b}
 		\PhotoCaptionRef[
+			hrefnode=Ctl,
 			node=Ctr, 
 			anchor=north west, 
 			xshift=\PhotoRefSkip,
-		]{subfigure}{}{Node detail}{fig:hannover_c}
+		]{subfigure}{}{Knot detail}{fig:hannover_c}
 		\intersectnode{CAtl |- Bbr}{Pt}
 		\PhotoTextBox[
 			node=Bbr,
@@ -660,11 +540,12 @@ In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happ
 	\settoheight{\myh}{\includegraphics[height=5cm]{downland_e1.jpg}}
 	\settowidth{\myw}{\includegraphics[height=5cm]{downland_e1.jpg}}
 	\gdef\mycode{\intersectnode{CAtr |- CAbl}{PSA}}
+	\intersectnode{CAtr |- CAbl}{PSA}
 	\PhotoSpread[
 		lpcode=\mycode,
 		node=PSA,
 		anchor=south west,
-		xshift={-\PaperWidth+2\myw+2\PhotoSkip},
+		xshift={-\PaperWidth+2\myw+2\PhotoSkip+3cm},
 		gopt={height=5cm},
 		]{downland_e3.jpg}
 	\savenodes{C}
@@ -683,37 +564,24 @@ In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happ
 			gopt={height=5cm},
 			]{downland_e1.jpg}
 		\savenodes{A}
-		% \Photo[
-		% 	node=CAtl,
-		% 	anchor=north west,
-		% 	gopt={height=10cm},
-		% 	]{downland_detail_a.jpg}
-		% \savenodes{DA}
-		% \Photo[
-		% 	node=DAbr,
-		% 	anchor=south west,
-		% 	xshift=\PhotoSkip,
-		% 	gopt={height=5cm},
-		% 	]{downland_dwg.jpg}
-		% \savenodes{DB}
-		%%
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl,
 			anchor=south west,
 			phantom=true,
-			]{figure}{}{Timber gridshell built in 2002 in Downland, England}{fig:downland_e}
+			]{figure}{}{Construction stages of the Downland gridshell}{fig:downland_e}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
 			node=Abr, 
 			anchor=north east, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{EA}{fig:downland_e1}
+			]{subfigure}{}{Flat grid on scaffold platform}{fig:downland_e1}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
 			node=Bbr, 
 			anchor=north east, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{EB}{fig:downland_e2}
+			]{subfigure}{}{Deformed grid}{fig:downland_e2}
 	}
 	}{%
 	\hbox{}\thispagestyle{empty}
@@ -723,7 +591,7 @@ In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happ
 			node=BR, 
 			anchor=north east, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{C}{fig:downland_e3}
+			]{subfigure}{}{Triangulated grid}{fig:downland_e3}
 		\Photo[
 			node=BR,
 			anchor=south west,
@@ -733,10 +601,10 @@ In 1997, architect Shigeru Ban began to collaborate with Frei Otto and Buro Happ
 		\savenodes{D}
 		\PhotoCaptionRef[
 			hrefnode=Dtl,
-			node=Dbr, 
+			node=CAbr, 
 			anchor=north east, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{D}{fig:downland_e4}
+			]{subfigure}{}{Final structure with cladding}{fig:downland_e4}
 		\PhotoTextBox[
 			node=CAtl,
 			anchor=north west,
@@ -758,15 +626,7 @@ The building is 50 meters long and 12.5 to 16 meters wide, covering an area of a
 
 
 \blankpage{%
-	% \enlargethispage{-16cm}
-	% \addtotextheigth{-10cm}
-	% \afterpage{\restoretexteheight}
-	% \begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
-	% 	\node[anchor=south west] at (CAbl){%
-	% 		\fbox{\parbox{\textwidth}{\vspace{10cm}}}
-	% 	};
-	% \end{tikzpicture}
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		% \GetLayoutNodes
@@ -818,48 +678,15 @@ The building is 50 meters long and 12.5 to 16 meters wide, covering an area of a
 	}
 }
 
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{2\TwoMediaWidth/3}
-% 		\includegraphics[width=\textwidth]{hannover_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:hannover_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{4\TwoMediaWidth/3}
-% 		\includegraphics[width=\textwidth]{hannover_sky.jpg}
-% 		\caption{Sky view}
-% 		\label{fig:hannover_b}
-% 	\end{subfigure}
-% 	\caption[Cardboard gridshell built in 2000 in Hannover, Germany]{Cardboard gridshell built in 2000 in Hannover, Germany.}
-% 	\label{fig:hannover}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{downland_b.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:downland_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{downland_a.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:downland_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 2002 in Downland, England]{Timber gridshell built in 2002 in Downland, England.}
-% 	\label{fig:downland}
-% \end{figure}
-
 The grid pitch is \SI{1.0}{m} except in weaker areas where it is \SI{0.5}{m}. There, the grid is twice denser to achieve the required buckling resistance \cite{Harris2003}. Rib-lath bracing was preferred to steel cable bracing as ribs were deemed to offer a more convenient support for the cladding and to reduce the complexity of the connection. A new connection system was developed to avoid the cost of drilling thousands of slotted holes that would, in addition, reduce the cross-section area, while maintaining the required scissor behaviour for the deformation of the timber lattice.\footnote{This detail was \href{https://patents.google.com/patent/GB2361504A/en?q=\%22A+coupling+and+a+method+of+constructing+grid+shell+buildings+using+such+a+coupling\%22&country=GB}{patented} by the design team and the client.}
 
-The flat lattice was laid out on a scaffold platform. Unlike the Japan Pavilion, the lattice was progressively lowered down into position. This stage took 6 weeks. Once deformed, the shear blocks were introduced in the grid and bracing rib-laths were installed, giving its full strength to the shell. Finally the gridshell was cladded with a mix of polycarbonate plates (to let the light in) and timber boards on top of insulation panels and a rain screen.
+The flat lattice was laid out on a scaffold platform (see \cref{fig:downland_e1}). Unlike the Japan Pavilion, the lattice was progressively lowered down into position (see \cref{fig:downland_e2}). This stage took 6 weeks. Once deformed, the shear blocks were introduced in the grid and bracing rib-laths were installed, giving its full strength to the shell (see \cref{fig:downland_e3}). Finally the gridshell was cladded with a mix of polycarbonate plates (to let the light in) and timber boards on top of insulation panels and a rain screen (see \cref{fig:downland_e4}).
 
 It is worthwhile to mention that for the first time the form was not found by inverting some sort of hanging chain model that would produce a pure funicular shape where only compression occurred. Instead, the shape was the result of a numerical computation that took into account the bending behaviour of the laths.\footnote{This software was developed under the supervision of Chris Williams of the university of Bath.} \citet{Harris2003} argued that computer models enabled some interactivity in the form-finding process that would not be possible with physical models, leading to a better synergy between architectural and structural requirements. They also argued that physical models contributed invaluably to the development of a creative and efficient design throughout the project.
 
 
 \blankpage{%
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
@@ -911,6 +738,7 @@ It is worthwhile to mention that for the first time the form was not found by in
 			]{subfigure}{}{Exterior view}{fig:pishwanton_b}
 		%%
 		\PhotoCaptionRef[
+			hrefnode=Ctl,
 			node=Ctl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
@@ -936,7 +764,7 @@ It is worthwhile to mention that for the first time the form was not found by in
 			]{%
 				\figurecaption{fig:pishwanton}\par
 				\figurecaption{fig:pishwanton_a}\par
-				\figurecaption{fig:pishwanton_b}\par\smallskip
+				\figurecaption{fig:pishwanton_b}\par\medskip
 				\figurecaption{fig:flimwell}\par
 				\figurecaption{fig:flimwell_a}\par
 				\figurecaption{fig:flimwell_b}\par
@@ -947,7 +775,7 @@ It is worthwhile to mention that for the first time the form was not found by in
 
 
 \blankpage{%
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
@@ -982,6 +810,7 @@ It is worthwhile to mention that for the first time the form was not found by in
 			]{kent_ext.jpg}%
 		\savenodes{D}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
@@ -1001,11 +830,12 @@ It is worthwhile to mention that for the first time the form was not found by in
 			]{subfigure}{}{Exterior view}{fig:savill_b}
 		%%
 		\PhotoCaptionRef[
+			hrefnode=Ctl,
 			node=Ctl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
 			phantom=true,
-			]{figure}{}{xxx}{fig:kent}
+			]{figure}{}{Timber gridshell built in 2007 in Kent, England.}{fig:kent}
 		\PhotoCaptionRef[
 			hrefnode=Ctl,
 			node=Cbr, 
@@ -1026,7 +856,7 @@ It is worthwhile to mention that for the first time the form was not found by in
 			]{%
 				\figurecaption{fig:savill}\par
 				\figurecaption{fig:savill_a}\par
-				\figurecaption{fig:savill_b}\par\smallskip
+				\figurecaption{fig:savill_b}\par\medskip
 				\figurecaption{fig:kent}\par
 				\figurecaption{fig:kent_a}\par
 				\figurecaption{fig:kent_b}\par
@@ -1043,56 +873,6 @@ The single-layer gridshell was made out of local larch. Once erected by hands, t
 The gridshell of the Woodland Centre was built 7 years after the project had started (see \cref{fig:flimwell_a}).\footnote{More to be found at : \href{http://www.fourthdoor.org/annular/?page_id=441}{Growing and making Flimwell’s chestnut gridshell}.} The building was designed by architect Feilden Clegg and engineers from Atelier One. It was part of a larger research and development project that aimed at developing chestnut -- a low grad wood -- as a construction material.\footnote{This projet was conducted by the \href{http://www.bre.co.uk/}{Building Research Establishment}.}
 
 The building, still existing, is composed of 5 barrel vaults spanning 12 meters and about 5 meters wide (see \cref{fig:flimwell_b}). It covers about \SI{300}{m^2} \cite{Lowenstein2004}. Each vault module is a transportable unit composed of two curved arches. A single layer gridshell was then applied to this primary frame and braced with chestnut panels. The grid was made of laths with~\SI{75}{mm} x \SI{25}{mm} rectangular cross-section, assembled with simple bolts. On top of that, insulation materials and a membrane as rainscreen \cite{FourthDoor2003}.
-
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{pishwanton_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:pishwanton_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{pishwanton_ext.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:pishwanton_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 2002 in Pishwanton, England]{Timber gridshell built in 2002 in Pishwanton, England.}
-% 	\label{fig:pishwanton}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{flimwell_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:flimwell_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{flimwell_ext.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:flimwell_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 2003 in Filmwell, England]{Timber gridshell built in 2003 in Filmwell, England.}
-% 	\label{fig:flimwell}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{savill_b.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:savill_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{savill_a.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:savill_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 2006 in Savill, England]{Timber gridshell built in 2006 in Savill, England.}
-% 	\label{fig:savill}
-% \end{figure}
-
 
 \subsubsection{Savill Garden, Englefield Green, England, 2006}
 
@@ -1111,22 +891,6 @@ The gridshell covering the orangery of Chiddingstone Castle is a very small one.
 
 However this project embed some interesting innovations. Indeed, this time the gridshell is braced with a bidirectional cable network. Twin cables are employed to facilitate clamping on the node connection, which has been adapted from the previous version developed in Downland. This connection is now equipped with an additional threaded hole which can receive the clamping supports for the glazing (see \cref{fig:kent_a}). The timber shell is then glazed with triangular panels. Note that the quadrangles of the mesh are not planar any more in the deformed configuration and therefore triangulation of the (flat) glass panels is mandatory.
 
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{kent_grid.jpg}
-% 		\caption{Glazing support}
-% 		\label{fig:kent_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{kent_ext.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:kent_b}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 2006 in Savill, England]{Timber gridshell built in 2006 in Savill, England.}
-% 	\label{fig:kent}
-% \end{figure}
-
 \subsection{Gridshell in composite materials : a new perpective}
 Since 2002, the laboratoire \href{http://navier.enpc.fr}{Navier} at the Ecole des Ponts ParisTech develops a research program on elastic gridshells that is still ongoing. It focuses on both the use of new materials such as composite materials and the development of modern computer design methods for the generation of complex shapes, their form-finding and their structural analysis.
 
@@ -1134,7 +898,7 @@ Since 2002, the laboratoire \href{http://navier.enpc.fr}{Navier} at the Ecole de
 
 
 \afterpage{%
-	% \thispagestyle{empty}
+	% \thispagestyle{pageonly}
 	\AddToShipoutPictureBG*{
 		\def\tmpwidth{(\textwidth-\PhotoSkip)/2}
 		\Photo[
@@ -1153,20 +917,23 @@ Since 2002, the laboratoire \href{http://navier.enpc.fr}{Navier} at the Ecole de
 		% \intersectnode{CAtl |- Btr}{Pt}
 		%%
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl, 
 			anchor=north west, 
 			phantom=true,
-		]{figure}{}{GFRP gridshell built in 2006 and 2007 in Noisy-Champs, France}{fig:proto}
+		]{figure}{}{GFRP gridshells built in 2006 and 2007 in Noisy-Champs, France}{fig:proto}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Abl, 
 			anchor=north west, 
 			yshift=-\PhotoRefSkip,
-		]{subfigure}{}{First prototype (2006)}{fig:proto_a}
+		]{subfigure}{}{First prototype 2006}{fig:proto_a}
 		\PhotoCaptionRef[
+			hrefnode=Btl,
 			node=Bbl, 
 			anchor=north west, 
 			yshift=-\PhotoRefSkip,
-		]{subfigure}{}{Second prototype (2007)}{fig:proto_b}
+		]{subfigure}{}{Second prototype 2007}{fig:proto_b}
 		\PhotoTextBox[
 			node=Abl,
 			anchor=north west,
@@ -1186,7 +953,7 @@ Since 2002, the laboratoire \href{http://navier.enpc.fr}{Navier} at the Ecole de
 
 \subsubsection{The first gridshells in composte material, Champs-sur-Marne, France, 2006}
 \label{sec=proto}
-These developments have been validated by the construction of two prototypes in 2006 (see \cref{fig:proto_a}) and in 2007 (see \ref{fig:proto_b}) \cite{Douthe2006}. These structures were left outside for about 7 years. They covered about \SI{150}{m^2} each, spanning around 13 meters. The structures were single-layer gridshells made with pultruded GFRP tubes (\O \SI{41.7}{mm} x \SI{3.5}{mm}) assembled with a standard scaffold swivel connector. The grid was braced with a third layer of tubes and covered with a PVC coated fabric membrane providing full waterproofness.
+These developments have been validated by the construction of two prototypes in 2006 (see \cref{fig:proto_a}) and in 2007 (see \cref{fig:proto_b}) \cite{Douthe2006}. These structures were left outside for about 7 years. They covered about \SI{150}{m^2} each, spanning around 13 meters. The structures were single-layer gridshells made with pultruded GFRP tubes (\O \SI{41.7}{mm} x \SI{3.5}{mm}) assembled with a standard scaffold swivel connector. The grid was braced with a third layer of tubes and covered with a PVC coated fabric membrane providing full waterproofness.
 
 Here, the performance of composite materials is of real benefit. A single--layer gridshell is enough for this span. The hollow circular cross-section make optimal use of the material. Tubes are provided in 12 meters length and therefore no joints are required for this span. In the end, all these benefits make the constructive system a lot more lighter, simpler and efficient than what a timber gridshell would offer.
 
@@ -1194,7 +961,7 @@ Note that the first prototype was manually pushed-up in its deformed shape while
 
 
 \doubleblankpage[l]{%
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{\textwidth+\ContentOuterMargin+\BleedOuterMargin}
@@ -1224,7 +991,7 @@ Note that the first prototype was manually pushed-up in its deformed shape while
 			}
 	}
 }{%
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{\textwidth+\ContentInnerMargin+\ContentBindingOffset+\BleedInnerMargin}
@@ -1248,6 +1015,7 @@ Note that the first prototype was manually pushed-up in its deformed shape while
 			]{creteil_ext.jpg}%
 		\savenodes{B}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl,
 			anchor=north west,
 			phantom=true,
@@ -1268,10 +1036,10 @@ Note that the first prototype was manually pushed-up in its deformed shape while
 			node=Bbr,
 			anchor=south west,
 			xshift=\PhotoSkip,
-			width=10cm,
+			width=5.4cm,
 			border=false,
 			]{%
-				\figurecaption{fig:creteil}\par
+				\figurecaption{fig:creteil}\par\smallskip
 				\figurecaption{fig:creteil_a}\par
 				\figurecaption{fig:creteil_b}
 			}
@@ -1280,59 +1048,9 @@ Note that the first prototype was manually pushed-up in its deformed shape while
 
 
 \subsubsection{Solidays, Champs sur Marne, France, 2011}
-In 2011, \href{http://navier.enpc.fr}{Navier} (L. du Peloux, O. Baverel, J-F. Caron, F. Tayeb) used its knowledge to design with a team of students a temporary pavilion for a music festival in Paris, France (see \cref{fig:solidays_b}).\footnote{Photos and videos of the construction process at: \url{ http://thinkshell.fr/gridshell-solidays-2011/}} Although the constructive system was similar to the one employed for the two prototypes, the size and the span were more than twice larger \cite{Baverel2012}. In addition, it was the first gridshell in composite material that hosted some public and therefore had to comply with strict building regulations.
+In 2011, \href{http://navier.enpc.fr}{Navier} (L. du Peloux, O. Baverel, J-F. Caron, F. Tayeb) used its knowledge to design with a team of students a temporary pavilion for a music festival in Paris, France (see \cref{fig:solidays}).\footnote{Photos and videos of the construction process at: \url{ http://thinkshell.fr/gridshell-solidays-2011/}} Although the constructive system was similar to the one employed for the two prototypes, the size and the span were more than twice larger \cite{Baverel2012}. In addition, it was the first gridshell in composite material that hosted some public and therefore had to comply with strict building regulations.
 
-To our knowledge, it is also the first gridshell that was designed using the compass method \cite{IL10}, thus providing an inverse method to design the structure directly from the shape given by the architect. The single-layer gridshell covered about \SI{280}{m^2} and was erected by two mobile cranes (see \cref{fig:solidays_a}).
-
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{proto_b.jpg}
-% 		\caption{First prototype (2006)}
-% 		\label{fig:proto_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{proto_a.jpg}
-% 		\caption{Second prototype (2007)}
-% 		\label{fig:proto_b}
-% 	\end{subfigure}
-% 	\caption[GFRP gridshell built in 2006 and 2007 in Noisy-Champs, France]{GFRP gridshell built in 2006 and 2007 in Noisy-Champs, France.}
-% 	\label{fig:proto}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{solidays_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:solidays_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{solidays_ext.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:solidays_b}
-% 	\end{subfigure}
-% 	\caption[Solidays GFRP gridshell built in 2011 in Paris, France]{Solidays GFRP gridshell built in 2011 in Paris, France.}
-% 	\label{fig:solidays}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{creteil_int.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:creteil_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{creteil_ext.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:creteil_b}
-% 	\end{subfigure}
-% 	\caption[GFRP gridshell built in 2013 in Créteil, France]{GFRP gridshell built in 2013 in Créteil, France.}
-% 	\label{fig:creteil}
-% \end{figure}
-
+To our knowledge, it is also the first gridshell that was designed using the compass method \cite{IL10}, thus providing an inverse method to design the structure directly from the shape given by the architect. The single-layer gridshell covered about \SI{280}{m^2} and was erected by two mobile cranes.
 
 \subsubsection{Ephemeral Cathedral, Créteil, France, 2013}
 The \emph{Ephemeral Cathedral} of Créteil is the last achievement of this kind \cite{DuPeloux2016}.\footnote{Photos and videos of the construction process at : \url{http://thinkshell.fr/gridshell-cathedral-2013/}} It was designed by \href{http://www.tess.fr}{T/E/S/S} (L. du Peloux, B. Vaudeville, T. Gray, S. Aubry) with the assistance of \href{http://navier.enpc.fr}{Navier} (F. Tayeb, J-F. Caron, O. Baverel, A. Tamaint).\footnote{For this project, I was in charge of the project development for T/E/S/S, including structural and technical design, detailing, doors, membrane, drawing production, fabrication and erection with the help of the parishioners, regulations, \telp{}}. This time, the structure is a real building meant to last a decade and is still in activity since its construction in 2013. A complete review of this project is given in the next chapter of this thesis (see \cref{chp=creteil}).
@@ -1345,7 +1063,7 @@ Since 2010, about 20 timber gridshell pavilions were built around the world, mai
 
 
 \blankpage{%
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
@@ -1378,6 +1096,7 @@ Since 2010, about 20 timber gridshell pavilions were built around the world, mai
 			]{sanantonio.jpg}%
 		\savenodes{D}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
@@ -1388,15 +1107,16 @@ Since 2010, about 20 timber gridshell pavilions were built around the world, mai
 			node=Atl, 
 			anchor=south west, 
 			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Interior view}{fig:lecce}
+			]{subfigure}{}{Lecce 2010}{fig:lecce}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
 			node=Btl, 
 			anchor=south west, 
 			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Exterior view}{fig:toledo2}
+			]{subfigure}{}{Toledo 2014}{fig:toledo2}
 		%%
 		\PhotoCaptionRef[
+			hrefnode=Ctl,
 			node=Ctl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
@@ -1404,7 +1124,7 @@ Since 2010, about 20 timber gridshell pavilions were built around the world, mai
 			]{figure}{}{Timber gridshell built in 2013 in San Antonio, USA}{fig:sanantonio}
 		\PhotoCaptionRef[
 			hrefnode=Ctl,
-			node=Cbl, 
+			node=Cbl,
 			anchor=north west, 
 			yshift=-\PhotoRefSkip,
 			]{subfigure}{}{Folding skin}{fig:sanantonio2}
@@ -1422,7 +1142,7 @@ Since 2010, about 20 timber gridshell pavilions were built around the world, mai
 			]{%
 				\figurecaption{fig:gsit}\par
 				\figurecaption{fig:lecce}\par
-				\figurecaption{fig:toledo2}\par\smallskip
+				\figurecaption{fig:toledo2}\par\medskip
 				\figurecaption{fig:sanantonio}\par
 				\figurecaption{fig:sanantonio2}\par
 				\figurecaption{fig:sanantonio1}\par
@@ -1444,7 +1164,7 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 
 
 \doubleblankpage[r]{%
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{\textwidth+\ContentInnerMargin+\ContentBindingOffset+\BleedInnerMargin}
@@ -1468,6 +1188,7 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 			]{montpellier2.jpg}%
 		\savenodes{B}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl,
 			anchor=north west,
 			phantom=true,
@@ -1497,7 +1218,7 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 			}
 	}
 }{%
-	\thispagestyle{empty}
+	\thispagestyle{pageonly}
 	\hbox{}
 	\AddToShipoutPictureBG*{% 
 		\def\tmpwidth{(\textwidth+\ContentOuterMargin+\BleedOuterMargin-\PhotoSkip)/2}
@@ -1532,6 +1253,7 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 			]{booby.jpg}%
 		\savenodes{D}
 		\PhotoCaptionRef[
+			hrefnode=Atl,
 			node=Atl,
 			anchor=south west,
 			yshift=-\PhotoSkip,
@@ -1561,13 +1283,13 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 			node=Cbr, 
 			anchor=north east, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{Glazing support}{fig:booby1}
+			]{subfigure}{}{Interior view}{fig:booby1}
 		\PhotoCaptionRef[
 			hrefnode=Dtl,
 			node=Dbr, 
 			anchor=north east, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{Exterior view}{fig:booby2}
+			]{subfigure}{}{Concrete shell}{fig:booby2}
 		\PhotoTextBox[
 			node=CAbl,
 			anchor=south west,
@@ -1576,7 +1298,7 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 			]{%
 				\figurecaption{fig:clc2016}\par
 				\figurecaption{fig:clc}\par
-				\figurecaption{fig:clc2}\par\smallskip
+				\figurecaption{fig:clc2}\par\medskip
 				\figurecaption{fig:booby}\par
 				\figurecaption{fig:booby1}\par
 				\figurecaption{fig:booby2}\par
@@ -1592,91 +1314,8 @@ In that vein, L. du Peloux from \href{http://navier.enpc.fr}{Navier} and G. Laur
 
 In 2016, a one-week workshop called \href{http://thinkshell.fr/freeform-wooden-gridshell-2016/}{Building Freeform 2016} was held at the Ecole des Ponts ParisTech, France. The brief was to explore some innovative methods, including the generation of forms which allow the coverage by flat panels as well as the automation of some production tasks with the use of a robot arm (see \cref{fig:clc}). The draft studies were conducted upstream of the week, so that students can focus on design issues, implementation and practical achievement.\footnote{The co-development of this week was part of my research work. In particular, I provided the form-finding and structural analysis tools and developed the upstream software to generate the fabrication informations required by the milling station. This software was largely parametric so students can truly implement their own design. I was also involved in the planing of the week.}
 
-The second experiment is a hybrid structure (see \cref{fig:booby}). It is part of our reflexion at \href{http://navier.enpc.fr}{Navier} on how to brace and clad gridshells. Indeed, the bracing of the grid in its final form remains a time consuming step with a lot of manual work. The lack of alternatives to membrane covering is also an important limitation to the development of such technology. The proposed experiment tries to tackle both issues through a novel concept of a hybrid structural skin made of an elastic gridshell braced with a concrete envelope. The idea is to use the gridshell as a formwork for the concrete and to guarantee a mechanical connection between the thin concrete skin and the main grid, so that the concrete ensures the bracing of the grid and that the thickness of the concrete is reduced to a minimum. To demonstrate the feasibility and interest of this structural concept, a \SI{10}{m^2} prototype was built at the Ecole des Ponts ParisTech, France (see \cref{fig:booby1,fig:booby2}). The main aspects of the design and of the realisation of the prototype are presented by \citef{Cuvilliers2017}
+The second experiment is a hybrid structure (see \cref{fig:booby}). It is part of our reflexion at \href{http://navier.enpc.fr}{Navier} on how to brace and clad gridshells. Indeed, the bracing of the grid in its final form remains a time consuming step with a lot of manual work. The lack of alternatives to membrane covering is also an important limitation to the development of such technology. The proposed experiment tries to tackle both issues through a novel concept of a hybrid structural skin made of an elastic gridshell (see \cref{fig:booby1}), braced with a concrete envelope (see \cref{fig:booby2}). The idea is to use the gridshell as a formwork for the concrete and to guarantee a mechanical connection between the thin concrete skin and the main grid, so that the concrete ensures the bracing of the grid and that the thickness of the concrete is reduced to a minimum. To demonstrate the feasibility and interest of this structural concept, a \SI{10}{m^2} prototype was built at the Ecole des Ponts ParisTech, France. The main aspects of the design and of the realisation of the prototype are presented by \citef{Cuvilliers2017}
 
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{lecce.jpg}
-% 		\caption{Lecce, 2010}
-% 		\label{fig:lecce}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{toledo2.jpg}
-% 		\caption{Toledo 2.0, 2014}
-% 		\label{fig:toledo2}
-% 	\end{subfigure}
-% 	\caption[Timber gridshells built by gridshell.it in Italy]{Timber gridshells built by gridshell.it in Italy.}
-% 	\label{fig:gsit}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{sanantonio2.jpg}
-% 		\caption{Folding skin}
-% 		\label{fig:sanantonio2}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{sanantonio.jpg}
-% 		\caption{Pavilion}
-% 		\label{fig:sanantonio1}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 2013 in San Antonio, USA]{Timber gridshell built in 2013 in San Antonio, USA.}
-% 	\label{fig:sanantonio}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{montpellier2.jpg}
-% 		\caption{Tensioner}
-% 		\label{fig:tensioner}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{montpellier.jpg}
-% 		\caption{Pavilion}
-% 		\label{fig:montpellier}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 2016 in Montpellier, France]{Timber gridshell built in 2016 in Montpellier, France.}
-% 	\label{fig:jpofav}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{clc.jpg}
-% 		\caption{Robotic manufacturing}
-% 		\label{fig:clc}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{clc2.jpg}
-% 		\caption{Timber lattice}
-% 		\label{fig:clc2}
-% 	\end{subfigure}
-% 	\caption[Timber gridshell built in 2016 in Champs-sur-Marne, France]{Timber gridshell built in 2016 in Champs-sur-Marne, France.}
-% 	\label{fig:clc2016}
-% \end{figure}
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{booby2.jpg}
-% 		\caption{Interior view}
-% 		\label{fig:booby1}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[width=\textwidth]{booby.jpg}
-% 		\caption{Exterior view}
-% 		\label{fig:booby2}
-% 	\end{subfigure}
-% 	\caption[Hybrid structural skin built in 2016 in Champs-sur-Marne, France]{Hybrid structural skin built in 2016 in Champs-sur-Marne, France.}
-% 	\label{fig:booby}
-% \end{figure}
-
-
-
-% \clearpage
 \section{Research works on elastic gridshells : a review}
 \label{sec=review_research}
 In this section we depict the research works that are related to elastic gridshells. Several topics have been identified to organise the review.

@@ -226,7 +226,7 @@
 
 % typeface
 \DeclareRobustCommand{\tf@hdr}{\font@hdr}
-\DeclareRobustCommand{\tf@pagenum}{\tf@hdr\footnotesize}
+\DeclareRobustCommand{\tf@pagenum}{\tf@hdr\bfseries\footnotesize}
 \DeclareRobustCommand{\tf@part}{\font@part\bfseries\Huge}
 \DeclareRobustCommand{\tf@chap}{\font@chap\fontsize{36pt}{32pt}\selectfont}
 \DeclareRobustCommand{\tf@sec}{\font@sec\bfseries\Large}
@@ -525,6 +525,13 @@
 % }}
 % \fancyfoot[EL,OR]{}
 
+% page only
+\fancypagestyle{pageonly}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+	\fancyfoot[EL,OR]{\tf@pagenum\thepage}
+}
 % plain style
 \fancypagestyle{plain}{
 	\fancyhf{}
@@ -1053,17 +1060,17 @@
 \colorlet{accent}{Tblue}
 \definecolor{secondary}{RGB}{244, 35, 0}
 
-\toggletrue{print}
+% \toggletrue{print}
 \iftoggle{print}{
 	\colorlet{urlcolor}{black}
 	\colorlet{citecolor}{black}
 	\colorlet{linkcolor}{black}
 	\colorlet{txtcolor}{Tblue}
 }{
-	\colorlet{urlcolor}{Tblue}
-	\colorlet{citecolor}{Tblue}
-	\colorlet{linkcolor}{Tblue}
-	\colorlet{txtcolor}{Tblue}
+	\colorlet{urlcolor}{secondary}
+	\colorlet{citecolor}{secondary}
+	\colorlet{linkcolor}{accent}
+	\colorlet{txtcolor}{green}
 }
 
 
