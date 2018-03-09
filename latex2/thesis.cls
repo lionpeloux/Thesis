@@ -36,7 +36,6 @@
 % \RequirePackage{eso-pic}
 
 
-\RequirePackage[explicit]{titlesec}
 
 
 % \RequirePackage[
@@ -189,54 +188,53 @@
 
 %% headings
 %% --------------------------
-\DeclareRobustCommand{\FontSwitch}[1]{
 
-	% XETEX
-	\RequirePackage{fontspec} 
+% XETEX
+% The fontspec package must also be loaded 
+% after any maths font packages (e.g., euler) to be successful
+\RequirePackage{fontspec} 
 
-	% math fonts
-	\RequirePackage{amsmath} % if desired
-	\RequirePackage{amssymb} % if desired
-	\RequirePackage[math-style=ISO]{unicode-math}
-	\setmathfont{latinmodern-math.otf}
-	% \setoperatorfont\mathsf
-
-	% \setmathfont{Asana-Math.otf}
-	% \renewcommand{\theta}{\mittheta}
-	% \setmathfont{texgyrepagella-math.otf}
-
-	% text fonts
-	% The fontspec package must also be loaded after any maths font packages (e.g., euler) to be successful
-	
-	% \setmainfont{SabonLTStd-Roman}
-	\setmainfont{LMRoman17-Regular}
-	% \setmainfont{GaramondPremrPro-LtDisp}
-	\newfontfamily\font@hdr{FuturaLT-Book}[Scale = MatchUppercase]
-	\newfontfamily\font@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
-	\newfontfamily\font@chap{FuturaLT}[Scale = MatchUppercase]
-	\newfontfamily\font@sec{FuturaLT-Book}[Scale = MatchUppercase]
-	\newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
-	\newfontfamily\font@subsubsec{FuturaLT-Condensed}[Scale = MatchUppercase]
-	\newfontfamily\font@alt{GillSans-Light}[Scale = MatchUppercase]
-	\newfontfamily\font@label{FuturaLT-Book}[Scale = MatchUppercase]
-}
+% math fonts
+\RequirePackage{amsmath} % if desired
+\RequirePackage{amssymb} % if desired
+\RequirePackage[math-style=ISO]{unicode-math}
+\setmathfont{latinmodern-math.otf}
+% \setoperatorfont\mathsf
 
 
 
-% switch between preset fonts
-\FontSwitch{1}
+% FONTS
+\setmainfont{LMRoman17-Regular}
+% \setmainfont{GaramondPremrPro-LtDisp}
+% \setmainfont{SabonLTStd-Roman}
+\newfontfamily\font@hdr{FuturaLT-Book}[Scale = MatchUppercase]
+\newfontfamily\font@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
+\newfontfamily\font@chap{FuturaLT}[Scale = MatchUppercase]
+\newfontfamily\font@sec{FuturaLT-Book}[Scale = MatchUppercase]
+\newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
+\newfontfamily\font@subsubsec{FuturaLT-Condensed}[Scale = MatchUppercase]
+\newfontfamily\font@label{FuturaLT-Book}[Scale = MatchUppercase]
+\newfontfamily\font@alt{GillSans-Light}[Scale = MatchUppercase]
 
-
-% typeface
+% HEADER / FOOTER
 \DeclareRobustCommand{\tf@hdr}{\font@hdr}
 \DeclareRobustCommand{\tf@pagenum}{\tf@hdr\bfseries\footnotesize}
+
+% BODY (part, chap, sec, text)
 \DeclareRobustCommand{\tf@part}{\font@part\bfseries\Huge}
 \DeclareRobustCommand{\tf@chap}{\font@chap\fontsize{36pt}{32pt}\selectfont}
 \DeclareRobustCommand{\tf@sec}{\font@sec\bfseries\Large}
 \DeclareRobustCommand{\tf@subsec}{\font@subsec\bfseries\normalsize}
 \DeclareRobustCommand{\tf@subsubsec}{\font@subsubsec\large}
+
+% LABELS (footnotes, captions)
 \DeclareRobustCommand{\tf@seclabel}{\font@label\scriptsize\color{secondary}}
 \DeclareRobustCommand{\tf@piclabel}{\font@label\scriptsize\color{black}}
+% equation
+\setlength{\mathindent}{1em}
+\DeclareRobustCommand{\tf@eqtag}{\font@label\mdseries}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+\renewcommand\tagform@[1]{\maketag@@@{\tf@eqtag\footnotesize\ignorespaces#1\unskip\@@italiccorr}}
 % footnote
 \DeclareRobustCommand{\tf@fntxt}{\font@alt\footnotesize}
 \DeclareRobustCommand{\tf@fnnum}{\font@alt\bfseries\scriptsize}
@@ -246,24 +244,33 @@
 \DeclareRobustCommand{\tf@capnum}{\font@label\bfseries\scriptsize\color{black}}
 % \DeclareRobustCommand{\tf@capmk}{\font@label\bfseries\tiny}
 
-\DeclareRobustCommand{\tf@cap}{\font@cap\small}
-% equation label font
-\setlength{\mathindent}{1em}
-\DeclareRobustCommand{\tf@eqtag}{\font@label\mdseries}
-\renewcommand{\theequation}{\thechapter.\arabic{equation}}
-\renewcommand\tagform@[1]{\maketag@@@{\tf@eqtag\footnotesize\ignorespaces#1\unskip\@@italiccorr}}
-
-% index of notations 
-\DeclareRobustCommand{\tf@nomsec}{\tf@subsec}
-\DeclareRobustCommand{\tf@nomtxt}{\small}
-
-% bib
+% BIBLIO
 \DeclareRobustCommand{\tf@bibnum}{\font@label\footnotesize\bfseries}
 \DeclareRobustCommand{\tf@bibtxt}{\small}
 
+% NOMENCLATURE
+\DeclareRobustCommand{\tf@nomsec}{\tf@subsec}
+\DeclareRobustCommand{\tf@nomtxt}{\small}
+
+% TOC
+\DeclareRobustCommand{\tf@toc@part}{\font@part\bfseries\fontsize{20pt}{24pt}\selectfont}
+\DeclareRobustCommand{\tf@toc@chap}{\font@chap\Large\bfseries}
+\DeclareRobustCommand{\tf@toc@chapalt}{\font@chap\Large}
+\DeclareRobustCommand{\tf@toc@sec}{\font@alt\bfseries\normalsize}
+\DeclareRobustCommand{\tf@toc@subsec}{\font@alt\small}
+
+% LOFT
+\DeclareRobustCommand{\tf@loft@txt}{\font@alt\small}
+\DeclareRobustCommand{\tf@loft@label}{\font@alt\small\bfseries}
+\DeclareRobustCommand{\tf@loft@num}{\font@alt\small}
+%
+\DeclareRobustCommand{\tf@loft@subtxt}{\font@alt\small}
+\DeclareRobustCommand{\tf@loft@sublabel}{\font@alt\small}
+\DeclareRobustCommand{\tf@loft@subnum}{\font@alt\small}
+
 %% heading format
 %% --------------------------
-
+\RequirePackage[explicit,newparttoc]{titlesec} % newparttoc to modify titletoc
 % \titleformat{⟨command⟩}[⟨shape⟩]{⟨format⟩}{⟨label⟩}{⟨sep⟩}{⟨before-code⟩}[⟨after-code⟩]
 
 \colorlet{titlelabel}{black}
@@ -292,6 +299,8 @@
 \titlespacing*{\subsubsection}{0pt}{12pt}{3pt}
 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% ENUM ITEM STYLES
@@ -299,6 +308,9 @@
 %%%%%
 \RequirePackage{enumitem}
 \setlist[itemize]{label=\ico,leftmargin=0pt,labelsep*=8pt} % rule{4pt}{4pt}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -316,46 +328,7 @@
 
 \DeclareCaptionFormat{plain}{{\tf@capnum#1}{\tf@captxt#2#3\par}}
 
-% subcaption entry format in LOF
-\DeclareCaptionListFormat{pcr}{#2)}
-
-% Photo Spread Caption Style
-\DeclareCaptionLabelFormat{PS}{#2}
-\DeclareCaptionFormat{PS}{#3}
-\DeclareCaptionStyle{PS}[]{
-	labelformat=PS,
-	format=PS,
-	labelsep=space,
-	textfont={sf,bf,color=Tblue},
-	labelfont={bf},
-	singlelinecheck=true,
-	aboveskip=0pt,
-	belowskip=0pt,
-	skip=0pt,
-	justification=centering,
-	strut=off, % must be off !!! to get proper baseline alignment
-}
-
-% Style for PhotoCaptionRef label
-\DeclareCaptionLabelFormat{pcr}{\thefigure\bothIfSecond{}{\thesubfigure}} %\thefigure
-\DeclareCaptionFormat{pcr}{\tf@seclabel#1#2#3}
-\DeclareCaptionStyle{pcr}[]{
-	% hypcap=false,
-	listformat=pcr,
-	labelformat=pcr,
-	format=pcr,
-	labelsep=space,
-	% textfont={sf,small},
-	% labelfont={sf,bf,scriptsize,color=black}, % Tblue
-	singlelinecheck=true,
-	aboveskip=0pt,
-	belowskip=0pt,
-	skip=0pt,
-	justification=centering,
-	strut=off, % must be off !!! to get proper baseline alignment
-}
-
-% Style for PhotoCaptionRef label
+% Style for PhotoCaptionRef labels
 \DeclareCaptionListFormat{phantom}{#2}
 \DeclareCaptionListFormat{phantomsub}{#2)}
 \DeclareCaptionLabelFormat{phantom}{\thefigure\bothIfSecond{}{\thesubfigure}}
@@ -373,122 +346,7 @@
 	strut=off, % must be off !!! to get proper baseline alignment
 }
 
-
-% \newcommand{\PhotoSubCaption}[2]{%
-% 	%
-% 	% [#1] : subcaption title
-% 	% [#2] : label
-% 	%
-% 	\captionsetup{style=PC}
-% 	\captionof{subfigure}[#1]{}\label{#2}
-% }
-
-
-
-
-\newcommand{\subfigskip}{\par\bigskip\medskip}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% TOC-LOFT
-%%
-%%%%%
-
-% \usepackage[]{tocbibind}
-\usepackage[titles,subfigure]{tocloft}
-
-% these counter are supposed to be defined either by the subfig or tocloft package
-% but here we cheat as we need subfigure usage within tocloft but with the subcaption package  
-\newcounter{lofdepth}
-\newcounter{lotdepth}
-
-\setcounter{tocdepth}{2}
-\setcounter{lofdepth}{2}
-\setcounter{lotdepth}{2}
-
-\setlength{\cftparskip}{0em}
-
-%% toc
-%% --------------------------
-
-%% font styles (rm, sf, tt)
-\DeclareRobustCommand{\TocFontStyle}{\sffamily} % \scshape
-\DeclareRobustCommand{\TocPartFont}{\TocFontStyle\LARGE\bfseries}
-\DeclareRobustCommand{\TocChapFont}{\TocFontStyle\large\bfseries}
-\DeclareRobustCommand{\TocChapFontFrontBack}{\TocFontStyle\large}
-\DeclareRobustCommand{\TocSecFont}{\TocFontStyle\normalsize}
-\DeclareRobustCommand{\TocSubSecFont}{\TocFontStyle\small}
-\DeclareRobustCommand{\LoftFont}{\TocFontStyle\small}
-
-%% set toc indents
-\newlength{\@TocVSkip}
-\setlength{\@TocVSkip}{1.0em}
-\cftsetindents{part}{0.0cm}{0.0cm}
-\cftsetindents{chapter}{0.0cm}{1.5em}
-\cftsetindents{section}{1.5em}{2.8em}
-\cftsetindents{subsection}{4.3em}{3.2em}
-
-%% PART
-\setlength{\cftbeforepartskip}{3em}
-\renewcommand{\cftpartfont}{\TocPartFont}
-\renewcommand{\cftpartpagefont}{\TocPartFont} 
-
-%% CHAPTER
-\preto{\frontmatter}{ % frontmatter
-	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{0.0em}}
-	\addtocontents{toc}{\protect\renewcommand{\protect\cftchapfont}{\protect\TocChapFontFrontBack}}
-	\addtocontents{toc}{\protect\renewcommand{\protect\cftchappagefont}{\protect\TocChapFontFrontBack}}
-}
-\preto{\mainmatter}{ % mainmatter
-	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{\@TocVSkip}}
-	\addtocontents{toc}{\protect\renewcommand{\protect\cftchapfont}{\protect\TocChapFont}}
-	\addtocontents{toc}{\protect\renewcommand{\protect\cftchappagefont}{\protect\TocChapFont}}
-}
-\preto{\appendix}{ % appendix vskip
-	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{\@TocVSkip}}
-}
-\preto{\backmatter}{ % backmatter
-	\addtocontents{toc}{\protect\addvspace{2\@TocVSkip}}
-	\addtocontents{toc}{\protect\setlength{\cftbeforechapskip}{0em}}
-	\addtocontents{toc}{\protect\renewcommand{\protect\cftchapfont}{\protect\TocChapFontFrontBack}}
-	\addtocontents{toc}{\protect\renewcommand{\protect\cftchappagefont}{\protect\TocChapFontFrontBack}}
-}
-
-%% SECTION
-\renewcommand{\cftsecfont}{\TocSecFont}
-\renewcommand{\cftsecpagefont}{\TocSecFont}
-
-%% SUBSECTION
-\renewcommand{\cftsubsecfont}{\TocSubSecFont}
-\renewcommand{\cftsubsecpagefont}{\TocSecFont}
-
-%% loft
-%% --------------------------
-
-%% FIGURE
-\setlength{\cftfigindent}{0em}
-\setlength{\cftfignumwidth}{2.5em}
-\renewcommand{\cftfigfont}{\LoftFont}
-\renewcommand{\cftfigpagefont}{\LoftFont}
-
-%% TABLE
-\setlength{\cfttabindent}{\cftfigindent}
-\setlength{\cfttabnumwidth}{\cftfignumwidth}
-\renewcommand{\cfttabfont}{\cftfigfont}
-\renewcommand{\cfttabpagefont}{\cftfigpagefont}
-
-%% SUBFIGURE
-\setlength{\cftsubfigindent}{\cftfignumwidth}
-\setlength{\cftsubfignumwidth}{1.25em}
-\renewcommand{\cftsubfigfont}{\LoftFont}
-\renewcommand{\cftsubfigpagefont}{\LoftFont}
-
-
-
+% \newcommand{\subfigskip}{\par\bigskip\medskip}
 
 
 
@@ -566,6 +424,9 @@
 %% Fancy Pages : Parts and Chapters
 %%
 %%%%%
+
+
+
 
 %% help box
 \newcommand*{\tfbox}[1]{{\fboxsep-\fboxrule\fbox{#1}}}
@@ -647,7 +508,7 @@
 \newlength{\PartYAdjust}
 \setlength{\PartYAdjust}{\totalheightof{\tf@part Part I}/2 - \depthof{\tf@part Part I}}
 
-%% commands
+% commands
 \renewcommand{\thepart}{\Roman{part}}
 \newcommand*\partlabel{}
 
@@ -680,13 +541,111 @@
 }
 
 
-\newcommand{\currentpart}{}
-\let\oldpart\part
-\renewcommand{\part}[1]{\oldpart{#1}\renewcommand{\currentpart}{#1}}
+% \newcommand{\currentpart}{}
+% \let\oldpart\part
+% \renewcommand{\part}[1]{\oldpart{#1}\renewcommand{\currentpart}{#1}}
 
 % \newcommand{\currentchapter}{}
 % \let\oldchapter\chapter
 % \renewcommand{\chapter}[1]{\oldchapter{#1}\renewcommand{\currentchapter}{#1}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% TOC-LOFT
+%%
+%%%%%
+
+\RequirePackage{titletoc}
+
+% \usepackage[]{tocbibind}
+% \usepackage[titles, subfigure]{tocloft}
+
+% these counter are supposed to be defined either by the subfig or tocloft package
+% but here we cheat as we need subfigure usage within tocloft but with the subcaption package  
+
+\newcounter{lofdepth}
+\newcounter{lotdepth}
+
+\setcounter{tocdepth}{2}
+\setcounter{lofdepth}{2}
+\setcounter{lotdepth}{2}
+
+\newlength\partnumwidth
+\newlength\partindent
+
+\setlength{\partindent}{-1cm}
+\setlength{\partnumwidth}{1cm}
+
+\titlecontents{part}
+	[0cm]
+	{\tf@toc@part}
+	{\hspace*{-3cm}\fbox{\parbox[b]{3cm}{\raggedleft\thecontentslabel\hspace*{\marginsep}}}}
+	{}
+	{\hfill\contentspage}
+	[]
+
+% \titlecontents{part}
+% 	[0em]
+%     {\vspace{2em}\large\bfseries\sffamily\relax}
+% 	{\contentslabel[\relax]{0em}}
+% 	{}
+% 	{\hfill\contentspage}
+
+% \titlecontents{part}[0pt]{\normalsize\bfseries\protect\addvspace{15pt}}%
+% 	{}{\partname{} }%
+% 	{\enspace\titlerule\contentspage}%
+
+\titlecontents{chapter}
+	[0cm]
+	{\tf@toc@chap}
+	{\fbox{\parbox[b]{1.5em}{\thecontentslabel}}}
+	{}
+	{\hfill\contentspage}
+	[]
+
+\titlecontents{chapter}
+	[0cm]
+	{\tf@toc@sec}
+	{\fbox{\parbox[b]{1.5em}{\thecontentslabel}}}
+	{}
+	{\hfill\contentspage}
+	[]
+
+
+\titlecontents{chapter}
+	[0cm]
+	{\tf@toc@subsec}
+	{\fbox{\parbox[b]{1.5em}{\thecontentslabel}}}
+	{}
+	{\hfill\contentspage}
+	[]
+% \titlecontents{chapter}
+% 	[3.8em] 								% left
+% 	{\tf@toc@chap}							% above
+% 	{\contentslabel{2.3em}}					% numbered-entry-format
+% 	{\hspace*{-2.3em}}						% numberless-entry-format
+% 	{\titlerule*[1pc]{.}\contentspage}		% filler
+% 	[]	
+
+% \titlecontents{section}
+% 	[3.8em] 								% left
+% 	{\tf@toc@sec}							% above
+% 	{\contentslabel{2.3em}}					% numbered-entry-format
+% 	{\hspace*{-2.3em}}						% numberless-entry-format
+% 	{\titlerule*[1pc]{.}\contentspage}		% filler
+% 	[]	
+
+% \titlecontents{subsection}
+% 	[3.8em] 								% left
+% 	{\tf@toc@subsec}						% above
+% 	{\contentslabel{2.3em}}					% numbered-entry-format
+% 	{\hspace*{-2.3em}}						% numberless-entry-format
+% 	{\contentspage}		% filler
+% 	[]	
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -823,26 +782,6 @@
 {\endlist}
 {\item}
 
-
-% \defbibenvironment{cvbib}
-% {
-% 	\list
-% 	{%
-% 		\iffieldequals{year}{\bibyear}%
-% 		{\phantom{\printfield[1cm]{year}}}%
-% 		{\printfield[1cm]{year}\savefield{year}{\bibyear}}%
-% 	}
-% 	{
-% 		% old
-% 		\setlength{\labelwidth}{\labelnumberwidth}%
-% 		\setlength{\leftmargin}{\labelwidth}%
-% 		\setlength{\labelsep}{\biblabelsep}%
-% 		\addtolength{\leftmargin}{\labelsep}%
-% 		\setlength{\itemsep}{2\bibitemsep}%
-% 		\setlength{\parsep}{\bibparsep}
-% 	}%
-% 	\renewcommand*{\makelabel}[1]{\hss##1}
-% }{\endlist}{\item}
 
 \DeclareSourcemap{
 	\maps[datatype=bibtex]{
