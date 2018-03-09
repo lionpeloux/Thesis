@@ -298,7 +298,7 @@ Space curves were historically understood as \emph{curves of double curvature} b
 % 	\centering
 % 	\includegraphics[]{osculating_circle.pdf}
 % 	\captionof{figure}[Osculating circles for a spiral curve at different parameters]{Osculating circles for a spiral curve at different parameters.}
-% 	\label{fig:3_2}
+% 	\label{fig:spiral}
 % \end{figure}
 
 %Curvature
@@ -381,11 +381,11 @@ where $\angle(\vect{t}(s),\vect{t}(s+ds))$ denotes the angle between $\vect{t}(s
 
 %Radius of curvature
 \subsubsection{Radius of curvature}
-The \emph{radius of curvature} is defined as the inverse of the curvature ($r= 1/\kappa$). From a geometric point of view, one can demonstrate that it is the radius of the osculating circle (see \cref{fig:3_2}). Remark that where the curvature vanishes the radius of curvature goes to infinity~; that is the osculating circle becomes a line, a circle of infinite radius.
+The \emph{radius of curvature} is defined as the inverse of the curvature ($r= 1/\kappa$). From a geometric point of view, one can demonstrate that it is the radius of the osculating circle (see \cref{fig:spiral}). Remark that where the curvature vanishes the radius of curvature goes to infinity~; that is the osculating circle becomes a line, a circle of infinite radius.
 
 %Osculating circle
 \subsubsection{Center of curvature}
-The \emph{center of curvature} is defined as the center of the osculating circle (see \cref{fig:3_2}). The locus of all the centers of curvature of a curve is called the \emph{evolute}.
+The \emph{center of curvature} is defined as the center of the osculating circle (see \cref{fig:spiral}). The locus of all the centers of curvature of a curve is called the \emph{evolute}.
 
 \subsubsection{Curvature binormal vector}
 \label{sec=kb}
@@ -623,7 +623,7 @@ At first sight this indexing could seem strange but it will be convenient later 
 			}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% yshift=-\PhotoBigSkip,
 			% width=\textwidth,
 			border=false,
@@ -979,7 +979,7 @@ Remark also that Frenet and Bishop frames coincide for planar curves ($\tau_f = 
 			]{subfigure}{}{Bishop Frame}{plot:bishop}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=\textwidth,
 			border=false,
 			]{%
@@ -1257,7 +1257,7 @@ Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n 
 			]{subfigure}{}{Bitangent with $\norm{\vect{e}_{i}}$}{fig:kb_mixed_b}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=\textwidth,
 			border=false,
 			]{%
@@ -1286,8 +1286,7 @@ Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n 
 					$\kappa_4 = \frac{2\,\sin(\varphi_i / 2)}{\rconf{l_i}}$ 				&  $\vect{x}_i$	&  $0$				&  $0, 2$					&  no		&  space	&  clothoid  		\\
 					$\kappa_5 = \frac{\varphi_i}{\rconf{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\rconf{l_i}$			&  no		&  space	&  elastica  		\\
 					\bottomrule
-		  		\end{tabularx}
-			}
+		  		\end{tabularx}}
 		\PhotoCaptionRef[
 			node=TL, 
 			anchor=north west, 
@@ -1296,8 +1295,8 @@ Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n 
 			]{table}{Review of several discrete curvature definitions}{Review of several discrete curvature definitions mentioned in the literature}{tab:kb_def}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
-			width=0.6\textwidth,
+			anchor=base west,
+			width=0.5\textwidth,
 			border=false,
 			]{%
 				\tablecaption{tab:kb_def}
@@ -1307,36 +1306,6 @@ Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n 
 
 \subsection{Definition from osculating circles}
 Curvature is defined from the osculating circle, which is the best approximation of a curve by a circle.
-
-% \begin{figure}[p]
-% \centering
-% \renewcommand{\arraystretch}{1.5}
-% 		\vspace{-0.5cm}
-% 		\subfloat[][vertex-based]{\includegraphics{kb_vertex.pdf}\label{fig:kb_vertex}}\hspace{5mm}
-%     		\subfloat[][edge-based]{\includegraphics{kb_edge.pdf}\label{fig:kb_edge}} \\[-10pt]
-% 		\subfloat[][bitangent with $\norm{\vect{e}_{i-1}}$]{\includegraphics{kb_mixed_a.pdf}\label{fig:kb_mixed_a}}\hspace{5mm}
-% 		\subfloat[][bitangent with $\norm{\vect{e}_{i}}$]{\includegraphics{kb_mixed_b.pdf}\label{fig:kb_mixed_b}}
-% 		\vspace{10pt}
-% 		\captionof{figure}[]{Several ways to define the osculating circle for discrete curves, leading to different notions of discrete curvature.}
-% 		\label{fig:kb_def}
-% 		\vspace{0.75cm}
-% 		\ra{1.5}
- 		% \begin{tabularx}{0.9\textwidth}{@{} X c c c r r r @{}}
-      	% 	\toprule
-		% Curvature ($\kappa_i$) 										&  Locality 	&  $\varphi \mapsto 0$ 	&  $\varphi \mapsto \pi$ 		& Ends  	& Dim 	&  Fitting			\\
-		% \midrule
-		% $\kappa_1 = \frac{2\, \sin(\varphi_i)}{\norm{\vect{e}_{i-1}+\vect{e}_i}}$ 	&  $\vect{x}_i$ 	&  $0$				&  $0, 2$					&  yes	&  space	&  clothoid			\\
-		% $\kappa_2 = \frac{\tan(\varphi_i/2)+\tan(\varphi_{i+1}/2)}{l_i}$ 			&  $\vect{e}_i$ 	&  $0$				&  $\infty$					&  no		&  planar	&  circle			\\
- 		% $\kappa_3 = \frac{2\, \tan(\varphi_i / 2)}{\rconf{l_i}} $				&  $\vect{x}_i$	&  $0$ 				&  $\infty$					&  no		&  space	&  circles			\\
-		% \midrule
-		% $\kappa_4 = \frac{2\,\sin(\varphi_i / 2)}{\rconf{l_i}}$ 				&  $\vect{x}_i$	&  $0$				&  $0, 2$					&  no		&  space	&  clothoid  		\\
-		% $\kappa_5 = \frac{\varphi_i}{\rconf{l_i}}$ 						&  $\vect{x}_i$	&  $0$				&  $\pi/\rconf{l_i}$			&  no		&  space	&  elastica  		\\
-		% \bottomrule
-		% \end{tabularx}
-% 		\vspace{10pt}
-% 		\captionof{table}[Review of several discrete curvature definitions]{Review of several discrete curvature definitions mentioned in the literature.}
-% 		\label{tab:kb_def}
-% \end{figure}
 
 % vertex-based curvature
 % -------------------------------
@@ -1460,7 +1429,7 @@ In this section we compare the two main discrete curvature notions (circumscribe
 			]{subfigure}{}{Inscribed ($\varphi=2\pi/3$)}{fig:kb_anim_edge_b}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% width=\textwidth,
 			border=false,
 			]{%
@@ -1489,7 +1458,7 @@ In this section we compare the two main discrete curvature notions (circumscribe
 			]{figure}{Sensitivity of discrete curvatures to non uniform discretization}{Comparison of circumscribed and inscribed osculating circles for different values of the turning angle ($\varphi$)}{fig:kb_bench}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% width=\textwidth,
 			border=false,
 			]{%
@@ -1558,7 +1527,7 @@ However, for the kind of structures we are studying here, those kind of configur
 			]{figure}{}{Discretization of a semicircle and evaluation of its bending energy}{fig:semicircle}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% width=\textwidth,
 			border=false,
 			]{%
@@ -1604,7 +1573,7 @@ However, for the kind of structures we are studying here, those kind of configur
 			]{subfigure}{}{$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%}{plot:bench_semicircle_edge}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% width=\textwidth,
 			border=false,
 			]{%
@@ -1639,21 +1608,23 @@ However, for the kind of structures we are studying here, those kind of configur
 			yshift=\PhotoRefSkip,
 			phantom=true,
 			]{figure}{}{Discretization of an elastica curve and evaluation of its bending energy}{fig:elastica}
+		\intersectnode{Atr -| CAtr}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
-			node=Atr,
+			node=Pt,
 			anchor=north east,
 			% yshift=\PhotoRefSkip,
 			]{subfigure}{}{Sequence of elastica curves}{fig:elastica_seq}
+		\intersectnode{Btr -| CAtr}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
-			node=Btr,
+			node=Pt,
 			anchor=north east,
 			% yshift=\PhotoRefSkip,
 			]{subfigure}{}{Zoom on the discretization}{fig:elastica_discretization}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% width=\textwidth,
 			border=false,
 			]{%
@@ -1698,36 +1669,19 @@ However, for the kind of structures we are studying here, those kind of configur
 			hrefnode=Btl,
 			node=Bt,
 			anchor=south,
-			]{subfigure}{}{$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%}{plot:bench_elastica_vertex}
+			]{subfigure}{}{$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%}{plot:bench_elastica_edge}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% width=\textwidth,
 			border=false,
 			]{%
 				\figurecaption{fig:bench_elastica}\par\medskip
 				\figurecaption{plot:bench_elastica_vertex}\par
-				\figurecaption{plot:bench_elastica_vertex}
+				\figurecaption{plot:bench_elastica_edge}
 			}
 	}
 }
-
-
-% 	\subfloat[][sequence of elastica curves]{\includegraphics{elastica.pdf}\label{fig:elastica_seq}}\\[5mm]
-% 	\subfloat[][zoom on the discretization]{\includegraphics{elastica_zoom.pdf}\label{fig:elastica_discretization}}
-% 	\vspace{12pt}
-% 	\captionof{figure}[Discretization of an elastica curve and evaluation of its bending energy]{Discretization of an elastica curve and evaluation of its bending energy.}
-% 	\label{fig:elastica}
-% 	\vspace{10mm}
-% 	\subfloat[][$|1-\frac{\mathcal{E}_1}{\mathcal{E}}(n) |$ in \%]{\includegraphics{ch4_geometry/plot/4_bench_elastica/build_vertex.pdf}
-% 		\label{plot:bench_elastica_vertex}}\hspace{5mm}
-% 	\subfloat[][$| 1-\frac{\mathcal{E}_3}{\mathcal{E}}(n) |$ in \%]{\includegraphics{ch4_geometry/plot/4_bench_elastica/build_edge.pdf}
-% 		\label{plot:bench_elastica_vertex}}
-% 	\vspace{8pt}
-% 	\captionof{figure}[Relative error in the estimation of the bending energy of an elastica]{Relative error in the estimation of the bending energy of an elastica ($\mathcal{E}$) by the discrete energies $\mathcal{E}_1$ and $\mathcal{E}_3$, regarding the sharpness of the discretization. The curves (1,5,10,15,20,25,30) are chosen from \cref{fig:elastica_seq}.}
-% 	\label{fig:bench_elastica}
-% \end{fullpage}
-% \end{figure}
 
 
 % accuracy in bending energy representation
@@ -1818,27 +1772,30 @@ We consider the case where the curvature is defined according to the circumscrib
 			yshift=\PhotoRefSkip,
 			phantom=true,
 			]{figure}{Definition of the tangent vector associated to the circumscribed curvature}{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the circumscribed curvature}{fig:kb_vertex_tangent}
+		\intersectnode{Atr -| CAtr}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
-			node=Atr,
+			node=Pt,
 			anchor=north east,
 			yshift=-2\PhotoBigSkip,
 			]{subfigure}{}{Current portion}{fig:kb_vertex_tangent_a}
+		\intersectnode{Btr -| CAtl}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
-			node=Btl,
+			node=Pt,
 			anchor=north west,
 			yshift=-\PhotoBigSkip,
 			]{subfigure}{}{Start}{fig:kb_vertex_tangent_b}
+		\intersectnode{Ctr -| CAtr}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Ctl,
-			node=Ctr,
+			node=Pt,
 			anchor=north east,
 			yshift=-\PhotoBigSkip,
 			]{subfigure}{}{End}{fig:kb_vertex_tangent_c}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=0.6\textwidth,
 			border=false,
 			]{%
@@ -1958,27 +1915,30 @@ We now consider the case where the curvature is defined according to the inscrib
 			yshift=\PhotoRefSkip,
 			phantom=true,
 			]{figure}{Definition of the tangent vector associated to the inscribed curvature}{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the inscribed curvature}{fig:kb_edge_tangent}
+		\intersectnode{Atr -| CAtr}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Atl,
-			node=Atr,
+			node=Pt,
 			anchor=north east,
 			yshift=-2\PhotoBigSkip,
 			]{subfigure}{}{Current portion}{fig:kb_edge_tangent_a}
+		\intersectnode{Btr -| CAtl}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
-			node=Btl,
+			node=Pt,
 			anchor=north west,
 			yshift=-\PhotoBigSkip,
 			]{subfigure}{}{Start}{fig:kb_edge_tangent_b}
+		\intersectnode{Ctr -| CAtr}{Pt}
 		\PhotoCaptionRef[
 			hrefnode=Ctl,
-			node=Ctr,
+			node=Pt,
 			anchor=north east,
 			yshift=-\PhotoBigSkip,
 			]{subfigure}{}{End}{fig:kb_edge_tangent_c}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=0.6\textwidth,
 			border=false,
 			]{%
@@ -2126,7 +2086,7 @@ The rotation method is given by \citef{Bloomenthal1990}. First, the frame at $\v
 			]{subfigure}{}{Double reflection method}{fig:pt_reflection}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=\textwidth,
 			border=false,
 			]{%

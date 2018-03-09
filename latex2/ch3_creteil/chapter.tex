@@ -84,7 +84,7 @@ This project was at the heart of the motivations for this thesis as it acted as 
 			]{figure}{Architectural sketch}{Architectural sketch (T. Gray)}{fig:form}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			border=false,
 			]{%
 				\figurecaption[\raggedright Major and minor volumes are agglomerated into one volume. Here, the morphological register allowed by elastic gridshells appears to be relevant.]{fig:form}
@@ -131,16 +131,15 @@ It is formally quite difficult to integrate doors, which must be verticals, into
 			anchor=south east,
 			yshift=\PhotoRefSkip,
 			phantom=true,
-			]{figure}{}{Exterior view}{fig:gs_ext}
+			]{figure}{}{Exterior view of the gridshell}{fig:gs_ext}
 		\intersectnode{CAtl |- Abr}{Pt}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
-			% yshift=-\PhotoBigSkip,
+			anchor=base west,
 			border=false,
-			% width=4cm-\PhotoSkip,
 			]{%
-				\figurecaption[The connections mark the fabric suggesting the interior grid structure. This texture enriches the perception of the building viewed from the outside and creates effects with the light reflections.]{fig:gs_ext}
+				\figurecaption{fig:gs_ext}\par\medskip
+				The connections mark the fabric suggesting the interior grid structure. This texture enriches the perception of the building viewed from the outside and creates effects with the light reflections.
 			}
 	}
 	\doubleblankpage[l]{%
@@ -157,17 +156,19 @@ It is formally quite difficult to integrate doors, which must be verticals, into
 				anchor=north west,
 				yshift=-\PhotoRefSkip,
 				phantom=true,
-			]{figure}{}{Interior view}{fig:gs_int}}
+			]{figure}{}{Interior view of the gridshell}{fig:gs_int}}
 	}{%
 		\hbox{}\thispagestyle{empty}
 		\AddToShipoutPictureBG*{
 		\PhotoTextBox[
 			node=BR,
-			anchor=south west,
+			anchor=base west,
 			xshift=\PhotoBigSkip,
+			width=0.51\textwidth,
 			border=false,
 			]{%
-				\figurecaption[The grid pattern highlights the lightness of the structure and gives its tempo to the internal space. Lines converge to the altar, the heart of the liturgical area where the mass is offered on.]{fig:gs_int}
+				\figurecaption{fig:gs_int}\par\medskip
+				The grid pattern highlights the lightness of the structure and gives its tempo to the internal space. Lines converge to the altar, the heart of the liturgical area where the mass is offered on.
 			}
 	}}
 }
@@ -212,7 +213,7 @@ The gridshell is covered by a PVC membrane, which is opaque. How to introduce da
 			]{subfigure}{}{Exterior view}{fig:door_ext}
 	\PhotoTextBox[
 		node=Bbr,
-		anchor=south west,
+		anchor=base west,
 		xshift=\PhotoSkip,
 		border=false,
 		width=4cm-\PhotoSkip,
@@ -294,7 +295,7 @@ The gridshell is covered by a PVC membrane, which is opaque. How to introduce da
 			]{subfigure}{}{Lacing rod}{fig:edge}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%
@@ -361,7 +362,7 @@ A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers
 			]{table}{}{Key figures}{tab:kfigures}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=0.6\textwidth,
 			border=false,
 			]{\tablecaption{tab:kfigures}}
@@ -390,7 +391,7 @@ A PVC coated fabric (see \cref{fig:gs_ext}), tailor-made for the purpose, covers
 			]{figure}{}{Top view of the building}{fig:plan_view}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=8cm,
 			border=false,
 			]{%
@@ -562,7 +563,7 @@ The next stage consisted in lifting the grid simultaneously with two mobile cran
 			]{subfigure}{}{Fixing the grid}{fig:erec_2c}
 		\PhotoTextBox[
 			node=BCbr,
-			anchor=south west,
+			anchor=base west,
 			xshift=\PhotoBigSkip,
 			width=10cm,
 			border=false,
@@ -697,9 +698,7 @@ Once the primary grid was deformed into the final shape, it was braced by a thir
 
 
 \subsection{Covering of the gridshell}
-Finally, the structure is covered with a PVC coated fabric (see \cref{fig:erec_4c}). The membrane comes rolled up. The roll is positioned at one side. Then it is progressively unrolled toward the other side (see \cref{fig:erec_4a,fig:erec_4b}). This step requires professional rope workers. Once the membrane is in place, it is hand tensioned with a system of halyard and strap (see \cref{fig:edge}). All included, this stage lasted no more than a single day for a team of six workers.
-
-This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis was successfully conducted with the required accuracy (see \cref{sec=form-finding}).
+Finally, the structure is covered with a PVC coated fabric (see \cref{fig:erec_4c}). The membrane comes rolled up. The roll is positioned at one side. Then it is progressively unrolled toward the other side (see \cref{fig:erec_4a,fig:erec_4b}). This step requires professional rope workers. Once the membrane is in place, it is hand tensioned with a system of halyard and strap (see \cref{fig:edge}). All included, this stage lasted no more than a single day for a team of six workers. This step appears as the moment of truth~: if the membrane perfectly fits the gridshell, making no crease, that means the structural analysis was successfully conducted with the required accuracy (see \cref{sec=form-finding}).
 
 %\clearpage
 \section{Structural design}\label{sec=proj_design}
@@ -724,16 +723,6 @@ Developing this structural design was a complex process. Indeed, for each step, 
 
 \subsection{3D modelling of the intended shape}
 %------------------------------------------
-The first step of the process consists in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal is to estimate quickly the probability that a given shape would lead to the generation of a structurally feasible gridshell.
-
-Stresses in the grid are mainly due to the bending of the tubes. Therefore, they can be derived directly from the measurement of the geometric curvature of the tubes. Because the principal curvatures of the surface give a quantitative measurement of the local curvature of any curve drawn on a surface, they are relevant indicators to evaluate the stress rate of laying a grid on the said surface.\footnote{Indeed, any normal section of the surface will have its curvature bounded by the principal curvatures of the surface. Therefore this seems reasonable to seek grids that fulfill this criterion as the structural elements would probably not resist too large variations of curvatures in the plane of the surface.} Particularly, the following condition has to be satisfied everywhere~:
-\begin{equation}
-	\mathrm{E} \cdot \frac{r}{R_{min}} < \frac{\sigma_{k,flex}}{\gamma_{lt}}
-	\label{eq:crit_1}
-\end{equation}
-where $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance (see \cref{sec=safety}).
-
-Ideally, the shape is controlled by few key parameters. Thus, it is easier to adapt and optimize the shape through an iterative process towards the above criterion \cref{eq:crit_1}.
 
 \afterpage{%
 	\AddToShipoutPictureBG*{% 
@@ -767,14 +756,17 @@ Ideally, the shape is controlled by few key parameters. Thus, it is easier to ad
 	\hbox{\vspace{\tmpheight}}
 }
 
-% \begin{figure}[t]
-% \centering
-% %\begin{fullpage}
-% \includegraphics[width=\textwidth]{curvature_analysis}
-% \caption[Benchmarking shapes regarding their curvature]{Benchmarking shapes regarding their minimum principal curvature.}
-% \label{fig:shape_bench}
-% %\end{fullpage}
-% \end{figure}
+
+The first step of the process consists in building a precise geometric model from the sketch of the architect and evaluating its mechanical potential (see \cref{fig:shape_bench}). At this stage, the goal is to estimate quickly the probability that a given shape would lead to the generation of a structurally feasible gridshell.
+
+Stresses in the grid are mainly due to the bending of the tubes. Therefore, they can be derived directly from the measurement of the geometric curvature of the tubes. Because the principal curvatures of the surface give a quantitative measurement of the local curvature of any curve drawn on a surface, they are relevant indicators to evaluate the stress rate of laying a grid on the said surface.\footnote{Indeed, any normal section of the surface will have its curvature bounded by the principal curvatures of the surface. Therefore this seems reasonable to seek grids that fulfill this criterion as the structural elements would probably not resist too large variations of curvatures in the plane of the surface.} Particularly, the following condition has to be satisfied everywhere~:
+\begin{equation}
+	\mathrm{E} \cdot \frac{r}{R_{min}} < \frac{\sigma_{k,flex}}{\gamma_{lt}}
+	\label{eq:crit_1}
+\end{equation}
+where $r$ is the tube’s outer radius, $R_{min}$ is the minimum principal radius of curvature of the surface, $E$ is the flexural modulus, $\sigma_{k,flex}$ the characteristic flexural strength and $\gamma_{lt}$ the long-term partial coefficient of material resistance (see \cref{sec=safety}).
+
+Ideally, the shape is controlled by few key parameters. Thus, it is easier to adapt and optimize the shape through an iterative process towards the above criterion \cref{eq:crit_1}.
 
 \subsection{Meshing the surface}
 %------------------------------------------
@@ -786,21 +778,6 @@ In this step, the geometric curvature of the polylines drawn on the surface is a
 	\label{eq:crit_2}
 \end{equation}
 where $R_{spline}$ is the spline’s local curvature radius. The mesh is obtained by the compass method (see below), which develops a regularly spaced grid on a surface from two secant curves lying on the surface and called \emph{directrix}. I implemented this method, proposed by \citet{IL10}, for the Solidays gridshell in 2011 \cite{DuPeloux2011}.\footnote{This method was also used at the laboratoire Navier by \citef{Bouhaya2014} and more recently by \citef{Masson2017b}.} The method guarantees that the grid is made of parallelograms when developed in a plane. This geometric property is exactly what we are looking for to ensure the necessary degree of freedom of the grid responsible for its deployment (see \cref{sec=swivel}). For a given shape, there are an infinite number of possible meshes. The goal of the method is to identify at least one grid which satisfies both the architectural and the structural requirements.
-
-% \begin{figure}[t]
-%      	\centering
-% %	\begin{fullpage}
-% 		\includegraphics[width=0.8\textwidth]{compass_method.png}
-% 		\caption[How the compass method works]{How the compass method works.}
-% 		\label{fig:compass_method}
-% 		%
-% 		\vspace{0.75cm}
-% 		%
-% 		\includegraphics[width=1\textwidth]{canevas.png}
-% 		\caption{Meshing software as a plugin for \emph{Grasshopper}.}
-% 		\label{fig:canevas}
-% %	\end{fullpage}
-% \end{figure}
 
 \subsubsection{Compass method}\label{sec=compass}
 This process propagates a two way mesh of constant pitch on any NURBS surface (see \cref{fig:compass_method}). Two secant directrices are drawn on the surface to mesh. These curves mark the boundary of four quadrants. Each half directrix is then subdivided with a compass of constant distance (the pitch). Finally, from two consecutive half directrix quadrants are meshed with the same compass distance.
@@ -941,7 +918,7 @@ The method is easily extended to meshes with variable pitch. This idea was explo
 			]{figure}{}{Principle of the compass method}{fig:compass_method}
 		\PhotoTextBox[
 			node=Pt,
-			anchor=south west,
+			anchor=base west,
 			% yshift=-\PhotoSkip,
 			width=10cm,
 			border=false,
@@ -992,7 +969,8 @@ In the previous steps, the initial form was optimized and promising meshes for t
 			]{figure}{}{Permanent bending stresses in the structure under self-weight}{fig:gsa}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
+			width=\textwidth,
 			border=false,
 			]{%
 				\figurecaption{fig:gsa}
@@ -1070,23 +1048,8 @@ Finally the process converges when the shape and the pattern drawn by the mesh a
 \subsection{As-built geometry}\label{sec=asbuilt}
  %-------------------------------------
 Although, the eccentricity ($e = \SI{136}{\mm}$) remains small compared with the span of the shell ($l =\SI{17}{m}$), it is not negligible compared with the mesh size ($w = \SI{1.0}{m}$). Thus, the tube lengths and anchorage positions could not be determined with sufficient accuracy without taking into account the thickness of the structural grid due to this eccentricity. The employed method, purely geometrical, assesses that the neutral fibre of the shell is equidistant from the first two layers of pipes. The form-finding is performed only with those two layers. Connection axes has to be parallel to the local normal of the shell surface. This assumption was not exact, but, in this case, gave sufficient accuracy. The red pipe was offset by $-e/2$, the green by $+e/2$ and the blue by $+3e/2$ along the surface normal (see \cref{fig:eccentricity}).
-% \begin{figure}[p]
-%      	\centering
-% 	\begin{fullpage}
-% 		\includegraphics[width=1\textwidth]{gsa2.jpg}
-% 		\caption[Permanent bending stresses in the structure under self-weight]{Permanent bending stresses in the structure under self-weight (max = \SI{130}{MPa}).}
-% 		\label{fig:gsa}
-% 		%
-% 		\vspace{1.5cm}
-% 		%
-% 		\subfloat[][Wire frame]{\includegraphics[width=0.48\textwidth]{eccentricity_1.png}\label{fig:eccentricity_a}}
-% 		\hspace*{\fill}
-% 		\subfloat[][Full 3D]{\includegraphics[width=0.48\textwidth]{eccentricity_2.png}\label{fig:eccentricity_b}}
-% 		\vspace{0.5cm}
-% 		\caption[Reconstruction of the full 3D geometry]{Reconstruction of the full 3D geometry.}
-% 		\label{fig:eccentricity}
-% 	\end{fullpage}
-% \end{figure}
+
+
 \subsection{Structural analysis}
 %------------------------------------------
 A full structural analysis is finally performed on the gridshell, using the two mechanical models created previously during the form-finding stage.
@@ -1143,7 +1106,7 @@ The technical properties of the tube employed for this project are given in \cre
 			]{table}{}{Technical properties of the tube}{tab:tube}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=0.6\textwidth,
 			border=false,
 			]{\tablecaption{tab:tube}}
@@ -1161,6 +1124,7 @@ consideration the project’s real-time requirement~: a light-weight structure w
 The second level, normative, consisted of ensuring that most of the existing regulatory framework justified the compliance of a structure that would not, at first sight, be considered by standards that do not include composite materials.
 
 As far as possible, the design was made in compliance with the Eurocode, where the structural design is done according to the limit states under normalized loadings (self-weight, snow, wind, etc.). Although, the Eurocodes do not directly take into account composite materials, they propose some probabilistic methods to introduce new materials (EN1990, Annexe D). The mechanical properties of the GFRP pipe were determined as far as possible by tests in conformance with these methods. Alternatively, values were taken according from the Eurocomp \cite{Clarke2003}.\footnote{The Eurocomp is a kind of pre-standard intended for the structural design of buildings and civil engineering works using GFRP composites, consistent with the Eurocode approach. It is considered as the reference design code for GFRP materials.} In some cases, such as for the sleeve, the construction design also benefited from this approach.
+
 
 \afterpage{%
 	\enlargethispage{-6cm}
@@ -1186,7 +1150,7 @@ As far as possible, the design was made in compliance with the Eurocode, where t
 			anchor=south east,
 			yshift=2.5cm,
 			]{%
-				\ra{0.9}%
+				\ra{1.0}%
 				\begin{tabular}{@{}l r r @{}}
 					\toprule
 					Time scale 	& $\gamma$		& $\sigma_{d}$\\
@@ -1211,7 +1175,7 @@ As far as possible, the design was made in compliance with the Eurocode, where t
 		]{table}{}{Short-term and long-term values for material resistance}{tab:gamma}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% yshift=-\PhotoRefSkip,
 			width=\textwidth,
 			border=false,
@@ -1220,42 +1184,7 @@ As far as possible, the design was made in compliance with the Eurocode, where t
 				\tablecaption{tab:gamma}\par
 				$\gamma$ is the partial coefficient for safety factor. $\sigma_{d}$ is the flexural design strength.
 			}
-		%%
-		% \PhotoCaptionRef[
-		% 	hrefnode=Atl,
-		% 	node=Atl,
-		% 	anchor=south east,
-		% 	yshift=\PhotoRefSkip,
-		% 	phantom=true,
-		% 	]{figure}{}{Reconstruction of the full 3D geometry}{fig:eccentricity}
-		% \PhotoCaptionRef[
-		% 	hrefnode=Atl,
-		% 	node=Atr,
-		% 	anchor=north east,
-		% 	% yshift=\PhotoRefSkip,
-		% 	]{subfigure}{}{Wire frame}{fig:eccentricity_a}
-		% \PhotoCaptionRef[
-		% 	hrefnode=Btl,
-		% 	node=Btr,
-		% 	anchor=north east,
-		% 	% yshift=\PhotoRefSkip,
-		% 	]{subfigure}{}{Full 3D}{fig:eccentricity_b}
-		% \intersectnode{CAtl |- Abr}{Pt}
-		% \PhotoTextBox[
-		% 	node=Pt,
-		% 	anchor=north west,
-		% 	yshift=-\PhotoSkip,
-		% 	width=10cm,
-		% 	border=false,
-		% 	]{%
-		% 		\figurecaption{fig:eccentricity}\par
-		% 		\figurecaption{fig:eccentricity_a}\par
-		% 		\figurecaption{fig:eccentricity_b}\par
-		% 	}
 	}
-	% \setlength{\tmpheight}{\PhotoHeight}
-	% \addtolength{\tmpheight}{4\PhotoBigSkip}
-	% \hbox{\vspace{8cm}}
 }
 
 \subsection{Flexural strength of the tubes}\label{sec=flex}
@@ -1284,7 +1213,7 @@ For five tests, the factor $k_{n,5\%}$ is 1.80 assuming a normal distribution. I
 		]{figure}{Flexural test of the GFRP tubes}{Flexural test of the GFRP tubes (Results from \cite{Tayeb2015a})}{plot:gfrp_tubes}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=10cm,
 		border=false,
 		]{%
@@ -1303,7 +1232,7 @@ When dealing with long-term effects in permanently loaded, pultruded composite m
 \pagebreak
 \section{Construction details}\label{sec=construction_details}
 % ====================
-In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (see \cref{fig:swivel}) ; the steel sleeve for connecting several composite tubes to obtain long members from initially short pieces of tubes (see \cref{fig:sleeve}) ; the ground anchorages for fixing the structure to the concrete slab (see \cref{fig:anchorage}) and the lacing edge beam of the fabric (see \autoref{fig:edge}). The challenging issue of connecting the steel and composite parts was solved similarly for sleeve and anchorage details.
+In this project, one can identify 4 major structural details : the swivel coupler for connecting composite tubes to assemble the grid (see \cref{fig:swivel}) ; the steel sleeve for connecting several composite tubes to obtain long members from initially short pieces of tubes (see \cref{fig:sleeve}) ; the ground anchorages for fixing the structure to the concrete slab (see \cref{fig:anchorage}) and the lacing edge beam of the fabric (see \cref{fig:edge}). The challenging issue of connecting the steel and composite parts was solved similarly for sleeve and anchorage details.
 
 \subsection{The swivel coupler}\label{sec=swivel}
 % -------------------------------------------------------
@@ -1366,7 +1295,7 @@ This coupler is made to assemble two scaffold steel tubes together. Workers shou
 		]{figure}{Influence of the interface layer on the sliding resistance}{Influence of the interface layer on the sliding resistance with a torque set to \SI{5}{Nm} (Results from \cite{Tayeb2015a})}{plot:layer_benchmark}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		border=false,
 		]{%
 			\figurecaption{plot:layer_benchmark}
@@ -1390,7 +1319,7 @@ This coupler is made to assemble two scaffold steel tubes together. Workers shou
 		]{figure}{Influence of the tightening on the sliding resistance}{Influence of the tightening on the sliding resistance for a \SI{1.5}{\mm} EPDM layer (Results from \cite{Tayeb2015a})}{plot:tightening}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		border=false,
 		]{%
 			\figurecaption{plot:tightening}
@@ -1414,7 +1343,7 @@ This coupler is made to assemble two scaffold steel tubes together. Workers shou
 		]{figure}{Influence of the temperature on the sliding resistance}{Influence of the temperature on the sliding resistance for a \SI{1.5}{\mm} EPDM layer (Results from \cite{Tayeb2015a})}{plot:epdm_temperature}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		border=false,
 		]{%
 			\figurecaption{plot:epdm_temperature}
@@ -1437,34 +1366,6 @@ This connection has the advantage to be available almost every where, to be real
 \end{itemize}
 
 Furthermore, other design criterion should be taken into account such as the fact that the connection must not damage the membrane. This was resolved in the project thanks to plastic caps (see \cref{fig:sleeve_dwg}). It is worthwhile to mention that the problematic of the connection should be treated in symbiosis with the difficult question of the bracing and the covering as it interacts with all the key parts of the system : grid, bracing and membrane. Some propositions to this complex problem were designed and tested during this thesis through the realization of three timber gridshells (see \cref{fig:jpofav,fig:clc2016}) and one hybrid structure (see \cref{fig:booby}). A noticeable design attempt was proposed for the roof of Chiddingstone's orangery \cref{fig:kent}.
-
-
-% \begin{figure}[p]
-% \centering
-% \begin{fullpage}
-% 	\includegraphics[]{ch3_creteil/plot/1_layer_benchmark/build.pdf}
-% 	\caption[Influence of the interface layer on the sliding resistance]{Influence of the interface layer on the sliding resistance (torque set to \SI{5}{Nm}). Results from \cite{Tayeb2015a}.}
-% 	\label{plot:layer_benchmark}
-% \end{fullpage}
-% \end{figure}
-
-% \begin{figure}[p]
-% \centering
-% \begin{fullpage}
-% 	\includegraphics[]{ch3_creteil/plot/3_tightening/build.pdf}
-% 	\caption[Influence of the tightening on the sliding resistance]{Influence of the tightening on the sliding resistance for a \SI{1.5}{\mm} EPDM layer. Results from \cite{Tayeb2015a}.}
-% 	\label{plot:tightening}
-% \end{fullpage}
-% \end{figure}
-
-% \begin{figure}[p]
-% \centering
-% \begin{fullpage}
-% 	\includegraphics[]{ch3_creteil/plot/2_epdm_temperature/build.pdf}
-% 	\caption[Influence of the temperature on the sliding resistance]{Influence of the temperature on the sliding resistance for a \SI{1.5}{\mm} EPDM layer. Results from \cite{Tayeb2015a}.}
-% 	\label{plot:epdm_temperature}
-% \end{fullpage}
-% \end{figure}
 
 
 \subsection{The sleeve system}
@@ -1495,7 +1396,7 @@ The sleeve is a steel system that provides mechanical continuity between two adj
 		]{figure}{}{Technical drawing of the sleeve system}{fig:sleeve_dwg}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		% yshift=-\PhotoSkip,
 		width=10cm,
 		border=false,
@@ -1571,7 +1472,7 @@ The sleeve is a steel system that provides mechanical continuity between two adj
 			]{subfigure}{}{Plastification threshold}{fig:sleeve_d}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%
@@ -1583,14 +1484,6 @@ The sleeve is a steel system that provides mechanical continuity between two adj
 			}
 	}
 }
-
-
-% \begin{figure}[ht]
-% 	\centering
-% 	\includegraphics[]{sleeve.pdf}
-% 	\caption{Technical drawing of the sleeve system.}
-% 	\label{fig:sleeve_dwg}
-% \end{figure}
 
 \subsubsection{Mechanical behaviour}
 
@@ -1771,7 +1664,7 @@ Tensile test of a three-pin connection between a connector and the corresponding
 		]{subfigure}{}{Contact compression}{fig:breaking_6}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=\textwidth,
 		border=false,
 		]{%
@@ -1782,7 +1675,7 @@ Tensile test of a three-pin connection between a connector and the corresponding
 		}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=\textwidth,
 		xshift=3cm,
 		border=false,
@@ -1810,7 +1703,7 @@ Tensile test of a three-pin connection between a connector and the corresponding
 	\intersectnode{CAtl |- Abr}{Pt}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		border=false,
 		width=\textwidth,
 		]{%
@@ -1895,7 +1788,7 @@ Thanks to the membrane strip and to a small step in the concrete slab (22) the w
 			]{table}{}{Technical properties of the membrane}{tab:membrane}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=0.6\textwidth,
 			border=false,
 			]{\tablecaption{tab:membrane}}
@@ -1957,7 +1850,7 @@ During the first two years and a half of its service life, the building has show
 		]{subfigure}{}{Solar radiation}{plot:T_2}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=\textwidth,
 		border=false,
 		]{%
@@ -2005,7 +1898,7 @@ During the first two years and a half of its service life, the building has show
 		]{subfigure}{}{With ventilation}{plot:T_4}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		border=false,
 		width=\textwidth,
 		]{%
@@ -2017,39 +1910,15 @@ During the first two years and a half of its service life, the building has show
 }
 
 At the time of writing, the building is being reconfigured and so its purpose is changing. A better thermal comfort is now required and solutions have to be found. Thus, a study on the thermal behavior of the structure has been done.\footnote{This study was done in June 2017 by the design companies T/E/S/S and CHOULET for the reconfiguration project of the temporary cathedral.} The main results are gathered in this thesis. The monthly exterior temperatures observed at the site location from 8:00 AM to 7:00 PM, which corresponds to the new intended opening hours of the building, are presented in \cref{plot:T_1}. Note that the maximum value is given over one hour, that is the observed temperature exceeds this value during a one-hour-wide window in the day. The solar radiation is also given in \cref{plot:T_2}. Two scenarios are studied~:
-\begin{enumerate}
+\begin{itemize}
 \item The structure is completely closed. No ventilation is put in place. The interior temperature can reach \SI{70}{\celsius} (see \cref{plot:T_3}).
 \item The structure is ventilated but no cooling system is put in place. The maximum interior temperature is lowered significantly but it can still reach \SI{50}{\celsius} (see \cref{plot:T_4}).
-\end{enumerate}
+\end{itemize}
 
 This study confirms what the experience has shown : the temperature inside the building can be very high. Above \SI{30}{\celsius} this is problematic for the comfort of the people. Above \SI{50}{\celsius} and up to \SI{70}{\celsius} it becomes problematic for the building itself. Indeed, this level of temperature is closed to the heat resistance of the membrane (see \cref{tab:membrane}) ; the interface layer faces a serious decrease of its capacity to resist to sliding (\cref{plot:epdm_temperature}) ; the creep of GFRP tubes is speed up (\cref{sec=gfrp}).
 
 \subsection{Moisture}
 Condensation was also noticed in winter and shoulder season. Sometimes, droplets of water could fall abundantly and thus the wooden furnitures had to be protected. This phenomenon was particularly intense the first months because the concrete slab had not yet fully dry-out. To protect the structure and the furnitures, it was decided to maintain the inside temperature above \SI{10}{\celsius} at all times.
-
-
-% \begin{figure}[p]
-% 	%
-%      	\centering
-% 	\begin{leftfullpage}
-% 		\subfloat[][Temperature.]{\includegraphics[]{ch3_creteil/plot/5_thermal/build_Text.pdf}\label{plot:T_1}} \\
-% 		\subfloat[][Solar radiation.]{\includegraphics[]{ch3_creteil/plot/5_thermal/build_Rad.pdf}\label{plot:T_2}} \\
-% 		\vspace{10pt}
-% 		\caption[Weather data at site location during opening hours]{Weather data at site location during opening hours (8:00 AM to 7:00 PM).}
-% 		\label{fig:thermal_ext}
-% 	\end{leftfullpage}
-% \end{figure}
-% \begin{figure}[p]
-% 	%
-%      	\centering
-% 	\begin{fullpage}
-% 		\subfloat[][Without ventilation.]{\includegraphics[]{ch3_creteil/plot/5_thermal/build_Tint_noV.pdf}\label{plot:T_3}} \\
-% 		\subfloat[][With ventilation.]{\includegraphics[]{ch3_creteil/plot/5_thermal/build_Tint_V.pdf}\label{plot:T_4}} \\
-% 		\vspace{10pt}
-% 		\caption[Temperature inside the building during opening hours]{Temperature inside the building during opening hours (8:00 AM to 7:00 PM).}
-% 		\label{fig:thermal_int}
-% 	\end{fullpage}
-% \end{figure}
 
 
 % \clearpage
@@ -2078,7 +1947,7 @@ However, this cost does not take into account all the (free) man-hours spent by 
 		]{figure}{}{Cost allocation for the whole project}{fig:budget}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=\textwidth/2,
 		border=false,
 		]{%
@@ -2103,7 +1972,7 @@ However, this cost does not take into account all the (free) man-hours spent by 
 		]{figure}{}{Cost allocation per square meter of covered area}{fig:building}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=\textwidth/2,
 		border=false,
 		]{%
@@ -2116,21 +1985,6 @@ However, this cost does not take into account all the (free) man-hours spent by 
 Moreover, this project required a lot of design studies and tests to verify the material properties and to validate the strength of key elements such as the swivel coupler with its EPDM layer, the sleeve system and the ground anchorage. The real cost of the studies was by far higher than what was really charged to the client and the difference must be regarded as an investment from the company T/E/S/S. In the same manner, people from the laboratory gave a consistent support during the construction stage as they were the only available experienced workers familiar with the construction of elastic gridshells in composite material \cite{Douthe2010a,Baverel2012} and this labor was not charged back to the client.
 
 The project was favorably accepted by the client based on the estimation that the cost of the gridshell would not be more expensive by 30\% than renting a simple tent. The rental of a 400~m\textsuperscript{2} tent with its floor was evaluated to 110\,000~€ for a period of time of 18 months. Retrospectively this target was met, especially as the cathedral was finally used for almost two years and a half, far more than the 18 months expected initially, and with no additional cost because the diocese owned the building.
-
-% \begin{figure}[h]
-% \begin{fullpage}
-% \centering
-% 	\includegraphics[]{budget}\vspace{10pt}
-% 	\caption[Cost allocation for the whole project]{Cost allocation for the whole project. This is the estimated overall final cost charged to the client. Prices are given excluding taxes (V.A.T).}
-% 	\label{fig:budget}
-% 	%
-% 	\vspace{2cm}
-% 	%
-% 	\includegraphics[]{building}\vspace{10pt}
-% 	\caption[Cost allocation per square meter of covered area]{Cost allocation per square meter of covered area. The cost of design is not included as it would not be representative. Prices are given excluding taxes (V.A.T).}
-% 	\label{fig:building}
-% 	\end{fullpage}
-% \end{figure}
 
 \subsection{Cost details for the building}\label{sec=gs_cost}
 Here we present the cost details for the main building, that is the cathedral itself. We try to understand what is the true cost of the gridshell system in this particular project and we thus eliminate side costs (for instance the cost of fittings, the cost of the pedestrian pathways, the cost of the service building, etc.). The cost allocation is presented per square meter of covered area in \cref{fig:building}. The total price for the building, excluding studies, is 473~€/m\textsuperscript{2}. It is composed of :
@@ -2211,7 +2065,7 @@ Here, the global amount of studies was charged around 83\,300~€, that is 248~�
 			]{table}{}{Man-hours spent by the volunteers on the fabrication}{tab:manhours}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=0.6\textwidth,
 			border=false,
 			]{%
@@ -2236,7 +2090,7 @@ Here, the global amount of studies was charged around 83\,300~€, that is 248~�
 		]{figure}{}{Allocation of the man-hours spent by the volunteers}{fig:manhours}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=\textwidth/2,
 		border=false,
 		]{%
@@ -2292,7 +2146,7 @@ Here, the global amount of studies was charged around 83\,300~€, that is 248~�
 			]{table}{}{Cost details for masonry works}{tab:masonry}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=0.6\textwidth,
 			border=false,
 			]{%
@@ -2317,7 +2171,7 @@ Here, the global amount of studies was charged around 83\,300~€, that is 248~�
 		]{figure}{}{Cost allocation for masonry works}{fig:masonry}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=\textwidth/2,
 		border=false,
 		]{%
@@ -2389,7 +2243,7 @@ Here, the global amount of studies was charged around 83\,300~€, that is 248~�
 			]{table}{}{Cost details for the superstructure}{tab:superstructure}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=0.6\textwidth,
 			border=false,
 			]{%
@@ -2414,7 +2268,7 @@ Here, the global amount of studies was charged around 83\,300~€, that is 248~�
 		]{figure}{}{Cost allocation for the superstructure}{fig:superstructure}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=\textwidth/2,
 		border=false,
 		]{%
@@ -2430,77 +2284,11 @@ In this project the prefabrication process represents almost half of the cost in
 
 Lots of man-hours are spent in the installation of the sleeve system (88~h). That represents 35~\% of the man-hours spent in the grid prefabrication. This part should be reimplemented to allow a simpler and faster installation. Similarly, the connection should be redesigned to avoid the application of the EPDM protection layer and to allow a faster positioning and fastening as it represents 23~\% of the man-hours spent in the prefabrication of the grid. This would also be a preponderant factor of improvement in the bracing stage although this cost is not detailed in \cref{tab:manhours}.
 
-At first sight it seems that the time spent assembling the grid on the construction site -- which represents 22~\% of the man-hours, see \cref{fig:manhours} -- can not easily be reduced. However, the grid system could be divided into transportable modules. These modules would be preassembled in the factory to increase the speed and quality of the production and to minimize on-site works. Thanks to the intrinsic grid kinematic, modules can be folded for transportation. Once on site, modules are unfolded and connected to each other to form the primary flat grid. This idea was tested successfully in two wooden gridshell projects of 50~m\textsuperscript{2} each, with students of the Ecole National d'Architecture de Toulouse and Ecole National d'Architecture de Grenoble in June 2016 (see \cref{fig:jpofav}).\footnote{Construction of two wooden gridshell pavilions : \url{http://www.lemoniteur.fr/article/a-toulouse-les-architectes-se-rassemblent-sous-le-meme-pavillon-32398196}.}
+At first sight it seems that the time spent assembling the grid on the construction site -- which represents 22~\% of the man-hours, see \cref{fig:manhours} -- can not easily be reduced. However, the grid system could be divided into transportable modules. These modules would be preassembled in the factory to increase the speed and quality of the production and to minimize on-site works. Thanks to the intrinsic grid kinematic, modules can be folded for transportation. Once on site, modules are unfolded and connected to each other to form the primary flat grid. This idea was tested successfully in two wooden gridshell projects of 50~m\textsuperscript{2} each, with students of the Ecole National d'Architecture de Toulouse and Ecole National d'Architecture de Grenoble in June 2016 (see \cref{fig:jpofav}).\footnote{Construction of two wooden gridshell pavilions :\\ \url{http://www.lemoniteur.fr/article/a-toulouse-les-architectes-se-rassemblent-sous-le-meme-pavillon-32398196}.}
 
 Bracing is yet another costly stage as it accounts for almost 30~\% of the man-hours (see \cref{fig:manhours}). This work is not easily parallelizable as it requires working at height with proper lifting equipments such as cherry pickers. Thus almost a small and qualified team can do the job. For instance, on the gridshell of Créteil, the team was composed of 6 workers using two aerial lifts. This team spent three full days to complete this task, that is the same amount of days required to assemble the grid and lift it up. Several attempt have been made during this thesis to answer this problematic. The first attempt was to use a bidirectional cable network to brace the grid. The network is installed at the ground level before the grid is deformed. Thus, work at height is reduced to a minimum (see \cref{fig:jpofav,fig:clc2016}). The second attempt is a larger thought on the envelope of such structures and tries to tackle two issues with a thin fibre-reinforced concrete skin~: the fact that bracing with a third direction of tubes is time consuming ; and the fact that membrane covering is not adapted for permanent buildings \cite{Cuvilliers2017} (see \cref{fig:booby}).
 
 
-
-
-% \begin{figure}[h]
-% \centering
-% \begin{leftfullpage}
-% 	\includegraphics[]{superstructure}\vspace{10pt}
-% 	\caption[Cost allocation for the superstructure]{Cost allocation for the superstructure. On-site works are isolated to identify pure manufacturing costs. To this end, the cost of the man-hours provided by the volunteers to prefabricate the grid has been assessed and allocated. See \cref{tab:superstructure} for detailed data.}
-% 	\label{fig:superstructure}
-% \end{leftfullpage}
-% \end{figure}
-% \begin{table}[h]
-% \centering
-% \ra{1.1}
-% \begin{fullpage}
-%  	\begin{tabularx}{\textwidth}{@{}Xlrrr@{}}
-% 	\toprule
-%  	Item	 							& Unit				& Quantity		& U.P. (€)		& Price (€) 			\\
-% 	\midrule
-% 	\addlinespace[10pt]
-% 	\textbf{Manufacturing of the gridshell} 	& 					& 			& 				& \tablebf{42\,853}  	\\
-% 	GRFP tube (\O 42~mm)				& ml					& 2304		& 3.66			&  8\,433  			\\
-% 	Swivel connector (42x42~mm)			& 					& 1295		& 3.95			&  5\,115  			\\
-% 	Swivel connector (42x49~mm)			& 					& 135		& 4.18			&  564  			\\
-% 	EPDM layer (1302x40x1.5~mm ribbon)	& 					& 2775		& 0.36			&  1131  			\\
-% 	Welded steel sleeve system			& 					& 150		& 50.00			&  7\,500  			\\
-% 	ARALDIT 2047 glue (480~ml cartridge)	& 					& 8			& 45.00			&  360 			\\
-% 	Ground anchorage (welded steel)		& 					& 120		& 80.00			&  9\,600  			\\
-% 	Man-hours (prefabrication)			& h 					& 290		& 35.00			& 10\,150			\\
-% 	%
-% 	\addlinespace[10pt]
-% 	\textbf{Manufacturing of the envelope}	& 					& 			& 				& \tablebf{34\,769}  	\\
-% 	GFRP lacing rod (\O 32~mm) 			& ml 					& 96			& 14.00			&  1\,134  			\\
-% 	Steel clip for the rod					&  					& 125		& 15.00			&  1\,875  			\\
-% 	Swivel collar (\O 34~mm)				& 					& 120		& 3.50			&  420  			\\
-% 	PVC coated fabric					& m\textsuperscript{2}	& 550		& 50.00			&  27\,500  		\\
-% 	Option for transparent inclusion			& 					& 12			& 320.00			&  3\,840  			\\
-% 	%
-% 	\addlinespace[10pt]
-% 	\textbf{Manufacturing of the steel doors} 					& 					& 			& 				& \tablebf{15\,000}  	\\
-% 	Main door 						& 					& 1			& 10\,000.00		&  10\,000  		\\
-% 	Small door  						&					& 1			& 5\,000.00		&  5\,000 			\\
-% 	%
-% 	\addlinespace[10pt]
-% 	\textbf{On-site works of installation} 		& 					& 			& 				& \tablebf{38\,220}  	\\
-% 	Installation of the doors				& 					& 1			& 5\,000.00		&  5\,000  			\\
-% 	Installation of the anchorages and clips	& h					& 90			& 45.00			&  4\,050  			\\
-% 	Grid erection 						& h					& 110		& 35.00			&  3\,850  			\\
-% 	\quad {cranes (x2 35T)}				& h					& 24			& 110.00			&  2\,640  			\\
-% 	Grid bracing 						& h					& 167		& 45.00			&  7\,515  			\\
-% 	\quad {aerial bucket (x2)}				& 					& 1			& 6\,000.00		&  6\,000  			\\
-% 	Installation of fabric 					& 					& 1			& 9\,165.00		&  9\,165  			\\
-% 	%
-% 	\addlinespace[10pt]
-% 	\midrule
-% 	\textbf{Total} 						& €/m\textsuperscript{2}	& 350		&  \tablebf{374}		& \tablebf{130\,842}  	\\
-% 	Cost of structure					&  					& 			& 265			& {92\,622}  		\\
-% 	Cost of installation					& 					& 			& 109			& {38\,220}  		\\
-% 	\bottomrule
-%  	\end{tabularx}
-% 	\vspace{10pt}
-% 	\caption[Cost details for the superstructure]{Cost details for the superstructure. On-site works are isolated to identify pure manufacturing costs of the gridshell, the envelope and the doors. To this end, the cost of the man-hours provided by the volunteers to prefabricate the grid has been assessed and allocated. Prices are given excluding transport costs and excluding taxes (V.A.T ). Spare quantities are included. See \cref{fig:superstructure} for a graphical representation of these data.}
-% 	\label{tab:superstructure}
-% \end{fullpage}
-% \end{table}
-
-% \clearpage
 
 \section{Conclusions}
 % ------------------------------------------

@@ -189,7 +189,7 @@ Kirchhoff's theory assigns an elastic energy to beams according to their strain~
 Here, $\rconf{\kappa}_1$, $\rconf{\kappa}_2$ and $\rconf{\tau}$  denote the \emph{natural} material curvatures and material twist of the rod in its rest configuration. $E$ and $G$ are the elastic and shear modulus of the rod material. $I_1$ and $I_2$ are the moments of inertia of the rod cross-section. $J$ is the torsion constant of the rod cross-section.
 
 \subsubsection{Initially straight isotropic rod~: a special case}
-From this energy formulation an interesting and well-known result on elastic rods can be retrieved. This result stipulates that torsion is uniform for a naturally straight rod with an isotropic cross-section.\footnote{This result was already known by Love \cite[§234]{Love1906} and is mentioned by \citef{Adriaenssens1999} and \citef{Douthe2007}.}
+From this energy formulation an interesting and well-known result on elastic rods can be retrieved, which stipulates that torsion is uniform for a naturally straight rod with an isotropic cross-section.\footnote{This result was already known by Love \cite[§234]{Love1906} and is mentioned by \citef{Adriaenssens1999} and \citef{Douthe2007}.}
 
 Indeed, by definition for a rod with isotropic cross-section~: $EI_1 = EI_2 = EI$. If in addition the rod is straight in its rest configuration ($\rconf{\kappa}_1 = \rconf{\kappa}_2 = \rconf{\tau} = 0$) the bending energy becomes~: $\mathcal{E}_{b} = EI_1\;\kappa_1^2 + EI_2\;\kappa_2^2 = EI(\kappa_1^2 + \kappa_2^2) = EI\kappa^2$. Consequently, the elastic energy of the rod is composed of two independent terms~: $\mathcal{E}_{b}[\vect{x}]$ and $\mathcal{E}_{r}[\theta]$. The coupling between bending and twisting disappears and the global minimum of elastic energy is reached when bending an twisting energies are minimized separately. This means that the geometry of the rod at static equilibrium ($\vect{x}$) is the one that minimizes $\mathcal{E}_{b}[\vect{x}]$. And the minimum of $\mathcal{E}_{t}[\theta]$ is obviously achieved for a uniform twist ($\tau = cst$) along the centerline, only prescribed by the boundary conditions at the extremities of the rod (least-squares minimization).
 
@@ -249,7 +249,7 @@ Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of th
 		\PhotoTextBox[
 			node=Pt,
 			anchor=north west,
-			yshift=-\PhotoBigSkip,
+			yshift=-\PhotoSkip,
 			% width=\textwidth,
 			border=false,
 			]{%
@@ -258,37 +258,9 @@ Following~\citef{Bergou2008} we introduce a reduced coordinate formulation of th
 				\figurecaption{fig:curve_angle_b}
 			}
 	}
-	\setlength{\tmpheight}{8cm + 2\PhotoBigSkip}
+	\setlength{\tmpheight}{8cm + \PhotoBigSkip}
 	\hbox{\vspace{\tmpheight}}
 }
-
-
-% \begin{figure}[t]
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics{curve_angle_a.pdf}
-% 		\caption{bending strains}
-% 		\label{fig:curve_angle_a}
-% 	\end{subfigure}%
-% 	\hspace{\MediaGutterWidth}% (%) required at end of lines to prevent extra space
-% 	\begin{subfigure}[b]{\TwoMediaWidth}
-% 		\includegraphics[]{curve_angle_b.pdf}
-% 		\caption{angular deviation}
-% 		\label{fig:curve_angle_b}
-% 	\end{subfigure}
-% 	\caption[Curve-angle representation of the rod]{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}
-% 	\label{fig:curve_angle}
-% \end{figure}
-% \begin{figure}[t]
-% %	\begin{fullpage}
-%      		\centering
-% 		\subfloat[][bending strains]{\includegraphics{curve_angle_a.pdf}\label{fig:curve_angle_a}}
-% 		\hspace{2.5cm}
-% 		\subfloat[][angular deviation]{\includegraphics{curve_angle_b.pdf}\label{fig:curve_angle_b}} \\
-% 		\vspace{10pt}
-% 		\captionof{figure}[Curve-angle representation of the rod]{Curve-angle representation of the rod. The orientation of the material frame is established from the reference frame by the deviation angle $\theta(s)$.}
-% 		\label{fig:curve_angle}
-% %	\end{fullpage}
-% \end{figure}
 
 \subsection{Definition of the representation}
 This reduction of the number of \dofs{} relies on the choice of a suitable reference frame, namely a Bishop (or zero-twisting) frame denoted $\{\vect{t}(s),\vect{u}(s),\vect{v}(s)\}$. Recall from \cref{sec=bishop} in \cref{chp=curve} that this reference frame is adapted to the centerline and exhibits a null angular velocity around the centerline's tangent vector (see \cref{eq:null_velocity}), which means~:
@@ -431,16 +403,6 @@ It is important to notice that as the rod is supposed to be inextensible, the el
 To compute the energy gradients with respect to the degrees of freedom of the rod it is primordial to understand how these \dofs{} are chained (see \cref{fig:dofs})~:
 
 
-
-
-% \begin{figure}[h]
-%      		\centering
-%      		\includegraphics{degrees_of_freedom.pdf}
-% %		\vspace{10pt}
-% 		\captionof{figure}[Succession of the degrees of freedom]{Succession of the degrees of freedom.}
-% %		\vspace{10pt}
-% 		\label{fig:dofs}
-% \end{figure}
 \begin{itemize}
 \item
 $\vect{x}$ leads to the determination of the curvature binormal ($\vect{\kappa b}$) and to the determination of the reference Bishop frame $\{\vect{t},\vect{u},\vect{v}\}$.
@@ -591,18 +553,28 @@ Hence, the quasi-static distributed internal twisting moment acting on the cente
 The quasistatic assumption (see \cref{eq:quasistat_hyp}) stipulates that the gradient of the elastic energy with respect to $\theta$ can be considered null ($\pdiff{\theta}{\mathcal{E}}{s} = 0$) for the calculation of the internal forces, which implies that for all $s$ in $[0,L]$~:
 \begin{equation}
 	\left(\left(\beta(\theta' -{\rconf{\theta}'})\right)' + (\vect{\omega} - \rconf{\vect{\omega}})^T \mat{B} \mat{J}\vect{\omega}\right)(s) = 0
-\label{eq:quasistat}
 \end{equation}
 or equivalently~:
 \begin{equation}
 	Q'(s) +  \kappa_1(s) M_2(s) - \kappa_2(s) M_1(s) = 0
-\label{eq:quasistat}
 \end{equation}
 
 
 \section{Energy gradient with respect to $\vect{x}$~: internal forces}\label{sec=dE_dx}
 
 For the calculus of variations, the reader is invited to refer to \cref{chp=variation} where the notations employed throughout this section are defined and where main results are reminded.
+
+\subsection{Derivative of material directors with respect to $\vect{x}$}
+A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation of the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame. Let us denote~:
+\begin{itemize}
+\item
+$F = \{\vect{t}, \vect{u},\vect{v}\}$~: the Bishop frame in the reference configuration ;
+\item
+ $F_\epsilon = \{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$~: the Bishop frame in the deformed configuration ;
+ \item
+$\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$~: the frame obtained by parallel transporting $F_\epsilon$ back on $F$.
+\end{itemize}
+
 
 \blankpage{%
 	\hbox{}\thispagestyle{empty}
@@ -625,7 +597,7 @@ For the calculus of variations, the reader is invited to refer to \cref{chp=vari
 		\intersectnode{CAtl |- Abr}{Pt}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% width=0.6\textwidth,
 			border=false,
 			]{%
@@ -660,7 +632,7 @@ For the calculus of variations, the reader is invited to refer to \cref{chp=vari
 					\figurecaption{fig:rot_a}
 				}
 		}
-		\setlength{\tmpheight}{12.25cm}
+		\setlength{\tmpheight}{12.75cm}
 		\hbox{\vspace{\tmpheight}}
 		%%
 		\afterpage{%
@@ -691,32 +663,12 @@ For the calculus of variations, the reader is invited to refer to \cref{chp=vari
 						\figurecaption{fig:rot_b}
 					}
 			}
-			\setlength{\tmpheight}{12.25cm}
+			\setlength{\tmpheight}{12.75cm}
 			\hbox{\vspace{\tmpheight}}
 		}
 	}	
 }
 
-\subsection{Derivative of material directors with respect to $\vect{x}$}
-A variation of the centerline $\vect{x}$ by $\vect{\epsilon} = \lambda \vect{h}_x$ would cause a variation of the Bishop frame because parallel transport depends on the centerline itself. As far as $\vect{x}$ and $\theta$ are independent variables, this leads necessarily to a variation of the material frame. Let us denote~:
-\begin{itemize}
-\item
-$F = \{\vect{t}, \vect{u},\vect{v}\}$~: the Bishop frame in the reference configuration ;
-\item
- $F_\epsilon = \{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsilon\}$~: the Bishop frame in the deformed configuration ;
- \item
-$\tilde{F}_\epsilon = \{\vect{t}, \vect{\tilde{u}}_\epsilon,\vect{\tilde{v}}_\epsilon\}$~: the frame obtained by parallel transporting $F_\epsilon$ back on $F$.
-\end{itemize}
-
-
-% \begin{figure}[p]
-% \begin{fullpage}
-% \centering
-% \includegraphics[width=\linewidth]{writhe.pdf}
-% \captionof{figure}[Variation of the Bishop frame for a perturbation of the centerline]{Variation of the Bishop frame for a perturbation of the centerline.}
-% \label{fig:varbishop}
-% \end{fullpage}
-% \end{figure}
 From \cref{fig:varbishop} we start with an (arbitrary) initial reference frame defined in the rest configuration and denoted $F(0)$, positioned at arc length parameter $s=0$~:
 \begin{itemize}
 \item
@@ -739,17 +691,6 @@ Firstly, let's decompose $\{\vect{t}_\epsilon, \vect{u}_\epsilon,\vect{v}_\epsil
 
 
 \subsubsection{Calculation of $\Psi_\epsilon$}
-
-% \begin{figure}[p]
-% \centering
-% 	\includegraphics[width=\textwidth]{rotation_B.pdf}
-% 	\captionof{figure}[Measuring the variation of parallel transport : rotation of angle $\alpha_\epsilon$.]{Measuring the variation of parallel transport ($\alpha_\epsilon$). $\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around the axis $\vect{b} = \vect{t}_\epsilon \times \vect{t}$ by an angle $\alpha_\epsilon$.}
-% 	\label{fig:rot_a}
-% %
-% 	\includegraphics[width=\textwidth]{rotation_A.pdf}
-% 	\captionof{figure}[Measuring the variation of parallel transport : rotation of angle $\Psi_\epsilon$.]{Measuring the variation of parallel transport ($\Psi_\epsilon$). $F$ is obtained by rotating $\tilde{F}_\epsilon$ around $\vect{t}$ by an angle $\Psi_\epsilon$.}
-% 	\label{fig:rot_b}
-% \end{figure}
 
 This variation is closely related to the writhe of closed curves. As explained by \citef{Fuller1978} when parallel transporting an adapted frame around a closed curve it might not realigned with itself after one complete loop. This \textquote{lack of alignement} is directly measured by the change of writhe which can be computed with Fuller's Formula~\cite{Fuller1978}.
 
@@ -837,13 +778,6 @@ Finally, it's possible to conclude that $\alpha_\epsilon(s)$ is in first order o
 	\lim_{\lambda \to 0} \alpha_\epsilon(s) = 0
 	\label{eq:lim_alpha}
 \end{equation}
-
-%\begin{figure}[t]
-%\centering
-%\includegraphics[width=\linewidth]{rotation_B.pdf}
-%\captionof{figure}[]{$\tilde{F}_\epsilon$ is obtained by parallel tranpsporting $F_\epsilon$ from $\vect{t}_\epsilon$ to $\vect{t}$. This operation could be seen as a rotation around $\vect{t}_\epsilon \times \vect{t}$ of an angle $\alpha$.}
-%\label{fig:varbishop}
-%\end{figure}
 
 \subsubsection{Aligning $\tilde{F}_\epsilon$ towards $F_\epsilon$}
 Recall that aligning $\tilde{F}_\epsilon$ over $F$ is nothing but a rotation around $\vect{t}$ by an angle $\Psi_\epsilon$. This leads to~:
@@ -1186,7 +1120,7 @@ By several integration by parts, using Fubini's theorem once and supposing that 
 	\right)'\cdot \vect{h}_x \;dt\\
 	\end{aligned}
 \end{equation}
-Which can be rewritted using the quasi-static hypothesis \cref{eq:quasistat}~:
+Which can be rewritted using the quasi-static hypothesis \cref{eq:quasistat_hyp}~:
 \begin{equation}
 	\begin{aligned}
 	\mathcal{B}+\mathcal{C}

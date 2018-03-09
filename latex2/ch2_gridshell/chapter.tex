@@ -25,7 +25,7 @@ We naturally begin this chapter by defining the notion of elastic gridshell and 
 The invention of the \emph{elastic gridshell} concept is commonly attributed to Frei Otto, a German architect who devoted several years to gridshells. In 1975 he achieved the famous \emph{Mannheim Multihalle} \cite{Happold1975}, a wooden shell of 7500~m\textsuperscript{2}, in collaboration with the engineer Edmund Happold (Arup).
 Literally, the word \textquote{gridshell} refers to grids behaving like shells~: from a mechanical point of view that means stresses acting on the structure are mainly transmitted through compression and tension. These structures can cross large-span with very little material.
 
-However, according to the historic evolution of the concept, to characterise a gridshell as the combination of a structural concept (a grid behaving like a shell, see \cref{sec=def_topo}) and a specific construction process (see \cref{sec=def_erec}) using the bending flexibility of the material (see \cref{sec=def_flexibility}) seems to be more accurate. The project of Mannheim -- in which a wooden regular and planar grid, lacking shear stiffness, is elastically deformed up to a targeted shape with the help of stays, and then braced and covered -- is regarded as the starting point of this new concept (see \cref{fig:erec_0,fig:erec_1,fig:erec_2,fig:erec_3}).
+However, according to the historic evolution of the concept, to characterise a gridshell as the combination of a structural concept (a grid behaving like a shell, see \cref{sec=def_topo}) and a specific construction process (see \cref{sec=def_erec}) using the bending flexibility of the material (see \cref{sec=def_flexibility}) seems to be more accurate. The project of Mannheim -- in which a wooden regular and planar grid, lacking shear stiffness, is elastically deformed up to a targeted shape with the help of stays, and then braced and covered -- is regarded as the starting point of this new concept (see \cref{fig:gserec_0,fig:gserec_1,fig:gserec_2,fig:gserec_3}).
 
 This type of gridshell, known as elastic gridshell, offers a very elegant manner to materialise freeform shapes from an initially flat and regular grid, which obviously has many practical benefits~: planar initial geometry, standard connection nodes, standard profiles and so on.
 
@@ -79,43 +79,43 @@ Note that the term \emph{rigid gridshell} is often opposed to the term \emph{ela
 			node=Atl, 
 			anchor=south west, 
 			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Assembly of the timber grid}{fig:erec_0}
+			]{subfigure}{}{Assembly of the timber grid}{fig:gserec_0}
 		\PhotoCaptionRef[
 			hrefnode=Btl,
 			node=Btl, 
 			anchor=south west, 
 			yshift=\PhotoRefSkip,
-			]{subfigure}{}{Deformation of the grid}{fig:erec_1}
+			]{subfigure}{}{Deformation of the grid}{fig:gserec_1}
 		\PhotoCaptionRef[
 			hrefnode=Ctl,
 			node=Cbl, 
 			anchor=north west, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{Final shape of the lattice}{fig:erec_2}
+			]{subfigure}{}{Final shape of the lattice}{fig:gserec_2}
 		\PhotoCaptionRef[
 			hrefnode=Dtl,
 			node=Dbl, 
 			anchor=north west, 
 			yshift=-\PhotoRefSkip,
-			]{subfigure}{}{Roofing with a membrane}{fig:erec_3}
+			]{subfigure}{}{Roofing with a membrane}{fig:gserec_3}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%
 				\figurecaption{fig:erec}\par
-				\figurecaption{fig:erec_0}\par
-				\figurecaption{fig:erec_1}\par
-				\figurecaption{fig:erec_2}\par
-				\figurecaption{fig:erec_3}\par
+				\figurecaption{fig:gserec_0}\par
+				\figurecaption{fig:gserec_1}\par
+				\figurecaption{fig:gserec_2}\par
+				\figurecaption{fig:gserec_3}\par
 			}
 	}
 }
 
 \subsection{Erection process}\label{sec=def_erec}
 % ------------------------------------------
-Usually, the grid morphology is not trivial and leads to design numerous costly and complex joints. To overcome this issue, an original and innovative erection process was developed that takes advantage of the flexibility inherent to slender elements. A regular planar grid made of long continuous linear members is built on the ground (see \cref{fig:erec_0}). The elements are pinned together so the grid has no in-plane shear stiffness and can accommodate large-scale deformations during erection. Then, the grid is bent elastically to its final shape (see \cref{fig:erec_1,fig:erec_2}). Finally, the grid is frozen in the desired shape with a third layer of bracing members and the structure becomes a shell. This process is illustrated and detailed in the next chapter (see \cref{sec=construction_process}).
+Usually, the grid morphology is not trivial and leads to design numerous costly and complex joints. To overcome this issue, an original and innovative erection process was developed that takes advantage of the flexibility inherent to slender elements. A regular planar grid made of long continuous linear members is built on the ground (see \cref{fig:gserec_0}). The elements are pinned together so the grid has no in-plane shear stiffness and can accommodate large-scale deformations during erection. Then, the grid is bent elastically to its final shape (see \cref{fig:gserec_1,fig:gserec_2}). Finally, the grid is frozen in the desired shape with a third layer of bracing members and the structure becomes a shell. This process is illustrated and detailed in the next chapter (see \cref{sec=construction_process}).
 
 \subsection{Structural typology}\label{sec=def_topo}
 % ------------------------------------------
@@ -144,7 +144,7 @@ In this field of application, composite materials like glass fibre reinforced po
 		]{figure}{}{Known elastic gridshells built by the past}{fig:projectsbymaterial}
 	\PhotoTextBox[
 		node=CAbl,
-		anchor=south west,
+		anchor=base west,
 		width=10cm,
 		border=false,
 		]{%
@@ -185,10 +185,9 @@ Frei Otto started his studies in architecture in 1947 in Berlin, Germany, and co
 		\savenodes{B}
 		\intersectnode{Abr -| PGtl}{Pt}
 		\Photo[
-			node=Abl,
-			anchor=north west,
-			yshift=-\PhotoBigSkip,
-			gopt={width=\tmpwidth},
+			node=CAbl,
+			anchor=south west,
+			gopt={trim=0 0 0 0.5cm, clip, width=\tmpwidth},
 			]{essen_foil_full.jpg}
 		\savenodes{C}
 		\PhotoCaptionRef[
@@ -299,7 +298,7 @@ A thorough report on the project is available in \cite{IL13}.  A more condensed 
 	\hbox{\vspace{\PhotoHeight}}
 	%
 	\doubleblankpage[l]{%
-		\hbox{}\thispagestyle{pageonly}
+		\hbox{}\thispagestyle{empty}
 		\PhotoSpread[
 			node=CAtl,
 			anchor=north west,
@@ -313,11 +312,11 @@ A thorough report on the project is available in \cite{IL13}.  A more condensed 
 				yshift=-\PhotoRefSkip,
 			]{subfigure}{}{Interior view}{fig:mannheim_a}}
 	}{%
-		\hbox{}\thispagestyle{pageonly}
+		\hbox{}\thispagestyle{empty}
 		\AddToShipoutPictureBG*{
 			\PhotoTextBox[
 				node=BR,
-				anchor=south west,
+				anchor=base west,
 				xshift=\PhotoSkip,
 				width=10cm,
 				border=false,
@@ -426,7 +425,7 @@ It is only 20 years later that gridshells started to reappear, in the late 90's 
 			]{subfigure}{}{Exterior view}{fig:doncaster_b}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%
@@ -506,7 +505,7 @@ These projects definitely trailed the technique in England and initiated the ren
 		\intersectnode{CAtl |- Bbr}{Pt}
 		\PhotoTextBox[
 			node=Bbr,
-			anchor=south west,
+			anchor=base west,
 			xshift=\PhotoSkip,
 			width=10cm,
 			border=false,
@@ -667,7 +666,7 @@ The building is 50 meters long and 12.5 to 16 meters wide, covering an area of a
 			]{subfigure}{}{Exterior view}{fig:downland_b}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%
@@ -758,7 +757,7 @@ It is worthwhile to mention that for the first time the form was not found by in
 			]{subfigure}{}{Exterior view}{fig:flimwell_b}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%
@@ -850,7 +849,7 @@ It is worthwhile to mention that for the first time the form was not found by in
 			]{subfigure}{}{Exterior view}{fig:kent_b}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%
@@ -1034,7 +1033,7 @@ Note that the first prototype was manually pushed-up in its deformed shape while
 			]{subfigure}{}{Exterior view}{fig:creteil_b}
 		\PhotoTextBox[
 			node=Bbr,
-			anchor=south west,
+			anchor=base west,
 			xshift=\PhotoSkip,
 			width=5.4cm,
 			border=false,
@@ -1136,7 +1135,7 @@ Since 2010, about 20 timber gridshell pavilions were built around the world, mai
 			]{subfigure}{}{Pavilion}{fig:sanantonio1}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%
@@ -1207,7 +1206,7 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 			]{subfigure}{}{Tensioner}{fig:tensioner}
 		\PhotoTextBox[
 			node=Bbr,
-			anchor=south west,
+			anchor=base west,
 			xshift=\PhotoSkip,
 			width=10cm,
 			border=false,
@@ -1292,7 +1291,7 @@ The ideas of the \emph{gridshell.it} group spread rapidly and similar projects w
 			]{subfigure}{}{Concrete shell}{fig:booby2}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=10cm,
 			border=false,
 			]{%

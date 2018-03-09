@@ -113,6 +113,9 @@
 \newlength\tmpheight
 \newlength\plotYadjust
 \setlength{\plotYadjust}{1cm}
+
+\newlength\marginsep
+\setlength{\marginsep}{6pt} % sep for side margin labels / bullet / ref ...
 % **************************************************
 % Commands
 % **************************************************
@@ -250,6 +253,13 @@
 \renewcommand{\theequation}{\thechapter.\arabic{equation}}
 \renewcommand\tagform@[1]{\maketag@@@{\tf@eqtag\footnotesize\ignorespaces#1\unskip\@@italiccorr}}
 
+% index of notations 
+\DeclareRobustCommand{\tf@nomsec}{\tf@subsec}
+\DeclareRobustCommand{\tf@nomtxt}{\small}
+
+% bib
+\DeclareRobustCommand{\tf@bibnum}{\font@label\footnotesize\bfseries}
+\DeclareRobustCommand{\tf@bibtxt}{\small}
 
 %% heading format
 %% --------------------------
@@ -260,15 +270,15 @@
 % \colorlet{titlelabel}{accent}
 
 \titleformat{\section}[hang]{}
-{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesection\hspace*{6pt}}}
+{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesection\hspace*{\marginsep}}}
 {0pt}{\tf@sec\MakeUppercase{#1}}
 
 \titleformat{\subsection}[hang]{}
-{\hspace*{-1.5cm}\fbox{\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesubsection\hspace*{6pt}}}}
+{\hspace*{-1.5cm}\fbox{\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesubsection\hspace*{\marginsep}}}}
 {0pt}{\tf@subsec\MakeUppercase{#1}}
 
 \titleformat{\subsubsection}[hang]{}
-{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesubsubsection\hspace*{6pt}}}
+{\hspace*{-1.5cm}\parbox[b]{1.5cm}{\raggedleft\tf@seclabel\thesubsubsection\hspace*{\marginsep}}}
 {0pt}{\tf@subsubsec{#1}}
 
 
@@ -288,7 +298,7 @@
 %%
 %%%%%
 \RequirePackage{enumitem}
-\setlist[itemize]{label=\rule{4pt}{4pt},leftmargin=0pt,labelsep*=8pt}
+\setlist[itemize]{label=\ico,leftmargin=0pt,labelsep*=8pt} % rule{4pt}{4pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -572,7 +582,7 @@
 \newlength{\ChapterBoxTextWidth}
 
 %% set parameters
-\setlength{\ChapterBoxWidth}{\@BleedInnerMargin + \@ContentBindingOffset + \@ContentInnerMargin-6pt}
+\setlength{\ChapterBoxWidth}{\@BleedInnerMargin + \@ContentBindingOffset + \@ContentInnerMargin-\marginsep}
 \setlength{\ChapterBoxYOffset}{7cm}
 \setlength{\ChapterBoxHeight}{15mm}
 \setlength{\ChapterBoxTextYMargin}{0pt}
@@ -713,30 +723,31 @@
 
 % custom bibliography style and alignment 
 \setlength{\bibhang}{0em}
-\setlength{\biblabelsep}{6pt}
-\setlength{\bibitemsep}{0em}
+\setlength{\biblabelsep}{\marginsep}
+\setlength{\bibitemsep}{6pt}
 \setlength{\bibparsep}{0em}
+\renewcommand{\bibfont}{\tf@bibtxt}
 
-\DeclareFieldFormat{labelnumberwidth}{\font@label\footnotesize\mkbibbold{#1}}
+\DeclareFieldFormat{labelnumberwidth}{\tf@bibnum#1}
 
 \defbibenvironment{bibliography}
-  {\list
-{\printfield[labelnumberwidth]{labelnumber}}
-{\setlength{\labelwidth}{\labelnumberwidth}%
- \setlength{\leftmargin}{\labelwidth}%
- \setlength{\labelsep}{\biblabelsep}%
- \addtolength{\leftmargin}{\labelsep}%
- \addtolength{\leftmargin}{-\labelwidth-\labelsep}% LDP add this xshift
- \setlength{\itemsep}{\bibitemsep}%
-\setlength{\parsep}{\bibparsep}}%
-    \renewcommand*{\makelabel}[1]{\hss##1}}
+{%
+	\list%
+	{%
+		\printfield[labelnumberwidth]{labelnumber}%
+	}{
+		\setlength{\labelwidth}{\labelnumberwidth}%
+		\setlength{\leftmargin}{\labelwidth}%
+		\setlength{\labelsep}{\biblabelsep}%
+		\addtolength{\leftmargin}{\labelsep}%
+		\addtolength{\leftmargin}{-\labelwidth-\labelsep}% LDP add this xshift
+		\setlength{\itemsep}{\bibitemsep}%
+		\setlength{\parsep}{\bibparsep}%
+	}%
+	\renewcommand*{\makelabel}[1]{\hss##1}%
+}%
 {\endlist}
 {\item}
-
-
-% custom style for citation mark in text
-% \appto{\citesetup}{\font@label}
-
 
 %% Favicon DOI Link 
 %% --------------------------
@@ -788,24 +799,50 @@
 
 %% CV style for personnal biblio
 %% --------------------------
+
 \defbibenvironment{cvbib}
-{
+{%
 	\list
-	{
+	{%
 		\iffieldequals{year}{\bibyear}%
-		{\phantom{\printfield[1cm]{year}}}%
-		{\printfield[1cm]{year}\savefield{year}{\bibyear}}%
-	}
-	{
-		\setlength{\labelwidth}{\labelnumberwidth}%
-		\setlength{\leftmargin}{\labelwidth}%
-		\setlength{\labelsep}{\biblabelsep}%
-		\addtolength{\leftmargin}{\labelsep}%
-		\setlength{\itemsep}{2\bibitemsep}%
-		\setlength{\parsep}{\bibparsep}
+		{\ico}%
+		{\printfield[labelnumberwidth]{year}\savefield{year}{\bibyear}}%
+		% \printfield[labelnumberwidth]{labelnumber}%
+	}{%
+		\setlength{\labelwidth}{2cm}%
+ 		\setlength{\leftmargin}{\labelwidth}%
+ 		\setlength{\labelsep}{\biblabelsep}%
+ 		\addtolength{\leftmargin}{\labelsep}%
+ 		\addtolength{\leftmargin}{-\labelwidth-\labelsep}% LDP add this xshift
+ 		\setlength{\itemsep}{\bibitemsep}%
+		\setlength{\parsep}{\bibparsep}%
+		\setlength{\bibhang}{0pt}%
 	}%
-	\renewcommand*{\makelabel}[1]{\hss##1}
-}{\endlist}{\item}
+	\renewcommand*{\makelabel}[1]{\hss##1}%
+}%
+{\endlist}
+{\item}
+
+
+% \defbibenvironment{cvbib}
+% {
+% 	\list
+% 	{%
+% 		\iffieldequals{year}{\bibyear}%
+% 		{\phantom{\printfield[1cm]{year}}}%
+% 		{\printfield[1cm]{year}\savefield{year}{\bibyear}}%
+% 	}
+% 	{
+% 		% old
+% 		\setlength{\labelwidth}{\labelnumberwidth}%
+% 		\setlength{\leftmargin}{\labelwidth}%
+% 		\setlength{\labelsep}{\biblabelsep}%
+% 		\addtolength{\leftmargin}{\labelsep}%
+% 		\setlength{\itemsep}{2\bibitemsep}%
+% 		\setlength{\parsep}{\bibparsep}
+% 	}%
+% 	\renewcommand*{\makelabel}[1]{\hss##1}
+% }{\endlist}{\item}
 
 \DeclareSourcemap{
 	\maps[datatype=bibtex]{
@@ -939,15 +976,17 @@
 \usepackage[intoc]{nomencl}
 \makenomenclature
 \renewcommand{\nomname}{Index of notation}
+\setlength{\nomlabelwidth}{1.8cm}
+\setlength{\nomitemsep}{-\parsep+1.5pt}
 \renewcommand\nomgroup[1]{%
-  \item[\bfseries
-  \ifstrequal{#1}{A}{\texttt{Geometry of smooth curves}}{%
-  \ifstrequal{#1}{B}{\texttt{Curve framing}}{%
-  \ifstrequal{#1}{C}{\texttt{Geometry of discrete curves}}{%
-  \ifstrequal{#1}{D}{\texttt{Motion of rods}}{%
-  \ifstrequal{#1}{E}{\texttt{Properties of rods}}{%
-  \ifstrequal{#1}{F}{\texttt{Mechanics of rods}}{%
-  \ifstrequal{#1}{G}{\texttt{Particle spring system}}{}}}}}}}%
+  \item[%
+  \ifstrequal{#1}{A}{\tf@nomsec\MakeUppercase{Geometry of smooth curves}}{%
+  \ifstrequal{#1}{B}{\tf@nomsec\MakeUppercase{Curve framing}}{%
+  \ifstrequal{#1}{C}{\tf@nomsec\MakeUppercase{Geometry of discrete curves}}{%
+  \ifstrequal{#1}{D}{\tf@nomsec\MakeUppercase{Motion of rods}}{%
+  \ifstrequal{#1}{E}{\tf@nomsec\MakeUppercase{Properties of rods}}{%
+  \ifstrequal{#1}{F}{\tf@nomsec\MakeUppercase{Mechanics of rods}}{%
+  \ifstrequal{#1}{G}{\tf@nomsec\MakeUppercase{Particle spring system}}{}}}}}}}%
 ]\vspace{12pt}}
 
 
@@ -966,23 +1005,11 @@
 \hypersetup{unicode,psdextra, % https://tex.stackexchange.com/a/69354/154815
 	pdfborder={0 0 0},
 	colorlinks=true,
-	linktoc=page,
+	linktoc=page, %
 	linkcolor=linkcolor,
 	citecolor=citecolor,
 	urlcolor=urlcolor} 
 \urlstyle{same}
-
-% attention a loader apres hypperef (use nameinlink or noabbrev options)
-\usepackage[nameinlink, noabbrev]{cleveref}
-\crefformat{section}{§#2#1#3}
-\Crefname{figure}{Fig/}{Figs.}
-\crefname{figure}{fig.}{figs.}
-\Crefname{figure}{Fig/}{Figs.}
-\crefname{table}{tab.}{tabs.}
-\Crefname{table}{Tab.}{Tabs.}
-\crefname{equation}{eq.}{eqs.}
-\Crefname{equation}{Eq.}{Eqs.}
-
 
 % figure legend
 \newcommand{\figurecaption}[2][]{%
@@ -1048,7 +1075,7 @@
 \definecolor{gray2}{cmyk}{0,0,0,0.2}
 \definecolor{gray4}{cmyk}{0,0,0,0.4}
 \definecolor{gray6}{cmyk}{0,0,0,0.6}
-\definecolor{gray8}{cmyk}{0,0,0,0.9}
+\definecolor{gray8}{cmyk}{0,0,0,0.8}
 
 \definecolor{gray1}{cmyk}{0,0,0,0.1}
 \definecolor{gray3}{cmyk}{0,0,0,0.3}
@@ -1062,17 +1089,29 @@
 
 % \toggletrue{print}
 \iftoggle{print}{
-	\colorlet{urlcolor}{black}
-	\colorlet{citecolor}{black}
-	\colorlet{linkcolor}{black}
-	\colorlet{txtcolor}{Tblue}
-}{
-	\colorlet{urlcolor}{secondary}
+	\colorlet{urlcolor}{gray6}
 	\colorlet{citecolor}{secondary}
-	\colorlet{linkcolor}{accent}
-	\colorlet{txtcolor}{green}
+	\colorlet{linkcolor}{black}
+	\colorlet{txtcolor}{black}
+}{
+	\colorlet{citecolor}{secondary}
+	\colorlet{urlcolor}{gray6}
+	\colorlet{linkcolor}{gray6}
+	\colorlet{txtcolor}{gray6}
 }
 
+\usepackage{textcomp} % € symbol
+
+% attention a loader apres hypperef (use nameinlink or noabbrev options)
+\usepackage[nameinlink]{cleveref}
+\crefformat{section}{#2§#1#3}
+% \crefname{figure}{fig.}{figs.}
+% \crefname{figure}{POUET}{POUET}
+% \Crefname{figure}{Fig/}{Figs.}
+% \crefname{table}{tab.}{tabs.}
+% \Crefname{table}{Tab.}{Tabs.}
+% \crefname{equation}{eq.}{eqs.}
+% \Crefname{equation}{Eq.}{Eqs.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1089,7 +1128,7 @@
 \newcommand{\GetX}[1]{\DivideLengths{#1}{\@PaperWidth}}
 \newcommand{\GetY}[1]{\DivideLengths{#1}{\@PaperHeight}}
 
-\usepackage{textcomp} % € symbol
+
 
 % typo
 \newcommand{\telp}{\textellipsis{}}

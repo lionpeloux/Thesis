@@ -102,7 +102,7 @@ Elements can either be closed or open. The relations between the corresponding n
 			]{figure}{}{Centerline of the discrete biarc model}{fig:discrete_model}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			width=\tmpwidth,
 			border=false,
 			]{%
@@ -111,7 +111,7 @@ Elements can either be closed or open. The relations between the corresponding n
 			}
 		\PhotoTextBox[
 			node=CAbr,
-			anchor=south east,
+			anchor=base east,
 			width=0.9\tmpwidth,
 			border=false,
 			]{%
@@ -135,8 +135,7 @@ Elements can either be closed or open. The relations between the corresponding n
 				   	ghosts 		& $n_g$ 	& $n_s$ 		& $n_s$ \\
 				   	handles 	& $n_h$ 	& $n_s+1$ 		& $n_s$ \\
 				   	\bottomrule
-			   \end{tabularx}%
-			}
+			   \end{tabularx}}
 		\savenodes{A}
 		\intersectnode{Abr -| CAtl}{Pt}
 		\PhotoCaptionRef[
@@ -493,16 +492,6 @@ The unit tangent vector $\vect{t}_{2i}$ (that is the cross-section normal) at ha
 % ---------------------------------------------------------------------------------
 Given the unit tangent vector $\vect{t}_{2i}$, one can define the left ($\vect{\kappa}_{2i}^-$) and right ($\vect{\kappa}_{2i}^+$) curvature at handle vertex $\vect{x}_{2i}$ (see \cref{fig:biarcparam_e}). The left curvature is initially evaluated from the left osculating circle, defined as the circle passing through $\vect{x}_{2i-1}$ and $\vect{x}_{2i}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$. The right curvature is initially evaluated from the right osculating circle, defined as the circle passing through $\vect{x}_{2i}$ and $\vect{x}_{2i+1}$ and tangent to $\vect{t}_{2i}$ at $\vect{x}_{2i}$.\footnote{Remark that the centerline is now approximated with a biarc in the vicinity of $\vect{x}_{2i}$. This is the reason why this model is called the \textquote{biarc model}.}${}^,$\footnote{This model offers the ability to represent discontinuities in curvature -- thus in bending moment -- at handle vertices as the left and right curvatures does not necessarily agree. This is quite different from the classical 3-dof element~\cite{Barnes1999, Adriaenssens1999, Douthe2006} which assumes that the curvature -- thus the bending moment -- is $\mathcal{C}^0$ and can be evaluated at every vertices from the circumscribed osculating circle.}
 
-% \begin{tabularx}{\textwidth}[t]{>{\centering\arraybackslash}m{0.48\textwidth} >{\centering\arraybackslash}X} % >{\centering\arraybackslash}
-% 	\includegraphics[]{E5.pdf}
-% 	&
-% 	$\begin{aligned}[t] % placement: default is "center", options are "top" and "bottom"
-% 	\vect{\kappa b}_{2i}^- &=  \frac{2}{l_{2i-1}} \vect{u}_{2i-1} \times \vect{t}_{2i}
-% 	\\[0.5em]
-% 	\vect{\kappa b}_{2i}^+ &=  \frac{2}{l_{2i}} \vect{t}_{2i} \times \vect{u}_{2i}
-% 	\end{aligned}$
-% \end{tabularx}
-
 However, this values need to be adjusted so that the static condition for rotational equilibrium is satisfied at all time ($\vect{M}^{ext}  + \vect{M}^+ - \vect{M}^- = 0$). Therefore, this condition will be satisfied in particular at the end of the solving process. To achieve this goal, we first compute a realistic mean value ($\vect{M}_{2i}^{\perp}$) for the internal bending moment as~:
 \begin{equation}
 		\vect{M}_{2i}^{\perp}	=  \frac{1}{2} \mat{B}_{i-1} ({\vect{\varkappa}_{2i}^{\perp}}^- - {\rconf{\vect{\varkappa}}_{2i}^{\perp}}^-)
@@ -548,10 +537,11 @@ We assume the twisting moment and the rate of twist to vary linearly over $]\vec
 Thus, the material twist of the rod at mid edge is given by~:
 \begin{subequations}
 	\begin{align}
-		\tau_{i+1/2} = \frac{\Delta\theta_{i}}{{l}_i}\label{eq:d_twist}
+		\tau_{i+1/2} = \frac{\Delta\theta_{i}}{{l}_i}
 		\\[0.5em]
-		\varkappa_{3,\,i+1/2} = \frac{\Delta\theta_{i}}{\rconf{l}_i}\label{eq:d_twist}
+		\varkappa_{3,\,i+1/2} = \frac{\Delta\theta_{i}}{\rconf{l}_i}
 	\end{align}
+	\label{eq:d_twist}
 \end{subequations}
 To compute $\Delta\theta_{i} = \theta_{i+1} - \theta_{i}$ imagine that the rod is framed with a Bishop frame $\{\vect{u},\vect{v},\vect{t}\}$. Because the material frame $\{\vect{d}_1,\vect{d}_2,\vect{d}_3\}$ is also adapted to the rod centerline, it can be transformed into the Bishop frame with a single rotation of angle $\theta(s)$ around $\vect{d}_3(s) =\vect{t}(s)$. Because the Bishop frame does not twist around $\vect{d}_3$, the rate of change of angle $\theta$ along the curve directly leads to the computation of the rate of twist as exposed in \cref{eq:d_twist}.
 
@@ -602,22 +592,6 @@ In the discrete case, the shear force is evaluated at mid span of each edge by :
 Remark that the derivative of the internal moment at mid edge is evaluated by the finite difference of the moment between the two closest vertices. This is in accordance with the quadratic interpolation method of a vector-valued function given in \cref{ch:interpolation}.
 
 Expressed in the form of \cref{eq:dshear_a,eq:dshear_b}, the discrete shear force has the interesting property to remain strictly orthogonal to $\vect{d}_{3,i+1/2} = \vect{u}_i$. While this is true in the continuous world, this property can easily be lost in the discrete case where mean values and derivatives are evaluated through finite summations or finite differences.
-
-%Equivalent equations could be expressed in a scalar form derived from \cref{eq:dshear_a,eq:dshear_b} as~:
-%\begin{subequations}
-%	\begin{alignat}{3}
-%		&F_{1,\;2i+1/2}  =  \frac{\rconf{l}_{2i}}{l_{2i}}
-%		 \left(
-%		 -\frac{M_{2,\,2i+1} - M_{2,\,2i}^{+}}{\rconf{l}_{2i}}
-%		 - \varkappa_{3,\,2i+1/2}M_{1,\,2i+1/2}
-%		 +\varkappa_{1,\,2i+1/2}Q_{2i+1/2}
-%		 \right)
-%		\\[0.5em]
-%		&\vect{F}^{\perp}_{2i+3/2}
-%		=  \vect{u}_{2i+1} &&\times \left( \frac{\vect{M}_{2i+2}^- - \vect{M}_{2i+1}}{l_{2i+1}}+ \frac{\rconf{l}_{2i+1}}{l_{2i+1}} \vect{m}_i \right)
-%		\label{eq:dshear_b}
-%	\end{alignat}
-%\end{subequations}
 
 \subsubsection{Matrix notation}
 Because there is a derivation with respect to $s$ in \cref{eq:dshear_a,eq:dshear_b}, one must be very careful when writing these equations in matrix notation. Indeed, their counterparts will translate differently wether the symbols will be decomposed in the \emph{global} frame basis or in the \emph{material} frame basis.
@@ -1116,8 +1090,6 @@ Some authors have proposed another option to address this problem \cite{Barnes19
 \end{subequations}
 Hence, this criterion is \emph{adaptative} and also \emph{relative} to the size of the problem. The same approach can be adopted for force, velocity or displacement based criteria.
 
-%Expliquer l'interpolation des efforts. Il y a un choix a faire dans la DR. Soit on écrit l'équilibre sur le noeud (de dimension null). Soir on écrit l'équilibre sur une tranche de dimension $l_i+l{i+1}/2$. Mais si l'on veut maintenir la précision des conditions de passage, la DR fonctionne avec des noeuds et pas des tranches, le mieux est d'opter pour un équilibre du noeud. La DR va minimiser les résidus aux noeuds et donc on aura les bonnes conditions de passage sous Fext et Mext. J'ai montré que la convergence était plus rapide et précise. On a pas de décalage dans les diagrammes des efforts (si il y en a, ce sont uniquement les défauts de convergence, le résidu , n'étant pas strictement nul au noeud à la fin de la DR).
-
 \subsection{Stability and critical damping}\label{sec=stab_crit}
 Because we are not interested by the motion itself but by the quasi-static response of the system when properly damped, the time step ($\dt{}$) and the mass of the particles ($m_i^x$, $m_i^{\theta}$) should be chosen in order~:
 \begin{itemize}
@@ -1247,7 +1219,7 @@ The angular velocity of the pendulum is calculated from the conservation of mech
 			]{subfigure}{}{Potential energy of the pendulum for the first steps}{fig:pendulum_Ep}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			xshift=-\tmpwidth,
 			yshift=7mm,
 			width=0.3\textwidth,
@@ -1297,7 +1269,7 @@ The angular velocity of the pendulum is calculated from the conservation of mech
 			]{subfigure}{}{Convergence of the DR process in the phase space}{fig:pendulum_Phase}
 		\PhotoTextBox[
 			node=CAbr,
-			anchor=south east,
+			anchor=base east,
 			xshift=\tmpwidth,
 			yshift=7mm,
 			width=0.3\textwidth,
@@ -1451,16 +1423,8 @@ The structure of the dynamic relaxation algorithm implemented in \emph{Marsupila
 \subsection{Key aspects}
 Discussions about implementing dynamic relaxation can be found in the reports from \citef{Olsson2012} and \citef{Poulsen2015}.
 
-% \subsubsection{Language}
-% Why C\# ?
-
 \subsubsection{Code abstraction}
 To develop a code with the right level of abstraction, it is advisable to refer to common \emph{design patterns} \cite{Bishop2008, Clune2012}.
-
-%Modularité : evaluation courbure, schéma d'intégration, autorefine, autobreak, plasticity
-%Design pattern
-%\cite{Clune2012} : An object-oriented architecture for extensible structural design software
-%\cite{Bishop2008} : design patterns
 
 \subsubsection{Event driven}
 Part of the solver implementation has been written to be \emph{event driven}.\footnote{\blockquote{The events-driven paradigm means that an object called an "event" is sent to the program whenever something happens, without that "something" having to be polled in regular intervals to discover whether it has happened. That "event" may be trapped by the program to perform some actions (i.e. a "handler") -- either synchronous or asynchronous.}} This allows to programmatically alter the solving process during its own execution. For some problems, this paradigm is very powerful and can succeed where more classic procedural or functional programming will fail. For instance this paradigm is currently used to implement auto-refinement of the element. It can be used to deal with breakable materials. In the future, it can be employed to add a level of user interactivity so the user can play with design parameters and see in quasi real-time the results, enhancing its design capabilities and reactivity.
@@ -1478,7 +1442,7 @@ To embrace the complexity of this problematic the reader is invited to refer to 
 	\AddToShipoutPictureBG*{%
 		\PhotoTextBox[
 			node=CAb,
-			anchor=south,
+			anchor=base,
 			width=0.5\textwidth,
 			border=false,
 			]{%
@@ -1497,8 +1461,7 @@ To embrace the complexity of this problematic the reader is invited to refer to 
 					\midrule
 					cost	& 1 	& 1 	& 4 	& 10 	& 20	\\
 					\bottomrule
-				\end{tabularx}%
-			}
+				\end{tabularx}}
 		\savenodes{A}
 		\PhotoCaptionRef[
 			node=Atl, 
@@ -1517,22 +1480,6 @@ then the optimization of the critical pieces of code can begin. To this end, two
 \end{itemize}
 
 
-
-% \begin{table}[!b]
-% \center
-% 	\ra{1.0}
-% 	\begin{tabularx}{0.4\textwidth}{@{} X ccccc @{}}
-% 		\toprule
-% 		 	& add 	& sub 	& mul 	& div 	& sqrt \\
-% 		\midrule
-% 		cost	& 1 		& 1 		& 4 		& 10 		& 20	\\
-% 		\bottomrule
-% 	\end{tabularx}
-% 	\vspace{10pt}
-% 	\captionof{table}[Simple cost model for arithmetic operations]{Simple cost model for arithmetic operations.}
-% 	\label{tab:costmodel}
-% \end{table}
-
 \subsubsection{Algorithmic optimization}
 The analyses made with PerfView showed that rotation and parallel transportation of frames are critical operations for the performance of the program. A thorough work was done to optimize all the costly math routines by using the minimal logic to perform the operations.
 
@@ -1549,58 +1496,18 @@ However, this technologies are relatively recent and still complex to implement 
 \subsubsection{Code abstraction}
 \blockcquote[p.~155]{Watson2014}{In-depth performance optimization will often defy code abstractions.}
 
-% \subsection{Further guidelines}
-% This is a raw list of interesting ressources.
-% \subsubsection{Tips}
-
-% \begin{itemize}
-% \item abstract model
-% \item NLopt, Ipopt that have a C\# warper, accord-framework, alglib
-% \item Proprietary solver Knitro, Mosek
-% \item webAPI C\# Julia Javascript
-% \cite{Moulard2014} : Software Tools for Nonlinear Optimization
-% \end{itemize}
-
-% \href{https://neos-guide.org/}{Neos}
-% The NEOS Server is a free internet-based service for solving numerical optimization problems. It is able to take models specified in a variety of formats (including AMPL, GAMS and MPS) and pass them to a range of both free and commercial solvers (including Gurobi, CPLEX and Cbc). See here for the full list of solvers and input formats that NEOS supports.
-% https://github.com/odow/NEOS.jl
-% http://www.juliaopt.org/
-
-% \subsubsection{DifferentialEquations.jl}
-% (\href{http://docs.juliadiffeq.org/latest/index.html}{Manual} | \href{https://github.com/JuliaDiffEq}{GitHub})
-% Time integration, custom mass matrix, call back to implement kinetic damping, custom integrator
-
-% MathOptInterface.jl :
-
-% An abstraction layer for mathematical optimization solvers (\href{http://www.juliaopt.org/MathOptInterface.jl/latest/apimanual.html}{Manual} | \href{https://github.com/JuliaOpt/MathOptInterface.jl}{GitHub})
-% MathProgBase.jl :
-% This package provides high-level one-shot functions for linear and mixed-integer programming (linprog and mixintprog), as well as a solver-independent low-level interface for implementing advanced techniques that require efficiently solving a sequence of linear programming problems.
-% \url{http://mathprogbasejl.readthedocs.io/en/latest/index.html}
-
-% OOP vs structured programming : \url{https://softwareengineering.stackexchange.com/questions/125753/does-object-orientation-really-affect-algorithm-performance}
-% AoS vs OaS particle vs Collection of Particle.
-
-% \clearpage
-
 \clearpage
 \section{Test case}\label{sec=testcase}
 
 The validation of the model is done through a comparison with the finite element solver \emph{Abaqus}. Several test cases have been studied to confirm that our model gives accurate results on typical problems where coupling between bending and torsion occurs.
 
-\subsection{Constrained arch}\label{sec=testcase}
+\subsection{Constrained arch}\label{sec=constrainedarch}
 
 \subsubsection{Definition of the case}
 
 In this test case, a straight slender beam ($L = \SI{10.0}{m}$) is bent into an arch-like shape (see \cref{fig:bench_arch}).\footnote{We previously employed this case in \cite{Lefevre2017}. A similar example was used by \citef{Bessini2017}.} The cross-section is rectangular ($\SI{4x6}{cm}$) and the bending occurs towards the strong inertia, provoking an out-of-plane displacement of the arch.\footnote{Note that if the arch had been bent against the weak inertia it would have remained planar.} The material axial and shear modulus are chosen to be $E=\SI{25}{GPa}$ and $G=\SI{10}{GPa}$ with a Poisson ratio of $\nu=0.25$.
 
 The beam is supposed to be clamped at both ends, so that the material tangent $\vect{d}_3$ is forced to lie in the $xz$ plane, making an angle of magnitude $\pi/3$ with respect to the $x$ axis, and so that the second material axis $\vect{d}_2$ is collinear to the $y$ axis. The distance between the ends is set to $\SI{2.0}{m}$.
-% \begin{figure}[!h]
-%      	\centering
-% 	\includegraphics[width=0.8\textwidth]{bench_A.pdf}
-% 	\captionof{figure}[Test case of a constrained arch]{Test case of a constrained arch.}
-% 	\label{fig:bench_arch}
-% \end{figure}
-
 
 \afterpage{%
 	\AddToShipoutPictureBG*{% 
@@ -1668,15 +1575,6 @@ The beam is supposed to be clamped at both ends, so that the material tangent $\
 		\hbox{\vspace{\tmpheight}}
 	}
 }
-
-% \begin{figure}[p]
-% \begin{fullpage}
-%      	\centering
-% 	\includegraphics[width=0.9\textwidth]{bench_arch_diagram.pdf}
-% 	\captionof{figure}[Comparison of normalized force diagrams]{Comparison of normalized force diagrams for the finest discretization ($n_{el}=96$ | Marsupilami~: blue | Abaqus : grey).}
-% 	\label{fig:bench_arch_diagram}
-% \end{fullpage}
-% \end{figure}
 
 \subsubsection{Results}
 
@@ -1759,7 +1657,7 @@ The superposition of the internal force diagrams obtained for the finest discret
 			]{table}{}{Internal forces for the arch test case}{tab:resA_force}
 		\PhotoTextBox[
 			node=Abl,
-			anchor=south east,
+			anchor=base east,
 			xshift=-2cm,
 			width=0.3\textwidth,
 			border=false,
@@ -1838,7 +1736,7 @@ The superposition of the internal force diagrams obtained for the finest discret
 			]{table}{}{Internal moments for the arch test case}{tab:resA_moment}
 		\PhotoTextBox[
 			node=Abr,
-			anchor=south west,
+			anchor=base west,
 			xshift=2cm,
 			width=0.3\textwidth,
 			border=false,
@@ -1904,7 +1802,7 @@ The superposition of the internal force diagrams obtained for the finest discret
 			]{table}{}{Geometric parameters for the arch test case}{tab:resA_geo}
 		\PhotoTextBox[
 			node=CAbl,
-			anchor=south west,
+			anchor=base west,
 			% yshift=-\PhotoRefSkip,
 			width=0.5\textwidth,
 			border=false,
