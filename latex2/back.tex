@@ -1,7 +1,7 @@
 % \PassOptionsToPackage{showrules}{blurb}
 % \PassOptionsToPackage{showframe}{blurb}
 % \PassOptionsToPackage{showbleed}{blurb}
-\PassOptionsToPackage{showcanon}{blurb}
+% \PassOptionsToPackage{showcanon}{blurb}
 \PassOptionsToPackage{nobleed}{blurb}
 
 \documentclass[12pt,fleqn]{thesis}
@@ -150,6 +150,7 @@
 \graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
 \addbibresource{library.bib}
 
+
 \begin{document}
 
 % --------------------------
@@ -165,12 +166,18 @@
 \include{_preface}
 \include{_abstracts}
 
+
+% \renewcommand{\contentsname}{Contents}
+% \renewcommand{\listfigurename}{Figures}
+% \renewcommand{\listtablename}{Tables}
+
+
 % tocloft
 \tableofcontents
 \listoffigures
 \listoftables
 
-% \showthe\cftpartnumwidth
+
 
 % --------------------------
 % Main matter
@@ -182,12 +189,26 @@
 	\include{ch1_introduction/chapter}
 	
 	\part{Elastic gridshells}\label{part=1}
-	% \chapter{wowowo}
-	% \section{héhé}
+	\chapter{Mon premier chapitre}
+		\section{section un un}
+		\section{section un deux}
+		\section{section un trois}
+	\chapter{Mon second chapitre}
+		\section{section deux un}
+		\section{section deux deux}
+		\section{section deux trois}
 	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 % 	\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 	\part{Rich Kirchhoff beam model}\label{part=2}
+	\chapter{Mon premier chapitre}
+		\section{section un un}
+		\section{section un deux}
+		\section{section un trois}
+	\chapter{Mon second chapitre}
+		\section{section deux un}
+		\section{section deux deux}
+		\section{section deux trois}
 	% \include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 % 	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]

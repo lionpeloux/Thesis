@@ -252,21 +252,6 @@
 \DeclareRobustCommand{\tf@nomsec}{\tf@subsec}
 \DeclareRobustCommand{\tf@nomtxt}{\small}
 
-% TOC
-\DeclareRobustCommand{\tf@toc@part}{\font@part\bfseries\fontsize{20pt}{24pt}\selectfont}
-\DeclareRobustCommand{\tf@toc@chap}{\font@chap\Large\bfseries}
-\DeclareRobustCommand{\tf@toc@chapalt}{\font@chap\Large}
-\DeclareRobustCommand{\tf@toc@sec}{\font@alt\bfseries\normalsize}
-\DeclareRobustCommand{\tf@toc@subsec}{\font@alt\small}
-
-% LOFT
-\DeclareRobustCommand{\tf@loft@txt}{\font@alt\small}
-\DeclareRobustCommand{\tf@loft@label}{\font@alt\small\bfseries}
-\DeclareRobustCommand{\tf@loft@num}{\font@alt\small}
-%
-\DeclareRobustCommand{\tf@loft@subtxt}{\font@alt\small}
-\DeclareRobustCommand{\tf@loft@sublabel}{\font@alt\small}
-\DeclareRobustCommand{\tf@loft@subnum}{\font@alt\small}
 
 %% heading format
 %% --------------------------
@@ -467,7 +452,10 @@
 	\path (CAtl |- Fbr) node (Tbl) {};
 	\path[fill=secondary] (Ftl) rectangle (Fbr);
 	\node[anchor=base west] at (Tbl){
-		\parbox[b]{\ChapterBoxTextWidth}{\raggedright{\scshape\chaptername~\chapterlabel{}}\\[8pt]\color{secondary}\MakeUppercase{#1}}
+		\parbox[b]{\ChapterBoxTextWidth}{%
+			\raggedright%
+			\ifdefvoid{\chapterlabel}{}{\scshape\chaptername~\chapterlabel{}\\[8pt]}
+			\color{secondary}\MakeUppercase{#1}}
 		% \fbox{\raggedright\color{black}#1}
 	};
 	\path (Fbr -| PPtr) node (@BLANKtr) {};
@@ -559,6 +547,17 @@
 
 \RequirePackage{titletoc}
 
+\RequirePackage[]{tocbibind} % puts toc/loft/bib in toc
+\settocname{Contents}
+\setlofname{Figures}
+\setlotname{Tables}
+% \AtEndPreamble{%
+% 	\renewcommand{\contentsname}{Contents}
+% 	\renewcommand{\listfigurename}{Figures}
+% 	\renewcommand{\listtablename}{Tables}
+% }	
+
+
 % \usepackage[]{tocbibind}
 % \usepackage[titles, subfigure]{tocloft}
 
@@ -572,55 +571,97 @@
 \setcounter{lofdepth}{2}
 \setcounter{lotdepth}{2}
 
+% TOC
+%\fontsize{32pt}{38pt}\selectfont
+\newfontfamily\font@toc{FuturaLT-Light}[Scale = MatchUppercase]
+
+\DeclareRobustCommand{\tf@toc@part}{\font@toc\huge}%\font@part\bfseries
+\DeclareRobustCommand{\tf@toc@chap}{\font@toc\Huge\bfseries}
+\DeclareRobustCommand{\tf@toc@chapalt}{\font@chap\Large}
+\DeclareRobustCommand{\tf@toc@sec}{\font@alt\bfseries\normalsize}
+\DeclareRobustCommand{\tf@toc@subsec}{\font@alt\small}
+
+% LOFT
+\DeclareRobustCommand{\tf@loft@txt}{\font@alt\small}
+\DeclareRobustCommand{\tf@loft@label}{\font@alt\small\bfseries}
+\DeclareRobustCommand{\tf@loft@num}{\font@alt\small}
+%
+\DeclareRobustCommand{\tf@loft@subtxt}{\font@alt\small}
+\DeclareRobustCommand{\tf@loft@sublabel}{\font@alt\small}
+\DeclareRobustCommand{\tf@loft@subnum}{\font@alt\small}
+
+
 \newlength\partnumwidth
 \newlength\partindent
 
 \setlength{\partindent}{-1cm}
 \setlength{\partnumwidth}{1cm}
 
-\titlecontents{part}
-	[0cm]
-	{\tf@toc@part}
-	{\hspace*{-3cm}\fbox{\parbox[b]{3cm}{\raggedleft\thecontentslabel\hspace*{\marginsep}}}}
-	{}
-	{\hfill\contentspage}
-	[]
-
 % \titlecontents{part}
-% 	[0em]
-%     {\vspace{2em}\large\bfseries\sffamily\relax}
-% 	{\contentslabel[\relax]{0em}}
+% 	[0cm]
+% 	{\tf@toc@part}
+% 	{\hspace*{-3cm}\fbox{\parbox[b]{3cm}{\raggedleft\thecontentslabel\hspace*{\marginsep}}}}
 % 	{}
 % 	{\hfill\contentspage}
+% 	[]
 
-% \titlecontents{part}[0pt]{\normalsize\bfseries\protect\addvspace{15pt}}%
-% 	{}{\partname{} }%
-% 	{\enspace\titlerule\contentspage}%
+% \titlecontents{chapter}
+% 	[0cm]
+% 	{}
+% 	{\tf@toc@chap\fbox{\parbox[b]{1.5em}{\thecontentslabel}}}
+% 	{\tf@toc@chapalt}
+% 	{\hfill\contentspage}
+% 	[]
 
-\titlecontents{chapter}
+\newtoggle{chapterafterpart}
+
+\titlecontents{part}
 	[0cm]
-	{\tf@toc@chap}
-	{\fbox{\parbox[b]{1.5em}{\thecontentslabel}}}
+	{\addvspace{1cm}\filcenter}
+	{\tf@toc@part\partname~\thecontentslabel\\*\ico\quad}
 	{}
-	{\hfill\contentspage}
-	[]
+	{\tf@toc@part\quad\ico}
+	[\addvspace{1cm}\global\toggletrue{chapterafterpart}]
 
 \titlecontents{chapter}
+	[0cm]% left
+	{%
+		\ifdefvoid{\thecontentslabel}
+		{}%
+		{\iftoggle{chapterafterpart}{true}{false}\iftoggle{chapterafterpart}{\global\togglefalse{chapterafterpart}}{\addvspace{1cm}}}%
+	}% above
+	{%
+		\tf@toc@chap%
+		\hspace*{-2cm}%
+		\fbox{\parbox[b]{2cm}{\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
+	}
+	{\tf@toc@chapalt}
+	{\hfill\contentspage}% filler
+	[]% below
+
+
+
+\titlecontents{section}
 	[0cm]
 	{\tf@toc@sec}
-	{\fbox{\parbox[b]{1.5em}{\thecontentslabel}}}
+	{\fbox{\parbox[b]{2.5em}{\thecontentslabel}}}
 	{}
 	{\hfill\contentspage}
 	[]
 
 
-\titlecontents{chapter}
+\titlecontents{subsection}
 	[0cm]
 	{\tf@toc@subsec}
-	{\fbox{\parbox[b]{1.5em}{\thecontentslabel}}}
+	{\fbox{\parbox[b]{2.5em}{\thecontentslabel}}}
 	{}
 	{\hfill\contentspage}
 	[]
+
+% \titlecontents*{subsection}[0pt]
+% 	{\upshape}{}{}
+% 	{, \thecontentspage}[ (][. ][)]
+
 % \titlecontents{chapter}
 % 	[3.8em] 								% left
 % 	{\tf@toc@chap}							% above
