@@ -1,3 +1,5 @@
+% !TEX TS-program = XeLaTeX
+
 % \PassOptionsToPackage{showrules}{blurb}
 % \PassOptionsToPackage{showframe}{blurb}
 % \PassOptionsToPackage{showbleed}{blurb}
@@ -162,10 +164,11 @@
 
 \input{head/titlepage.tex}
 % \restoregeometry
-\include{_dedication}
-\include{_preface}
-\include{_abstracts}
-
+\setlength{\parindent}{1em}
+\input{_dedication}
+\input{_preface}
+\input{_abstracts}
+\setlength{\parindent}{0em}
 
 % \renewcommand{\contentsname}{Contents}
 % \renewcommand{\listfigurename}{Figures}
@@ -178,7 +181,6 @@
 \listoftables
 
 
-
 % --------------------------
 % Main matter
 % --------------------------
@@ -186,59 +188,44 @@
 
 	\newrefsection
 
-	\include{ch1_introduction/chapter}
+	\input{ch1_introduction/chapter}
 	
 	\part{Elastic gridshells}\label{part=1}
-	\chapter{Mon premier chapitre}
-		\section{section un un}
-		\section{section un deux}
-		\section{section un trois}
-	\chapter{Mon second chapitre}
-		\section{section deux un}
-		\section{section deux deux}
-		\section{section deux trois}
-	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\input{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
 	\part{Rich Kirchhoff beam model}\label{part=2}
-	\chapter{Mon premier chapitre}
-		\section{section un un}
-		\section{section un deux}
-		\section{section un trois}
-	\chapter{Mon second chapitre}
-		\section{section deux un}
-		\section{section deux deux}
-		\section{section deux trois}
-	% \include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\input{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 % 	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 % 	\include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ch8_conclusion/chapter}
+	
+	\input{ch8_conclusion/chapter}
 
-% % APPENDINX MATTER
-% \part{Appendix}	\label{part=3}
-% \appendix
-% 	\include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-
+% APPENDINX MATTER
+\part{Appendix}	\label{part=3}
+\begin{appendices}
+	\input{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\input{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\input{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+\end{appendices}
 % BACK MATTER
-% \backmatter
+\backmatter
 
-% 	% go back to root for bookmarks
-% 	\bookmarksetup{startatroot}
+	% go back to root for bookmarks
+	\bookmarksetup{startatroot}
 
-% 	% list of notations
-% 	\include{_notations}
+	% list of notations
+	\input{_notations}
 
-% 	% general bibliography
-% 	\printbibliography[heading=bibintoc]
+	% general bibliography
+	\printbibliography[heading=bibintoc]
 
-% 	% personal publications
-% 	\newrefsection
-% 	\newrefcontext[sorting=ydnt]
-% 	\nocite{*}
-% 	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
+	% personal publications
+	\newrefsection
+	\newrefcontext[sorting=ydnt]
+	\nocite{*}
+	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
 	
 
 \end{document}

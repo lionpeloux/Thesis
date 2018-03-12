@@ -18,7 +18,6 @@
 	fleqn,		% equations are left aligned
 	]{book}
 
-
 % \RequirePackage{sectsty} 
 \RequirePackage{setspace}
 
@@ -32,26 +31,6 @@
 \RequirePackage{xparse}
 \RequirePackage{refcount,lastpage}
 \RequirePackage{printlen}
-% \RequirePackage{adjustbox}
-% \RequirePackage{eso-pic}
-
-
-
-
-% \RequirePackage[
-% 	top = 12mm-6.35mm,
-% 	outer = 36mm-6.35mm,
-% 	bottom = 36mm-6.35mm,
-% 	% inner = 12mm-0.317mm-12.70mm,
-% 	inner = 0mm,
-% 	binding = 0mm,
-% 	% booksize = a4,
-% 	% booksize = TB_6x9,
-% 	booksize = TB_8x10,
-% 	pagemodulo = 4,
-% 	gutter=2.399cm,
-% 	% nobleed,
-% 	]{blurb}
 
 % golden section
 \RequirePackage[
@@ -70,8 +49,37 @@
 	]{blurb}
 \RequirePackage{photo}
 
-
-
+% help : https://tex.stackexchange.com/a/121881/154815
+% needs to be immediately after loading book.cls
+\tracingpatches
+% choose manualy which chapter has figures / tables 
+% and put a separator in the lof / lot
+\patchcmd{\@chapter}
+	{\addtocontents{lof}{\protect\addvspace{10\p@}}}
+	{%
+		\expandafter\ifx\@chapapp\appendixname
+			\typeout{LOF_APP}
+		\else
+			\typeout{LOF_CHAP}
+			\ifnumcomp{\value{chapter}}{=}{2}{\typeout{SEPARATOR}\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{3}{\typeout{SEPARATOR}\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{5}{\typeout{SEPARATOR}\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{6}{\typeout{SEPARATOR}\protect\tocseparator[lof]}{}%
+		\fi
+	}
+	{}{}
+\patchcmd{\@chapter}
+	{\addtocontents{lot}{\protect\addvspace{10\p@}}}
+	{%
+	\expandafter\ifx\@chapapp\appendixname
+		\typeout{LOT_APP}
+		\ifnumcomp{\value{chapter}}{=}{1}{\typeout{SEPARATOR}\protect\tocseparator[lot]}{}%
+	\else
+		\typeout{LOT_CHAP}
+		% \ifnumcomp{\value{chapter}}{=}{2}{\typeout{SEPARATOR}\protect\tocseparator[lot]}{}%
+	\fi
+	}
+	{}{}
 
 
 % \RequirePackage{color}
@@ -292,7 +300,7 @@
 %%
 %%%%%
 \RequirePackage{enumitem}
-\setlist[itemize]{label=\ico,leftmargin=0pt,labelsep*=8pt} % rule{4pt}{4pt}
+\setlist[itemize]{label=\ico{},leftmargin=0pt,labelsep*=8pt} % rule{4pt}{4pt}
 
 
 
@@ -315,7 +323,7 @@
 
 % Style for PhotoCaptionRef labels
 \DeclareCaptionListFormat{phantom}{#2}
-\DeclareCaptionListFormat{phantomsub}{#2)}
+\DeclareCaptionListFormat{phantomsub}{#2}
 \DeclareCaptionLabelFormat{phantom}{\thefigure\bothIfSecond{}{\thesubfigure}}
 \DeclareCaptionFormat{phantom}{#1#2#3}
 \DeclareCaptionStyle{phantom}{
@@ -454,7 +462,7 @@
 	\node[anchor=base west] at (Tbl){
 		\parbox[b]{\ChapterBoxTextWidth}{%
 			\raggedright%
-			\ifdefvoid{\chapterlabel}{}{\scshape\chaptername~\chapterlabel{}\\[8pt]}
+			\ifdefvoid{\chapterlabel}{}{\scshape\@chapapp~\chapterlabel{}\\[8pt]}
 			\color{secondary}\MakeUppercase{#1}}
 		% \fbox{\raggedright\color{black}#1}
 	};
@@ -546,6 +554,8 @@
 %%%%%
 
 \RequirePackage{titletoc}
+\RequirePackage[titles, subfigure]{tocloft}
+\RequirePackage{appendix}
 
 \RequirePackage[]{tocbibind} % puts toc/loft/bib in toc
 \settocname{Contents}
@@ -558,8 +568,6 @@
 % }	
 
 
-% \usepackage[]{tocbibind}
-% \usepackage[titles, subfigure]{tocloft}
 
 % these counter are supposed to be defined either by the subfig or tocloft package
 % but here we cheat as we need subfigure usage within tocloft but with the subcaption package  
@@ -571,93 +579,173 @@
 \setcounter{lofdepth}{2}
 \setcounter{lotdepth}{2}
 
+\newlength\toc@partskip
+\newlength\toc@chapskip
+\newlength\toc@lmargin
+\newlength\toc@rmargin
+
+\setlength{\toc@lmargin}{0cm}
+\setlength{\toc@rmargin}{2cm}
+\contentsmargin{0.85cm}
+
+% toc separator (3 square bullets)
+\DeclareRobustCommand{\tocseparator}[1][toc]{%
+	\addtocontents{#1}{\protect\vskip \toc@partskip}%
+	\addtocontents{#1}{\protect\centering\protect\ico\protect\quad\protect\ico\protect\quad\protect\ico}%
+	\addtocontents{#1}{\protect\vskip \toc@partskip}%
+}
+
+
+
 % TOC
 %\fontsize{32pt}{38pt}\selectfont
-\newfontfamily\font@toc{FuturaLT-Light}[Scale = MatchUppercase]
-
-\DeclareRobustCommand{\tf@toc@part}{\font@toc\huge}%\font@part\bfseries
-\DeclareRobustCommand{\tf@toc@chap}{\font@toc\Huge\bfseries}
-\DeclareRobustCommand{\tf@toc@chapalt}{\font@chap\Large}
-\DeclareRobustCommand{\tf@toc@sec}{\font@alt\bfseries\normalsize}
-\DeclareRobustCommand{\tf@toc@subsec}{\font@alt\small}
+% part
+\setlength{\toc@partskip}{1.25cm}
+\newfontfamily\font@toc@part{FuturaLT-Light}[Scale = MatchUppercase]
+\DeclareRobustCommand{\tf@toc@part}{\font@toc@part\large}%\font@part\bfseries
+% front/back chapters
+\newfontfamily\font@toc@fbchap{FuturaLT}[Scale = MatchUppercase]
+\DeclareRobustCommand{\tf@toc@fbchap}{\font@toc@fbchap\Large}
+% main chapter
+\newfontfamily\font@toc@mainchap{FuturaLT-Heavy}[Scale = MatchUppercase]
+\DeclareRobustCommand{\tf@toc@mainchap}{\font@toc@mainchap\Huge\bfseries}
+% appendix chapter
+\newfontfamily\font@toc@appchap{FuturaLT}[Scale = MatchUppercase]
+\DeclareRobustCommand{\tf@toc@appchap}{\font@toc@appchap\Huge}
+% section
+\newfontfamily\font@toc@sec{FuturaLT}[Scale = MatchUppercase]
+\DeclareRobustCommand{\tf@toc@sec}{\font@toc@sec\large}
+% subsection
+\newfontfamily\font@toc@subsec{FuturaLT-Light}[Scale = MatchUppercase]
+\DeclareRobustCommand{\tf@toc@subsec}{\font@toc@subsec\small}
+% chapter page num
+\newfontfamily\font@toc@pchap{FuturaLT-Heavy}[Scale = MatchUppercase]
+\DeclareRobustCommand{\tf@toc@pchap}{\font@toc@pchap\large}
 
 % LOFT
-\DeclareRobustCommand{\tf@loft@txt}{\font@alt\small}
-\DeclareRobustCommand{\tf@loft@label}{\font@alt\small\bfseries}
-\DeclareRobustCommand{\tf@loft@num}{\font@alt\small}
-%
-\DeclareRobustCommand{\tf@loft@subtxt}{\font@alt\small}
-\DeclareRobustCommand{\tf@loft@sublabel}{\font@alt\small}
-\DeclareRobustCommand{\tf@loft@subnum}{\font@alt\small}
+\newfontfamily\font@toc@loft{FuturaLT-Light}[Scale = MatchUppercase]
+\DeclareRobustCommand{\tf@loft@ft}{\font@toc@loft\small\bfseries}
+\DeclareRobustCommand{\tf@loft@subft}{\font@toc@loft\footnotesize}
 
 
-\newlength\partnumwidth
-\newlength\partindent
-
-\setlength{\partindent}{-1cm}
-\setlength{\partnumwidth}{1cm}
-
-% \titlecontents{part}
-% 	[0cm]
-% 	{\tf@toc@part}
-% 	{\hspace*{-3cm}\fbox{\parbox[b]{3cm}{\raggedleft\thecontentslabel\hspace*{\marginsep}}}}
-% 	{}
-% 	{\hfill\contentspage}
-% 	[]
-
-% \titlecontents{chapter}
-% 	[0cm]
-% 	{}
-% 	{\tf@toc@chap\fbox{\parbox[b]{1.5em}{\thecontentslabel}}}
-% 	{\tf@toc@chapalt}
-% 	{\hfill\contentspage}
-% 	[]
+\preto{\frontmatter}{%
+	\addtocontents{toc}{\protect\setlength{\protect\toc@chapskip}{0cm}}
+	\addtocontents{toc}{\protect\let\protect\tf@toc@chap\protect\tf@toc@fbchap}
+}
+\preto{\tableofcontents}{%
+	\addtocontents{toc}{\protect\vskip 1em}
+}
+\preto{\listoffigures}{%
+	\addtocontents{lof}{\protect\setlength{\protect\toc@partskip}{1cm}}
+}
+\preto{\mainmatter}{%
+	\addtocontents{toc}{\protect\setlength{\protect\toc@chapskip}{1em}}
+	\tocseparator
+	\addtocontents{toc}{\protect\let\protect\tf@toc@chap\protect\tf@toc@mainchap}
+}
+\BeforeBeginEnvironment{appendices}{%
+	\addtocontents{toc}{\protect\let\protect\tf@toc@chap\protect\tf@toc@appchap}
+	\addtocontents{toc}{\protect\renewcommand{\protect\@chapapp}{\appendixname}}
+}
+\preto{\backmatter}{%
+	\addtocontents{toc}{\protect\setlength{\protect\toc@chapskip}{0cm}}
+	\addtocontents{toc}{\protect\let\protect\tf@toc@chap\protect\tf@toc@fbchap}
+	\tocseparator
+}
 
 \newtoggle{chapterafterpart}
 
 \titlecontents{part}
-	[0cm]
-	{\addvspace{1cm}\filcenter}
-	{\tf@toc@part\partname~\thecontentslabel\\*\ico\quad}
+	[\toc@lmargin]
+	{\contentsmargin{0cm}\addvspace{\toc@partskip}\filcenter}
+	% {\tf@toc@part\partname~\thecontentslabel\\*\ico\quad}
+	{\tf@toc@part\ico\quad\partname~\thecontentslabel~:~}
 	{}
 	{\tf@toc@part\quad\ico}
-	[\addvspace{1cm}\global\toggletrue{chapterafterpart}]
+	[\addvspace{\toc@partskip}\global\toggletrue{chapterafterpart}]
 
 \titlecontents{chapter}
-	[0cm]% left
-	{%
-		\ifdefvoid{\thecontentslabel}
-		{}%
-		{\iftoggle{chapterafterpart}{true}{false}\iftoggle{chapterafterpart}{\global\togglefalse{chapterafterpart}}{\addvspace{1cm}}}%
-	}% above
-	{%
-		\tf@toc@chap%
-		\hspace*{-2cm}%
-		\fbox{\parbox[b]{2cm}{\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
+	[\toc@lmargin]% left
+	{% above
+		% \ifdefvoid{\thecontentslabel}{}{}
+		\tf@toc@chap
+		\iftoggle{chapterafterpart}{%
+			\global\togglefalse{chapterafterpart}
+		}{%
+			\addvspace{\toc@chapskip}
+		}%
 	}
-	{\tf@toc@chapalt}
-	{\hfill\contentspage}% filler
+	{% numbered
+		\hspace*{-2cm}%
+		\fbox{\parbox[b]{2cm}{\color{secondary}\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
+	}
+	{% unnumbered
+	}
+	{\hfill{\tf@toc@pchap\contentspage}}% filler
 	[]% below
 
-
-
 \titlecontents{section}
-	[0cm]
+	[\toc@lmargin]
 	{\tf@toc@sec}
-	{\fbox{\parbox[b]{2.5em}{\thecontentslabel}}}
+	{%
+		\hspace*{-2cm}%
+		\fbox{\parbox[b]{2cm}{\color{secondary}\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
+	}
 	{}
 	{\hfill\contentspage}
 	[]
-
 
 \titlecontents{subsection}
-	[0cm]
+	[\toc@lmargin]
 	{\tf@toc@subsec}
-	{\fbox{\parbox[b]{2.5em}{\thecontentslabel}}}
+	{}
 	{}
 	{\hfill\contentspage}
 	[]
 
+% LOF LOT
+\titlecontents{figure}
+	[0cm]
+	{\tf@loft@ft}
+	{%
+		\hspace*{-2cm}%
+		\fbox{\parbox[b]{2cm}{\color{secondary}\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
+	}
+	{}
+	{\hfill\contentspage}
+	[]
+\titlecontents{table}
+	[0cm]
+	{\tf@loft@ft}
+	{%
+		\hspace*{-2cm}%
+		\fbox{\parbox[b]{2cm}{\color{black}\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
+	}
+	{}
+	{\hfill\contentspage}
+	[]
+
+%% SUBFIGURE
+\setlength{\cftsubfigindent}{-2cm}
+\setlength{\cftsubfignumwidth}{2cm}
+\renewcommand{\cftsubfigpresnum}{\hfill}
+\renewcommand{\cftsubfigaftersnum}{\hspace*{\marginsep}}
+\renewcommand{\cftsubfigleader}{\hfill}
+\renewcommand{\cftsubfigfont}{\tf@toc@subsec}
+\renewcommand{\cftsubfigpagefont}{\tf@toc@subsec}
+
+
+
+	% \titlecontents{subfigure}
+% 	[0cm]
+% 	{\tf@toc@subsec}
+% 	{%
+% 	% \hspace*{-2cm}%
+% 	% \fbox{\parbox[b]{2cm}{\color{black}\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
+% 	}
+% 	{}
+% 	{\hfill\contentspage}
+% 	[]
 % \titlecontents*{subsection}[0pt]
 % 	{\upshape}{}{}
 % 	{, \thecontentspage}[ (][. ][)]
@@ -883,8 +971,6 @@
 
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% QUOTATIONS
@@ -981,11 +1067,11 @@
 \usepackage{hyperxmp} % pdf metadada (LDP)
 %%\usepackage[a-1b]{pdfx}
 
-\usepackage{hyperref} % 
+\RequirePackage{hyperref} % 
 \hypersetup{unicode,psdextra, % https://tex.stackexchange.com/a/69354/154815
 	pdfborder={0 0 0},
 	colorlinks=true,
-	linktoc=page, %
+	linktoc=all, %
 	linkcolor=linkcolor,
 	citecolor=citecolor,
 	urlcolor=urlcolor} 
@@ -1067,7 +1153,7 @@
 \colorlet{accent}{Tblue}
 \definecolor{secondary}{RGB}{244, 35, 0}
 
-% \toggletrue{print}
+\toggletrue{print}
 \iftoggle{print}{
 	\colorlet{urlcolor}{gray6}
 	\colorlet{citecolor}{secondary}

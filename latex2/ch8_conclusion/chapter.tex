@@ -10,10 +10,14 @@
 % !BIB program = biber
 
 \newrefsegment
-\addtocontents{toc}{\protect\vskip 1em}
+
 \chapter*{Conclusion}\label{chp=conclu}
+
+% \addtocontents{toc}{\protect\vskip 1.5cm}
+% \addtocontents{toc}{\protect\centering\protect\ico\protect\quad\protect\ico\protect\quad\protect\ico}
+% \addtocontents{toc}{\protect\vskip 1.5cm}
 \bookmarksetup{startatroot} % ensure the conclusion is not inside part II in bookmarks
-\addcontentsline{toc}{chapter}{\textbf{Conclusion}}
+\addcontentsline{toc}{chapter}{Conclusion}
 \markboth{Conclusion}{Conclusion} % necessary to have the correct header with \chapter* and book.cls
 
 \begin{otherlanguage}{french}
