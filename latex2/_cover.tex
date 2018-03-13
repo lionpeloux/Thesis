@@ -11,19 +11,20 @@
 % !BIB program = biber
 
 
-\PassOptionsToPackage{showrules}{blurb}
+% \PassOptionsToPackage{showrules}{blurb}
 % \PassOptionsToPackage{showframe}{blurb}
-\PassOptionsToPackage{showbleed}{blurb}
+% \PassOptionsToPackage{showbleed}{blurb}
 % \PassOptionsToPackage{showcanon}{blurb}
-% \PassOptionsToPackage{nobleed}{blurb}
+\PassOptionsToPackage{nobleed}{blurb}
 \PassOptionsToPackage{cover}{blurb}
 
 \documentclass[12pt,fleqn]{thesis}
 	\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}{./cover/}}
 	\addbibresource{library.bib}
 
-\usepackage{multicol}
 
+
+\newlength\CoverWidth
 \newlength\MainBarYOffset
 \newlength\MainBarHeight
 \newlength\MainBarStepWidth
@@ -31,6 +32,12 @@
 \newlength\AuthorYMargin
 \newlength\AuthorWidth
 \newlength\AuthorRuleWidth
+\newlength\BackTitleTopMargin
+\newlength\BackTitleSideMargin
+\newlength\BackTextYOffset
+\newlength\BackTickMargin
+%
+\setlength{\CoverWidth}{\PaperWidth/2-\BleedOuterMargin-\BlurbGutterWidth/2}
 %
 \setlength{\MainBarYOffset}{\PageHeight/2}
 \setlength{\MainBarHeight}{2.5cm}
@@ -39,23 +46,33 @@
 %
 \setlength{\AuthorYMargin}{1.5cm}
 \setlength{\AuthorRuleWidth}{4mm}
+%
+\setlength{\BackTitleTopMargin}{3cm}
+\setlength{\BackTitleSideMargin}{3.0cm}
+\setlength{\BackTickMargin}{0.5cm}
 
 % FONT FAMILY
 \newfontfamily\FTRegular{FuturaLT}[Scale = MatchUppercase]
 \newfontfamily\FTLight{FuturaLT-Light}[Scale = MatchUppercase]
 \newfontfamily\FTBold{FuturaLT-Bold}[Scale = MatchUppercase]
 \newfontfamily\FTHeavy{FuturaLT-Heavy}[Scale = MatchUppercase]
+\newfontfamily\FTBookOblique{FuturaLT-BookOblique}[Scale = MatchUppercase]
 \newfontfamily\GSLight{GillSans-Light}[Scale = MatchUppercase]
 
-% TYPE FACE
+% TYPE FACE FRONT COVER
 \DeclareRobustCommand{\tfgridshell}{\FTBold\fontsize{70pt}{0pt}\selectfont}
 \DeclareRobustCommand{\tfelastica}{\FTLight\fontsize{60pt}{0pt}\selectfont}
 \DeclareRobustCommand{\tfauthor}{\FTRegular\fontsize{16pt}{0pt}\selectfont}
 \DeclareRobustCommand{\tfyear}{\FTHeavy\fontsize{25pt}{0pt}\selectfont}
 \DeclareRobustCommand{\tfphd}{\FTHeavy\fontsize{30pt}{0pt}\selectfont}
+% TYPE FACE BACK COVER
+\DeclareRobustCommand{\tfHA}{\FTBookOblique\fontsize{15pt}{0pt}\selectfont}
+\DeclareRobustCommand{\tfHB}{\FTBold\fontsize{16pt}{0pt}\selectfont}
 \DeclareRobustCommand{\tftxt}{\GSLight\small}
-
+\usepackage{multicol}
 \usepackage{adjustbox}
+\usepackage{soul}
+
 
 \begin{document}
 \thispagestyle{empty}
@@ -99,12 +116,28 @@
 		\path[use as bounding box] (0,0);
 	\end{tikzpicture}
 	%
+	\sodef\spaceout{}{0pt plus 1fil}{.4em plus 1fil}{0pt}%
 	\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+		\coordinate[xshift=\BackTitleSideMargin, yshift=-\BackTitleTopMargin] (HA) at (PGtl);
+		\node[anchor=base west, yshift=0cm] at (HA){%
+			\tfHA%
+			\fbox{\parbox[b]{\CoverWidth-2\BackTitleSideMargin}{\spaceout{Modeling of bending-torsion couplings in active-bending structures}}}%
+		};
+		\path[fill,black] (PPtl |- HA) rectangle ([xshift=-\BackTickMargin, yshift=2mm]HA);
+		\coordinate[yshift=-0.75cm] (HB) at (HA);
+		\path[fill,secondary] (PPtl |- HB) rectangle ([xshift=-\BackTickMargin, yshift=4mm]HB);
+		\node[anchor=base west, yshift=0cm] at (HB){%
+			\tfHB%
+			\fbox{\parbox[b]{\CoverWidth-2\BackTitleSideMargin}{\spaceout{APPLICATION TO THE DESIGN OF ELASTIC GRIDSHELLS}}}%
+		};
 		% abstract
-		\node[anchor=south west, xshift=0.5cm, yshift=0.5cm] at (CAbl){%
-			\fbox{\parbox[b]{16cm}{%
+		\node[anchor=south west, xshift=\BackTitleSideMargin, yshift=4cm] at (PGbl){%
+			\fbox{\parbox[b]{\CoverWidth-2\BackTitleSideMargin}{%
 			\tftxt%
+			
 			\begin{multicols}{2}%
+				\setstretch{1.1}
+				\setlength\columnsep{0.5cm}
 				An \emph{elastic gridshell} is a freeform structure, generally doubly curved, but formed out through the reversible deformation of a regular and initially flat structural grid. Building curved shapes that may seems to offer the best of both worlds~: shell structures are amongst the most performant mechanically speaking while planar and orthogonal constructions are much more efficient and economic to produce than curved ones. This ability to \textquote{form a form} efficiently is of peculiar importance in the current context where morphology is a predominant component of modern architecture, and envelopes appear to be the neuralgic point for building performances.
 
 				The concept was invented by Frei Otto, a German architect and structural engineer who devoted many years of research to gridshells. In 1975 he designed the Multihalle of Mannheim, a \SI{7500}{m^2} wooden shell which demonstrated the feasibility of this technology and made it famous to a wide audience. However, despite their potential, very few projects of this kind were built after this major realization. And for good reason, the resources committed at that time cannot guarantee the replicability of this experiment for more standard projects, especially on the economic level. Moreover, the technics and methods developed by Otto's team in the 1960s have mostly fall into disuse or are based on disciplines that have considerably evolved. New materials, such as composite materials, have recently emerged. They go beyond the limitations of conventional materials such as timber and offer at all levels much better technical performances for this kind of application. Finally, it should be noted that the regulatory framework has also deeply changed, bringing a certain rigidity to the penetration of innovations in the building industry. Therefore, the design of gridshells arises in new terms for current architects and engineers and comes up against the inadequacy of existing tools and methods.
