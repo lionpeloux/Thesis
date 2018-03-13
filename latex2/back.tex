@@ -1,4 +1,15 @@
-% !TEX TS-program = XeLaTeX
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
+
+% ===========================
+% COMPILER DIRECTIVES
+% ===========================
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = XeLaTeX-shellescape
+% !BIB TS-program = biber
+% !BIB program = biber
+
 
 % \PassOptionsToPackage{showrules}{blurb}
 % \PassOptionsToPackage{showframe}{blurb}
@@ -7,24 +18,6 @@
 % \PassOptionsToPackage{nobleed}{blurb}
 
 \documentclass[12pt,fleqn]{thesis}
-% ENCODING
-
-
-
-% **************************************************
-% METADATA
-% **************************************************
-\newcommand\mytitle{Modeling of bending-torsion couplings in active-bending structures. Application to the design of elastic gridshell.}
-\newcommand\myauthor{Lionel du Peloux de Saint Romain}
-\newcommand\mykeywords{gridshell, active bending, freeform, dynamic relaxation}
-\newcommand\myabstract{My abstract.}
-
-
-\usepackage{kantlipsum}
-
-% **************************************************
-% DOCUMENT
-% **************************************************
 \graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
 \addbibresource{library.bib}
 
@@ -36,7 +29,7 @@
 % --------------------------
 \frontmatter
 
-\input{head/titlepage.tex}
+% \input{head/titlepage.tex}
 \input{_dedication}
 \input{_preface}
 \input{_abstracts}
@@ -71,7 +64,7 @@
 \appendixmatter
 	\part{Appendix}\label{part=3}
 	\begin{appendices}
-		% \include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		\include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 		% \include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 		% \include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	\end{appendices}
@@ -92,7 +85,9 @@
 	\newrefsection
 	\newrefcontext[sorting=ydnt]
 	\nocite{*}
-	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
-	
+	\begingroup
+		% \setstretch{0.5}
+		\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
+	\endgroup
 
 \end{document}

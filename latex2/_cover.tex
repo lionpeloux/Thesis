@@ -1,0 +1,76 @@
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
+
+% ===========================
+% COMPILER DIRECTIVES
+% ===========================
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = XeLaTeX-shellescape
+% !BIB TS-program = biber
+% !BIB program = biber
+
+
+\PassOptionsToPackage{showrules}{blurb}
+% \PassOptionsToPackage{showframe}{blurb}
+\PassOptionsToPackage{showbleed}{blurb}
+% \PassOptionsToPackage{showcanon}{blurb}
+% \PassOptionsToPackage{nobleed}{blurb}
+\PassOptionsToPackage{cover}{blurb}
+
+\documentclass[12pt,fleqn]{thesis}
+	\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
+	\addbibresource{library.bib}
+	
+\begin{document}
+	
+
+\begin{titlepage}
+	\begin{center}
+	\includegraphics[width=6cm]{head/logo_upe}\\
+	\vspace{2cm}
+	\setstretch{1.5}
+	{\Large Thèse de doctorat} \\
+	{\large École doctorale~: Science, Ingénierie et Environnement}\\
+	{\large Spécialité~: Structures et Matériaux}\\
+	\vspace{18pt}
+	{\Large Présentée par}\\
+	{\large \myauthor}
+	
+	\vfill
+	
+	\setstretch{2}
+	{\ttfamily
+	{\bfseries\huge  Modeling of bending-torsion couplings in active-bending structures}
+	\\\vspace{12pt}
+	{\Large Application to the design of elastic gridshells}
+	}
+	
+	\vfill
+	\setlength{\parskip}{0em}
+	{\large Soutenue à l'Ecole Nationale des Ponts et Chaussées,\\\vspace{-10.0pt}le 20 décembre 2017, devant le jury composé de~:}
+	
+	\vspace{1.5cm}
+	
+	\setstretch{1.2}
+	{\setlength{\tabcolsep}{0.5cm}\ra{1.0}
+	\begin{tabular}{@{}>{}lll@{}}
+	Président 		& Bernard MAURIN 			& Université Montpellier 2\\
+	\addlinespace
+	Rapporteurs 	& Sébastien NEUKIRCH 		& Université Pierre et Marie Curie\\
+					 & Carlos LÁZARO 			& Universitat Politècnica de València\\
+	\addlinespace
+	Examinateurs	& Alberto PUGNALE 			& University of Melbourne\\
+					 & Jean-François CARON 		& École des Ponts ParisTech\\
+					 & Cyril DOUTHE 				& École des Ponts ParisTech\\
+	\addlinespace
+	Invité 			& Bernard VAUDEVILLE 		& T/E/S/S atelier d'ingénierie\\
+	\addlinespace
+	Directeur de thèse 	& Olivier BAVEREL 		& École des Ponts ParisTech\\
+	\end{tabular}}
+	\end{center}
+	\end{titlepage}
+	
+	
+\end{document}
+

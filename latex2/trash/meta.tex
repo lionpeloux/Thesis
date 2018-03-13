@@ -1,0 +1,52 @@
+\listfiles
+\documentclass[twoside,a4paper,DIV15,parskip=off,9pt]{book}
+\usepackage{fontspec}
+
+% ------
+% Clickable URLs
+\usepackage[
+linktocpage=false,      % no page numbers are clickable
+colorlinks=false,       % no color
+breaklinks=true,        % break URLs
+bookmarks,              % creates bookmarks in pdf
+hyperfootnotes=true,    % clickable footnotes
+pdfborder={0 0 0},      % for removing borders around links
+bookmarksnumbered=true, % If Acrobat bookmarks are requested, include section numbers.
+bookmarksopen=false,    % If Acrobat bookmarks are requested, show them with all the subtrees expanded.
+%hidelinks=true,
+%linkcolor=blue,
+%citecolor=blue,
+%urlcolor=blue
+pdfpagemode={UseOutlines}, % show pdf bookmarks (indices) on startup; does not function all the time
+pdftitle={Stammbaum der Familie Neumann}, % title
+pdfauthor={Sebastian Neumann}, % author
+pdfkeywords={Genealogy, Family tree, Neumann}, % subject of the document
+pdfsubject={Stammbaum, Neumann, Genealogie}, % list of keywords
+pdfmenubar=true,        % make PDF viewer?s menu bar visible
+pdfpagelabels]
+{hyperref}
+%\usepackage{url} % Urls become clickable
+\urlstyle{same} % Font style same as text style
+%\urlstyle{rm}
+
+%-------
+% Optimization for PDF/A-1b Standard
+\usepackage[a-1b]{pdfx}
+
+\usepackage{filecontents}% NOTE: I'd still put this before `pdfx` as advised....
+\begin{filecontents}{\jobname.xmpdata}
+\Title{title}
+\Author{Lionel du Peloux}
+\Keywords{keyword1\sep keyword2\sep keyword3}
+\Subject{bla\sep bla\sep bla}
+\Publisher{test}
+\Copyright{a copyright statement}
+\CopyrightURL{test}
+\Copyrighted{True}
+\PublicationType{book}
+\Volume{1}
+\end{filecontents}
+
+\begin{document}
+foobar
+\end{document}

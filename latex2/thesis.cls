@@ -44,14 +44,15 @@
 	% booksize = TB_6x9,
 	booksize = TB_8x10,
 	pagemodulo = 4,
-	gutter=2.399cm,
+	gutter=	2.752cm,
+	covertype=soft,
 	% nobleed,
 	]{blurb}
 \RequirePackage{photo}
 
 % help : https://tex.stackexchange.com/a/121881/154815
 % needs to be immediately after loading book.cls
-% \tracingpatches
+\tracingpatches
 % choose manualy which chapter has figures / tables 
 % and put a separator in the lof / lot
 \patchcmd{\@chapter}
@@ -439,7 +440,7 @@
 
 %% set parameters
 \setlength{\ChapterBoxWidth}{\@BleedInnerMargin + \@ContentBindingOffset + \@ContentInnerMargin-\marginsep}
-\setlength{\ChapterBoxYOffset}{7cm}
+\setlength{\ChapterBoxYOffset}{8cm}
 \setlength{\ChapterBoxHeight}{15mm}
 \setlength{\ChapterBoxTextYMargin}{0pt}
 \setlength{\ChapterBoxTextXMargin}{3pt}
@@ -457,10 +458,10 @@
 {											% code before the title body
 \GetPageLayoutNodes
 \begin{tikzpicture}[remember picture, inner sep=0mm]
-	\coordinate[yshift=-0\ChapterBoxYOffset/2] (Ftl) at (PGtl);
-	\coordinate[xshift=\ChapterBoxWidth, yshift=-\ChapterBoxYOffset-\ChapterBoxHeight] (Fbr) at (PGtl);
+	\coordinate (Ftl) at (PGtl);
+	\coordinate[xshift=\ChapterBoxWidth, yshift=-\ChapterBoxYOffset] (Fbr) at (Ftl);
 	\path (CAtl |- Fbr) node (Tbl) {};
-	\path[fill=secondary] (Ftl) rectangle (Fbr);
+	\path[fill=secondary] (PPtl) rectangle (Fbr);
 	\node[anchor=base west] at (Tbl){
 		\parbox[b]{\ChapterBoxTextWidth}{%
 			\raggedright%
@@ -495,7 +496,7 @@
 \newlength{\PartBoxTextWidth}
 
 %% set parameters
-\setlength{\PartBoxYOffset}{8.0cm}
+\setlength{\PartBoxYOffset}{\ChapterBoxYOffset}
 \setlength{\PartBoxWidth}{70mm}
 \setlength{\PartBoxHeight}{20mm}
 \setlength{\PartBoxTextXMargin}{12pt}
@@ -520,8 +521,8 @@
 \addtocounter{PartCount}{1}
 \GetPageLayoutNodes
 \begin{tikzpicture}[remember picture, inner sep=0]
-	\coordinate[yshift=-\ChapterBoxYOffset-\ChapterBoxHeight] (Ftr) at (PGtr);
-	\coordinate[xshift=-\PartBoxWidth, yshift=-\PartBoxHeight] (Fbl) at (Ftr);
+	\path (PGtl -| PPtr) node[yshift=-\PartBoxYOffset] (Ftr) {};
+	\coordinate[xshift=-\PartBoxWidth, yshift=-\PartBoxHeight] (Fbl) at (Ftr -| PGtr);
 	\coordinate[yshift=\PartBoxHeight/2] (Fl) at (Fbl);
 	\ifnumcomp{\value{part}}{=}{1}{
 		\path[fill=black] (Fbl) rectangle (Ftr);
@@ -539,7 +540,7 @@
 			% {\color{secondary}\hspace*{2.75cm}\font@part\fontsize{40pt}{48pt}\selectfont\bfseries\MakeUppercase{KIRCHHOFF}}\\[12pt]%
 		};
 		\node[anchor=south west, text width=\textwidth, align=left] at (CAbl){%
-			{\color{black}\hspace*{1.37cm}\font@part\fontsize{35pt}{40pt}\selectfont\bfseries\MakeUppercase{KIRCHHOFF}}\\[6pt]%
+			{\color{black}\hspace*{1.375cm}\font@part\fontsize{35pt}{40pt}\selectfont\bfseries\MakeUppercase{KIRCHHOFF}}\\[6pt]%
 			{\color{secondary}\font@part\fontsize{75pt}{0pt}\selectfont\bfseries\MakeUppercase{BEAM MODEL}}%
 		};
 	}{}
@@ -782,6 +783,8 @@
 	firstinits=true,
 	useprefix=true,
 	]{biblatex} 
+
+\pretocmd{\printbibliography}{\setstretch{1.0}}{\typeout{patchbib:sucess}}{\typeout{patchbib:failur}}
 
 
 \renewcommand*{\multicitedelim}{\addcomma\space}
@@ -1103,9 +1106,9 @@
 %% HYPERREF & CROSS REF
 %%
 %%%%%
-\usepackage{hyperxmp} % pdf metadada (LDP)
-%%\usepackage[a-1b]{pdfx}
 
+
+\RequirePackage{hyperxmp} % pdf metadada (LDP)
 \RequirePackage{hyperref} % 
 \hypersetup{unicode,psdextra, % https://tex.stackexchange.com/a/69354/154815
 	pdfborder={0 0 0},
@@ -1163,6 +1166,63 @@
 	\let\oldlabel\label
 	\renewcommand{\label}[1]{\oldlabel{#1}\zlabel{#1}}
 }
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% METADATA
+%%
+%%%%%
+% http://www.mathstat.dal.ca/~selinger/pdfa/
+% https://tex.stackexchange.com/questions/139308/how-to-embed-abstract-as-an-xmp-metadata
+% SPEC SUBLIN : http://dublincore.org/documents/dces/
+% https://tex.stackexchange.com/questions/139716/is-it-possible-to-use-both-hyperxmp-and-xmpincl-in-latex
+\newcommand\mytitle{Modeling of bending-torsion couplings in active-bending structures. Application to the design of elastic gridshells.}
+\newcommand\myauthor{Lionel du Peloux}
+\newcommand\mykeywords{gridshell, active bending, freeform, dynamic relaxation}
+\newcommand\myabstract{My abstract.}
+
+% \usepackage[a-3b]{pdfx}
+
+% to be used with pdfx
+%\usepackage{filecontents}
+%\begin{filecontents*}{\jobname.xmpdata}
+%	\Doi{12345}
+%\end{filecontents*}
+
+%% have a look at : https://tex.stackexchange.com/questions/139308/how-to-embed-abstract-as-an-xmp-metadata
+% DOI : https://github.com/semprag/tex/blob/master/sp.cls
+\AtEndPreamble{%
+	\hypersetup{%
+		pdftype={thesis},
+		pdftitle={\mytitle},
+		pdfauthor={\myauthor},
+		pdfproducer={\myauthor},
+		pdfauthortitle={Technical Assistant, Level III},
+		pdfdate={\the\year-\the\month-\the\day},
+		pdfcopyright={Copyright (C) \the\year, \myauthor},
+		pdfsubject={\myabstract},
+		pdfkeywords={\mykeywords},
+		% pdflicenseurl={http://creativecommons.org/licenses/by-nc-nd/3.0/},
+		% pdfcaptionwriter={Scott Pakin},
+		% pdfcontactaddress={Kramgasse 49},
+		pdfcontactcity={Paris},
+		pdfcontactpostcode={75},
+		pdfcontactcountry={France},
+		pdfcontactphone={},
+		pdfcontactemail={lionel.dupeloux@gmail.com},
+		pdfcontacturl={%
+		http://www.thinkshell.fr,
+		https://www.facebook.com/AlbertEinstein
+		},
+		pdflang={en},
+		pdfmetalang={en},
+		baseurl={http://www.thinkshell.fr}
+	}
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
