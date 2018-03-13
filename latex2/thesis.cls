@@ -51,20 +51,19 @@
 
 % help : https://tex.stackexchange.com/a/121881/154815
 % needs to be immediately after loading book.cls
-\tracingpatches
+% \tracingpatches
 % choose manualy which chapter has figures / tables 
 % and put a separator in the lof / lot
 \patchcmd{\@chapter}
 	{\addtocontents{lof}{\protect\addvspace{10\p@}}}
 	{%
 		\expandafter\ifx\@chapapp\appendixname
-			\typeout{LOF_APP}
 		\else
-			\typeout{LOF_CHAP}
-			\ifnumcomp{\value{chapter}}{=}{2}{\typeout{SEPARATOR}\protect\tocseparator[lof]}{}%
-			\ifnumcomp{\value{chapter}}{=}{3}{\typeout{SEPARATOR}\protect\tocseparator[lof]}{}%
-			\ifnumcomp{\value{chapter}}{=}{5}{\typeout{SEPARATOR}\protect\tocseparator[lof]}{}%
-			\ifnumcomp{\value{chapter}}{=}{6}{\typeout{SEPARATOR}\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{2}{\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{3}{\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{4}{\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{5}{\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{6}{\protect\tocseparator[lof]}{}%
 		\fi
 	}
 	{}{}
@@ -72,15 +71,16 @@
 	{\addtocontents{lot}{\protect\addvspace{10\p@}}}
 	{%
 	\expandafter\ifx\@chapapp\appendixname
-		\typeout{LOT_APP}
-		\ifnumcomp{\value{chapter}}{=}{1}{\typeout{SEPARATOR}\protect\tocseparator[lot]}{}%
+		\ifnumcomp{\value{chapter}}{=}{1}{\protect\tocseparator[lot]}{}%
 	\else
-		\typeout{LOT_CHAP}
-		% \ifnumcomp{\value{chapter}}{=}{2}{\typeout{SEPARATOR}\protect\tocseparator[lot]}{}%
+		\ifnumcomp{\value{chapter}}{=}{3}{\protect\tocseparator[lot]}{}%
+		\ifnumcomp{\value{chapter}}{=}{5}{\protect\tocseparator[lot]}{}%
+		\ifnumcomp{\value{chapter}}{=}{6}{\protect\tocseparator[lot]}{}%
 	\fi
 	}
 	{}{}
-
+\newcommand\appendixmatter{\cleardoublepage} % required to resolve pbs with \include and \loft
+\renewcommand\backmatter{\cleardoublepage\@mainmatterfalse} % required to resolve pbs with \include and \loft
 
 % \RequirePackage{color}
 \RequirePackage{textcase} % text case
@@ -96,6 +96,8 @@
 \RequirePackage{stmaryrd} % symbols for theoretical computer science
 \RequirePackage{pgfplots,pgfplotstable}
 \RequirePackage{enumerate}
+\RequirePackage{dpfloat} % for double page float figures aand tables side by side
+
 % **************************************************
 % Options
 % **************************************************
@@ -216,7 +218,7 @@
 % \setmainfont{GaramondPremrPro-LtDisp}
 % \setmainfont{SabonLTStd-Roman}
 \newfontfamily\font@hdr{FuturaLT-Book}[Scale = MatchUppercase]
-\newfontfamily\font@part{Futura-CondensedExtraBold}[Scale = MatchUppercase]
+\newfontfamily\font@part{FuturaLT-Heavy}[Scale = MatchUppercase]
 \newfontfamily\font@chap{FuturaLT}[Scale = MatchUppercase]
 \newfontfamily\font@sec{FuturaLT-Book}[Scale = MatchUppercase]
 \newfontfamily\font@subsec{FuturaLT}[Scale = MatchUppercase]
@@ -229,7 +231,7 @@
 \DeclareRobustCommand{\tf@pagenum}{\tf@hdr\bfseries\footnotesize}
 
 % BODY (part, chap, sec, text)
-\DeclareRobustCommand{\tf@part}{\font@part\bfseries\Huge}
+\DeclareRobustCommand{\tf@part}{\font@part\fontsize{44pt}{42pt}\selectfont}
 \DeclareRobustCommand{\tf@chap}{\font@chap\fontsize{36pt}{32pt}\selectfont}
 \DeclareRobustCommand{\tf@sec}{\font@sec\bfseries\Large}
 \DeclareRobustCommand{\tf@subsec}{\font@subsec\bfseries\normalsize}
@@ -494,7 +496,7 @@
 
 %% set parameters
 \setlength{\PartBoxYOffset}{8.0cm}
-\setlength{\PartBoxWidth}{60mm}
+\setlength{\PartBoxWidth}{70mm}
 \setlength{\PartBoxHeight}{20mm}
 \setlength{\PartBoxTextXMargin}{12pt}
 \setlength{\PartBoxTextWidth}{\@BleedOuterMargin + \@ContentOuterMargin + \@ContentWidth - \PartBoxWidth - \PartBoxTextXMargin}
@@ -511,27 +513,47 @@
 %% Part
 \newcounter{PartCount}						% store part count to apply offset
 \titleformat{\part}[display]  				% type (section,chapter,etc...) to vary
-{\tf@part} 								% format of the part
+{\tf@part} 									% format of the part
 {\gdef\partlabel{\thepart\ }}     			% the label
 {0pt} 										% separation between label and chapter-title
 {											% code before the title body
 \addtocounter{PartCount}{1}
-\tikzset{external/export next=false}
-\begin{tikzpicture}[remember picture,overlay, inner sep=0]
-	\node[xshift=-\PartBoxWidth, yshift=-\PartBoxYOffset-\value{PartCount}*\PartBoxHeight] at (current page.north east){
-		\begin{tikzpicture}[remember picture, overlay, inner sep=0]
-		\draw[draw=Tblue, fill=Tblue] (0,0) rectangle (\PartBoxWidth,\PartBoxHeight); % color box
-		% \filldraw  (0,\PartBoxHeight/2) circle (2pt);
-		\node[anchor=west, xshift=\PartBoxTextXMargin] (ref) at (0,\PartBoxHeight/2){
-			\raggedright\color{white}Part~\partlabel
-			% \fbox{\raggedright\color{white}Part \partlabel}
+\GetPageLayoutNodes
+\begin{tikzpicture}[remember picture, inner sep=0]
+	\coordinate[yshift=-\ChapterBoxYOffset-\ChapterBoxHeight] (Ftr) at (PGtr);
+	\coordinate[xshift=-\PartBoxWidth, yshift=-\PartBoxHeight] (Fbl) at (Ftr);
+	\coordinate[yshift=\PartBoxHeight/2] (Fl) at (Fbl);
+	\ifnumcomp{\value{part}}{=}{1}{
+		\path[fill=black] (Fbl) rectangle (Ftr);
+		\node[anchor=north west, rotate=90, text width=\textwidth, align=left] at (CAbl){%
+			% {\color{secondary}\hspace*{2.75cm}\font@part\fontsize{40pt}{48pt}\selectfont\bfseries\MakeUppercase{ELASTIC}}\\[12pt]%
 		};
-		\node[anchor=base east, yshift=-\PartYAdjust, xshift=-\PartBoxTextXMargin,text width=\PartBoxTextWidth, align=right] at (0,\PartBoxHeight/2){
-			\color{black}#1
-			% \fbox{\raggedleft\color{black}#1}
+		\node[anchor=south west, text width=\textwidth, align=left] at (CAbl){%
+			{\color{black}\hspace*{1.815cm}\font@part\fontsize{35pt}{40pt}\selectfont\bfseries\MakeUppercase{ELASTIC}}\\[6pt]%
+			{\color{secondary}\font@part\fontsize{75pt}{0pt}\selectfont\bfseries\MakeUppercase{GRIDSHELL}}%
 		};
-		\end{tikzpicture}
+	}{}
+	\ifnumcomp{\value{part}}{=}{2}{
+		\path[fill=black] (Fbl) rectangle (Ftr);
+		\node[anchor=north west, rotate=90, text width=\textwidth, align=left] at (CAbl){%
+			% {\color{secondary}\hspace*{2.75cm}\font@part\fontsize{40pt}{48pt}\selectfont\bfseries\MakeUppercase{KIRCHHOFF}}\\[12pt]%
+		};
+		\node[anchor=south west, text width=\textwidth, align=left] at (CAbl){%
+			{\color{black}\hspace*{1.37cm}\font@part\fontsize{35pt}{40pt}\selectfont\bfseries\MakeUppercase{KIRCHHOFF}}\\[6pt]%
+			{\color{secondary}\font@part\fontsize{75pt}{0pt}\selectfont\bfseries\MakeUppercase{BEAM MODEL}}%
+		};
+	}{}
+	\ifnumcomp{\value{part}}{=}{3}{
+		\path[fill=secondary] (Fbl) rectangle (Ftr);
+		\node[anchor=south west, text width=\textwidth, align=left] at (CAbl){%
+			{\font@part\fontsize{75pt}{0pt}\selectfont\bfseries\MakeUppercase{APPENDIX}}%
+		};
+	}{}
+	\node[anchor=west, xshift=\PartBoxTextXMargin, text width=\PartBoxWidth, align=left] at (Fl){%
+		\ifnumcomp{\value{part}}{=}{3}{}{\color{white}Part~\partlabel}
 	};
+	\pgfresetboundingbox
+	\path[use as bounding box] (0,0);
 \end{tikzpicture}
 \gdef\partlabel{}
 }
@@ -600,7 +622,7 @@
 % TOC
 %\fontsize{32pt}{38pt}\selectfont
 % part
-\setlength{\toc@partskip}{1.25cm}
+\setlength{\toc@partskip}{0.85cm}
 \newfontfamily\font@toc@part{FuturaLT-Light}[Scale = MatchUppercase]
 \DeclareRobustCommand{\tf@toc@part}{\font@toc@part\large}%\font@part\bfseries
 % front/back chapters
@@ -634,16 +656,21 @@
 }
 \preto{\tableofcontents}{%
 	\addtocontents{toc}{\protect\vskip 1em}
+	\raggedbottom
 }
 \preto{\listoffigures}{%
-	\addtocontents{lof}{\protect\setlength{\protect\toc@partskip}{1cm}}
+	\addtocontents{lof}{\protect\setlength{\protect\toc@partskip}{0.85cm}}
+}
+\preto{\listoftables}{%
+	\addtocontents{lof}{\protect\setlength{\protect\toc@partskip}{0.85cm}}
 }
 \preto{\mainmatter}{%
 	\addtocontents{toc}{\protect\setlength{\protect\toc@chapskip}{1em}}
 	\tocseparator
 	\addtocontents{toc}{\protect\let\protect\tf@toc@chap\protect\tf@toc@mainchap}
 }
-\BeforeBeginEnvironment{appendices}{%
+\preto{\appendixmatter}{%
+% \BeforeBeginEnvironment{appendices}{%
 	\addtocontents{toc}{\protect\let\protect\tf@toc@chap\protect\tf@toc@appchap}
 	\addtocontents{toc}{\protect\renewcommand{\protect\@chapapp}{\appendixname}}
 }
@@ -719,7 +746,7 @@
 	{\tf@loft@ft}
 	{%
 		\hspace*{-2cm}%
-		\fbox{\parbox[b]{2cm}{\color{black}\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
+		\fbox{\parbox[b]{2cm}{\color{secondary}\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
 	}
 	{}
 	{\hfill\contentspage}
@@ -733,47 +760,6 @@
 \renewcommand{\cftsubfigleader}{\hfill}
 \renewcommand{\cftsubfigfont}{\tf@toc@subsec}
 \renewcommand{\cftsubfigpagefont}{\tf@toc@subsec}
-
-
-
-	% \titlecontents{subfigure}
-% 	[0cm]
-% 	{\tf@toc@subsec}
-% 	{%
-% 	% \hspace*{-2cm}%
-% 	% \fbox{\parbox[b]{2cm}{\color{black}\raggedleft\thecontentslabel\hspace*{\marginsep}}}%
-% 	}
-% 	{}
-% 	{\hfill\contentspage}
-% 	[]
-% \titlecontents*{subsection}[0pt]
-% 	{\upshape}{}{}
-% 	{, \thecontentspage}[ (][. ][)]
-
-% \titlecontents{chapter}
-% 	[3.8em] 								% left
-% 	{\tf@toc@chap}							% above
-% 	{\contentslabel{2.3em}}					% numbered-entry-format
-% 	{\hspace*{-2.3em}}						% numberless-entry-format
-% 	{\titlerule*[1pc]{.}\contentspage}		% filler
-% 	[]	
-
-% \titlecontents{section}
-% 	[3.8em] 								% left
-% 	{\tf@toc@sec}							% above
-% 	{\contentslabel{2.3em}}					% numbered-entry-format
-% 	{\hspace*{-2.3em}}						% numberless-entry-format
-% 	{\titlerule*[1pc]{.}\contentspage}		% filler
-% 	[]	
-
-% \titlecontents{subsection}
-% 	[3.8em] 								% left
-% 	{\tf@toc@subsec}						% above
-% 	{\contentslabel{2.3em}}					% numbered-entry-format
-% 	{\hspace*{-2.3em}}						% numberless-entry-format
-% 	{\contentspage}		% filler
-% 	[]	
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -837,6 +823,33 @@
 {\endlist}
 {\item}
 
+%% Title DOI Link 
+%% --------------------------
+\newbibmacro{string+doiurlisbn}[1]{%
+  \iffieldundef{doi}{%
+    \iffieldundef{url}{%
+      \iffieldundef{isbn}{%
+        \iffieldundef{issn}{%
+          #1%
+        }{%
+          \href{http://books.google.com/books?vid=ISSN\thefield{issn}}{#1}%
+        }%
+      }{%
+        \href{http://books.google.com/books?vid=ISBN\thefield{isbn}}{#1}%
+      }%
+    }{%
+      \href{\thefield{url}}{#1}%
+    }%
+  }{%
+    \href{http://dx.doi.org/\thefield{doi}}{#1}%
+  }%
+}
+
+\DeclareFieldFormat{title}{\usebibmacro{string+doiurlisbn}{\mkbibemph{#1}}}
+\DeclareFieldFormat[article,incollection]{title}%
+    {\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
+
+
 %% Favicon DOI Link 
 %% --------------------------
 
@@ -881,8 +894,10 @@
 }}
 
 \newbool{biblink}
-\booltrue{biblink}
+\booltrue{false}
 \ifbool{biblink}{\renewcommand{\finentrypunct}{\addperiod~\icohref{}}}{}
+
+
 
 
 %% CV style for personnal biblio
@@ -964,12 +979,10 @@
      \defbibheading{subbibliography}{\section{\refname}}}
     {\defbibheading{subbibliography}{%
        \AtNextBibliography{\let\blx@anchor\relax}%
-	   \section*{\refname}}}
+	   \clearpage\section*{\refname}}}
 }
+\defbibheading{subbibliography}[\refname]{\section*{#1}}
 % \defbibheading{subbibliography}[\refname]{\section*{#1}}
-\defbibheading{subbibliography}[\refname]{\chapter*{\bibname}}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -1008,6 +1021,32 @@
 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% TABLES
+%%
+%%%%%
+\usepackage{tabularx}
+\usepackage{multirow}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedright\arraybackslash}X}
+
+% l r c coumns width optional fixed with
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\newcommand{\tablebf}{\fontseries{b}\selectfont} % bold font that does not get wider to keep bold numbers aligned
+% \ra{0.9}
+\AtBeginEnvironment{tabular}{\footnotesize}
+\AtBeginEnvironment{tabularx}{\footnotesize}
+
+\heavyrulewidth=2pt %.08em
+\lightrulewidth=1pt %.05em
+\cmidrulewidth=1pt  %.03em
 
 
 
@@ -1149,36 +1188,37 @@
 \definecolor{gray7}{cmyk}{0,0,0,0.7}
 \definecolor{gray9}{cmyk}{0,0,0,0.9}
 
-\newtoggle{print}
+
+
 \colorlet{accent}{Tblue}
 \definecolor{secondary}{RGB}{244, 35, 0}
 
+
+\newtoggle{print}
 \toggletrue{print}
 \iftoggle{print}{
-	\colorlet{urlcolor}{gray6}
 	\colorlet{citecolor}{secondary}
+	\colorlet{urlcolor}{black}
 	\colorlet{linkcolor}{black}
 	\colorlet{txtcolor}{black}
 }{
 	\colorlet{citecolor}{secondary}
-	\colorlet{urlcolor}{gray6}
-	\colorlet{linkcolor}{gray6}
-	\colorlet{txtcolor}{gray6}
+	\colorlet{urlcolor}{gray7}
+	\colorlet{linkcolor}{gray7}
+	\colorlet{txtcolor}{gray7}
 }
+\pretocmd{\tableofcontents}{% no href colors in toc, lof, lot
+		\colorlet{linkcolor}{black}
+		\colorlet{txtcolor}{black}
+}{}{}
+
+
 
 \usepackage{textcomp} % € symbol
 
 % attention a loader apres hypperef (use nameinlink or noabbrev options)
 \usepackage[nameinlink]{cleveref}
 \crefformat{section}{#2§#1#3}
-% \crefname{figure}{fig.}{figs.}
-% \crefname{figure}{POUET}{POUET}
-% \Crefname{figure}{Fig/}{Figs.}
-% \crefname{table}{tab.}{tabs.}
-% \Crefname{table}{Tab.}{Tabs.}
-% \crefname{equation}{eq.}{eqs.}
-% \Crefname{equation}{Eq.}{Eqs.}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -1254,3 +1294,94 @@
 }
 
 \newcommand{\dt}{h} % timestep
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% overbar & hat
+%%
+%%%%%
+
+% old version (renamed bellow)
+%\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\usepackage{scalerel,stackengine}
+\stackMath
+\usepackage{verbatimbox} % For \addvbuffer
+\usepackage{xparse}
+\newlength\glyphwidth
+\newlength\widthofx
+
+% over hat
+
+\newsavebox\hatglyphCONTENT
+\sbox\hatglyphCONTENT{%
+	%% 1ST OPTIONAL ARGUMENT OF \addvbuffer (CROP OFF TOP OF STACKED hat)
+	%%	2ND OPTIONAL ARGUMENT OF \addvbuffer (CROP OFF BOTTOM OF STACKED hat)
+    	\addvbuffer[-0.05ex -1.1ex]{$\hat{\phantom{.}}$}%
+}
+
+%% The floating point parameter scales the hatt glyphs everywhere.
+\newcommand\hatglyph{\resizebox{0.6\widthofx}{!}{\usebox{\hatglyphCONTENT}}}
+\newcommand\shifthat[2]{%
+	%% 1ST ARGUMENT OF \stackengine (GAP BETWEEN GLYPH AND \hatglyph)
+    \stackengine{0.2\widthofx}{%
+        \SavedStyle#2}{%
+        \rule{#1}{0ex}\hatglyph}{O}{c}{F}{T}{S}%
+}
+\ExplSyntaxOn
+\newcommand\relativeGlyphOffset[1]{%
+    	% The horizontal offset in arbitrary units that scale with math style.
+    \str_case:nnF{#1}{%
+        {A}{0.18}%
+        {B}{0.1}%
+        {W}{0.02}%
+        {J}{0.18}%
+        {\phi}{0.17}%
+        {\varkappa}{0.12}%
+        {\vect{\varkappa}}{0.13}% 
+        {\vect{\omega}}{0.03}%
+        {\mathcal{S}}{0.1}%  
+    }{0.05}% Default
+}\ExplSyntaxOff
+% \hatt{decoratedLetter}[A] will insert the decoratedLetter with the hat
+% above it, horizontally adjusted as if the decoratedLetter was an "A".
+% If the trailing optional argument is not provided, then it defaults 
+% to the decoratedLetter. This way we could do e.g. \hatt{\hatt{A}}[A].
+\NewDocumentCommand{\hatt}{mO{#1}}{%
+    \ThisStyle{%
+        \setlength\glyphwidth{\widthof{$\SavedStyle{}\longleftarrow$}}%
+        \setlength\widthofx{\widthof{$\SavedStyle{}x$}}%
+        \shifthat{\relativeGlyphOffset{#2}\glyphwidth}{#1}%
+  }%
+}
+
+% over bar
+\usepackage{stmaryrd}
+\newsavebox\barglyphCONTENT
+\sbox\barglyphCONTENT{%
+	%% 1ST OPTIONAL ARGUMENT OF \addvbuffer (CROP OFF TOP OF STACKED bar)
+	%%	2ND OPTIONAL ARGUMENT OF \addvbuffer (CROP OFF BOTTOM OF STACKED bar)
+    \addvbuffer[-0.05ex -1.35ex]{$\bar{\phantom{.}}$}%
+}
+
+%%%% The floating point parameter scales the check glyphs everywhere.
+\newcommand\barglyph{\resizebox{0.7\widthofx}{!}{\usebox{\barglyphCONTENT}}}
+\newcommand\shiftbar[2]{%
+%%%% 1ST ARGUMENT OF \stackengine (GAP BETWEEN GLYPH AND \checkglyph)
+    \stackengine{0.2\widthofx}{%
+        \SavedStyle#2}{%
+        \rule{#1}{0ex}\barglyph}{O}{c}{F}{T}{S}%
+}
+
+\NewDocumentCommand{\barr}{mO{#1}}{%
+    \ThisStyle{%
+        \setlength\glyphwidth{\widthof{$\SavedStyle{}\longleftarrow$}}%
+        \setlength\widthofx{\widthof{$\SavedStyle{}x$}}%
+        \shiftbar{\relativeGlyphOffset{#2}\glyphwidth}{#1}%
+    }%
+}
+
+\newcommand{\rconf}[1]{\barr{#1}}
+
+

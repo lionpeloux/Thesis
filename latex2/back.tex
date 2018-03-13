@@ -4,7 +4,7 @@
 % \PassOptionsToPackage{showframe}{blurb}
 % \PassOptionsToPackage{showbleed}{blurb}
 % \PassOptionsToPackage{showcanon}{blurb}
-\PassOptionsToPackage{nobleed}{blurb}
+% \PassOptionsToPackage{nobleed}{blurb}
 
 \documentclass[12pt,fleqn]{thesis}
 % ENCODING
@@ -20,130 +20,6 @@
 \newcommand\myabstract{My abstract.}
 
 
-
-
-\usepackage{dpfloat} % for double page float figures aand tables side by side
-
-% **************************************************
-% FIGURES
-% **************************************************
-% \usepackage[]{graphicx}  % draft = no image
-% \usepackage[aboveskip=50pt]{subfig}
-
-% **************************************************
-% TABLES
-% **************************************************
-\usepackage{tabularx}
-\usepackage{multirow}
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
-\newcolumntype{Z}{>{\raggedright\arraybackslash}X}
-
-% l r c coumns width optional fixed with
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-\usepackage{booktabs}
-\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
-\newcommand{\tablebf}{\fontseries{b}\selectfont} % bold font that does not get wider to keep bold numbers aligned
-% \ra{0.9}
-\AtBeginEnvironment{tabular}{\footnotesize}
-\AtBeginEnvironment{tabularx}{\footnotesize}
-
-\heavyrulewidth=2pt %.08em
-\lightrulewidth=1pt %.05em
-\cmidrulewidth=1pt  %.03em
-
-
-
-% overbar & hat
-% -----------------------------------
-
-% old version (renamed bellow)
-%\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
-
-\usepackage{scalerel,stackengine}
-\stackMath
-\usepackage{verbatimbox} % For \addvbuffer
-\usepackage{xparse}
-\newlength\glyphwidth
-\newlength\widthofx
-
-% over hat
-
-\newsavebox\hatglyphCONTENT
-\sbox\hatglyphCONTENT{%
-	%% 1ST OPTIONAL ARGUMENT OF \addvbuffer (CROP OFF TOP OF STACKED hat)
-	%%	2ND OPTIONAL ARGUMENT OF \addvbuffer (CROP OFF BOTTOM OF STACKED hat)
-    	\addvbuffer[-0.05ex -1.1ex]{$\hat{\phantom{.}}$}%
-}
-
-%% The floating point parameter scales the hatt glyphs everywhere.
-\newcommand\hatglyph{\resizebox{0.6\widthofx}{!}{\usebox{\hatglyphCONTENT}}}
-\newcommand\shifthat[2]{%
-	%% 1ST ARGUMENT OF \stackengine (GAP BETWEEN GLYPH AND \hatglyph)
-    \stackengine{0.2\widthofx}{%
-        \SavedStyle#2}{%
-        \rule{#1}{0ex}\hatglyph}{O}{c}{F}{T}{S}%
-}
-\ExplSyntaxOn
-\newcommand\relativeGlyphOffset[1]{%
-    	% The horizontal offset in arbitrary units that scale with math style.
-    \str_case:nnF{#1}{%
-        {A}{0.18}%
-        {B}{0.1}%
-        {W}{0.02}%
-        {J}{0.18}%
-        {\phi}{0.17}%
-        {\varkappa}{0.12}%
-        {\vect{\varkappa}}{0.13}% 
-        {\vect{\omega}}{0.03}%
-        {\mathcal{S}}{0.1}%  
-    }{0.05}% Default
-}\ExplSyntaxOff
-% \hatt{decoratedLetter}[A] will insert the decoratedLetter with the hat
-% above it, horizontally adjusted as if the decoratedLetter was an "A".
-% If the trailing optional argument is not provided, then it defaults 
-% to the decoratedLetter. This way we could do e.g. \hatt{\hatt{A}}[A].
-\NewDocumentCommand{\hatt}{mO{#1}}{%
-    \ThisStyle{%
-        \setlength\glyphwidth{\widthof{$\SavedStyle{}\longleftarrow$}}%
-        \setlength\widthofx{\widthof{$\SavedStyle{}x$}}%
-        \shifthat{\relativeGlyphOffset{#2}\glyphwidth}{#1}%
-  }%
-}
-
-% over bar
-\usepackage{stmaryrd}
-\newsavebox\barglyphCONTENT
-\sbox\barglyphCONTENT{%
-	%% 1ST OPTIONAL ARGUMENT OF \addvbuffer (CROP OFF TOP OF STACKED bar)
-	%%	2ND OPTIONAL ARGUMENT OF \addvbuffer (CROP OFF BOTTOM OF STACKED bar)
-    \addvbuffer[-0.05ex -1.35ex]{$\bar{\phantom{.}}$}%
-}
-
-%%%% The floating point parameter scales the check glyphs everywhere.
-\newcommand\barglyph{\resizebox{0.7\widthofx}{!}{\usebox{\barglyphCONTENT}}}
-\newcommand\shiftbar[2]{%
-%%%% 1ST ARGUMENT OF \stackengine (GAP BETWEEN GLYPH AND \checkglyph)
-    \stackengine{0.2\widthofx}{%
-        \SavedStyle#2}{%
-        \rule{#1}{0ex}\barglyph}{O}{c}{F}{T}{S}%
-}
-
-\NewDocumentCommand{\barr}{mO{#1}}{%
-    \ThisStyle{%
-        \setlength\glyphwidth{\widthof{$\SavedStyle{}\longleftarrow$}}%
-        \setlength\widthofx{\widthof{$\SavedStyle{}x$}}%
-        \shiftbar{\relativeGlyphOffset{#2}\glyphwidth}{#1}%
-    }%
-}
-
-\newcommand{\rconf}[1]{\barr{#1}}
-
-
-
-
 \usepackage{kantlipsum}
 
 % **************************************************
@@ -152,7 +28,7 @@
 \graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
 \addbibresource{library.bib}
 
-
+% \includeonly{_dedication,_preface,_abstracts}
 \begin{document}
 
 % --------------------------
@@ -160,26 +36,15 @@
 % --------------------------
 \frontmatter
 
-% preamble
-
 \input{head/titlepage.tex}
-% \restoregeometry
-\setlength{\parindent}{1em}
 \input{_dedication}
 \input{_preface}
 \input{_abstracts}
-\setlength{\parindent}{0em}
-
-% \renewcommand{\contentsname}{Contents}
-% \renewcommand{\listfigurename}{Figures}
-% \renewcommand{\listtablename}{Tables}
-
-
-% tocloft
-\tableofcontents
-\listoffigures
-\listoftables
-
+\begingroup
+	\tableofcontents
+	\listoffigures
+	\listoftables
+\endgroup
 
 % --------------------------
 % Main matter
@@ -188,27 +53,29 @@
 
 	\newrefsection
 
-	\input{ch1_introduction/chapter}
+	\include{ch1_introduction/chapter}
 	
 	\part{Elastic gridshells}\label{part=1}
-	\input{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 
-	\part{Rich Kirchhoff beam model}\label{part=2}
-	\input{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\part{Kirchhoff beam model}\label{part=2}
+	% \include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-% 	\include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	% \include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	
-	\input{ch8_conclusion/chapter}
+	\include{ch8_conclusion/chapter}
 
 % APPENDINX MATTER
-\part{Appendix}	\label{part=3}
-\begin{appendices}
-	\input{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\input{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\input{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-\end{appendices}
+\appendixmatter
+	\part{Appendix}\label{part=3}
+	\begin{appendices}
+		% \include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		% \include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		% \include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\end{appendices}
+
 % BACK MATTER
 \backmatter
 

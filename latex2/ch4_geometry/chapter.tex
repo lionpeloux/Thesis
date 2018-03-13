@@ -634,21 +634,6 @@ At first sight this indexing could seem strange but it will be convenient later 
 }
 
 
-% \begin{figure}[t]
-% 	\centering
-% 	\includegraphics[]{darboux.pdf}
-% 	\captionof{figure}[Geometric interpretation of the angular velocity vector of a moving frame]{Geometric interpretation of the angular velocity vector of a moving frame.}
-% 	\label{fig:geo_interpretation}
-% 	\end{figure}
-
-
-% \begin{figure}[t]
-% 	\centering
-% 	\includegraphics[]{adapted_moving_frame.pdf}
-% 	\captionof{figure}[Adapted moving frame on a circular helix]{Moving frame $F(s) =\{\vect{e}_{3}(s),\vect{e}_{1}(s),\vect{e}_{2}(s)\}$ on a circular helix. The frame is adapted as $\vect{e}_3(s) = \vect{t}(s)$.}
-% 	\label{fig:adapted}
-% 	\end{figure}
-
 % governing equations
 \subsubsection{Governing equations}
 Computing the derivatives of the previous relationships leads to the following system of differential equations that the frame must satisfy for all $s \in [0,L]$~:
@@ -764,12 +749,6 @@ Consequently, for an adapted moving frame, the \emph{normal fields} $\vect{e}_1$
 	\vect{\Omega}(s) = \vect{\Omega}_{\perp}(s) =  \vect{\kappa b}(s) \Leftrightarrow \vect{\Omega}(s) \cdot \vect{t}(s) = 0  \Leftrightarrow \tau(s) = 0  
 \end{equation}
 In other words, a \emph{relatively parallel normal field}~: \blockcquote{Bishop1975}{turns, only whatever amount is necessary for it to remain normal, so it is as close to being parallel as possible without losing normality}. 
-%
-%In addition, relatively parallel normal vector fields exhibit some interesting properties~\cite{Hanson95}~: 
-%\begin{itemize}
-%	\item $\|\vect{p}\|$ is of constant length;
-%	\item $\|\vect{p}\|$ is of constant length;
-%\end{itemize}
 
 \subsubsection{Parallel transport of vectors along a curve}
 Reciprocally, it is possible to define the \emph{parallel transport} of a vector along a curve $\gamma$ as its propagation along $\gamma$ at angular speed $\vect{\kappa b}$. An initial vector $\vect{p}_0 = \vect{p}(s_0)$ is parallel transported at arc length parameter $s$ into the vector $\vect{p}(s)$ by integrating the following first-order differential equation along $\gamma$~:
@@ -782,11 +761,6 @@ From the point of view of differential geometry, this means that the next vector
 
 \subsubsection{Parallel transport of frames along a curve}
 Identically, the \emph{parallel transport} of an adapted frame is defined as the parallel transport of its components along $\gamma$.
-
-%\subsubsection{Parallel curves and inextensibility}
-%Let $\vect{p}$ be a \emph{relatively parallel normal vector field}.
-%
-%Relatively parallel fields~\cite[p.4]{Carroll2007},~\cite{Bishop1975},~\cite{Hanson95}
 
 % FRENET FRAME
 \subsection{Frenet frame}
@@ -843,7 +817,6 @@ Remark that the Frenet frame satisfies $\vect{\Omega_f}(s) \cdot \vect{n}(s) = 0
 Note also that $\vect{t}'(s)$ and $\vect{b}'(s)$ are collinear to $\vect{n}(s)$. This means that the projection of $\vect{t}(s)$ and $\vect{b}(s)$ is conserved from one normal plane to another, that is $\vect{t}$ and $\vect{b}$ are parallel transported along the vector field $\vect{n}$.
 
 \subsubsection{Drawbacks and benefits}\label{sec=frenetdrawbacks}
-%\footnote{\note{une perturbation de la courbe dans le sens de la courbure engendre une variation de longueur de la courbe proportionnelle à l'inverse de la courbure (au premier ordre) + schéma.}}\textsuperscript{,}\footnote{\note{une perturbation de la courbe dans le sens de la binormale (en tout point) préserve la longueur de la courbe au 1er ordre~: c'est un déplacement qui conserve l'hypothèse d'inextensibilité au premier ordre.}}\textsuperscript{,}\footnote{\note{Examiner la question de la fermeture sur une boucle fermée. Schéma.}}
 
 The Frenet frame is not continuously defined if $\gamma$ is not $\mathcal{C}^2$. This is problematic for the study of slender beams as the centerline of a beam subject to concentrated external forces and moments or to material discontinuities will not be $\mathcal{C}^2$ but only picewise $\mathcal{C}^2$. In that case, the centerline tangent will be continuously defined everywhere but the curvature will be subject to discontinuities, that is $\vect{t}'$ will not be continuously defined.
 
@@ -928,12 +901,6 @@ Strictly speaking, a Bishop frame is not a reference frame as it is defined with
 Unlike the Frenet frame, when transported along a \emph{closed curve}, the Bishop frame at the end of the curve will not necessarily align back with the frame at the beginning of the curve.\footnote{\blockcquote{Hanson95}{it is possible for closed curves to have parallel transport frames that do not match up after one full circuit of the curve}.} Even if the frame returns to its initial value after a complete turn, it may returns in its position after several complete turns ($2k\pi$) around the curve tangent. During its movement along the curve, the frame will make a total twist of $\int_0^L \tau_f(s)ds = \alpha[2\pi]$ around the tangent vector. This difference of angle is related to the concept of \emph{holonomy}.
 
 Remark also that Frenet and Bishop frames coincide for planar curves ($\tau_f = 0$), within a constant rotation around the unit tangent vector.
- 
- %related to mechanical torsion
-
-%expliquer la notion de parallèle comme l'a formulé Laurent Hauswirth~: la projection de $u'$ et $v'$ dans le plan normal à la tangente $t$ est nulle, cad que d'un plan à un autre la projection de $u$ et $v$ est conservée + faire schéma.
-
-%Laurent Hauswirth~: la complexité d'un problème est en général proportionnelle à la codimension de l'objet étudié et donc, de ce fait les courbes ($codim = 3-1 = 2$) sont des objets plus compliqués que les surfaces ($codim = 3-2=1$) ds $\mathbb{R}^3$.
 
 \subsection{Comparison between Frenet and Bishop frames}
 
@@ -1044,17 +1011,6 @@ The angular velocities of the Frenet and Bishop frames are respectively given by
 	\end{alignat}
 \end{subequations}
 
-
-% \begin{figure}[p]
-% \centering
-% 	\vspace{-0.5cm}
-% 	\subfloat[][Frenet frame]{\includegraphics[]{ch4_geometry/plot/1_bench_frame/build_frenet_large.pdf}\label{plot:frenet}}
-% 	\\
-% %  	 \hspace{0.2cm}
-% 	\subfloat[][Bishop frame]{\includegraphics[]{ch4_geometry/plot/1_bench_frame/build_bishop_large.pdf}\label{plot:bishop}}
-% 	\captionof{figure}[Angular velocities of Frenet and Bishop frames for a circular helix]{Angular velocities of Frenet and Bishop frames for a circular helix ($a=1.0$ and $k=0.5$).}
-% 	\label{fig:frame_bench}
-% \end{figure}
 The components of these angular velocities are plotted in \cref{fig:frame_bench} for a circular helix with parameter $a=1.0$ and $k=0.5$ while the parameter $t$ varies from $0$ to $2\pi$. At $t=2\pi$ the frame has made a full turn and its altitude has increased from $0$ to $\pi$. 
 
 The components of the angular velocity of the Frenet frame are constant during the movement along the curve and the frame does not rotate around the normal vector as $\Omega_f^2 = 0$ (see \cref{plot:frenet}). The components of the angular velocity of the Bishop frame vary during the movement along the curve and the frame does not rotate around the tangent vector as $\Omega_b^3 = 0$ (see \cref{plot:bishop}).
@@ -1121,12 +1077,7 @@ The length of $\vect{e}_i$ is denoted $l_i = \norm{\vect{e}_i}$. The total lengt
 	\right.
 \end{equation}
 
-% \begin{figure}[t]
-% 	\centering
-% 	\includegraphics[]{discrete_curve_full.pdf}
-% 	\captionof{figure}[Discrete curve representation and parametrization]{Discrete curve representation and parametrization.}
-% 	\label{fig:discrete_curve}
-% \end{figure}
+
 
 \subsubsection{Discrete unit tangent vector}\label{sec=tangent_edge}
 Edge vectors lead to a natural definition of the \emph{discrete unit tangent vector} along each edge~: $\vect{u}_i = \vect{e}_i / l_i$. However, this definition makes no sense at vertices where all the curvature is condensed and measured by the turning angle ($\varphi_i$). This is often illustrated in terms of the Gau{\ss} map, a transformation in which edges will map to points and vertices will map to curves on the unit sphere.
@@ -1275,6 +1226,7 @@ Note that this parametrization satisfies $\norm{\Gamma'}=1$ on $\bigcup_{i=1}^n 
 			node=CAc,
 			anchor=center,
 			]{%
+				\ra{1.5}
 				\begin{tabularx}{\textwidth}{@{} X c c c r r r @{}}
 					\toprule
 					Curvature ($\kappa_i$) 										&  Locality 	&  $\varphi \mapsto 0$ 	&  $\varphi \mapsto \pi$ 		& Ends  	& Dim 	&  Fitting			\\
@@ -1467,22 +1419,6 @@ In this section we compare the two main discrete curvature notions (circumscribe
 	}
 }
 
-
-% \begin{figure}[!p]
-% 	\captionsetup[subfloat]{captionskip=10pt}
-% 	\centering
-% 	\vspace{-5mm}
-% 	\subfloat[][Circumscribed]{\includegraphics{kb_anim_vertex_a.pdf}\label{fig:1}}\hspace{5mm}
-% 	\subfloat[][Circumscribed]{\includegraphics{kb_anim_vertex_b.pdf}\label{fig:2}} \\[-10mm]
-% 	\subfloat[][Inscribed]{\includegraphics{kb_anim_edge_a.pdf}\label{fig:3}}\hspace{5mm}
-% 	\subfloat[][Inscribed]{\includegraphics{kb_anim_edge_b.pdf}\label{fig:4}}
-% 	\captionof{figure}[Comparison of circumscribed and inscribed osculating circles]{Comparison of circumscribed and inscribed osculating circles for different values of the turning angle ($\varphi$).}
-% 	\label{fig:kb_animation}
-% 	\vspace{0mm}
-% 	\includegraphics{ch4_geometry/plot/2_bench_kb/build.pdf}
-% 	\captionof{figure}[Sensitivity of discrete curvatures to non uniform discretization]{Sensitivity of discrete curvatures to non uniform discretization ($\alpha \in [0.5,2]$) over the whole domain of variation of the turning angle ($\varphi \in [0,\pi]$).}
-% 	\label{fig:kb_bench}
-% \end{figure}
 
 This aspect is not treated in the actual literature, in which curves parametrized by arc length are usually treated as curves of constant edge length, though it is yet an important topic when it comes to the numerical modeling of true mechanical systems. Indeed, the presence of connexions between members will compromise the ability to enforce a constant discretization through all the elements of the structure. Additionally, vertices are obviously points of interest in a discrete model as they will be used to apply loads and enforce various constraints such as joints and support conditions. Finally, the accuracy of the discretized model is proportional to the sharpness of the discretization, whereas the computing time required to solve the model will grow as the sharpness increases. Consequently, one would distribute these points in the space as cleverly as possible and try to minimize their number as they increase the overall computation cost.
 
@@ -1839,17 +1775,6 @@ Note that $\vect{t}_i^-$ (resp. $\vect{t}_i^+$) is obtained by a reflection of $
 The first expression is interpreted as the unique circle passing through three points ($\vect{x}_{i-1}$, $\vect{x}_i$, $\vect{x}_{i+1}$) as explained in \cref{sec=circumscribed}. Equivalently, there exist a unique circle defined by two points and a tangent vector. Precisely, the last two expressions in \cref{eq:vertex_kbs} can be interpreted as the curvature binormal vector of the unique circle passing through $\vect{x}_{i-1}$, $\vect{x}_i$ (resp. $\vect{x}_{i}$, $\vect{x}_{i+1}$) and tangent to $\vect{t}_{i}$ at $\vect{x}_{i}$.
 
 
-% \begin{figure}[p]
-% 	\captionsetup[subfloat]{captionskip=20pt}
-% 	\centering
-% 	\subfloat[][current portion]{\includegraphics{kb_vertex_tangent.pdf}\label{fig:kb_vertex_tangent_a}}\\
-% 	\subfloat[][start]{\includegraphics{kb_vertex_start.pdf}\label{fig:kb_vertex_tangent_b}}\hspace{5mm}
-% 	\subfloat[][end]{\includegraphics{kb_vertex_end.pdf}\label{fig:kb_vertex_tangent_c}}
-% 	\vspace{10pt}
-% 	\captionof{figure}[Definition of the tangent vector associated to the circumscribed curvature]{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the circumscribed curvature.}
-% 	\label{fig:kb_vertex_tangent}
-% \end{figure}
-
 \subsubsection{Discontinuity of curvature}
 Let $\vect{t}_i^*$ be an arbitrary tangent vector at $\vect{x}_i$. Following \cref{eq:vertex_kbs} we define the \emph{left-sided} (resp. \emph{right-sided}) discrete curvatures at $\vect{x}_i$ in the circumscribed case as~:
 \begin{subequations}
@@ -1949,18 +1874,6 @@ We now consider the case where the curvature is defined according to the inscrib
 			}
 	}
 }
-
-
-% \begin{figure}[p]
-% 	\captionsetup[subfloat]{captionskip=20pt}
-% 	\centering
-% 	\subfloat[][current portion]{\includegraphics{kb_edge_tangent.pdf}\label{fig:kb_edge_tangent_a}}\\
-% 	\subfloat[][start]{\includegraphics{kb_edge_start.pdf}\label{fig:kb_edge_tangent_b}}\hspace{5mm}
-% 	\subfloat[][end]{\includegraphics{kb_edge_end.pdf}\label{fig:kb_edge_tangent_c}}
-% 	\vspace{10pt}
-% 	\captionof{figure}[Definition of the tangent vector associated to the inscribed curvature]{Definition of the tangent vector ($\vect{t}$) and related curvature binormal vector ($\vect{\kappa b}$) at vertices associated to the inscribed curvature.}
-% 	\label{fig:kb_edge_tangent}
-% \end{figure}
 
 
 \subsubsection{Current portion}
@@ -2097,16 +2010,6 @@ The rotation method is given by \citef{Bloomenthal1990}. First, the frame at $\v
 	}
 }
 
-
-% \begin{figure}[!p]
-% 	\captionsetup[subfloat]{captionskip=10pt}
-% 	\centering
-% 	\subfloat[][rotation method]{\includegraphics{pt_rotation.pdf}\label{fig:pt_rotation}}\\
-% 	\subfloat[][double reflection method]{\includegraphics{pt_reflection.pdf}\label{fig:pt_reflection}}
-% 	\vspace{10pt}
-% 	\captionof{figure}[Two methods to parallel transport a vector]{Two methods to parallel transport a frame from $\{\vect{x}_i,\vect{t}_i\}$ to $\{\vect{x}_{i+1},\vect{t}_{i+1}\}$.}
-% 	\label{fig:pt}
-% \end{figure}
 
 \subsection{The double reflexion method}
 The double reflection method is given by \citef{Wang2008}. It is supposed to be of order $o(h^4)$ whereas the rotation method is only $o(h^2)$, where $h = \sup_{i\in \llbracket 0,n \rrbracket} \norm{\vect{e}_i}$ is the sharpness of the discretization. Though their computation cost is quite similar, the double reflection method is not subject to instability when $\vect{t}_i$ and $\vect{t}_{i+1}$ tend to be collinear, which is an obvious advantage.

@@ -6,85 +6,104 @@
 % COMPILER DIRECTIVES
 % ===========================
 % !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = XeLaTeX
 % !BIB TS-program = biber
 % !BIB program = biber
 
-% ===========================
-% PREAMBLE
-% ===========================
-\input{head/settings_epfl_template.tex}
-\input{head/settings_custom.tex}
-\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
 
-% For float/eq auto-extraction
-\usepackage[]{preview}
-\PreviewEnvironment{tabularx}
+\PassOptionsToPackage{showrules}{blurb}
+% \PassOptionsToPackage{showframe}{blurb}
+\PassOptionsToPackage{showbleed}{blurb}
+% \PassOptionsToPackage{showcanon}{blurb}
+% \PassOptionsToPackage{nobleed}{blurb}
 
-% ===========================
-% DOCUMENT
-% ===========================
-\begin{document}
-
-% FRONTMATTER
-\frontmatter
-
-% preamble
-\setlength{\parskip}{1em}
-\input{head/titlepage.tex}
-\include{_dedication}
-\include{_preface}
-\include{_abstracts}
-\setcounter{tocdepth}{2}
-
-% tocloft
-\setlength{\parskip}{0em}
-\addtocontents{toc}{\protect\addvspace{1em}}
-\tableofcontents
-\listoffigures
-\listoftables
-
-% MAIN MATTER
-\setlength{\parskip}{1em}
-\mainmatter
-
-	\newrefsection
-
-	\include{ch1_introduction/chapter}
-
-	\part{Elastic gridshells}\label{part=1}
-	\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-
-	\part{Rich Kirchhoff beam model}\label{part=2}
-	\include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ch8_conclusion/chapter}
-
-% APPENDINX MATTER
-	\part{Appendix}	\label{part=3}
-	\appendix
-	\include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	\include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
-
-% BACK MATTER
-\backmatter
-
-	% go back to root for bookmarks
-	\bookmarksetup{startatroot}
-
-	% list of notations
-	\include{_notations}
-
-	% general bibliography
-	\printbibliography[heading=bibintoc]
-
-	% personal publications
-	\newrefsection
-	\newrefcontext[sorting=ydnt]
-	\nocite{*}
-	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
-
-\end{document}
+\documentclass[12pt,fleqn]{thesis}
+	% ENCODING
+	
+	
+	
+	% **************************************************
+	% METADATA
+	% **************************************************
+	\newcommand\mytitle{Modeling of bending-torsion couplings in active-bending structures. Application to the design of elastic gridshell.}
+	\newcommand\myauthor{Lionel du Peloux de Saint Romain}
+	\newcommand\mykeywords{gridshell, active bending, freeform, dynamic relaxation}
+	\newcommand\myabstract{My abstract.}
+	
+	
+	\usepackage{kantlipsum}
+	
+	% **************************************************
+	% DOCUMENT
+	% **************************************************
+	\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
+	\addbibresource{library.bib}
+	
+	% \includeonly{_dedication,_preface,_abstracts}
+	\begin{document}
+	
+	% --------------------------
+	% Front matter
+	% --------------------------
+	\frontmatter
+	
+	\input{head/titlepage.tex}
+	\input{_dedication}
+	\input{_preface}
+	\input{_abstracts}
+	\begingroup
+		\tableofcontents
+		\listoffigures
+		\listoftables
+	\endgroup
+	
+	% --------------------------
+	% Main matter
+	% --------------------------
+	\mainmatter
+	
+		\newrefsection
+	
+		\include{ch1_introduction/chapter}
+		
+		\part{Elastic gridshells}\label{part=1}
+		\include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		\include{ch3_creteil/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	
+		\part{Kirchhoff beam model}\label{part=2}
+		\include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		\include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		\include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		
+		\include{ch8_conclusion/chapter}
+	
+	% APPENDINX MATTER
+	\appendixmatter
+		\part{Appendix}\label{part=3}
+		\begin{appendices}
+			\include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+			\include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+			\include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		\end{appendices}
+	
+	% BACK MATTER
+	\backmatter
+	
+		% go back to root for bookmarks
+		\bookmarksetup{startatroot}
+	
+		% list of notations
+		\input{_notations}
+	
+		% general bibliography
+		\printbibliography[heading=bibintoc]
+	
+		% personal publications
+		\newrefsection
+		\newrefcontext[sorting=ydnt]
+		\nocite{*}
+		\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
+		
+	
+	\end{document}
