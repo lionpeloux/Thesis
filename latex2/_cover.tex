@@ -60,6 +60,7 @@
 \newfontfamily\FTBookOblique{FuturaLT-BookOblique}[Scale = MatchUppercase]
 \newfontfamily\FTCondensedBoldOblique{FuturaLT-CondensedBoldOblique}[Scale = MatchUppercase]
 \newfontfamily\GSLight{GillSans-Light}[Scale = MatchUppercase]
+\newfontfamily\FTCondensed{FuturaLT-Condensed}[Scale = MatchUppercase]
 
 % TYPE FACE FRONT COVER
 \DeclareRobustCommand{\tfgridshell}{\FTBold\fontsize{70pt}{0pt}\selectfont}
@@ -72,8 +73,12 @@
 \DeclareRobustCommand{\tfHB}{\FTBold\fontsize{16pt}{0pt}\selectfont}
 \DeclareRobustCommand{\tfquote}{\FTCondensedBoldOblique\large}
 \DeclareRobustCommand{\tftxt}{\GSLight\small}
+% TYPE FACE SPINE
+\DeclareRobustCommand{\tfspineauthor}{\FTRegular\fontsize{22pt}{0pt}\selectfont}
+\DeclareRobustCommand{\tfspinephd}{\FTCondensed\fontsize{14pt}{0pt}\selectfont}
+\DeclareRobustCommand{\tfspinetitle}{\FTBold\fontsize{36pt}{0pt}\selectfont\color{secondary}}
 
-\let\defaultpgflinewidth\pgflinewidt
+\let\defaultpgflinewidth\pgflinewidth
 \setlength{\pgflinewidth}{0pt}
 
 \usepackage{multicol}
@@ -96,6 +101,7 @@
 \begin{document}
 \thispagestyle{empty}
 \AddToShipoutPictureBG*{%
+	% BACK COVER
 	\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
 		% background color
 		\path[fill,gray1] (PPbl) rectangle (PPtr);
@@ -136,10 +142,30 @@
 		% phd
 		\node[anchor=center, xshift=-\MainBarStepWidth/2, rotate=90] (MBphd) at (MByear -| SPtl){%
 			\fbox{\hbox{\color{white}\tfphd PhD}}};
+		\path (PGb) -- (PGb |- MBbr) coordinate[midway] (Pt);
 		\pgfresetboundingbox
 		\path[use as bounding box] (0,0);
 	\end{tikzpicture}
-	%
+	% SPINE
+	\begin{tikzpicture}[remember picture, inner sep=0pt]
+		% spine PHD
+		\node[anchor=base, yshift=\AuthorYMargin] at (PGb){%
+			\fbox{\hbox{\tfspinephd PhD Thesis}}};
+		\path (current bounding box.north) -- (PGb |- MBbr) coordinate[midway] (Pt);
+		\pgfresetboundingbox
+		\path[use as bounding box] (0,0);
+	\end{tikzpicture}
+	\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+		% spine author
+		\node[anchor=center, yshift=0mm, rotate=90] at (Pt){%
+			\fbox{\hbox{\tfspineauthor Lionel du Peloux}}};
+		% spine title
+		\path (PGt) -- (PGt |- MBtr) coordinate[midway] (Pt);
+		\node[anchor=center, yshift=0mm, rotate=90] at (Pt){%
+			\fbox{\hbox{\tfspinetitle ELASTIC GRIDSHELL}}};
+		\pgfresetboundingbox\path[use as bounding box] (0,0);
+	\end{tikzpicture}
+	% BACK COVER
 	\sodef\spaceout{}{0pt plus 1fil}{.4em plus 1fil}{0pt}%
 	\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
 		\coordinate[xshift=\BackTitleSideMargin, yshift=-\BackTitleTopMargin] (HA) at (PGtl);
@@ -184,78 +210,5 @@
 	\end{tikzpicture}
 }
 \hbox{}
-
-% In this thesis, which marks an important step in a personal research adventure initiated in 2010, we try to embrace the issue of the design of elastic gridshells in all its complexity, addressing both theoretical, technical and constructive aspects. 
-
-% \begin{figure}
-% 	\includegraphics{fav_nb.png}
-% \end{figure}
-
-% \begin{titlepage}
-% 	\begin{center}
-% 	\includegraphics[width=6cm]{head/logo_upe}\\
-% 	\vspace{2cm}
-% 	\setstretch{1.5}
-% 	{\Large Thèse de doctorat} \\
-% 	{\large École doctorale~: Science, Ingénierie et Environnement}\\
-% 	{\large Spécialité~: Structures et Matériaux}\\
-% 	\vspace{18pt}
-% 	{\Large Présentée par}\\
-% 	{\large \myauthor}
-	
-% 	\vfill
-	
-% 	\setstretch{2}
-% 	{\ttfamily
-% 	{\bfseries\huge  Modeling of bending-torsion couplings in active-bending structures}
-% 	\\\vspace{12pt}
-% 	{\Large Application to the design of elastic gridshells}
-% 	}
-	
-% 	\vfill
-% 	\setlength{\parskip}{0em}
-% 	{\large Soutenue à l'Ecole Nationale des Ponts et Chaussées,\\\vspace{-10.0pt}le 20 décembre 2017, devant le jury composé de~:}
-	
-% 	\vspace{1.5cm}
-	
-% 	\setstretch{1.2}
-% 	{\setlength{\tabcolsep}{0.5cm}\ra{1.0}
-% 	\begin{tabular}{@{}>{}lll@{}}
-% 	Président 		& Bernard MAURIN 			& Université Montpellier 2\\
-% 	\addlinespace
-% 	Rapporteurs 	& Sébastien NEUKIRCH 		& Université Pierre et Marie Curie\\
-% 					 & Carlos LÁZARO 			& Universitat Politècnica de València\\
-% 	\addlinespace
-% 	Examinateurs	& Alberto PUGNALE 			& University of Melbourne\\
-% 					 & Jean-François CARON 		& École des Ponts ParisTech\\
-% 					 & Cyril DOUTHE 				& École des Ponts ParisTech\\
-% 	\addlinespace
-% 	Invité 			& Bernard VAUDEVILLE 		& T/E/S/S atelier d'ingénierie\\
-% 	\addlinespace
-% 	Directeur de thèse 	& Olivier BAVEREL 		& École des Ponts ParisTech\\
-% 	\end{tabular}}
-% 	\end{center}
-% 	\end{titlepage}
-	
-	
-% \clearpage
-% %http://tug.ctan.org/tex-archive/macros/latex/contrib/wrapfig/multiple-span.txt
-% \parbox[t]{\CoverWidth-2\BackTitleSideMargin}{%
-% 	\tftxt\setstretch{1.0}%
-% 	\setlength{\parindent}{1em}%
-% 	% cant align properly the text at the top of the box so add a small amount of negative vspace
-% 	\vspace{-0.3\baselineskip}
-% 	\begin{multicols}{2}
-% 		\noindent
-% 		An \emph{elastic gridshell} is a freeform structure, generally doubly curved, but formed out through the reversible deformation of a regular and initially flat structural grid. Building curved shapes that may seems to offer the best of both worlds~: shell structures are amongst the most performant mechanically speaking while planar and orthogonal constructions are much more efficient and economic to produce than curved ones. This ability to \textquote{form a form}\begin{wrapfigure}[9]{r}[\dimexpr.5\width+.5\columnsep\relax]{6cm}%
-% 			\includegraphics[width=6cm,height=8\baselineskip]{example-image-a}%
-% 		\end{wrapfigure}
-% 		efficiently is of peculiar importance in the current context where morphology is a predominant component of modern architecture, and envelopes appear to be the neuralgic point for building performances.
-
-% 		The concept was invented by Frei Otto, a German architect and structural engineer who devoted many years of research to gridshells. In 1975 he designed the Multihalle of Mannheim, a \SI{7500}{m^2} wooden shell which demonstrated the feasibility of this technology and made it famous to a wide audience. However, despite their potential, very few projects of this kind were built after this major realization. And for good reason, the resources committed at that time cannot guarantee the replicability of this experiment for more standard projects, especially on the economic level. Moreover, the technics and methods developed by Otto's team in the 1960s have mostly fall into disuse or are based on disciplines that have considerably evolved. New materials, such as composite materials, have recently emerged. They go beyond the limitations of conventional materials such as timber and offer at all levels much better technical performances for this kind of application. Finally, it should be noted that the regulatory framework has also deeply changed, bringing a certain rigidity to the penetration of innovations in the building industry. Therefore, the design of gridshells arises in new terms for current architects and engineers and comes up against the inadequacy of existing tools and methods.
-
-% 		In this thesis, which marks an important step in a personal research adventure initiated in 2010, we try to embrace the issue of the design of elastic gridshells in all its complexity, addressing both theoretical, technical and constructive aspects. In a first part, we deliver a thorough review of this topic and we present in detail one of our main achievements, the ephemeral cathedral of Créteil, built in 2013 and still in service. In a second part, we develop an original discrete beam element with a minimal number of degrees of freedom adapted to the modeling of bending and torsion inside gridshell members with anisotropic cross-section. Enriched with a ghost node, it allows to model more accurately physical phenomena that occur at connections or at supports. Its numerical implementation is presented and validated through several test cases. Although this element has been developed specifically for the study of elastic gridshells, it can advantageously be used in any type of problem where the need for an interactive computation with elastic rods taking into account flexion-torsion couplings is required.
-% 	\end{multicols}
-% }
 \end{document}
 
