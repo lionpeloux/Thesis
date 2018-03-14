@@ -67,6 +67,7 @@
 \DeclareBoolOption[false]{showframe}
 \DeclareBoolOption[false]{showbleed}
 \DeclareBoolOption[false]{showcanon}
+\DeclareBoolOption[false]{showspine}
 \DeclareBoolOption[false]{nobleed}
 \ProcessKeyvalOptions*
 
@@ -641,6 +642,13 @@
 				\path[fill,gray,opacity=0.8] 
 					(PGtl) -- (PPtl) -- (PPtr) -- (PPbr) -- (PPbl) -- (PPtl) -- (PGtl) -- (PGbl) -- (PGbr) -- (PGtr) -- (PGtl);
 			}{}
+			\ifbool{opt@showspine}{
+				% spine line
+				\draw[black,thick] (SPbl) -- (SPtl);
+				\draw[black,thick] (SPbr) -- (SPtr);
+				\draw[black,thick,dashed] (BLb) -- (BLt);
+				% paper nodes
+			}{}
 			\ifbool{opt@showrules}{
 				% paper frame
 				\draw [red,thick] (PPbl) rectangle (PPtr);
@@ -659,6 +667,9 @@
 				\draw[red,thin,dashed] (PGtl) -- (PGbr);
 				\draw[red,thin,dashed] (PGbl) -- (PGtr);
 			}{}
+			% ISBN place holder
+			\path (PGbl) -- (SPbl) coordinate[yshift=13mm,midway] (ISBN);
+			\path[fill,black] ([xshift=-22mm]ISBN) rectangle ([yshift=22mm,xshift=22mm]ISBN);
 		\end{tikzpicture}
 	}
 }
