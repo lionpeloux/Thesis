@@ -68,6 +68,7 @@
 \DeclareBoolOption[false]{showbleed}
 \DeclareBoolOption[false]{showcanon}
 \DeclareBoolOption[false]{showspine}
+\DeclareBoolOption[false]{showisbn}
 \DeclareBoolOption[false]{nobleed}
 \ProcessKeyvalOptions*
 
@@ -423,7 +424,7 @@
 		% full content
 		\ifbool{opt@showrules}{
 			\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
-				\path[fill,gray,opacity=0.8]  (CAbl) rectangle (CAtr);
+				\path[fill,gray,opacity=0.1]  (CAbl) rectangle (CAtr);
 			\end{tikzpicture}
 		}{}
 	}
@@ -668,8 +669,10 @@
 				\draw[red,thin,dashed] (PGbl) -- (PGtr);
 			}{}
 			% ISBN place holder
-			\path (PGbl) -- (SPbl) coordinate[yshift=13mm,midway] (ISBN);
-			\path[fill,black] ([xshift=-22mm]ISBN) rectangle ([yshift=22mm,xshift=22mm]ISBN);
+			\ifbool{opt@showisbn}{
+				\path (PGbl) -- (SPbl) coordinate[yshift=13mm,midway] (ISBN);
+				\path[fill,black,opacity=0.6] ([xshift=-22mm]ISBN) rectangle ([yshift=22mm,xshift=22mm]ISBN);
+			}{}
 		\end{tikzpicture}
 	}
 }
@@ -707,8 +710,6 @@
 			\@SetBlurbPageLayout{20.320cm}{25.401cm}{0.317cm}{0.635cm}{1.270cm}
 		}{}
 		\@ShowPageLayoutRules{}
-		\ifdefstring{\opt@pagemodulo}{2}{\AtEndDocument{\@PageCountMultipleOfTwo}}{}
-		\ifdefstring{\opt@pagemodulo}{4}{\AtEndDocument{\@PageCountMultipleOfFour}}{}
 	}
 }
 
@@ -726,31 +727,42 @@
 %% https://tex.stackexchange.com/q/22873/154815
 %%%%%
 
-\patchcmd\mainmatter{\cleardoublepage}{%
-	\clearpage\edef\@currentlabel{\number\numexpr\arabic{page}\ifodd\arabic{page}+1\fi\relax}%
-	\label{LastFrontmatterPage}%
-	\cleardoublepage
-}{}{}
+\newcounter{mycount}
+\newcounter{mymodulo}
+\newcounter{addpage}
+\DeclareRobustCommand{\AddBlankPageToMatchModulo}{
+	\clearpage
+	\hbox{}\thispagestyle{empty}
+	\zlabel{contentlastpage}
 
-\ExplSyntaxOn
-\cs_new:Npn \egreg_int_coremainder:nn #1 #2{%
-  \int_mod:nn { #2 - \int_mod:nn { #1 } { #2 } } { #2 }
+	% \value{abspage} = value of abspage - 1 (+1 added at shipout time)
+	% This is page \zref[abspage]{contentlastpage}
+	% \theabspage
+	% \ifnumcomp{\value{abspage}}{=}{63}{true}{false}
+	% $\theabspage (4) = \intcalcMod{\value{abspage}}{4}$
+	
+	\setcounter{mymodulo}{\opt@pagemodulo}
+	\ifodd\c@page
+		% we are now a right page
+	\else
+		% we are now on a left page
+		\clearpage\hbox{}\thispagestyle{empty}	
+		% we are now a right page
+	\fi
+	% we are now on a right page	
+	% we need to add a least a double blank page
+	% to have some blank pages between content and cover
+	\clearpage\hbox{}\thispagestyle{empty}
+	\clearpage\hbox{}\thispagestyle{empty}
+	% we are now on a right page
+	% we add as many blank pages as we need so the total page count is modulo /mymodulo
+	% not that the count does not take into count the first page (front cover)
+	\setcounter{addpage}{\intcalcMod{\value{abspage}}{\value{mymodulo}}}
+	\setcounter{addpage}{\intcalcMod{\value{addpage}}{\value{mymodulo}}}
+	\setcounter{mycount}{0}\whiledo{\value{mycount}<\value{addpage}}
+		{\clearpage\hbox{}\thispagestyle{empty}\stepcounter{mycount}}
+	% we are now on a right page (modulo )
 }
-\NewDocumentCommand{\@PageCountMultipleOfFour} { O{0} }{%
-	\prg_replicate:nn
-	{
-		\egreg_int_coremainder:nn { #1 + \getrefnumber{LastFrontmatterPage} + \getpagerefnumber{LastPage} } { 4 }
-	}
-	{ \thispagestyle{empty}\null\clearpage }
-}
-\NewDocumentCommand{\@PageCountMultipleOfTwo} { O{0} }{%
-	\prg_replicate:nn
-	{
-		\egreg_int_coremainder:nn { #1 + \getrefnumber{LastFrontmatterPage} + \getpagerefnumber{LastPage} } { 2 }
-	}
-	{ \thispagestyle{empty}\null\clearpage }
-}
-\ExplSyntaxOff
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -15,10 +15,10 @@
 % \PassOptionsToPackage{showframe}{blurb}
 % \PassOptionsToPackage{showbleed}{blurb}
 % \PassOptionsToPackage{showcanon}{blurb}
-\PassOptionsToPackage{showspine}{blurb}
-\PassOptionsToPackage{nobleed}{blurb}
 \PassOptionsToPackage{cover}{blurb}
-
+% \PassOptionsToPackage{showspine}{blurb}
+% \PassOptionsToPackage{showisbn}{blurb}
+% \PassOptionsToPackage{nobleed}{blurb}
 \documentclass[12pt,fleqn]{thesis}
 	\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}{./cover/}}
 	\addbibresource{library.bib}
@@ -104,7 +104,8 @@
 	% BACK COVER
 	\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
 		% background color
-		\path[fill,gray1] (PPbl) rectangle (PPtr);
+		\definecolor{graybckgd}{gray}{0.9}
+		\path[fill,graybckgd] (PPbl) rectangle (PPtr);
 		% main bar nodes
 		\path (PGtl -| PPtr) node[yshift=-\MainBarYOffset] (MBtr) {};
 		\path (MBtr -| SPtl) node[xshift=-\MainBarStepWidth, yshift=-\MainBarHeight] (MBbl) {};

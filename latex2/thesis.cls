@@ -27,10 +27,11 @@
 % \RequirePackage{kvoptions}  		% key-value options
 \RequirePackage{etoolbox,xpatch}
 \RequirePackage{ifthen}
-\RequirePackage{calc}
+\RequirePackage{calc, intcalc}
 \RequirePackage{xparse}
 \RequirePackage{refcount,lastpage}
 \RequirePackage{printlen}
+\RequirePackage{soul}
 
 % golden section
 \RequirePackage[
@@ -1157,7 +1158,7 @@
 	}
 }
 
-\RequirePackage{zref-user,zref-titleref,zref-descref} % needs to be loaded after subcaption
+\RequirePackage{zref-abspage,zref-user,zref-titleref,zref-descref} % needs to be loaded after subcaption
 % zref-descref is my custom upgrade of zref-titleref
 % it adds the \zdescref{ref} to get the caption longtitle/desc by ref
 

@@ -1,0 +1,31 @@
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
+
+% ===========================
+% COMPILER DIRECTIVES
+% ===========================
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = XeLaTeX-shellescape
+% !BIB TS-program = biber
+% !BIB program = biber
+
+\AddBlankPageToMatchModulo
+
+% we are now on a right (odd) page
+% and the total page count (minus the front and back cover)
+% is modulo 2/4 regarding the blurb package option
+\clearpage
+\hbox{}\thispagestyle{empty}
+% we are on a left (even) page
+\AddToShipoutPictureBG*{%
+	\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+		\begin{scope}
+			\setlength{\pgflinewidth}{0pt}
+			\clip (PPbl) rectangle (PPtr);
+			\node[anchor=north west] at (PPtl){\includegraphics{softcoverwithbleed.pdf}};
+		\end{scope}		
+	\end{tikzpicture}
+}
+
+

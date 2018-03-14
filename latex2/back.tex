@@ -30,14 +30,15 @@
 \frontmatter
 
 % \input{head/titlepage.tex}
+\input{_frontcover}
 \input{_dedication}
-\input{_preface}
-\input{_abstracts}
-\begingroup
-	\tableofcontents
-	\listoffigures
-	\listoftables
-\endgroup
+% \input{_preface}
+% \input{_abstracts}
+% \begingroup
+% 	\tableofcontents
+% 	\listoffigures
+% 	\listoftables
+% \endgroup
 
 % --------------------------
 % Main matter
@@ -46,7 +47,7 @@
 
 	\newrefsection
 
-	\include{ch1_introduction/chapter}
+	% \include{ch1_introduction/chapter}
 	
 	\part{Elastic gridshells}\label{part=1}
 	% \include{ch2_gridshell/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
@@ -64,7 +65,7 @@
 \appendixmatter
 	\part{Appendix}\label{part=3}
 	\begin{appendices}
-		\include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
+		% \include{ap3_review/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 		% \include{ap1_variational/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 		% \include{ap2_interpolation/appendix}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	\end{appendices}
@@ -89,5 +90,7 @@
 		% \setstretch{0.5}
 		\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
 	\endgroup
+
+\input{_backcover}
 
 \end{document}

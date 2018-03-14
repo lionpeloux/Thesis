@@ -2137,57 +2137,13 @@
     <bcf:datasource type="file" datatype="bibtex">library.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="1">
-    <bcf:citekey order="1">IL13</bcf:citekey>
-    <bcf:citekey order="1">Happold1975</bcf:citekey>
-    <bcf:citekey order="2">Ban2006</bcf:citekey>
-    <bcf:citekey order="3">Harris2002</bcf:citekey>
-    <bcf:citekey order="4">Harris2008</bcf:citekey>
-    <bcf:citekey order="5">Douthe2006</bcf:citekey>
-    <bcf:citekey order="5">Douthe2010a</bcf:citekey>
-    <bcf:citekey order="6">Baverel2012</bcf:citekey>
-    <bcf:citekey order="7">DuPeloux2016</bcf:citekey>
-    <bcf:citekey order="8">DAmico2014</bcf:citekey>
-    <bcf:citekey order="8">Naicu2014</bcf:citekey>
-    <bcf:citekey order="8">DAmico2015a</bcf:citekey>
-    <bcf:citekey order="8">Mork2016</bcf:citekey>
-    <bcf:citekey order="9">IL13</bcf:citekey>
-    <bcf:citekey order="10">Mesnil2017</bcf:citekey>
-    <bcf:citekey order="11">Tayeb2015</bcf:citekey>
-    <bcf:citekey order="12">Bergou2008</bcf:citekey>
-    <bcf:citekey order="13">DuPeloux2015</bcf:citekey>
-    <bcf:citekey order="13">Lefevre2017</bcf:citekey>
-    <bcf:citekey order="14">DuPeloux2016</bcf:citekey>
-    <bcf:citekey order="15">Adriaenssens2000</bcf:citekey>
-    <bcf:citekey order="16">Bergou2008</bcf:citekey>
-    <bcf:citekey order="17">Tayeb2015a</bcf:citekey>
-    <bcf:citekey order="18">Lefevre2017</bcf:citekey>
-    <bcf:citekey order="19">Cuvilliers2017</bcf:citekey>
-    <bcf:citekey order="20">Charpentier2017</bcf:citekey>
-    <bcf:citekey order="71">IL10</bcf:citekey>
-    <bcf:citekey order="72">IL10</bcf:citekey>
-    <bcf:citekey order="73">IL10</bcf:citekey>
-    <bcf:citekey order="74">IL13</bcf:citekey>
-    <bcf:citekey order="75">IL10</bcf:citekey>
-    <bcf:citekey order="76">IL10</bcf:citekey>
-    <bcf:citekey order="77">IL10</bcf:citekey>
-    <bcf:citekey order="78">IL13</bcf:citekey>
-    <bcf:citekey order="79">IL13</bcf:citekey>
-    <bcf:citekey order="80">IL10</bcf:citekey>
-    <bcf:citekey order="81">IL13</bcf:citekey>
-    <bcf:citekey order="82">IL13</bcf:citekey>
-    <bcf:citekey order="83">IL13</bcf:citekey>
-    <bcf:citekey order="84">IL13</bcf:citekey>
-    <bcf:citekey order="85">Burton1998</bcf:citekey>
-    <bcf:citekey order="86">Ban2006</bcf:citekey>
-    <bcf:citekey order="87">Harris2003</bcf:citekey>
-    <bcf:citekey order="88">Harris2008</bcf:citekey>
-    <bcf:citekey order="89">Douthe2006</bcf:citekey>
-    <bcf:citekey order="90">Baverel2012</bcf:citekey>
-    <bcf:citekey order="91">DAmico2014</bcf:citekey>
-    <bcf:citekey order="92">DuPeloux2016</bcf:citekey>
-    <bcf:citekey order="93">DAmico2015a</bcf:citekey>
-    <bcf:citekey order="94">Cuvilliers2017</bcf:citekey>
-    <bcf:citekey order="95">Mork2016</bcf:citekey>
+    <bcf:citekey order="1">DuPeloux2016</bcf:citekey>
+    <bcf:citekey order="2">Adriaenssens2000</bcf:citekey>
+    <bcf:citekey order="3">Bergou2008</bcf:citekey>
+    <bcf:citekey order="4">Tayeb2015a</bcf:citekey>
+    <bcf:citekey order="5">Lefevre2017</bcf:citekey>
+    <bcf:citekey order="6">Cuvilliers2017</bcf:citekey>
+    <bcf:citekey order="7">Charpentier2017</bcf:citekey>
   </bcf:section>
   <!-- SECTION 0 (cont.) -->
   <bcf:section number="0">
@@ -2202,13 +2158,6 @@
   <!-- SECTION 0 (cont.) -->
   <bcf:section number="0">
   </bcf:section>
-  <bcf:sortlist section="1" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
-  <bcf:sorting>
-    <bcf:sort order="1">
-      <bcf:sortitem order="1">citeorder</bcf:sortitem>
-    </bcf:sort>
-  </bcf:sorting>
-  </bcf:sortlist>
   <bcf:sortlist section="1" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
     <bcf:sort order="1">
