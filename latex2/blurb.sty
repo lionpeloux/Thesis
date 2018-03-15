@@ -69,6 +69,7 @@
 \DeclareBoolOption[false]{showcanon}
 \DeclareBoolOption[false]{showspine}
 \DeclareBoolOption[false]{showisbn}
+\DeclareBoolOption[false]{showcolorbg} % background color as print protection
 \DeclareBoolOption[false]{nobleed}
 \ProcessKeyvalOptions*
 
@@ -118,7 +119,8 @@
 \setlength{\marginparsep}{0mm}			% no notes
 \setlength{\headheight}{14pt}			% increase headheight (default to 12pt)
 \setlength{\headsep}{18pt}				
-\setlength{\footskip}{48pt}	
+\setlength{\footskip}{48pt}
+\definecolor{graybg}{gray}{0.9}
 
 % get content margins relative to safe area borders
 \setlength{\@ContentTopMargin}{\opt@top}
@@ -421,12 +423,15 @@
 		% place the page layout nodes in the shipout BG register
 		% so they will ba accessible in \AddToShipoutPictureBG
 		\GetPageLayoutNodes
+		\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
+		\ifbool{opt@showcolorbg}{
+				\path[fill,graybg]  (PPbl) rectangle (PPtr);
+			}{}
 		% full content
-		\ifbool{opt@showrules}{
-			\begin{tikzpicture}[remember picture, overlay,inner sep=0pt]
-				\path[fill,gray,opacity=0.1]  (CAbl) rectangle (CAtr);
-			\end{tikzpicture}
-		}{}
+			\ifbool{opt@showrules}{
+					\path[fill,gray,opacity=0.1]  (CAbl) rectangle (CAtr);
+				}{}
+		\end{tikzpicture}
 	}
 	\AddToShipoutPictureFG{
 		% place the page layout nodes in the shipout FG register

@@ -1,16 +1,14 @@
 
 % https://fr.sharelatex.com/learn/Writing_your_own_class#Preliminary_declarations
 
-% **************************************************
-% Identification
-% **************************************************
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{thesis}[2017/12/20 Lionel du Peloux]
 
-
-% **************************************************
-% Preliminary declarations
-% **************************************************
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% PRELIMINARY DECLARATIONS
+%%
+%%%%%
 \LoadClass[
 	11pt,		% base fontsize
 	twoside,
@@ -18,13 +16,10 @@
 	fleqn,		% equations are left aligned
 	]{book}
 
-% \RequirePackage{sectsty} 
+\RequirePackage{kvoptions}
 \RequirePackage{setspace}
-
 \RequirePackage{fancyhdr}
 \RequirePackage{mfirstuc}
-
-% \RequirePackage{kvoptions}  		% key-value options
 \RequirePackage{etoolbox,xpatch}
 \RequirePackage{ifthen}
 \RequirePackage{calc, intcalc}
@@ -51,11 +46,11 @@
 	]{blurb}
 \RequirePackage{photo}
 
-% help : https://tex.stackexchange.com/a/121881/154815
-% needs to be immediately after loading book.cls
-\tracingpatches
+
 % choose manualy which chapter has figures / tables 
 % and put a separator in the lof / lot
+% help : https://tex.stackexchange.com/a/121881/154815
+\tracingpatches
 \patchcmd{\@chapter}
 	{\addtocontents{lof}{\protect\addvspace{10\p@}}}
 	{%
@@ -84,11 +79,9 @@
 \newcommand\appendixmatter{\cleardoublepage} % required to resolve pbs with \include and \loft
 \renewcommand\backmatter{\cleardoublepage\@mainmatterfalse} % required to resolve pbs with \include and \loft
 
-% \RequirePackage{color}
-\RequirePackage{textcase} % text case
+\RequirePackage{textcase}
 \RequirePackage{tikz}
 \RequirePackage{tikzpagenodes}
-\usetikzlibrary{external} % for chapter and part special pages
 
 \RequirePackage{bm}
 \RequirePackage{mathtools}
