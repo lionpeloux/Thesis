@@ -10,7 +10,7 @@
 		ylabel={$\mathcal{E} / \mathcal{E}_{max}$},
 		legend style={font=\small, row sep=2pt},
 		legend columns=3,
-		legend style={at={(0.5,1.1)},anchor=south, font=\small, row sep=2pt, column sep=5pt, overlay},
+		legend style={at={(0.5,1.1)},anchor=south, font=\small, row sep=2pt, column sep=5pt, fill=none,overlay},
 		]
 			\addplot[gray8, smooth, thick, legend entry = $\mathcal{E}_p$]  table[x expr=\thisrowno{0}, y expr=\thisrowno{1}] {\Table};
 		

@@ -39,6 +39,39 @@
 \RequirePackage{soul}
 
 
+% choose manualy which chapter has figures / tables 
+% and put a separator in the lof / lot
+% help : https://tex.stackexchange.com/a/121881/154815
+\tracingpatches
+\patchcmd{\@chapter}
+	{\addtocontents{lof}{\protect\addvspace{10\p@}}}
+	{%
+		\expandafter\ifx\@chapapp\appendixname
+		\else
+			\ifnumcomp{\value{chapter}}{=}{2}{\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{3}{\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{4}{\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{5}{\protect\tocseparator[lof]}{}%
+			\ifnumcomp{\value{chapter}}{=}{6}{\protect\tocseparator[lof]}{}%
+		\fi
+	}
+	{}{}
+\patchcmd{\@chapter}
+	{\addtocontents{lot}{\protect\addvspace{10\p@}}}
+	{%
+	\expandafter\ifx\@chapapp\appendixname
+		\ifnumcomp{\value{chapter}}{=}{1}{\protect\tocseparator[lot]}{}%
+	\else
+		\ifnumcomp{\value{chapter}}{=}{3}{\protect\tocseparator[lot]}{}%
+		\ifnumcomp{\value{chapter}}{=}{5}{\protect\tocseparator[lot]}{}%
+		\ifnumcomp{\value{chapter}}{=}{6}{\protect\tocseparator[lot]}{}%
+	\fi
+	}
+	{}{}
+\newcommand\appendixmatter{\cleardoublepage} % required to resolve pbs with \include and \loft
+\renewcommand\backmatter{\cleardoublepage\@mainmatterfalse} % required to resolve pbs with \include and \loft
+
+
 \RequirePackage{textcase}
 \RequirePackage{tikz}
 \RequirePackage{tikzpagenodes}
@@ -95,38 +128,6 @@
 \newlength\marginsep
 \setlength{\marginsep}{6pt} % sep for side margin labels / bullet / ref ...
 
-
-% choose manualy which chapter has figures / tables 
-% and put a separator in the lof / lot
-% help : https://tex.stackexchange.com/a/121881/154815
-\tracingpatches
-\patchcmd{\@chapter}
-	{\addtocontents{lof}{\protect\addvspace{10\p@}}}
-	{%
-		\expandafter\ifx\@chapapp\appendixname
-		\else
-			\ifnumcomp{\value{chapter}}{=}{2}{\protect\tocseparator[lof]}{}%
-			\ifnumcomp{\value{chapter}}{=}{3}{\protect\tocseparator[lof]}{}%
-			\ifnumcomp{\value{chapter}}{=}{4}{\protect\tocseparator[lof]}{}%
-			\ifnumcomp{\value{chapter}}{=}{5}{\protect\tocseparator[lof]}{}%
-			\ifnumcomp{\value{chapter}}{=}{6}{\protect\tocseparator[lof]}{}%
-		\fi
-	}
-	{}{}
-\patchcmd{\@chapter}
-	{\addtocontents{lot}{\protect\addvspace{10\p@}}}
-	{%
-	\expandafter\ifx\@chapapp\appendixname
-		\ifnumcomp{\value{chapter}}{=}{1}{\protect\tocseparator[lot]}{}%
-	\else
-		\ifnumcomp{\value{chapter}}{=}{3}{\protect\tocseparator[lot]}{}%
-		\ifnumcomp{\value{chapter}}{=}{5}{\protect\tocseparator[lot]}{}%
-		\ifnumcomp{\value{chapter}}{=}{6}{\protect\tocseparator[lot]}{}%
-	\fi
-	}
-	{}{}
-\newcommand\appendixmatter{\cleardoublepage} % required to resolve pbs with \include and \loft
-\renewcommand\backmatter{\cleardoublepage\@mainmatterfalse} % required to resolve pbs with \include and \loft
 
 
 % **************************************************
@@ -558,13 +559,16 @@
 
 \setlength{\toc@lmargin}{0cm}
 \setlength{\toc@rmargin}{2cm}
+\setlength{\toc@partskip}{0.85cm}
 \contentsmargin{0.85cm}
 
 % toc separator (3 square bullets)
 \DeclareRobustCommand{\tocseparator}[1][toc]{%
-	\addtocontents{#1}{\protect\vskip \toc@partskip}%
+	% \addtocontents{#1}{\protect\vskip \toc@partskip}%
+	\addtocontents{#1}{\protect\vspace*{0.85cm}}%
 	\addtocontents{#1}{\protect\centering\protect\ico\protect\quad\protect\ico\protect\quad\protect\ico}%
-	\addtocontents{#1}{\protect\vskip \toc@partskip}%
+	\addtocontents{#1}{\protect\vspace*{0.85cm}}%
+	% \addtocontents{#1}{\protect\vskip \toc@partskip}%
 }
 
 
@@ -572,7 +576,7 @@
 % TOC
 %\fontsize{32pt}{38pt}\selectfont
 % part
-\setlength{\toc@partskip}{0.85cm}
+
 \newfontfamily\font@toc@part{FuturaLT-Light}[Scale = MatchUppercase]
 \DeclareRobustCommand{\tf@toc@part}{\font@toc@part\large}%\font@part\bfseries
 % front/back chapters
