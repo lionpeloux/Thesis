@@ -12,13 +12,9 @@
 \newrefsegment
 
 \chapter*{Conclusion}\label{chp=conclu}
-
-% \addtocontents{toc}{\protect\vskip 1.5cm}
-% \addtocontents{toc}{\protect\centering\protect\ico\protect\quad\protect\ico\protect\quad\protect\ico}
-% \addtocontents{toc}{\protect\vskip 1.5cm}
 \bookmarksetup{startatroot} % ensure the conclusion is not inside part II in bookmarks
 \addcontentsline{toc}{chapter}{Conclusion}
-\markboth{Conclusion}{Conclusion} % necessary to have the correct header with \chapter* and book.cls
+\markboth{Conclusion}{Conclusion}
 
 \begin{otherlanguage}{french}
 
@@ -59,19 +55,20 @@ Finalement, nous avons présenté succinctement \emph{Marsupilami}, le code de c
 \subsection*{Perspectives}
 Les modèles, les outils et les méthodes développés au cours de cette recherche ont rendu possible la conception et la réalisation d'un certain nombre de prototypes à une échelle parfois importante, comme ce fût le cas des gridshells de Solidays en 2011 et de Créteil en 2013. L'expérience acquise sur ces projets a mis en valeur la nécessité de disposer d'outils de conception agiles pour aborder l'interaction forme-maillage-structure. Elle a aussi souligné les éléments qui mériteraient d'être approfondis, parmi lesquels nous retiendrons~: 
 
-% \begin{itemize}
-% \item 
+\begin{itemize}
+\item 
     \textbf{Marsupilami}. Le code actuel pourrait devenir une API \Csharp{} fort pratique pour le calcul des gridshells moyennant un effort de développement conséquent. Le travail pourrait consister à consolider et étendre l'API actuelle pour la rendre stable et facilement extensible~; ainsi qu'à développer une interface interactive pour la plateforme \rhino{} \& \grasshopper{}. Ce travail devrait garder comme objectif la capacité à générer des maquettes numériques de conception qui soient les plus agiles possible. L'API elle-même pourrait potentiellement faire l'objet d'un développement collaboratif, pourquoi pas en partenariat avec d'autres laboratoires, ce qui permettrait de pourvoir aux compétences nécessaires à un tel projet. En ce sens, une licence de type \emph{Open Source} pourrait permettre une meilleur diffusion du code et donc de toucher de potentiels contributeurs.
     
-    % \item 
+\item 
     \textbf{Système Constructif}. La noix de connexion et le manchon constituent deux détails clefs du système constructif actuel. Ces pièces pourraient faire l'objet de nombreuses améliorations pour en augmenter la légèreté, ou bien pour les rendre plus fonctionnelles afin de faciliter l'assemblage de la grille par les opérateurs. Il en va de même pour le dispositif de contreventement qui impact grandement les coûts de construction comme nous l'avons montré. Dans ce sens nous avons pu tester en 2016, à petite échelle sur trois gridshells en bois d'environ \SI{50}{m^2}, un système à câble installé sur la grille au sol et activé une fois la déformation terminée. Cela a permis de réduire le temps de travail en hauteur de façon significative et a nécessité des développement nouveaux pour les pièces de connexion du système de triangulation.
 
-    % \item 
+\item 
     \textbf{Enveloppe}. L'enveloppe des ces structures reste un champ difficile à maîtriser du fait de la courbure géométrique. Les membranes employées jusqu'ici ne garantissent aucunes performances acoustiques ou thermiques sérieuses. On pourrait contourner ce problème en identifiant les applications potentielles où ces critères ne sont pas rédhibitoires, comme par exemple pour certaines structures à usage temporaire ou bien pour des couvertures d'espaces industriels qui ne doivent assurer aucune autre fonction que celle de l'étanchéité. Cette question peut être abordée de manière plus globale avec celle de la structure et du contreventement. Nous avons eu l'occasion de développer une réflexion originale sur le sujet, en mettant au point un concept de structure hybride dans lequel l'enveloppe assure à la fois le clos-couvert du bâtiment et le contreventement de la résille en matériau composite \cite{Cuvilliers2017}. L'idée principale est d'utiliser le gridshell comme cintre pour couler une fine enveloppe en béton fibré par dessus. Une connexion mécanique est assurée entre la résille et le béton pour permettre à l'enveloppe de jouer le rôle de contreventement d'une part~; et minimiser l'épaisseur de béton nécéssaire d'autre part.
-
+    
+\item 
     \textbf{Autres}. On pourra aussi considérer plus largement les applications potentielles du présent travail, et principalement l'utilisation de l'élément de poutre mis au point dans le domaine de l'\emph{active-bending}. En s'intéressant par exemple au problème de positionnement des gaines sur les bras robotisés, un outil autrefois réservé aux grands industriels et en passe de se démocratiser, qui peuvent venir en contact des outils ou gêner le mobilité du bras et dont les mouvements sont difficiles à prévoir (à cause du couplage flexion torsion). Pour rester dans le secteur de la construction, on pourra également regarder du côté des mécanismes avancés appliqués aux \emph{shading device} \cite{Charpentier2017}.
 
-% \end{itemize}
+\end{itemize}
 
 Enfin, bien que ce travail ait permis de mieux comprendre certains aspects des structures de type \emph{gridshell élastique} et d'enrichir la palette des outils d'analyse disponibles pour les concevoir, il reste manifestement beaucoup à faire pour les démocratiser là où elles pourraient apporter une valeur ajoutée significative. Cependant, il nous semble que ce travail n'est désormais plus du ressort de la recherche académique et devrait, pour continuer à vivre, trouver une viabilité économique à moyen terme.
 

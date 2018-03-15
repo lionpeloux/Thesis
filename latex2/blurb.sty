@@ -1,8 +1,14 @@
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
 
-% Lionel du Peloux (2018)
-% https://fr.sharelatex.com/learn/Writing_your_own_class#Preliminary_declarations
-
-
+% ===========================
+% COMPILER DIRECTIVES
+% ===========================
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = XeLaTeX-shellescape
+% !BIB TS-program = biber
+% !BIB program = biber
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,7 +19,6 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{blurb}[2017/12/20 Lionel du Peloux]
-
 
 
 
@@ -61,7 +66,12 @@
 \DeclareStringOption[0mm]{binding}[0mm]
 \DeclareStringOption[2]{pagemodulo}[2]
 \DeclareStringOption[20mm]{gutter}[20mm]
+%
 \DeclareStringOption[soft]{covertype}[soft]
+\DeclareBoolOption[true]{softcover}
+\DeclareBoolOption[false]{hardcover}
+\DeclareBoolOption[false]{dustjacket}
+%
 \DeclareBoolOption[false]{cover}
 \DeclareBoolOption[false]{showrules}
 \DeclareBoolOption[false]{showframe}
@@ -73,9 +83,10 @@
 \DeclareBoolOption[false]{nobleed}
 \ProcessKeyvalOptions*
 
-
-
-
+\ifbool{opt@softcover}{\renewcommand{\opt@covertype}{soft}}{}
+\ifbool{opt@hardcover}{\renewcommand{\opt@covertype}{hard}}{}
+\ifbool{opt@dustjacket}{\renewcommand{\opt@covertype}{jacket}}{}
+\typeout{covertype=\opt@covertype}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -120,7 +131,7 @@
 \setlength{\headheight}{14pt}			% increase headheight (default to 12pt)
 \setlength{\headsep}{18pt}				
 \setlength{\footskip}{48pt}
-\definecolor{graybg}{gray}{0.9}
+\definecolor{graybg}{gray}{0.75} % 0.95
 
 % get content margins relative to safe area borders
 \setlength{\@ContentTopMargin}{\opt@top}
@@ -688,7 +699,6 @@
 }{
 	\ifbool{opt@cover}{%
 		% BLurb Cover Size
-		\typeout{cover type : \opt@covertype}
 		\ifdefstring{\opt@booksize}{TB_8x10}{ % Trade Book 8x10 inches
 			\ifdefstring{\opt@covertype}{soft}{%
 				\@SetBlurbCoverLayout{20.320cm}{25.401cm}{0.317cm}{\opt@gutter}{0.635cm}

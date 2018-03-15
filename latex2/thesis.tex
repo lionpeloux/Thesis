@@ -6,22 +6,34 @@
 % COMPILER DIRECTIVES
 % ===========================
 % !TEX encoding = UTF-8 Unicode
-% !TEX TS-program = XeLaTeX
+% !TEX TS-program = XeLaTeX-shellescape
 % !BIB TS-program = biber
 % !BIB program = biber
 
 
-\PassOptionsToPackage{showrules}{blurb}
-% \PassOptionsToPackage{showframe}{blurb}
-% \PassOptionsToPackage{showbleed}{blurb}
-\PassOptionsToPackage{showcanon}{blurb}
+% ACTIVATE TO TRIM BLEED MARGINS
 % \PassOptionsToPackage{nobleed}{blurb}
 
-\documentclass[12pt,fleqn]{thesis}
-\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
-\addbibresource{library.bib}
+% WETHER ITS THE PRINT (true) OR WEB (false) VERSION
+% \PassOptionsToClass{print}{thesis}
 
-% \includeonly{_dedication,_preface,_abstracts}
+% DEBUG OPTIONS
+\PassOptionsToPackage{showbleed}{blurb}
+% \PassOptionsToPackage{showrules}{blurb}
+% \PassOptionsToPackage{showcanon}{blurb}
+% \PassOptionsToPackage{showframe}{blurb}
+
+\documentclass[12pt,fleqn]{thesis}
+\addbibresource{library.bib}
+\graphicspath{
+	{./ch7_numeric/img/}
+	{./ch6_kirchhoff/img/}
+	{./ch5_energy/img/}
+	{./ch4_geometry/img/}
+	{./ch3_creteil/img/}
+	{./ch2_gridshell/img/}
+}
+
 \begin{document}
 
 % --------------------------
@@ -29,10 +41,11 @@
 % --------------------------
 \frontmatter
 
-\input{head/titlepage.tex}
+\input{_frontcover}
 \input{_dedication}
 \input{_preface}
 \input{_abstracts}
+
 \begingroup
 	\tableofcontents
 	\listoffigures
@@ -85,7 +98,10 @@
 	\newrefsection
 	\newrefcontext[sorting=ydnt]
 	\nocite{*}
-	\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
-	
+	\begingroup
+		\printbibliography[heading=bibintoc,title={Publications from the author},keyword=own,env=cvbib]
+	\endgroup
+
+\input{_backcover}
 
 \end{document}

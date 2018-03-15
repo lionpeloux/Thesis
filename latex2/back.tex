@@ -11,16 +11,28 @@
 % !BIB program = biber
 
 
+% ACTIVATE TO TRIM BLEED MARGINS
+% \PassOptionsToPackage{nobleed}{blurb}
+
+% WETHER ITS THE PRINT (true) OR WEB (false) VERSION
+% \PassOptionsToClass{print}{thesis}
+
+% DEBUG OPTIONS
+\PassOptionsToPackage{showbleed}{blurb}
 % \PassOptionsToPackage{showrules}{blurb}
-% \PassOptionsToPackage{showframe}{blurb}
-% \PassOptionsToPackage{showbleed}{blurb}
 % \PassOptionsToPackage{showcanon}{blurb}
-\PassOptionsToPackage{showcolorbg}{blurb}
-\PassOptionsToPackage{nobleed}{blurb}
+% \PassOptionsToPackage{showframe}{blurb}
 
 \documentclass[12pt,fleqn]{thesis}
-\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}}
 \addbibresource{library.bib}
+\graphicspath{
+	{./ch7_numeric/img/}
+	{./ch6_kirchhoff/img/}
+	{./ch5_energy/img/}
+	{./ch4_geometry/img/}
+	{./ch3_creteil/img/}
+	{./ch2_gridshell/img/}
+}
 
 % \includeonly{_dedication,_preface,_abstracts}
 \begin{document}
@@ -33,13 +45,13 @@
 % \input{head/titlepage.tex}
 \input{_frontcover}
 \input{_dedication}
-% \input{_preface}
-% \input{_abstracts}
-% \begingroup
-% 	\tableofcontents
-% 	\listoffigures
-% 	\listoftables
-% \endgroup
+\input{_preface}
+\input{_abstracts}
+\begingroup
+	\tableofcontents
+	\listoffigures
+	\listoftables
+\endgroup
 
 % --------------------------
 % Main matter
@@ -57,7 +69,7 @@
 	\part{Kirchhoff beam model}\label{part=2}
 	% \include{ch4_geometry/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch5_energy/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
-	% \include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
+	\include{ch6_kirchhoff/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	% \include{ch7_numeric/chapter}\printbibliography[segment=\therefsegment,heading=subbibliography]
 	
 	\include{ch8_conclusion/chapter}

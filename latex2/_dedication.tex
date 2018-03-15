@@ -3,13 +3,9 @@
 
 \vspace*{2cm}
 
-{\large
-\begin{raggedleft}
-	\textquote{\itshape Quia nominor leo.}\\
-\end{raggedleft}
-%\epigraph{\textquote{Quia nominor leo.}}{Jacques Perrot}
+\hspace*{\fill}\parbox{8cm}{\raggedleft\large\textquote{\itshape Quia nominor leo.}}
 
-\vspace*{3cm}
+\vspace*{2cm}
 
 \hspace*{\fill}\parbox{8cm}{%
 	\raggedleft\large
@@ -17,7 +13,6 @@
 	Mes grands-parents bien-aimés.
 }
 
-}
 % \cleartoleftpage
 \doubleblankpage[l]{%
 	\hbox{}\thispagestyle{empty}
@@ -28,8 +23,23 @@
 	]{cover.jpg}
 }{%
 	\hbox{}\thispagestyle{empty}
+	
+	\afterpage{%
+		\AddToShipoutPictureBG*{
+			\begin{tikzpicture}[remember picture, overlay, inner sep=0pt] % ovelay is required, dont now why
+				\node[anchor=north east, yshift=-0cm] at (CAtr){\parbox{10cm}{%
+					\raggedleft%
+						Tu ne peux vivre\\
+						Que de cela que tu transformes,\\
+						Et dont un peu chaque jour,\\
+						Puisque tu t'échanges contre,\\
+						Tu meurs.
+					\\[12pt]
+					\raggedleft 
+					---Antoine de Saint-Exupéry \\
+					\textit{Citadelle}
+				}};
+			\end{tikzpicture}
+		}
+	}
 }
-
-%
-%\cleartoleftpage
-%\PhotoSpread[]{cover.jpg}

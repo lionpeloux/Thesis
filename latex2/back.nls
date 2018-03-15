@@ -2,146 +2,145 @@
 
  \nomgroup{A}
 
-  \item [{$I$}]\begingroup An interval of $\mathbb{R}$.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\gamma$}]\begingroup A parametric curve.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$t$}]\begingroup Any curve parameter.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$s$}]\begingroup The arc length parameter of a curve.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$L$}]\begingroup The length of a curve.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{t}$}]\begingroup The unit tangent vector.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{n}$}]\begingroup The unit normal vector.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{b}$}]\begingroup The unit binormal vector.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\kappa$}]\begingroup The curvature.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\tau_f$}]\begingroup The torsion of Frenet.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{\kappa b}$}]\begingroup The curvature binormal vector.\nomeqref {6.15}
-		\nompageref{359}
+  \item [{$I$}]\begingroup An interval of $\mathbb{R}$.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\gamma$}]\begingroup A parametric curve.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$t$}]\begingroup Any curve parameter.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$s$}]\begingroup The arc length parameter of a curve.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$L$}]\begingroup The length of a curve.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{t}$}]\begingroup The unit tangent vector.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{n}$}]\begingroup The unit normal vector.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{b}$}]\begingroup The unit binormal vector.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\kappa$}]\begingroup The curvature.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\tau_f$}]\begingroup The torsion of Frenet.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{\kappa b}$}]\begingroup The curvature binormal vector.\nomeqref {0.0}
+		\nompageref{21}
 
  \nomgroup{B}
 
-  \item [{$\vect{e}_3,\vect{e}_1,\vect{e}_2$}]\begingroup Any moving frame.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{t},\vect{n},\vect{b}$}]\begingroup The Frenet frame.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{t},\vect{u},\vect{v}$}]\begingroup The Bishop frame.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{\Omega}$}]\begingroup The Darboux (or angular velocity) vector of a moving frame.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\tau,k_1,k_2$}]\begingroup The components of the Darboux vector -- moving frame basis.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{}]\begingroup \nomeqref {6.15}\nompageref{359}
+  \item [{$\vect{e}_3,\vect{e}_1,\vect{e}_2$}]\begingroup Any moving frame.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{t},\vect{n},\vect{b}$}]\begingroup The Frenet frame.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{t},\vect{u},\vect{v}$}]\begingroup The Bishop frame.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{\Omega}$}]\begingroup The Darboux (or angular velocity) vector of a moving frame.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\tau,k_1,k_2$}]\begingroup The components of the Darboux vector -- moving frame basis.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{}]\begingroup \nomeqref {0.0}\nompageref{21}
 
  \nomgroup{C}
 
-  \item [{$\Gamma$}]\begingroup A discrete curve.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{x}_i$}]\begingroup A vertex of a discrete curve.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{e}_i$}]\begingroup An edge of a discrete curve.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$l_i$}]\begingroup The length of edge $\vect{e}_i$.\nomeqref {6.15}
-		\nompageref{359}
+  \item [{$\Gamma$}]\begingroup A discrete curve.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{x}_i$}]\begingroup A vertex of a discrete curve.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{e}_i$}]\begingroup An edge of a discrete curve.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$l_i$}]\begingroup The length of edge $\vect{e}_i$.\nomeqref {0.0}
+		\nompageref{21}
 
  \nomgroup{D}
 
-  \item [{$s$}]\begingroup The arc length of the centerline -- reference configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$s_t$}]\begingroup The arc length of the centerline -- actual configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\rconf{\vect{x}}$}]\begingroup The centerline position vector -- reference configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{x}$}]\begingroup The centerline position vector -- actual configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\rconf{\vect{d}_3},\rconf{\vect{d}_1},\rconf{\vect{d}_2}$}]\begingroup The material frame -- reference configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{d}_3,\vect{d}_1,\vect{d}_2$}]\begingroup The material frame -- actual configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\dot{\vect{x}}$}]\begingroup The velocity of the centerline.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{\omega}$}]\begingroup The angular velocity of the material frame.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\epsilon$}]\begingroup The axial extension.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\rconf{\vect{\nu}}$}]\begingroup The force strain vector -- reference configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{\nu}$}]\begingroup The force strain vector -- actual configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\rconf{\vect{\varkappa}}$}]\begingroup The material curvature (or moment strain) vector -- reference configuration.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{\varkappa}$}]\begingroup The material curvature (or moment strain) vector -- actual configuration.\nomeqref {6.15}
-		\nompageref{359}
+  \item [{$s$}]\begingroup The arc length of the centerline -- reference configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$s_t$}]\begingroup The arc length of the centerline -- actual configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\rconf{\vect{x}}$}]\begingroup The centerline position vector -- reference configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{x}$}]\begingroup The centerline position vector -- actual configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\rconf{\vect{d}_3},\rconf{\vect{d}_1},\rconf{\vect{d}_2}$}]\begingroup The material frame -- reference configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{d}_3,\vect{d}_1,\vect{d}_2$}]\begingroup The material frame -- actual configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\dot{\vect{x}}$}]\begingroup The velocity of the centerline.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{\omega}$}]\begingroup The angular velocity of the material frame.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\epsilon$}]\begingroup The axial extension.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\rconf{\vect{\nu}}$}]\begingroup The force strain vector -- reference configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{\nu}$}]\begingroup The force strain vector -- actual configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\rconf{\vect{\varkappa}}$}]\begingroup The material curvature (or moment strain) vector -- reference configuration.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{\varkappa}$}]\begingroup The material curvature (or moment strain) vector -- actual configuration.\nomeqref {0.0}
+		\nompageref{21}
 
  \nomgroup{E}
 
-  \item [{$E$}]\begingroup The elastic modulus.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$G$}]\begingroup The shear modulus.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$S$}]\begingroup The area of the cross-section.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$I_1$}]\begingroup The first principal axis of inertia of the cross-section.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$I_2$}]\begingroup The second principal axis of inertia of the cross-section.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$J$}]\begingroup The torsion constant of the cross-section.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\varphi$}]\begingroup The warping function of the cross-section.\nomeqref {6.15}
-		\nompageref{359}
+  \item [{$E$}]\begingroup The elastic modulus.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$G$}]\begingroup The shear modulus.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$S$}]\begingroup The area of the cross-section.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$I_1$}]\begingroup The first principal axis of inertia of the cross-section.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$I_2$}]\begingroup The second principal axis of inertia of the cross-section.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$J$}]\begingroup The torsion constant of the cross-section.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\varphi$}]\begingroup The warping function of the cross-section.\nomeqref {0.0}
+		\nompageref{21}
 
  \nomgroup{F}
 
-  \item [{$\mathcal{E}_s$}]\begingroup The stretching energy.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\mathcal{E}_b$}]\begingroup The bending energy.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\mathcal{E}_t$}]\begingroup The twisting energy.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{F}$}]\begingroup The vector of internal forces.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$F_3,\,N$}]\begingroup The axial force -- material frame basis.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$F_1$}]\begingroup The first component of the shear force -- material frame basis.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$F_2$}]\begingroup The second component of the shear force -- material frame basis.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{M}$}]\begingroup The vector of internal moments.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$M_3,\,Q$}]\begingroup The twisting moment -- material frame basis.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$M_1$}]\begingroup The first component of the bending moment -- material frame basis.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$M_2$}]\begingroup The second component of the bending moment -- material frame basis.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{f}$}]\begingroup The vector of applied distributed forces.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{m}$}]\begingroup The vector of applied distributed moments.\nomeqref {6.15}
-		\nompageref{359}
+  \item [{$\mathcal{E}_s$}]\begingroup The stretching energy.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\mathcal{E}_b$}]\begingroup The bending energy.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\mathcal{E}_t$}]\begingroup The twisting energy.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{F}$}]\begingroup The vector of internal forces.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$F_3,\,N$}]\begingroup The axial force -- material frame basis.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$F_1$}]\begingroup The first component of the shear force -- material frame basis.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$F_2$}]\begingroup The second component of the shear force -- material frame basis.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{M}$}]\begingroup The vector of internal moments.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$M_3,\,Q$}]\begingroup The twisting moment -- material frame basis.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$M_1$}]\begingroup The first component of the bending moment -- material frame basis.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$M_2$}]\begingroup The second component of the bending moment -- material frame basis.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{f}$}]\begingroup The vector of applied distributed forces.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{m}$}]\begingroup The vector of applied distributed moments.\nomeqref {0.0}
+		\nompageref{21}
 
  \nomgroup{G}
 
-  \item [{$m^{\vect{x}}$}]\begingroup The translational lumped mass.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$m^{\theta}$}]\begingroup The rotational lumped mass.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{R}^{\vect{x}}$}]\begingroup The translational resultant force.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\vect{R}^{\theta}$}]\begingroup The resultant twisting moment.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\lambda^{\vect{x}}$}]\begingroup The translational viscous damping factor.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\lambda^{\theta}$}]\begingroup The rotational viscous damping factor.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$h$}]\begingroup The time step.\nomeqref {6.15}
-		\nompageref{359}
-  \item [{$\mathcal{E}_k$}]\begingroup The kinetic energy.\nomeqref {6.15}
-		\nompageref{359}
+  \item [{$m^{\vect{x}}$}]\begingroup The translational lumped mass.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$m^{\theta}$}]\begingroup The rotational lumped mass.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{R}^{\vect{x}}$}]\begingroup The translational resultant force.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\vect{R}^{\theta}$}]\begingroup The resultant twisting moment.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\lambda^{\vect{x}}$}]\begingroup The translational viscous damping factor.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$\lambda^{\theta}$}]\begingroup The rotational viscous damping factor.\nomeqref {0.0}
+		\nompageref{21}
+  \item [{$h$}]\begingroup The time step.\nomeqref {0.0}\nompageref{21}
+  \item [{$\mathcal{E}_k$}]\begingroup The kinetic energy.\nomeqref {0.0}
+		\nompageref{21}
 
 \end{thenomenclature}

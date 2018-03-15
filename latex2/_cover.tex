@@ -10,20 +10,25 @@
 % !BIB TS-program = biber
 % !BIB program = biber
 
-
-% \PassOptionsToPackage{showrules}{blurb}
-% \PassOptionsToPackage{showframe}{blurb}
-% \PassOptionsToPackage{showbleed}{blurb}
-% \PassOptionsToPackage{showcanon}{blurb}
 \PassOptionsToPackage{cover}{blurb}
-% \PassOptionsToPackage{showspine}{blurb}
-% \PassOptionsToPackage{showisbn}{blurb}
+
+% ACTIVATE TO TRIM BLEED MARGINS
 % \PassOptionsToPackage{nobleed}{blurb}
+
+% SELECT COVER TYPE
+% \PassOptionsToPackage{hardcover}{blurb}
+\PassOptionsToPackage{softcover}{blurb}
+
+% DEBUG OPTIONS
+\PassOptionsToPackage{showbleed}{blurb}
+\PassOptionsToPackage{showspine}{blurb}
+\PassOptionsToPackage{showisbn}{blurb}
+% \PassOptionsToPackage{showrules}{blurb}
+
+
 \documentclass[12pt,fleqn]{thesis}
 	\graphicspath{{./ch7_numeric/img/}{./ch6_kirchhoff/img/}{./ch5_energy/img/}{./ch4_geometry/img/}{./ch3_creteil/img/}{./ch2_gridshell/img/}{./cover/}}
 	\addbibresource{library.bib}
-
-
 
 \newlength\CoverWidth
 \newlength\MainBarYOffset
@@ -111,15 +116,12 @@
 		\path (MBtr -| SPtl) node[xshift=-\MainBarStepWidth, yshift=-\MainBarHeight] (MBbl) {};
 		\coordinate[yshift=\MainBarHeight] (MBtl) at (MBbl);
 		\coordinate[yshift=-\MainBarHeight] (MBbr) at (MBtr);
-		% image
+		% image mask
 		\begin{scope}
 			\clip (SPtr |- MBtr) rectangle (PPtr);
 			\node[anchor=north east, xshift=0cm, yshift=0cm] at (PPtr)
 				{\adjustbox{}{\includegraphics[width=30cm]{fav_nb.png}}};
 		\end{scope}		
-		% % image mask
-		% \path[fill,white,opacity=1] 
-		% 	(PPtl) -- (SPtr) -- (SPtr |- MBtr) --  (MBtr -| PPtr) -- (PPbr) -- (PPbl) -- (PPtl);
 		% main bar
 		\path[fill,black,opacity=1]  (MBbl) rectangle (MBtr -| PPtr);
 		\node[anchor=east, xshift=-\MainTextXMargin, yshift=\MainBarHeight/2] at (MBbr){%

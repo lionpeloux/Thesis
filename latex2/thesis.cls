@@ -1,5 +1,14 @@
+% Author :  Lionel du Peloux
+% Contact : lionel.dupeloux@gmail
+% Year : 2017
 
-% https://fr.sharelatex.com/learn/Writing_your_own_class#Preliminary_declarations
+% ===========================
+% COMPILER DIRECTIVES
+% ===========================
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = XeLaTeX-shellescape
+% !BIB TS-program = biber
+% !BIB program = biber
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{thesis}[2017/12/20 Lionel du Peloux]
@@ -17,6 +26,7 @@
 	]{book}
 
 \RequirePackage{kvoptions}
+\RequirePackage{xkeyval}
 \RequirePackage{setspace}
 \RequirePackage{fancyhdr}
 \RequirePackage{mfirstuc}
@@ -28,7 +38,35 @@
 \RequirePackage{printlen}
 \RequirePackage{soul}
 
+
+\RequirePackage{textcase}
+\RequirePackage{tikz}
+\RequirePackage{tikzpagenodes}
+\RequirePackage{bm}
+\RequirePackage{mathtools}
+\RequirePackage{bookmark} % manipulate bookmark level
+\RequirePackage{stmaryrd} % symbols for theoretical computer science
+% \RequirePackage{pgfplots,pgfplotstable}
+\RequirePackage{enumerate}
+\RequirePackage{dpfloat} % for double page float figures aand tables side by side
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% DECLARE OPTIONS
+%%
+%%%%%
+
+\SetupKeyvalOptions{family=thesis,prefix=opt@} 
+\DeclareBoolOption[false]{print} % default to web
+\ProcessKeyvalOptions*
+
+\newtoggle{print}
+\ifbool{opt@print}{\toggletrue{print}\typeout{printopt:true}}{\togglefalse{print}\typeout{printopt:false}}
+
 % golden section
+\iftoggle{print}{}{\PassOptionsToPackage{showcolorbg}{blurb}}
 \RequirePackage[
 	top = 22.19mm-6.35mm,
 	outer = 35.45mm-6.35mm,
@@ -44,7 +82,18 @@
 	covertype=soft,
 	% nobleed,
 	]{blurb}
+
 \RequirePackage{photo}
+
+
+% temporary registers
+\newlength\tmpwidth
+\newlength\tmpheight
+\newlength\plotYadjust
+\setlength{\plotYadjust}{1cm}
+
+\newlength\marginsep
+\setlength{\marginsep}{6pt} % sep for side margin labels / bullet / ref ...
 
 
 % choose manualy which chapter has figures / tables 
@@ -79,47 +128,7 @@
 \newcommand\appendixmatter{\cleardoublepage} % required to resolve pbs with \include and \loft
 \renewcommand\backmatter{\cleardoublepage\@mainmatterfalse} % required to resolve pbs with \include and \loft
 
-\RequirePackage{textcase}
-\RequirePackage{tikz}
-\RequirePackage{tikzpagenodes}
 
-\RequirePackage{bm}
-\RequirePackage{mathtools}
-
-\RequirePackage{bookmark} % manipulate bookmark level
-
-\RequirePackage{stmaryrd} % symbols for theoretical computer science
-\RequirePackage{pgfplots,pgfplotstable}
-\RequirePackage{enumerate}
-\RequirePackage{dpfloat} % for double page float figures aand tables side by side
-
-% **************************************************
-% Options
-% **************************************************
-
-\typeout{}
-\typeout{===============}
-\DeclareOption{onecolumn}{\OptionNotUsed}
-\DeclareOption{green}{\renewcommand{\headlinecolor}{\color{green}}}
-\DeclareOption{red}{\renewcommand{\headlinecolor}{\color{slcolor}}}
-\ProcessOptions\relax
-\message{\CurrentOption}
-\typeout{\CurrentOption}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
-\ProcessOptions\relax
-\typeout{===============}
-\typeout{}
-% \errmessage{Break}
-
-
-% temporary registers
-\newlength\tmpwidth
-\newlength\tmpheight
-\newlength\plotYadjust
-\setlength{\plotYadjust}{1cm}
-
-\newlength\marginsep
-\setlength{\marginsep}{6pt} % sep for side margin labels / bullet / ref ...
 % **************************************************
 % Commands
 % **************************************************
@@ -129,40 +138,12 @@
 % --------------------------
 
 % float placement
-
-
-
-
 % help : http://www.tex.ac.uk/FAQ-vertposfp.html
 % \setlength{\@fptop}{0pt-\headsep-\headheight} 	% align to header top
 % \setlength{\@fptop}{0pt} 						% align to body top 
 % \setlength{\@fpbot}{0pt} 						% align to body bottom 
 % \setlength{\@fpbot}{0pt-\footskip} 			% align to footer bottom
 
-
-
-\newcommand{\MediaWidthRatio}{1.0} % in percent
-\newcommand{\MediaGutterRatio}{0.04} % in percent
-
-\newlength{\MediaWidth}
-\newlength{\MediaGutterWidth}
-\newlength{\TwoMediaWidth}
-\newlength{\PhotoMargin}
-
-\setlength{\MediaWidth}{\MediaWidthRatio \@ContentWidth}
-\setlength{\MediaGutterWidth}{\MediaGutterRatio \MediaWidth}
-\setlength{\TwoMediaWidth}{0.5\MediaWidth - 0.5\MediaGutterWidth}
-\setlength{\PhotoMargin}{10mm + \@BleedOuterMargin}
-
-\typeout{}
-\typeout{}
-\typeout{**************************}
-\typeout{media width : '\MediaWidth'}
-\typeout{media gutter width : \MediaGutterWidth}
-\typeout{two media width : \TwoMediaWidth}
-\typeout{**************************}
-\typeout{}
-\typeout{}
 
 
 % LANGUAGES
@@ -180,10 +161,12 @@
 
 %% paragraph
 %% --------------------------
-	
+
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{0em}
-\setstretch{1.125}
+\setlength{\parindent}{0em}
+\def\linestretch{1.125}
+\setstretch{\linestretch}
 
 % relax interline skip to ensure better flushbottom
 \baselineskip\the\baselineskip plus1.0pt minus0.5pt\relax
@@ -205,7 +188,6 @@
 \RequirePackage[math-style=ISO]{unicode-math}
 \setmathfont{latinmodern-math.otf}
 % \setoperatorfont\mathsf
-
 
 
 % FONTS
@@ -297,7 +279,8 @@
 %%
 %%%%%
 \RequirePackage{enumitem}
-\setlist[itemize]{label=\ico{},leftmargin=0pt,labelsep*=8pt} % rule{4pt}{4pt}
+\newcommand{\ico}{\adjustbox{width=5pt}{$\blacksquare$}}
+\setlist[itemize]{label=\ico{},leftmargin=0pt,labelsep*=\marginsep} % rule{4pt}{4pt}
 
 
 
@@ -324,7 +307,7 @@
 \DeclareCaptionLabelFormat{phantom}{\thefigure\bothIfSecond{}{\thesubfigure}}
 \DeclareCaptionFormat{phantom}{#1#2#3}
 \DeclareCaptionStyle{phantom}{
-	% hypcap=false,
+	hypcap=false,
 	listformat=phantom,
 	labelformat=phantom,
 	format=phantom,
@@ -357,9 +340,6 @@
 \renewcommand{\chaptermark}[1]{{\markboth{{#1}}{}}}
 \renewcommand{\sectionmark}[1]{\markright{#1}} % \thesection
 \fancyhf{}
-% \iffloatpage{0.0pt}{0.4pt}
-% \newgeometry{⟨options⟩} and \restoregeometry
-% \renewcommand{\headheight}{\iffloatpage{\protect\setlength{\headheight}{0pt}}{\protect\setlength{\headheight}{14pt}}}
 
 % first style
 \renewcommand{\headrulewidth}{\iffloatpage{0.0pt}{4.0pt}}
@@ -367,21 +347,6 @@
 \fancyhead[OR]{\iffloatpage{}{\tf@hdr\MakeUppercase{\rightmark}\vspace{0.25pt}}} 	% \nouppercase
 \fancyhead[EL]{\iffloatpage{}{\tf@hdr\MakeUppercase{\leftmark}\vspace{0.25pt}}} 	% \nouppercase
 \fancyfoot[EL,OR]{\tf@pagenum\thepage}
-
-% second style
-% \fancyhead[EL]{\iffloatpage{}{%
-% 	\hspace*{-1pt}\hspace*{-1cm}\parbox[b]{1cm}{\raggedleft\HdrFontStyle\MakeUppercase{\thepage}\hspace*{6pt}}%
-% 	\rule[-1pt]{2pt}{8pt}\hspace*{6pt}%
-% 	\HdrFontStyle\MakeUppercase{\leftmark}%
-% }}
-% \fancyhead[OR]{\iffloatpage{}{%
-% 	\HdrFontStyle\MakeUppercase{\rightmark}%
-% 	\hspace*{6pt}%
-% 	\rule[-1pt]{2pt}{8pt}%
-% 	\parbox[b]{1cm}{\raggedright\hspace*{6pt}\HdrFontStyle\MakeUppercase{\thepage}}\hspace*{-1cm}\hspace*{-1pt}%
-% 	% 
-% }}
-% \fancyfoot[EL,OR]{}
 
 % page only
 \fancypagestyle{pageonly}{
@@ -414,8 +379,6 @@
 %% Fancy Pages : Parts and Chapters
 %%
 %%%%%
-
-
 
 
 %% help box
@@ -461,16 +424,8 @@
 			\raggedright%
 			\ifdefvoid{\chapterlabel}{}{\scshape\@chapapp~\chapterlabel{}\\[8pt]}
 			\color{secondary}\MakeUppercase{#1}}
-		% \fbox{\raggedright\color{black}#1}
 	};
 	\path (Fbr -| PPtr) node (@BLANKtr) {};
-	% \path[fill=black,opacity=0.2] ([yshift=-7cm]Fbr) rectangle (@BLANKtr);
-	% \filldraw[green] (CAtl) circle [radius=1mm];
-	% \filldraw[green] (CAtr) circle [radius=1mm];
-	% \filldraw[green] (CAbl) circle [radius=1mm];
-	% \filldraw[green] (CAbr) circle [radius=1mm];
-	% \filldraw[black] (Fbr) circle [radius=1mm];
-	% \filldraw[blue] (Tbl) circle [radius=1mm];
 	\pgfresetboundingbox
 	\path[use as bounding box] (0,0);
 \end{tikzpicture}
@@ -762,8 +717,6 @@
 %% BIBLATEX
 %%
 %%%%%
-% **************************************************
-
 \usepackage[
 	backend=biber, 
 	natbib=true,
@@ -778,8 +731,10 @@
 	useprefix=true,
 	]{biblatex} 
 
-\pretocmd{\printbibliography}{\setstretch{1.0}}{\typeout{patchbib:sucess}}{\typeout{patchbib:failur}}
 
+% should return to global setstrech when exiting
+% the scope of the bibliogrpahy section/chapter
+\AtBeginBibliography{\setstretch{1.0}}
 
 \renewcommand*{\multicitedelim}{\addcomma\space}
 \newcommand{\citef}[2][]{\citeauthor{#2} \citeyear{#2} \cite[#1]{#2}} % custom full cite
@@ -787,18 +742,12 @@
 \renewcommand*{\finalnamedelim}{\addspace and \addspace} % separator mark between authors
 \renewcommand{\labelnamepunct}{\addcomma\addspace}
 
-
-% put title of misc entry bitween quotes
-\DeclareFieldFormat[misc]{title}{\mkbibquote{#1}}
-
-
 % custom bibliography style and alignment 
 \setlength{\bibhang}{0em}
 \setlength{\biblabelsep}{\marginsep}
 \setlength{\bibitemsep}{6pt}
 \setlength{\bibparsep}{0em}
 \renewcommand{\bibfont}{\tf@bibtxt}
-
 \DeclareFieldFormat{labelnumberwidth}{\tf@bibnum#1}
 
 \defbibenvironment{bibliography}
@@ -820,86 +769,8 @@
 {\endlist}
 {\item}
 
-%% Title DOI Link 
-%% --------------------------
-\newbibmacro{string+doiurlisbn}[1]{%
-  \iffieldundef{doi}{%
-    \iffieldundef{url}{%
-      \iffieldundef{isbn}{%
-        \iffieldundef{issn}{%
-          #1%
-        }{%
-          \href{http://books.google.com/books?vid=ISSN\thefield{issn}}{#1}%
-        }%
-      }{%
-        \href{http://books.google.com/books?vid=ISBN\thefield{isbn}}{#1}%
-      }%
-    }{%
-      \href{\thefield{url}}{#1}%
-    }%
-  }{%
-    \href{http://dx.doi.org/\thefield{doi}}{#1}%
-  }%
-}
-
-\DeclareFieldFormat{title}{\usebibmacro{string+doiurlisbn}{\mkbibemph{#1}}}
-\DeclareFieldFormat[article,incollection]{title}%
-    {\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
-
-
-%% Favicon DOI Link 
-%% --------------------------
-
-% resolve espacing latex characters in url field when exporting from Mendeley
-% help : https://tex.stackexchange.com/a/309995
-\DeclareSourcemap{
-    \maps{
-        \map{ % Replaces '{\_}', '{_}' or '\_' with just '_'
-            \step[fieldsource=url,
-                  match=\regexp{\{\\\_\}|\{\_\}|\\\_},
-                  replace=\regexp{\_}]
-        }
-        \map{ % Replaces '{'$\sim$'}', '$\sim$' or '{~}' with just '~'
-            \step[fieldsource=url,
-                  match=\regexp{\{\$\\sim\$\}|\{\~\}|\$\\sim\$},
-                  replace=\regexp{\~}]
-        }
-    }
-}
-
-% href icon for url or doi
-% \usepackage{fontawesome}
-% \newcommand{\ico}{\small\faExternalLink}%
-\newcommand{\ico}{\parbox{4pt}{\rule{4pt}{4pt}}}
-\renewcommand{\ico}{\adjustbox{width=4pt}{$\blacksquare$}}
-\newcommand{\icohref}{%
-\ifboolexpr{%
-	test {\ifhyperref}
-	and
-	not test {\iftoggle{bbx:url}}
-	and
-	not test {\iftoggle{bbx:doi}}
- }{%true
-  \iffieldundef{doi}{%true
-  	\iffieldundef{url}{%true
-	}{%false
-		\href{\strfield{url}}{\ico}
-	}
-  }{%false
-  	\href{http://dx.doi.org/\strfield{doi}}{\ico}%sec:\therefsection %seg:\therefsegment name:\refname chap:\thechapter
-  }
-}}
-
-\newbool{biblink}
-\booltrue{false}
-\ifbool{biblink}{\renewcommand{\finentrypunct}{\addperiod~\icohref{}}}{}
-
-
-
-
 %% CV style for personnal biblio
 %% --------------------------
-
 \defbibenvironment{cvbib}
 {%
 	\list
@@ -910,11 +781,11 @@
 		% \printfield[labelnumberwidth]{labelnumber}%
 	}{%
 		\setlength{\labelwidth}{2cm}%
- 		\setlength{\leftmargin}{\labelwidth}%
- 		\setlength{\labelsep}{\biblabelsep}%
- 		\addtolength{\leftmargin}{\labelsep}%
- 		\addtolength{\leftmargin}{-\labelwidth-\labelsep}% LDP add this xshift
- 		\setlength{\itemsep}{\bibitemsep}%
+			\setlength{\leftmargin}{\labelwidth}%
+			\setlength{\labelsep}{\biblabelsep}%
+			\addtolength{\leftmargin}{\labelsep}%
+			\addtolength{\leftmargin}{-\labelwidth-\labelsep}% LDP add this xshift
+			\setlength{\itemsep}{\bibitemsep}%
 		\setlength{\parsep}{\bibparsep}%
 		\setlength{\bibhang}{0pt}%
 	}%
@@ -923,22 +794,64 @@
 {\endlist}
 {\item}
 
+%% Modify .bib data with maps
+%% --------------------------
+
+% resolve espacing latex characters in url field when exporting from Mendeley
+% help : https://tex.stackexchange.com/a/309995
+\DeclareSourcemap{
+	\maps{
+		\map{ % Replaces '{\_}', '{_}' or '\_' with just '_'
+			\step[fieldsource=url,
+					match=\regexp{\{\\\_\}|\{\_\}|\\\_},
+					replace=\regexp{\_}]
+		}
+		\map{ % Replaces '{'$\sim$'}', '$\sim$' or '{~}' with just '~'
+			\step[fieldsource=url,
+					match=\regexp{\{\$\\sim\$\}|\{\~\}|\$\\sim\$},
+					replace=\regexp{\~}]
+		}
+	}
+}
 
 \DeclareSourcemap{
 	\maps[datatype=bibtex]{
-	% -- filter for personnal bib entry
-	% https://tex.stackexchange.com/questions/125744/how-to-print-a-bibliography-for-a-particular-author-only
-	\map[overwrite=true]{
-		\pernottype{misc}
-		\step[fieldsource=author, match={du Peloux}, final]
-		\step[fieldset=keywords, fieldvalue={, own}, append]
+		% -- filter for personnal bib entry
+		% https://tex.stackexchange.com/questions/125744/how-to-print-a-bibliography-for-a-particular-author-only
+		\map[overwrite=true]{
+			\pernottype{misc}
+			\step[fieldsource=author, match={du Peloux}, final]
+			\step[fieldset=keywords, fieldvalue={, own}, append]
+		}
+		% -- replace m2 with a supersript m^2
+		\map{
+			\step[fieldsource=title, match=\regexp{m2}, replace=\regexp{m\\textsuperscript\{2\}}]
+		}
 	}
-	% -- replace m2 with a supersript m^2
-	\map{
-	\step[fieldsource=title, match=\regexp{m2}, replace=\regexp{m\\textsuperscript\{2\}}]
-	}
-  	}
 }
+
+%% Title DOI Link 
+%% --------------------------
+\newbibmacro{string+doiurlisbn}[1]{%
+	\iffieldundef{doi}{%
+		\iffieldundef{url}{%
+			\iffieldundef{isbn}{%
+				\iffieldundef{issn}{%
+					#1%
+				}{%
+					\href{http://books.google.com/books?vid=ISSN\thefield{issn}}{#1}%
+				}%
+			}{%
+				\href{http://books.google.com/books?vid=ISBN\thefield{isbn}}{#1}%
+			}%
+		}{%
+			\href{\thefield{url}}{#1}%
+		}%
+	}{%
+		\href{http://dx.doi.org/\thefield{doi}}{#1}%
+	}%
+}
+\DeclareFieldFormat*{title}{\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
 
 % with this macro you can chose to link the citation labels to local subbib (anchorsegments=true) or to global bib (anchorsegments=false)
 % local links do not work if chapter has no subbib, because there is not subib to point to !
@@ -946,60 +859,244 @@
 \newbool{anchorsegments}
 \boolfalse{anchorsegments}
 \AtBeginDocument{%
-  \ifbool{anchorsegments}
-    {\long\def\blx@bibhyperref[#1]#2{%
-       \blx@sfsave\hyper@natlinkstart{\the\c@refsection @\the\c@refsegment @#1}%
-       \blx@sfrest
-       #2%
-       \blx@sfsave\hyper@natlinkend\blx@sfrest}%
-     \protected\long\def\blx@imc@bibhyperlink#1#2{%
-       \blx@sfsave\hyper@natlinkstart{\the\c@refsection:\the\c@refsegment:#1}%
-       \blx@sfrest
-       #2%
-       \blx@sfsave\hyper@natlinkend\blx@sfrest}%
-     \protected\long\def\blx@imc@bibhypertarget#1#2{%
-       \blx@sfsave\hyper@natanchorstart{\the\c@refsection:\the\c@refsegment:#1}%
-       \blx@sfrest
-       #2%
-       \blx@sfsave\hyper@natanchorend\blx@sfrest}%
-     \protected\def\blx@anchor{%
-       \xifinlist
-         {\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}
-         {\blx@anchors}
-         {}
-         {\listxadd
-            {\blx@anchors}
-            {\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
-          \hyper@natanchorstart{%
-            \the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
-          \hyper@natanchorend}}%
-     \defbibheading{subbibliography}{\section{\refname}}}
-    {\defbibheading{subbibliography}{%
-       \AtNextBibliography{\let\blx@anchor\relax}%
-	   \clearpage\section*{\refname}}}
+	\ifbool{anchorsegments}
+	{\long\def\blx@bibhyperref[#1]#2{%
+		\blx@sfsave\hyper@natlinkstart{\the\c@refsection @\the\c@refsegment @#1}%
+		\blx@sfrest
+		#2%
+		\blx@sfsave\hyper@natlinkend\blx@sfrest}%
+		\protected\long\def\blx@imc@bibhyperlink#1#2{%
+		\blx@sfsave\hyper@natlinkstart{\the\c@refsection:\the\c@refsegment:#1}%
+		\blx@sfrest
+		#2%
+		\blx@sfsave\hyper@natlinkend\blx@sfrest}%
+		\protected\long\def\blx@imc@bibhypertarget#1#2{%
+		\blx@sfsave\hyper@natanchorstart{\the\c@refsection:\the\c@refsegment:#1}%
+		\blx@sfrest
+		#2%
+		\blx@sfsave\hyper@natanchorend\blx@sfrest}%
+		\protected\def\blx@anchor{%
+		\xifinlist
+			{\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}
+			{\blx@anchors}
+			{}
+			{\listxadd
+			{\blx@anchors}
+			{\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
+			\hyper@natanchorstart{%
+			\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
+			\hyper@natanchorend}}%
+		\defbibheading{subbibliography}{\section{\refname}}}
+	{\defbibheading{subbibliography}{%
+		\AtNextBibliography{\let\blx@anchor\relax}%
+		\clearpage\section*{\refname}}}
 }
 \defbibheading{subbibliography}[\refname]{\section*{#1}}
 % \defbibheading{subbibliography}[\refname]{\section*{#1}}
 
+% \DeclareSourcemap{
+% 	\maps[datatype=bibtex]{
+% 	% -- filter for personnal bib entry
+% 	% https://tex.stackexchange.com/questions/125744/how-to-print-a-bibliography-for-a-particular-author-only
+% 	\map[overwrite=true]{
+% 		\pernottype{misc}
+% 		\step[fieldsource=author, match={du Peloux}, final]
+% 		\step[fieldset=keywords, fieldvalue={, own}, append]
+% 	}
+% 	% -- replace m2 with a supersript m^2
+% 	\map{
+% 	\step[fieldsource=title, match=\regexp{m2}, replace=\regexp{m\\textsuperscript\{2\}}]
+% 	}
+% 		}
+% }
+
+% % formatting
+% \pretocmd{\printbibliography}{\setstretch{1.0}}{}{}
+% \renewcommand*{\multicitedelim}{\addcomma\space}
+% \newcommand{\citef}[2][]{\citeauthor{#2} \citeyear{#2} \cite[#1]{#2}} % custom full cite
+% \renewcommand*{\multinamedelim}{\addcomma\addspace} % separator mark between authors
+% \renewcommand*{\finalnamedelim}{\addspace and \addspace} % separator mark between authors
+% \renewcommand{\labelnamepunct}{\addcomma\addspace}
+% \DeclareFieldFormat[misc]{title}{\mkbibquote{#1}} % put title of misc entry bitween quotes
+
+% % custom bibliography style and alignment 
+% \setlength{\bibhang}{0em}
+% \setlength{\biblabelsep}{\marginsep}
+% \setlength{\bibitemsep}{6pt}
+% \setlength{\bibparsep}{0em}
+% \renewcommand{\bibfont}{\tf@bibtxt}
+% \DeclareFieldFormat{labelnumberwidth}{\tf@bibnum#1}
+
+% %% Default style
+% %% -------------
+% \defbibenvironment{bibliography}
+% {%
+% 	\list%
+% 	{%
+% 		\printfield[labelnumberwidth]{labelnumber}%
+% 	}{
+% 		\setlength{\labelwidth}{\labelnumberwidth}%
+% 		\setlength{\leftmargin}{\labelwidth}%
+% 		\setlength{\labelsep}{\biblabelsep}%
+% 		\addtolength{\leftmargin}{\labelsep}%
+% 		\addtolength{\leftmargin}{-\labelwidth-\labelsep}% LDP add this xshift
+% 		\setlength{\itemsep}{\bibitemsep}%
+% 		\setlength{\parsep}{\bibparsep}%
+% 	}%
+% 	\renewcommand*{\makelabel}[1]{\hss##1}%
+% }%
+% {\endlist}
+% {\item}
+
+% %% CV style 
+% %% --------
+% \defbibenvironment{cvbib}
+% {%
+% 	\list
+% 	{%
+% 		\iffieldequals{year}{\bibyear}%
+% 		{\ico}%
+% 		{\printfield[labelnumberwidth]{year}\savefield{year}{\bibyear}}%
+% 		% \printfield[labelnumberwidth]{labelnumber}%
+% 	}{%
+% 		\setlength{\labelwidth}{2cm}%
+%  		\setlength{\leftmargin}{\labelwidth}%
+%  		\setlength{\labelsep}{\biblabelsep}%
+%  		\addtolength{\leftmargin}{\labelsep}%
+%  		\addtolength{\leftmargin}{-\labelwidth-\labelsep}% LDP add this xshift
+%  		\setlength{\itemsep}{\bibitemsep}%
+% 		\setlength{\parsep}{\bibparsep}%
+% 		\setlength{\bibhang}{0pt}%
+% 	}%
+% 	\renewcommand*{\makelabel}[1]{\hss##1}%
+% }%
+% {\endlist}
+% {\item}
+
+
+% %% Title DOI Link 
+% %% --------------------------
+% \newbibmacro{string+doiurlisbn}[1]{%
+%   \iffieldundef{doi}{%
+%     \iffieldundef{url}{%
+%       \iffieldundef{isbn}{%
+%         \iffieldundef{issn}{%
+%           #1%
+%         }{%
+%           \href{http://books.google.com/books?vid=ISSN\thefield{issn}}{#1}%
+%         }%
+%       }{%
+%         \href{http://books.google.com/books?vid=ISBN\thefield{isbn}}{#1}%
+%       }%
+%     }{%
+%       \href{\thefield{url}}{#1}%
+%     }%
+%   }{%
+%     \href{http://dx.doi.org/\thefield{doi}}{#1}%
+%   }%
+% }
+% \DeclareFieldFormat{title}{\usebibmacro{string+doiurlisbn}{\mkbibemph{#1}}}
+% \DeclareFieldFormat[article,incollection]{title}{\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
+% \DeclareFieldFormat[misc]{title}{\mkbibquote{#1}} % put title of misc entry bitween quotes
+
+
+% %% Favicon DOI Link 
+% %% ----------------
+% \newbool{biblink}
+% \booltrue{false}
+% \ifbool{biblink}{\renewcommand{\finentrypunct}{\addperiod~\icohref{}}}{}
+
+% % resolve espacing latex characters in url field when exporting from Mendeley
+% % help : https://tex.stackexchange.com/a/309995
+% \DeclareSourcemap{
+%     \maps{
+%         \map{ % Replaces '{\_}', '{_}' or '\_' with just '_'
+%             \step[fieldsource=url,
+%                   match=\regexp{\{\\\_\}|\{\_\}|\\\_},
+%                   replace=\regexp{\_}]
+%         }
+%         \map{ % Replaces '{'$\sim$'}', '$\sim$' or '{~}' with just '~'
+%             \step[fieldsource=url,
+%                   match=\regexp{\{\$\\sim\$\}|\{\~\}|\$\\sim\$},
+%                   replace=\regexp{\~}]
+%         }
+%     }
+% }
+
+% % href icon for url or doi
+% \newcommand{\ico}{\adjustbox{width=5pt}{$\blacksquare$}}
+% \newcommand{\icohref}{%
+% \ifboolexpr{%
+% 	test {\ifhyperref}
+% 	and
+% 	not test {\iftoggle{bbx:url}}
+% 	and
+% 	not test {\iftoggle{bbx:doi}}
+%  }{%true
+%   \iffieldundef{doi}{%true
+%   	\iffieldundef{url}{%true
+% 	}{%false
+% 		\href{\strfield{url}}{\ico}
+% 	}
+%   }{%false
+%   	\href{http://dx.doi.org/\strfield{doi}}{\ico}%sec:\therefsection %seg:\therefsegment name:\refname chap:\thechapter
+%   }
+% }}
+
+
+% %% Link to local / gloal bib segment
+% %% ---------------------------------
+% % with this macro you can chose to link the citation labels to local subbib (anchorsegments=true) or to global bib (anchorsegments=false)
+% % local links do not work if chapter has no subbib, because there is not subib to point to !
+% % https://tex.stackexchange.com/questions/142632/multiple-bibliographies-with-local-links-global-labels-also-global-bibliograph/142720
+% \newbool{anchorsegments}
+% \boolfalse{anchorsegments}
+% \AtBeginDocument{%
+%   \ifbool{anchorsegments}
+%     {\long\def\blx@bibhyperref[#1]#2{%
+%        \blx@sfsave\hyper@natlinkstart{\the\c@refsection @\the\c@refsegment @#1}%
+%        \blx@sfrest
+%        #2%
+%        \blx@sfsave\hyper@natlinkend\blx@sfrest}%
+%      \protected\long\def\blx@imc@bibhyperlink#1#2{%
+%        \blx@sfsave\hyper@natlinkstart{\the\c@refsection:\the\c@refsegment:#1}%
+%        \blx@sfrest
+%        #2%
+%        \blx@sfsave\hyper@natlinkend\blx@sfrest}%
+%      \protected\long\def\blx@imc@bibhypertarget#1#2{%
+%        \blx@sfsave\hyper@natanchorstart{\the\c@refsection:\the\c@refsegment:#1}%
+%        \blx@sfrest
+%        #2%
+%        \blx@sfsave\hyper@natanchorend\blx@sfrest}%
+%      \protected\def\blx@anchor{%
+%        \xifinlist
+%          {\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}
+%          {\blx@anchors}
+%          {}
+%          {\listxadd
+%             {\blx@anchors}
+%             {\the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
+%           \hyper@natanchorstart{%
+%             \the\c@refsection @\the\c@refsegment @\abx@field@entrykey}%
+%           \hyper@natanchorend}}%
+%      \defbibheading{subbibliography}{\section{\refname}}}
+%     {\defbibheading{subbibliography}{%
+%        \AtNextBibliography{\let\blx@anchor\relax}%
+% 	   \clearpage\section*{\refname}}}
+% }
+% \defbibheading{subbibliography}[\refname]{\section*{#1}}
+% % \defbibheading{subbibliography}[\refname]{\section*{#1}}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% QUOTATIONS
-%%
-%%%%%
-\usepackage{csquotes}
-\usepackage{epigraph} % incompatible avec nextpage
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% FOOTNOTES
+%% FOOTNOTES & QUOTES
 %%
 %% help : https://tex.stackexchange.com/a/21917/154815
 %%
 %%%%%
+\usepackage{csquotes}
 \usepackage[bottom]{footmisc}
 \setlength{\skip\footins}{22pt}
 
@@ -1068,8 +1165,6 @@
 
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% INDEX
@@ -1092,6 +1187,54 @@
 ]\vspace{12pt}}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% COLORS
+%%
+%%%%%
+\RequirePackage{xcolor}
+
+\definecolor{Tblue}{RGB}{104, 135, 255}
+\definecolor{Tred}{RGB}{255, 110, 103}
+\definecolor{Tgreen}{RGB}{147, 250, 103}
+\definecolor{Tgray}{RGB}{184, 184, 184}
+\definecolor{Tdarkgray}{RGB}{56, 56, 56}
+
+\definecolor{gray2}{cmyk}{0,0,0,0.2}
+\definecolor{gray4}{cmyk}{0,0,0,0.4}
+\definecolor{gray6}{cmyk}{0,0,0,0.6}
+\definecolor{gray8}{cmyk}{0,0,0,0.8}
+
+\definecolor{gray1}{cmyk}{0,0,0,0.1}
+\definecolor{gray3}{cmyk}{0,0,0,0.3}
+\definecolor{gray5}{cmyk}{0,0,0,0.5}
+\definecolor{gray7}{cmyk}{0,0,0,0.7}
+\definecolor{gray9}{cmyk}{0,0,0,0.9}
+
+\colorlet{accent}{Tblue}
+\definecolor{secondary}{RGB}{244, 35, 0}
+\definecolor{linkgray}{gray}{0.4}
+
+
+\iftoggle{print}{
+	\typeout{printtoggle:true}
+	\colorlet{citecolor}{secondary}
+	\colorlet{urlcolor}{black}
+	\colorlet{linkcolor}{black}
+	\colorlet{txtcolor}{black}
+}{
+	\typeout{printtoggle:false}
+	\PassOptionsToPackage{showcolorbg}{blurb}
+	\colorlet{citecolor}{secondary}
+	\colorlet{urlcolor}{linkgray}
+	\colorlet{linkcolor}{linkgray}
+	\colorlet{txtcolor}{linkgray}
+}
+\pretocmd{\tableofcontents}{% no href colors in toc, lof, lot
+		\colorlet{linkcolor}{black}
+		\colorlet{txtcolor}{black}
+}{}{}
 
 
 
@@ -1216,56 +1359,6 @@
 		baseurl={http://www.thinkshell.fr}
 	}
 }
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% COLORS
-%%
-%%%%%
-\RequirePackage{xcolor}
-
-\definecolor{Tblue}{RGB}{104, 135, 255}
-\definecolor{Tred}{RGB}{255, 110, 103}
-\definecolor{Tgreen}{RGB}{147, 250, 103}
-\definecolor{Tgray}{RGB}{184, 184, 184}
-\definecolor{Tdarkgray}{RGB}{56, 56, 56}
-
-\definecolor{gray2}{cmyk}{0,0,0,0.2}
-\definecolor{gray4}{cmyk}{0,0,0,0.4}
-\definecolor{gray6}{cmyk}{0,0,0,0.6}
-\definecolor{gray8}{cmyk}{0,0,0,0.8}
-
-\definecolor{gray1}{cmyk}{0,0,0,0.1}
-\definecolor{gray3}{cmyk}{0,0,0,0.3}
-\definecolor{gray5}{cmyk}{0,0,0,0.5}
-\definecolor{gray7}{cmyk}{0,0,0,0.7}
-\definecolor{gray9}{cmyk}{0,0,0,0.9}
-
-
-
-\colorlet{accent}{Tblue}
-\definecolor{secondary}{RGB}{244, 35, 0}
-
-
-\newtoggle{print}
-\toggletrue{print}
-\iftoggle{print}{
-	\colorlet{citecolor}{secondary}
-	\colorlet{urlcolor}{black}
-	\colorlet{linkcolor}{black}
-	\colorlet{txtcolor}{black}
-}{
-	\colorlet{citecolor}{secondary}
-	\colorlet{urlcolor}{gray7}
-	\colorlet{linkcolor}{gray7}
-	\colorlet{txtcolor}{gray7}
-}
-\pretocmd{\tableofcontents}{% no href colors in toc, lof, lot
-		\colorlet{linkcolor}{black}
-		\colorlet{txtcolor}{black}
-}{}{}
-
 
 
 \usepackage{textcomp} % € symbol
@@ -1438,4 +1531,11 @@
 
 \newcommand{\rconf}[1]{\barr{#1}}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Output Toggle
+%%
+%%%%%
 
