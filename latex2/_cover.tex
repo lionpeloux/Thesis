@@ -16,13 +16,13 @@
 % \PassOptionsToPackage{nobleed}{blurb}
 
 % SELECT COVER TYPE
-% \PassOptionsToPackage{hardcover}{blurb}
-\PassOptionsToPackage{softcover}{blurb}
+\PassOptionsToPackage{hardcover}{blurb}
+% \PassOptionsToPackage{softcover}{blurb}
 
 % DEBUG OPTIONS
-\PassOptionsToPackage{showbleed}{blurb}
-\PassOptionsToPackage{showspine}{blurb}
-\PassOptionsToPackage{showisbn}{blurb}
+% \PassOptionsToPackage{showbleed}{blurb}
+% \PassOptionsToPackage{showspine}{blurb}
+% \PassOptionsToPackage{showisbn}{blurb}
 % \PassOptionsToPackage{showrules}{blurb}
 
 
@@ -42,6 +42,7 @@
 \newlength\BackTitleSideMargin
 \newlength\BackTextYOffset
 \newlength\BackTickMargin
+\newlength\BackTitleWidth
 %
 \setlength{\CoverWidth}{\PaperWidth/2-\BleedOuterMargin-\BlurbGutterWidth/2}
 %
@@ -54,7 +55,7 @@
 \setlength{\AuthorRuleWidth}{4mm}
 %
 \setlength{\BackTitleTopMargin}{3cm}
-\setlength{\BackTitleSideMargin}{3.0cm}
+\setlength{\BackTitleWidth}{14.3cm}
 \setlength{\BackTickMargin}{0.5cm}
 
 % FONT FAMILY
@@ -106,7 +107,7 @@
 \begin{document}
 \thispagestyle{empty}
 \AddToShipoutPictureBG*{%
-	% BACK COVER
+	% FRONT COVER
 	\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
 		% background color
 		\definecolor{graybckgd}{gray}{0.9}
@@ -171,24 +172,26 @@
 	% BACK COVER
 	\sodef\spaceout{}{0pt plus 1fil}{.4em plus 1fil}{0pt}%
 	\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
-		\coordinate[xshift=\BackTitleSideMargin, yshift=-\BackTitleTopMargin] (HA) at (PGtl);
+		\path (PGtl) -- (PGtl -| SPtl) coordinate[midway] (Pt);
+		\coordinate[xshift=-\BackTitleWidth/2, yshift=-\BackTitleTopMargin] (HA) at (Pt);
 		\node[anchor=base west, yshift=0cm] at (HA){%
 			\tfHA%
-			\fbox{\parbox[b]{\CoverWidth-2\BackTitleSideMargin}{\spaceout{Modeling of bending-torsion couplings in active-bending structures}}}%
+			\fbox{\parbox[b]{\BackTitleWidth}{\spaceout{Modeling of bending-torsion couplings in active-bending structures}}}%
 		};
 		\path[fill,black] (PPtl |- HA) rectangle ([xshift=-\BackTickMargin, yshift=2mm]HA);
 		\coordinate[yshift=-0.75cm] (HB) at (HA);
 		\path[fill,secondary] (PPtl |- HB) rectangle ([xshift=-\BackTickMargin, yshift=4mm]HB);
 		\node[anchor=base west, yshift=0cm] at (HB){%
 			\tfHB%
-			\fbox{\parbox[b]{\CoverWidth-2\BackTitleSideMargin}{\spaceout{APPLICATION TO THE DESIGN OF ELASTIC GRIDSHELLS}}}%
+			\fbox{\parbox[b]{\BackTitleWidth}{\spaceout{APPLICATION TO THE DESIGN OF ELASTIC GRIDSHELLS}}}%
 		};
 		% abstract
 		\setlength\columnsep{0.5cm}%
-		\coordinate[yshift=-2cm] (HC) at (HB);
+		\coordinate[yshift=8.15cm] (HC) at (HA |- MBphd);
+		% \coordinate (HC) at (HC);
 		\path[fill,black] (PPtl |- HC) rectangle ([xshift=-\BackTickMargin, yshift=-8mm]HC);
 		\node[anchor=north west] at (HC){%
-			\fbox{\parbox[t]{\CoverWidth-2\BackTitleSideMargin}{%
+			\fbox{\parbox[t]{\BackTitleWidth}{%
 			\tftxt\setstretch{1.0}%
 			\setlength{\parindent}{0em}%
 			% cant align properly the text at the top of the box so add a small amount of negative vspace
@@ -201,9 +204,9 @@
 
 				In a first part, we deliver a thorough review of this topic and we present in detail one of our main achievements, the ephemeral cathedral of Créteil, built in 2013 and still in service. In a second part, \vspace{7\baselineskip}we develop an original discrete beam element with a minimal number of degrees of freedom adapted to the modeling of bending and torsion inside gridshell members with anisotropic cross-section. Enriched with a ghost node, it allows to model more accurately physical phenomena that occur at connections or at supports. Its numerical implementation is presented and validated through several test cases. Although this element has been developed specifically for the study of elastic gridshells, it can advantageously be used in any type of problem where the need for an interactive computation with elastic rods taking into account flexion-torsion couplings is required.
 			\end{multicols}}}};
-		\coordinate[xshift=\CoverWidth/2-\BackTitleSideMargin] (HC) at (MBphd -| HB);
+		\coordinate (HC) at (MBphd -| Pt);
 		\node[anchor=center] at (HC){%
-			\fbox{\parbox[c]{\CoverWidth-2\BackTitleSideMargin}{%
+			\fbox{\parbox[c]{\BackTitleWidth}{%
 				\tfquote\setstretch{1.1}%
 				\centering
 				% \raggedleft

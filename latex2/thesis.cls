@@ -111,7 +111,8 @@
 	% booksize = TB_6x9,
 	booksize = TB_8x10,
 	pagemodulo = 4,
-	gutter=	2.752cm,
+	% gutter=	2.752cm, % soft 412pp
+	gutter=	3.034cm, % hard 412pp
 	covertype=soft,
 	% nobleed,
 	]{blurb}
@@ -1229,7 +1230,6 @@
 	\colorlet{txtcolor}{black}
 }{
 	\typeout{printtoggle:false}
-	\PassOptionsToPackage{showcolorbg}{blurb}
 	\colorlet{citecolor}{secondary}
 	\colorlet{urlcolor}{linkgray}
 	\colorlet{linkcolor}{linkgray}

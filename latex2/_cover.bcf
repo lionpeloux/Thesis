@@ -509,11 +509,13 @@
   <!-- SOURCEMAP -->
   <bcf:sourcemap>
     <bcf:maps datatype="bibtex" level="user">
-      <bcf:map>
-        <bcf:map_step map_field_source="url" map_match="\{\\\_\}|\{\_\}|\\\_" map_replace="\_"/>
+      <bcf:map map_overwrite="1">
+        <bcf:per_nottype>misc</bcf:per_nottype>
+        <bcf:map_step map_field_source="author" map_match="du Peloux" map_final="1"/>
+        <bcf:map_step map_field_set="keywords" map_field_value=", own" map_append="1"/>
       </bcf:map>
       <bcf:map>
-        <bcf:map_step map_field_source="url" map_match="\{\$\\sim\$\}|\{\~\}|\$\\sim\$" map_replace="\~"/>
+        <bcf:map_step map_field_source="title" map_match="m2" map_replace="m\\textsuperscript\{2\}"/>
       </bcf:map>
     </bcf:maps>
     <bcf:maps datatype="bibtex" level="driver">
