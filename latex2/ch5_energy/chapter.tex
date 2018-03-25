@@ -375,13 +375,13 @@ These forces and moments will be used later in a damped explicit dynamic procedu
 Introducing $\vect{\omega}$ and $\theta$, the elastic energy defined in \cref{eq:energy_el} can be rewritten in the form~:
 \begin{equation}
 		\mathcal{E} = \mathcal{E}_{b} + \mathcal{E}_{t} =
-		\tfrac{1}{2} \int_{0}^{L} (\vect{\omega}-\rconf{\vect{\omega}})^T B (\vect{\omega}-\rconf{\vect{\omega}}) ds
+		\tfrac{1}{2} \int_{0}^{L} (\vect{\omega}-\rconf{\vect{\omega}})^T \mat{B} (\vect{\omega}-\rconf{\vect{\omega}}) ds
 		+ \tfrac{1}{2} \int_{0}^{L} \beta(\theta' -{\rconf{\theta}'})^2 ds
 \label{eq:E2}
 \end{equation}
-where $B$ is the bending stiffness matrix given in material frame coordinate system and $\beta$ is the torsional stiffness given by~:
+where $\mat{B}$ is the bending stiffness matrix given in material frame coordinate system and $\beta$ is the torsional stiffness given by~:
 \begin{equation}
-	B(s) = \begin{bmatrix}
+	\mat{B}(s) = \begin{bmatrix}
 			EI_1(s)	&	0\\
 			0	&	EI_2(s)\\
 		\end{bmatrix}

@@ -101,11 +101,10 @@
 % golden section
 \iftoggle{print}{}{\PassOptionsToPackage{showcolorbg}{blurb}}
 \RequirePackage[
-	top = 22.19mm-6.35mm,
-	outer = 35.45mm-6.35mm,
-	bottom = 44.31mm-6.35mm-0mm,
-	% inner = 12mm-0.317mm-12.70mm,
-	inner = 1.89mm,
+	top = 22.19mm-6.35mm+5mm,
+	outer = 35.45mm-6.35mm-4mm,
+	bottom = 44.31mm-6.35mm-0mm-5mm,
+	inner = 1.89mm+4mm,
 	binding = 0mm,
 	% booksize = a4,
 	% booksize = TB_6x9,
@@ -187,10 +186,9 @@
 % math fonts
 \RequirePackage{amsmath} % if desired
 \RequirePackage{amssymb} % if desired
-\RequirePackage[math-style=ISO]{unicode-math}
+\RequirePackage[mathbf=sym,math-style=ISO]{unicode-math}
 \setmathfont{latinmodern-math.otf}
 % \setoperatorfont\mathsf
-
 
 % FONTS
 \setmainfont{LMRoman17-Regular}
@@ -1415,7 +1413,7 @@
 
 % vector, matrix and tensor
 \newcommand{\vect}[1]{\symbf{#1}} 
-\newcommand{\mat}[1]{\symbf{\mathit{#1}}}
+\newcommand{\mat}[1]{\mathbfit{#1}}
 \newcommand{\tens}[1]{\symbf{\mathcal{#1}}}
 
 \newcommand{\scalar}[2]{\langle #1\,, #2\rangle}
